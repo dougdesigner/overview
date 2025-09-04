@@ -9,6 +9,12 @@ export const chartColors = {
     fill: "fill-blue-500",
     text: "text-blue-500",
   },
+  sky: {
+    bg: "bg-sky-500",
+    stroke: "stroke-sky-500",
+    fill: "fill-sky-500",
+    text: "text-sky-500",
+  },
   emerald: {
     bg: "bg-emerald-500",
     stroke: "stroke-emerald-500",
