@@ -47,21 +47,29 @@ export default function OverviewPage() {
             className="mt-4 flex flex-wrap gap-x-10 gap-y-4 text-sm"
           >
             <li>
-              <span className="text-base font-semibold text-gray-900 dark:text-gray-50">
+              {/* <span className="text-base font-semibold text-gray-900 dark:text-gray-50">
                 34.4%
-              </span>
+              </span> */}
+
               <div className="flex items-center gap-2">
                 <span
                   className="size-2.5 shrink-0 rounded-sm bg-blue-500 dark:bg-blue-500"
                   aria-hidden="true"
                 />
-                <span className="text-sm">U.S. Stocks</span>
+                <span className="leadig-none text-sm">U.S. Stocks</span>
               </div>
+
+              <p className="mt-1 text-lg font-semibold text-gray-900 dark:text-gray-50">
+                34.4%
+              </p>
+              <p className="text-sm text-gray-600 dark:text-gray-400">
+                $85,129 value
+              </p>
             </li>
             <li>
-              <span className="text-base font-semibold text-gray-900 dark:text-gray-50">
+              {/* <span className="text-base font-semibold text-gray-900 dark:text-gray-50">
                 30.6%
-              </span>
+              </span> */}
               <div className="flex items-center gap-2">
                 <span
                   className="size-2.5 shrink-0 rounded-sm bg-sky-400 dark:bg-sky-600"
@@ -69,11 +77,19 @@ export default function OverviewPage() {
                 />
                 <span className="text-sm">Non-U.S. Stocks</span>
               </div>
+
+              <p className="mt-1 text-lg font-semibold text-gray-900 dark:text-gray-50">
+                30.6%
+              </p>
+              <p className="text-sm text-gray-600 dark:text-gray-400">
+                $75,725 value
+              </p>
             </li>
             <li>
-              <span className="text-base font-semibold text-gray-900 dark:text-gray-50">
+              {/* <span className="text-base font-semibold text-gray-900 dark:text-gray-50">
                 20.9%
-              </span>
+              </span> */}
+
               <div className="flex items-center gap-2">
                 <span
                   className="size-2.5 shrink-0 rounded-sm bg-amber-500 dark:bg-amber-500"
@@ -81,11 +97,18 @@ export default function OverviewPage() {
                 />
                 <span className="text-sm">Fixed Income</span>
               </div>
+
+              <p className="mt-1 text-lg font-semibold text-gray-900 dark:text-gray-50">
+                20.9%
+              </p>
+              <p className="text-sm text-gray-600 dark:text-gray-400">
+                $51,721 value
+              </p>
             </li>
             <li>
-              <span className="text-base font-semibold text-gray-900 dark:text-gray-50">
+              {/* <span className="text-base font-semibold text-gray-900 dark:text-gray-50">
                 14.1%
-              </span>
+              </span> */}
               <div className="flex items-center gap-2">
                 <span
                   className="size-2.5 shrink-0 rounded-sm bg-emerald-500 dark:bg-emerald-500"
@@ -93,11 +116,18 @@ export default function OverviewPage() {
                 />
                 <span className="text-sm">Cash</span>
               </div>
+
+              <p className="mt-1 text-lg font-semibold text-gray-900 dark:text-gray-50">
+                14.1%
+              </p>
+              <p className="text-sm text-gray-600 dark:text-gray-400">
+                $34,893 value
+              </p>
             </li>
             <li>
-              <span className="text-base font-semibold text-gray-900 dark:text-gray-50">
+              {/* <span className="text-base font-semibold text-gray-900 dark:text-gray-50">
                 0%
-              </span>
+              </span> */}
               <div className="flex items-center gap-2">
                 <span
                   className="size-2.5 shrink-0 rounded-sm bg-gray-400 dark:bg-gray-600"
@@ -105,6 +135,13 @@ export default function OverviewPage() {
                 />
                 <span className="text-sm">Other</span>
               </div>
+
+              <p className="mt-1 text-lg font-semibold text-gray-900 dark:text-gray-50">
+                0%
+              </p>
+              <p className="text-sm text-gray-600 dark:text-gray-400">
+                $0 value
+              </p>
             </li>
           </ul>
         </Card>
