@@ -2,7 +2,6 @@
 
 import { TabNavigation, TabNavigationLink } from "@/components/TabNavigation"
 import Link from "next/link"
-import { Notifications } from "./Notifications"
 
 import { usePathname } from "next/navigation"
 import { Logo } from "../../../public/Logo"
@@ -12,13 +11,13 @@ function Navigation() {
   const pathname = usePathname()
   return (
     <div className="shadow-s sticky top-0 z-20 bg-white dark:bg-gray-950">
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 pt-3">
+      <div className="mx-auto flex max-w-7xl items-center justify-between px-4 pt-3 sm:px-6">
         <div>
           <span className="sr-only">Your Company</span>
           <Logo className="h-6" />
         </div>
         <div className="flex h-[42px] flex-nowrap gap-1">
-          <Notifications />
+          {/* <Notifications /> */}
           <DropdownUserProfile />
         </div>
       </div>
@@ -32,6 +31,35 @@ function Navigation() {
             <Link href="/overview">Overview</Link>
           </TabNavigationLink>
           <TabNavigationLink
+            className="inline-flex gap-2"
+            asChild
+            active={pathname === "/accounts"}
+          >
+            <Link href="/accounts">Accounts</Link>
+          </TabNavigationLink>
+          <TabNavigationLink
+            className="inline-flex gap-2"
+            asChild
+            active={pathname === "/holdings"}
+          >
+            <Link href="/holdings">Holdings</Link>
+          </TabNavigationLink>
+          <TabNavigationLink
+            className="inline-flex gap-2"
+            asChild
+            active={pathname === "/exposure"}
+          >
+            <Link href="/exposure">Exposure</Link>
+          </TabNavigationLink>
+          <TabNavigationLink
+            className="inline-flex gap-2"
+            asChild
+            active={pathname === "/analysis"}
+          >
+            <Link href="/analysis">Analysis</Link>
+          </TabNavigationLink>
+
+          {/* <TabNavigationLink
             className="inline-flex gap-2"
             asChild
             active={pathname === "/support"}
@@ -58,7 +86,7 @@ function Navigation() {
             active={pathname === "/agents"}
           >
             <Link href="/agents">Agents</Link>
-          </TabNavigationLink>
+          </TabNavigationLink> */}
         </div>
       </TabNavigation>
     </div>
