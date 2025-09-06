@@ -4,6 +4,7 @@ import { Card } from "@/components/Card"
 import { CategoryBar } from "@/components/CategoryBar"
 import { Divider } from "@/components/Divider"
 import KPICard from "@/components/KPICard"
+import SankeyChart from "@/components/SankeyChart"
 import React from "react"
 
 export default function OverviewPage() {
@@ -54,7 +55,7 @@ export default function OverviewPage() {
 
               <div className="flex items-center gap-2">
                 <span
-                  className="size-2.5 shrink-0 rounded-sm bg-blue-500 dark:bg-blue-500"
+                  className="size-2.5 shrink-0 rounded-sm bg-blue-600 dark:bg-blue-500"
                   aria-hidden="true"
                 />
                 <span className="text-sm font-medium text-gray-500 dark:text-gray-400">
@@ -75,7 +76,7 @@ export default function OverviewPage() {
               </span> */}
               <div className="flex items-center gap-2">
                 <span
-                  className="dark:bg-cyan-00 size-2.5 shrink-0 rounded-sm bg-cyan-500"
+                  className="dark:bg-cyan-00 size-2.5 shrink-0 rounded-sm bg-cyan-600 dark:bg-cyan-500"
                   aria-hidden="true"
                 />
                 <span className="text-sm font-medium text-gray-500 dark:text-gray-400">
@@ -97,7 +98,7 @@ export default function OverviewPage() {
 
               <div className="flex items-center gap-2">
                 <span
-                  className="size-2.5 shrink-0 rounded-sm bg-amber-500 dark:bg-amber-500"
+                  className="size-2.5 shrink-0 rounded-sm bg-amber-600 dark:bg-amber-500"
                   aria-hidden="true"
                 />
                 <span className="text-sm font-medium text-gray-500 dark:text-gray-400">
@@ -118,7 +119,7 @@ export default function OverviewPage() {
               </span> */}
               <div className="flex items-center gap-2">
                 <span
-                  className="size-2.5 shrink-0 rounded-sm bg-emerald-500 dark:bg-emerald-500"
+                  className="size-2.5 shrink-0 rounded-sm bg-emerald-600 dark:bg-emerald-500"
                   aria-hidden="true"
                 />
                 <span className="text-sm font-medium text-gray-500 dark:text-gray-400">
@@ -263,6 +264,63 @@ export default function OverviewPage() {
         />
         <KPICard name="Cash" stat="$34,893" change="14.1%" color="emerald" />
       </dl>
+
+      <Card className="mt-8">
+        <p className="text-sm font-medium text-gray-900 dark:text-gray-50">
+          Portfolio Allocation Flow
+        </p>
+        <SankeyChart
+          data={{
+            nodes: [
+              // Account nodes (left side)
+              { id: "401(k)" },
+              { id: "Personal Investment" },
+              { id: "Roth IRA" },
+              { id: "Savings" },
+              { id: "Checking" },
+              // Portfolio Total (center)
+              { id: "Portfolio Total" },
+              // Asset type nodes (right side)
+              { id: "U.S. Stocks" },
+              { id: "Non-U.S. Stocks" },
+              { id: "Fixed Income" },
+              { id: "Cash" },
+            ],
+            links: [
+              // Accounts to Portfolio Total
+              { source: "401(k)", target: "Portfolio Total", value: 98987 },
+              {
+                source: "Personal Investment",
+                target: "Portfolio Total",
+                value: 74240,
+              },
+              { source: "Roth IRA", target: "Portfolio Total", value: 49494 },
+              { source: "Savings", target: "Portfolio Total", value: 17224 },
+              { source: "Checking", target: "Portfolio Total", value: 7423 },
+              // Portfolio Total to Asset Types
+              {
+                source: "Portfolio Total",
+                target: "U.S. Stocks",
+                value: 85129,
+              },
+              {
+                source: "Portfolio Total",
+                target: "Non-U.S. Stocks",
+                value: 75725,
+              },
+              {
+                source: "Portfolio Total",
+                target: "Fixed Income",
+                value: 51721,
+              },
+              { source: "Portfolio Total", target: "Cash", value: 34893 },
+            ],
+          }}
+          colors={["blue", "cyan", "amber", "emerald"]}
+          accountColors={["violet", "fuchsia", "pink", "sky", "lime"]}
+          height={350}
+        />
+      </Card>
     </main>
   )
 }
