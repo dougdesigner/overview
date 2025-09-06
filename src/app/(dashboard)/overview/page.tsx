@@ -3,6 +3,7 @@
 import { Card } from "@/components/Card"
 import { CategoryBar } from "@/components/CategoryBar"
 import { Divider } from "@/components/Divider"
+import KPICard from "@/components/KPICard"
 import React from "react"
 
 export default function OverviewPage() {
@@ -14,7 +15,7 @@ export default function OverviewPage() {
           <h1 className="text-2xl font-semibold text-gray-900 dark:text-gray-50">
             Overview
           </h1>
-          <p className="text-gray-500 sm:text-sm/6 dark:text-gray-500">
+          <p className="text-gray-500 sm:text-sm/6 dark:text-gray-400">
             Your portfolio value and asset class distribution at a glance
           </p>
         </div>
@@ -39,7 +40,7 @@ export default function OverviewPage() {
           <CategoryBar
             values={[34.4, 30.6, 20.9, 14.1]}
             className="mt-6"
-            colors={["blue", "sky", "amber", "emerald"]}
+            colors={["blue", "cyan", "amber", "emerald"]}
             showLabels={false}
           />
           <ul
@@ -56,15 +57,17 @@ export default function OverviewPage() {
                   className="size-2.5 shrink-0 rounded-sm bg-blue-500 dark:bg-blue-500"
                   aria-hidden="true"
                 />
-                <span className="leadig-none text-sm">U.S. Stocks</span>
+                <span className="text-sm font-medium text-gray-500 dark:text-gray-400">
+                  U.S. Stocks
+                </span>
               </div>
 
-              <p className="mt-1 text-lg font-semibold text-gray-900 dark:text-gray-50">
+              {/* <p className="mt-1 text-lg font-semibold text-gray-900 dark:text-gray-50">
                 34.4%
               </p>
               <p className="text-sm text-gray-600 dark:text-gray-400">
                 $85,129 value
-              </p>
+              </p> */}
             </li>
             <li>
               {/* <span className="text-base font-semibold text-gray-900 dark:text-gray-50">
@@ -72,18 +75,20 @@ export default function OverviewPage() {
               </span> */}
               <div className="flex items-center gap-2">
                 <span
-                  className="size-2.5 shrink-0 rounded-sm bg-sky-400 dark:bg-sky-600"
+                  className="dark:bg-cyan-00 size-2.5 shrink-0 rounded-sm bg-cyan-500"
                   aria-hidden="true"
                 />
-                <span className="text-sm">Non-U.S. Stocks</span>
+                <span className="text-sm font-medium text-gray-500 dark:text-gray-400">
+                  Non-U.S. Stocks
+                </span>
               </div>
 
-              <p className="mt-1 text-lg font-semibold text-gray-900 dark:text-gray-50">
+              {/* <p className="mt-1 text-lg font-semibold text-gray-900 dark:text-gray-50">
                 30.6%
               </p>
               <p className="text-sm text-gray-600 dark:text-gray-400">
                 $75,725 value
-              </p>
+              </p> */}
             </li>
             <li>
               {/* <span className="text-base font-semibold text-gray-900 dark:text-gray-50">
@@ -95,15 +100,17 @@ export default function OverviewPage() {
                   className="size-2.5 shrink-0 rounded-sm bg-amber-500 dark:bg-amber-500"
                   aria-hidden="true"
                 />
-                <span className="text-sm">Fixed Income</span>
+                <span className="text-sm font-medium text-gray-500 dark:text-gray-400">
+                  Fixed Income
+                </span>
               </div>
 
-              <p className="mt-1 text-lg font-semibold text-gray-900 dark:text-gray-50">
+              {/* <p className="mt-1 text-lg font-semibold text-gray-900 dark:text-gray-50">
                 20.9%
               </p>
               <p className="text-sm text-gray-600 dark:text-gray-400">
                 $51,721 value
-              </p>
+              </p> */}
             </li>
             <li>
               {/* <span className="text-base font-semibold text-gray-900 dark:text-gray-50">
@@ -114,15 +121,17 @@ export default function OverviewPage() {
                   className="size-2.5 shrink-0 rounded-sm bg-emerald-500 dark:bg-emerald-500"
                   aria-hidden="true"
                 />
-                <span className="text-sm">Cash</span>
+                <span className="text-sm font-medium text-gray-500 dark:text-gray-400">
+                  Cash
+                </span>
               </div>
 
-              <p className="mt-1 text-lg font-semibold text-gray-900 dark:text-gray-50">
+              {/* <p className="mt-1 text-lg font-semibold text-gray-900 dark:text-gray-50">
                 14.1%
               </p>
               <p className="text-sm text-gray-600 dark:text-gray-400">
                 $34,893 value
-              </p>
+              </p> */}
             </li>
             <li>
               {/* <span className="text-base font-semibold text-gray-900 dark:text-gray-50">
@@ -133,15 +142,17 @@ export default function OverviewPage() {
                   className="size-2.5 shrink-0 rounded-sm bg-gray-400 dark:bg-gray-600"
                   aria-hidden="true"
                 />
-                <span className="text-sm">Other</span>
+                <span className="text-sm font-medium text-gray-500 dark:text-gray-400">
+                  Other
+                </span>
               </div>
 
-              <p className="mt-1 text-lg font-semibold text-gray-900 dark:text-gray-50">
+              {/* <p className="mt-1 text-lg font-semibold text-gray-900 dark:text-gray-50">
                 0%
               </p>
               <p className="text-sm text-gray-600 dark:text-gray-400">
                 $0 value
-              </p>
+              </p> */}
             </li>
           </ul>
         </Card>
@@ -230,6 +241,28 @@ export default function OverviewPage() {
         </Card> */}
       </dl>
       {/* <DataTable data={tickets} columns={columns} /> */}
+
+      <dl className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <KPICard
+          name="U.S. Stocks"
+          stat="$85,129"
+          change="34.4%"
+          color="blue"
+        />
+        <KPICard
+          name="Non-U.S. Stocks"
+          stat="$75,725"
+          change="30.6%"
+          color="cyan"
+        />
+        <KPICard
+          name="Fixed Income"
+          stat="$51,721"
+          change="20.9%"
+          color="amber"
+        />
+        <KPICard name="Cash" stat="$34,893" change="14.1%" color="emerald" />
+      </dl>
     </main>
   )
 }
