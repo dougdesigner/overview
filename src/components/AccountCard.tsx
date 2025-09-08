@@ -121,7 +121,7 @@ export default function AccountCard({
 
         {/* Account identification */}
         <div className="min-w-0 flex-1">
-          <h3 className="text-lg font-medium text-gray-900 dark:text-gray-50">
+          <h3 className="text-base font-medium text-gray-900 dark:text-gray-50">
             {displayName}
           </h3>
           <p className="text-sm font-normal text-gray-500 dark:text-gray-400">
@@ -154,7 +154,7 @@ export default function AccountCard({
 
         {/* Financial data */}
         <div className="text-right">
-          <div className="text-lg font-medium text-gray-900 dark:text-gray-50">
+          <div className="text-base font-medium text-gray-900 dark:text-gray-50">
             {formatCurrency(totalValue)}
           </div>
           <div className="text-sm font-normal text-gray-500 dark:text-gray-400">

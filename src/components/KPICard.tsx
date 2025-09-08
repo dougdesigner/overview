@@ -17,7 +17,7 @@ interface KPICardProps {
 export default function KPICard({ name, stat, change, color }: KPICardProps) {
   return (
     <Card>
-      <dt className="text-sm font-medium text-gray-500 dark:text-gray-400">
+      <dt className="text-base font-medium text-gray-900 dark:text-gray-50">
         {name}
       </dt>
       <dd className="mt-2 flex items-baseline space-x-2.5">
@@ -29,7 +29,7 @@ export default function KPICard({ name, stat, change, color }: KPICardProps) {
         >
           {stat}
         </span>
-        <span className="text-sm font-medium text-gray-900 dark:text-gray-50">
+        <span className="text-sm font-medium text-gray-500 dark:text-gray-400">
           {change}
         </span>
       </dd>

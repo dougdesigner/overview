@@ -32,7 +32,7 @@ export default function OverviewPage() {
       <Divider />
       <dl className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-1 lg:grid-cols-1">
         <Card>
-          <dt className="text-sm font-medium text-gray-900 dark:text-gray-50">
+          <dt className="text-base font-medium text-gray-900 dark:text-gray-50">
             Portfolio Value
           </dt>
           <dd className="mt-1 text-3xl font-semibold text-gray-900 dark:text-gray-50">
@@ -266,8 +266,8 @@ export default function OverviewPage() {
       </dl>
 
       <Card className="mt-8">
-        <p className="text-sm font-medium text-gray-900 dark:text-gray-50">
-          Portfolio Allocation Flow
+        <p className="text-base font-medium text-gray-900 dark:text-gray-50">
+          Account Flow
         </p>
         <SankeyChart
           data={{
