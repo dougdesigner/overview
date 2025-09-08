@@ -114,6 +114,7 @@ interface CategoryBarProps extends React.HTMLAttributes<HTMLDivElement> {
   colors?: AvailableChartColorsKeys[]
   marker?: { value: number; tooltip?: string; showAnimation?: boolean }
   showLabels?: boolean
+  segmentLabels?: string[]
 }
 
 const CategoryBar = React.forwardRef<HTMLDivElement, CategoryBarProps>(
@@ -123,6 +124,7 @@ const CategoryBar = React.forwardRef<HTMLDivElement, CategoryBarProps>(
       colors = AvailableChartColors,
       marker,
       showLabels = true,
+      segmentLabels,
       className,
       ...props
     },
@@ -162,7 +164,9 @@ const CategoryBar = React.forwardRef<HTMLDivElement, CategoryBarProps>(
             {values.map((value, index) => {
               const barColor = colors[index] ?? "gray"
               const percentage = (value / maxValue) * 100
-              return (
+              const hasTooltip = segmentLabels && segmentLabels[index] && percentage > 0
+              
+              const segment = (
                 <div
                   key={`item-${index}`}
                   className={cx(
@@ -176,6 +180,12 @@ const CategoryBar = React.forwardRef<HTMLDivElement, CategoryBarProps>(
                   style={{ width: `${percentage}%` }}
                 />
               )
+              
+              return hasTooltip ? (
+                <Tooltip key={`item-${index}`} triggerAsChild content={`${segmentLabels[index]}: ${value}%`}>
+                  {segment}
+                </Tooltip>
+              ) : segment
             })}
           </div>
 

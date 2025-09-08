@@ -31,7 +31,7 @@ export default function HoldingsPage() {
           onClick={() => setIsOpen(true)}
           className="flex items-center gap-2 text-base sm:text-sm"
         >
-          Add Holding
+          Add Holdings
           <RiAddLine className="-mr-0.5 size-5 shrink-0" aria-hidden="true" />
         </Button>
         <TicketDrawer open={isOpen} onOpenChange={setIsOpen} />

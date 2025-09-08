@@ -1,21 +1,366 @@
 "use client"
 
+import AccountCard from "@/components/AccountCard"
 import { Button } from "@/components/Button"
-import { Card } from "@/components/Card"
-import { CategoryBar } from "@/components/CategoryBar"
 import { Divider } from "@/components/Divider"
-import { LineChartSupport } from "@/components/LineChartSupport"
-import { ProgressCircle } from "@/components/ProgressCircle"
-import { TicketDrawer } from "@/components/ui/TicketDrawer"
-import { DataTable } from "@/components/ui/data-table-support/DataTable"
-import { columns } from "@/components/ui/data-table-support/columns"
-import { tickets } from "@/data/support/tickets"
-import { volume } from "@/data/support/volume"
+import {
+  AccountDrawer,
+  type AccountFormData,
+} from "@/components/ui/AccountDrawer"
 import { RiAddLine } from "@remixicon/react"
 import React from "react"
 
+// Map account types to labels for display
+const accountTypeLabels: Record<string, string> = {
+  // Cash accounts
+  bank: "Bank Account",
+  checking: "Checking Account",
+  savings: "Savings Account", 
+  cash: "Cash",
+  rewards: "Rewards Account",
+  
+  // Investment accounts
+  investment: "Investment Account",
+  "personal-investment": "Personal Investment",
+  individual: "Individual Brokerage", // keeping for backward compatibility
+  "joint-investment": "Joint Investment",
+  joint: "Joint Brokerage", // keeping for backward compatibility
+  "brokerage-corporate-non-taxable": "Brokerage Corporate Non-Taxable",
+  "brokerage-corporate-taxable": "Brokerage Corporate Taxable",
+  "brokerage-stock-plan": "Brokerage Stock Plan",
+  "brokerage-pension": "Brokerage Pension",
+  "brokerage-variable-annuity": "Brokerage Variable Annuity",
+  "other-non-taxable": "Other Non-Taxable",
+  "other-taxable": "Other Taxable",
+  cryptocurrency: "Cryptocurrency",
+  
+  // Asset accounts - Retirement
+  "traditional-ira": "Traditional IRA",
+  "roth-ira": "Roth IRA",
+  "sep-ira": "SEP IRA",
+  "simple-ira": "SIMPLE IRA",
+  "401a": "401(a)",
+  "traditional-401k": "Traditional 401(k)",
+  "roth-401k": "Roth 401(k)",
+  "403b": "403(b)",
+  "457b": "457(b)", 
+  "thrift-savings-plan": "Thrift Savings Plan",
+  
+  // Asset accounts - Education & Health
+  "529": "529 Education Savings",
+  hsa: "Health Savings Account",
+  "coverdell-esa": "Coverdell ESA",
+  
+  // Asset accounts - Insurance & Annuities
+  insurance: "Insurance",
+  "fixed-annuity": "Fixed Annuity",
+  annuity: "Annuity",
+  
+  // Asset accounts - Tangible
+  art: "Art",
+  wine: "Wine",
+  jewelry: "Jewelry", 
+  collectible: "Collectible",
+  car: "Car",
+  "other-asset": "Other Asset",
+  
+  // Asset accounts - Trust & Specialized
+  trust: "Trust Account",
+  
+  // Liability accounts
+  "credit-card": "Credit Card",
+  heloc: "HELOC",
+  loan: "Loan",
+  "student-loan": "Student Loan",
+  "auto-loan": "Auto Loan", 
+  mortgage: "Mortgage",
+  "other-liability": "Other Liability",
+}
+
+// Map institutions to labels
+const institutionLabels: Record<string, string> = {
+  fidelity: "Fidelity Investments",
+  vanguard: "Vanguard",
+  schwab: "Charles Schwab",
+  etrade: "E*TRADE",
+  "td-ameritrade": "TD Ameritrade",
+  merrill: "Merrill Edge",
+  wealthfront: "Wealthfront",
+  betterment: "Betterment",
+  robinhood: "Robinhood",
+  chase: "Chase",
+  bofa: "Bank of America",
+  "wells-fargo": "Wells Fargo",
+  citi: "Citibank",
+  amex: "American Express",
+  other: "Other",
+}
+
+interface Account {
+  id: string
+  name: string
+  accountType: string
+  accountTypeLabel: string
+  institution: string
+  institutionLabel: string
+  totalValue: number
+  holdingsCount: number
+  assetAllocation: {
+    usStocks: number
+    nonUsStocks: number
+    fixedIncome: number
+    cash: number
+  }
+}
+
 export default function AccountsPage() {
   const [isOpen, setIsOpen] = React.useState(false)
+
+  // Initialize with example accounts
+  const [accounts, setAccounts] = React.useState<Account[]>([
+    {
+      id: "1",
+      name: "Retirement Fund",
+      accountType: "traditional-401k",
+      accountTypeLabel: "Traditional 401(k)",
+      institution: "fidelity",
+      institutionLabel: "Fidelity Investments",
+      totalValue: 98987,
+      holdingsCount: 12,
+      assetAllocation: {
+        usStocks: 45,
+        nonUsStocks: 25,
+        fixedIncome: 20,
+        cash: 10,
+      },
+    },
+    {
+      id: "2",
+      name: "Personal Investment",
+      accountType: "individual",
+      accountTypeLabel: "Individual Brokerage",
+      institution: "wealthfront",
+      institutionLabel: "Wealthfront",
+      totalValue: 74240,
+      holdingsCount: 8,
+      assetAllocation: {
+        usStocks: 55,
+        nonUsStocks: 30,
+        fixedIncome: 10,
+        cash: 5,
+      },
+    },
+    {
+      id: "3",
+      name: "Tax-Free Growth",
+      accountType: "roth-ira",
+      accountTypeLabel: "Roth IRA",
+      institution: "vanguard",
+      institutionLabel: "Vanguard",
+      totalValue: 49494,
+      holdingsCount: 6,
+      assetAllocation: {
+        usStocks: 60,
+        nonUsStocks: 25,
+        fixedIncome: 10,
+        cash: 5,
+      },
+    },
+    {
+      id: "4",
+      name: "Emergency Fund",
+      accountType: "savings",
+      accountTypeLabel: "Savings Account",
+      institution: "chase",
+      institutionLabel: "Chase",
+      totalValue: 24747,
+      holdingsCount: 1,
+      assetAllocation: {
+        usStocks: 0,
+        nonUsStocks: 0,
+        fixedIncome: 0,
+        cash: 100,
+      },
+    },
+  ])
+
+  // Handle adding a new account from the drawer
+  const handleAddAccount = (formData: AccountFormData) => {
+    const newAccount: Account = {
+      id: Date.now().toString(), // Simple ID generation
+      name:
+        formData.accountName ||
+        accountTypeLabels[formData.accountType] ||
+        formData.accountType,
+      accountType: formData.accountType,
+      accountTypeLabel:
+        accountTypeLabels[formData.accountType] || formData.accountType,
+      institution: formData.institution,
+      institutionLabel:
+        institutionLabels[formData.institution] || formData.institution,
+      totalValue: 0, // Will be calculated from holdings later
+      holdingsCount: 0, // Will be updated when holdings are added
+      assetAllocation: {
+        usStocks: 0,
+        nonUsStocks: 0,
+        fixedIncome: 0,
+        cash: 0,
+      },
+    }
+
+    setAccounts((prev) => [...prev, newAccount])
+  }
+
+  // Define account type categories
+  const getAccountCategory = (accountType: string): string => {
+    const cashTypes = [
+      "bank",
+      "checking", 
+      "savings",
+      "cash",
+      "rewards"
+    ]
+    
+    const investmentTypes = [
+      "investment",
+      "personal-investment",
+      "individual", // keeping for backward compatibility
+      "joint-investment",
+      "joint", // keeping for backward compatibility
+      "brokerage-corporate-non-taxable",
+      "brokerage-corporate-taxable", 
+      "brokerage-stock-plan",
+      "brokerage-pension",
+      "brokerage-variable-annuity",
+      "other-non-taxable",
+      "other-taxable",
+      "cryptocurrency"
+    ]
+    
+    const assetTypes = [
+      // Retirement accounts
+      "traditional-ira",
+      "roth-ira", 
+      "sep-ira",
+      "simple-ira",
+      "401a",
+      "traditional-401k",
+      "roth-401k",
+      "403b",
+      "457b",
+      "thrift-savings-plan",
+      // Education & Health
+      "529",
+      "hsa",
+      "coverdell-esa",
+      // Insurance & Annuities
+      "insurance",
+      "fixed-annuity",
+      "annuity",
+      // Tangible assets
+      "art",
+      "wine", 
+      "jewelry",
+      "collectible",
+      "car",
+      "other-asset",
+      // Trust & Specialized
+      "trust"
+    ]
+    
+    const liabilityTypes = [
+      "credit-card",
+      "heloc",
+      "loan",
+      "student-loan", 
+      "auto-loan",
+      "mortgage",
+      "other-liability"
+    ]
+
+    if (cashTypes.includes(accountType)) return "Cash"
+    if (investmentTypes.includes(accountType)) return "Investments"  
+    if (assetTypes.includes(accountType)) return "Assets"
+    if (liabilityTypes.includes(accountType)) return "Liabilities"
+    return "Assets" // default fallback
+  }
+
+  // Group and sort accounts by category and type
+  const groupedAccounts = React.useMemo(() => {
+    const groups: Record<string, Account[]> = {}
+
+    // Group accounts by category
+    accounts.forEach((account) => {
+      const category = getAccountCategory(account.accountType)
+      if (!groups[category]) {
+        groups[category] = []
+      }
+      groups[category].push(account)
+    })
+
+    // Sort accounts within each group
+    Object.keys(groups).forEach((category) => {
+      groups[category].sort((a, b) => {
+        const typeOrder: Record<string, string[]> = {
+          "Cash": [
+            "checking", "savings", "bank", "cash", "rewards"
+          ],
+          "Investments": [
+            "personal-investment", "individual", "joint-investment", "joint", 
+            "investment", "brokerage-corporate-non-taxable", "brokerage-corporate-taxable",
+            "brokerage-stock-plan", "brokerage-pension", "brokerage-variable-annuity",
+            "other-non-taxable", "other-taxable", "cryptocurrency"
+          ],
+          "Assets": [
+            // Retirement accounts
+            "traditional-401k", "roth-401k", "401a", "403b", "457b", "thrift-savings-plan",
+            "traditional-ira", "roth-ira", "sep-ira", "simple-ira",
+            // Education & Health
+            "529", "hsa", "coverdell-esa",
+            // Insurance & Annuities
+            "insurance", "fixed-annuity", "annuity",
+            // Tangible assets
+            "art", "wine", "jewelry", "collectible", "car", "other-asset",
+            // Trust & Specialized
+            "trust"
+          ],
+          "Liabilities": [
+            "credit-card", "mortgage", "heloc", "student-loan", "auto-loan", "loan", "other-liability"
+          ]
+        }
+
+        const categoryTypeOrder = typeOrder[category] || []
+        const aIndex = categoryTypeOrder.indexOf(a.accountType)
+        const bIndex = categoryTypeOrder.indexOf(b.accountType)
+
+        if (aIndex === -1 && bIndex === -1) return a.name.localeCompare(b.name)
+        if (aIndex === -1) return 1
+        if (bIndex === -1) return -1
+
+        return aIndex - bIndex
+      })
+    })
+
+    return groups
+  }, [accounts])
+
+  // Define category order for consistent display
+  const categoryOrder = [
+    "Cash",
+    "Investments", 
+    "Assets",
+    "Liabilities",
+  ]
+
+  // Handlers for edit and delete actions
+  const handleEdit = (accountId: string) => {
+    console.log(`Edit account: ${accountId}`)
+  }
+
+  const handleDelete = (accountId: string) => {
+    setAccounts((prev) => prev.filter((account) => account.id !== accountId))
+  }
+
   return (
     <main>
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
@@ -23,161 +368,107 @@ export default function AccountsPage() {
           <h1 className="text-2xl font-semibold text-gray-900 dark:text-gray-50">
             Accounts
           </h1>
-          <p className="text-gray-500 sm:text-sm/6 dark:text-gray-500">
+          <p className="text-gray-500 sm:text-sm/6 dark:text-gray-400">
             Organize your holdings by account for clearer insights
           </p>
         </div>
         <Button
           onClick={() => setIsOpen(true)}
-          className="flex items-center gap-2 text-base sm:text-sm"
+          className="hidden items-center gap-2 text-base sm:flex sm:text-sm"
         >
           Add Account
           <RiAddLine className="-mr-0.5 size-5 shrink-0" aria-hidden="true" />
         </Button>
-        <TicketDrawer open={isOpen} onOpenChange={setIsOpen} />
+        <AccountDrawer
+          open={isOpen}
+          onOpenChange={setIsOpen}
+          onSubmit={handleAddAccount}
+        />
       </div>
       <Divider />
-      <dl className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        <Card>
-          <dt className="text-sm font-medium text-gray-900 dark:text-gray-50">
-            Current Tickets
-          </dt>
-          <dd className="mt-1 text-3xl font-semibold text-gray-900 dark:text-gray-50">
-            247
-          </dd>
-          <CategoryBar
-            values={[82, 13, 5]}
-            className="mt-6"
-            colors={["blue", "lightGray", "red"]}
-            showLabels={false}
-          />
-          <ul
-            role="list"
-            className="mt-4 flex flex-wrap gap-x-10 gap-y-4 text-sm"
-          >
-            <li>
-              <span className="text-base font-semibold text-gray-900 dark:text-gray-50">
-                82%
-              </span>
-              <div className="flex items-center gap-2">
-                <span
-                  className="size-2.5 shrink-0 rounded-sm bg-blue-500 dark:bg-blue-500"
-                  aria-hidden="true"
-                />
-                <span className="text-sm">Resolved</span>
-              </div>
-            </li>
-            <li>
-              <span className="text-base font-semibold text-gray-900 dark:text-gray-50">
-                13%
-              </span>
-              <div className="flex items-center gap-2">
-                <span
-                  className="size-2.5 shrink-0 rounded-sm bg-gray-400 dark:bg-gray-600"
-                  aria-hidden="true"
-                />
-                <span className="text-sm">In Progress</span>
-              </div>
-            </li>
-            <li>
-              <span className="text-base font-semibold text-gray-900 dark:text-gray-50">
-                5%
-              </span>
-              <div className="flex items-center gap-2">
-                <span
-                  className="size-2.5 shrink-0 rounded-sm bg-red-500 dark:bg-red-500"
-                  aria-hidden="true"
-                />
-                <span className="text-sm">Escalated</span>
-              </div>
-            </li>
-          </ul>
-        </Card>
-        <Card>
-          <dt className="text-sm font-medium text-gray-900 dark:text-gray-50">
-            SLA Performance
-          </dt>
-          <div className="mt-4 flex flex-nowrap items-center justify-between gap-y-4">
-            <dd className="space-y-3">
-              <div>
-                <div className="flex items-center gap-2">
-                  <span
-                    className="size-2.5 shrink-0 rounded-sm bg-blue-500 dark:bg-blue-500"
-                    aria-hidden="true"
-                  />
-                  <span className="text-sm">Within SLA</span>
-                </div>
-                <span className="mt-1 block text-2xl font-semibold text-gray-900 dark:text-gray-50">
-                  83.3%
+
+      {/* Account Cards grouped by type */}
+      <div className="mt-8">
+        {categoryOrder.map((category) => {
+          const accountsInCategory = groupedAccounts[category]
+          if (!accountsInCategory || accountsInCategory.length === 0) {
+            return null
+          }
+
+          // Calculate total value for this category
+          const categoryTotal = accountsInCategory.reduce(
+            (sum, account) => sum + account.totalValue,
+            0,
+          )
+
+          // Format currency
+          const formatCurrency = (value: number) => {
+            return new Intl.NumberFormat("en-US", {
+              style: "currency",
+              currency: "USD",
+              minimumFractionDigits: 0,
+              maximumFractionDigits: 0,
+            }).format(value)
+          }
+
+          return (
+            <div key={category} className="mb-8">
+              {/* Section Header with Total */}
+              <div className="mb-6 flex items-center justify-between">
+                <h2 className="text-lg font-medium text-gray-900 dark:text-gray-50">
+                  {category}
+                </h2>
+                <span className="text-lg font-medium text-gray-900 dark:text-gray-50">
+                  {formatCurrency(categoryTotal)}
                 </span>
               </div>
-              <div>
-                <div className="flex items-center gap-2">
-                  <span
-                    className="size-2.5 shrink-0 rounded-sm bg-red-500 dark:bg-red-500"
-                    aria-hidden="true"
+
+              {/* Account Cards in this category */}
+              <div className="space-y-4">
+                {accountsInCategory.map((account) => (
+                  <AccountCard
+                    key={account.id}
+                    name={account.name}
+                    accountType={account.accountTypeLabel as any}
+                    institution={account.institutionLabel as any}
+                    totalValue={account.totalValue}
+                    holdingsCount={account.holdingsCount}
+                    assetAllocation={account.assetAllocation}
+                    onEdit={() => handleEdit(account.id)}
+                    onDelete={() => handleDelete(account.id)}
                   />
-                  <span className="text-sm text-gray-900 dark:text-gray-50">
-                    SLA Breached
-                  </span>
-                </div>
-                <span className="mt-1 block text-2xl font-semibold text-gray-900 dark:text-gray-50">
-                  16.7%
-                </span>
+                ))}
               </div>
-            </dd>
-            <ProgressCircle value={83} radius={45} strokeWidth={7} />
+              <Divider />
+            </div>
+          )
+        })}
+
+        {/* Mobile Add Account Button */}
+        {accounts.length > 0 && (
+          <div className="mt-6 sm:hidden">
+            <Button
+              onClick={() => setIsOpen(true)}
+              className="flex w-full items-center justify-center gap-2 text-base"
+            >
+              Add Account
+              <RiAddLine
+                className="-mr-0.5 size-5 shrink-0"
+                aria-hidden="true"
+              />
+            </Button>
           </div>
-        </Card>
-        <Card>
-          <dt className="text-sm font-medium text-gray-900 dark:text-gray-50">
-            Call Volume Trends
-          </dt>
-          <div className="mt-4 flex items-center gap-x-8 gap-y-4">
-            <dd className="space-y-3 whitespace-nowrap">
-              <div>
-                <div className="flex items-center gap-2">
-                  <span
-                    className="size-2.5 shrink-0 rounded-sm bg-blue-500 dark:bg-blue-500"
-                    aria-hidden="true"
-                  />
-                  <span className="text-sm">Today</span>
-                </div>
-                <span className="mt-1 block text-2xl font-semibold text-gray-900 dark:text-gray-50">
-                  573
-                </span>
-              </div>
-              <div>
-                <div className="flex items-center gap-2">
-                  <span
-                    className="size-2.5 shrink-0 rounded-sm bg-gray-400 dark:bg-gray-600"
-                    aria-hidden="true"
-                  />
-                  <span className="text-sm">Yesterday</span>
-                </div>
-                <span className="mt-1 block text-2xl font-semibold text-gray-900 dark:text-gray-50">
-                  451
-                </span>
-              </div>
-            </dd>
-            <LineChartSupport
-              className="h-28"
-              data={volume}
-              index="time"
-              categories={["Today", "Yesterday"]}
-              colors={["blue", "lightGray"]}
-              showTooltip={false}
-              valueFormatter={(number: number) =>
-                Intl.NumberFormat("us").format(number).toString()
-              }
-              startEndOnly={true}
-              showYAxis={false}
-              showLegend={false}
-            />
+        )}
+
+        {/* Empty state */}
+        {accounts.length === 0 && (
+          <div className="py-12 text-center">
+            <p className="text-gray-500 dark:text-gray-400">
+              No accounts yet. Click "Add Account" to get started.
+            </p>
           </div>
-        </Card>
-      </dl>
-      <DataTable data={tickets} columns={columns} />
+        )}
+      </div>
     </main>
   )
 }

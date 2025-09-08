@@ -23,7 +23,7 @@ export default function KPICard({ name, stat, change, color }: KPICardProps) {
       <dd className="mt-2 flex items-baseline space-x-2.5">
         <span
           className={cx(
-            "text-3xl font-semibold",
+            "text-2xl font-semibold",
             getColorClassName(color, "text"),
           )}
         >
