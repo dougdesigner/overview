@@ -29,9 +29,9 @@ export default function KPICard({ name, stat, change, color }: KPICardProps) {
         >
           {stat}
         </span>
-        <span className="text-sm font-medium text-gray-500 dark:text-gray-400">
+        {/* <span className="text-sm font-medium text-gray-500 dark:text-gray-400">
           {change}
-        </span>
+        </span> */}
       </dd>
     </Card>
   )

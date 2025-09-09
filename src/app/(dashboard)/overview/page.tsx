@@ -39,6 +39,7 @@ export default function OverviewPage() {
             $247,468
           </dd>
           <CategoryBar
+            // label="Asset Allocation"
             values={[34.4, 30.6, 20.9, 14.1]}
             className="mt-6"
             colors={["blue", "cyan", "amber", "emerald"]}
@@ -49,18 +50,16 @@ export default function OverviewPage() {
             className="mt-4 flex flex-wrap gap-x-10 gap-y-4 text-sm"
           >
             <li>
-              {/* <span className="text-base font-semibold text-gray-900 dark:text-gray-50">
+              <span className="text-base font-semibold text-gray-900 dark:text-gray-50">
                 34.4%
-              </span> */}
+              </span>
 
               <div className="flex items-center gap-2">
                 <span
                   className="size-2.5 shrink-0 rounded-sm bg-blue-600 dark:bg-blue-500"
                   aria-hidden="true"
                 />
-                <span className="text-sm font-medium text-gray-500 dark:text-gray-400">
-                  U.S. Stocks
-                </span>
+                <span className="text-sm">U.S. Stocks</span>
               </div>
 
               {/* <p className="mt-1 text-lg font-semibold text-gray-900 dark:text-gray-50">
@@ -71,17 +70,15 @@ export default function OverviewPage() {
               </p> */}
             </li>
             <li>
-              {/* <span className="text-base font-semibold text-gray-900 dark:text-gray-50">
+              <span className="text-base font-semibold text-gray-900 dark:text-gray-50">
                 30.6%
-              </span> */}
+              </span>
               <div className="flex items-center gap-2">
                 <span
                   className="dark:bg-cyan-00 size-2.5 shrink-0 rounded-sm bg-cyan-600 dark:bg-cyan-500"
                   aria-hidden="true"
                 />
-                <span className="text-sm font-medium text-gray-500 dark:text-gray-400">
-                  Non-U.S. Stocks
-                </span>
+                <span className="text-sm">Non-U.S. Stocks</span>
               </div>
 
               {/* <p className="mt-1 text-lg font-semibold text-gray-900 dark:text-gray-50">
@@ -92,18 +89,16 @@ export default function OverviewPage() {
               </p> */}
             </li>
             <li>
-              {/* <span className="text-base font-semibold text-gray-900 dark:text-gray-50">
+              <span className="text-base font-semibold text-gray-900 dark:text-gray-50">
                 20.9%
-              </span> */}
+              </span>
 
               <div className="flex items-center gap-2">
                 <span
                   className="size-2.5 shrink-0 rounded-sm bg-amber-600 dark:bg-amber-500"
                   aria-hidden="true"
                 />
-                <span className="text-sm font-medium text-gray-500 dark:text-gray-400">
-                  Fixed Income
-                </span>
+                <span className="text-sm">Fixed Income</span>
               </div>
 
               {/* <p className="mt-1 text-lg font-semibold text-gray-900 dark:text-gray-50">
@@ -114,17 +109,15 @@ export default function OverviewPage() {
               </p> */}
             </li>
             <li>
-              {/* <span className="text-base font-semibold text-gray-900 dark:text-gray-50">
+              <span className="text-base font-semibold text-gray-900 dark:text-gray-50">
                 14.1%
-              </span> */}
+              </span>
               <div className="flex items-center gap-2">
                 <span
                   className="size-2.5 shrink-0 rounded-sm bg-emerald-600 dark:bg-emerald-500"
                   aria-hidden="true"
                 />
-                <span className="text-sm font-medium text-gray-500 dark:text-gray-400">
-                  Cash
-                </span>
+                <span className="text-sm">Cash</span>
               </div>
 
               {/* <p className="mt-1 text-lg font-semibold text-gray-900 dark:text-gray-50">
@@ -135,17 +128,15 @@ export default function OverviewPage() {
               </p> */}
             </li>
             <li>
-              {/* <span className="text-base font-semibold text-gray-900 dark:text-gray-50">
+              <span className="text-base font-semibold text-gray-900 dark:text-gray-50">
                 0%
-              </span> */}
+              </span>
               <div className="flex items-center gap-2">
                 <span
                   className="size-2.5 shrink-0 rounded-sm bg-gray-400 dark:bg-gray-600"
                   aria-hidden="true"
                 />
-                <span className="text-sm font-medium text-gray-500 dark:text-gray-400">
-                  Other
-                </span>
+                <span className="text-sm">Other</span>
               </div>
 
               {/* <p className="mt-1 text-lg font-semibold text-gray-900 dark:text-gray-50">

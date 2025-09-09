@@ -115,6 +115,7 @@ interface CategoryBarProps extends React.HTMLAttributes<HTMLDivElement> {
   marker?: { value: number; tooltip?: string; showAnimation?: boolean }
   showLabels?: boolean
   segmentLabels?: string[]
+  label?: string
 }
 
 const CategoryBar = React.forwardRef<HTMLDivElement, CategoryBarProps>(
@@ -125,6 +126,7 @@ const CategoryBar = React.forwardRef<HTMLDivElement, CategoryBarProps>(
       marker,
       showLabels = true,
       segmentLabels,
+      label,
       className,
       ...props
     },
@@ -158,14 +160,20 @@ const CategoryBar = React.forwardRef<HTMLDivElement, CategoryBarProps>(
         tremor-id="tremor-raw"
         {...props}
       >
+        {label && (
+          <h4 className="text-sm font-medium text-gray-500 dark:text-gray-400">
+            {label}
+          </h4>
+        )}
         {showLabels ? <BarLabels values={values} /> : null}
-        <div className="relative flex h-2 w-full items-center">
+        <div className="relative mt-4 flex h-2 w-full items-center">
           <div className="flex h-full flex-1 items-center gap-0.5 overflow-hidden rounded-full">
             {values.map((value, index) => {
               const barColor = colors[index] ?? "gray"
               const percentage = (value / maxValue) * 100
-              const hasTooltip = segmentLabels && segmentLabels[index] && percentage > 0
-              
+              const hasTooltip =
+                segmentLabels && segmentLabels[index] && percentage > 0
+
               const segment = (
                 <div
                   key={`item-${index}`}
@@ -180,12 +188,18 @@ const CategoryBar = React.forwardRef<HTMLDivElement, CategoryBarProps>(
                   style={{ width: `${percentage}%` }}
                 />
               )
-              
+
               return hasTooltip ? (
-                <Tooltip key={`item-${index}`} triggerAsChild content={`${segmentLabels[index]}: ${value}%`}>
+                <Tooltip
+                  key={`item-${index}`}
+                  triggerAsChild
+                  content={`${segmentLabels[index]}: ${value}%`}
+                >
                   {segment}
                 </Tooltip>
-              ) : segment
+              ) : (
+                segment
+              )
             })}
           </div>
 
