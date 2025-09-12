@@ -115,6 +115,8 @@ interface Account {
 
 export default function AccountsPage() {
   const [isOpen, setIsOpen] = React.useState(false)
+  const [drawerMode, setDrawerMode] = React.useState<'create' | 'edit'>('create')
+  const [editingAccount, setEditingAccount] = React.useState<Account | null>(null)
 
   // Initialize with example accounts
   const [accounts, setAccounts] = React.useState<Account[]>([
@@ -184,31 +186,51 @@ export default function AccountsPage() {
     },
   ])
 
-  // Handle adding a new account from the drawer
-  const handleAddAccount = (formData: AccountFormData) => {
-    const newAccount: Account = {
-      id: Date.now().toString(), // Simple ID generation
-      name:
-        formData.accountName ||
-        accountTypeLabels[formData.accountType] ||
-        formData.accountType,
-      accountType: formData.accountType,
-      accountTypeLabel:
-        accountTypeLabels[formData.accountType] || formData.accountType,
-      institution: formData.institution,
-      institutionLabel:
-        institutionLabels[formData.institution] || formData.institution,
-      totalValue: 0, // Will be calculated from holdings later
-      holdingsCount: 0, // Will be updated when holdings are added
-      assetAllocation: {
-        usStocks: 0,
-        nonUsStocks: 0,
-        fixedIncome: 0,
-        cash: 0,
-      },
+  // Handle adding or editing account from the drawer
+  const handleAccountSubmit = (formData: AccountFormData) => {
+    if (drawerMode === 'edit' && editingAccount) {
+      // Update existing account
+      setAccounts(prev => prev.map(account => 
+        account.id === editingAccount.id 
+          ? {
+              ...account,
+              name: formData.accountName || accountTypeLabels[formData.accountType] || formData.accountType,
+              accountType: formData.accountType,
+              accountTypeLabel: accountTypeLabels[formData.accountType] || formData.accountType,
+              institution: formData.institution,
+              institutionLabel: institutionLabels[formData.institution] || formData.institution,
+            }
+          : account
+      ))
+    } else {
+      // Create new account
+      const newAccount: Account = {
+        id: Date.now().toString(), // Simple ID generation
+        name:
+          formData.accountName ||
+          accountTypeLabels[formData.accountType] ||
+          formData.accountType,
+        accountType: formData.accountType,
+        accountTypeLabel:
+          accountTypeLabels[formData.accountType] || formData.accountType,
+        institution: formData.institution,
+        institutionLabel:
+          institutionLabels[formData.institution] || formData.institution,
+        totalValue: 0, // Will be calculated from holdings later
+        holdingsCount: 0, // Will be updated when holdings are added
+        assetAllocation: {
+          usStocks: 0,
+          nonUsStocks: 0,
+          fixedIncome: 0,
+          cash: 0,
+        },
+      }
+      setAccounts((prev) => [...prev, newAccount])
     }
-
-    setAccounts((prev) => [...prev, newAccount])
+    
+    // Reset state
+    setEditingAccount(null)
+    setDrawerMode('create')
   }
 
   // Define account type categories
@@ -354,11 +376,26 @@ export default function AccountsPage() {
 
   // Handlers for edit and delete actions
   const handleEdit = (accountId: string) => {
-    console.log(`Edit account: ${accountId}`)
+    const account = accounts.find(a => a.id === accountId)
+    if (account) {
+      setEditingAccount(account)
+      setDrawerMode('edit')
+      setIsOpen(true)
+    }
   }
 
   const handleDelete = (accountId: string) => {
     setAccounts((prev) => prev.filter((account) => account.id !== accountId))
+  }
+
+  // Handle drawer close
+  const handleDrawerClose = (open: boolean) => {
+    setIsOpen(open)
+    if (!open) {
+      // Reset to create mode when closing
+      setEditingAccount(null)
+      setDrawerMode('create')
+    }
   }
 
   return (
@@ -373,7 +410,11 @@ export default function AccountsPage() {
           </p>
         </div>
         <Button
-          onClick={() => setIsOpen(true)}
+          onClick={() => {
+            setDrawerMode('create')
+            setEditingAccount(null)
+            setIsOpen(true)
+          }}
           className="hidden items-center gap-2 text-base sm:flex sm:text-sm"
         >
           Add Account
@@ -381,8 +422,14 @@ export default function AccountsPage() {
         </Button>
         <AccountDrawer
           open={isOpen}
-          onOpenChange={setIsOpen}
-          onSubmit={handleAddAccount}
+          onOpenChange={handleDrawerClose}
+          onSubmit={handleAccountSubmit}
+          mode={drawerMode}
+          initialData={editingAccount ? {
+            institution: editingAccount.institution,
+            accountType: editingAccount.accountType,
+            accountName: editingAccount.name,
+          } : undefined}
         />
       </div>
       <Divider />
@@ -448,7 +495,11 @@ export default function AccountsPage() {
         {accounts.length > 0 && (
           <div className="mt-6 sm:hidden">
             <Button
-              onClick={() => setIsOpen(true)}
+              onClick={() => {
+                setDrawerMode('create')
+                setEditingAccount(null)
+                setIsOpen(true)
+              }}
               className="flex w-full items-center justify-center gap-2 text-base"
             >
               Add Account

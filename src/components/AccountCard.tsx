@@ -163,18 +163,17 @@ export default function AccountCard({
         </div>
       </div>
 
-      {/* Asset allocation visualization */}
-      <div className="mt-4">
-        {/* <h4 className="mb-3 text-sm font-medium text-gray-700 dark:text-gray-300">
-          Asset Allocation
-        </h4> */}
-        <CategoryBar
-          values={allocationValues}
-          colors={["blue", "cyan", "amber", "emerald"]}
-          showLabels={false}
-          segmentLabels={allocationLabels}
-        />
-      </div>
+      {/* Asset allocation visualization - only show if there's data */}
+      {allocationValues.some(value => value > 0) && (
+        <div className="mt-4">
+          <CategoryBar
+            values={allocationValues}
+            colors={["blue", "cyan", "amber", "emerald"]}
+            showLabels={false}
+            segmentLabels={allocationLabels}
+          />
+        </div>
+      )}
     </Card>
   )
 }

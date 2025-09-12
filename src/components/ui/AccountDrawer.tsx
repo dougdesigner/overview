@@ -105,7 +105,42 @@ const institutions = [
   { value: "other", label: "Other" },
 ]
 
+// Get institution brand color
+const getInstitutionBrandColor = (institution: string): string => {
+  const brandColors: Record<string, string> = {
+    "fidelity": "bg-emerald-600",
+    "chase": "bg-blue-600",
+    "vanguard": "bg-red-600",
+    "wealthfront": "bg-purple-600",
+    "amex": "bg-blue-700",
+    "schwab": "bg-orange-600",
+    "etrade": "bg-purple-700",
+    "td-ameritrade": "bg-green-600",
+    "merrill": "bg-blue-600",
+    "betterment": "bg-blue-500",
+    "robinhood": "bg-green-500",
+    "bofa": "bg-red-700",
+    "wells-fargo": "bg-red-600",
+    "citi": "bg-blue-600",
+  }
+  return brandColors[institution] || "bg-gray-500"
+}
+
+// Get institution initials for logo
+const getInstitutionInitials = (institutionLabel: string): string => {
+  const words = institutionLabel.split(" ")
+  if (words.length === 1) {
+    return words[0].substring(0, 2).toUpperCase()
+  }
+  return words
+    .map((word) => word[0])
+    .join("")
+    .substring(0, 2)
+    .toUpperCase()
+}
+
 export interface AccountFormData {
+  id?: string // Only present in edit mode
   institution: string
   accountType: string
   accountName: string
@@ -115,6 +150,9 @@ interface AccountDrawerProps {
   open: boolean
   onOpenChange: (open: boolean) => void
   onSubmit?: (account: AccountFormData) => void
+  mode?: 'create' | 'edit'
+  initialData?: AccountFormData
+  title?: string
 }
 
 const FormField = ({
@@ -135,22 +173,39 @@ const FormField = ({
   </div>
 )
 
-export function AccountDrawer({ open, onOpenChange, onSubmit }: AccountDrawerProps) {
+export function AccountDrawer({ 
+  open, 
+  onOpenChange, 
+  onSubmit,
+  mode = 'create',
+  initialData,
+  title
+}: AccountDrawerProps) {
+  // Initialize with empty form to prevent initial render issues
   const [formData, setFormData] = React.useState<AccountFormData>({
     institution: "",
     accountType: "",
     accountName: "",
   })
 
-  // Auto-populate account name when account type changes
+  // Reset form when drawer opens/closes with new initial data
   React.useEffect(() => {
-    if (formData.accountType && !formData.accountName) {
-      const selectedType = accountTypes.find(t => t.value === formData.accountType)
-      if (selectedType) {
-        setFormData(prev => ({ ...prev, accountName: selectedType.label }))
+    if (open) {
+      // Set initial data when opening
+      if (initialData) {
+        setFormData(initialData)
+      } else if (mode === 'create') {
+        // Reset to empty for create mode
+        setFormData({
+          institution: "",
+          accountType: "",
+          accountName: "",
+        })
       }
     }
-  }, [formData.accountType])
+  }, [open, initialData, mode])
+
+  // Remove the second useEffect as auto-population is now handled in the onChange handler
 
   const handleUpdateForm = (updates: Partial<AccountFormData>) => {
     setFormData((prev) => ({ ...prev, ...updates }))
@@ -178,9 +233,9 @@ export function AccountDrawer({ open, onOpenChange, onSubmit }: AccountDrawerPro
       <DrawerContent className="overflow-x-hidden sm:max-w-lg">
         <DrawerHeader>
           <DrawerTitle>
-            <p>Add Account</p>
+            <p>{title || (mode === 'edit' ? 'Edit Account' : 'Add Account')}</p>
             <span className="text-sm font-normal text-gray-500 dark:text-gray-500">
-              Create a new investment account
+              {mode === 'edit' ? 'Update account information' : 'Create a new investment account'}
             </span>
           </DrawerTitle>
         </DrawerHeader>
@@ -197,7 +252,14 @@ export function AccountDrawer({ open, onOpenChange, onSubmit }: AccountDrawerPro
               <SelectContent>
                 {institutions.map((inst) => (
                   <SelectItem key={inst.value} value={inst.value}>
-                    {inst.label}
+                    <div className="flex items-center gap-2">
+                      <div 
+                        className={`flex size-6 shrink-0 items-center justify-center rounded-full text-xs font-semibold text-white ${getInstitutionBrandColor(inst.value)}`}
+                      >
+                        {getInstitutionInitials(inst.label)}
+                      </div>
+                      <span>{inst.label}</span>
+                    </div>
                   </SelectItem>
                 ))}
               </SelectContent>
@@ -208,11 +270,15 @@ export function AccountDrawer({ open, onOpenChange, onSubmit }: AccountDrawerPro
             <Select
               value={formData.accountType}
               onValueChange={(value) => {
-                const selectedType = accountTypes.find(t => t.value === value)
-                handleUpdateForm({ 
-                  accountType: value,
-                  accountName: selectedType?.label || ""
-                })
+                if (mode === 'create' && !formData.accountName) {
+                  const selectedType = accountTypes.find(t => t.value === value)
+                  handleUpdateForm({ 
+                    accountType: value,
+                    accountName: selectedType?.label || ""
+                  })
+                } else {
+                  handleUpdateForm({ accountType: value })
+                }
               }}
             >
               <SelectTrigger>
@@ -249,7 +315,7 @@ export function AccountDrawer({ open, onOpenChange, onSubmit }: AccountDrawerPro
             onClick={handleSubmit}
             disabled={!isFormValid()}
           >
-            Add Account
+            {mode === 'edit' ? 'Save Changes' : 'Add Account'}
           </Button>
         </DrawerFooter>
       </DrawerContent>
