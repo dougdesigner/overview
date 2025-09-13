@@ -9,9 +9,11 @@ import {
 import { HoldingsTable } from "@/components/ui/data-table-holdings/HoldingsTable"
 import { Holding } from "@/components/ui/data-table-holdings/types"
 import { RiAddLine } from "@remixicon/react"
+import { useSearchParams } from "next/navigation"
 import React from "react"
 
 export default function HoldingsPage() {
+  const searchParams = useSearchParams()
   const [isOpen, setIsOpen] = React.useState(false)
   const [editingHolding, setEditingHolding] = React.useState<Holding | null>(null)
 
@@ -254,6 +256,7 @@ export default function HoldingsPage() {
           accounts={accounts}
           onEdit={handleEdit}
           onDelete={handleDelete}
+          initialAccountFilter={searchParams.get("account") || "all"}
         />
       </div>
     </main>

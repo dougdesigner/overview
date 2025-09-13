@@ -8,6 +8,7 @@ import {
   type AccountFormData,
 } from "@/components/ui/AccountDrawer"
 import { RiAddLine } from "@remixicon/react"
+import { useRouter } from "next/navigation"
 import React from "react"
 
 // Map account types to labels for display
@@ -114,6 +115,7 @@ interface Account {
 }
 
 export default function AccountsPage() {
+  const router = useRouter()
   const [isOpen, setIsOpen] = React.useState(false)
   const [drawerMode, setDrawerMode] = React.useState<'create' | 'edit'>('create')
   const [editingAccount, setEditingAccount] = React.useState<Account | null>(null)
@@ -233,146 +235,10 @@ export default function AccountsPage() {
     setDrawerMode('create')
   }
 
-  // Define account type categories
-  const getAccountCategory = (accountType: string): string => {
-    const cashTypes = [
-      "bank",
-      "checking", 
-      "savings",
-      "cash",
-      "rewards"
-    ]
-    
-    const investmentTypes = [
-      "investment",
-      "personal-investment",
-      "individual", // keeping for backward compatibility
-      "joint-investment",
-      "joint", // keeping for backward compatibility
-      "brokerage-corporate-non-taxable",
-      "brokerage-corporate-taxable", 
-      "brokerage-stock-plan",
-      "brokerage-pension",
-      "brokerage-variable-annuity",
-      "other-non-taxable",
-      "other-taxable",
-      "cryptocurrency"
-    ]
-    
-    const assetTypes = [
-      // Retirement accounts
-      "traditional-ira",
-      "roth-ira", 
-      "sep-ira",
-      "simple-ira",
-      "401a",
-      "traditional-401k",
-      "roth-401k",
-      "403b",
-      "457b",
-      "thrift-savings-plan",
-      // Education & Health
-      "529",
-      "hsa",
-      "coverdell-esa",
-      // Insurance & Annuities
-      "insurance",
-      "fixed-annuity",
-      "annuity",
-      // Tangible assets
-      "art",
-      "wine", 
-      "jewelry",
-      "collectible",
-      "car",
-      "other-asset",
-      // Trust & Specialized
-      "trust"
-    ]
-    
-    const liabilityTypes = [
-      "credit-card",
-      "heloc",
-      "loan",
-      "student-loan", 
-      "auto-loan",
-      "mortgage",
-      "other-liability"
-    ]
-
-    if (cashTypes.includes(accountType)) return "Cash"
-    if (investmentTypes.includes(accountType)) return "Investments"  
-    if (assetTypes.includes(accountType)) return "Assets"
-    if (liabilityTypes.includes(accountType)) return "Liabilities"
-    return "Assets" // default fallback
-  }
-
-  // Group and sort accounts by category and type
-  const groupedAccounts = React.useMemo(() => {
-    const groups: Record<string, Account[]> = {}
-
-    // Group accounts by category
-    accounts.forEach((account) => {
-      const category = getAccountCategory(account.accountType)
-      if (!groups[category]) {
-        groups[category] = []
-      }
-      groups[category].push(account)
-    })
-
-    // Sort accounts within each group
-    Object.keys(groups).forEach((category) => {
-      groups[category].sort((a, b) => {
-        const typeOrder: Record<string, string[]> = {
-          "Cash": [
-            "checking", "savings", "bank", "cash", "rewards"
-          ],
-          "Investments": [
-            "personal-investment", "individual", "joint-investment", "joint", 
-            "investment", "brokerage-corporate-non-taxable", "brokerage-corporate-taxable",
-            "brokerage-stock-plan", "brokerage-pension", "brokerage-variable-annuity",
-            "other-non-taxable", "other-taxable", "cryptocurrency"
-          ],
-          "Assets": [
-            // Retirement accounts
-            "traditional-401k", "roth-401k", "401a", "403b", "457b", "thrift-savings-plan",
-            "traditional-ira", "roth-ira", "sep-ira", "simple-ira",
-            // Education & Health
-            "529", "hsa", "coverdell-esa",
-            // Insurance & Annuities
-            "insurance", "fixed-annuity", "annuity",
-            // Tangible assets
-            "art", "wine", "jewelry", "collectible", "car", "other-asset",
-            // Trust & Specialized
-            "trust"
-          ],
-          "Liabilities": [
-            "credit-card", "mortgage", "heloc", "student-loan", "auto-loan", "loan", "other-liability"
-          ]
-        }
-
-        const categoryTypeOrder = typeOrder[category] || []
-        const aIndex = categoryTypeOrder.indexOf(a.accountType)
-        const bIndex = categoryTypeOrder.indexOf(b.accountType)
-
-        if (aIndex === -1 && bIndex === -1) return a.name.localeCompare(b.name)
-        if (aIndex === -1) return 1
-        if (bIndex === -1) return -1
-
-        return aIndex - bIndex
-      })
-    })
-
-    return groups
+  // Sort accounts alphabetically by name
+  const sortedAccounts = React.useMemo(() => {
+    return [...accounts].sort((a, b) => a.name.localeCompare(b.name))
   }, [accounts])
-
-  // Define category order for consistent display
-  const categoryOrder = [
-    "Cash",
-    "Investments", 
-    "Assets",
-    "Liabilities",
-  ]
 
   // Handlers for edit and delete actions
   const handleEdit = (accountId: string) => {
@@ -386,6 +252,10 @@ export default function AccountsPage() {
 
   const handleDelete = (accountId: string) => {
     setAccounts((prev) => prev.filter((account) => account.id !== accountId))
+  }
+
+  const handleAccountClick = (accountId: string) => {
+    router.push(`/holdings?account=${accountId}`)
   }
 
   // Handle drawer close
@@ -434,62 +304,24 @@ export default function AccountsPage() {
       </div>
       <Divider />
 
-      {/* Account Cards grouped by type */}
+      {/* Account Cards */}
       <div className="mt-8">
-        {categoryOrder.map((category) => {
-          const accountsInCategory = groupedAccounts[category]
-          if (!accountsInCategory || accountsInCategory.length === 0) {
-            return null
-          }
-
-          // Calculate total value for this category
-          const categoryTotal = accountsInCategory.reduce(
-            (sum, account) => sum + account.totalValue,
-            0,
-          )
-
-          // Format currency
-          const formatCurrency = (value: number) => {
-            return new Intl.NumberFormat("en-US", {
-              style: "currency",
-              currency: "USD",
-              minimumFractionDigits: 0,
-              maximumFractionDigits: 0,
-            }).format(value)
-          }
-
-          return (
-            <div key={category} className="mb-8">
-              {/* Section Header with Total */}
-              <div className="mb-6 flex items-center justify-between">
-                <h2 className="text-lg font-medium text-gray-900 dark:text-gray-50">
-                  {category}
-                </h2>
-                <span className="text-lg font-medium text-gray-900 dark:text-gray-50">
-                  {formatCurrency(categoryTotal)}
-                </span>
-              </div>
-
-              {/* Account Cards in this category */}
-              <div className="space-y-4">
-                {accountsInCategory.map((account) => (
-                  <AccountCard
-                    key={account.id}
-                    name={account.name}
-                    accountType={account.accountTypeLabel as any}
-                    institution={account.institutionLabel as any}
-                    totalValue={account.totalValue}
-                    holdingsCount={account.holdingsCount}
-                    assetAllocation={account.assetAllocation}
-                    onEdit={() => handleEdit(account.id)}
-                    onDelete={() => handleDelete(account.id)}
-                  />
-                ))}
-              </div>
-              <Divider />
-            </div>
-          )
-        })}
+        <div className="space-y-4">
+          {sortedAccounts.map((account) => (
+            <AccountCard
+              key={account.id}
+              name={account.name}
+              accountType={account.accountTypeLabel}
+              institution={account.institutionLabel}
+              totalValue={account.totalValue}
+              holdingsCount={account.holdingsCount}
+              assetAllocation={account.assetAllocation}
+              onEdit={() => handleEdit(account.id)}
+              onDelete={() => handleDelete(account.id)}
+              onClick={() => handleAccountClick(account.id)}
+            />
+          ))}
+        </div>
 
         {/* Mobile Add Account Button */}
         {accounts.length > 0 && (

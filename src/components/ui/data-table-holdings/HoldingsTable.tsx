@@ -84,10 +84,11 @@ export function HoldingsTable({
   accounts,
   onEdit,
   onDelete,
+  initialAccountFilter = "all",
 }: HoldingsTableProps) {
   const [expanded, setExpanded] = React.useState<ExpandedState>({})
   const [sorting, setSorting] = React.useState<SortingState>([])
-  const [selectedAccount, setSelectedAccount] = React.useState<string>("all")
+  const [selectedAccount, setSelectedAccount] = React.useState<string>(initialAccountFilter)
 
   // Filter holdings by selected account
   const filteredHoldings = React.useMemo(() => {

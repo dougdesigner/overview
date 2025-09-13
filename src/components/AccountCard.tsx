@@ -10,6 +10,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/DropdownMenu"
 import { RiDeleteBinLine, RiEditLine, RiMore2Fill } from "@remixicon/react"
+import { cx } from "@/lib/utils"
 
 interface AccountCardProps {
   // Account identification
@@ -42,6 +43,7 @@ interface AccountCardProps {
   // Action handlers
   onEdit?: () => void
   onDelete?: () => void
+  onClick?: () => void
 }
 
 export default function AccountCard({
@@ -53,6 +55,7 @@ export default function AccountCard({
   assetAllocation,
   onEdit,
   onDelete,
+  onClick,
 }: AccountCardProps) {
   // Default name to account type if no custom name provided
   const displayName = name || accountType
@@ -119,7 +122,13 @@ export default function AccountCard({
   ]
 
   return (
-    <Card className="relative">
+    <Card
+      className={cx(
+        "relative",
+        onClick && "cursor-pointer transition-colors hover:bg-gray-50 dark:hover:bg-gray-900/50"
+      )}
+      onClick={onClick}
+    >
       {/* Header with logo, account info, actions, and financial data */}
       <div className="flex items-start gap-3">
         {/* Institution logo */}
@@ -142,7 +151,11 @@ export default function AccountCard({
         {/* More actions dropdown */}
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button variant="ghost" className="h-8 w-8 p-0">
+            <Button
+              variant="ghost"
+              className="h-8 w-8 p-0"
+              onClick={(e) => e.stopPropagation()}
+            >
               <RiMore2Fill className="h-4 w-4" />
               <span className="sr-only">Open menu</span>
             </Button>
