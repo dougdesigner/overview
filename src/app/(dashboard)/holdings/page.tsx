@@ -177,6 +177,27 @@ export default function HoldingsPage() {
     setIsOpen(true)
   }
 
+  // Convert Holding to HoldingFormData for editing
+  const convertHoldingToFormData = (holding: Holding): HoldingFormData => {
+    if (holding.type === "cash") {
+      return {
+        id: holding.id,
+        accountId: holding.accountId,
+        holdingType: "cash",
+        amount: holding.marketValue, // For cash, marketValue is the amount
+        description: holding.name,
+      }
+    } else {
+      return {
+        id: holding.id,
+        accountId: holding.accountId,
+        holdingType: "stocks-funds",
+        ticker: holding.ticker,
+        shares: holding.quantity,
+      }
+    }
+  }
+
   const handleDelete = (holdingId: string) => {
     setHoldings(prev => prev.filter(h => h.id !== holdingId))
   }
@@ -200,9 +221,16 @@ export default function HoldingsPage() {
         </Button>
         <HoldingsDrawer
           open={isOpen}
-          onOpenChange={setIsOpen}
+          onOpenChange={(open) => {
+            setIsOpen(open)
+            if (!open) {
+              setEditingHolding(null)
+            }
+          }}
           accounts={accounts}
           onSubmit={handleHoldingSubmit}
+          mode={editingHolding ? "edit" : "create"}
+          initialData={editingHolding ? convertHoldingToFormData(editingHolding) : undefined}
         />
       </div>
       <Divider />
