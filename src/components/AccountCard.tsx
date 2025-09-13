@@ -65,6 +65,16 @@ export default function AccountCard({
       Vanguard: "bg-red-600",
       Wealthfront: "bg-purple-600",
       "American Express": "bg-blue-700",
+      "Charles Schwab": "bg-orange-600",
+      "E*TRADE": "bg-purple-700",
+      "TD Ameritrade": "bg-green-600",
+      "Merrill Edge": "bg-blue-600",
+      Betterment: "bg-blue-500",
+      Robinhood: "bg-green-500",
+      "Bank of America": "bg-red-700",
+      "Wells Fargo": "bg-red-600",
+      Citibank: "bg-blue-600",
+      Other: "bg-gray-500",
     }
     return brandColors[institution] || "bg-gray-500"
   }

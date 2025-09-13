@@ -29,7 +29,7 @@ const buttonVariants = tv({
         "hover:bg-blue-700 dark:hover:bg-blue-700",
         // disabled
         "disabled:bg-blue-300 disabled:text-white",
-        "disabled:dark:bg-blue-800 disabled:dark:text-blue-400",
+        "disabled:dark:bg-blue-700 disabled:dark:text-blue-300",
       ],
       secondary: [
         // border
@@ -126,7 +126,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         {isLoading ? (
           <span className="pointer-events-none flex shrink-0 items-center justify-center gap-1.5">
             <RiLoader2Fill
-              className="animate-spin size-4 shrink-0"
+              className="size-4 shrink-0 animate-spin"
               aria-hidden="true"
             />
             <span className="sr-only">
