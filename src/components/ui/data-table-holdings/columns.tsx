@@ -246,7 +246,7 @@ export const createColumns = ({
     },
     enableSorting: true,
     meta: {
-      className: "text-left",
+      className: "text-left min-w-80",
     },
   },
   {
