@@ -148,6 +148,16 @@ export default function AccountCard({
           </p>
         </div>
 
+        {/* Financial data */}
+        <div className="text-right">
+          <div className="text-base font-medium text-gray-900 dark:text-gray-50">
+            {formatCurrency(totalValue)}
+          </div>
+          <div className="text-sm font-normal text-gray-500 dark:text-gray-400">
+            {holdingsCount} {holdingsCount === 1 ? "holding" : "holdings"}
+          </div>
+        </div>
+
         {/* More actions dropdown */}
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
@@ -174,16 +184,6 @@ export default function AccountCard({
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
-
-        {/* Financial data */}
-        <div className="text-right">
-          <div className="text-base font-medium text-gray-900 dark:text-gray-50">
-            {formatCurrency(totalValue)}
-          </div>
-          <div className="text-sm font-normal text-gray-500 dark:text-gray-400">
-            {holdingsCount} {holdingsCount === 1 ? "holding" : "holdings"}
-          </div>
-        </div>
       </div>
 
       {/* Asset allocation visualization - only show if there's data */}
