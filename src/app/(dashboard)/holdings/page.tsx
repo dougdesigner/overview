@@ -133,6 +133,18 @@ export default function HoldingsPage() {
       allocation: 2.4,
       type: "cash",
     },
+    {
+      id: "h10",
+      accountId: "3",
+      accountName: "Tax-Free Growth",
+      ticker: "VOO",
+      name: "Vanguard S&P 500 ETF",
+      quantity: 75,
+      lastPrice: 455.32,
+      marketValue: 34149.00,
+      allocation: 11.4,
+      type: "fund",
+    },
   ])
 
   const handleHoldingSubmit = (holding: HoldingFormData) => {

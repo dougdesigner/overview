@@ -22,6 +22,8 @@ import {
   getExpandedRowModel,
   getFilteredRowModel,
   getPaginationRowModel,
+  getSortedRowModel,
+  SortingState,
   useReactTable,
 } from "@tanstack/react-table"
 import React from "react"
@@ -84,6 +86,7 @@ export function HoldingsTable({
   onDelete,
 }: HoldingsTableProps) {
   const [expanded, setExpanded] = React.useState<ExpandedState>({})
+  const [sorting, setSorting] = React.useState<SortingState>([])
   const [selectedAccount, setSelectedAccount] = React.useState<string>("all")
 
   // Filter holdings by selected account
@@ -115,8 +118,29 @@ export function HoldingsTable({
     }).format(value)
   }
 
+  // Toggle expand/collapse all
+  const toggleExpandAll = () => {
+    const allExpandableRows = table.getRowModel().rows.filter(row => row.getCanExpand())
+    const allExpanded = allExpandableRows.every(row => row.getIsExpanded())
+
+    if (allExpanded) {
+      setExpanded({})
+    } else {
+      const newExpanded: ExpandedState = {}
+      allExpandableRows.forEach(row => {
+        newExpanded[row.id] = true
+      })
+      setExpanded(newExpanded)
+    }
+  }
+
+  const areAllExpanded = () => {
+    const allExpandableRows = table?.getRowModel().rows.filter(row => row.getCanExpand()) || []
+    return allExpandableRows.length > 0 && allExpandableRows.every(row => row.getIsExpanded())
+  }
+
   const columns = React.useMemo(
-    () => createColumns({ onEdit, onDelete }),
+    () => createColumns({ onEdit, onDelete, toggleExpandAll, areAllExpanded }),
     [onEdit, onDelete],
   )
 
@@ -125,13 +149,16 @@ export function HoldingsTable({
     columns,
     state: {
       expanded,
+      sorting,
     },
     onExpandedChange: setExpanded,
+    onSortingChange: setSorting,
     getSubRows: (row) => row.subRows,
     getCoreRowModel: getCoreRowModel(),
     getExpandedRowModel: getExpandedRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
+    getSortedRowModel: getSortedRowModel(),
     initialState: {
       pagination: {
         pageSize: 20,
@@ -219,7 +246,7 @@ export function HoldingsTable({
                 <TableRow
                   key={row.id}
                   className={cx(
-                    "border-gray-200 dark:border-gray-800",
+                    "border-gray-200 dark:border-gray-800 text-gray-900 dark:text-gray-50",
                     row.depth > 0 && "bg-gray-50/50 dark:bg-gray-900/50",
                   )}
                 >

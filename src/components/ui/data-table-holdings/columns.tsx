@@ -10,9 +10,12 @@ import { cx } from "@/lib/utils"
 import {
   RiArrowDownSLine,
   RiArrowRightSLine,
+  RiArrowUpSLine,
   RiDeleteBinLine,
   RiEditLine,
   RiMore2Fill,
+  RiSubtractLine,
+  RiAddLine,
 } from "@remixicon/react"
 import { ColumnDef, Row } from "@tanstack/react-table"
 import { Holding } from "./types"
@@ -112,15 +115,36 @@ const getTickerColor = (ticker: string, type: "stock" | "fund" | "cash"): string
 interface ColumnsProps {
   onEdit: (holding: Holding) => void
   onDelete: (holdingId: string) => void
+  toggleExpandAll: () => void
+  areAllExpanded: () => boolean
 }
 
 export const createColumns = ({
   onEdit,
   onDelete,
+  toggleExpandAll,
+  areAllExpanded,
 }: ColumnsProps): ColumnDef<Holding>[] => [
   {
     id: "expander",
-    header: () => null,
+    header: ({ table }) => {
+      const hasExpandableRows = table.getRowModel().rows.some(row => row.getCanExpand())
+      if (!hasExpandableRows) return null
+
+      return (
+        <button
+          onClick={toggleExpandAll}
+          className="cursor-pointer p-1"
+          title={areAllExpanded() ? "Collapse all" : "Expand all"}
+        >
+          {areAllExpanded() ? (
+            <RiArrowDownSLine className="h-4 w-4" />
+          ) : (
+            <RiArrowRightSLine className="h-4 w-4" />
+          )}
+        </button>
+      )
+    },
     cell: ({ row }) => {
       if (!row.getCanExpand()) return null
       return (
@@ -136,12 +160,24 @@ export const createColumns = ({
         </button>
       )
     },
+    enableSorting: false,
     meta: {
       className: "!w-6 !pr-0",
     },
   },
   {
-    header: "Ticker",
+    header: ({ column }) => {
+      return (
+        <button
+          className="flex items-center gap-1 font-medium hover:text-gray-900 dark:hover:text-gray-50"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Ticker
+          {column.getIsSorted() === "asc" && <RiArrowUpSLine className="h-4 w-4" />}
+          {column.getIsSorted() === "desc" && <RiArrowDownSLine className="h-4 w-4" />}
+        </button>
+      )
+    },
     accessorKey: "ticker",
     cell: ({ row }) => {
       const ticker = row.original.ticker
@@ -166,20 +202,37 @@ export const createColumns = ({
         </div>
       )
     },
+    sortingFn: (rowA, rowB) => {
+      const tickerA = rowA.original.ticker || ""
+      const tickerB = rowB.original.ticker || ""
+      return tickerA.localeCompare(tickerB)
+    },
+    enableSorting: true,
     meta: {
       className: "text-left",
     },
   },
   {
-    header: "Name",
+    header: ({ column }) => {
+      return (
+        <button
+          className="flex items-center gap-1 font-medium hover:text-gray-900 dark:hover:text-gray-50"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Name
+          {column.getIsSorted() === "asc" && <RiArrowUpSLine className="h-4 w-4" />}
+          {column.getIsSorted() === "desc" && <RiArrowDownSLine className="h-4 w-4" />}
+        </button>
+      )
+    },
     accessorKey: "name",
     cell: ({ row }) => {
       const isNested = row.depth > 0
       return (
         <span
           className={cx(
-            "text-gray-900 dark:text-gray-50",
-            isNested && "pl-6 text-gray-600 dark:text-gray-400",
+            "font-semibold text-gray-900 dark:text-gray-50",
+            isNested && "pl-6 text-gray-600 dark:text-gray-400 font-normal",
           )}
         >
           {row.original.name}
@@ -191,12 +244,24 @@ export const createColumns = ({
         </span>
       )
     },
+    enableSorting: true,
     meta: {
       className: "text-left",
     },
   },
   {
-    header: "Quantity",
+    header: ({ column }) => {
+      return (
+        <button
+          className="flex items-center gap-1 font-medium hover:text-gray-900 dark:hover:text-gray-50 justify-end w-full"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Quantity
+          {column.getIsSorted() === "asc" && <RiArrowUpSLine className="h-4 w-4" />}
+          {column.getIsSorted() === "desc" && <RiArrowDownSLine className="h-4 w-4" />}
+        </button>
+      )
+    },
     accessorKey: "quantity",
     cell: ({ row }) => {
       const quantity = row.original.quantity
@@ -206,12 +271,29 @@ export const createColumns = ({
       }
       return <span>{formatNumber(quantity)}</span>
     },
+    sortingFn: (rowA, rowB) => {
+      const qtyA = rowA.original.type === "cash" ? rowA.original.marketValue : rowA.original.quantity
+      const qtyB = rowB.original.type === "cash" ? rowB.original.marketValue : rowB.original.quantity
+      return qtyA - qtyB
+    },
+    enableSorting: true,
     meta: {
       className: "text-right",
     },
   },
   {
-    header: "Last Price",
+    header: ({ column }) => {
+      return (
+        <button
+          className="flex items-center gap-1 font-medium hover:text-gray-900 dark:hover:text-gray-50 justify-end w-full"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Last Price
+          {column.getIsSorted() === "asc" && <RiArrowUpSLine className="h-4 w-4" />}
+          {column.getIsSorted() === "desc" && <RiArrowDownSLine className="h-4 w-4" />}
+        </button>
+      )
+    },
     accessorKey: "lastPrice",
     cell: ({ row }) => {
       const price = row.original.lastPrice
@@ -221,28 +303,56 @@ export const createColumns = ({
       }
       return <span>{formatCurrency(price)}</span>
     },
+    sortingFn: (rowA, rowB) => {
+      const priceA = rowA.original.type === "cash" ? 1 : rowA.original.lastPrice
+      const priceB = rowB.original.type === "cash" ? 1 : rowB.original.lastPrice
+      return priceA - priceB
+    },
+    enableSorting: true,
     meta: {
       className: "text-right",
     },
   },
   {
-    header: "Market Value",
+    header: ({ column }) => {
+      return (
+        <button
+          className="flex items-center gap-1 font-medium hover:text-gray-900 dark:hover:text-gray-50 justify-end w-full"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Market Value
+          {column.getIsSorted() === "asc" && <RiArrowUpSLine className="h-4 w-4" />}
+          {column.getIsSorted() === "desc" && <RiArrowDownSLine className="h-4 w-4" />}
+        </button>
+      )
+    },
     accessorKey: "marketValue",
     cell: ({ row }) => {
       const value = row.original.marketValue
-      const isGroup = row.original.isGroup
       return (
-        <span className={cx(isGroup && "font-semibold")}>
+        <span>
           {formatCurrency(value)}
         </span>
       )
     },
+    enableSorting: true,
     meta: {
       className: "text-right",
     },
   },
   {
-    header: "Allocation (%)",
+    header: ({ column }) => {
+      return (
+        <button
+          className="flex items-center gap-1 font-medium hover:text-gray-900 dark:hover:text-gray-50 justify-end w-full"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Allocation (%)
+          {column.getIsSorted() === "asc" && <RiArrowUpSLine className="h-4 w-4" />}
+          {column.getIsSorted() === "desc" && <RiArrowDownSLine className="h-4 w-4" />}
+        </button>
+      )
+    },
     accessorKey: "allocation",
     cell: ({ row }) => {
       const allocation = row.original.allocation
@@ -259,6 +369,7 @@ export const createColumns = ({
         </span>
       )
     },
+    enableSorting: true,
     meta: {
       className: "text-right",
     },
@@ -295,6 +406,7 @@ export const createColumns = ({
         </DropdownMenu>
       )
     },
+    enableSorting: false,
     meta: {
       className: "text-center w-16",
     },
