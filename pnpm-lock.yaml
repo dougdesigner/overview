@@ -63,6 +63,9 @@ importers:
       '@react-aria/datepicker':
         specifier: ^3.14.1
         version: 3.14.1(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
+      '@react-spring/web':
+        specifier: ^10.0.2
+        version: 10.0.2(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       '@react-stately/datepicker':
         specifier: ^3.13.0
         version: 3.13.0(react@19.0.0)
