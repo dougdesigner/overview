@@ -171,12 +171,18 @@ export default function AccountCard({
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
-            <DropdownMenuItem onClick={onEdit}>
+            <DropdownMenuItem onClick={(e) => {
+              e.stopPropagation()
+              onEdit()
+            }}>
               <RiEditLine className="mr-2 h-4 w-4" />
               Edit Account
             </DropdownMenuItem>
             <DropdownMenuItem
-              onClick={onDelete}
+              onClick={(e) => {
+                e.stopPropagation()
+                onDelete()
+              }}
               className="text-red-600 dark:text-red-400"
             >
               <RiDeleteBinLine className="mr-2 h-4 w-4" />

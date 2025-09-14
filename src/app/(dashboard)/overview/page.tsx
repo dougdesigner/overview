@@ -3,12 +3,99 @@
 import { Card } from "@/components/Card"
 import { CategoryBar } from "@/components/CategoryBar"
 import { Divider } from "@/components/Divider"
+import { DonutChart } from "@/components/DonutChart"
 import KPICard from "@/components/KPICard"
 import SankeyChart from "@/components/SankeyChart"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/Tabs"
+import { RiArrowRightSLine } from "@remixicon/react"
+import { cx } from "@/lib/utils"
+import { AvailableChartColorsKeys } from "@/lib/chartUtils"
 import React from "react"
 
 export default function OverviewPage() {
   const [isOpen, setIsOpen] = React.useState(false)
+
+  // Calculate account count from Sankey data
+  const accountCount = 5 // 401(k), Personal Investment, Roth IRA, Savings, Checking
+
+  // Data for donut charts
+  const dataByAssetClass = [
+    {
+      name: "U.S. Stocks",
+      amount: 85129,
+      share: "34.4%",
+      borderColor: "border-blue-500 dark:border-blue-500",
+    },
+    {
+      name: "Non-U.S. Stocks",
+      amount: 75725,
+      share: "30.6%",
+      borderColor: "border-cyan-500 dark:border-cyan-500",
+    },
+    {
+      name: "Fixed Income",
+      amount: 51721,
+      share: "20.9%",
+      borderColor: "border-amber-500 dark:border-amber-500",
+    },
+    {
+      name: "Cash",
+      amount: 34893,
+      share: "14.1%",
+      borderColor: "border-emerald-500 dark:border-emerald-500",
+    },
+  ]
+
+  const dataByAccount = [
+    {
+      name: "401(k)",
+      amount: 98987,
+      share: "40.0%",
+      borderColor: "border-violet-500 dark:border-violet-500",
+    },
+    {
+      name: "Personal Investment",
+      amount: 74240,
+      share: "30.0%",
+      borderColor: "border-fuchsia-500 dark:border-fuchsia-500",
+    },
+    {
+      name: "Roth IRA",
+      amount: 49494,
+      share: "20.0%",
+      borderColor: "border-pink-500 dark:border-pink-500",
+    },
+    {
+      name: "Savings",
+      amount: 17224,
+      share: "7.0%",
+      borderColor: "border-sky-500 dark:border-sky-500",
+    },
+    {
+      name: "Checking",
+      amount: 7423,
+      share: "3.0%",
+      borderColor: "border-lime-500 dark:border-lime-500",
+    },
+  ]
+
+  const summary = [
+    {
+      name: "Asset Class",
+      data: dataByAssetClass,
+      colors: ["blue", "cyan", "amber", "emerald"] as AvailableChartColorsKeys[],
+    },
+    {
+      name: "Account",
+      data: dataByAccount,
+      colors: ["violet", "fuchsia", "pink", "sky", "lime"] as AvailableChartColorsKeys[],
+    },
+  ]
+
+  const currencyFormatter = (number: number) => {
+    return "$" + Intl.NumberFormat("us").format(number).toString()
+  }
+
   return (
     <main>
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
@@ -31,6 +118,7 @@ export default function OverviewPage() {
       </div>
       <Divider />
       <dl className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-1 lg:grid-cols-1">
+        {/* Portfolio Value Card */}
         <Card>
           <dt className="text-base font-medium text-gray-900 dark:text-gray-50">
             Portfolio Value
@@ -38,8 +126,10 @@ export default function OverviewPage() {
           <dd className="mt-1 text-3xl font-semibold text-gray-900 dark:text-gray-50">
             $247,468
           </dd>
+          <div className="mt-1 text-sm font-normal text-gray-500 dark:text-gray-400">
+            {accountCount} {accountCount === 1 ? "account" : "accounts"}
+          </div>
           <CategoryBar
-            // label="Asset Allocation"
             values={[34.4, 30.6, 20.9, 14.1]}
             className="mt-6"
             colors={["blue", "cyan", "amber", "emerald"]}
@@ -53,7 +143,6 @@ export default function OverviewPage() {
               <span className="text-base font-semibold text-gray-900 dark:text-gray-50">
                 34.4%
               </span>
-
               <div className="flex items-center gap-2">
                 <span
                   className="size-2.5 shrink-0 rounded-sm bg-blue-600 dark:bg-blue-500"
@@ -61,13 +150,6 @@ export default function OverviewPage() {
                 />
                 <span className="text-sm">U.S. Stocks</span>
               </div>
-
-              {/* <p className="mt-1 text-lg font-semibold text-gray-900 dark:text-gray-50">
-                34.4%
-              </p>
-              <p className="text-sm text-gray-600 dark:text-gray-400">
-                $85,129 value
-              </p> */}
             </li>
             <li>
               <span className="text-base font-semibold text-gray-900 dark:text-gray-50">
@@ -75,24 +157,16 @@ export default function OverviewPage() {
               </span>
               <div className="flex items-center gap-2">
                 <span
-                  className="dark:bg-cyan-00 size-2.5 shrink-0 rounded-sm bg-cyan-600 dark:bg-cyan-500"
+                  className="size-2.5 shrink-0 rounded-sm bg-cyan-600 dark:bg-cyan-500"
                   aria-hidden="true"
                 />
                 <span className="text-sm">Non-U.S. Stocks</span>
               </div>
-
-              {/* <p className="mt-1 text-lg font-semibold text-gray-900 dark:text-gray-50">
-                30.6%
-              </p>
-              <p className="text-sm text-gray-600 dark:text-gray-400">
-                $75,725 value
-              </p> */}
             </li>
             <li>
               <span className="text-base font-semibold text-gray-900 dark:text-gray-50">
                 20.9%
               </span>
-
               <div className="flex items-center gap-2">
                 <span
                   className="size-2.5 shrink-0 rounded-sm bg-amber-600 dark:bg-amber-500"
@@ -100,13 +174,6 @@ export default function OverviewPage() {
                 />
                 <span className="text-sm">Fixed Income</span>
               </div>
-
-              {/* <p className="mt-1 text-lg font-semibold text-gray-900 dark:text-gray-50">
-                20.9%
-              </p>
-              <p className="text-sm text-gray-600 dark:text-gray-400">
-                $51,721 value
-              </p> */}
             </li>
             <li>
               <span className="text-base font-semibold text-gray-900 dark:text-gray-50">
@@ -119,13 +186,6 @@ export default function OverviewPage() {
                 />
                 <span className="text-sm">Cash</span>
               </div>
-
-              {/* <p className="mt-1 text-lg font-semibold text-gray-900 dark:text-gray-50">
-                14.1%
-              </p>
-              <p className="text-sm text-gray-600 dark:text-gray-400">
-                $34,893 value
-              </p> */}
             </li>
             <li>
               <span className="text-base font-semibold text-gray-900 dark:text-gray-50">
@@ -138,15 +198,77 @@ export default function OverviewPage() {
                 />
                 <span className="text-sm">Other</span>
               </div>
-
-              {/* <p className="mt-1 text-lg font-semibold text-gray-900 dark:text-gray-50">
-                0%
-              </p>
-              <p className="text-sm text-gray-600 dark:text-gray-400">
-                $0 value
-              </p> */}
             </li>
           </ul>
+        </Card>
+
+        {/* Asset Allocation Donut Chart */}
+        <Card className="overflow-hidden p-0">
+          <div className="px-6 pt-6">
+            <h3 className="text-base font-medium text-gray-900 dark:text-gray-50">
+              Asset Allocation
+            </h3>
+            <p className="mt-1 text-sm/6 text-gray-500 dark:text-gray-500">
+              Portfolio distribution across asset classes and accounts
+            </p>
+          </div>
+          <Tabs defaultValue={summary[0].name}>
+            <TabsList className="px-6 pt-6">
+              {summary.map((category) => (
+                <TabsTrigger key={category.name} value={category.name}>
+                  By {category.name}
+                </TabsTrigger>
+              ))}
+            </TabsList>
+            <div className="pt-8">
+              {summary.map((category) => (
+                <TabsContent key={category.name} value={category.name}>
+                  <div className="px-6 pb-6">
+                    <DonutChart
+                      className="mx-auto"
+                      data={category.data}
+                      value="amount"
+                      category="name"
+                      valueFormatter={currencyFormatter}
+                      showLabel={true}
+                      showTooltip={false}
+                      colors={category.colors}
+                    />
+                  </div>
+                  <ul
+                    role="list"
+                    className="mt-2 divide-y divide-gray-200 border-t border-gray-200 text-sm text-gray-500 dark:divide-gray-800 dark:border-gray-800 dark:text-gray-500"
+                  >
+                    {category.data.map((item) => (
+                      <li
+                        key={item.name}
+                        className="group relative flex items-center justify-between space-x-4 truncate pr-4 hover:bg-gray-50 hover:dark:bg-gray-900"
+                      >
+                        <div
+                          className={cx(
+                            item.borderColor,
+                            "flex h-12 items-center truncate border-l-2 pl-4"
+                          )}
+                        >
+                          <span className="truncate text-gray-700 group-hover:text-gray-900 dark:text-gray-300 group-hover:dark:text-gray-50">
+                            {item.name}
+                          </span>
+                        </div>
+                        <div className="flex items-center space-x-1.5">
+                          <span className="font-medium tabular-nums text-gray-900 dark:text-gray-50">
+                            {currencyFormatter(item.amount)}{" "}
+                            <span className="font-normal text-gray-500 dark:text-gray-500">
+                              ({item.share})
+                            </span>
+                          </span>
+                        </div>
+                      </li>
+                    ))}
+                  </ul>
+                </TabsContent>
+              ))}
+            </div>
+          </Tabs>
         </Card>
         {/* <Card>
           <dt className="text-sm font-medium text-gray-900 dark:text-gray-50">
