@@ -31,6 +31,59 @@ import { DataTablePagination } from "../data-table/DataTablePagination"
 import { createColumns } from "./columns"
 import { Holding, HoldingsTableProps } from "./types"
 
+// Get institution brand color
+const getInstitutionBrandColor = (institution: string): string => {
+  const brandColors: Record<string, string> = {
+    fidelity: "bg-emerald-600",
+    chase: "bg-blue-600",
+    vanguard: "bg-red-600",
+    wealthfront: "bg-purple-600",
+    amex: "bg-blue-700",
+    schwab: "bg-orange-600",
+    etrade: "bg-purple-700",
+    "td-ameritrade": "bg-green-600",
+    merrill: "bg-blue-600",
+    betterment: "bg-blue-500",
+    robinhood: "bg-green-500",
+    bofa: "bg-red-700",
+    "wells-fargo": "bg-red-600",
+    citi: "bg-blue-600",
+  }
+  return brandColors[institution] || "bg-gray-500"
+}
+
+// Get institution initials for logo
+const getInstitutionInitials = (institutionLabel: string): string => {
+  const words = institutionLabel.split(" ")
+  if (words.length === 1) {
+    return words[0].substring(0, 2).toUpperCase()
+  }
+  return words
+    .map((word) => word[0])
+    .join("")
+    .substring(0, 2)
+    .toUpperCase()
+}
+
+// Map institutions to labels
+const institutionLabels: Record<string, string> = {
+  fidelity: "Fidelity Investments",
+  vanguard: "Vanguard",
+  schwab: "Charles Schwab",
+  etrade: "E*TRADE",
+  "td-ameritrade": "TD Ameritrade",
+  merrill: "Merrill Edge",
+  wealthfront: "Wealthfront",
+  betterment: "Betterment",
+  robinhood: "Robinhood",
+  chase: "Chase",
+  bofa: "Bank of America",
+  "wells-fargo": "Wells Fargo",
+  citi: "Citibank",
+  amex: "American Express",
+  other: "Other",
+}
+
 // Group holdings by ticker and account for nested display
 const groupHoldings = (holdings: Holding[]): Holding[] => {
   const grouped: Record<string, Holding[]> = {}
@@ -88,7 +141,8 @@ export function HoldingsTable({
 }: HoldingsTableProps) {
   const [expanded, setExpanded] = React.useState<ExpandedState>({})
   const [sorting, setSorting] = React.useState<SortingState>([])
-  const [selectedAccount, setSelectedAccount] = React.useState<string>(initialAccountFilter)
+  const [selectedAccount, setSelectedAccount] =
+    React.useState<string>(initialAccountFilter)
 
   // Filter holdings by selected account
   const filteredHoldings = React.useMemo(() => {
@@ -121,14 +175,16 @@ export function HoldingsTable({
 
   // Toggle expand/collapse all
   const toggleExpandAll = () => {
-    const allExpandableRows = table.getRowModel().rows.filter(row => row.getCanExpand())
-    const allExpanded = allExpandableRows.every(row => row.getIsExpanded())
+    const allExpandableRows = table
+      .getRowModel()
+      .rows.filter((row) => row.getCanExpand())
+    const allExpanded = allExpandableRows.every((row) => row.getIsExpanded())
 
     if (allExpanded) {
       setExpanded({})
     } else {
       const newExpanded: ExpandedState = {}
-      allExpandableRows.forEach(row => {
+      allExpandableRows.forEach((row) => {
         newExpanded[row.id] = true
       })
       setExpanded(newExpanded)
@@ -136,8 +192,12 @@ export function HoldingsTable({
   }
 
   const areAllExpanded = () => {
-    const allExpandableRows = table?.getRowModel().rows.filter(row => row.getCanExpand()) || []
-    return allExpandableRows.length > 0 && allExpandableRows.every(row => row.getIsExpanded())
+    const allExpandableRows =
+      table?.getRowModel().rows.filter((row) => row.getCanExpand()) || []
+    return (
+      allExpandableRows.length > 0 &&
+      allExpandableRows.every((row) => row.getIsExpanded())
+    )
   }
 
   const columns = React.useMemo(
@@ -174,19 +234,63 @@ export function HoldingsTable({
         <div className="flex items-center gap-4">
           <div className="flex items-center gap-2">
             <label htmlFor="account-filter" className="text-sm font-medium">
-              Account:
+              Account
             </label>
             <Select value={selectedAccount} onValueChange={setSelectedAccount}>
               <SelectTrigger className="w-[200px]" id="account-filter">
-                <SelectValue />
+                <SelectValue placeholder="Select an account">
+                  {selectedAccount === "all"
+                    ? "All Accounts"
+                    : (() => {
+                        const selectedAccountData = accounts.find(
+                          (a) => a.id === selectedAccount,
+                        )
+                        if (selectedAccountData) {
+                          const institutionLabel =
+                            institutionLabels[
+                              selectedAccountData.institution
+                            ] || selectedAccountData.institution
+                          return (
+                            <div className="flex items-center gap-2">
+                              <div
+                                className={`flex size-5 shrink-0 items-center justify-center rounded-full text-[10px] font-semibold text-white ${getInstitutionBrandColor(selectedAccountData.institution)}`}
+                              >
+                                {getInstitutionInitials(institutionLabel)}
+                              </div>
+                              <span className="truncate">
+                                {selectedAccountData.name}
+                              </span>
+                            </div>
+                          )
+                        }
+                        return null
+                      })()}
+                </SelectValue>
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value="all">All Accounts</SelectItem>
-                {accounts.map((account) => (
-                  <SelectItem key={account.id} value={account.id}>
-                    {account.name}
-                  </SelectItem>
-                ))}
+                {accounts.map((account) => {
+                  const institutionLabel =
+                    institutionLabels[account.institution] ||
+                    account.institution
+                  return (
+                    <SelectItem key={account.id} value={account.id}>
+                      <div className="flex items-start gap-2">
+                        <div
+                          className={`flex size-5 shrink-0 items-center justify-center rounded-full text-[10px] font-semibold text-white ${getInstitutionBrandColor(account.institution)}`}
+                        >
+                          {getInstitutionInitials(institutionLabel)}
+                        </div>
+                        <div className="flex flex-col">
+                          <span>{account.name}</span>
+                          <span className="text-xs text-gray-500">
+                            {institutionLabel}
+                          </span>
+                        </div>
+                      </div>
+                    </SelectItem>
+                  )
+                })}
               </SelectContent>
             </Select>
           </div>
@@ -247,7 +351,7 @@ export function HoldingsTable({
                 <TableRow
                   key={row.id}
                   className={cx(
-                    "border-gray-200 dark:border-gray-800 text-gray-900 dark:text-gray-50",
+                    "border-gray-200 text-gray-900 dark:border-gray-800 dark:text-gray-50",
                     row.depth > 0 && "bg-gray-50/50 dark:bg-gray-900/50",
                   )}
                 >

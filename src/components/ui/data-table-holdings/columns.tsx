@@ -376,7 +376,7 @@ export const createColumns = ({
   },
   {
     id: "actions",
-    header: "Actions",
+    header: "",
     cell: ({ row }) => {
       const holding = row.original
       // Don't show actions for group rows
