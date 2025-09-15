@@ -293,12 +293,12 @@ export function HoldingsTable({
             </SelectContent>
           </Select>
         </div>
-        <div className="flex items-center gap-4">
-          <span className="text-lg font-semibold text-gray-900 dark:text-gray-50">
+        <div className="text-right">
+          <div className="text-base font-medium text-gray-900 dark:text-gray-50">
             {formatCurrency(totalValue)}
-          </span>
-          <div className="text-sm text-gray-500">
-            {filteredHoldings.length} holdings
+          </div>
+          <div className="text-sm font-normal text-gray-500 dark:text-gray-400">
+            {filteredHoldings.length} {filteredHoldings.length === 1 ? "holding" : "holdings"}
           </div>
         </div>
       </div>
