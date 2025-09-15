@@ -3,7 +3,6 @@
 import AssetAllocationCard from "@/components/AssetAllocationCard"
 import { Card } from "@/components/Card"
 import { Divider } from "@/components/Divider"
-import KPICard from "@/components/KPICard"
 import PortfolioValueCard from "@/components/PortfolioValueCard"
 import SankeyChart from "@/components/SankeyChart"
 import React from "react"
@@ -127,7 +126,7 @@ export default function OverviewPage() {
       </dl>
       {/* <DataTable data={tickets} columns={columns} /> */}
 
-      <dl className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+      {/* <dl className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
         <KPICard
           name="U.S. Stocks"
           stat="$85,129"
@@ -147,7 +146,7 @@ export default function OverviewPage() {
           color="amber"
         />
         <KPICard name="Cash" stat="$34,893" change="14.1%" color="emerald" />
-      </dl>
+      </dl> */}
 
       <dl className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-1 lg:grid-cols-1">
         <AssetAllocationCard />
