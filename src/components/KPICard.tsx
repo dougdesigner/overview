@@ -14,7 +14,7 @@ interface KPICardProps {
   color: AvailableChartColorsKeys
 }
 
-export default function KPICard({ name, stat, change, color }: KPICardProps) {
+export default function KPICard({ name, stat, color }: KPICardProps) {
   return (
     <Card>
       <dt className="text-base font-medium text-gray-900 dark:text-gray-50">
