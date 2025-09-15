@@ -286,7 +286,7 @@ export const createColumns = ({
     accessorKey: "marketValue",
     cell: ({ row }) => {
       const value = row.original.marketValue
-      return <span>{formatCurrency(value)}</span>
+      return <span className="text-sm text-gray-900 dark:text-gray-50">{formatCurrency(value)}</span>
     },
     enableSorting: true,
     meta: {
@@ -314,14 +314,7 @@ export const createColumns = ({
     cell: ({ row }) => {
       const allocation = row.original.allocation
       return (
-        <span
-          className={cx(
-            "text-sm",
-            allocation >= 10
-              ? "text-gray-900 dark:text-gray-50"
-              : "text-gray-600 dark:text-gray-400",
-          )}
-        >
+        <span className="text-sm text-gray-900 dark:text-gray-50">
           {formatPercentage(allocation)}
         </span>
       )
