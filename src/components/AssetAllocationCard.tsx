@@ -3,8 +3,8 @@
 import { Card } from "@/components/Card"
 import { DonutChart } from "@/components/DonutChart"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/Tabs"
-import { cx } from "@/lib/utils"
 import { AvailableChartColorsKeys } from "@/lib/chartUtils"
+import { cx } from "@/lib/utils"
 import React from "react"
 
 export interface AssetAllocationItem {
@@ -172,37 +172,65 @@ const getDefaultData = (): AssetAllocationData[] => {
     {
       name: "Assets",
       data: dataByAssets,
-      colors: ["blue", "gray", "cyan", "amber", "emerald", "violet"] as AvailableChartColorsKeys[],
+      colors: [
+        "blue",
+        "gray",
+        "cyan",
+        "amber",
+        "emerald",
+        "violet",
+      ] as AvailableChartColorsKeys[],
     },
     {
       name: "Asset Classes",
       data: dataByAssetClass,
-      colors: ["blue", "cyan", "amber", "emerald"] as AvailableChartColorsKeys[],
+      colors: [
+        "blue",
+        "cyan",
+        "amber",
+        "emerald",
+      ] as AvailableChartColorsKeys[],
     },
     {
       name: "Accounts",
       data: dataByAccount,
-      colors: ["violet", "fuchsia", "pink", "sky", "lime"] as AvailableChartColorsKeys[],
+      colors: [
+        "violet",
+        "fuchsia",
+        "pink",
+        "sky",
+        "lime",
+      ] as AvailableChartColorsKeys[],
     },
     {
       name: "Sectors",
       data: dataBySectors,
-      colors: ["blue", "red", "emerald", "violet", "amber", "gray"] as AvailableChartColorsKeys[],
+      colors: [
+        "blue",
+        "red",
+        "emerald",
+        "violet",
+        "amber",
+        "gray",
+      ] as AvailableChartColorsKeys[],
     },
   ]
 }
 
-const AssetAllocationCard = React.forwardRef<HTMLDivElement, AssetAllocationCardProps>(
+const AssetAllocationCard = React.forwardRef<
+  HTMLDivElement,
+  AssetAllocationCardProps
+>(
   (
     {
-      title = "Asset Allocation",
-      description = "Portfolio distribution across assets, classes, accounts, and sectors",
+      title = "Portfolio distribution",
+      description = "Distribution across assets, classes, accounts, and sectors",
       data,
       defaultTab,
       className,
       ...props
     },
-    forwardedRef
+    forwardedRef,
   ) => {
     const allocationData = data || getDefaultData()
     const defaultTabValue = defaultTab || allocationData[0]?.name
@@ -212,7 +240,11 @@ const AssetAllocationCard = React.forwardRef<HTMLDivElement, AssetAllocationCard
     }
 
     return (
-      <Card ref={forwardedRef} className={cx("overflow-hidden p-0", className)} {...props}>
+      <Card
+        ref={forwardedRef}
+        className={cx("overflow-hidden p-0", className)}
+        {...props}
+      >
         <div className="px-6 pt-6">
           <h3 className="text-base font-medium text-gray-900 dark:text-gray-50">
             {title}
@@ -244,7 +276,7 @@ const AssetAllocationCard = React.forwardRef<HTMLDivElement, AssetAllocationCard
                 />
                 <p className="mt-8 flex items-center justify-between text-xs text-gray-500 dark:text-gray-500">
                   <span>Category</span>
-                  <span>Amount / Share</span>
+                  <span>Value / Allocation</span>
                 </p>
                 <ul
                   role="list"
@@ -258,8 +290,8 @@ const AssetAllocationCard = React.forwardRef<HTMLDivElement, AssetAllocationCard
                       <div className="flex items-center space-x-2.5 truncate">
                         <span
                           className={cx(
-                            item.borderColor.replace(/border/g, 'bg'),
-                            "size-2.5 shrink-0 rounded-sm"
+                            item.borderColor.replace(/border/g, "bg"),
+                            "size-2.5 shrink-0 rounded-sm",
                           )}
                           aria-hidden="true"
                         />
@@ -284,7 +316,7 @@ const AssetAllocationCard = React.forwardRef<HTMLDivElement, AssetAllocationCard
         </Tabs>
       </Card>
     )
-  }
+  },
 )
 
 AssetAllocationCard.displayName = "AssetAllocationCard"

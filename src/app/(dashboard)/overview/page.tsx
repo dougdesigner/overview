@@ -35,12 +35,12 @@ export default function OverviewPage() {
         <TicketDrawer open={isOpen} onOpenChange={setIsOpen} /> */}
       </div>
       <Divider />
+
       <dl className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-1 lg:grid-cols-1">
         {/* Portfolio Value Card */}
         <PortfolioValueCard accountCount={accountCount} />
 
         {/* Asset Allocation Donut Chart */}
-        <AssetAllocationCard />
         {/* <Card>
           <dt className="text-sm font-medium text-gray-900 dark:text-gray-50">
             SLA Performance
@@ -147,6 +147,10 @@ export default function OverviewPage() {
           color="amber"
         />
         <KPICard name="Cash" stat="$34,893" change="14.1%" color="emerald" />
+      </dl>
+
+      <dl className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-1 lg:grid-cols-1">
+        <AssetAllocationCard />
       </dl>
 
       <Card className="mt-8">
