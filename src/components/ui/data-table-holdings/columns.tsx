@@ -6,6 +6,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/DropdownMenu"
+import { getTickerColor } from "@/lib/tickerColors"
 import { cx } from "@/lib/utils"
 import {
   RiArrowDownSLine,
@@ -14,10 +15,8 @@ import {
   RiDeleteBinLine,
   RiEditLine,
   RiMore2Fill,
-  RiSubtractLine,
-  RiAddLine,
 } from "@remixicon/react"
-import { ColumnDef, Row } from "@tanstack/react-table"
+import { ColumnDef } from "@tanstack/react-table"
 import { Holding } from "./types"
 
 // Format currency
@@ -43,74 +42,7 @@ const formatPercentage = (value: number) => {
   return `${value.toFixed(2)}%`
 }
 
-// Get ticker color based on company/institution
-const getTickerColor = (ticker: string, type: "stock" | "fund" | "cash"): string => {
-  // Stock company colors
-  const stockColors: Record<string, string> = {
-    AAPL: "bg-gray-600", // Apple
-    MSFT: "bg-blue-600", // Microsoft
-    GOOGL: "bg-blue-500", // Google (simplified to blue)
-    GOOG: "bg-blue-500", // Google
-    AMZN: "bg-orange-500", // Amazon
-    TSLA: "bg-red-600", // Tesla
-    META: "bg-blue-700", // Meta/Facebook
-    NVDA: "bg-green-600", // NVIDIA
-    JPM: "bg-blue-800", // JP Morgan
-    V: "bg-blue-600", // Visa
-    MA: "bg-red-600", // Mastercard
-    JNJ: "bg-red-500", // Johnson & Johnson
-    WMT: "bg-blue-500", // Walmart
-    PG: "bg-blue-600", // Procter & Gamble
-    HD: "bg-orange-600", // Home Depot
-    DIS: "bg-blue-500", // Disney
-    NFLX: "bg-red-600", // Netflix
-    ADBE: "bg-red-600", // Adobe
-    CRM: "bg-blue-500", // Salesforce
-    ORCL: "bg-red-600", // Oracle
-    INTC: "bg-blue-600", // Intel
-    AMD: "bg-gray-900", // AMD
-    PYPL: "bg-blue-600", // PayPal
-    CSCO: "bg-blue-700", // Cisco
-  }
-
-  // ETF/Fund colors based on provider
-  const fundColors: Record<string, string> = {
-    // Vanguard funds
-    VOO: "bg-red-600", // Vanguard S&P 500
-    VTI: "bg-red-600", // Vanguard Total Market
-    VTV: "bg-red-600", // Vanguard Value
-    VUG: "bg-red-600", // Vanguard Growth
-    VIG: "bg-red-600", // Vanguard Dividend
-    VYM: "bg-red-600", // Vanguard High Dividend
-    BND: "bg-red-600", // Vanguard Bond
-    VXUS: "bg-red-600", // Vanguard International
-    VNQ: "bg-red-600", // Vanguard REIT
-    // SPDR funds
-    SPY: "bg-gray-700", // SPDR S&P 500
-    // iShares/BlackRock funds
-    IVV: "bg-gray-900", // iShares S&P 500
-    IWM: "bg-gray-900", // iShares Russell 2000
-    EFA: "bg-gray-900", // iShares MSCI EAFE
-    AGG: "bg-gray-900", // iShares Core Aggregate Bond
-    // Invesco funds
-    QQQ: "bg-teal-600", // Invesco QQQ
-    // Other popular funds
-    ARKK: "bg-purple-600", // ARK Innovation
-    ARKG: "bg-purple-600", // ARK Genomic
-    GLD: "bg-yellow-600", // SPDR Gold
-  }
-
-  if (type === "stock" && stockColors[ticker]) {
-    return stockColors[ticker]
-  }
-
-  if (type === "fund" && fundColors[ticker]) {
-    return fundColors[ticker]
-  }
-
-  // Default colors
-  return type === "stock" ? "bg-blue-500" : "bg-gray-500"
-}
+// Note: getTickerColor is now imported from @/lib/tickerColors for shared use across the app
 
 interface ColumnsProps {
   onEdit: (holding: Holding) => void
@@ -128,7 +60,9 @@ export const createColumns = ({
   {
     id: "expander",
     header: ({ table }) => {
-      const hasExpandableRows = table.getRowModel().rows.some(row => row.getCanExpand())
+      const hasExpandableRows = table
+        .getRowModel()
+        .rows.some((row) => row.getCanExpand())
       if (!hasExpandableRows) return null
 
       return (
@@ -173,8 +107,12 @@ export const createColumns = ({
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
           Ticker
-          {column.getIsSorted() === "asc" && <RiArrowUpSLine className="h-4 w-4" />}
-          {column.getIsSorted() === "desc" && <RiArrowDownSLine className="h-4 w-4" />}
+          {column.getIsSorted() === "asc" && (
+            <RiArrowUpSLine className="h-4 w-4" />
+          )}
+          {column.getIsSorted() === "desc" && (
+            <RiArrowDownSLine className="h-4 w-4" />
+          )}
         </button>
       )
     },
@@ -190,13 +128,10 @@ export const createColumns = ({
       return (
         <div className="flex items-center gap-2">
           <div
-            className={cx(
-              "h-6 w-6 rounded-full shrink-0",
-              color
-            )}
+            className={cx("h-6 w-6 shrink-0 rounded-full", color)}
             aria-hidden="true"
           />
-          <Badge variant="neutral" className="font-medium">
+          <Badge variant="flat" className="font-semibold">
             {ticker}
           </Badge>
         </div>
@@ -220,8 +155,12 @@ export const createColumns = ({
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
           Name
-          {column.getIsSorted() === "asc" && <RiArrowUpSLine className="h-4 w-4" />}
-          {column.getIsSorted() === "desc" && <RiArrowDownSLine className="h-4 w-4" />}
+          {column.getIsSorted() === "asc" && (
+            <RiArrowUpSLine className="h-4 w-4" />
+          )}
+          {column.getIsSorted() === "desc" && (
+            <RiArrowDownSLine className="h-4 w-4" />
+          )}
         </button>
       )
     },
@@ -232,7 +171,7 @@ export const createColumns = ({
         <span
           className={cx(
             "font-semibold text-gray-900 dark:text-gray-50",
-            isNested && "pl-6 text-gray-600 dark:text-gray-400 font-normal",
+            isNested && "pl-6 font-normal text-gray-600 dark:text-gray-400",
           )}
         >
           {row.original.name}
@@ -253,12 +192,16 @@ export const createColumns = ({
     header: ({ column }) => {
       return (
         <button
-          className="flex items-center gap-1 font-medium hover:text-gray-900 dark:hover:text-gray-50 justify-end w-full"
+          className="flex w-full items-center justify-end gap-1 font-medium hover:text-gray-900 dark:hover:text-gray-50"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
           Quantity
-          {column.getIsSorted() === "asc" && <RiArrowUpSLine className="h-4 w-4" />}
-          {column.getIsSorted() === "desc" && <RiArrowDownSLine className="h-4 w-4" />}
+          {column.getIsSorted() === "asc" && (
+            <RiArrowUpSLine className="h-4 w-4" />
+          )}
+          {column.getIsSorted() === "desc" && (
+            <RiArrowDownSLine className="h-4 w-4" />
+          )}
         </button>
       )
     },
@@ -272,8 +215,14 @@ export const createColumns = ({
       return <span>{formatNumber(quantity)}</span>
     },
     sortingFn: (rowA, rowB) => {
-      const qtyA = rowA.original.type === "cash" ? rowA.original.marketValue : rowA.original.quantity
-      const qtyB = rowB.original.type === "cash" ? rowB.original.marketValue : rowB.original.quantity
+      const qtyA =
+        rowA.original.type === "cash"
+          ? rowA.original.marketValue
+          : rowA.original.quantity
+      const qtyB =
+        rowB.original.type === "cash"
+          ? rowB.original.marketValue
+          : rowB.original.quantity
       return qtyA - qtyB
     },
     enableSorting: true,
@@ -285,12 +234,16 @@ export const createColumns = ({
     header: ({ column }) => {
       return (
         <button
-          className="flex items-center gap-1 font-medium hover:text-gray-900 dark:hover:text-gray-50 justify-end w-full"
+          className="flex w-full items-center justify-end gap-1 font-medium hover:text-gray-900 dark:hover:text-gray-50"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
           Last Price
-          {column.getIsSorted() === "asc" && <RiArrowUpSLine className="h-4 w-4" />}
-          {column.getIsSorted() === "desc" && <RiArrowDownSLine className="h-4 w-4" />}
+          {column.getIsSorted() === "asc" && (
+            <RiArrowUpSLine className="h-4 w-4" />
+          )}
+          {column.getIsSorted() === "desc" && (
+            <RiArrowDownSLine className="h-4 w-4" />
+          )}
         </button>
       )
     },
@@ -317,23 +270,23 @@ export const createColumns = ({
     header: ({ column }) => {
       return (
         <button
-          className="flex items-center gap-1 font-medium hover:text-gray-900 dark:hover:text-gray-50 justify-end w-full"
+          className="flex w-full items-center justify-end gap-1 font-medium hover:text-gray-900 dark:hover:text-gray-50"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
           Market Value
-          {column.getIsSorted() === "asc" && <RiArrowUpSLine className="h-4 w-4" />}
-          {column.getIsSorted() === "desc" && <RiArrowDownSLine className="h-4 w-4" />}
+          {column.getIsSorted() === "asc" && (
+            <RiArrowUpSLine className="h-4 w-4" />
+          )}
+          {column.getIsSorted() === "desc" && (
+            <RiArrowDownSLine className="h-4 w-4" />
+          )}
         </button>
       )
     },
     accessorKey: "marketValue",
     cell: ({ row }) => {
       const value = row.original.marketValue
-      return (
-        <span>
-          {formatCurrency(value)}
-        </span>
-      )
+      return <span>{formatCurrency(value)}</span>
     },
     enableSorting: true,
     meta: {
@@ -344,12 +297,16 @@ export const createColumns = ({
     header: ({ column }) => {
       return (
         <button
-          className="flex items-center gap-1 font-medium hover:text-gray-900 dark:hover:text-gray-50 justify-end w-full"
+          className="flex w-full items-center justify-end gap-1 font-medium hover:text-gray-900 dark:hover:text-gray-50"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
           Allocation (%)
-          {column.getIsSorted() === "asc" && <RiArrowUpSLine className="h-4 w-4" />}
-          {column.getIsSorted() === "desc" && <RiArrowDownSLine className="h-4 w-4" />}
+          {column.getIsSorted() === "asc" && (
+            <RiArrowUpSLine className="h-4 w-4" />
+          )}
+          {column.getIsSorted() === "desc" && (
+            <RiArrowDownSLine className="h-4 w-4" />
+          )}
         </button>
       )
     },

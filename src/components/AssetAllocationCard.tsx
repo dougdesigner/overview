@@ -1,9 +1,11 @@
 "use client"
 
+import { Badge } from "@/components/Badge"
 import { Card } from "@/components/Card"
 import { DonutChart } from "@/components/DonutChart"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/Tabs"
 import { AvailableChartColorsKeys } from "@/lib/chartUtils"
+import { getTickerColor, getTickerType } from "@/lib/tickerColors"
 import { cx } from "@/lib/utils"
 import React from "react"
 
@@ -288,16 +290,49 @@ const AssetAllocationCard = React.forwardRef<
                       className="flex items-center justify-between space-x-6 py-2"
                     >
                       <div className="flex items-center space-x-2.5 truncate">
-                        <span
-                          className={cx(
-                            item.borderColor.replace(/border/g, "bg"),
-                            "size-2.5 shrink-0 rounded-sm",
-                          )}
-                          aria-hidden="true"
-                        />
-                        <span className="truncate dark:text-gray-300">
-                          {item.name}
-                        </span>
+                        {category.name === "Assets" &&
+                        getTickerType(item.name) !== "other" ? (
+                          // Special styling for stock/fund tickers in Assets tab
+                          <>
+                            {/* Legend color indicator (matches donut chart) */}
+                            <span
+                              className={cx(
+                                item.borderColor.replace(/border/g, "bg"),
+                                "size-2.5 shrink-0 rounded-sm",
+                              )}
+                              aria-hidden="true"
+                            />
+                            {/* Ticker brand color dot */}
+                            <div
+                              className={cx(
+                                "h-6 w-6 shrink-0 rounded-full",
+                                getTickerColor(
+                                  item.name,
+                                  getTickerType(item.name),
+                                ),
+                              )}
+                              aria-hidden="true"
+                            />
+                            {/* Ticker symbol badge */}
+                            <Badge variant="flat" className="font-semibold">
+                              {item.name}
+                            </Badge>
+                          </>
+                        ) : (
+                          // Default styling for other items
+                          <>
+                            <span
+                              className={cx(
+                                item.borderColor.replace(/border/g, "bg"),
+                                "size-2.5 shrink-0 rounded-sm",
+                              )}
+                              aria-hidden="true"
+                            />
+                            <span className="truncate dark:text-gray-300">
+                              {item.name}
+                            </span>
+                          </>
+                        )}
                       </div>
                       <div className="flex items-center space-x-2">
                         <span className="font-medium tabular-nums text-gray-900 dark:text-gray-50">
