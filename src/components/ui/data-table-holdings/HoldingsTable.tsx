@@ -231,80 +231,75 @@ export function HoldingsTable({
     <div className="space-y-4">
       {/* Account Filter and Total Value */}
       <div className="flex items-center justify-between">
-        <div className="flex items-center gap-4">
-          <div className="flex items-center gap-2">
-            <label htmlFor="account-filter" className="text-sm font-medium">
-              Account
-            </label>
-            <Select value={selectedAccount} onValueChange={setSelectedAccount}>
-              <SelectTrigger className="w-[200px]" id="account-filter">
-                <SelectValue placeholder="Select an account">
-                  {selectedAccount === "all"
-                    ? "All Accounts"
-                    : (() => {
-                        const selectedAccountData = accounts.find(
-                          (a) => a.id === selectedAccount,
-                        )
-                        if (selectedAccountData) {
-                          const institutionLabel =
-                            institutionLabels[
-                              selectedAccountData.institution
-                            ] || selectedAccountData.institution
-                          return (
-                            <div className="flex items-center gap-2">
-                              <div
-                                className={`flex size-5 shrink-0 items-center justify-center rounded-full text-[10px] font-semibold text-white ${getInstitutionBrandColor(selectedAccountData.institution)}`}
-                              >
-                                {getInstitutionInitials(institutionLabel)}
-                              </div>
-                              <span className="truncate">
-                                {selectedAccountData.name}
-                              </span>
+        <div className="flex flex-col gap-1 sm:flex-row sm:items-center sm:gap-2">
+          <label htmlFor="account-filter" className="text-sm font-medium">
+            Account
+          </label>
+          <Select value={selectedAccount} onValueChange={setSelectedAccount}>
+            <SelectTrigger className="w-full sm:w-[200px]" id="account-filter">
+              <SelectValue placeholder="Select an account">
+                {selectedAccount === "all"
+                  ? "All Accounts"
+                  : (() => {
+                      const selectedAccountData = accounts.find(
+                        (a) => a.id === selectedAccount,
+                      )
+                      if (selectedAccountData) {
+                        const institutionLabel =
+                          institutionLabels[
+                            selectedAccountData.institution
+                          ] || selectedAccountData.institution
+                        return (
+                          <div className="flex items-center gap-2">
+                            <div
+                              className={`flex size-5 shrink-0 items-center justify-center rounded-full text-[10px] font-semibold text-white ${getInstitutionBrandColor(selectedAccountData.institution)}`}
+                            >
+                              {getInstitutionInitials(institutionLabel)}
                             </div>
-                          )
-                        }
-                        return null
-                      })()}
-                </SelectValue>
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="all">All Accounts</SelectItem>
-                {accounts.map((account) => {
-                  const institutionLabel =
-                    institutionLabels[account.institution] ||
-                    account.institution
-                  return (
-                    <SelectItem key={account.id} value={account.id}>
-                      <div className="flex items-start gap-2">
-                        <div
-                          className={`flex size-5 shrink-0 items-center justify-center rounded-full text-[10px] font-semibold text-white ${getInstitutionBrandColor(account.institution)}`}
-                        >
-                          {getInstitutionInitials(institutionLabel)}
-                        </div>
-                        <div className="flex flex-col">
-                          <span>{account.name}</span>
-                          <span className="text-xs text-gray-500">
-                            {institutionLabel}
-                          </span>
-                        </div>
+                            <span className="truncate">
+                              {selectedAccountData.name}
+                            </span>
+                          </div>
+                        )
+                      }
+                      return null
+                    })()}
+              </SelectValue>
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="all">All Accounts</SelectItem>
+              {accounts.map((account) => {
+                const institutionLabel =
+                  institutionLabels[account.institution] ||
+                  account.institution
+                return (
+                  <SelectItem key={account.id} value={account.id}>
+                    <div className="flex items-start gap-2">
+                      <div
+                        className={`flex size-5 shrink-0 items-center justify-center rounded-full text-[10px] font-semibold text-white ${getInstitutionBrandColor(account.institution)}`}
+                      >
+                        {getInstitutionInitials(institutionLabel)}
                       </div>
-                    </SelectItem>
-                  )
-                })}
-              </SelectContent>
-            </Select>
-          </div>
-          <div className="flex items-center gap-2">
-            {/* <span className="text-sm font-medium text-gray-600 dark:text-gray-400">
-              Total Value:
-            </span> */}
-            <span className="text-lg font-semibold text-gray-900 dark:text-gray-50">
-              {formatCurrency(totalValue)}
-            </span>
-          </div>
+                      <div className="flex flex-col">
+                        <span>{account.name}</span>
+                        <span className="text-xs text-gray-500">
+                          {institutionLabel}
+                        </span>
+                      </div>
+                    </div>
+                  </SelectItem>
+                )
+              })}
+            </SelectContent>
+          </Select>
         </div>
-        <div className="text-sm text-gray-500">
-          {filteredHoldings.length} holdings
+        <div className="flex items-center gap-4">
+          <span className="text-lg font-semibold text-gray-900 dark:text-gray-50">
+            {formatCurrency(totalValue)}
+          </span>
+          <div className="text-sm text-gray-500">
+            {filteredHoldings.length} holdings
+          </div>
         </div>
       </div>
 
