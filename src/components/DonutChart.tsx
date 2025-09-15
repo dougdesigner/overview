@@ -3,14 +3,7 @@
 "use client"
 
 import React from "react"
-import {
-  PieChart,
-  Pie,
-  Cell,
-  ResponsiveContainer,
-  Tooltip,
-  Legend as RechartsLegend,
-} from "recharts"
+import { Cell, Pie, PieChart, ResponsiveContainer, Tooltip } from "recharts"
 
 import {
   AvailableChartColors,
@@ -43,7 +36,7 @@ const ChartTooltip = ({
         <span
           className={cx(
             "h-2.5 w-2.5 shrink-0 rounded-full",
-            getColorClassName(data.payload.color || "blue", "bg")
+            getColorClassName(data.payload.color || "blue", "bg"),
           )}
         />
         <p className="font-medium text-gray-900 dark:text-gray-50">
@@ -89,7 +82,7 @@ const DonutChart = React.forwardRef<HTMLDivElement, DonutChartProps>(
       className,
       ...props
     },
-    forwardedRef
+    forwardedRef,
   ) => {
     const chartData = React.useMemo(() => {
       return data.map((item, index) => ({
@@ -116,24 +109,20 @@ const DonutChart = React.forwardRef<HTMLDivElement, DonutChartProps>(
             dominantBaseline="middle"
             className="fill-gray-900 dark:fill-gray-50"
           >
-            <tspan
-              x={cx}
-              dy="-0.2em"
-              className="text-2xl font-semibold"
-            >
+            <tspan x={cx} dy="-0.2em" className="text-2xl font-semibold">
               {valueFormatter(totalValue)}
             </tspan>
             <tspan
               x={cx}
               dy="1.4em"
-              className="text-sm fill-gray-500 dark:fill-gray-400"
+              className="fill-gray-500 text-sm dark:fill-gray-400"
             >
               Total
             </tspan>
           </text>
         )
       },
-      [showLabel, totalValue, valueFormatter]
+      [showLabel, totalValue, valueFormatter],
     )
 
     return (
@@ -162,7 +151,7 @@ const DonutChart = React.forwardRef<HTMLDivElement, DonutChartProps>(
                   fill=""
                   className={cx(
                     getColorClassName(entry.color, "fill"),
-                    "stroke-white dark:stroke-gray-950"
+                    "stroke-white dark:stroke-gray-950",
                   )}
                   strokeWidth={2}
                 />
@@ -183,7 +172,7 @@ const DonutChart = React.forwardRef<HTMLDivElement, DonutChartProps>(
         </ResponsiveContainer>
       </div>
     )
-  }
+  },
 )
 
 DonutChart.displayName = "DonutChart"

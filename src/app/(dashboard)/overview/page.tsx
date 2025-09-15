@@ -2,9 +2,9 @@
 
 import AssetAllocationCard from "@/components/AssetAllocationCard"
 import { Card } from "@/components/Card"
-import { CategoryBar } from "@/components/CategoryBar"
 import { Divider } from "@/components/Divider"
 import KPICard from "@/components/KPICard"
+import PortfolioValueCard from "@/components/PortfolioValueCard"
 import SankeyChart from "@/components/SankeyChart"
 import React from "react"
 
@@ -37,88 +37,7 @@ export default function OverviewPage() {
       <Divider />
       <dl className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-1 lg:grid-cols-1">
         {/* Portfolio Value Card */}
-        <Card>
-          <dt className="text-base font-medium text-gray-900 dark:text-gray-50">
-            Portfolio Value
-          </dt>
-          <dd className="mt-1 text-3xl font-semibold text-gray-900 dark:text-gray-50">
-            $247,468
-          </dd>
-          <div className="mt-1 text-sm font-normal text-gray-500 dark:text-gray-400">
-            {accountCount} {accountCount === 1 ? "account" : "accounts"}
-          </div>
-          <CategoryBar
-            values={[34.4, 30.6, 20.9, 14.1]}
-            className="mt-6"
-            colors={["blue", "cyan", "amber", "emerald"]}
-            showLabels={false}
-          />
-          <ul
-            role="list"
-            className="mt-4 flex flex-wrap gap-x-10 gap-y-4 text-sm"
-          >
-            <li>
-              <span className="text-base font-semibold text-gray-900 dark:text-gray-50">
-                34.4%
-              </span>
-              <div className="flex items-center gap-2">
-                <span
-                  className="size-2.5 shrink-0 rounded-sm bg-blue-600 dark:bg-blue-500"
-                  aria-hidden="true"
-                />
-                <span className="text-sm">U.S. Stocks</span>
-              </div>
-            </li>
-            <li>
-              <span className="text-base font-semibold text-gray-900 dark:text-gray-50">
-                30.6%
-              </span>
-              <div className="flex items-center gap-2">
-                <span
-                  className="size-2.5 shrink-0 rounded-sm bg-cyan-600 dark:bg-cyan-500"
-                  aria-hidden="true"
-                />
-                <span className="text-sm">Non-U.S. Stocks</span>
-              </div>
-            </li>
-            <li>
-              <span className="text-base font-semibold text-gray-900 dark:text-gray-50">
-                20.9%
-              </span>
-              <div className="flex items-center gap-2">
-                <span
-                  className="size-2.5 shrink-0 rounded-sm bg-amber-600 dark:bg-amber-500"
-                  aria-hidden="true"
-                />
-                <span className="text-sm">Fixed Income</span>
-              </div>
-            </li>
-            <li>
-              <span className="text-base font-semibold text-gray-900 dark:text-gray-50">
-                14.1%
-              </span>
-              <div className="flex items-center gap-2">
-                <span
-                  className="size-2.5 shrink-0 rounded-sm bg-emerald-600 dark:bg-emerald-500"
-                  aria-hidden="true"
-                />
-                <span className="text-sm">Cash</span>
-              </div>
-            </li>
-            <li>
-              <span className="text-base font-semibold text-gray-900 dark:text-gray-50">
-                0%
-              </span>
-              <div className="flex items-center gap-2">
-                <span
-                  className="size-2.5 shrink-0 rounded-sm bg-gray-400 dark:bg-gray-600"
-                  aria-hidden="true"
-                />
-                <span className="text-sm">Other</span>
-              </div>
-            </li>
-          </ul>
-        </Card>
+        <PortfolioValueCard accountCount={accountCount} />
 
         {/* Asset Allocation Donut Chart */}
         <AssetAllocationCard />

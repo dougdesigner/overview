@@ -152,7 +152,7 @@ const getDefaultData = (): AssetAllocationData[] => {
       name: "Consumer",
       amount: 29756,
       share: "12.0%",
-      borderColor: "border-purple-500 dark:border-purple-500",
+      borderColor: "border-violet-500 dark:border-violet-500",
     },
     {
       name: "Energy",
@@ -229,46 +229,50 @@ const AssetAllocationCard = React.forwardRef<HTMLDivElement, AssetAllocationCard
               </TabsTrigger>
             ))}
           </TabsList>
-          <div className="pt-8">
+          <div className="px-6 pb-6">
             {allocationData.map((category) => (
               <TabsContent key={category.name} value={category.name}>
-                <div className="px-6 pb-6">
-                  <DonutChart
-                    className="mx-auto"
-                    data={category.data}
-                    value="amount"
-                    category="name"
-                    valueFormatter={currencyFormatter}
-                    showLabel={true}
-                    showTooltip={false}
-                    colors={category.colors}
-                  />
-                </div>
+                <DonutChart
+                  className="mx-auto mt-8"
+                  data={category.data}
+                  value="amount"
+                  category="name"
+                  valueFormatter={currencyFormatter}
+                  showLabel={true}
+                  showTooltip={false}
+                  colors={category.colors}
+                />
+                <p className="mt-8 flex items-center justify-between text-xs text-gray-500 dark:text-gray-500">
+                  <span>Category</span>
+                  <span>Amount / Share</span>
+                </p>
                 <ul
                   role="list"
-                  className="mt-2 divide-y divide-gray-200 border-t border-gray-200 text-sm text-gray-500 dark:divide-gray-800 dark:border-gray-800 dark:text-gray-500"
+                  className="mt-2 divide-y divide-gray-200 text-sm text-gray-500 dark:divide-gray-800 dark:text-gray-500"
                 >
                   {category.data.map((item) => (
                     <li
                       key={item.name}
-                      className="group relative flex items-center justify-between space-x-4 truncate pr-4 hover:bg-gray-50 hover:dark:bg-gray-900"
+                      className="flex items-center justify-between space-x-6 py-2"
                     >
-                      <div
-                        className={cx(
-                          item.borderColor,
-                          "flex h-12 items-center truncate border-l-2 pl-4"
-                        )}
-                      >
-                        <span className="truncate text-gray-700 group-hover:text-gray-900 dark:text-gray-300 group-hover:dark:text-gray-50">
+                      <div className="flex items-center space-x-2.5 truncate">
+                        <span
+                          className={cx(
+                            item.borderColor.replace(/border/g, 'bg'),
+                            "size-2.5 shrink-0 rounded-sm"
+                          )}
+                          aria-hidden="true"
+                        />
+                        <span className="truncate dark:text-gray-300">
                           {item.name}
                         </span>
                       </div>
-                      <div className="flex items-center space-x-1.5">
+                      <div className="flex items-center space-x-2">
                         <span className="font-medium tabular-nums text-gray-900 dark:text-gray-50">
-                          {currencyFormatter(item.amount)}{" "}
-                          <span className="font-normal text-gray-500 dark:text-gray-500">
-                            ({item.share})
-                          </span>
+                          {currencyFormatter(item.amount)}
+                        </span>
+                        <span className="rounded-md bg-gray-100 px-1.5 py-0.5 text-xs font-medium tabular-nums text-gray-700 dark:bg-gray-800 dark:text-gray-300">
+                          {item.share}
                         </span>
                       </div>
                     </li>
