@@ -241,6 +241,17 @@ const AssetAllocationCard = React.forwardRef<
       return "$" + Intl.NumberFormat("us").format(number).toString()
     }
 
+    // Calculate total value once (same for all tabs)
+    const totalValue = React.useMemo(() => {
+      if (allocationData.length > 0) {
+        return allocationData[0].data.reduce(
+          (sum, item) => sum + item.amount,
+          0,
+        )
+      }
+      return 0
+    }, [allocationData])
+
     return (
       <Card
         ref={forwardedRef}
@@ -266,16 +277,29 @@ const AssetAllocationCard = React.forwardRef<
           <div className="px-6 pb-6">
             {allocationData.map((category) => (
               <TabsContent key={category.name} value={category.name}>
-                <DonutChart
-                  className="mx-auto mt-8"
-                  data={category.data}
-                  value="amount"
-                  category="name"
-                  valueFormatter={currencyFormatter}
-                  showLabel={true}
-                  showTooltip={false}
-                  colors={category.colors}
-                />
+                <div className="relative mx-auto mt-8">
+                  {/* Persistent total value display */}
+                  <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
+                    <div className="text-center">
+                      <div className="text-2xl font-semibold text-gray-900 dark:text-gray-50">
+                        {currencyFormatter(totalValue)}
+                      </div>
+                      {/* <div className="text-sm text-gray-500 dark:text-gray-400">
+                        Total
+                      </div> */}
+                    </div>
+                  </div>
+                  {/* DonutChart with label disabled */}
+                  <DonutChart
+                    data={category.data}
+                    value="amount"
+                    category="name"
+                    valueFormatter={currencyFormatter}
+                    showLabel={false}
+                    showTooltip={false}
+                    colors={category.colors}
+                  />
+                </div>
                 <p className="mt-8 flex items-center justify-between text-xs text-gray-500 dark:text-gray-500">
                   <span>Category</span>
                   <span>Value / Allocation</span>
