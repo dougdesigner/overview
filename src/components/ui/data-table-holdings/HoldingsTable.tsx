@@ -138,6 +138,7 @@ export function HoldingsTable({
   onEdit,
   onDelete,
   initialAccountFilter = "all",
+  onAccountFilterChange,
 }: HoldingsTableProps) {
   const [expanded, setExpanded] = React.useState<ExpandedState>({})
   const [sorting, setSorting] = React.useState<SortingState>([])
@@ -235,7 +236,10 @@ export function HoldingsTable({
           <label htmlFor="account-filter" className="text-sm font-medium">
             Account
           </label>
-          <Select value={selectedAccount} onValueChange={setSelectedAccount}>
+          <Select value={selectedAccount} onValueChange={(value) => {
+            setSelectedAccount(value)
+            onAccountFilterChange?.(value)
+          }}>
             <SelectTrigger className="w-full sm:w-[200px]" id="account-filter">
               <SelectValue placeholder="Select an account">
                 {selectedAccount === "all"

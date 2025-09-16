@@ -16,6 +16,9 @@ export default function HoldingsPage() {
   const searchParams = useSearchParams()
   const [isOpen, setIsOpen] = React.useState(false)
   const [editingHolding, setEditingHolding] = React.useState<Holding | null>(null)
+  const [currentAccountFilter, setCurrentAccountFilter] = React.useState<string>(
+    searchParams.get("account") || "all"
+  )
 
   // Example accounts data - in a real app this would come from state or API
   const accounts = [
@@ -244,7 +247,13 @@ export default function HoldingsPage() {
           accounts={accounts}
           onSubmit={handleHoldingSubmit}
           mode={editingHolding ? "edit" : "create"}
-          initialData={editingHolding ? convertHoldingToFormData(editingHolding) : undefined}
+          initialData={
+            editingHolding
+              ? convertHoldingToFormData(editingHolding)
+              : currentAccountFilter !== "all"
+                ? { accountId: currentAccountFilter, holdingType: "stocks-funds" }
+                : undefined
+          }
         />
       </div>
       <Divider />
@@ -257,6 +266,7 @@ export default function HoldingsPage() {
           onEdit={handleEdit}
           onDelete={handleDelete}
           initialAccountFilter={searchParams.get("account") || "all"}
+          onAccountFilterChange={setCurrentAccountFilter}
         />
       </div>
     </main>

@@ -26,4 +26,5 @@ export interface HoldingsTableProps {
   onEdit: (holding: Holding) => void
   onDelete: (holdingId: string) => void
   initialAccountFilter?: string
+  onAccountFilterChange?: (accountId: string) => void
 }
