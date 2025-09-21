@@ -88,9 +88,11 @@ const institutionLabels: Record<string, string> = {
 const groupHoldings = (holdings: Holding[]): Holding[] => {
   const grouped: Record<string, Holding[]> = {}
 
-  // Group holdings by ticker (or by name for cash)
+  // Group holdings by ticker for stocks/funds, or by type for cash
   holdings.forEach((holding) => {
-    const key = holding.ticker || holding.name
+    // For cash holdings, group all together regardless of name
+    const key =
+      holding.type === "cash" ? "CASH_GROUP" : holding.ticker || holding.name
     if (!grouped[key]) {
       grouped[key] = []
     }
@@ -113,9 +115,9 @@ const groupHoldings = (holdings: Holding[]): Holding[] => {
         accountId: "all",
         accountName: "All Accounts",
         ticker: group[0].ticker,
-        name: group[0].name,
+        name: group[0].type === "cash" ? "Cash" : group[0].name,
         quantity: totalQuantity,
-        lastPrice: group[0].type === "cash" ? 0 : avgPrice,
+        lastPrice: group[0].type === "cash" ? 1 : avgPrice,
         marketValue: totalMarketValue,
         allocation: totalAllocation,
         type: group[0].type,
@@ -236,10 +238,13 @@ export function HoldingsTable({
           <label htmlFor="account-filter" className="text-sm font-medium">
             Account
           </label>
-          <Select value={selectedAccount} onValueChange={(value) => {
-            setSelectedAccount(value)
-            onAccountFilterChange?.(value)
-          }}>
+          <Select
+            value={selectedAccount}
+            onValueChange={(value) => {
+              setSelectedAccount(value)
+              onAccountFilterChange?.(value)
+            }}
+          >
             <SelectTrigger className="w-full sm:w-[200px]" id="account-filter">
               <SelectValue placeholder="Select an account">
                 {selectedAccount === "all"
@@ -250,9 +255,8 @@ export function HoldingsTable({
                       )
                       if (selectedAccountData) {
                         const institutionLabel =
-                          institutionLabels[
-                            selectedAccountData.institution
-                          ] || selectedAccountData.institution
+                          institutionLabels[selectedAccountData.institution] ||
+                          selectedAccountData.institution
                         return (
                           <div className="flex items-center gap-2">
                             <div
@@ -274,8 +278,7 @@ export function HoldingsTable({
               <SelectItem value="all">All Accounts</SelectItem>
               {accounts.map((account) => {
                 const institutionLabel =
-                  institutionLabels[account.institution] ||
-                  account.institution
+                  institutionLabels[account.institution] || account.institution
                 return (
                   <SelectItem key={account.id} value={account.id}>
                     <div className="flex items-start gap-2">
@@ -302,7 +305,8 @@ export function HoldingsTable({
             {formatCurrency(totalValue)}
           </div>
           <div className="text-sm font-normal text-gray-500 dark:text-gray-400">
-            {filteredHoldings.length} {filteredHoldings.length === 1 ? "holding" : "holdings"}
+            {filteredHoldings.length}{" "}
+            {filteredHoldings.length === 1 ? "holding" : "holdings"}
           </div>
         </div>
       </div>
