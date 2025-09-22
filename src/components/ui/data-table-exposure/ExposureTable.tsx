@@ -26,6 +26,7 @@ import {
   useReactTable,
 } from "@tanstack/react-table"
 import React from "react"
+import { DataTablePagination } from "../data-table/DataTablePagination"
 import { createColumns } from "./columns"
 import { ExposureTreemap } from "./ExposureTreemap"
 import {
@@ -313,39 +314,10 @@ export function ExposureTable({ holdings, onRefresh }: ExposureTableProps) {
             </TableBody>
           </Table>
         </div>
-
-        {/* Pagination */}
-        {table.getPageCount() > 1 && (
-          <div className="flex items-center justify-between border-t p-4">
-            <div className="text-sm text-gray-500 dark:text-gray-400">
-              Showing {table.getState().pagination.pageIndex * 20 + 1} to{" "}
-              {Math.min(
-                (table.getState().pagination.pageIndex + 1) * 20,
-                data.length,
-              )}{" "}
-              of {data.length} stocks
-            </div>
-            <div className="flex items-center gap-2">
-              <Button
-                variant="secondary"
-                size="sm"
-                onClick={() => table.previousPage()}
-                disabled={!table.getCanPreviousPage()}
-              >
-                Previous
-              </Button>
-              <Button
-                variant="secondary"
-                size="sm"
-                onClick={() => table.nextPage()}
-                disabled={!table.getCanNextPage()}
-              >
-                Next
-              </Button>
-            </div>
-          </div>
-        )}
       </Card>
+
+      {/* Pagination */}
+      <DataTablePagination table={table} pageSize={20} />
     </div>
   )
 }
