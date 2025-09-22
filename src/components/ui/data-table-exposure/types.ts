@@ -2,6 +2,8 @@ export interface StockExposure {
   id: string
   ticker: string
   name: string
+  sector?: string // Company sector from Alpha Vantage
+  industry?: string // Company industry from Alpha Vantage
   directShares: number
   etfExposure: number // Total shares held through ETFs
   totalShares: number // directShares + etfExposure

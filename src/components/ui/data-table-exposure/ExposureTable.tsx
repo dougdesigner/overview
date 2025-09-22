@@ -28,6 +28,7 @@ import {
 import React from "react"
 import { createColumns } from "./columns"
 import { ExposurePieChart } from "./ExposurePieChart"
+import { ExposureTreemap } from "./ExposureTreemap"
 import {
   ExposureCalculationResult,
   ExposureTableProps,
@@ -90,7 +91,7 @@ export function ExposureTable({ holdings, onRefresh }: ExposureTableProps) {
       setExpanded({})
     } else {
       const newExpanded: ExpandedState = {}
-      data.forEach((row) => {
+      data.forEach((row, index) => {
         if (row.subRows && row.subRows.length > 0) {
           newExpanded[index] = true
         }
@@ -100,7 +101,9 @@ export function ExposureTable({ holdings, onRefresh }: ExposureTableProps) {
   }
 
   const areAllExpanded = () => {
-    const expandableRows = data.filter((row) => row.subRows && row.subRows.length > 0)
+    const expandableRows = data.filter(
+      (row) => row.subRows && row.subRows.length > 0,
+    )
     if (expandableRows.length === 0) return false
     return expandableRows.every((row) => expanded[data.indexOf(row)])
   }
@@ -111,7 +114,7 @@ export function ExposureTable({ holdings, onRefresh }: ExposureTableProps) {
         toggleExpandAll,
         areAllExpanded,
       }),
-    [expanded, data, toggleExpandAll, areAllExpanded]
+    [expanded, data, toggleExpandAll, areAllExpanded],
   )
 
   const table = useReactTable({
@@ -147,7 +150,7 @@ export function ExposureTable({ holdings, onRefresh }: ExposureTableProps) {
     <div className="space-y-6">
       {/* Summary Cards and Pie Chart */}
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
-        <div className="lg:col-span-2 grid grid-cols-1 gap-4 sm:grid-cols-3">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-3 lg:col-span-2">
           <Card className="p-4">
             <p className="text-sm font-medium text-gray-500 dark:text-gray-400">
               Total Stocks
@@ -174,12 +177,14 @@ export function ExposureTable({ holdings, onRefresh }: ExposureTableProps) {
             <p className="text-sm font-medium text-gray-500 dark:text-gray-400">
               Top Concentration
             </p>
-            <p className={cx(
-              "mt-1 text-2xl font-semibold",
-              topConcentration > 10
-                ? "text-orange-600 dark:text-orange-400"
-                : "text-gray-900 dark:text-gray-50"
-            )}>
+            <p
+              className={cx(
+                "mt-1 text-2xl font-semibold",
+                topConcentration > 10
+                  ? "text-orange-600 dark:text-orange-400"
+                  : "text-gray-900 dark:text-gray-50",
+              )}
+            >
               {topConcentration.toFixed(1)}%
             </p>
             <p className="mt-1 text-xs text-gray-600 dark:text-gray-400">
@@ -191,10 +196,18 @@ export function ExposureTable({ holdings, onRefresh }: ExposureTableProps) {
         {/* Pie Chart */}
         {data.length > 0 && (
           <div className="lg:col-span-1">
-            <ExposurePieChart exposures={data} totalValue={totalPortfolioValue} />
+            <ExposurePieChart
+              exposures={data}
+              totalValue={totalPortfolioValue}
+            />
           </div>
         )}
       </div>
+
+      {/* Treemap Visualization */}
+      {data.length > 0 && (
+        <ExposureTreemap exposures={data} totalValue={totalPortfolioValue} />
+      )}
 
       {/* Table Controls */}
       <Card>
@@ -243,7 +256,7 @@ export function ExposureTable({ holdings, onRefresh }: ExposureTableProps) {
                         ? null
                         : flexRender(
                             header.column.columnDef.header,
-                            header.getContext()
+                            header.getContext(),
                           )}
                     </TableHeaderCell>
                   ))}
@@ -271,19 +284,17 @@ export function ExposureTable({ holdings, onRefresh }: ExposureTableProps) {
                     key={row.id}
                     data-state={row.getIsSelected() && "selected"}
                     className={cx(
-                      row.depth > 0 && "bg-gray-50 dark:bg-gray-900/50"
+                      row.depth > 0 && "bg-gray-50 dark:bg-gray-900/50",
                     )}
                   >
                     {row.getVisibleCells().map((cell) => (
                       <TableCell
                         key={cell.id}
-                        className={cx(
-                          cell.column.columnDef.meta?.className
-                        )}
+                        className={cx(cell.column.columnDef.meta?.className)}
                       >
                         {flexRender(
                           cell.column.columnDef.cell,
-                          cell.getContext()
+                          cell.getContext(),
                         )}
                       </TableCell>
                     ))}
@@ -310,7 +321,7 @@ export function ExposureTable({ holdings, onRefresh }: ExposureTableProps) {
               Showing {table.getState().pagination.pageIndex * 20 + 1} to{" "}
               {Math.min(
                 (table.getState().pagination.pageIndex + 1) * 20,
-                data.length
+                data.length,
               )}{" "}
               of {data.length} stocks
             </div>

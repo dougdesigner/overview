@@ -53,7 +53,6 @@ export function ExposurePieChart({ exposures, totalValue }: ExposurePieChartProp
           category="value"
           index="name"
           valueFormatter={formatCurrency}
-          showAnimation={true}
           className="h-72"
         />
       </div>

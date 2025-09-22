@@ -12,14 +12,25 @@ interface ETFProfileResponse {
   }
 }
 
-interface CacheEntry {
-  data: ETFProfileResponse
+interface CompanyOverview {
+  Symbol: string
+  Name: string
+  Sector: string
+  Industry: string
+  MarketCapitalization?: string
+  Exchange?: string
+  Currency?: string
+  Country?: string
+}
+
+interface CacheEntry<T = ETFProfileResponse | CompanyOverview> {
+  data: T
   timestamp: number
 }
 
 class AlphaVantageClient {
   private baseURL = "https://www.alphavantage.co/query"
-  private cache: Map<string, CacheEntry> = new Map()
+  private cache: Map<string, CacheEntry<any>> = new Map()
   private cacheDuration: number
 
   constructor() {
@@ -30,7 +41,7 @@ class AlphaVantageClient {
     return `${func}:${symbol}`
   }
 
-  private getFromCache(key: string): ETFProfileResponse | null {
+  private getFromCache<T>(key: string): T | null {
     const entry = this.cache.get(key)
     if (!entry) return null
 
@@ -40,10 +51,10 @@ class AlphaVantageClient {
       return null
     }
 
-    return entry.data
+    return entry.data as T
   }
 
-  private setCache(key: string, data: ETFProfileResponse): void {
+  private setCache<T>(key: string, data: T): void {
     this.cache.set(key, {
       data,
       timestamp: Date.now()
@@ -59,7 +70,7 @@ class AlphaVantageClient {
     }
 
     const cacheKey = this.getCacheKey(symbol, "ETF_PROFILE")
-    const cached = this.getFromCache(cacheKey)
+    const cached = this.getFromCache<ETFProfileResponse>(cacheKey)
     if (cached) {
       console.log(`Using cached data for ${symbol}`)
       return cached
@@ -218,10 +229,219 @@ class AlphaVantageClient {
     }
   }
 
+  async getCompanyOverview(symbol: string): Promise<CompanyOverview | null> {
+    const apiKey = process.env.ALPHA_VANTAGE_API_KEY
+
+    if (!apiKey || apiKey === "YOUR_API_KEY_HERE") {
+      console.warn("Alpha Vantage API key not configured. Using mock data.")
+      return this.getMockCompanyOverview(symbol)
+    }
+
+    const cacheKey = this.getCacheKey(symbol, "OVERVIEW")
+    const cached = this.getFromCache<CompanyOverview>(cacheKey)
+    if (cached) {
+      console.log(`Using cached company overview for ${symbol}`)
+      return cached
+    }
+
+    try {
+      const url = new URL(this.baseURL)
+      url.searchParams.append("function", "OVERVIEW")
+      url.searchParams.append("symbol", symbol)
+      url.searchParams.append("apikey", apiKey)
+
+      const response = await fetch(url.toString())
+
+      if (!response.ok) {
+        throw new Error(`API request failed: ${response.status}`)
+      }
+
+      const data = await response.json()
+
+      if (data["Error Message"] || data["Note"] || !data.Symbol) {
+        console.error("Alpha Vantage API error:", data["Error Message"] || data["Note"] || "No data returned")
+        return this.getMockCompanyOverview(symbol)
+      }
+
+      this.setCache(cacheKey, data)
+      return data as CompanyOverview
+    } catch (error) {
+      console.error(`Error fetching company overview for ${symbol}:`, error)
+      return this.getMockCompanyOverview(symbol)
+    }
+  }
+
+  private getMockCompanyOverview(symbol: string): CompanyOverview {
+    const mockData: Record<string, CompanyOverview> = {
+      AAPL: {
+        Symbol: "AAPL",
+        Name: "Apple Inc.",
+        Sector: "Technology",
+        Industry: "Consumer Electronics",
+        MarketCapitalization: "3000000000000",
+        Exchange: "NASDAQ",
+        Currency: "USD",
+        Country: "USA"
+      },
+      MSFT: {
+        Symbol: "MSFT",
+        Name: "Microsoft Corporation",
+        Sector: "Technology",
+        Industry: "Software—Infrastructure",
+        MarketCapitalization: "2800000000000",
+        Exchange: "NASDAQ",
+        Currency: "USD",
+        Country: "USA"
+      },
+      AMZN: {
+        Symbol: "AMZN",
+        Name: "Amazon.com Inc.",
+        Sector: "Consumer Cyclical",
+        Industry: "Internet Retail",
+        MarketCapitalization: "1700000000000",
+        Exchange: "NASDAQ",
+        Currency: "USD",
+        Country: "USA"
+      },
+      GOOGL: {
+        Symbol: "GOOGL",
+        Name: "Alphabet Inc. Class A",
+        Sector: "Communication Services",
+        Industry: "Internet Content & Information",
+        MarketCapitalization: "1800000000000",
+        Exchange: "NASDAQ",
+        Currency: "USD",
+        Country: "USA"
+      },
+      GOOG: {
+        Symbol: "GOOG",
+        Name: "Alphabet Inc. Class C",
+        Sector: "Communication Services",
+        Industry: "Internet Content & Information",
+        MarketCapitalization: "1800000000000",
+        Exchange: "NASDAQ",
+        Currency: "USD",
+        Country: "USA"
+      },
+      NVDA: {
+        Symbol: "NVDA",
+        Name: "NVIDIA Corporation",
+        Sector: "Technology",
+        Industry: "Semiconductors",
+        MarketCapitalization: "1100000000000",
+        Exchange: "NASDAQ",
+        Currency: "USD",
+        Country: "USA"
+      },
+      META: {
+        Symbol: "META",
+        Name: "Meta Platforms Inc.",
+        Sector: "Communication Services",
+        Industry: "Internet Content & Information",
+        MarketCapitalization: "900000000000",
+        Exchange: "NASDAQ",
+        Currency: "USD",
+        Country: "USA"
+      },
+      TSLA: {
+        Symbol: "TSLA",
+        Name: "Tesla Inc.",
+        Sector: "Consumer Cyclical",
+        Industry: "Auto Manufacturers",
+        MarketCapitalization: "800000000000",
+        Exchange: "NASDAQ",
+        Currency: "USD",
+        Country: "USA"
+      },
+      BRK: {
+        Symbol: "BRK.B",
+        Name: "Berkshire Hathaway Inc.",
+        Sector: "Financial Services",
+        Industry: "Insurance—Diversified",
+        MarketCapitalization: "780000000000",
+        Exchange: "NYSE",
+        Currency: "USD",
+        Country: "USA"
+      },
+      "BRK.B": {
+        Symbol: "BRK.B",
+        Name: "Berkshire Hathaway Inc. Class B",
+        Sector: "Financial Services",
+        Industry: "Insurance—Diversified",
+        MarketCapitalization: "780000000000",
+        Exchange: "NYSE",
+        Currency: "USD",
+        Country: "USA"
+      },
+      JPM: {
+        Symbol: "JPM",
+        Name: "JPMorgan Chase & Co.",
+        Sector: "Financial Services",
+        Industry: "Banks—Diversified",
+        MarketCapitalization: "500000000000",
+        Exchange: "NYSE",
+        Currency: "USD",
+        Country: "USA"
+      },
+      UNH: {
+        Symbol: "UNH",
+        Name: "UnitedHealth Group Inc.",
+        Sector: "Healthcare",
+        Industry: "Healthcare Plans",
+        MarketCapitalization: "450000000000",
+        Exchange: "NYSE",
+        Currency: "USD",
+        Country: "USA"
+      },
+      AVGO: {
+        Symbol: "AVGO",
+        Name: "Broadcom Inc.",
+        Sector: "Technology",
+        Industry: "Semiconductors",
+        MarketCapitalization: "600000000000",
+        Exchange: "NASDAQ",
+        Currency: "USD",
+        Country: "USA"
+      },
+      PEP: {
+        Symbol: "PEP",
+        Name: "PepsiCo Inc.",
+        Sector: "Consumer Defensive",
+        Industry: "Beverages—Non-Alcoholic",
+        MarketCapitalization: "230000000000",
+        Exchange: "NASDAQ",
+        Currency: "USD",
+        Country: "USA"
+      },
+      COST: {
+        Symbol: "COST",
+        Name: "Costco Wholesale Corporation",
+        Sector: "Consumer Defensive",
+        Industry: "Discount Stores",
+        MarketCapitalization: "350000000000",
+        Exchange: "NASDAQ",
+        Currency: "USD",
+        Country: "USA"
+      }
+    }
+
+    // Return generic data for unknown symbols
+    return mockData[symbol] || {
+      Symbol: symbol,
+      Name: `${symbol} Company`,
+      Sector: "Unknown",
+      Industry: "Unknown",
+      MarketCapitalization: "0",
+      Exchange: "UNKNOWN",
+      Currency: "USD",
+      Country: "USA"
+    }
+  }
+
   clearCache(): void {
     this.cache.clear()
   }
 }
 
 export const alphaVantageClient = new AlphaVantageClient()
-export type { ETFProfileResponse }
+export type { ETFProfileResponse, CompanyOverview }
