@@ -2,7 +2,9 @@
 
 import AccountCard from "@/components/AccountCard"
 import { Button } from "@/components/Button"
+import { Card } from "@/components/Card"
 import { Divider } from "@/components/Divider"
+import SankeyChart from "@/components/SankeyChart"
 import {
   AccountDrawer,
   type AccountFormData,
@@ -303,6 +305,70 @@ export default function AccountsPage() {
         />
       </div>
       <Divider />
+
+      {/* Account Flow Sankey Chart */}
+      {accounts.length > 0 && (
+        <Card className="mt-8">
+          <p className="text-base font-medium text-gray-900 dark:text-gray-50">
+            Account Flow
+          </p>
+          <SankeyChart
+            data={{
+              nodes: [
+                // Account nodes (left side) - dynamically generated from accounts
+                ...accounts.map(account => ({ id: account.name })),
+                // Portfolio Total (center)
+                { id: "Portfolio Total" },
+                // Asset type nodes (right side)
+                { id: "U.S. Stocks" },
+                { id: "Non-U.S. Stocks" },
+                { id: "Fixed Income" },
+                { id: "Cash" },
+              ],
+              links: [
+                // Accounts to Portfolio Total
+                ...accounts.map(account => ({
+                  source: account.name,
+                  target: "Portfolio Total",
+                  value: account.totalValue,
+                })),
+                // Portfolio Total to Asset Types - calculate from account allocations
+                {
+                  source: "Portfolio Total",
+                  target: "U.S. Stocks",
+                  value: accounts.reduce((sum, acc) =>
+                    sum + (acc.totalValue * acc.assetAllocation.usStocks / 100), 0
+                  ),
+                },
+                {
+                  source: "Portfolio Total",
+                  target: "Non-U.S. Stocks",
+                  value: accounts.reduce((sum, acc) =>
+                    sum + (acc.totalValue * acc.assetAllocation.nonUsStocks / 100), 0
+                  ),
+                },
+                {
+                  source: "Portfolio Total",
+                  target: "Fixed Income",
+                  value: accounts.reduce((sum, acc) =>
+                    sum + (acc.totalValue * acc.assetAllocation.fixedIncome / 100), 0
+                  ),
+                },
+                {
+                  source: "Portfolio Total",
+                  target: "Cash",
+                  value: accounts.reduce((sum, acc) =>
+                    sum + (acc.totalValue * acc.assetAllocation.cash / 100), 0
+                  ),
+                },
+              ],
+            }}
+            colors={["blue", "cyan", "amber", "emerald"]}
+            accountColors={["violet", "fuchsia", "pink", "sky", "lime"]}
+            height={350}
+          />
+        </Card>
+      )}
 
       {/* Account Cards */}
       <div className="mt-8">

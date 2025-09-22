@@ -1,10 +1,8 @@
 "use client"
 
 import AssetAllocationCard from "@/components/AssetAllocationCard"
-import { Card } from "@/components/Card"
 import { Divider } from "@/components/Divider"
 import PortfolioValueCard from "@/components/PortfolioValueCard"
-import SankeyChart from "@/components/SankeyChart"
 import React from "react"
 
 export default function OverviewPage() {
@@ -151,63 +149,6 @@ export default function OverviewPage() {
       <dl className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-1 lg:grid-cols-1">
         <AssetAllocationCard />
       </dl>
-
-      <Card className="mt-8">
-        <p className="text-base font-medium text-gray-900 dark:text-gray-50">
-          Account Flow
-        </p>
-        <SankeyChart
-          data={{
-            nodes: [
-              // Account nodes (left side)
-              { id: "401(k)" },
-              { id: "Personal Investment" },
-              { id: "Roth IRA" },
-              { id: "Savings" },
-              { id: "Checking" },
-              // Portfolio Total (center)
-              { id: "Portfolio Total" },
-              // Asset type nodes (right side)
-              { id: "U.S. Stocks" },
-              { id: "Non-U.S. Stocks" },
-              { id: "Fixed Income" },
-              { id: "Cash" },
-            ],
-            links: [
-              // Accounts to Portfolio Total
-              { source: "401(k)", target: "Portfolio Total", value: 98987 },
-              {
-                source: "Personal Investment",
-                target: "Portfolio Total",
-                value: 74240,
-              },
-              { source: "Roth IRA", target: "Portfolio Total", value: 49494 },
-              { source: "Savings", target: "Portfolio Total", value: 17224 },
-              { source: "Checking", target: "Portfolio Total", value: 7423 },
-              // Portfolio Total to Asset Types
-              {
-                source: "Portfolio Total",
-                target: "U.S. Stocks",
-                value: 85129,
-              },
-              {
-                source: "Portfolio Total",
-                target: "Non-U.S. Stocks",
-                value: 75725,
-              },
-              {
-                source: "Portfolio Total",
-                target: "Fixed Income",
-                value: 51721,
-              },
-              { source: "Portfolio Total", target: "Cash", value: 34893 },
-            ],
-          }}
-          colors={["blue", "cyan", "amber", "emerald"]}
-          accountColors={["violet", "fuchsia", "pink", "sky", "lime"]}
-          height={350}
-        />
-      </Card>
     </main>
   )
 }
