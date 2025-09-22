@@ -310,11 +310,11 @@ export function ExposureTreemap({
           <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-50">
             Portfolio Treemap
           </h3>
-          <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
+          {/* <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
             {groupingMode === "sector"
               ? "Hierarchical view: Sectors → Industries → Stocks"
               : "Hierarchical view: Industries → Stocks"}
-          </p>
+          </p> */}
         </div>
 
         {/* Grouping Mode Toggle */}
@@ -348,7 +348,7 @@ export function ExposureTreemap({
           identity="name"
           value="value"
           valueFormat={formatValue}
-          margin={{ top: 10, right: 10, bottom: 10, left: 10 }}
+          margin={{ top: 0, right: 0, bottom: 0, left: 0 }}
           labelSkipSize={12}
           labelTextColor={{
             from: "color",
@@ -378,7 +378,7 @@ export function ExposureTreemap({
             const isLeaf = node.isLeaf
 
             return (
-              <div className="flex rounded-md border border-gray-200 bg-white px-3 py-2 text-sm shadow-md dark:border-gray-800 dark:bg-gray-950">
+              <div className="rounded-md border border-gray-200 bg-white px-3 py-2 text-sm shadow-md dark:border-gray-800 dark:bg-gray-950">
                 <div className="font-medium text-gray-900 dark:text-gray-50">
                   {node.id}
                 </div>
@@ -404,7 +404,7 @@ export function ExposureTreemap({
       </div>
 
       {/* Legend for top sectors/industries */}
-      <div className="mt-6 border-t pt-4">
+      <div className="mt-4 pt-0">
         <p className="mb-4 text-sm font-medium text-gray-700 dark:text-gray-300">
           {groupingMode === "sector" ? "Top Sectors" : "Top Industries"}
         </p>
