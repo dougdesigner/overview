@@ -7,6 +7,22 @@ export function cx(...args: ClassValue[]) {
   return twMerge(clsx(...args))
 }
 
+export function toProperCase(str: string): string {
+  if (!str) return str
+
+  // If already in proper case format (has capital letters), return as is
+  if (str !== str.toLowerCase() && str !== str.toUpperCase()) {
+    return str
+  }
+
+  // Convert to proper case
+  return str
+    .toLowerCase()
+    .split(' ')
+    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(' ')
+}
+
 // Tremor Raw focusInput [v0.0.1]
 
 export const focusInput = [

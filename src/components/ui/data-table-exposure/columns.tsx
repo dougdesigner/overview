@@ -1,6 +1,6 @@
 import { Badge } from "@/components/Badge"
 import { getTickerColor } from "@/lib/tickerColors"
-import { cx } from "@/lib/utils"
+import { cx, toProperCase } from "@/lib/utils"
 import {
   RiArrowDownSLine,
   RiArrowRightSLine,
@@ -202,7 +202,7 @@ export const createColumns = ({
 
       return (
         <Badge variant="flat" className="text-xs">
-          {sector}
+          {toProperCase(sector)}
         </Badge>
       )
     },
@@ -239,7 +239,7 @@ export const createColumns = ({
 
       return (
         <Badge variant="flat" className="text-xs">
-          {industry}
+          {toProperCase(industry)}
         </Badge>
       )
     },

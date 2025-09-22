@@ -1,6 +1,7 @@
 "use client"
 
 import { Card } from "@/components/Card"
+import { toProperCase } from "@/lib/utils"
 import { ResponsiveTreeMap } from "@nivo/treemap"
 import { useState } from "react"
 import { StockExposure } from "./types"
@@ -46,8 +47,8 @@ export function ExposureTreemap({ exposures, totalValue }: ExposureTreemapProps)
       const sectorMap = new Map<string, Map<string, StockExposure[]>>()
 
       validExposures.forEach(exposure => {
-        const sector = exposure.sector || "Unknown Sector"
-        const industry = exposure.industry || "Unknown Industry"
+        const sector = toProperCase(exposure.sector || "Unknown Sector")
+        const industry = toProperCase(exposure.industry || "Unknown Industry")
 
         if (!sectorMap.has(sector)) {
           sectorMap.set(sector, new Map())
@@ -81,7 +82,7 @@ export function ExposureTreemap({ exposures, totalValue }: ExposureTreemapProps)
     } else {
       // For industry mode: keep the current two-level hierarchy (Industry -> Stocks)
       const grouped = validExposures.reduce((acc, exposure) => {
-        const groupKey = exposure.industry || "Unknown Industry"
+        const groupKey = toProperCase(exposure.industry || "Unknown Industry")
 
         if (!acc[groupKey]) {
           acc[groupKey] = []
@@ -120,6 +121,7 @@ export function ExposureTreemap({ exposures, totalValue }: ExposureTreemapProps)
   }
 
   // Define color scheme for sectors/industries
+  // Keys should match the proper case format returned by toProperCase
   const sectorColors: Record<string, string> = {
     "Technology": "#3b82f6",
     "Healthcare": "#10b981",
@@ -135,15 +137,16 @@ export function ExposureTreemap({ exposures, totalValue }: ExposureTreemapProps)
     "Unknown Sector": "#9ca3af"
   }
 
+  // Keys should match the proper case format returned by toProperCase
   const industryColors: Record<string, string> = {
     // Technology industries
     "Consumer Electronics": "#3b82f6",
-    "Software—Infrastructure": "#2563eb",
+    "Software—infrastructure": "#2563eb",
     "Semiconductors": "#1d4ed8",
-    "Software—Application": "#1e40af",
+    "Software—application": "#1e40af",
     // Financial industries
-    "Banks—Diversified": "#8b5cf6",
-    "Insurance—Diversified": "#7c3aed",
+    "Banks—diversified": "#8b5cf6",
+    "Insurance—diversified": "#7c3aed",
     "Asset Management": "#6d28d9",
     "Capital Markets": "#5b21b6",
     // Consumer industries
@@ -152,7 +155,7 @@ export function ExposureTreemap({ exposures, totalValue }: ExposureTreemapProps)
     "Specialty Retail": "#b45309",
     "Restaurants": "#92400e",
     "Discount Stores": "#ec4899",
-    "Beverages—Non-Alcoholic": "#db2777",
+    "Beverages—non-alcoholic": "#db2777",
     "Packaged Foods": "#be185d",
     // Healthcare industries
     "Healthcare Plans": "#10b981",
@@ -370,17 +373,20 @@ export function ExposureTreemap({ exposures, totalValue }: ExposureTreemapProps)
 
       {/* Legend for top sectors/industries */}
       <div className="mt-6 border-t pt-4">
-        <p className="mb-3 text-sm font-medium text-gray-700 dark:text-gray-300">
+        <p className="mb-4 text-sm font-medium text-gray-700 dark:text-gray-300">
           {groupingMode === "sector" ? "Top Sectors" : "Top Industries"}
         </p>
-        <div className="grid grid-cols-2 gap-2 sm:grid-cols-3">
+        <ul
+          role="list"
+          className="flex flex-wrap gap-x-10 gap-y-4 text-sm"
+        >
           {Object.entries(
             exposures
               .filter(exp => !exp.isETFBreakdown && exp.totalValue > 0)
               .reduce((acc, exp) => {
                 const key = groupingMode === "sector"
-                  ? (exp.sector || "Unknown Sector")
-                  : (exp.industry || "Unknown Industry")
+                  ? toProperCase(exp.sector || "Unknown Sector")
+                  : toProperCase(exp.industry || "Unknown Industry")
                 acc[key] = (acc[key] || 0) + exp.totalValue
                 return acc
               }, {} as Record<string, number>)
@@ -388,24 +394,25 @@ export function ExposureTreemap({ exposures, totalValue }: ExposureTreemapProps)
             .sort((a, b) => b[1] - a[1])
             .slice(0, 6)
             .map(([name, value], index) => (
-              <div key={name} className="flex items-center gap-2">
-                <div
-                  className="h-3 w-3 shrink-0 rounded"
-                  style={{
-                    backgroundColor: groupingMode === "sector"
-                      ? (sectorColors[name] || generateColorForString(name))
-                      : getPairedColor(index)
-                  }}
-                />
-                <span className="truncate text-sm text-gray-900 dark:text-gray-50">
-                  {name}
-                </span>
-                <span className="ml-auto text-sm font-medium text-gray-600 dark:text-gray-400">
+              <li key={name}>
+                <span className="text-base font-semibold text-gray-900 dark:text-gray-50">
                   {((value / totalValue) * 100).toFixed(1)}%
                 </span>
-              </div>
+                <div className="flex items-center gap-2">
+                  <span
+                    className="size-2.5 shrink-0 rounded-sm"
+                    style={{
+                      backgroundColor: groupingMode === "sector"
+                        ? (sectorColors[name] || generateColorForString(name))
+                        : getPairedColor(index)
+                    }}
+                    aria-hidden="true"
+                  />
+                  <span className="text-sm">{name}</span>
+                </div>
+              </li>
             ))}
-        </div>
+        </ul>
       </div>
     </Card>
   )

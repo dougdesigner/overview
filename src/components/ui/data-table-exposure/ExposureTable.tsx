@@ -27,7 +27,6 @@ import {
 } from "@tanstack/react-table"
 import React from "react"
 import { createColumns } from "./columns"
-import { ExposurePieChart } from "./ExposurePieChart"
 import { ExposureTreemap } from "./ExposureTreemap"
 import {
   ExposureCalculationResult,
@@ -149,7 +148,8 @@ export function ExposureTable({ holdings, onRefresh }: ExposureTableProps) {
   return (
     <div className="space-y-6">
       {/* Summary Cards and Pie Chart */}
-      <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
+
+      {/* <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-3 lg:col-span-2">
           <Card className="p-4">
             <p className="text-sm font-medium text-gray-500 dark:text-gray-400">
@@ -191,10 +191,10 @@ export function ExposureTable({ holdings, onRefresh }: ExposureTableProps) {
               {data[0]?.ticker || "—"} exposure
             </p>
           </Card>
-        </div>
+        </div> */}
 
-        {/* Pie Chart */}
-        {data.length > 0 && (
+      {/* Pie Chart */}
+      {/* {data.length > 0 && (
           <div className="lg:col-span-1">
             <ExposurePieChart
               exposures={data}
@@ -202,7 +202,7 @@ export function ExposureTable({ holdings, onRefresh }: ExposureTableProps) {
             />
           </div>
         )}
-      </div>
+      </div> */}
 
       {/* Treemap Visualization */}
       {data.length > 0 && (
