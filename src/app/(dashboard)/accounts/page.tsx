@@ -18,10 +18,10 @@ const accountTypeLabels: Record<string, string> = {
   // Cash accounts
   bank: "Bank Account",
   checking: "Checking Account",
-  savings: "Savings Account", 
+  savings: "Savings Account",
   cash: "Cash",
   rewards: "Rewards Account",
-  
+
   // Investment accounts
   investment: "Investment Account",
   "personal-investment": "Personal Investment",
@@ -36,7 +36,7 @@ const accountTypeLabels: Record<string, string> = {
   "other-non-taxable": "Other Non-Taxable",
   "other-taxable": "Other Taxable",
   cryptocurrency: "Cryptocurrency",
-  
+
   // Asset accounts - Retirement
   "traditional-ira": "Traditional IRA",
   "roth-ira": "Roth IRA",
@@ -46,36 +46,36 @@ const accountTypeLabels: Record<string, string> = {
   "traditional-401k": "Traditional 401(k)",
   "roth-401k": "Roth 401(k)",
   "403b": "403(b)",
-  "457b": "457(b)", 
+  "457b": "457(b)",
   "thrift-savings-plan": "Thrift Savings Plan",
-  
+
   // Asset accounts - Education & Health
   "529": "529 Education Savings",
   hsa: "Health Savings Account",
   "coverdell-esa": "Coverdell ESA",
-  
+
   // Asset accounts - Insurance & Annuities
   insurance: "Insurance",
   "fixed-annuity": "Fixed Annuity",
   annuity: "Annuity",
-  
+
   // Asset accounts - Tangible
   art: "Art",
   wine: "Wine",
-  jewelry: "Jewelry", 
+  jewelry: "Jewelry",
   collectible: "Collectible",
   car: "Car",
   "other-asset": "Other Asset",
-  
+
   // Asset accounts - Trust & Specialized
   trust: "Trust Account",
-  
+
   // Liability accounts
   "credit-card": "Credit Card",
   heloc: "HELOC",
   loan: "Loan",
   "student-loan": "Student Loan",
-  "auto-loan": "Auto Loan", 
+  "auto-loan": "Auto Loan",
   mortgage: "Mortgage",
   "other-liability": "Other Liability",
 }
@@ -119,8 +119,12 @@ interface Account {
 export default function AccountsPage() {
   const router = useRouter()
   const [isOpen, setIsOpen] = React.useState(false)
-  const [drawerMode, setDrawerMode] = React.useState<'create' | 'edit'>('create')
-  const [editingAccount, setEditingAccount] = React.useState<Account | null>(null)
+  const [drawerMode, setDrawerMode] = React.useState<"create" | "edit">(
+    "create",
+  )
+  const [editingAccount, setEditingAccount] = React.useState<Account | null>(
+    null,
+  )
 
   // Initialize with example accounts
   const [accounts, setAccounts] = React.useState<Account[]>([
@@ -192,20 +196,29 @@ export default function AccountsPage() {
 
   // Handle adding or editing account from the drawer
   const handleAccountSubmit = (formData: AccountFormData) => {
-    if (drawerMode === 'edit' && editingAccount) {
+    if (drawerMode === "edit" && editingAccount) {
       // Update existing account
-      setAccounts(prev => prev.map(account => 
-        account.id === editingAccount.id 
-          ? {
-              ...account,
-              name: formData.accountName || accountTypeLabels[formData.accountType] || formData.accountType,
-              accountType: formData.accountType,
-              accountTypeLabel: accountTypeLabels[formData.accountType] || formData.accountType,
-              institution: formData.institution,
-              institutionLabel: institutionLabels[formData.institution] || formData.institution,
-            }
-          : account
-      ))
+      setAccounts((prev) =>
+        prev.map((account) =>
+          account.id === editingAccount.id
+            ? {
+                ...account,
+                name:
+                  formData.accountName ||
+                  accountTypeLabels[formData.accountType] ||
+                  formData.accountType,
+                accountType: formData.accountType,
+                accountTypeLabel:
+                  accountTypeLabels[formData.accountType] ||
+                  formData.accountType,
+                institution: formData.institution,
+                institutionLabel:
+                  institutionLabels[formData.institution] ||
+                  formData.institution,
+              }
+            : account,
+        ),
+      )
     } else {
       // Create new account
       const newAccount: Account = {
@@ -231,10 +244,10 @@ export default function AccountsPage() {
       }
       setAccounts((prev) => [...prev, newAccount])
     }
-    
+
     // Reset state
     setEditingAccount(null)
-    setDrawerMode('create')
+    setDrawerMode("create")
   }
 
   // Sort accounts alphabetically by name
@@ -244,10 +257,10 @@ export default function AccountsPage() {
 
   // Handlers for edit and delete actions
   const handleEdit = (accountId: string) => {
-    const account = accounts.find(a => a.id === accountId)
+    const account = accounts.find((a) => a.id === accountId)
     if (account) {
       setEditingAccount(account)
-      setDrawerMode('edit')
+      setDrawerMode("edit")
       setIsOpen(true)
     }
   }
@@ -266,7 +279,7 @@ export default function AccountsPage() {
     if (!open) {
       // Reset to create mode when closing
       setEditingAccount(null)
-      setDrawerMode('create')
+      setDrawerMode("create")
     }
   }
 
@@ -283,7 +296,7 @@ export default function AccountsPage() {
         </div>
         <Button
           onClick={() => {
-            setDrawerMode('create')
+            setDrawerMode("create")
             setEditingAccount(null)
             setIsOpen(true)
           }}
@@ -297,11 +310,15 @@ export default function AccountsPage() {
           onOpenChange={handleDrawerClose}
           onSubmit={handleAccountSubmit}
           mode={drawerMode}
-          initialData={editingAccount ? {
-            institution: editingAccount.institution,
-            accountType: editingAccount.accountType,
-            accountName: editingAccount.name,
-          } : undefined}
+          initialData={
+            editingAccount
+              ? {
+                  institution: editingAccount.institution,
+                  accountType: editingAccount.accountType,
+                  accountName: editingAccount.name,
+                }
+              : undefined
+          }
         />
       </div>
       <Divider />
@@ -310,13 +327,13 @@ export default function AccountsPage() {
       {accounts.length > 0 && (
         <Card className="mt-8">
           <p className="text-base font-medium text-gray-900 dark:text-gray-50">
-            Account Flow
+            Portfolio Sankey
           </p>
           <SankeyChart
             data={{
               nodes: [
                 // Account nodes (left side) - dynamically generated from accounts
-                ...accounts.map(account => ({ id: account.name })),
+                ...accounts.map((account) => ({ id: account.name })),
                 // Portfolio Total (center)
                 { id: "Portfolio Total" },
                 // Asset type nodes (right side)
@@ -327,7 +344,7 @@ export default function AccountsPage() {
               ],
               links: [
                 // Accounts to Portfolio Total
-                ...accounts.map(account => ({
+                ...accounts.map((account) => ({
                   source: account.name,
                   target: "Portfolio Total",
                   value: account.totalValue,
@@ -336,29 +353,40 @@ export default function AccountsPage() {
                 {
                   source: "Portfolio Total",
                   target: "U.S. Stocks",
-                  value: accounts.reduce((sum, acc) =>
-                    sum + (acc.totalValue * acc.assetAllocation.usStocks / 100), 0
+                  value: accounts.reduce(
+                    (sum, acc) =>
+                      sum +
+                      (acc.totalValue * acc.assetAllocation.usStocks) / 100,
+                    0,
                   ),
                 },
                 {
                   source: "Portfolio Total",
                   target: "Non-U.S. Stocks",
-                  value: accounts.reduce((sum, acc) =>
-                    sum + (acc.totalValue * acc.assetAllocation.nonUsStocks / 100), 0
+                  value: accounts.reduce(
+                    (sum, acc) =>
+                      sum +
+                      (acc.totalValue * acc.assetAllocation.nonUsStocks) / 100,
+                    0,
                   ),
                 },
                 {
                   source: "Portfolio Total",
                   target: "Fixed Income",
-                  value: accounts.reduce((sum, acc) =>
-                    sum + (acc.totalValue * acc.assetAllocation.fixedIncome / 100), 0
+                  value: accounts.reduce(
+                    (sum, acc) =>
+                      sum +
+                      (acc.totalValue * acc.assetAllocation.fixedIncome) / 100,
+                    0,
                   ),
                 },
                 {
                   source: "Portfolio Total",
                   target: "Cash",
-                  value: accounts.reduce((sum, acc) =>
-                    sum + (acc.totalValue * acc.assetAllocation.cash / 100), 0
+                  value: accounts.reduce(
+                    (sum, acc) =>
+                      sum + (acc.totalValue * acc.assetAllocation.cash) / 100,
+                    0,
                   ),
                 },
               ],
@@ -394,7 +422,7 @@ export default function AccountsPage() {
           <div className="mt-6 sm:hidden">
             <Button
               onClick={() => {
-                setDrawerMode('create')
+                setDrawerMode("create")
                 setEditingAccount(null)
                 setIsOpen(true)
               }}
