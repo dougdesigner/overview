@@ -342,7 +342,7 @@ export function ExposureTreemap({
         </div>
       </div>
 
-      <div className="mt-6" style={{ height: "500px" }}>
+      <div className="mt-6" style={{ height: "300px" }}>
         <ResponsiveTreeMap
           data={data}
           identity="name"
