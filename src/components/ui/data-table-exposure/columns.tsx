@@ -178,80 +178,6 @@ export const createColumns = ({
     header: ({ column }) => {
       return (
         <button
-          className="flex items-center gap-1 font-medium hover:text-gray-900 dark:hover:text-gray-50"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        >
-          Sector
-          {column.getIsSorted() === "asc" && (
-            <RiArrowUpSLine className="h-4 w-4" />
-          )}
-          {column.getIsSorted() === "desc" && (
-            <RiArrowDownSLine className="h-4 w-4" />
-          )}
-        </button>
-      )
-    },
-    accessorKey: "sector",
-    cell: ({ row }) => {
-      const sector = row.original.sector
-      const isETFBreakdown = row.original.isETFBreakdown
-
-      if (!sector || isETFBreakdown) {
-        return <span className="text-gray-400">—</span>
-      }
-
-      return (
-        <Badge variant="flat" className="text-xs">
-          {toProperCase(sector)}
-        </Badge>
-      )
-    },
-    enableSorting: true,
-    meta: {
-      className: "text-left",
-    },
-  },
-  {
-    header: ({ column }) => {
-      return (
-        <button
-          className="flex items-center gap-1 font-medium hover:text-gray-900 dark:hover:text-gray-50"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        >
-          Industry
-          {column.getIsSorted() === "asc" && (
-            <RiArrowUpSLine className="h-4 w-4" />
-          )}
-          {column.getIsSorted() === "desc" && (
-            <RiArrowDownSLine className="h-4 w-4" />
-          )}
-        </button>
-      )
-    },
-    accessorKey: "industry",
-    cell: ({ row }) => {
-      const industry = row.original.industry
-      const isETFBreakdown = row.original.isETFBreakdown
-
-      if (!industry || isETFBreakdown) {
-        return <span className="text-gray-400">—</span>
-      }
-
-      return (
-        <Badge variant="flat" className="text-xs">
-          {toProperCase(industry)}
-        </Badge>
-      )
-    },
-    enableSorting: true,
-    meta: {
-      className: "text-left min-w-40",
-    },
-  },
-  {
-    header: ({ column }) => {
-      return (
-        <button
           className="flex w-full items-center justify-end gap-1 font-medium hover:text-gray-900 dark:hover:text-gray-50"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
@@ -419,6 +345,80 @@ export const createColumns = ({
     enableSorting: true,
     meta: {
       className: "text-right",
+    },
+  },
+  {
+    header: ({ column }) => {
+      return (
+        <button
+          className="flex items-center gap-1 font-medium hover:text-gray-900 dark:hover:text-gray-50"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Sector
+          {column.getIsSorted() === "asc" && (
+            <RiArrowUpSLine className="h-4 w-4" />
+          )}
+          {column.getIsSorted() === "desc" && (
+            <RiArrowDownSLine className="h-4 w-4" />
+          )}
+        </button>
+      )
+    },
+    accessorKey: "sector",
+    cell: ({ row }) => {
+      const sector = row.original.sector
+      const isETFBreakdown = row.original.isETFBreakdown
+
+      if (!sector || isETFBreakdown) {
+        return <span className="text-gray-400">—</span>
+      }
+
+      return (
+        <Badge variant="flat" className="text-xs">
+          {toProperCase(sector)}
+        </Badge>
+      )
+    },
+    enableSorting: true,
+    meta: {
+      className: "text-left",
+    },
+  },
+  {
+    header: ({ column }) => {
+      return (
+        <button
+          className="flex items-center gap-1 font-medium hover:text-gray-900 dark:hover:text-gray-50"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Industry
+          {column.getIsSorted() === "asc" && (
+            <RiArrowUpSLine className="h-4 w-4" />
+          )}
+          {column.getIsSorted() === "desc" && (
+            <RiArrowDownSLine className="h-4 w-4" />
+          )}
+        </button>
+      )
+    },
+    accessorKey: "industry",
+    cell: ({ row }) => {
+      const industry = row.original.industry
+      const isETFBreakdown = row.original.isETFBreakdown
+
+      if (!industry || isETFBreakdown) {
+        return <span className="text-gray-400">—</span>
+      }
+
+      return (
+        <Badge variant="flat" className="text-xs">
+          {toProperCase(industry)}
+        </Badge>
+      )
+    },
+    enableSorting: true,
+    meta: {
+      className: "text-left min-w-40",
     },
   },
 ]
