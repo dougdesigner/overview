@@ -58,7 +58,7 @@ export default function SankeyChart({
   const getNodeColor = (nodeId: string) => {
     // Portfolio Total node - center node
     if (nodeId === "Portfolio Total") {
-      return isDark ? colorValues.lightGray.dark : colorValues.lightGray.light
+      return isDark ? colorValues.sky.dark : colorValues.sky.light
     }
 
     // Asset type nodes (right side) - nodes that receive from Portfolio Total
@@ -96,6 +96,7 @@ export default function SankeyChart({
       primary: isDark ? "#e5e7eb" : "#374151", // gray-200 / gray-700
       secondary: isDark ? "#9ca3af" : "#6b7280", // gray-400 / gray-500
     },
+    label: isDark ? "#f9fafb" : "#111827", // gray-50 / gray-900
     border: isDark ? "#4b5563" : "#d1d5db", // gray-600 / gray-300
     background: isDark ? "#1f2937" : "#ffffff", // gray-800 / white
   }
@@ -106,7 +107,9 @@ export default function SankeyChart({
     fontSize: 12,
     labels: {
       text: {
-        fontWeight: 600,
+        fontWeight: 500,
+        fontSize: 14,
+        fill: themeColors.label,
       },
     },
     tooltip: {
@@ -114,7 +117,7 @@ export default function SankeyChart({
         background: themeColors.background,
         color: themeColors.text.primary,
         fontSize: 12,
-        fontWeight: 600,
+        fontWeight: 500,
         borderRadius: 4,
         boxShadow:
           "0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)",
@@ -130,6 +133,7 @@ export default function SankeyChart({
         theme={nivoTheme}
         margin={{ top: 20, right: 120, bottom: 20, left: 140 }}
         align="justify"
+        sort="descending"
         colors={(node) => getNodeColor(node.id)}
         nodeOpacity={1}
         nodeHoverOthersOpacity={0.35}
@@ -144,10 +148,7 @@ export default function SankeyChart({
         labelPosition="outside"
         labelOrientation="horizontal"
         labelPadding={16}
-        labelTextColor={{
-          from: "color",
-          modifiers: [],
-        }}
+        labelTextColor={themeColors.label}
         valueFormat={(value) => `$${value.toLocaleString()}`}
       />
     </div>
