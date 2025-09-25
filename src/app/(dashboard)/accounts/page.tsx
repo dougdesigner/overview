@@ -4,7 +4,7 @@ import AccountCard from "@/components/AccountCard"
 import { Button } from "@/components/Button"
 import { Card } from "@/components/Card"
 import { Divider } from "@/components/Divider"
-import SankeyChart from "@/components/SankeyChart"
+import SankeyChartHighcharts from "@/components/SankeyChartHighcharts"
 import {
   AccountDrawer,
   type AccountFormData,
@@ -329,7 +329,7 @@ export default function AccountsPage() {
           <p className="py-1.5 text-base font-medium text-gray-900 dark:text-gray-50">
             Account flow
           </p>
-          <SankeyChart
+          <SankeyChartHighcharts
             data={{
               nodes: [
                 // Account nodes (left side) - dynamically generated from accounts

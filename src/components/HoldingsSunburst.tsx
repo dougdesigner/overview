@@ -344,7 +344,7 @@ export function HoldingsSunburst({
     <Card className="p-6">
       <div className="mb-4">
         <h3 className="text-base font-medium text-gray-900 dark:text-gray-50">
-          Portfolio Composition
+          Holdings hierarchy
         </h3>
         <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">
           Interactive view of your holdings across all accounts
