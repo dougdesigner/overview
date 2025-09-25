@@ -25,32 +25,6 @@ export function ExposureTreemapHighcharts({
   const isDark = theme === "dark"
   const chartRef = useRef<HighchartsReact.RefObject>(null)
 
-  // Initialize Highcharts treemap module on client side
-  useEffect(() => {
-    const loadTreemap = async () => {
-      if (typeof Highcharts === "object") {
-        const treemapModule = await import("highcharts/modules/treemap")
-        // The module is a direct function export, not a default export
-        if (typeof treemapModule === "function") {
-          treemapModule(Highcharts)
-        } else if (typeof treemapModule.default === "function") {
-          treemapModule.default(Highcharts)
-        } else {
-          // Log the structure to debug if needed
-          console.warn("Treemap module structure:", treemapModule)
-          // Try to call it anyway as last resort
-          try {
-            ;(treemapModule as any)(Highcharts)
-          } catch (e) {
-            console.error("Failed to initialize treemap module:", e)
-          }
-        }
-        setIsTreemapLoaded(true)
-      }
-    }
-    loadTreemap()
-  }, [])
-
   // Define color scheme for sectors
   const sectorColors: Record<string, string> = {
     Technology: "#3b82f6",

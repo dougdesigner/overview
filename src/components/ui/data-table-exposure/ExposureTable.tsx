@@ -29,7 +29,8 @@ import React from "react"
 import { DataTablePagination } from "../data-table/DataTablePagination"
 import { createColumns } from "./columns"
 // import { ExposureTreemap } from "./ExposureTreemap"  // Nivo version - commented out
-import { ExposureTreemapHighcharts } from "./ExposureTreemapHighcharts"
+// import { ExposureTreemapHighcharts } from "./ExposureTreemapHighcharts"  // Original version
+import { ExposureTreemapHighcharts } from "./ExposureTreemapHighchartsSimplified"
 import {
   ExposureCalculationResult,
   ExposureTableProps,
