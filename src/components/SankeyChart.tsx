@@ -25,14 +25,21 @@ interface SankeyChartProps {
   accountColors?: AvailableChartColorsKeys[]
   height?: number
   animate?: boolean
-  motionConfig?: "default" | "gentle" | "wobbly" | "stiff" | "slow" | "molasses" | {
-    mass?: number
-    tension?: number
-    friction?: number
-    clamp?: boolean
-    precision?: number
-    velocity?: number
-  }
+  motionConfig?:
+    | "default"
+    | "gentle"
+    | "wobbly"
+    | "stiff"
+    | "slow"
+    | "molasses"
+    | {
+        mass?: number
+        tension?: number
+        friction?: number
+        clamp?: boolean
+        precision?: number
+        velocity?: number
+      }
 }
 
 // Since Nivo requires actual color values (not classes), we define them here
@@ -59,7 +66,7 @@ export default function SankeyChart({
   data,
   colors = ["blue", "cyan", "amber", "emerald"],
   accountColors = ["violet", "fuchsia", "pink", "sky", "lime"],
-  height = 400,
+  height = 500,
   animate = true,
   motionConfig = "gentle",
 }: SankeyChartProps) {
@@ -154,8 +161,17 @@ export default function SankeyChart({
   // Show loading state while waiting for mount
   if (!isMounted) {
     return (
-      <div style={{ height, display: "flex", alignItems: "center", justifyContent: "center" }}>
-        <div style={{ color: themeColors.text.secondary }}>Loading chart...</div>
+      <div
+        style={{
+          height,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <div style={{ color: themeColors.text.secondary }}>
+          Loading chart...
+        </div>
       </div>
     )
   }
@@ -176,7 +192,7 @@ export default function SankeyChart({
         nodeSpacing={24}
         nodeBorderWidth={0}
         nodeBorderRadius={3}
-        linkOpacity={0.33}
+        linkOpacity={0.25}
         linkHoverOthersOpacity={0.1}
         linkContract={3}
         enableLinkGradient={true}

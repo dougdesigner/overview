@@ -2,6 +2,7 @@
 
 import { Button } from "@/components/Button"
 import { Divider } from "@/components/Divider"
+import { HoldingsSunburst } from "@/components/HoldingsSunburst"
 import {
   HoldingsDrawer,
   type HoldingFormData,
@@ -257,6 +258,11 @@ export default function HoldingsPage() {
         />
       </div>
       <Divider />
+
+      {/* Hero Visualization - Sunburst Chart */}
+      <div className="mt-8">
+        <HoldingsSunburst holdings={holdings} />
+      </div>
 
       {/* Holdings Table */}
       <div className="mt-8">

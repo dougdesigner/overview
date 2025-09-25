@@ -169,7 +169,7 @@ export function ExposureTreemapHighcharts({
             },
             borderWidth: 3,
             borderRadius: 3,
-            borderColor: isDark ? "#374151" : "#e5e7eb",
+            borderColor: isDark ? "#1f2937" : "#f3f4f6",
           },
           {
             level: 2,
@@ -178,7 +178,7 @@ export function ExposureTreemapHighcharts({
               inside: false,
             },
             borderWidth: 3,
-            borderColor: isDark ? "#1F2937" : "#e5e7eb",
+            borderColor: isDark ? "#1f2937" : "#f3f4f6",
           },
         ],
         dataLabels: {
