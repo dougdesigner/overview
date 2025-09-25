@@ -29,8 +29,14 @@ export function ExposureTreemapHighcharts({
 
   // Simple color palette
   const colors = [
-    "#3b82f6", "#10b981", "#8b5cf6", "#f59e0b",
-    "#ec4899", "#06b6d4", "#f97316", "#84cc16"
+    "#3b82f6",
+    "#10b981",
+    "#8b5cf6",
+    "#f59e0b",
+    "#ec4899",
+    "#06b6d4",
+    "#f97316",
+    "#84cc16",
   ]
 
   // Format currency values
@@ -43,17 +49,20 @@ export function ExposureTreemapHighcharts({
   // Transform data for treemap
   const getTreemapData = (): Highcharts.SeriesTreemapOptions["data"] => {
     const validExposures = exposures.filter(
-      (exp) => !exp.isETFBreakdown && exp.totalValue > 0
+      (exp) => !exp.isETFBreakdown && exp.totalValue > 0,
     )
 
     const data: Highcharts.SeriesTreemapOptions["data"] = []
-    const groupKey = groupingMode === "sector" ? "sector" : "industry" as keyof StockExposure
+    const groupKey =
+      groupingMode === "sector" ? "sector" : ("industry" as keyof StockExposure)
 
     // Group stocks by sector or industry
     const groups = new Map<string, StockExposure[]>()
     validExposures.forEach((exposure) => {
       const groupValue = exposure[groupKey] as string | undefined
-      const group = toProperCase(groupValue || `Unknown ${toProperCase(groupKey)}`)
+      const group = toProperCase(
+        groupValue || `Unknown ${toProperCase(groupKey)}`,
+      )
       if (!groups.has(group)) {
         groups.set(group, [])
       }
@@ -67,7 +76,7 @@ export function ExposureTreemapHighcharts({
       data.push({
         id: groupName,
         name: groupName,
-        color: colors[colorIndex % colors.length]
+        color: colors[colorIndex % colors.length],
       })
       colorIndex++
 
@@ -76,7 +85,7 @@ export function ExposureTreemapHighcharts({
         data.push({
           name: stock.ticker,
           parent: groupName,
-          value: stock.totalValue
+          value: stock.totalValue,
         })
       })
     })
@@ -89,68 +98,127 @@ export function ExposureTreemapHighcharts({
     chart: {
       type: "treemap",
       backgroundColor: "transparent",
-      height: 300
+      height: 300,
+      margin: [0, 0, 0, 0],
     },
     title: {
-      text: undefined
+      text: undefined,
     },
     credits: {
-      enabled: false
+      enabled: false,
     },
-    series: [{
-      type: "treemap",
-      layoutAlgorithm: "squarified",
-      alternateStartingDirection: true,
-      data: getTreemapData(),
-      levels: [{
-        level: 1,
-        layoutAlgorithm: groupingMode === "sector" ? "sliceAndDice" : "squarified",
+    series: [
+      {
+        type: "treemap",
+        name: "All",
+        allowTraversingTree: true,
+        layoutAlgorithm: "squarified",
+        alternateStartingDirection: true,
+        data: getTreemapData(),
+        borderRadius: 3,
+        nodeSizeBy: "leaf",
+        breadcrumbs: {
+          floating: false,
+          position: {
+            align: "left",
+            verticalAlign: "top",
+          },
+          format: "{level.name}",
+          buttonTheme: {
+            fill: "transparent",
+            style: {
+              color: isDark ? "#f3f4f6" : "#111827",
+            },
+            states: {
+              hover: {
+                fill: isDark ? "#1f2937" : "#f3f4f6", // bg-gray-800 : bg-gray-100
+                style: {
+                  color: isDark ? "#f9fafb" : "#111827", // gray-50 : gray-900
+                },
+              },
+              select: {
+                // fill: isDark ? "#374151" : "#e5e7eb", // bg-gray-700 : bg-gray-200
+                style: {
+                  color: isDark ? "#f3f4f6" : "#111827",
+                },
+              },
+            },
+          },
+          separator: {
+            style: {
+              color: isDark ? "#9ca3af" : "#6b7280",
+            },
+          },
+          style: {
+            color: isDark ? "#f3f4f6" : "#111827",
+          },
+        },
+        levels: [
+          {
+            level: 1,
+            layoutAlgorithm:
+              groupingMode === "sector" ? "sliceAndDice" : "squarified",
+            dataLabels: {
+              enabled: true,
+              headers: true,
+              // align: "center",
+              // verticalAlign: "center",
+              style: {
+                textOutline: "none",
+              },
+            },
+            borderWidth: 3,
+            borderRadius: 3,
+            borderColor: isDark ? "#374151" : "#e5e7eb",
+          },
+          {
+            level: 2,
+            dataLabels: {
+              enabled: true,
+              inside: false,
+            },
+            borderWidth: 3,
+            borderColor: isDark ? "#1F2937" : "#e5e7eb",
+          },
+        ],
         dataLabels: {
           enabled: true,
-          align: "left",
-          verticalAlign: "top",
           style: {
-            fontSize: "13px",
-            fontWeight: "bold",
-            textOutline: "none"
-          }
+            textOutline: "none",
+            color: isDark ? "#f3f4f6" : "#111827",
+          },
         },
-        borderWidth: 3,
-        borderColor: isDark ? "#374151" : "#e5e7eb"
-      }],
-      dataLabels: {
-        enabled: true,
-        style: {
-          textOutline: "none",
-          fontWeight: "500",
-          color: isDark ? "#f3f4f6" : "#111827"
-        }
-      }
-    } as Highcharts.SeriesTreemapOptions],
+      } as Highcharts.SeriesTreemapOptions,
+    ],
     tooltip: {
       useHTML: true,
-      pointFormatter: function() {
-        const point = this as Highcharts.Point
+      pointFormatter: function () {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const point = this as any
         const value = typeof point.value === "number" ? point.value : 0
         const percentage = ((value / totalValue) * 100).toFixed(1)
         return `<b>${point.name}</b><br/>
                 Value: ${formatValue(value)}<br/>
                 Portfolio: ${percentage}%`
-      }
-    }
+      },
+    },
   }
 
   // Calculate top groups for legend
   const topGroups = Object.entries(
     exposures
       .filter((exp) => !exp.isETFBreakdown && exp.totalValue > 0)
-      .reduce((acc, exp) => {
-        const key = groupingMode === "sector"
-          ? toProperCase(exp.sector || "Unknown Sector")
-          : toProperCase(exp.industry || "Unknown Industry")
-        acc[key] = (acc[key] || 0) + exp.totalValue
-        return acc
-      }, {} as Record<string, number>)
+      .reduce(
+        (acc, exp) => {
+          const key =
+            groupingMode === "sector"
+              ? toProperCase(exp.sector || "Unknown Sector")
+              : toProperCase(exp.industry || "Unknown Industry")
+          acc[key] = (acc[key] || 0) + exp.totalValue
+          return acc
+        },
+        {} as Record<string, number>,
+      ),
   )
     .sort((a, b) => b[1] - a[1])
     .slice(0, 6)
@@ -195,8 +263,8 @@ export function ExposureTreemapHighcharts({
       </div>
 
       {/* Legend */}
-      <div className="mt-4">
-        <p className="mb-4 text-sm font-medium text-gray-700 dark:text-gray-300">
+      <div className="mt-6">
+        <p className="mb-1 text-sm font-medium text-gray-700 dark:text-gray-300">
           {groupingMode === "sector" ? "Top Sectors" : "Top Industries"}
         </p>
         <ul className="flex flex-wrap gap-x-10 gap-y-4 text-sm">
