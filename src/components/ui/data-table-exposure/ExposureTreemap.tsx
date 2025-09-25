@@ -3,6 +3,7 @@
 import { Card } from "@/components/Card"
 import { toProperCase } from "@/lib/utils"
 import { ResponsiveTreeMap } from "@nivo/treemap"
+import { useTheme } from "next-themes"
 import { useState } from "react"
 import { StockExposure } from "./types"
 
@@ -26,6 +27,8 @@ export function ExposureTreemap({
   totalValue,
 }: ExposureTreemapProps) {
   const [groupingMode, setGroupingMode] = useState<GroupingMode>("sector")
+  const { theme } = useTheme()
+  const isDark = theme === "dark"
 
   // Nivo's paired color scheme colors
   const pairedColors = [
@@ -352,16 +355,16 @@ export function ExposureTreemap({
           labelSkipSize={12}
           labelTextColor={{
             from: "color",
-            modifiers: [["darker", 1.2]],
+            modifiers: [[isDark ? "brighter" : "darker", isDark ? 1.5 : 1.2]],
           }}
           parentLabelPosition="left"
           parentLabelTextColor={{
             from: "color",
-            modifiers: [["darker", 2]],
+            modifiers: [[isDark ? "brighter" : "darker", isDark ? 2 : 2]],
           }}
           borderColor={{
             from: "color",
-            modifiers: [["darker", 0.1]],
+            modifiers: [[isDark ? "brighter" : "darker", isDark ? 0.3 : 0.1]],
           }}
           colors={groupingMode === "sector" ? getColor : { scheme: "paired" }}
           nodeOpacity={1}
