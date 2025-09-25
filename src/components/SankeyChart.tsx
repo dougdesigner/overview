@@ -107,8 +107,8 @@ export default function SankeyChart({
     fontSize: 12,
     labels: {
       text: {
-        fontWeight: 500,
-        fontSize: 14,
+        fontWeight: 600,
+        fontSize: 12,
         fill: themeColors.label,
       },
     },
