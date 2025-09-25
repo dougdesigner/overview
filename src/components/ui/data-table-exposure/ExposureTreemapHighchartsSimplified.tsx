@@ -226,8 +226,8 @@ export function ExposureTreemapHighcharts({
   return (
     <Card className="p-6">
       <div className="flex items-center justify-between">
-        <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-50">
-          Portfolio Treemap
+        <h3 className="text-base font-medium text-gray-900 dark:text-gray-50">
+          Exposure map
         </h3>
 
         <div className="flex items-center rounded-lg bg-gray-100 p-1 dark:bg-gray-800">

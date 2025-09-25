@@ -141,7 +141,7 @@ export default function SankeyChart({
         nodeSpacing={24}
         nodeBorderWidth={0}
         nodeBorderRadius={3}
-        linkOpacity={0.5}
+        linkOpacity={0.33}
         linkHoverOthersOpacity={0.1}
         linkContract={3}
         enableLinkGradient={true}

@@ -326,8 +326,8 @@ export default function AccountsPage() {
       {/* Account Flow Sankey Chart */}
       {accounts.length > 0 && (
         <Card className="mt-8">
-          <p className="text-base font-medium text-gray-900 dark:text-gray-50">
-            Portfolio Sankey
+          <p className="py-1.5 text-base font-medium text-gray-900 dark:text-gray-50">
+            Account flow
           </p>
           <SankeyChart
             data={{

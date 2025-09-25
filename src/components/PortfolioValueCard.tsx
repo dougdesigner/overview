@@ -56,10 +56,13 @@ const getDefaultAssetClasses = (): AssetClassItem[] => [
   },
 ]
 
-const PortfolioValueCard = React.forwardRef<HTMLDivElement, PortfolioValueCardProps>(
+const PortfolioValueCard = React.forwardRef<
+  HTMLDivElement,
+  PortfolioValueCardProps
+>(
   (
     {
-      title = "Portfolio Value",
+      title = "Portfolio value",
       value = 247468,
       accountCount = 5,
       holdingsCount = 6,
@@ -67,7 +70,7 @@ const PortfolioValueCard = React.forwardRef<HTMLDivElement, PortfolioValueCardPr
       className,
       ...props
     },
-    forwardedRef
+    forwardedRef,
   ) => {
     const classes = assetClasses || getDefaultAssetClasses()
     const valueFormatter = (number: number) => {
@@ -75,19 +78,20 @@ const PortfolioValueCard = React.forwardRef<HTMLDivElement, PortfolioValueCardPr
     }
 
     // Extract percentages and colors for CategoryBar
-    const percentages = classes.slice(0, 4).map(item => item.percentage) // Exclude "Other" if 0%
-    const colors = classes.slice(0, 4).map(item => item.color)
+    const percentages = classes.slice(0, 4).map((item) => item.percentage) // Exclude "Other" if 0%
+    const colors = classes.slice(0, 4).map((item) => item.color)
 
     return (
       <Card ref={forwardedRef} className={cx(className)} {...props}>
-        <dt className="text-base font-medium text-gray-900 dark:text-gray-50">
+        <dt className="pt-1.5 text-base font-medium text-gray-900 dark:text-gray-50">
           {title}
         </dt>
         <dd className="mt-1 text-3xl font-semibold text-gray-900 dark:text-gray-50">
           {valueFormatter(value)}
         </dd>
         <div className="mt-1 text-sm font-normal text-gray-500 dark:text-gray-400">
-          {accountCount} {accountCount === 1 ? "account" : "accounts"} · {holdingsCount} {holdingsCount === 1 ? "holding" : "holdings"}
+          {accountCount} {accountCount === 1 ? "account" : "accounts"} ·{" "}
+          {holdingsCount} {holdingsCount === 1 ? "holding" : "holdings"}
         </div>
         <CategoryBar
           values={percentages}
@@ -108,7 +112,7 @@ const PortfolioValueCard = React.forwardRef<HTMLDivElement, PortfolioValueCardPr
                 <span
                   className={cx(
                     "size-2.5 shrink-0 rounded-sm",
-                    item.bgColorClass
+                    item.bgColorClass,
                   )}
                   aria-hidden="true"
                 />
@@ -119,7 +123,7 @@ const PortfolioValueCard = React.forwardRef<HTMLDivElement, PortfolioValueCardPr
         </ul>
       </Card>
     )
-  }
+  },
 )
 
 PortfolioValueCard.displayName = "PortfolioValueCard"
