@@ -28,7 +28,8 @@ import {
 import React from "react"
 import { DataTablePagination } from "../data-table/DataTablePagination"
 import { createColumns } from "./columns"
-import { ExposureTreemap } from "./ExposureTreemap"
+// import { ExposureTreemap } from "./ExposureTreemap"  // Nivo version - commented out
+import { ExposureTreemapHighcharts } from "./ExposureTreemapHighcharts"
 import {
   ExposureCalculationResult,
   ExposureTableProps,
@@ -207,7 +208,13 @@ export function ExposureTable({ holdings, onRefresh }: ExposureTableProps) {
 
       {/* Treemap Visualization */}
       {data.length > 0 && (
-        <ExposureTreemap exposures={data} totalValue={totalPortfolioValue} />
+        <>
+          {/* Option 1: Nivo Treemap (original) */}
+          {/* <ExposureTreemap exposures={data} totalValue={totalPortfolioValue} /> */}
+
+          {/* Option 2: Highcharts Treemap (now active - better margin control) */}
+          <ExposureTreemapHighcharts exposures={data} totalValue={totalPortfolioValue} />
+        </>
       )}
 
       {/* Table Controls */}

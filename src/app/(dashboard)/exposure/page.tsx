@@ -18,7 +18,7 @@ export default function ExposurePage() {
       name: "Vanguard S&P 500 ETF",
       quantity: 100,
       lastPrice: 455.32,
-      marketValue: 45532.00,
+      marketValue: 45532.0,
       type: "fund",
     },
     {
@@ -40,7 +40,7 @@ export default function ExposurePage() {
       name: "Invesco QQQ Trust",
       quantity: 50,
       lastPrice: 455.32,
-      marketValue: 22766.00,
+      marketValue: 22766.0,
       type: "fund",
     },
     {
@@ -50,8 +50,8 @@ export default function ExposurePage() {
       ticker: "SPY",
       name: "SPDR S&P 500 ETF Trust",
       quantity: 30,
-      lastPrice: 450.00,
-      marketValue: 13500.00,
+      lastPrice: 450.0,
+      marketValue: 13500.0,
       type: "fund",
     },
     // Direct Stock Holdings
@@ -63,7 +63,7 @@ export default function ExposurePage() {
       name: "Apple Inc.",
       quantity: 50,
       lastPrice: 189.87,
-      marketValue: 9493.50,
+      marketValue: 9493.5,
       type: "stock",
     },
     {
@@ -85,7 +85,7 @@ export default function ExposurePage() {
       name: "Microsoft Corporation",
       quantity: 30,
       lastPrice: 378.52,
-      marketValue: 11355.60,
+      marketValue: 11355.6,
       type: "stock",
     },
     {
@@ -96,7 +96,7 @@ export default function ExposurePage() {
       name: "Alphabet Inc. Class A",
       quantity: 20,
       lastPrice: 139.67,
-      marketValue: 2793.40,
+      marketValue: 2793.4,
       type: "stock",
     },
     {
@@ -106,8 +106,8 @@ export default function ExposurePage() {
       ticker: "NVDA",
       name: "NVIDIA Corporation",
       quantity: 15,
-      lastPrice: 485.00,
-      marketValue: 7275.00,
+      lastPrice: 485.0,
+      marketValue: 7275.0,
       type: "stock",
     },
     {
@@ -117,8 +117,8 @@ export default function ExposurePage() {
       ticker: "AMZN",
       name: "Amazon.com Inc.",
       quantity: 10,
-      lastPrice: 145.00,
-      marketValue: 1450.00,
+      lastPrice: 145.0,
+      marketValue: 1450.0,
       type: "stock",
     },
     {
@@ -128,8 +128,8 @@ export default function ExposurePage() {
       ticker: "TSLA",
       name: "Tesla Inc.",
       quantity: 20,
-      lastPrice: 250.00,
-      marketValue: 5000.00,
+      lastPrice: 250.0,
+      marketValue: 5000.0,
       type: "stock",
     },
     // Cash holdings (not included in exposure calculation)
@@ -140,7 +140,7 @@ export default function ExposurePage() {
       name: "Emergency Savings",
       quantity: 25000,
       lastPrice: 1,
-      marketValue: 25000.00,
+      marketValue: 25000.0,
       type: "cash",
     },
     {
@@ -150,7 +150,7 @@ export default function ExposurePage() {
       name: "Settlement Fund",
       quantity: 5000,
       lastPrice: 1,
-      marketValue: 5000.00,
+      marketValue: 5000.0,
       type: "cash",
     },
   ])
@@ -165,7 +165,7 @@ export default function ExposurePage() {
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <h1 className="text-2xl font-semibold text-gray-900 dark:text-gray-50">
-            Stock Exposure Analysis
+            Exposure
           </h1>
           <p className="text-gray-500 sm:text-sm/6 dark:text-gray-500">
             See your true stock exposure across all ETFs and direct holdings
@@ -176,10 +176,7 @@ export default function ExposurePage() {
 
       {/* Exposure Table */}
       <div className="mt-8">
-        <ExposureTable
-          holdings={holdings}
-          onRefresh={handleRefresh}
-        />
+        <ExposureTable holdings={holdings} onRefresh={handleRefresh} />
       </div>
     </main>
   )

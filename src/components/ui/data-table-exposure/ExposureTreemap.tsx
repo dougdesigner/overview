@@ -355,7 +355,7 @@ export function ExposureTreemap({
           labelSkipSize={12}
           labelTextColor={{
             from: "color",
-            modifiers: [[isDark ? "brighter" : "darker", isDark ? 1.5 : 1.2]],
+            modifiers: [[isDark ? "brighter" : "darker", isDark ? 2 : 2]],
           }}
           parentLabelPosition="left"
           parentLabelTextColor={{
@@ -375,6 +375,7 @@ export function ExposureTreemap({
           }
           orientLabel={false}
           tile="squarify"
+          outerPadding={2}
           tooltip={({ node }) => {
             const value = node.data.value || 0
             const percentage = ((value / totalValue) * 100).toFixed(2)
