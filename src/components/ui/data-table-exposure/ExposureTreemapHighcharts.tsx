@@ -245,6 +245,7 @@ export function ExposureTreemapHighcharts({
     chart: {
       type: "treemap",
       backgroundColor: "transparent",
+      margin: [0, 0, 0, 0],
       height: 300,
       style: {
         fontFamily: "inherit",
@@ -290,12 +291,13 @@ export function ExposureTreemapHighcharts({
             dataLabels: {
               enabled: true,
               align: "center",
-              verticalAlign: "middle",
+              verticalAlign: "top",
               style: {
                 fontSize: "13px",
                 fontWeight: "600",
                 textTransform: "uppercase",
                 color: isDark ? "#f3f4f6" : "#111827",
+                backgroundColor: isDark ? "#1f2937" : "#ffffff",
               },
             },
             borderWidth: 2,
