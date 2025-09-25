@@ -1,4 +1,5 @@
 "use client"
+import { Card } from "@/components/Card"
 import {
   Select,
   SelectContent,
@@ -312,72 +313,65 @@ export function HoldingsTable({
       </div>
 
       {/* Table */}
-      <div className="relative overflow-hidden overflow-x-auto rounded-lg border border-gray-200 dark:border-gray-800">
-        <Table>
-          <TableHead>
-            {table.getHeaderGroups().map((headerGroup) => (
-              <TableRow
-                key={headerGroup.id}
-                className="border-gray-200 dark:border-gray-800"
-              >
-                {headerGroup.headers.map((header) => (
-                  <TableHeaderCell
-                    key={header.id}
-                    className={cx(
-                      "whitespace-nowrap py-3 font-medium",
-                      header.column.columnDef.meta?.className,
-                    )}
-                  >
-                    {header.isPlaceholder
-                      ? null
-                      : flexRender(
-                          header.column.columnDef.header,
-                          header.getContext(),
-                        )}
-                  </TableHeaderCell>
-                ))}
-              </TableRow>
-            ))}
-          </TableHead>
-          <TableBody>
-            {table.getRowModel().rows.length === 0 ? (
-              <TableRow>
-                <TableCell
-                  colSpan={columns.length}
-                  className="h-24 text-center text-gray-500"
-                >
-                  No holdings found
-                </TableCell>
-              </TableRow>
-            ) : (
-              table.getRowModel().rows.map((row) => (
-                <TableRow
-                  key={row.id}
-                  className={cx(
-                    "border-gray-200 text-gray-900 dark:border-gray-800 dark:text-gray-50",
-                    row.depth > 0 && "bg-gray-50/50 dark:bg-gray-900/50",
-                  )}
-                >
-                  {row.getVisibleCells().map((cell) => (
-                    <TableCell
-                      key={cell.id}
-                      className={cx(
-                        "whitespace-nowrap py-3",
-                        cell.column.columnDef.meta?.className,
-                      )}
+      <Card className="p-0">
+        <div className="overflow-x-auto">
+          <Table>
+            <TableHead>
+              {table.getHeaderGroups().map((headerGroup) => (
+                <TableRow key={headerGroup.id}>
+                  {headerGroup.headers.map((header) => (
+                    <TableHeaderCell
+                      key={header.id}
+                      className={cx(header.column.columnDef.meta?.className)}
                     >
-                      {flexRender(
-                        cell.column.columnDef.cell,
-                        cell.getContext(),
-                      )}
-                    </TableCell>
+                      {header.isPlaceholder
+                        ? null
+                        : flexRender(
+                            header.column.columnDef.header,
+                            header.getContext(),
+                          )}
+                    </TableHeaderCell>
                   ))}
                 </TableRow>
-              ))
-            )}
-          </TableBody>
-        </Table>
-      </div>
+              ))}
+            </TableHead>
+            <TableBody>
+              {table.getRowModel().rows.length === 0 ? (
+                <TableRow>
+                  <TableCell
+                    colSpan={columns.length}
+                    className="h-24 text-center"
+                  >
+                    No holdings found
+                  </TableCell>
+                </TableRow>
+              ) : (
+                table.getRowModel().rows.map((row) => (
+                  <TableRow
+                    key={row.id}
+                    data-state={row.getIsSelected() && "selected"}
+                    className={cx(
+                      row.depth > 0 && "bg-gray-50 dark:bg-gray-900/50",
+                    )}
+                  >
+                    {row.getVisibleCells().map((cell) => (
+                      <TableCell
+                        key={cell.id}
+                        className={cx(cell.column.columnDef.meta?.className)}
+                      >
+                        {flexRender(
+                          cell.column.columnDef.cell,
+                          cell.getContext(),
+                        )}
+                      </TableCell>
+                    ))}
+                  </TableRow>
+                ))
+              )}
+            </TableBody>
+          </Table>
+        </div>
+      </Card>
 
       {/* Pagination */}
       <DataTablePagination table={table} pageSize={20} />
