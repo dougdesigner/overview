@@ -60,6 +60,7 @@ export function HoldingsSunburst({
       parent: "",
       name: "Portfolio",
       value: totalValue,
+      color: "transparent",
     })
 
     // Group holdings by account and type
@@ -163,7 +164,7 @@ export function HoldingsSunburst({
     series: [
       {
         type: "sunburst",
-        name: "Portfolio",
+        name: "Holdings",
         data: transformToSunburstData(),
         allowTraversingTree: true,
         cursor: "pointer",
