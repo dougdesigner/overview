@@ -114,20 +114,15 @@ export function HoldingsSunburst({
           parent: accountNodeId,
           name: type.charAt(0).toUpperCase() + type.slice(1),
           value: typeTotal,
-          color: adjustColorBrightness(accountColor, isDark ? 1.2 : 0.9),
         })
 
         // Add individual holdings
-        typeHoldings.forEach((holding, index) => {
+        typeHoldings.forEach((holding) => {
           data.push({
             id: `${typeNodeId}-${holding.id}`,
             parent: typeNodeId,
             name: holding.ticker || holding.name,
             value: holding.marketValue,
-            color: adjustColorBrightness(
-              accountColor,
-              isDark ? 1.4 + index * 0.1 : 0.8 - index * 0.05,
-            ),
             ticker: holding.ticker,
             fullName: holding.name,
             quantity: holding.quantity,
@@ -140,20 +135,6 @@ export function HoldingsSunburst({
     })
 
     return data
-  }
-
-  // Helper function to adjust color brightness
-  const adjustColorBrightness = (color: string, factor: number): string => {
-    const hex = color.replace("#", "")
-    const r = parseInt(hex.substr(0, 2), 16)
-    const g = parseInt(hex.substr(2, 2), 16)
-    const b = parseInt(hex.substr(4, 2), 16)
-
-    const newR = Math.min(255, Math.max(0, Math.round(r * factor)))
-    const newG = Math.min(255, Math.max(0, Math.round(g * factor)))
-    const newB = Math.min(255, Math.max(0, Math.round(b * factor)))
-
-    return `#${newR.toString(16).padStart(2, "0")}${newG.toString(16).padStart(2, "0")}${newB.toString(16).padStart(2, "0")}`
   }
 
   // Format currency values
@@ -189,15 +170,9 @@ export function HoldingsSunburst({
         dataLabels: {
           format: "{point.name}",
           filter: {
-            property: "value",
+            property: "innerArcLength",
             operator: ">",
-            value: totalValue * 0.02, // Show labels for items > 2% of total
-          },
-          style: {
-            textOutline: "none",
-            color: isDark ? "#f3f4f6" : "#111827",
-            fontSize: "11px",
-            fontWeight: "500",
+            value: 16,
           },
         },
         borderRadius: 3,
@@ -206,48 +181,31 @@ export function HoldingsSunburst({
         levels: [
           {
             level: 1,
+            levelIsConstant: false,
             dataLabels: {
               filter: {
-                property: "value",
+                property: "outerArcLength",
                 operator: ">",
-                value: 0,
+                value: 64,
               },
             },
           },
           {
             level: 2,
-            colorByPoint: false,
-            dataLabels: {
-              rotationMode: "parallel",
-              filter: {
-                property: "value",
-                operator: ">",
-                value: totalValue * 0.05,
-              },
-            },
+            colorByPoint: true,
           },
           {
             level: 3,
-            colorByPoint: false,
-            dataLabels: {
-              rotationMode: "parallel",
-              filter: {
-                property: "value",
-                operator: ">",
-                value: totalValue * 0.03,
-              },
+            colorVariation: {
+              key: "brightness",
+              to: -0.5,
             },
           },
           {
             level: 4,
-            colorByPoint: false,
-            dataLabels: {
-              rotationMode: "parallel",
-              filter: {
-                property: "value",
-                operator: ">",
-                value: totalValue * 0.02,
-              },
+            colorVariation: {
+              key: "brightness",
+              to: 0.5,
             },
           },
         ],
@@ -289,44 +247,9 @@ export function HoldingsSunburst({
       } as any,
     ],
     tooltip: {
-      useHTML: true,
-      backgroundColor: isDark ? "#1f2937" : "#ffffff",
-      borderColor: isDark ? "#4b5563" : "#e5e7eb",
-      borderRadius: 6,
-      borderWidth: 1,
-      shadow: {
-        color: "rgba(0, 0, 0, 0.1)",
-        offsetX: 0,
-        offsetY: 2,
-        opacity: 0.1,
-        width: 3,
-      },
-      style: {
-        color: isDark ? "#f3f4f6" : "#111827",
-        fontSize: "12px",
-      },
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      pointFormatter: function (this: any) {
-        const point = this
-        const percentage = ((point.value / totalValue) * 100).toFixed(1)
-
-        let html = `<div style="padding: 2px;">
-          <div style="font-weight: 600; margin-bottom: 4px;">${point.name}</div>
-          <div>Value: ${formatValue(point.value)}</div>
-          <div>Portfolio: ${percentage}%</div>`
-
-        if (point.ticker) {
-          html += `<div style="margin-top: 4px; padding-top: 4px; border-top: 1px solid ${isDark ? "#4b5563" : "#e5e7eb"};">
-            <div style="color: ${isDark ? "#9ca3af" : "#6b7280"}; font-size: 11px;">
-              ${point.fullName}<br/>
-              ${point.quantity} shares @ $${point.lastPrice?.toFixed(2)}
-            </div>
-          </div>`
-        }
-
-        html += `</div>`
-        return html
-      },
+      headerFormat: "",
+      pointFormat:
+        "<b>{point.name}</b><br/>Value: ${point.value:,.0f}<br/>Portfolio: {point.percentage:.1f}%",
     },
   }
 
@@ -346,9 +269,9 @@ export function HoldingsSunburst({
         <h3 className="text-base font-medium text-gray-900 dark:text-gray-50">
           Holdings hierarchy
         </h3>
-        <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">
+        {/* <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">
           Interactive view of your holdings across all accounts
-        </p>
+        </p> */}
       </div>
 
       <HighchartsReact
