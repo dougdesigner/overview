@@ -224,7 +224,7 @@ export function ExposureTreemapHighcharts({
     .slice(0, 6)
 
   return (
-    <Card className="p-6">
+    <Card className="pb-4 pt-6">
       <div className="flex items-center justify-between">
         <h3 className="text-base font-medium text-gray-900 dark:text-gray-50">
           Exposure map
@@ -254,7 +254,7 @@ export function ExposureTreemapHighcharts({
         </div>
       </div>
 
-      <div className="mt-6">
+      <div className="mt-4">
         <HighchartsReact
           highcharts={Highcharts}
           options={options}
@@ -263,7 +263,7 @@ export function ExposureTreemapHighcharts({
       </div>
 
       {/* Legend */}
-      <div className="mt-6">
+      <div className="mt-4">
         <p className="mb-1 text-sm font-medium text-gray-700 dark:text-gray-300">
           {groupingMode === "sector" ? "Top Sectors" : "Top Industries"}
         </p>

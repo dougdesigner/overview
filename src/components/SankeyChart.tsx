@@ -3,6 +3,7 @@
 import { type AvailableChartColorsKeys } from "@/lib/chartUtils"
 import { ResponsiveSankey } from "@nivo/sankey"
 import { useTheme } from "next-themes"
+import { useEffect, useState } from "react"
 
 interface SankeyNode {
   id: string
@@ -23,6 +24,15 @@ interface SankeyChartProps {
   colors?: AvailableChartColorsKeys[]
   accountColors?: AvailableChartColorsKeys[]
   height?: number
+  animate?: boolean
+  motionConfig?: "default" | "gentle" | "wobbly" | "stiff" | "slow" | "molasses" | {
+    mass?: number
+    tension?: number
+    friction?: number
+    clamp?: boolean
+    precision?: number
+    velocity?: number
+  }
 }
 
 // Since Nivo requires actual color values (not classes), we define them here
@@ -50,9 +60,24 @@ export default function SankeyChart({
   colors = ["blue", "cyan", "amber", "emerald"],
   accountColors = ["violet", "fuchsia", "pink", "sky", "lime"],
   height = 400,
+  animate = true,
+  motionConfig = "gentle",
 }: SankeyChartProps) {
   const { theme } = useTheme()
   const isDark = theme === "dark"
+  const [isMounted, setIsMounted] = useState(false)
+  const [animationKey, setAnimationKey] = useState(0)
+
+  // Ensure chart mounts properly with animations
+  useEffect(() => {
+    // Small delay to ensure DOM is ready and trigger proper animation initialization
+    const timer = setTimeout(() => {
+      setIsMounted(true)
+      // Force a fresh mount to trigger animations
+      setAnimationKey(1)
+    }, 100)
+    return () => clearTimeout(timer)
+  }, [])
 
   // Get node color based on node type and position
   const getNodeColor = (nodeId: string) => {
@@ -126,9 +151,19 @@ export default function SankeyChart({
     },
   }
 
+  // Show loading state while waiting for mount
+  if (!isMounted) {
+    return (
+      <div style={{ height, display: "flex", alignItems: "center", justifyContent: "center" }}>
+        <div style={{ color: themeColors.text.secondary }}>Loading chart...</div>
+      </div>
+    )
+  }
+
   return (
     <div style={{ height }}>
       <ResponsiveSankey
+        key={animationKey} // Force fresh mount to trigger animations
         data={data}
         theme={nivoTheme}
         margin={{ top: 20, right: 120, bottom: 20, left: 140 }}
@@ -150,6 +185,9 @@ export default function SankeyChart({
         labelPadding={16}
         labelTextColor={themeColors.label}
         valueFormat={(value) => `$${value.toLocaleString()}`}
+        animate={animate}
+        motionConfig={motionConfig}
+        isInteractive={true} // Ensure all interactive features are enabled
       />
     </div>
   )

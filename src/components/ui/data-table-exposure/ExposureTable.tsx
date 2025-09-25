@@ -1,8 +1,6 @@
 "use client"
 
-import { Button } from "@/components/Button"
 import { Card } from "@/components/Card"
-import { Input } from "@/components/Input"
 import {
   Table,
   TableBody,
@@ -13,7 +11,7 @@ import {
 } from "@/components/Table"
 import { exposureCalculator } from "@/lib/exposureCalculator"
 import { cx } from "@/lib/utils"
-import { RiRefreshLine, RiSearchLine } from "@remixicon/react"
+import { RiRefreshLine } from "@remixicon/react"
 import {
   ExpandedState,
   flexRender,
@@ -214,13 +212,16 @@ export function ExposureTable({ holdings, onRefresh }: ExposureTableProps) {
           {/* <ExposureTreemap exposures={data} totalValue={totalPortfolioValue} /> */}
 
           {/* Option 2: Highcharts Treemap (now active - better margin control) */}
-          <ExposureTreemapHighcharts exposures={data} totalValue={totalPortfolioValue} />
+          <ExposureTreemapHighcharts
+            exposures={data}
+            totalValue={totalPortfolioValue}
+          />
         </>
       )}
 
       {/* Table Controls */}
-      <Card>
-        <div className="flex flex-col gap-4 p-4 sm:flex-row sm:items-center sm:justify-between">
+      <Card className="p-0">
+        {/* <div className="flex flex-col gap-4 p-4 sm:flex-row sm:items-center sm:justify-between">
           <div className="relative">
             <RiSearchLine className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" />
             <Input
@@ -248,7 +249,7 @@ export function ExposureTable({ holdings, onRefresh }: ExposureTableProps) {
               Refresh
             </Button>
           </div>
-        </div>
+        </div> */}
 
         {/* Table */}
         <div className="overflow-x-auto">
