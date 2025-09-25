@@ -7,8 +7,10 @@ import HighchartsReact from "highcharts-react-official"
 import { useTheme } from "next-themes"
 import { useEffect, useRef, useState } from "react"
 
-// Import sunburst module for side effects (auto-initializes in Highcharts v12+)
+// Import Highcharts modules for side effects (auto-initializes in Highcharts v12+)
 import "highcharts/modules/sunburst"
+import "highcharts/modules/exporting"
+import "highcharts/modules/export-data"
 
 interface HoldingsSunburstProps {
   holdings: Holding[]
@@ -138,14 +140,7 @@ export function HoldingsSunburst({
     return data
   }
 
-  // Format currency values
-  const formatValue = (value: number) => {
-    if (value >= 1000000) return `$${(value / 1000000).toFixed(1)}M`
-    if (value >= 1000) return `$${(value / 1000).toFixed(0)}K`
-    return `$${value.toFixed(0)}`
-  }
-
-  // Chart options
+// Chart options
   const options: Highcharts.Options = {
     chart: {
       type: undefined, // Required for sunburst
@@ -160,6 +155,24 @@ export function HoldingsSunburst({
     },
     credits: {
       enabled: false,
+    },
+    exporting: {
+      buttons: {
+        contextButton: {
+          menuItems: [
+            'viewFullscreen',
+            'printChart',
+            'separator',
+            'downloadPNG',
+            'downloadJPEG',
+            'downloadPDF',
+            'downloadSVG',
+            'separator',
+            'downloadCSV',
+            'downloadXLS'
+          ]
+        }
+      }
     },
     series: [
       {

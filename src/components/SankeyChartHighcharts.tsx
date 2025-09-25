@@ -6,8 +6,10 @@ import HighchartsReact from "highcharts-react-official"
 import { useTheme } from "next-themes"
 import { useEffect, useRef, useState } from "react"
 
-// Import sankey module for side effects (auto-initializes in Highcharts v12+)
+// Import Highcharts modules for side effects (auto-initializes in Highcharts v12+)
 import "highcharts/modules/sankey"
+import "highcharts/modules/exporting"
+import "highcharts/modules/export-data"
 
 interface SankeyNode {
   id: string
@@ -149,6 +151,24 @@ export default function SankeyChartHighcharts({
     },
     credits: {
       enabled: false,
+    },
+    exporting: {
+      buttons: {
+        contextButton: {
+          menuItems: [
+            'viewFullscreen',
+            'printChart',
+            'separator',
+            'downloadPNG',
+            'downloadJPEG',
+            'downloadPDF',
+            'downloadSVG',
+            'separator',
+            'downloadCSV',
+            'downloadXLS'
+          ]
+        }
+      }
     },
     series: [{
       type: "sankey",

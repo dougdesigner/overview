@@ -8,8 +8,10 @@ import { useTheme } from "next-themes"
 import { useRef, useState } from "react"
 import { StockExposure } from "./types"
 
-// Import treemap module for side effects (auto-initializes in Highcharts v12+)
+// Import Highcharts modules for side effects (auto-initializes in Highcharts v12+)
 import "highcharts/modules/treemap"
+import "highcharts/modules/exporting"
+import "highcharts/modules/export-data"
 
 interface ExposureTreemapHighchartsProps {
   exposures: StockExposure[]
@@ -106,6 +108,24 @@ export function ExposureTreemapHighcharts({
     },
     credits: {
       enabled: false,
+    },
+    exporting: {
+      buttons: {
+        contextButton: {
+          menuItems: [
+            'viewFullscreen',
+            'printChart',
+            'separator',
+            'downloadPNG',
+            'downloadJPEG',
+            'downloadPDF',
+            'downloadSVG',
+            'separator',
+            'downloadCSV',
+            'downloadXLS'
+          ]
+        }
+      }
     },
     series: [
       {
