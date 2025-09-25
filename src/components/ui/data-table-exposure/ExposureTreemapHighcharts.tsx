@@ -263,7 +263,6 @@ export function ExposureTreemapHighcharts({
         name: "All",
         allowTraversingTree: true,
         alternateStartingDirection: true,
-        clip: false,
         data: data,
         dataLabels: {
           enabled: true,
@@ -277,45 +276,37 @@ export function ExposureTreemapHighcharts({
           filter: {
             property: "value",
             operator: ">",
-            value: totalValue * 0.005, // Show labels for items > 0.5% of total
+            value: totalValue * 0.0005, // Show labels for items > 0.05% of total
           },
         },
         borderRadius: 3,
-        borderWidth: 1,
+        nodeSizeBy: "leaf",
         borderColor: isDark ? "#374151" : "#e5e7eb",
         levels: [
           {
             level: 1,
             layoutAlgorithm:
               groupingMode === "sector" ? "sliceAndDice" : "squarified",
+            groupPadding: 3,
             dataLabels: {
               enabled: true,
-              align: "center",
-              verticalAlign: "top",
+              headers: true,
               style: {
                 fontSize: "13px",
                 fontWeight: "600",
-                textTransform: "uppercase",
                 color: isDark ? "#f3f4f6" : "#111827",
-                backgroundColor: isDark ? "#1f2937" : "#ffffff",
               },
             },
+            borderRadius: 3,
             borderWidth: 2,
             borderColor: isDark ? "#4b5563" : "#d1d5db",
           },
           {
             level: 2,
-            layoutAlgorithm: "squarified",
             dataLabels: {
               enabled: true,
-              style: {
-                fontSize: "11px",
-                fontWeight: "500",
-                color: isDark ? "#e5e7eb" : "#374151",
-              },
+              inside: false,
             },
-            borderWidth: 1,
-            borderColor: isDark ? "#374151" : "#e5e7eb",
           },
         ],
       } as any,
