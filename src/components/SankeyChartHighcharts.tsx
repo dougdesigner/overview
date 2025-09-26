@@ -179,9 +179,11 @@ export default function SankeyChartHighcharts({
         data: sankeyData,
         nodes: highchartsNodes,
         nodeWidth: 20,
-        nodePadding: 24,
-        linkOpacity: isDark ? 0.5 : 0.33,
-        linkColorMode: "gradient" as any,
+        nodePadding: 40,
+        borderRadius: 3,
+        linkOpacity: 0.33,
+        minLinkWidth: 1,
+        linkColorMode: "gradient",
         dataLabels: {
           enabled: true,
           nodeFormat: "{point.name}",
@@ -190,16 +192,6 @@ export default function SankeyChartHighcharts({
             textOutline: "none",
             fontSize: "12px",
             fontWeight: "600",
-          },
-        },
-        states: {
-          hover: {
-            linkOpacity: 0.8,
-          },
-          inactive: {
-            enabled: true,
-            linkOpacity: 0.1,
-            opacity: 0.35,
           },
         },
       } as any,
@@ -221,22 +213,6 @@ export default function SankeyChartHighcharts({
         color: isDark ? "#f3f4f6" : "#111827",
         fontSize: "12px",
       },
-      nodeFormatter: function () {
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        const point = this as any
-        const total =
-          point.sum ||
-          point.linksFrom?.reduce(
-            (sum: number, link: any) => sum + link.weight,
-            0,
-          ) ||
-          0
-
-        return `<div style="padding: 2px;">
-          <div style="font-weight: 600; margin-bottom: 4px;">${point.name}</div>
-          <div>Total: ${formatValue(total)}</div>
-        </div>`
-      },
       pointFormatter: function () {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const point = this as any
@@ -251,12 +227,23 @@ export default function SankeyChartHighcharts({
     },
     plotOptions: {
       sankey: {
-        colorByPoint: false,
         curveFactor: 0.33,
-        borderRadius: 3,
-        states: {
-          hover: {
-            brightness: 0.1,
+        tooltip: {
+          nodeFormatter: function () {
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            const point = this as any
+            const total =
+              point.sum ||
+              point.linksFrom?.reduce(
+                (sum: number, link: any) => sum + link.weight,
+                0,
+              ) ||
+              0
+
+            return `<div style="padding: 2px;">
+              <div style="font-weight: 600; margin-bottom: 4px;">${point.name}</div>
+              <div>Total: ${formatValue(total)}</div>
+            </div>`
           },
         },
       },
