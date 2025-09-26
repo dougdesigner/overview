@@ -8,9 +8,9 @@ import { useTheme } from "next-themes"
 import { useEffect, useRef, useState } from "react"
 
 // Import Highcharts modules for side effects (auto-initializes in Highcharts v12+)
-import "highcharts/modules/sunburst"
-import "highcharts/modules/exporting"
 import "highcharts/modules/export-data"
+import "highcharts/modules/exporting"
+import "highcharts/modules/sunburst"
 
 interface HoldingsSunburstProps {
   holdings: Holding[]
@@ -140,7 +140,7 @@ export function HoldingsSunburst({
     return data
   }
 
-// Chart options
+  // Chart options
   const options: Highcharts.Options = {
     chart: {
       type: undefined, // Required for sunburst
@@ -160,19 +160,19 @@ export function HoldingsSunburst({
       buttons: {
         contextButton: {
           menuItems: [
-            'viewFullscreen',
-            'printChart',
-            'separator',
-            'downloadPNG',
-            'downloadJPEG',
-            'downloadPDF',
-            'downloadSVG',
-            'separator',
-            'downloadCSV',
-            'downloadXLS'
-          ]
-        }
-      }
+            "viewFullscreen",
+            "printChart",
+            "separator",
+            "downloadPNG",
+            "downloadJPEG",
+            "downloadPDF",
+            "downloadSVG",
+            "separator",
+            "downloadCSV",
+            "downloadXLS",
+          ],
+        },
+      },
     },
     series: [
       {
@@ -187,6 +187,9 @@ export function HoldingsSunburst({
             property: "innerArcLength",
             operator: ">",
             value: 16,
+          },
+          style: {
+            // textOutline: "none",
           },
         },
         borderRadius: 3,

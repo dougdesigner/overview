@@ -198,6 +198,7 @@ export default function SankeyChartHighcharts({
     ],
     tooltip: {
       useHTML: true,
+      headerFormat: "",
       backgroundColor: isDark ? "#1f2937" : "#ffffff",
       borderColor: isDark ? "#4b5563" : "#e5e7eb",
       borderRadius: 6,
@@ -220,8 +221,8 @@ export default function SankeyChartHighcharts({
           <div style="font-weight: 600; margin-bottom: 4px;">
             ${point.from} → ${point.to}
           </div>
-          <div>Value: ${formatValue(point.weight)}</div>
-          <div>Flow: ${((point.weight / point.fromNode.sum) * 100).toFixed(1)}%</div>
+          <div>Value: <b>${formatValue(point.weight)}</b></div>
+          <div>Flow: <b>${((point.weight / point.fromNode.sum) * 100).toFixed(1)}%</b></div>
         </div>`
       },
     },
