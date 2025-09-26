@@ -7,9 +7,9 @@ import { useTheme } from "next-themes"
 import { useEffect, useRef, useState } from "react"
 
 // Import Highcharts modules for side effects (auto-initializes in Highcharts v12+)
-import "highcharts/modules/sankey"
-import "highcharts/modules/exporting"
 import "highcharts/modules/export-data"
+import "highcharts/modules/exporting"
+import "highcharts/modules/sankey"
 
 interface SankeyNode {
   id: string
@@ -90,7 +90,7 @@ export default function SankeyChartHighcharts({
 
     // Account nodes (left side) - nodes that feed into Portfolio Total
     const accounts = data.nodes.filter(
-      (n) => n.id !== "Portfolio Total" && !assetTypes.includes(n.id)
+      (n) => n.id !== "Portfolio Total" && !assetTypes.includes(n.id),
     )
     const accountIndex = accounts.findIndex((n) => n.id === nodeId)
     if (accountIndex >= 0) {
@@ -106,19 +106,19 @@ export default function SankeyChartHighcharts({
   // Transform data to Highcharts sankey format
   const transformToHighchartsData = () => {
     // Create nodes array with colors
-    const nodes = data.nodes.map(node => ({
+    const nodes = data.nodes.map((node) => ({
       id: node.id,
       color: getNodeColor(node.id),
       dataLabels: {
         style: {
           color: isDark ? "#f3f4f6" : "#111827",
           textOutline: "none",
-        }
-      }
+        },
+      },
     }))
 
     // Transform links for Highcharts format
-    const sankeyData = data.links.map(link => ({
+    const sankeyData = data.links.map((link) => ({
       from: link.source,
       to: link.target,
       weight: link.value,
@@ -134,7 +134,8 @@ export default function SankeyChartHighcharts({
     return `$${value.toFixed(0)}`
   }
 
-  const { nodes: highchartsNodes, data: sankeyData } = transformToHighchartsData()
+  const { nodes: highchartsNodes, data: sankeyData } =
+    transformToHighchartsData()
 
   // Chart options
   const options: Highcharts.Options = {
@@ -156,51 +157,53 @@ export default function SankeyChartHighcharts({
       buttons: {
         contextButton: {
           menuItems: [
-            'viewFullscreen',
-            'printChart',
-            'separator',
-            'downloadPNG',
-            'downloadJPEG',
-            'downloadPDF',
-            'downloadSVG',
-            'separator',
-            'downloadCSV',
-            'downloadXLS'
-          ]
-        }
-      }
+            "viewFullscreen",
+            "printChart",
+            "separator",
+            "downloadPNG",
+            "downloadJPEG",
+            "downloadPDF",
+            "downloadSVG",
+            "separator",
+            "downloadCSV",
+            "downloadXLS",
+          ],
+        },
+      },
     },
-    series: [{
-      type: "sankey",
-      name: "Portfolio Flow",
-      keys: ["from", "to", "weight"],
-      data: sankeyData,
-      nodes: highchartsNodes,
-      nodeWidth: 20,
-      nodePadding: 24,
-      linkOpacity: isDark ? 0.5 : 0.33,
-      linkColorMode: "gradient" as any,
-      dataLabels: {
-        enabled: true,
-        nodeFormat: "{point.name}",
-        style: {
-          color: isDark ? "#f3f4f6" : "#111827",
-          textOutline: "none",
-          fontSize: "12px",
-          fontWeight: "600",
-        },
-      },
-      states: {
-        hover: {
-          linkOpacity: 0.8,
-        },
-        inactive: {
+    series: [
+      {
+        type: "sankey",
+        name: "Portfolio Flow",
+        keys: ["from", "to", "weight"],
+        data: sankeyData,
+        nodes: highchartsNodes,
+        nodeWidth: 20,
+        nodePadding: 24,
+        linkOpacity: isDark ? 0.5 : 0.33,
+        linkColorMode: "gradient" as any,
+        dataLabels: {
           enabled: true,
-          linkOpacity: 0.1,
-          opacity: 0.35,
+          nodeFormat: "{point.name}",
+          style: {
+            color: isDark ? "#f3f4f6" : "#111827",
+            textOutline: "none",
+            fontSize: "12px",
+            fontWeight: "600",
+          },
         },
-      },
-    } as any],
+        states: {
+          hover: {
+            linkOpacity: 0.8,
+          },
+          inactive: {
+            enabled: true,
+            linkOpacity: 0.1,
+            opacity: 0.35,
+          },
+        },
+      } as any,
+    ],
     tooltip: {
       useHTML: true,
       backgroundColor: isDark ? "#1f2937" : "#ffffff",
@@ -218,17 +221,23 @@ export default function SankeyChartHighcharts({
         color: isDark ? "#f3f4f6" : "#111827",
         fontSize: "12px",
       },
-      nodeFormatter: function() {
+      nodeFormatter: function () {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const point = this as any
-        const total = point.sum || point.linksFrom?.reduce((sum: number, link: any) => sum + link.weight, 0) || 0
+        const total =
+          point.sum ||
+          point.linksFrom?.reduce(
+            (sum: number, link: any) => sum + link.weight,
+            0,
+          ) ||
+          0
 
         return `<div style="padding: 2px;">
           <div style="font-weight: 600; margin-bottom: 4px;">${point.name}</div>
           <div>Total: ${formatValue(total)}</div>
         </div>`
       },
-      pointFormatter: function() {
+      pointFormatter: function () {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const point = this as any
         return `<div style="padding: 2px;">
@@ -256,7 +265,14 @@ export default function SankeyChartHighcharts({
 
   if (!isClient) {
     return (
-      <div style={{ height, display: "flex", alignItems: "center", justifyContent: "center" }}>
+      <div
+        style={{
+          height,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
         <div style={{ color: isDark ? "#9ca3af" : "#6b7280" }}>
           Loading chart...
         </div>
