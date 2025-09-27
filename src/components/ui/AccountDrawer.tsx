@@ -16,7 +16,9 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/Select"
-import React from "react"
+import { getInstitutionLogoUrl } from "@/lib/logoUtils"
+import Image from "next/image"
+import React, { useState, useMemo } from "react"
 import { Input } from "../Input"
 import { Label } from "../Label"
 
@@ -179,6 +181,34 @@ const FormField = ({
   </div>
 )
 
+// Component for rendering institution item with logo
+function InstitutionItem({ institution }: { institution: { value: string; label: string } }) {
+  const [logoError, setLogoError] = useState(false)
+  const logoUrl = getInstitutionLogoUrl(institution.label)
+
+  return (
+    <div className="flex items-center gap-2">
+      {logoUrl && !logoError ? (
+        <Image
+          src={logoUrl}
+          alt={institution.label}
+          width={24}
+          height={24}
+          className="size-6 rounded-full object-cover bg-white"
+          onError={() => setLogoError(true)}
+        />
+      ) : (
+        <div
+          className={`flex size-6 shrink-0 items-center justify-center rounded-full text-xs font-semibold text-white ${getInstitutionBrandColor(institution.value)}`}
+        >
+          {getInstitutionInitials(institution.label)}
+        </div>
+      )}
+      <span>{institution.label}</span>
+    </div>
+  )
+}
+
 export function AccountDrawer({
   open,
   onOpenChange,
@@ -194,6 +224,19 @@ export function AccountDrawer({
     accountName: "",
   })
 
+  // State for institution search
+  const [institutionSearch, setInstitutionSearch] = useState("")
+  const [isSelectOpen, setIsSelectOpen] = useState(false)
+
+  // Filter institutions based on search
+  const filteredInstitutions = useMemo(() => {
+    if (!institutionSearch) return institutions
+    const searchLower = institutionSearch.toLowerCase()
+    return institutions.filter(inst =>
+      inst.label.toLowerCase().includes(searchLower)
+    )
+  }, [institutionSearch])
+
   // Reset form when drawer opens/closes with new initial data
   React.useEffect(() => {
     if (open) {
@@ -208,6 +251,8 @@ export function AccountDrawer({
           accountName: "",
         })
       }
+      // Reset search when opening
+      setInstitutionSearch("")
     }
   }, [open, initialData, mode])
 
@@ -252,26 +297,46 @@ export function AccountDrawer({
           <FormField label="Institution" required>
             <Select
               value={formData.institution}
-              onValueChange={(value) =>
+              onValueChange={(value) => {
                 handleUpdateForm({ institution: value })
-              }
+                setInstitutionSearch("")
+              }}
+              open={isSelectOpen}
+              onOpenChange={setIsSelectOpen}
             >
               <SelectTrigger>
-                <SelectValue placeholder="Select Institution" />
+                <SelectValue placeholder="Select Institution">
+                  {formData.institution && (
+                    <InstitutionItem
+                      institution={institutions.find(i => i.value === formData.institution)!}
+                    />
+                  )}
+                </SelectValue>
               </SelectTrigger>
               <SelectContent>
-                {institutions.map((inst) => (
-                  <SelectItem key={inst.value} value={inst.value}>
-                    <div className="flex items-center gap-2">
-                      <div
-                        className={`flex size-6 shrink-0 items-center justify-center rounded-full text-xs font-semibold text-white ${getInstitutionBrandColor(inst.value)}`}
-                      >
-                        {getInstitutionInitials(inst.label)}
-                      </div>
-                      <span>{inst.label}</span>
+                <div className="p-2 pb-0">
+                  <Input
+                    type="search"
+                    placeholder="Search institutions..."
+                    value={institutionSearch}
+                    onChange={(e) => setInstitutionSearch(e.target.value)}
+                    className="mb-2"
+                    onClick={(e) => e.stopPropagation()}
+                  />
+                </div>
+                <div className="max-h-64 overflow-y-auto">
+                  {filteredInstitutions.length > 0 ? (
+                    filteredInstitutions.map((inst) => (
+                      <SelectItem key={inst.value} value={inst.value}>
+                        <InstitutionItem institution={inst} />
+                      </SelectItem>
+                    ))
+                  ) : (
+                    <div className="px-3 py-2 text-sm text-gray-500 dark:text-gray-400">
+                      No institutions found
                     </div>
-                  </SelectItem>
-                ))}
+                  )}
+                </div>
               </SelectContent>
             </Select>
           </FormField>

@@ -9,8 +9,11 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/DropdownMenu"
-import { RiDeleteBinLine, RiEditLine, RiMore2Fill } from "@remixicon/react"
+import { getInstitutionLogoUrl } from "@/lib/logoUtils"
 import { cx } from "@/lib/utils"
+import { RiDeleteBinLine, RiEditLine, RiMore2Fill } from "@remixicon/react"
+import Image from "next/image"
+import { useState } from "react"
 
 interface AccountCardProps {
   // Account identification
@@ -57,8 +60,14 @@ export default function AccountCard({
   onDelete,
   onClick,
 }: AccountCardProps) {
+  // Logo loading state
+  const [logoError, setLogoError] = useState(false)
+
   // Default name to account type if no custom name provided
   const displayName = name || accountType
+
+  // Get logo URL
+  const logoUrl = getInstitutionLogoUrl(institution)
 
   // Get institution brand color
   const getInstitutionBrandColor = (institution: string): string => {
@@ -132,11 +141,22 @@ export default function AccountCard({
       {/* Header with logo, account info, actions, and financial data */}
       <div className="flex items-start gap-3">
         {/* Institution logo */}
-        <div
-          className={`flex size-10 shrink-0 items-center justify-center rounded-full text-sm font-semibold text-white ${getInstitutionBrandColor(institution)}`}
-        >
-          {getInstitutionInitials(institution)}
-        </div>
+        {logoUrl && !logoError ? (
+          <Image
+            src={logoUrl}
+            alt={institution}
+            width={40}
+            height={40}
+            className="size-10 rounded-full object-cover bg-white"
+            onError={() => setLogoError(true)}
+          />
+        ) : (
+          <div
+            className={`flex size-10 shrink-0 items-center justify-center rounded-full text-sm font-semibold text-white ${getInstitutionBrandColor(institution)}`}
+          >
+            {getInstitutionInitials(institution)}
+          </div>
+        )}
 
         {/* Account identification */}
         <div className="min-w-0 flex-1">
