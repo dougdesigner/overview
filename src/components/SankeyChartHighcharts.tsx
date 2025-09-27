@@ -112,7 +112,7 @@ export default function SankeyChartHighcharts({
       dataLabels: {
         style: {
           color: isDark ? "#f3f4f6" : "#111827",
-          textOutline: "none",
+          // textOutline: "none",
         },
       },
     }))
@@ -189,7 +189,7 @@ export default function SankeyChartHighcharts({
           nodeFormat: "{point.name}",
           style: {
             color: isDark ? "#f3f4f6" : "#111827",
-            textOutline: "none",
+            // textOutline: "none",
             fontSize: "12px",
             fontWeight: "600",
           },

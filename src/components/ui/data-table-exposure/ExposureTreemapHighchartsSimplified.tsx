@@ -212,6 +212,21 @@ export function ExposureTreemapHighcharts({
     ],
     tooltip: {
       useHTML: true,
+      backgroundColor: isDark ? "#1f2937" : "#ffffff",
+      borderColor: isDark ? "#4b5563" : "#e5e7eb",
+      borderRadius: 6,
+      borderWidth: 1,
+      shadow: {
+        color: "rgba(0, 0, 0, 0.1)",
+        offsetX: 0,
+        offsetY: 2,
+        opacity: 0.1,
+        width: 3,
+      },
+      style: {
+        color: isDark ? "#f3f4f6" : "#111827",
+        fontSize: "12px",
+      },
       pointFormatter: function () {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const point = this as any
