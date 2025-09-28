@@ -4,9 +4,9 @@ import { Card } from "@/components/Card"
 import { toProperCase } from "@/lib/utils"
 import Highcharts from "highcharts"
 import HighchartsReact from "highcharts-react-official"
-import HighchartsTreemap from "highcharts/modules/treemap"
-import HighchartsExporting from "highcharts/modules/exporting"
 import HighchartsExportData from "highcharts/modules/export-data"
+import HighchartsExporting from "highcharts/modules/exporting"
+import HighchartsTreemap from "highcharts/modules/treemap"
 import { useTheme } from "next-themes"
 import { useRef, useState } from "react"
 import { StockExposure } from "./types"
@@ -124,19 +124,19 @@ export function ExposureTreemapHighcharts({
       buttons: {
         contextButton: {
           menuItems: [
-            'viewFullscreen',
-            'printChart',
-            'separator',
-            'downloadPNG',
-            'downloadJPEG',
-            'downloadPDF',
-            'downloadSVG',
-            'separator',
-            'downloadCSV',
-            'downloadXLS'
-          ]
-        }
-      }
+            "viewFullscreen",
+            "printChart",
+            "separator",
+            "downloadPNG",
+            "downloadJPEG",
+            "downloadPDF",
+            "downloadSVG",
+            "separator",
+            "downloadCSV",
+            "downloadXLS",
+          ],
+        },
+      },
     },
     series: [
       {
@@ -216,9 +216,8 @@ export function ExposureTreemapHighcharts({
           enabled: true,
           style: {
             color: isDark ? "#f3f4f6" : "#111827",
-            fontSize: "12px",
+            fontSize: "14px",
             fontWeight: "600",
-            textOutline: "none",
           },
         },
       } as Highcharts.SeriesTreemapOptions,
