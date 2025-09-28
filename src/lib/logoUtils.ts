@@ -2,20 +2,23 @@
 
 // Map institution names to their domain names for logo.dev API
 const institutionDomains: Record<string, string | null> = {
-  "Fidelity Investments": "fidelity.com",
+  "Ally Bank": "ally.com",
+  "American Express": "americanexpress.com",
+  "Bank of America": "bankofamerica.com",
+  Betterment: "betterment.com",
+  "Capital One": "capitalone.com",
+  "Charles Schwab": "schwab.com",
   Chase: "chase.com",
+  Citibank: "citi.com",
+  "E*TRADE": "etrade.com",
+  "Fidelity Investments": "fidelity.com",
+  "Merrill Edge": "ml.com",
+  "PNC Bank": "pnc.com",
+  Robinhood: "robinhood.com",
+  "TD Ameritrade": "tdameritrade.com",
   Vanguard: "vanguard.com",
   Wealthfront: "wealthfront.com",
-  "American Express": "americanexpress.com",
-  "Charles Schwab": "schwab.com",
-  "E*TRADE": "etrade.com",
-  "TD Ameritrade": "tdameritrade.com",
-  "Merrill Edge": "ml.com",
-  Betterment: "betterment.com",
-  Robinhood: "robinhood.com",
-  "Bank of America": "bankofamerica.com",
   "Wells Fargo": "wellsfargo.com",
-  Citibank: "citi.com",
   Other: null, // No logo for "Other"
 }
 
@@ -45,5 +48,5 @@ export function getTickerLogoUrl(ticker: string): string | null {
   if (!ticker || !token) return null
 
   // Logo.dev API supports tickers directly with optimized parameters
-  return `https://img.logo.dev/${ticker.toLowerCase()}?token=${token}&retina=true&fallback=monogram&format=webp&size=400`
+  return `https://img.logo.dev/${ticker.toLowerCase()}?token=${token}&retina=true&fallback=monogram&format=webp&size=600`
 }

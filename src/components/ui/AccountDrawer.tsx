@@ -18,7 +18,7 @@ import {
 } from "@/components/Select"
 import { getInstitutionLogoUrl } from "@/lib/logoUtils"
 import Image from "next/image"
-import React, { useState, useMemo } from "react"
+import React, { useState } from "react"
 import { Input } from "../Input"
 import { Label } from "../Label"
 
@@ -96,20 +96,23 @@ const accountTypes = [
 ]
 
 const institutions = [
-  { value: "fidelity", label: "Fidelity Investments" },
-  { value: "vanguard", label: "Vanguard" },
-  { value: "schwab", label: "Charles Schwab" },
-  { value: "etrade", label: "E*TRADE" },
-  { value: "td-ameritrade", label: "TD Ameritrade" },
-  { value: "merrill", label: "Merrill Edge" },
-  { value: "wealthfront", label: "Wealthfront" },
-  { value: "betterment", label: "Betterment" },
-  { value: "robinhood", label: "Robinhood" },
-  { value: "chase", label: "Chase" },
-  { value: "bofa", label: "Bank of America" },
-  { value: "wells-fargo", label: "Wells Fargo" },
-  { value: "citi", label: "Citibank" },
+  { value: "ally", label: "Ally Bank" },
   { value: "amex", label: "American Express" },
+  { value: "bofa", label: "Bank of America" },
+  { value: "betterment", label: "Betterment" },
+  { value: "capital-one", label: "Capital One" },
+  { value: "schwab", label: "Charles Schwab" },
+  { value: "chase", label: "Chase" },
+  { value: "citi", label: "Citibank" },
+  { value: "etrade", label: "E*TRADE" },
+  { value: "fidelity", label: "Fidelity Investments" },
+  { value: "merrill", label: "Merrill Edge" },
+  { value: "pnc", label: "PNC Bank" },
+  { value: "robinhood", label: "Robinhood" },
+  { value: "td-ameritrade", label: "TD Ameritrade" },
+  { value: "vanguard", label: "Vanguard" },
+  { value: "wealthfront", label: "Wealthfront" },
+  { value: "wells-fargo", label: "Wells Fargo" },
   { value: "other", label: "Other" },
 ]
 
@@ -130,6 +133,9 @@ const getInstitutionBrandColor = (institution: string): string => {
     bofa: "bg-red-700",
     "wells-fargo": "bg-red-600",
     citi: "bg-blue-600",
+    pnc: "bg-orange-500",
+    "capital-one": "bg-red-500",
+    ally: "bg-purple-500",
   }
   return brandColors[institution] || "bg-gray-500"
 }
@@ -224,18 +230,6 @@ export function AccountDrawer({
     accountName: "",
   })
 
-  // State for institution search
-  const [institutionSearch, setInstitutionSearch] = useState("")
-  const [isSelectOpen, setIsSelectOpen] = useState(false)
-
-  // Filter institutions based on search
-  const filteredInstitutions = useMemo(() => {
-    if (!institutionSearch) return institutions
-    const searchLower = institutionSearch.toLowerCase()
-    return institutions.filter(inst =>
-      inst.label.toLowerCase().includes(searchLower)
-    )
-  }, [institutionSearch])
 
   // Reset form when drawer opens/closes with new initial data
   React.useEffect(() => {
@@ -251,8 +245,6 @@ export function AccountDrawer({
           accountName: "",
         })
       }
-      // Reset search when opening
-      setInstitutionSearch("")
     }
   }, [open, initialData, mode])
 
@@ -297,12 +289,9 @@ export function AccountDrawer({
           <FormField label="Institution" required>
             <Select
               value={formData.institution}
-              onValueChange={(value) => {
+              onValueChange={(value) =>
                 handleUpdateForm({ institution: value })
-                setInstitutionSearch("")
-              }}
-              open={isSelectOpen}
-              onOpenChange={setIsSelectOpen}
+              }
             >
               <SelectTrigger>
                 <SelectValue placeholder="Select Institution">
@@ -314,29 +303,11 @@ export function AccountDrawer({
                 </SelectValue>
               </SelectTrigger>
               <SelectContent>
-                <div className="p-2 pb-0">
-                  <Input
-                    type="search"
-                    placeholder="Search institutions..."
-                    value={institutionSearch}
-                    onChange={(e) => setInstitutionSearch(e.target.value)}
-                    className="mb-2"
-                    onClick={(e) => e.stopPropagation()}
-                  />
-                </div>
-                <div className="max-h-64 overflow-y-auto">
-                  {filteredInstitutions.length > 0 ? (
-                    filteredInstitutions.map((inst) => (
-                      <SelectItem key={inst.value} value={inst.value}>
-                        <InstitutionItem institution={inst} />
-                      </SelectItem>
-                    ))
-                  ) : (
-                    <div className="px-3 py-2 text-sm text-gray-500 dark:text-gray-400">
-                      No institutions found
-                    </div>
-                  )}
-                </div>
+                {institutions.map((inst) => (
+                  <SelectItem key={inst.value} value={inst.value}>
+                    <InstitutionItem institution={inst} />
+                  </SelectItem>
+                ))}
               </SelectContent>
             </Select>
           </FormField>
