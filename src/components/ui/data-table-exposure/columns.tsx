@@ -41,9 +41,11 @@ const domainCache = new Map<string, string>()
 function TickerCell({
   ticker,
   isETFBreakdown,
+  isDirectHolding,
 }: {
   ticker: string
   isETFBreakdown?: boolean
+  isDirectHolding?: boolean
 }) {
   const [logoError, setLogoError] = useState(false)
   const [companyDomain, setCompanyDomain] = useState<string | undefined>(
@@ -54,15 +56,20 @@ function TickerCell({
   const isBerkshire =
     ticker.toUpperCase() === "BRK.B" || ticker.toUpperCase() === "BRK-B"
 
+  // Determine if this is a stock or ETF
+  // Direct holding breakdowns should be treated as stocks
+  // ETF contribution breakdowns should be treated as ETFs
+  const treatAsStock = !isETFBreakdown || isDirectHolding
+
   // Try to get logo URL with domain if available (skip for Berkshire)
   const logoUrl = isBerkshire ? null : getTickerLogoUrl(ticker, companyDomain)
-  const color = isETFBreakdown
+  const color = isETFBreakdown && !isDirectHolding
     ? "bg-gray-200 dark:bg-gray-700"
     : getTickerColor(ticker, "stock")
 
-  // If no domain and it's not an ETF breakdown, check overrides first, then fetch from Alpha Vantage
+  // If no domain and it's a stock (not an ETF contribution), check overrides first, then fetch from Alpha Vantage
   useEffect(() => {
-    if (!companyDomain && !logoUrl && !isETFBreakdown && ticker) {
+    if (!companyDomain && !logoUrl && treatAsStock && ticker) {
       const upperTicker = ticker.toUpperCase()
 
       // Check if we have an override first
@@ -101,7 +108,7 @@ function TickerCell({
 
   return (
     <div className="flex items-center gap-2">
-      {isBerkshire && !isETFBreakdown ? (
+      {isBerkshire && treatAsStock ? (
         // Custom Berkshire Hathaway logo
         <div
           className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-xs font-bold text-white"
@@ -110,7 +117,7 @@ function TickerCell({
         >
           BH
         </div>
-      ) : logoUrl && !logoError && !isETFBreakdown ? (
+      ) : logoUrl && !logoError ? (
         <Image
           src={logoUrl}
           alt={ticker}
@@ -187,7 +194,8 @@ export const createColumns = ({
     enableSorting: false,
     meta: {
       className: "!w-6 !pr-0",
-    } as any,
+      displayName: "Expand",
+    },
   },
   {
     header: ({ column }) => {
@@ -213,7 +221,16 @@ export const createColumns = ({
 
       if (!ticker) return <span className="text-gray-400">—</span>
 
-      return <TickerCell ticker={ticker} isETFBreakdown={isETFBreakdown} />
+      // Check if this is a direct holding breakdown
+      // Direct holdings have id like "stock-AAPL-direct"
+      // ETF contributions have id like "stock-AAPL-etf-0"
+      const isDirectHolding = isETFBreakdown && row.original.id?.includes('-direct')
+
+      return <TickerCell
+        ticker={ticker}
+        isETFBreakdown={isETFBreakdown}
+        isDirectHolding={isDirectHolding}
+      />
     },
     sortingFn: (rowA, rowB) => {
       const tickerA = rowA.original.ticker || ""
@@ -223,7 +240,8 @@ export const createColumns = ({
     enableSorting: true,
     meta: {
       className: "text-left",
-    } as any,
+      displayName: "Ticker",
+    },
   },
   {
     header: ({ column }) => {
@@ -261,72 +279,77 @@ export const createColumns = ({
     enableSorting: true,
     meta: {
       className: "text-left min-w-80",
+      displayName: "Name",
     },
   },
-  {
-    header: ({ column }) => {
-      return (
-        <button
-          className="flex w-full items-center justify-end gap-1 font-medium hover:text-gray-900 dark:hover:text-gray-50"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        >
-          Direct Shares
-          {column.getIsSorted() === "asc" && (
-            <RiArrowUpSLine className="h-4 w-4" />
-          )}
-          {column.getIsSorted() === "desc" && (
-            <RiArrowDownSLine className="h-4 w-4" />
-          )}
-        </button>
-      )
-    },
-    accessorKey: "directShares",
-    cell: ({ row }) => {
-      const shares = row.original.directShares
-      if (shares === 0) {
-        return <span className="text-gray-400">—</span>
-      }
-      return <span>{formatNumber(shares)}</span>
-    },
-    enableSorting: true,
-    meta: {
-      className: "text-right",
-    } as any,
-  },
-  {
-    header: ({ column }) => {
-      return (
-        <button
-          className="flex w-full items-center justify-end gap-1 font-medium hover:text-gray-900 dark:hover:text-gray-50"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        >
-          ETF Exposure
-          {column.getIsSorted() === "asc" && (
-            <RiArrowUpSLine className="h-4 w-4" />
-          )}
-          {column.getIsSorted() === "desc" && (
-            <RiArrowDownSLine className="h-4 w-4" />
-          )}
-        </button>
-      )
-    },
-    accessorKey: "etfExposure",
-    cell: ({ row }) => {
-      const shares = row.original.etfExposure
-      if (shares === 0) {
-        return <span className="text-gray-400">—</span>
-      }
-      return (
-        <span className="text-blue-600 dark:text-blue-400">
-          {formatNumber(shares)}
-        </span>
-      )
-    },
-    enableSorting: true,
-    meta: {
-      className: "text-right",
-    } as any,
-  },
+  // Commented out Direct Shares and ETF Exposure columns
+  // Users can see this breakdown by expanding rows
+  // {
+  //   header: ({ column }) => {
+  //     return (
+  //       <button
+  //         className="flex w-full items-center justify-end gap-1 font-medium hover:text-gray-900 dark:hover:text-gray-50"
+  //         onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+  //       >
+  //         Direct Shares
+  //         {column.getIsSorted() === "asc" && (
+  //           <RiArrowUpSLine className="h-4 w-4" />
+  //         )}
+  //         {column.getIsSorted() === "desc" && (
+  //           <RiArrowDownSLine className="h-4 w-4" />
+  //         )}
+  //       </button>
+  //     )
+  //   },
+  //   accessorKey: "directShares",
+  //   cell: ({ row }) => {
+  //     const shares = row.original.directShares
+  //     if (shares === 0) {
+  //       return <span className="text-gray-400">—</span>
+  //     }
+  //     return <span>{formatNumber(shares)}</span>
+  //   },
+  //   enableSorting: true,
+  //   meta: {
+  //     className: "text-right",
+  //     displayName: "Direct Shares",
+  //   },
+  // },
+  // {
+  //   header: ({ column }) => {
+  //     return (
+  //       <button
+  //         className="flex w-full items-center justify-end gap-1 font-medium hover:text-gray-900 dark:hover:text-gray-50"
+  //         onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+  //       >
+  //         ETF Exposure
+  //         {column.getIsSorted() === "asc" && (
+  //           <RiArrowUpSLine className="h-4 w-4" />
+  //         )}
+  //         {column.getIsSorted() === "desc" && (
+  //           <RiArrowDownSLine className="h-4 w-4" />
+  //         )}
+  //       </button>
+  //     )
+  //   },
+  //   accessorKey: "etfExposure",
+  //   cell: ({ row }) => {
+  //     const shares = row.original.etfExposure
+  //     if (shares === 0) {
+  //       return <span className="text-gray-400">—</span>
+  //     }
+  //     return (
+  //       <span className="text-blue-600 dark:text-blue-400">
+  //         {formatNumber(shares)}
+  //       </span>
+  //     )
+  //   },
+  //   enableSorting: true,
+  //   meta: {
+  //     className: "text-right",
+  //     displayName: "ETF Exposure",
+  //   },
+  // },
   {
     header: ({ column }) => {
       return (
@@ -350,7 +373,6 @@ export const createColumns = ({
       return (
         <span
           className={cx(
-            "font-semibold",
             !isETFBreakdown && "text-gray-900 dark:text-gray-50",
           )}
         >
@@ -361,7 +383,8 @@ export const createColumns = ({
     enableSorting: true,
     meta: {
       className: "text-right",
-    } as any,
+      displayName: "Quantity",
+    },
   },
   {
     header: ({ column }) => {
@@ -398,7 +421,8 @@ export const createColumns = ({
     enableSorting: true,
     meta: {
       className: "text-right",
-    } as any,
+      displayName: "Market Value",
+    },
   },
   {
     header: ({ column }) => {
@@ -422,15 +446,11 @@ export const createColumns = ({
       const percent = row.original.percentOfPortfolio
       const isETFBreakdown = row.original.isETFBreakdown
 
-      // Highlight concentrated positions
-      const isConcentrated = percent > 10 && !isETFBreakdown
-
       return (
         <span
           className={cx(
             "text-sm",
             !isETFBreakdown && "font-semibold text-gray-900 dark:text-gray-50",
-            isConcentrated && "text-orange-600 dark:text-orange-400",
           )}
         >
           {formatPercentage(percent)}
@@ -440,7 +460,8 @@ export const createColumns = ({
     enableSorting: true,
     meta: {
       className: "text-right",
-    } as any,
+      displayName: "Allocation (%)",
+    },
   },
   {
     header: ({ column }) => {
@@ -477,7 +498,8 @@ export const createColumns = ({
     enableSorting: true,
     meta: {
       className: "text-left",
-    } as any,
+      displayName: "Sector",
+    },
   },
   {
     header: ({ column }) => {
@@ -514,6 +536,7 @@ export const createColumns = ({
     enableSorting: true,
     meta: {
       className: "text-left min-w-40",
+      displayName: "Industry",
     },
   },
 ]

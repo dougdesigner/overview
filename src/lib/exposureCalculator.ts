@@ -440,9 +440,10 @@ export class ExposureCalculator {
   }
 
   // Helper method to fetch real stock prices (optional enhancement)
-  async fetchStockPrices(_symbols: string[]): Promise<void> {
+  async fetchStockPrices(symbols: string[]): Promise<void> {
     // This would fetch real stock prices from an API
     // For now, we use prices from direct holdings or defaults
+    console.log(`Would fetch prices for ${symbols.length} symbols`)
   }
 }
 

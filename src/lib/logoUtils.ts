@@ -148,7 +148,7 @@ const etfProviderDomains: Record<string, string> = {
   MUB: "blackrock.com",
 
   // State Street (SPDR) ETFs
-  SPY: "ssga.com",
+  SPY: "statestreet.com",
   GLD: "ssga.com",
   XLF: "ssga.com",
   XLE: "ssga.com",

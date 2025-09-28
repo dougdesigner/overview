@@ -134,7 +134,8 @@ export default function AccountCard({
     <Card
       className={cx(
         "relative",
-        onClick && "cursor-pointer transition-colors hover:bg-gray-50 dark:hover:bg-gray-900/50"
+        onClick &&
+          "cursor-pointer transition-colors hover:bg-gray-50 dark:hover:bg-gray-900/50",
       )}
       onClick={onClick}
     >
@@ -147,7 +148,7 @@ export default function AccountCard({
             alt={institution}
             width={80}
             height={80}
-            className="size-10 rounded-full object-cover bg-white"
+            className="size-10 rounded-full bg-white object-cover"
             onError={() => setLogoError(true)}
           />
         ) : (
@@ -191,10 +192,12 @@ export default function AccountCard({
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
-            <DropdownMenuItem onClick={(e) => {
-              e.stopPropagation()
-              onEdit()
-            }}>
+            <DropdownMenuItem
+              onClick={(e) => {
+                e.stopPropagation()
+                onEdit()
+              }}
+            >
               <RiEditLine className="mr-2 h-4 w-4" />
               Edit Account
             </DropdownMenuItem>
@@ -213,7 +216,7 @@ export default function AccountCard({
       </div>
 
       {/* Asset allocation visualization - only show if there's data */}
-      {allocationValues.some(value => value > 0) && (
+      {allocationValues.some((value) => value > 0) && (
         <div className="mt-4">
           <CategoryBar
             values={allocationValues}
