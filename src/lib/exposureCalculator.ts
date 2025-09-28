@@ -1,17 +1,20 @@
 import {
-  StockExposure,
-  ExposureSource,
   ETFProfile,
+  ExposureCalculationResult,
+  ExposureSource,
   PortfolioHolding,
-  ExposureCalculationResult
+  StockExposure,
 } from "@/components/ui/data-table-exposure/types"
 
 export class ExposureCalculator {
   private etfProfiles: Map<string, ETFProfile> = new Map()
   private stockPrices: Map<string, number> = new Map()
-  private companyOverviews: Map<string, { sector: string; industry: string }> = new Map()
+  private companyOverviews: Map<string, { sector: string; industry: string }> =
+    new Map()
 
-  async calculateExposures(holdings: PortfolioHolding[]): Promise<ExposureCalculationResult> {
+  async calculateExposures(
+    holdings: PortfolioHolding[],
+  ): Promise<ExposureCalculationResult> {
     console.log("Starting exposure calculation with holdings:", holdings.length)
 
     // Step 1: Fetch ETF profiles for all ETFs in portfolio
@@ -36,7 +39,10 @@ export class ExposureCalculator {
     await this.processETFHoldings(holdings, exposureMap)
 
     // Step 5: Calculate total portfolio value and percentages
-    const totalPortfolioValue = holdings.reduce((sum, h) => sum + h.marketValue, 0)
+    const totalPortfolioValue = holdings.reduce(
+      (sum, h) => sum + h.marketValue,
+      0,
+    )
 
     // Step 6: Finalize exposures with percentages and create subrows
     const exposures = this.finalizeExposures(exposureMap, totalPortfolioValue)
@@ -46,14 +52,14 @@ export class ExposureCalculator {
       exposures,
       totalPortfolioValue,
       etfProfiles: this.etfProfiles,
-      lastCalculated: new Date()
+      lastCalculated: new Date(),
     }
   }
 
   private async fetchETFProfiles(holdings: PortfolioHolding[]): Promise<void> {
     const etfSymbols = holdings
-      .filter(h => h.type === "fund" && h.ticker)
-      .map(h => h.ticker as string)
+      .filter((h) => h.type === "fund" && h.ticker)
+      .map((h) => h.ticker as string)
 
     if (etfSymbols.length === 0) return
 
@@ -63,7 +69,9 @@ export class ExposureCalculator {
       const mockProfile = this.getMockETFProfile(symbol)
       if (mockProfile && mockProfile.holdings.length > 0) {
         this.etfProfiles.set(symbol, mockProfile)
-        console.log(`Set mock ETF profile for ${symbol} with ${mockProfile.holdings.length} holdings`)
+        console.log(
+          `Set mock ETF profile for ${symbol} with ${mockProfile.holdings.length} holdings`,
+        )
       }
     }
 
@@ -72,7 +80,7 @@ export class ExposureCalculator {
       const response = await fetch("/api/etf-data", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ symbols: etfSymbols })
+        body: JSON.stringify({ symbols: etfSymbols }),
       })
 
       if (!response.ok) {
@@ -86,22 +94,26 @@ export class ExposureCalculator {
       for (const symbol of etfSymbols) {
         const profile = profiles[symbol]
         if (profile && profile.holdings?.data) {
-          console.log(`Setting ETF profile for ${symbol} with ${profile.holdings.data.length} holdings`)
+          console.log(
+            `Setting ETF profile for ${symbol} with ${profile.holdings.data.length} holdings`,
+          )
           this.etfProfiles.set(symbol, {
             symbol: profile.symbol,
             name: profile.name,
-            holdings: profile.holdings.data.map((h: {
-              symbol: string
-              name: string
-              weight: string
-              shares?: string
-            }) => ({
-              symbol: h.symbol,
-              name: h.name,
-              weight: parseFloat(h.weight) || 0,
-              shares: h.shares ? parseFloat(h.shares) : undefined
-            })),
-            lastUpdated: new Date()
+            holdings: profile.holdings.data.map(
+              (h: {
+                symbol: string
+                name: string
+                weight: string
+                shares?: string
+              }) => ({
+                symbol: h.symbol,
+                name: h.name,
+                weight: parseFloat(h.weight) || 0,
+                shares: h.shares ? parseFloat(h.shares) : undefined,
+              }),
+            ),
+            lastUpdated: new Date(),
           })
         } else {
           // Keep the mock data that was already set
@@ -116,27 +128,29 @@ export class ExposureCalculator {
   }
 
   private extractStockPrices(holdings: PortfolioHolding[]): void {
-    holdings.forEach(holding => {
+    holdings.forEach((holding) => {
       if (holding.ticker && holding.type === "stock") {
         this.stockPrices.set(holding.ticker, holding.lastPrice)
       }
     })
   }
 
-  private async fetchCompanyOverviews(holdings: PortfolioHolding[]): Promise<void> {
+  private async fetchCompanyOverviews(
+    holdings: PortfolioHolding[],
+  ): Promise<void> {
     // Collect all unique stock symbols from direct holdings and ETF holdings
     const stockSymbols = new Set<string>()
 
     // Add direct stock holdings
-    holdings.forEach(holding => {
+    holdings.forEach((holding) => {
       if (holding.ticker && holding.type === "stock") {
         stockSymbols.add(holding.ticker)
       }
     })
 
     // Add stocks from ETF holdings
-    this.etfProfiles.forEach(etfProfile => {
-      etfProfile.holdings.forEach(holding => {
+    this.etfProfiles.forEach((etfProfile) => {
+      etfProfile.holdings.forEach((holding) => {
         stockSymbols.add(holding.symbol)
       })
     })
@@ -147,7 +161,7 @@ export class ExposureCalculator {
       const response = await fetch("/api/company-overview", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ symbols: Array.from(stockSymbols) })
+        body: JSON.stringify({ symbols: Array.from(stockSymbols) }),
       })
 
       if (!response.ok) {
@@ -158,7 +172,10 @@ export class ExposureCalculator {
 
       // Store the overviews in our map
       for (const [symbol, overview] of Object.entries(overviews)) {
-        this.companyOverviews.set(symbol, overview as { sector: string; industry: string })
+        this.companyOverviews.set(
+          symbol,
+          overview as { sector: string; industry: string },
+        )
       }
     } catch (error) {
       console.error("Error fetching company overviews:", error)
@@ -168,11 +185,11 @@ export class ExposureCalculator {
 
   private processDirectHoldings(
     holdings: PortfolioHolding[],
-    exposureMap: Map<string, StockExposure>
+    exposureMap: Map<string, StockExposure>,
   ): void {
     holdings
-      .filter(h => h.type === "stock" && h.ticker)
-      .forEach(holding => {
+      .filter((h) => h.type === "stock" && h.ticker)
+      .forEach((holding) => {
         const ticker = holding.ticker!
         const existing = exposureMap.get(ticker)
         const overview = this.companyOverviews.get(ticker)
@@ -198,7 +215,7 @@ export class ExposureCalculator {
             etfValue: 0,
             totalValue: holding.marketValue,
             percentOfPortfolio: 0,
-            exposureSources: []
+            exposureSources: [],
           })
         }
       })
@@ -206,9 +223,9 @@ export class ExposureCalculator {
 
   private async processETFHoldings(
     holdings: PortfolioHolding[],
-    exposureMap: Map<string, StockExposure>
+    exposureMap: Map<string, StockExposure>,
   ): Promise<void> {
-    const etfHoldings = holdings.filter(h => h.type === "fund" && h.ticker)
+    const etfHoldings = holdings.filter((h) => h.type === "fund" && h.ticker)
     console.log(`Processing ${etfHoldings.length} ETF holdings`)
 
     for (const etfHolding of etfHoldings) {
@@ -220,7 +237,9 @@ export class ExposureCalculator {
         continue
       }
 
-      console.log(`Processing ETF ${etfSymbol} with ${etfProfile.holdings.length} holdings`)
+      console.log(
+        `Processing ETF ${etfSymbol} with ${etfProfile.holdings.length} holdings`,
+      )
       const etfValue = etfHolding.marketValue
 
       // Process each stock within the ETF
@@ -248,7 +267,7 @@ export class ExposureCalculator {
           etfName: etfProfile.name,
           sharesViaETF,
           percentOfETF: stockInETF.weight,
-          valueViaETF: stockValueViaETF
+          valueViaETF: stockValueViaETF,
         }
 
         // Update or create exposure
@@ -256,14 +275,18 @@ export class ExposureCalculator {
         const overview = this.companyOverviews.get(stockSymbol)
 
         if (existing) {
-          console.log(`Adding ETF exposure to existing ${stockSymbol}: +${sharesViaETF} shares via ${etfSymbol}`)
+          console.log(
+            `Adding ETF exposure to existing ${stockSymbol}: +${sharesViaETF} shares via ${etfSymbol}`,
+          )
           existing.etfExposure += sharesViaETF
           existing.etfValue += stockValueViaETF
           existing.totalShares = existing.directShares + existing.etfExposure
           existing.totalValue = existing.directValue + existing.etfValue
           existing.exposureSources.push(exposureSource)
         } else {
-          console.log(`Creating new exposure for ${stockSymbol}: ${sharesViaETF} shares via ${etfSymbol}`)
+          console.log(
+            `Creating new exposure for ${stockSymbol}: ${sharesViaETF} shares via ${etfSymbol}`,
+          )
           exposureMap.set(stockSymbol, {
             id: `stock-${stockSymbol}`,
             ticker: stockSymbol,
@@ -278,7 +301,7 @@ export class ExposureCalculator {
             etfValue: stockValueViaETF,
             totalValue: stockValueViaETF,
             percentOfPortfolio: 0,
-            exposureSources: [exposureSource]
+            exposureSources: [exposureSource],
           })
         }
       }
@@ -287,18 +310,21 @@ export class ExposureCalculator {
 
   private finalizeExposures(
     exposureMap: Map<string, StockExposure>,
-    totalPortfolioValue: number
+    totalPortfolioValue: number,
   ): StockExposure[] {
     const exposures: StockExposure[] = []
     console.log(`Finalizing ${exposureMap.size} exposures`)
 
-    exposureMap.forEach(exposure => {
+    exposureMap.forEach((exposure) => {
       // Calculate percentage of portfolio
-      exposure.percentOfPortfolio = (exposure.totalValue / totalPortfolioValue) * 100
+      exposure.percentOfPortfolio =
+        (exposure.totalValue / totalPortfolioValue) * 100
 
       // Log stocks with ETF exposure
       if (exposure.etfExposure > 0) {
-        console.log(`${exposure.ticker}: Direct=${exposure.directShares}, ETF=${exposure.etfExposure}, Sources=${exposure.exposureSources.length}`)
+        console.log(
+          `${exposure.ticker}: Direct=${exposure.directShares}, ETF=${exposure.etfExposure}, Sources=${exposure.exposureSources.length}`,
+        )
       }
 
       // Create subrows for ETF breakdown if there are ETF sources
@@ -306,7 +332,7 @@ export class ExposureCalculator {
         exposure.subRows = exposure.exposureSources.map((source, index) => ({
           id: `${exposure.id}-etf-${index}`,
           ticker: source.etfSymbol,
-          name: `via ${source.etfName}`,
+          name: `${source.etfName}`,
           directShares: 0,
           etfExposure: source.sharesViaETF,
           totalShares: source.sharesViaETF,
@@ -316,7 +342,7 @@ export class ExposureCalculator {
           totalValue: source.valueViaETF,
           percentOfPortfolio: (source.valueViaETF / totalPortfolioValue) * 100,
           exposureSources: [],
-          isETFBreakdown: true
+          isETFBreakdown: true,
         }))
 
         // Add direct holding row if applicable
@@ -324,7 +350,7 @@ export class ExposureCalculator {
           exposure.subRows.unshift({
             id: `${exposure.id}-direct`,
             ticker: exposure.ticker,
-            name: "Direct Holding",
+            name: exposure.name,
             directShares: exposure.directShares,
             etfExposure: 0,
             totalShares: exposure.directShares,
@@ -332,9 +358,10 @@ export class ExposureCalculator {
             directValue: exposure.directValue,
             etfValue: 0,
             totalValue: exposure.directValue,
-            percentOfPortfolio: (exposure.directValue / totalPortfolioValue) * 100,
+            percentOfPortfolio:
+              (exposure.directValue / totalPortfolioValue) * 100,
             exposureSources: [],
-            isETFBreakdown: true
+            isETFBreakdown: true,
           })
         }
       }
@@ -357,9 +384,9 @@ export class ExposureCalculator {
           { symbol: "AMZN", name: "Amazon.com Inc.", weight: 3.51 },
           { symbol: "NVDA", name: "NVIDIA Corporation", weight: 3.12 },
           { symbol: "GOOGL", name: "Alphabet Inc. Class A", weight: 2.15 },
-          { symbol: "TSLA", name: "Tesla Inc.", weight: 1.62 }
+          { symbol: "TSLA", name: "Tesla Inc.", weight: 1.62 },
         ],
-        lastUpdated: new Date()
+        lastUpdated: new Date(),
       },
       SPY: {
         symbol: "SPY",
@@ -367,12 +394,12 @@ export class ExposureCalculator {
         holdings: [
           { symbol: "AAPL", name: "Apple Inc.", weight: 7.27 },
           { symbol: "MSFT", name: "Microsoft Corporation", weight: 7.02 },
-          { symbol: "AMZN", name: "Amazon.com Inc.", weight: 3.50 },
+          { symbol: "AMZN", name: "Amazon.com Inc.", weight: 3.5 },
           { symbol: "NVDA", name: "NVIDIA Corporation", weight: 3.11 },
           { symbol: "GOOGL", name: "Alphabet Inc. Class A", weight: 2.14 },
-          { symbol: "TSLA", name: "Tesla Inc.", weight: 1.61 }
+          { symbol: "TSLA", name: "Tesla Inc.", weight: 1.61 },
         ],
-        lastUpdated: new Date()
+        lastUpdated: new Date(),
       },
       QQQ: {
         symbol: "QQQ",
@@ -383,9 +410,9 @@ export class ExposureCalculator {
           { symbol: "AMZN", name: "Amazon.com Inc.", weight: 5.42 },
           { symbol: "NVDA", name: "NVIDIA Corporation", weight: 4.85 },
           { symbol: "GOOGL", name: "Alphabet Inc. Class A", weight: 2.64 },
-          { symbol: "TSLA", name: "Tesla Inc.", weight: 2.51 }
+          { symbol: "TSLA", name: "Tesla Inc.", weight: 2.51 },
         ],
-        lastUpdated: new Date()
+        lastUpdated: new Date(),
       },
       VTI: {
         symbol: "VTI",
@@ -396,18 +423,20 @@ export class ExposureCalculator {
           { symbol: "AMZN", name: "Amazon.com Inc.", weight: 3.15 },
           { symbol: "NVDA", name: "NVIDIA Corporation", weight: 2.81 },
           { symbol: "GOOGL", name: "Alphabet Inc. Class A", weight: 1.93 },
-          { symbol: "TSLA", name: "Tesla Inc.", weight: 1.46 }
+          { symbol: "TSLA", name: "Tesla Inc.", weight: 1.46 },
         ],
-        lastUpdated: new Date()
-      }
+        lastUpdated: new Date(),
+      },
     }
 
-    return mockProfiles[symbol] || {
-      symbol,
-      name: `${symbol} ETF`,
-      holdings: [],
-      lastUpdated: new Date()
-    }
+    return (
+      mockProfiles[symbol] || {
+        symbol,
+        name: `${symbol} ETF`,
+        holdings: [],
+        lastUpdated: new Date(),
+      }
+    )
   }
 
   // Helper method to fetch real stock prices (optional enhancement)

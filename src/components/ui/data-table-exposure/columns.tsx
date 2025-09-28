@@ -4,14 +4,14 @@ import { Badge } from "@/components/Badge"
 import { getTickerLogoUrl, stockDomainOverrides } from "@/lib/logoUtils"
 import { getTickerColor } from "@/lib/tickerColors"
 import { cx, toProperCase } from "@/lib/utils"
-import Image from "next/image"
-import { useState, useEffect } from "react"
 import {
   RiArrowDownSLine,
   RiArrowRightSLine,
   RiArrowUpSLine,
 } from "@remixicon/react"
 import { ColumnDef } from "@tanstack/react-table"
+import Image from "next/image"
+import { useEffect, useState } from "react"
 import { StockExposure } from "./types"
 
 const formatCurrency = (value: number) => {
@@ -38,14 +38,21 @@ const formatPercentage = (value: number) => {
 const domainCache = new Map<string, string>()
 
 // Component for rendering ticker with logo
-function TickerCell({ ticker, isETFBreakdown }: { ticker: string; isETFBreakdown?: boolean }) {
+function TickerCell({
+  ticker,
+  isETFBreakdown,
+}: {
+  ticker: string
+  isETFBreakdown?: boolean
+}) {
   const [logoError, setLogoError] = useState(false)
   const [companyDomain, setCompanyDomain] = useState<string | undefined>(
-    domainCache.get(ticker)
+    domainCache.get(ticker),
   )
 
   // Special handling for BRK.B - use custom text logo
-  const isBerkshire = ticker.toUpperCase() === 'BRK.B' || ticker.toUpperCase() === 'BRK-B'
+  const isBerkshire =
+    ticker.toUpperCase() === "BRK.B" || ticker.toUpperCase() === "BRK-B"
 
   // Try to get logo URL with domain if available (skip for Berkshire)
   const logoUrl = isBerkshire ? null : getTickerLogoUrl(ticker, companyDomain)
@@ -67,23 +74,23 @@ function TickerCell({ ticker, isETFBreakdown }: { ticker: string; isETFBreakdown
       } else if (!domainCache.has(ticker)) {
         // Only make API call if no override exists
         // Mark as fetching to avoid duplicate requests
-        domainCache.set(ticker, '')
+        domainCache.set(ticker, "")
 
         // Call API to get company overview with OfficialSite
-        fetch('/api/company-overview', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ symbols: [ticker] })
+        fetch("/api/company-overview", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ symbols: [ticker] }),
         })
-          .then(res => res.json())
-          .then(data => {
+          .then((res) => res.json())
+          .then((data) => {
             if (data[ticker]?.officialSite) {
               const site = data[ticker].officialSite
               domainCache.set(ticker, site)
               setCompanyDomain(site)
             }
           })
-          .catch(err => {
+          .catch((err) => {
             console.error(`Failed to fetch domain for ${ticker}:`, err)
             // Remove from cache on error
             domainCache.delete(ticker)
@@ -98,7 +105,7 @@ function TickerCell({ ticker, isETFBreakdown }: { ticker: string; isETFBreakdown
         // Custom Berkshire Hathaway logo
         <div
           className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-xs font-bold text-white"
-          style={{ backgroundColor: '#000080' }}
+          style={{ backgroundColor: "#000080" }}
           aria-hidden="true"
         >
           BH
@@ -109,7 +116,7 @@ function TickerCell({ ticker, isETFBreakdown }: { ticker: string; isETFBreakdown
           alt={ticker}
           width={48}
           height={48}
-          className="size-6 rounded-full object-cover bg-white"
+          className="size-6 rounded-full bg-white object-cover"
           onError={() => setLogoError(true)}
         />
       ) : (
@@ -122,7 +129,7 @@ function TickerCell({ ticker, isETFBreakdown }: { ticker: string; isETFBreakdown
         variant="flat"
         className={cx(
           "font-semibold",
-          isETFBreakdown && "text-gray-600 dark:text-gray-400"
+          isETFBreakdown && "text-gray-600 dark:text-gray-400",
         )}
       >
         {ticker}
@@ -244,7 +251,7 @@ export const createColumns = ({
           className={cx(
             "font-semibold text-gray-900 dark:text-gray-50",
             isNested && "pl-6 font-normal",
-            isETFBreakdown && "text-gray-600 dark:text-gray-400 italic"
+            isETFBreakdown && "text-gray-600 dark:text-gray-400",
           )}
         >
           {row.original.name}
@@ -341,10 +348,12 @@ export const createColumns = ({
     cell: ({ row }) => {
       const isETFBreakdown = row.original.isETFBreakdown
       return (
-        <span className={cx(
-          "font-semibold",
-          !isETFBreakdown && "text-gray-900 dark:text-gray-50"
-        )}>
+        <span
+          className={cx(
+            "font-semibold",
+            !isETFBreakdown && "text-gray-900 dark:text-gray-50",
+          )}
+        >
           {formatNumber(row.original.totalShares)}
         </span>
       )
@@ -376,10 +385,12 @@ export const createColumns = ({
       const value = row.original.totalValue
       const isETFBreakdown = row.original.isETFBreakdown
       return (
-        <span className={cx(
-          "text-sm",
-          !isETFBreakdown && "font-semibold text-gray-900 dark:text-gray-50"
-        )}>
+        <span
+          className={cx(
+            "text-sm",
+            !isETFBreakdown && "font-semibold text-gray-900 dark:text-gray-50",
+          )}
+        >
           {formatCurrency(value)}
         </span>
       )
@@ -415,11 +426,13 @@ export const createColumns = ({
       const isConcentrated = percent > 10 && !isETFBreakdown
 
       return (
-        <span className={cx(
-          "text-sm",
-          !isETFBreakdown && "font-semibold text-gray-900 dark:text-gray-50",
-          isConcentrated && "text-orange-600 dark:text-orange-400"
-        )}>
+        <span
+          className={cx(
+            "text-sm",
+            !isETFBreakdown && "font-semibold text-gray-900 dark:text-gray-50",
+            isConcentrated && "text-orange-600 dark:text-orange-400",
+          )}
+        >
           {formatPercentage(percent)}
         </span>
       )
