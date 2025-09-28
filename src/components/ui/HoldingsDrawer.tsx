@@ -11,68 +11,9 @@ import {
 } from "@/components/Drawer"
 import { Input } from "@/components/Input"
 import { Label } from "@/components/Label"
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/Select"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/Tabs"
+import { AccountSelector } from "@/components/ui/AccountSelector"
 import React from "react"
-
-// Get institution brand color
-const getInstitutionBrandColor = (institution: string): string => {
-  const brandColors: Record<string, string> = {
-    fidelity: "bg-emerald-600",
-    chase: "bg-blue-600",
-    vanguard: "bg-red-600",
-    wealthfront: "bg-purple-600",
-    amex: "bg-blue-700",
-    schwab: "bg-orange-600",
-    etrade: "bg-purple-700",
-    "td-ameritrade": "bg-green-600",
-    merrill: "bg-blue-600",
-    betterment: "bg-blue-500",
-    robinhood: "bg-green-500",
-    bofa: "bg-red-700",
-    "wells-fargo": "bg-red-600",
-    citi: "bg-blue-600",
-  }
-  return brandColors[institution] || "bg-gray-500"
-}
-
-// Get institution initials for logo
-const getInstitutionInitials = (institutionLabel: string): string => {
-  const words = institutionLabel.split(" ")
-  if (words.length === 1) {
-    return words[0].substring(0, 2).toUpperCase()
-  }
-  return words
-    .map((word) => word[0])
-    .join("")
-    .substring(0, 2)
-    .toUpperCase()
-}
-
-// Map institutions to labels
-const institutionLabels: Record<string, string> = {
-  fidelity: "Fidelity Investments",
-  vanguard: "Vanguard",
-  schwab: "Charles Schwab",
-  etrade: "E*TRADE",
-  "td-ameritrade": "TD Ameritrade",
-  merrill: "Merrill Edge",
-  wealthfront: "Wealthfront",
-  betterment: "Betterment",
-  robinhood: "Robinhood",
-  chase: "Chase",
-  bofa: "Bank of America",
-  "wells-fargo": "Wells Fargo",
-  citi: "Citibank",
-  amex: "American Express",
-  other: "Other",
-}
 
 export interface HoldingFormData {
   id?: string
@@ -220,56 +161,14 @@ export function HoldingsDrawer({
 
         <DrawerBody className="-mx-6 space-y-6 overflow-y-scroll border-t border-gray-200 px-6 dark:border-gray-800">
           <FormField label="Account" required>
-            <Select
+            <AccountSelector
+              accounts={accounts}
               value={formData.accountId}
               onValueChange={(value) =>
                 handleUpdateForm({ accountId: value })
               }
-            >
-              <SelectTrigger>
-                <SelectValue placeholder="Select an account">
-                  {formData.accountId && (() => {
-                    const selectedAccount = accounts.find(a => a.id === formData.accountId)
-                    if (selectedAccount) {
-                      const institutionLabel = selectedAccount.institutionLabel || institutionLabels[selectedAccount.institution] || selectedAccount.institution
-                      return (
-                        <div className="flex items-center gap-2">
-                          <div
-                            className={`flex size-5 shrink-0 items-center justify-center rounded-full text-[10px] font-semibold text-white ${getInstitutionBrandColor(selectedAccount.institution)}`}
-                          >
-                            {getInstitutionInitials(institutionLabel)}
-                          </div>
-                          <span className="truncate">{selectedAccount.name}</span>
-                        </div>
-                      )
-                    }
-                    return null
-                  })()}
-                </SelectValue>
-              </SelectTrigger>
-              <SelectContent>
-                {accounts.map((account) => {
-                  const institutionLabel = account.institutionLabel || institutionLabels[account.institution] || account.institution
-                  return (
-                    <SelectItem key={account.id} value={account.id}>
-                      <div className="flex items-start gap-2">
-                        <div
-                          className={`flex size-5 shrink-0 items-center justify-center rounded-full text-[10px] font-semibold text-white ${getInstitutionBrandColor(account.institution)}`}
-                        >
-                          {getInstitutionInitials(institutionLabel)}
-                        </div>
-                        <div className="flex flex-col">
-                          <span>{account.name}</span>
-                          <span className="text-xs text-gray-500">
-                            {institutionLabel}
-                          </span>
-                        </div>
-                      </div>
-                    </SelectItem>
-                  )
-                })}
-              </SelectContent>
-            </Select>
+              placeholder="Select an account"
+            />
           </FormField>
 
           <div>

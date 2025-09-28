@@ -148,12 +148,12 @@ export default function AccountCard({
             alt={institution}
             width={80}
             height={80}
-            className="size-10 rounded-full bg-white object-cover"
+            className="size-9 rounded-full bg-white object-cover"
             onError={() => setLogoError(true)}
           />
         ) : (
           <div
-            className={`flex size-10 shrink-0 items-center justify-center rounded-full text-sm font-semibold text-white ${getInstitutionBrandColor(institution)}`}
+            className={`flex size-9 shrink-0 items-center justify-center rounded-full text-sm font-semibold text-white ${getInstitutionBrandColor(institution)}`}
           >
             {getInstitutionInitials(institution)}
           </div>

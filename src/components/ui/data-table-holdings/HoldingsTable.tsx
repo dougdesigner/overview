@@ -1,13 +1,6 @@
 "use client"
 import { Card } from "@/components/Card"
 import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/Select"
-import {
   Table,
   TableBody,
   TableCell,
@@ -15,8 +8,8 @@ import {
   TableHeaderCell,
   TableRow,
 } from "@/components/Table"
-import { getInstitutionLogoUrl } from "@/lib/logoUtils"
 import { cx } from "@/lib/utils"
+import { AccountSelector } from "@/components/ui/AccountSelector"
 import {
   ExpandedState,
   flexRender,
@@ -28,103 +21,10 @@ import {
   SortingState,
   useReactTable,
 } from "@tanstack/react-table"
-import Image from "next/image"
 import React from "react"
 import { DataTablePagination } from "../data-table/DataTablePagination"
 import { createColumns } from "./columns"
 import { Holding, HoldingsTableProps } from "./types"
-
-// Get institution brand color
-const getInstitutionBrandColor = (institution: string): string => {
-  const brandColors: Record<string, string> = {
-    fidelity: "bg-emerald-600",
-    chase: "bg-blue-600",
-    vanguard: "bg-red-600",
-    wealthfront: "bg-purple-600",
-    amex: "bg-blue-700",
-    schwab: "bg-orange-600",
-    etrade: "bg-purple-700",
-    "td-ameritrade": "bg-green-600",
-    merrill: "bg-blue-600",
-    betterment: "bg-blue-500",
-    robinhood: "bg-green-500",
-    bofa: "bg-red-700",
-    "wells-fargo": "bg-red-600",
-    citi: "bg-blue-600",
-  }
-  return brandColors[institution] || "bg-gray-500"
-}
-
-// Get institution initials for logo
-const getInstitutionInitials = (institutionLabel: string): string => {
-  const words = institutionLabel.split(" ")
-  if (words.length === 1) {
-    return words[0].substring(0, 2).toUpperCase()
-  }
-  return words
-    .map((word) => word[0])
-    .join("")
-    .substring(0, 2)
-    .toUpperCase()
-}
-
-// Map institutions to labels (matching the names in logoUtils)
-const institutionLabels: Record<string, string> = {
-  fidelity: "Fidelity Investments",
-  vanguard: "Vanguard",
-  schwab: "Charles Schwab",
-  etrade: "E*TRADE",
-  "td-ameritrade": "TD Ameritrade",
-  merrill: "Merrill Edge",
-  wealthfront: "Wealthfront",
-  betterment: "Betterment",
-  robinhood: "Robinhood",
-  chase: "Chase",
-  bofa: "Bank of America",
-  "wells-fargo": "Wells Fargo",
-  citi: "Citibank",
-  amex: "American Express",
-  other: "Other",
-}
-
-// Component for rendering institution logo with fallback
-function InstitutionLogo({
-  institution,
-  className = "size-5",
-}: {
-  institution: string
-  className?: string
-}) {
-  const [logoError, setLogoError] = React.useState(false)
-  const institutionLabel = institutionLabels[institution] || institution
-  const logoUrl = getInstitutionLogoUrl(institutionLabel)
-
-  if (!logoUrl || logoError) {
-    // Fallback to initials
-    return (
-      <div
-        className={cx(
-          "flex shrink-0 items-center justify-center rounded-full text-[10px] font-semibold text-white",
-          className,
-          getInstitutionBrandColor(institution),
-        )}
-      >
-        {getInstitutionInitials(institutionLabel)}
-      </div>
-    )
-  }
-
-  return (
-    <Image
-      src={logoUrl}
-      alt={institutionLabel}
-      width={20}
-      height={20}
-      className={cx("shrink-0 rounded-full bg-white object-cover", className)}
-      onError={() => setLogoError(true)}
-    />
-  )
-}
 
 // Group holdings by ticker and account for nested display
 const groupHoldings = (holdings: Holding[]): Holding[] => {
@@ -218,36 +118,40 @@ export function HoldingsTable({
     }).format(value)
   }
 
-  // Toggle expand/collapse all
-  const toggleExpandAll = () => {
-    const allExpandableRows = table
+  // We need to create the table first before we can use it in toggleExpandAll
+  const tableRef = React.useRef<any>(null)
+
+  const toggleExpandAll = React.useCallback(() => {
+    if (!tableRef.current) return
+    const allExpandableRows = tableRef.current
       .getRowModel()
-      .rows.filter((row) => row.getCanExpand())
-    const allExpanded = allExpandableRows.every((row) => row.getIsExpanded())
+      .rows.filter((row: any) => row.getCanExpand())
+    const allExpanded = allExpandableRows.every((row: any) => row.getIsExpanded())
 
     if (allExpanded) {
       setExpanded({})
     } else {
       const newExpanded: ExpandedState = {}
-      allExpandableRows.forEach((row) => {
+      allExpandableRows.forEach((row: any) => {
         newExpanded[row.id] = true
       })
       setExpanded(newExpanded)
     }
-  }
+  }, [])
 
-  const areAllExpanded = () => {
+  const areAllExpanded = React.useCallback(() => {
+    if (!tableRef.current) return false
     const allExpandableRows =
-      table?.getRowModel().rows.filter((row) => row.getCanExpand()) || []
+      tableRef.current.getRowModel().rows.filter((row: any) => row.getCanExpand()) || []
     return (
       allExpandableRows.length > 0 &&
-      allExpandableRows.every((row) => row.getIsExpanded())
+      allExpandableRows.every((row: any) => row.getIsExpanded())
     )
-  }
+  }, [])
 
   const columns = React.useMemo(
     () => createColumns({ onEdit, onDelete, toggleExpandAll, areAllExpanded }),
-    [onEdit, onDelete],
+    [onEdit, onDelete, toggleExpandAll, areAllExpanded],
   )
 
   const table = useReactTable({
@@ -272,6 +176,11 @@ export function HoldingsTable({
     },
   })
 
+  // Store the table in the ref so it can be used in callbacks
+  React.useEffect(() => {
+    tableRef.current = table
+  }, [table])
+
   return (
     <div className="space-y-4">
       {/* Account Filter and Total Value */}
@@ -280,58 +189,17 @@ export function HoldingsTable({
           <label htmlFor="account-filter" className="text-sm font-medium">
             Account
           </label>
-          <Select
+          <AccountSelector
+            accounts={accounts}
             value={selectedAccount}
             onValueChange={(value) => {
               setSelectedAccount(value)
               onAccountFilterChange?.(value)
             }}
-          >
-            <SelectTrigger className="w-full sm:w-[200px]" id="account-filter">
-              <SelectValue placeholder="Select an account">
-                {selectedAccount === "all"
-                  ? "All Accounts"
-                  : (() => {
-                      const selectedAccountData = accounts.find(
-                        (a) => a.id === selectedAccount,
-                      )
-                      if (selectedAccountData) {
-                        return (
-                          <div className="flex items-center gap-2">
-                            <InstitutionLogo
-                              institution={selectedAccountData.institution}
-                            />
-                            <span className="truncate">
-                              {selectedAccountData.name}
-                            </span>
-                          </div>
-                        )
-                      }
-                      return null
-                    })()}
-              </SelectValue>
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="all">All Accounts</SelectItem>
-              {accounts.map((account) => {
-                const institutionLabel =
-                  institutionLabels[account.institution] || account.institution
-                return (
-                  <SelectItem key={account.id} value={account.id}>
-                    <div className="flex items-start gap-2">
-                      <InstitutionLogo institution={account.institution} />
-                      <div className="flex flex-col">
-                        <span>{account.name}</span>
-                        <span className="text-xs text-gray-500">
-                          {institutionLabel}
-                        </span>
-                      </div>
-                    </div>
-                  </SelectItem>
-                )
-              })}
-            </SelectContent>
-          </Select>
+            showAllOption={true}
+            className="w-full sm:w-[200px]"
+            id="account-filter"
+          />
         </div>
         <div className="text-right">
           <div className="text-base font-medium text-gray-900 dark:text-gray-50">
