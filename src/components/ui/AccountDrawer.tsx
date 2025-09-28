@@ -198,8 +198,8 @@ function InstitutionItem({ institution }: { institution: { value: string; label:
         <Image
           src={logoUrl}
           alt={institution.label}
-          width={24}
-          height={24}
+          width={48}
+          height={48}
           className="size-6 rounded-full object-cover bg-white"
           onError={() => setLogoError(true)}
         />

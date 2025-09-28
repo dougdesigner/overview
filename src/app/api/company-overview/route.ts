@@ -24,11 +24,12 @@ export async function POST(request: Request) {
       if (overview) {
         acc[symbol.toUpperCase()] = {
           sector: overview.Sector,
-          industry: overview.Industry
+          industry: overview.Industry,
+          officialSite: overview.OfficialSite
         }
       }
       return acc
-    }, {} as Record<string, { sector: string; industry: string }>)
+    }, {} as Record<string, { sector: string; industry: string; officialSite?: string }>)
 
     return NextResponse.json(result)
   } catch (error) {

@@ -1,3 +1,5 @@
+"use client"
+
 import { Badge } from "@/components/Badge"
 import { Button } from "@/components/Button"
 import {
@@ -6,8 +8,11 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/DropdownMenu"
+import { getTickerLogoUrl, stockDomainOverrides } from "@/lib/logoUtils"
 import { getTickerColor } from "@/lib/tickerColors"
 import { cx } from "@/lib/utils"
+import Image from "next/image"
+import { useState, useEffect } from "react"
 import {
   RiArrowDownSLine,
   RiArrowRightSLine,
@@ -43,6 +48,83 @@ const formatPercentage = (value: number) => {
 }
 
 // Note: getTickerColor is now imported from @/lib/tickerColors for shared use across the app
+
+// Cache for company domains to avoid repeated API calls
+const domainCache = new Map<string, string>()
+
+// Component for rendering ticker with logo
+function TickerCell({ ticker, type }: { ticker: string; type?: string }) {
+  const [logoError, setLogoError] = useState(false)
+  const [companyDomain, setCompanyDomain] = useState<string | undefined>(
+    domainCache.get(ticker)
+  )
+
+  // Try to get logo URL with domain if available
+  const logoUrl = getTickerLogoUrl(ticker, companyDomain)
+  const color = getTickerColor(ticker, type)
+
+  // If no domain and it's a stock, check overrides first, then fetch from Alpha Vantage
+  useEffect(() => {
+    if (!companyDomain && !logoUrl && type === 'stock' && ticker) {
+      const upperTicker = ticker.toUpperCase()
+
+      // Check if we have an override first
+      const override = stockDomainOverrides[upperTicker]
+      if (override) {
+        // Use override, skip API call
+        domainCache.set(ticker, `https://${override}`)
+        setCompanyDomain(`https://${override}`)
+      } else if (!domainCache.has(ticker)) {
+        // Only make API call if no override exists
+        // Mark as fetching to avoid duplicate requests
+        domainCache.set(ticker, '')
+
+        // Call API to get company overview with OfficialSite
+        fetch('/api/company-overview', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ symbols: [ticker] })
+        })
+          .then(res => res.json())
+          .then(data => {
+            if (data[ticker]?.officialSite) {
+              const site = data[ticker].officialSite
+              domainCache.set(ticker, site)
+              setCompanyDomain(site)
+            }
+          })
+          .catch(err => {
+            console.error(`Failed to fetch domain for ${ticker}:`, err)
+            // Remove from cache on error
+            domainCache.delete(ticker)
+          })
+      }
+    }
+  }, [ticker, type, companyDomain, logoUrl])
+
+  return (
+    <div className="flex items-center gap-2">
+      {logoUrl && !logoError ? (
+        <Image
+          src={logoUrl}
+          alt={ticker}
+          width={48}
+          height={48}
+          className="size-6 rounded-full object-cover bg-white"
+          onError={() => setLogoError(true)}
+        />
+      ) : (
+        <div
+          className={cx("h-6 w-6 shrink-0 rounded-full", color)}
+          aria-hidden="true"
+        />
+      )}
+      <Badge variant="flat" className="font-semibold">
+        {ticker}
+      </Badge>
+    </div>
+  )
+}
 
 interface ColumnsProps {
   onEdit: (holding: Holding) => void
@@ -97,7 +179,7 @@ export const createColumns = ({
     enableSorting: false,
     meta: {
       className: "!w-6 !pr-0",
-    },
+    } as any,
   },
   {
     header: ({ column }) => {
@@ -123,19 +205,7 @@ export const createColumns = ({
 
       if (!ticker) return <span className="text-gray-400">—</span>
 
-      const color = getTickerColor(ticker, type)
-
-      return (
-        <div className="flex items-center gap-2">
-          <div
-            className={cx("h-6 w-6 shrink-0 rounded-full", color)}
-            aria-hidden="true"
-          />
-          <Badge variant="flat" className="font-semibold">
-            {ticker}
-          </Badge>
-        </div>
-      )
+      return <TickerCell ticker={ticker} type={type} />
     },
     sortingFn: (rowA, rowB) => {
       const tickerA = rowA.original.ticker || ""
@@ -145,7 +215,7 @@ export const createColumns = ({
     enableSorting: true,
     meta: {
       className: "text-left",
-    },
+    } as any,
   },
   {
     header: ({ column }) => {
@@ -228,7 +298,7 @@ export const createColumns = ({
     enableSorting: true,
     meta: {
       className: "text-right",
-    },
+    } as any,
   },
   {
     header: ({ column }) => {
@@ -264,7 +334,7 @@ export const createColumns = ({
     enableSorting: true,
     meta: {
       className: "text-right",
-    },
+    } as any,
   },
   {
     header: ({ column }) => {
@@ -291,7 +361,7 @@ export const createColumns = ({
     enableSorting: true,
     meta: {
       className: "text-right",
-    },
+    } as any,
   },
   {
     header: ({ column }) => {
@@ -322,7 +392,7 @@ export const createColumns = ({
     enableSorting: true,
     meta: {
       className: "text-right",
-    },
+    } as any,
   },
   {
     id: "actions",

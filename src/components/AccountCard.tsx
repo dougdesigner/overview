@@ -145,8 +145,8 @@ export default function AccountCard({
           <Image
             src={logoUrl}
             alt={institution}
-            width={40}
-            height={40}
+            width={80}
+            height={80}
             className="size-10 rounded-full object-cover bg-white"
             onError={() => setLogoError(true)}
           />

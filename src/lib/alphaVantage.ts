@@ -21,6 +21,7 @@ interface CompanyOverview {
   Exchange?: string
   Currency?: string
   Country?: string
+  OfficialSite?: string
 }
 
 interface CacheEntry<T = ETFProfileResponse | CompanyOverview> {
