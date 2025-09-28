@@ -101,10 +101,11 @@ const stockDomainOverrides: Record<string, string> = {
   TMUS: "t-mobile.com",
 
   // Berkshire variants
+  // Note: BRK.B and BRK-B use custom text logo in components
   "BRK.A": "berkshirehathaway.com",
-  "BRK.B": "berkshirehathaway.com",
+  // "BRK.B": "berkshirehathaway.com",  // Using custom BH text logo
   "BRK-A": "berkshirehathaway.com",
-  "BRK-B": "berkshirehathaway.com",
+  // "BRK-B": "berkshirehathaway.com",  // Using custom BH text logo
 }
 
 // Export for use in other components

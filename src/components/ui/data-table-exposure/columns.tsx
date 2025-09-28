@@ -1,6 +1,11 @@
+"use client"
+
 import { Badge } from "@/components/Badge"
+import { getTickerLogoUrl, stockDomainOverrides } from "@/lib/logoUtils"
 import { getTickerColor } from "@/lib/tickerColors"
 import { cx, toProperCase } from "@/lib/utils"
+import Image from "next/image"
+import { useState, useEffect } from "react"
 import {
   RiArrowDownSLine,
   RiArrowRightSLine,
@@ -27,6 +32,103 @@ const formatNumber = (value: number) => {
 
 const formatPercentage = (value: number) => {
   return `${value.toFixed(2)}%`
+}
+
+// Cache for company domains to avoid repeated API calls
+const domainCache = new Map<string, string>()
+
+// Component for rendering ticker with logo
+function TickerCell({ ticker, isETFBreakdown }: { ticker: string; isETFBreakdown?: boolean }) {
+  const [logoError, setLogoError] = useState(false)
+  const [companyDomain, setCompanyDomain] = useState<string | undefined>(
+    domainCache.get(ticker)
+  )
+
+  // Special handling for BRK.B - use custom text logo
+  const isBerkshire = ticker.toUpperCase() === 'BRK.B' || ticker.toUpperCase() === 'BRK-B'
+
+  // Try to get logo URL with domain if available (skip for Berkshire)
+  const logoUrl = isBerkshire ? null : getTickerLogoUrl(ticker, companyDomain)
+  const color = isETFBreakdown
+    ? "bg-gray-200 dark:bg-gray-700"
+    : getTickerColor(ticker, "stock")
+
+  // If no domain and it's not an ETF breakdown, check overrides first, then fetch from Alpha Vantage
+  useEffect(() => {
+    if (!companyDomain && !logoUrl && !isETFBreakdown && ticker) {
+      const upperTicker = ticker.toUpperCase()
+
+      // Check if we have an override first
+      const override = stockDomainOverrides[upperTicker]
+      if (override) {
+        // Use override, skip API call
+        domainCache.set(ticker, `https://${override}`)
+        setCompanyDomain(`https://${override}`)
+      } else if (!domainCache.has(ticker)) {
+        // Only make API call if no override exists
+        // Mark as fetching to avoid duplicate requests
+        domainCache.set(ticker, '')
+
+        // Call API to get company overview with OfficialSite
+        fetch('/api/company-overview', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ symbols: [ticker] })
+        })
+          .then(res => res.json())
+          .then(data => {
+            if (data[ticker]?.officialSite) {
+              const site = data[ticker].officialSite
+              domainCache.set(ticker, site)
+              setCompanyDomain(site)
+            }
+          })
+          .catch(err => {
+            console.error(`Failed to fetch domain for ${ticker}:`, err)
+            // Remove from cache on error
+            domainCache.delete(ticker)
+          })
+      }
+    }
+  }, [ticker, isETFBreakdown, companyDomain, logoUrl])
+
+  return (
+    <div className="flex items-center gap-2">
+      {isBerkshire && !isETFBreakdown ? (
+        // Custom Berkshire Hathaway logo
+        <div
+          className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-xs font-bold text-white"
+          style={{ backgroundColor: '#000080' }}
+          aria-hidden="true"
+        >
+          BH
+        </div>
+      ) : logoUrl && !logoError && !isETFBreakdown ? (
+        <Image
+          src={logoUrl}
+          alt={ticker}
+          width={48}
+          height={48}
+          className="size-6 rounded-full object-cover bg-white"
+          onError={() => setLogoError(true)}
+        />
+      ) : (
+        <div
+          className={cx("h-6 w-6 shrink-0 rounded-full", color)}
+          aria-hidden="true"
+        />
+      )}
+      <Badge
+        variant="flat"
+        className={cx(
+          "font-semibold",
+          isETFBreakdown && "text-gray-600 dark:text-gray-400"
+        )}
+      >
+        {ticker}
+      </Badge>
+    </div>
+  )
 }
 
 interface ColumnsProps {
@@ -78,7 +180,7 @@ export const createColumns = ({
     enableSorting: false,
     meta: {
       className: "!w-6 !pr-0",
-    },
+    } as any,
   },
   {
     header: ({ column }) => {
@@ -104,27 +206,7 @@ export const createColumns = ({
 
       if (!ticker) return <span className="text-gray-400">—</span>
 
-      const color = isETFBreakdown
-        ? "bg-gray-200 dark:bg-gray-700"
-        : getTickerColor(ticker, "stock")
-
-      return (
-        <div className="flex items-center gap-2">
-          <div
-            className={cx("h-6 w-6 shrink-0 rounded-full", color)}
-            aria-hidden="true"
-          />
-          <Badge
-            variant={isETFBreakdown ? "flat" : "flat"}
-            className={cx(
-              "font-semibold",
-              isETFBreakdown && "text-gray-600 dark:text-gray-400"
-            )}
-          >
-            {ticker}
-          </Badge>
-        </div>
-      )
+      return <TickerCell ticker={ticker} isETFBreakdown={isETFBreakdown} />
     },
     sortingFn: (rowA, rowB) => {
       const tickerA = rowA.original.ticker || ""
@@ -134,7 +216,7 @@ export const createColumns = ({
     enableSorting: true,
     meta: {
       className: "text-left",
-    },
+    } as any,
   },
   {
     header: ({ column }) => {
@@ -202,7 +284,7 @@ export const createColumns = ({
     enableSorting: true,
     meta: {
       className: "text-right",
-    },
+    } as any,
   },
   {
     header: ({ column }) => {
@@ -236,7 +318,7 @@ export const createColumns = ({
     enableSorting: true,
     meta: {
       className: "text-right",
-    },
+    } as any,
   },
   {
     header: ({ column }) => {
@@ -270,7 +352,7 @@ export const createColumns = ({
     enableSorting: true,
     meta: {
       className: "text-right",
-    },
+    } as any,
   },
   {
     header: ({ column }) => {
@@ -305,7 +387,7 @@ export const createColumns = ({
     enableSorting: true,
     meta: {
       className: "text-right",
-    },
+    } as any,
   },
   {
     header: ({ column }) => {
@@ -345,7 +427,7 @@ export const createColumns = ({
     enableSorting: true,
     meta: {
       className: "text-right",
-    },
+    } as any,
   },
   {
     header: ({ column }) => {
@@ -382,7 +464,7 @@ export const createColumns = ({
     enableSorting: true,
     meta: {
       className: "text-left",
-    },
+    } as any,
   },
   {
     header: ({ column }) => {

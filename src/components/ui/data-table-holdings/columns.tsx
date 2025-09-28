@@ -59,8 +59,11 @@ function TickerCell({ ticker, type }: { ticker: string; type?: string }) {
     domainCache.get(ticker)
   )
 
-  // Try to get logo URL with domain if available
-  const logoUrl = getTickerLogoUrl(ticker, companyDomain)
+  // Special handling for BRK.B - use custom text logo
+  const isBerkshire = ticker.toUpperCase() === 'BRK.B' || ticker.toUpperCase() === 'BRK-B'
+
+  // Try to get logo URL with domain if available (skip for Berkshire)
+  const logoUrl = isBerkshire ? null : getTickerLogoUrl(ticker, companyDomain)
   const color = getTickerColor(ticker, type)
 
   // If no domain and it's a stock, check overrides first, then fetch from Alpha Vantage
@@ -104,7 +107,16 @@ function TickerCell({ ticker, type }: { ticker: string; type?: string }) {
 
   return (
     <div className="flex items-center gap-2">
-      {logoUrl && !logoError ? (
+      {isBerkshire ? (
+        // Custom Berkshire Hathaway logo
+        <div
+          className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-xs font-bold text-white"
+          style={{ backgroundColor: '#000080' }}
+          aria-hidden="true"
+        >
+          BH
+        </div>
+      ) : logoUrl && !logoError ? (
         <Image
           src={logoUrl}
           alt={ticker}
