@@ -63,9 +63,10 @@ function TickerCell({
 
   // Try to get logo URL with domain if available (skip for Berkshire)
   const logoUrl = isBerkshire ? null : getTickerLogoUrl(ticker, companyDomain)
-  const color = isETFBreakdown && !isDirectHolding
-    ? "bg-gray-200 dark:bg-gray-700"
-    : getTickerColor(ticker, "stock")
+  const color =
+    isETFBreakdown && !isDirectHolding
+      ? "bg-gray-200 dark:bg-gray-700"
+      : getTickerColor(ticker, "stock")
 
   // If no domain and it's a stock (not an ETF contribution), check overrides first, then fetch from Alpha Vantage
   useEffect(() => {
@@ -111,7 +112,7 @@ function TickerCell({
       {isBerkshire && treatAsStock ? (
         // Custom Berkshire Hathaway logo
         <div
-          className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-xs font-bold text-white"
+          className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full font-serif text-xs font-bold text-white"
           style={{ backgroundColor: "#000080" }}
           aria-hidden="true"
         >
@@ -224,13 +225,16 @@ export const createColumns = ({
       // Check if this is a direct holding breakdown
       // Direct holdings have id like "stock-AAPL-direct"
       // ETF contributions have id like "stock-AAPL-etf-0"
-      const isDirectHolding = isETFBreakdown && row.original.id?.includes('-direct')
+      const isDirectHolding =
+        isETFBreakdown && row.original.id?.includes("-direct")
 
-      return <TickerCell
-        ticker={ticker}
-        isETFBreakdown={isETFBreakdown}
-        isDirectHolding={isDirectHolding}
-      />
+      return (
+        <TickerCell
+          ticker={ticker}
+          isETFBreakdown={isETFBreakdown}
+          isDirectHolding={isDirectHolding}
+        />
+      )
     },
     sortingFn: (rowA, rowB) => {
       const tickerA = rowA.original.ticker || ""
@@ -372,9 +376,7 @@ export const createColumns = ({
       const isETFBreakdown = row.original.isETFBreakdown
       return (
         <span
-          className={cx(
-            !isETFBreakdown && "text-gray-900 dark:text-gray-50",
-          )}
+          className={cx(!isETFBreakdown && "text-gray-900 dark:text-gray-50")}
         >
           {formatNumber(row.original.totalShares)}
         </span>
