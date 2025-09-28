@@ -201,7 +201,7 @@ export default function SankeyChartHighcharts({
           style: {
             color: isDark ? "#f3f4f6" : "#111827",
             // textOutline: "none",
-            fontSize: "12px",
+            fontSize: "14px",
             fontWeight: "600",
           },
         },

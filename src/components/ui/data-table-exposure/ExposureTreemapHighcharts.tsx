@@ -4,9 +4,17 @@ import { Card } from "@/components/Card"
 import { toProperCase } from "@/lib/utils"
 import Highcharts from "highcharts"
 import HighchartsReact from "highcharts-react-official"
+import HighchartsTreemap from "highcharts/modules/treemap"
 import { useTheme } from "next-themes"
 import { useEffect, useRef, useState } from "react"
 import { StockExposure } from "./types"
+
+// Initialize Highcharts modules for Next.js
+if (typeof Highcharts === "object") {
+  if (typeof HighchartsTreemap === "function") {
+    HighchartsTreemap(Highcharts)
+  }
+}
 
 interface ExposureTreemapHighchartsProps {
   exposures: StockExposure[]
@@ -172,8 +180,8 @@ export function ExposureTreemapHighcharts({
           treemap: {
             dataLabels: {
               style: {
-                color: isDark ? "#f3f4f6" : "#111827",
-                textOutline: "none",
+                fontSize: "14px",
+                fontWeight: "600",
               },
             },
             levels: [

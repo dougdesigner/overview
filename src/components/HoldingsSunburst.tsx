@@ -4,9 +4,9 @@ import { Card } from "@/components/Card"
 import type { Holding } from "@/components/ui/data-table-holdings/types"
 import Highcharts from "highcharts"
 import HighchartsReact from "highcharts-react-official"
-import HighchartsSunburst from "highcharts/modules/sunburst"
-import HighchartsExporting from "highcharts/modules/exporting"
 import HighchartsExportData from "highcharts/modules/export-data"
+import HighchartsExporting from "highcharts/modules/exporting"
+import HighchartsSunburst from "highcharts/modules/sunburst"
 import { useTheme } from "next-themes"
 import { useEffect, useRef, useState } from "react"
 
@@ -201,9 +201,8 @@ export function HoldingsSunburst({
           },
           style: {
             color: isDark ? "#f3f4f6" : "#111827",
-            fontSize: "12px",
+            fontSize: "14px",
             fontWeight: "600",
-            textOutline: "none",
           },
         },
         borderRadius: 3,
@@ -298,9 +297,9 @@ export function HoldingsSunburst({
       pointFormat:
         '<div style="padding: 2px;">' +
         '<div style="font-weight: 600; margin-bottom: 4px;">{point.name}</div>' +
-        '<div>Value: <b>${point.value:,.0f}</b></div>' +
-        '<div>Portfolio: <b>{point.percentage:.1f}%</b></div>' +
-        '</div>',
+        "<div>Value: <b>${point.value:,.0f}</b></div>" +
+        "<div>Portfolio: <b>{point.percentage:.1f}%</b></div>" +
+        "</div>",
     },
   }
 

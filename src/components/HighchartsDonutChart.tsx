@@ -121,7 +121,7 @@ export function HighchartsDonutChart({
           format: "{point.percentage:.0f}%",
           style: {
             color: isDark ? "#f3f4f6" : "#111827",
-            fontSize: "12px",
+            fontSize: "14px",
             fontWeight: "600",
           },
         },
