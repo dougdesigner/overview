@@ -85,9 +85,9 @@ export function HighchartsDonutChart({
       pointFormat:
         '<div style="padding: 2px;">' +
         '<div style="font-weight: 600; margin-bottom: 4px;">{point.name}</div>' +
-        '<div>Allocation: <b>{point.percentage:.1f}%</b></div>' +
-        '<div>Value: <b>${point.y:,.0f}</b></div>' +
-        '</div>',
+        "<div>Allocation: <b>{point.percentage:.1f}%</b></div>" +
+        "<div>Value: <b>${point.y:,.0f}</b></div>" +
+        "</div>",
       backgroundColor: isDark ? "#1f2937" : "#ffffff",
       borderColor: isDark ? "#4b5563" : "#e5e7eb",
       borderRadius: 6,
@@ -117,13 +117,12 @@ export function HighchartsDonutChart({
         borderRadius: 8,
         dataLabels: {
           enabled: true,
-          distance: -30,
+          distance: -25,
           format: "{point.percentage:.0f}%",
           style: {
             color: isDark ? "#f3f4f6" : "#111827",
             fontSize: "12px",
             fontWeight: "600",
-            textOutline: "none",
           },
         },
         states: {
@@ -172,7 +171,7 @@ export function HighchartsDonutChart({
             dataLabels: {
               style: {
                 color: isDark ? "#f3f4f6" : "#111827",
-                fontSize: "12px",
+                fontSize: "14px",
                 fontWeight: "600",
               },
             },
