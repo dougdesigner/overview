@@ -28,7 +28,8 @@ import { DataTablePagination } from "../data-table/DataTablePagination"
 import { createColumns } from "./columns"
 // import { ExposureTreemap } from "./ExposureTreemap"  // Nivo version - commented out
 // import { ExposureTreemapHighcharts } from "./ExposureTreemapHighcharts"  // Original version
-import { ExposureTreemapHighcharts } from "./ExposureTreemapHighchartsSimplified"
+// import { ExposureTreemapHighcharts } from "./ExposureTreemapHighchartsSimplified"  // Simplified version
+import { ExposureTreemapHighchartsWithLogos as ExposureTreemapHighcharts } from "./ExposureTreemapHighchartsWithLogos"  // Version with logos
 import {
   ExposureCalculationResult,
   ExposureTableProps,
