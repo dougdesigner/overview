@@ -13,6 +13,7 @@ import { Input } from "@/components/Input"
 import { Label } from "@/components/Label"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/Tabs"
 import { AccountSelector } from "@/components/ui/AccountSelector"
+import { TickerSelector } from "@/components/ui/TickerSelector"
 import React from "react"
 
 export interface HoldingFormData {
@@ -187,14 +188,13 @@ export function HoldingsDrawer({
 
               <TabsContent value="stocks-funds" className="mt-4 space-y-4">
                 <FormField label="Ticker Symbol" required>
-                  <Input
-                    name="ticker"
+                  <TickerSelector
                     value={formData.ticker || ""}
-                    onChange={(e) =>
-                      handleUpdateForm({ ticker: e.target.value.toUpperCase() })
+                    onValueChange={(value) =>
+                      handleUpdateForm({ ticker: value })
                     }
-                    placeholder="e.g., AAPL, VOO, MSFT"
-                    className="uppercase"
+                    placeholder="Select or enter ticker"
+                    required
                   />
                 </FormField>
 

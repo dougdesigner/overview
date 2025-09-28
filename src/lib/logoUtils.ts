@@ -149,19 +149,19 @@ const etfProviderDomains: Record<string, string> = {
 
   // State Street (SPDR) ETFs
   SPY: "statestreet.com",
-  GLD: "ssga.com",
-  XLF: "ssga.com",
-  XLE: "ssga.com",
-  XLK: "ssga.com",
-  XLV: "ssga.com",
-  XLI: "ssga.com",
-  XLY: "ssga.com",
-  XLP: "ssga.com",
-  XLB: "ssga.com",
-  XLU: "ssga.com",
-  XLRE: "ssga.com",
-  MDY: "ssga.com",
-  DIA: "ssga.com",
+  GLD: "statestreet.com",
+  XLF: "statestreet.com",
+  XLE: "statestreet.com",
+  XLK: "statestreet.com",
+  XLV: "statestreet.com",
+  XLI: "statestreet.com",
+  XLY: "statestreet.com",
+  XLP: "statestreet.com",
+  XLB: "statestreet.com",
+  XLU: "statestreet.com",
+  XLRE: "statestreet.com",
+  MDY: "statestreet.com",
+  DIA: "statestreet.com",
 
   // Invesco ETFs
   QQQ: "invesco.com",
@@ -300,15 +300,25 @@ export function getTickerLogoUrl(
   // 2. If domain is provided (from Alpha Vantage), use it
   if (domain) {
     // Extract domain from full URL (e.g., "https://www.ibm.com" → "ibm.com")
-    const cleanDomain = domain
+    let cleanDomain = domain
       .replace(/^https?:\/\/(www\.)?/, "")
       .replace(/\/$/, "")
+
+    // Map ssga.com domains to statestreet.com for proper logo display
+    if (cleanDomain === "ssga.com" || cleanDomain.endsWith(".ssga.com")) {
+      cleanDomain = "statestreet.com"
+    }
+
     return `https://img.logo.dev/${cleanDomain}?token=${token}&retina=true&fallback=monogram&format=webp&size=400`
   }
 
   // 3. Check if it's an ETF and use the provider domain
-  const etfDomain = etfProviderDomains[upperTicker]
+  let etfDomain = etfProviderDomains[upperTicker]
   if (etfDomain) {
+    // Map ssga.com domains to statestreet.com for proper logo display
+    if (etfDomain === "ssga.com" || etfDomain.endsWith(".ssga.com")) {
+      etfDomain = "statestreet.com"
+    }
     return `https://img.logo.dev/${etfDomain}?token=${token}&retina=true&fallback=monogram&format=webp&size=400`
   }
 
