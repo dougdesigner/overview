@@ -2,10 +2,12 @@
 
 import { Badge } from "@/components/Badge"
 import { Card } from "@/components/Card"
-import { DonutChart } from "@/components/DonutChart"
+import { HighchartsDonutChart } from "@/components/HighchartsDonutChart"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/Tabs"
+import { InstitutionLogo } from "@/components/ui/InstitutionLogo"
+import { TickerLogo } from "@/components/ui/TickerLogo"
 import { AvailableChartColorsKeys } from "@/lib/chartUtils"
-import { getTickerColor, getTickerType } from "@/lib/tickerColors"
+import { getTickerType } from "@/lib/tickerColors"
 import { cx } from "@/lib/utils"
 import React from "react"
 
@@ -14,6 +16,7 @@ export interface AssetAllocationItem {
   amount: number
   share: string
   borderColor: string
+  institution?: string // For accounts tab
 }
 
 export interface AssetAllocationData {
@@ -104,30 +107,35 @@ const getDefaultData = (): AssetAllocationData[] => {
       amount: 98987,
       share: "40.0%",
       borderColor: "border-violet-500 dark:border-violet-500",
+      institution: "fidelity",
     },
     {
       name: "Personal Investment",
       amount: 74240,
       share: "30.0%",
       borderColor: "border-fuchsia-500 dark:border-fuchsia-500",
+      institution: "wealthfront",
     },
     {
       name: "Roth IRA",
       amount: 49494,
       share: "20.0%",
       borderColor: "border-pink-500 dark:border-pink-500",
+      institution: "vanguard",
     },
     {
       name: "Savings",
       amount: 17224,
       share: "7.0%",
       borderColor: "border-sky-500 dark:border-sky-500",
+      institution: "chase",
     },
     {
       name: "Checking",
       amount: 7423,
       share: "3.0%",
       borderColor: "border-lime-500 dark:border-lime-500",
+      institution: "chase",
     },
   ]
 
@@ -277,27 +285,14 @@ const AssetAllocationCard = React.forwardRef<
           <div className="px-6 pb-6">
             {allocationData.map((category) => (
               <TabsContent key={category.name} value={category.name}>
-                <div className="relative mx-auto mt-8">
-                  {/* Persistent total value display */}
-                  <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
-                    <div className="text-center">
-                      <div className="text-2xl font-semibold text-gray-900 dark:text-gray-50">
-                        {currencyFormatter(totalValue)}
-                      </div>
-                      {/* <div className="text-sm text-gray-500 dark:text-gray-400">
-                        Total
-                      </div> */}
-                    </div>
-                  </div>
-                  {/* DonutChart with label disabled */}
-                  <DonutChart
+                <div className="mx-auto mt-8">
+                  {/* HighchartsDonutChart */}
+                  <HighchartsDonutChart
                     data={category.data}
-                    value="amount"
-                    category="name"
+                    totalValue={totalValue}
                     valueFormatter={currencyFormatter}
-                    showLabel={false}
-                    showTooltip={false}
                     colors={category.colors}
+                    height={280}
                   />
                 </div>
                 <p className="mt-8 flex items-center justify-between text-xs text-gray-500 dark:text-gray-500">
@@ -326,21 +321,37 @@ const AssetAllocationCard = React.forwardRef<
                               )}
                               aria-hidden="true"
                             />
-                            {/* Ticker brand color dot */}
-                            <div
-                              className={cx(
-                                "h-6 w-6 shrink-0 rounded-full",
-                                getTickerColor(
-                                  item.name,
-                                  getTickerType(item.name),
-                                ),
-                              )}
-                              aria-hidden="true"
+                            {/* Ticker logo */}
+                            <TickerLogo
+                              ticker={item.name}
+                              type={getTickerType(item.name) as "stock" | "etf"}
+                              className="size-6"
                             />
                             {/* Ticker symbol badge */}
                             <Badge variant="flat" className="font-semibold">
                               {item.name}
                             </Badge>
+                          </>
+                        ) : category.name === "Accounts" && item.institution ? (
+                          // Special styling for accounts with institution logos
+                          <>
+                            {/* Legend color indicator (matches donut chart) */}
+                            <span
+                              className={cx(
+                                item.borderColor.replace(/border/g, "bg"),
+                                "size-2.5 shrink-0 rounded-sm",
+                              )}
+                              aria-hidden="true"
+                            />
+                            {/* Institution logo */}
+                            <InstitutionLogo
+                              institution={item.institution}
+                              className="size-6"
+                            />
+                            {/* Account name */}
+                            <span className="truncate dark:text-gray-300">
+                              {item.name}
+                            </span>
                           </>
                         ) : (
                           // Default styling for other items
