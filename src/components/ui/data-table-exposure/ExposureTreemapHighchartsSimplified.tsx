@@ -196,6 +196,7 @@ export function ExposureTreemapHighcharts({
               // verticalAlign: "center",
               style: {
                 textOutline: "none",
+                color: isDark ? "#f3f4f6" : "#111827",
               },
             },
             borderWidth: 3,
@@ -215,9 +216,11 @@ export function ExposureTreemapHighcharts({
         dataLabels: {
           enabled: true,
           style: {
-            color: isDark ? "#f3f4f6" : "#111827",
+            // color: isDark ? "#f3f4f6" : "#111827",
             fontSize: "14px",
             fontWeight: "600",
+            // textOutline: isDark ? "1px contrast" : "none",
+            textOutline: "none",
           },
         },
       } as Highcharts.SeriesTreemapOptions,

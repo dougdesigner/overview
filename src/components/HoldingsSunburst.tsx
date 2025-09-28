@@ -200,9 +200,11 @@ export function HoldingsSunburst({
             value: 16,
           },
           style: {
-            color: isDark ? "#f3f4f6" : "#111827",
+            // color: isDark ? "#f3f4f6" : "#111827",
             fontSize: "14px",
             fontWeight: "600",
+            textOutline: "none",
+            // textOutline: isDark ? "1px contrast" : "none",
           },
         },
         borderRadius: 3,

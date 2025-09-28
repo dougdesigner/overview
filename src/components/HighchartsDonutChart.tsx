@@ -120,9 +120,10 @@ export function HighchartsDonutChart({
           distance: -25,
           format: "{point.percentage:.0f}%",
           style: {
-            color: isDark ? "#f3f4f6" : "#111827",
+            // color: isDark ? "#f3f4f6" : "#111827",
             fontSize: "14px",
             fontWeight: "600",
+            // textOutline: "none",
           },
         },
         states: {
@@ -170,9 +171,10 @@ export function HighchartsDonutChart({
           pie: {
             dataLabels: {
               style: {
-                color: isDark ? "#f3f4f6" : "#111827",
+                // color: isDark ? "#f3f4f6" : "#111827",
                 fontSize: "14px",
                 fontWeight: "600",
+                textOutline: "none",
               },
             },
           },
