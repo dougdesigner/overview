@@ -4,13 +4,24 @@ import { Card } from "@/components/Card"
 import type { Holding } from "@/components/ui/data-table-holdings/types"
 import Highcharts from "highcharts"
 import HighchartsReact from "highcharts-react-official"
+import HighchartsSunburst from "highcharts/modules/sunburst"
+import HighchartsExporting from "highcharts/modules/exporting"
+import HighchartsExportData from "highcharts/modules/export-data"
 import { useTheme } from "next-themes"
 import { useEffect, useRef, useState } from "react"
 
-// Import Highcharts modules for side effects (auto-initializes in Highcharts v12+)
-import "highcharts/modules/export-data"
-import "highcharts/modules/exporting"
-import "highcharts/modules/sunburst"
+// Initialize Highcharts modules for Next.js
+if (typeof Highcharts === "object") {
+  if (typeof HighchartsSunburst === "function") {
+    HighchartsSunburst(Highcharts)
+  }
+  if (typeof HighchartsExporting === "function") {
+    HighchartsExporting(Highcharts)
+  }
+  if (typeof HighchartsExportData === "function") {
+    HighchartsExportData(Highcharts)
+  }
+}
 
 interface HoldingsSunburstProps {
   holdings: Holding[]

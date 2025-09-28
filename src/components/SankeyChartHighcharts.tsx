@@ -3,13 +3,24 @@
 import { type AvailableChartColorsKeys } from "@/lib/chartUtils"
 import Highcharts from "highcharts"
 import HighchartsReact from "highcharts-react-official"
+import HighchartsSankey from "highcharts/modules/sankey"
+import HighchartsExporting from "highcharts/modules/exporting"
+import HighchartsExportData from "highcharts/modules/export-data"
 import { useTheme } from "next-themes"
 import { useEffect, useRef, useState } from "react"
 
-// Import Highcharts modules for side effects (auto-initializes in Highcharts v12+)
-import "highcharts/modules/export-data"
-import "highcharts/modules/exporting"
-import "highcharts/modules/sankey"
+// Initialize Highcharts modules for Next.js
+if (typeof Highcharts === "object") {
+  if (typeof HighchartsSankey === "function") {
+    HighchartsSankey(Highcharts)
+  }
+  if (typeof HighchartsExporting === "function") {
+    HighchartsExporting(Highcharts)
+  }
+  if (typeof HighchartsExportData === "function") {
+    HighchartsExportData(Highcharts)
+  }
+}
 
 interface SankeyNode {
   id: string

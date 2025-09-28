@@ -10,7 +10,7 @@ This is a Next.js 15 application template from Tremor called "Overview" - a dash
 
 - **Framework**: Next.js 15.1.4 with App Router
 - **UI Components**: Tremor Raw (built on Radix UI primitives)
-- **Charts**: Recharts
+- **Charts**: Recharts and Highcharts
 - **Styling**: Tailwind CSS 3.4 with tailwind-variants
 - **Tables**: TanStack Table v8
 - **TypeScript**: Strict mode enabled
@@ -64,6 +64,8 @@ pnpm run generate:retention # Generate retention cohorts
   - `utils.ts` - cn() function for class merging
   - `formatters.ts` - Number and date formatting utilities
   - `chartUtils.ts` - Chart configuration helpers
+  - `logoUtils.ts` - Functions for fetching ticker and institution logos via logo.dev API
+  - `institutionUtils.ts` - Institution brand colors, labels, and initials helpers
 
 ### Key Patterns
 
@@ -84,6 +86,202 @@ pnpm run generate:retention # Generate retention cohorts
 - Strict mode enabled with no unused locals/parameters
 - Path alias: `@/*` → `./src/*`
 - Separate tsconfig for scripts (`tsconfig.scripts.json`)
+
+## Highcharts Implementation in Next.js
+
+### Important: Module Loading Pattern
+
+Next.js executes code twice - on server-side and then client-side. This causes issues with Highcharts modules that need to extend the Highcharts object. To prevent "Cannot read properties of undefined (reading 'prototype')" errors, follow this pattern:
+
+```typescript
+"use client"
+
+import Highcharts from "highcharts"
+import HighchartsReact from "highcharts-react-official"
+// Import modules as functions
+import HighchartsSankey from "highcharts/modules/sankey"
+import HighchartsExporting from "highcharts/modules/exporting"
+import HighchartsExportData from "highcharts/modules/export-data"
+
+// Initialize modules only when Highcharts is loaded as an object
+if (typeof Highcharts === "object") {
+  // Check each module is a function before calling
+  if (typeof HighchartsSankey === "function") {
+    HighchartsSankey(Highcharts)
+  }
+  if (typeof HighchartsExporting === "function") {
+    HighchartsExporting(Highcharts)
+  }
+  if (typeof HighchartsExportData === "function") {
+    HighchartsExportData(Highcharts)
+  }
+}
+```
+
+### Common Highcharts Modules
+
+- `highcharts/modules/sankey` - For Sankey diagrams
+- `highcharts/modules/sunburst` - For Sunburst charts
+- `highcharts/modules/treemap` - For Treemap visualizations
+- `highcharts/modules/exporting` - For export functionality
+- `highcharts/modules/export-data` - For data export options
+
+### DO NOT Use These Patterns
+
+```typescript
+// ❌ Wrong - ES6 side-effect imports
+import "highcharts/modules/sankey"
+
+// ❌ Wrong - Direct function call without checks
+import HighchartsSankey from "highcharts/modules/sankey"
+HighchartsSankey(Highcharts)
+
+// ❌ Wrong - Using require without checks
+require("highcharts/modules/sankey")(Highcharts)
+```
+
+## Image and Logo Best Practices
+
+### High-Resolution Images for Retina Displays
+
+When using Next.js Image component, decouple source resolution from display size:
+
+```typescript
+// ✅ Correct - Fetch high-res, display at desired size
+<Image
+  src={logoUrl}
+  alt="Logo"
+  width={48}    // Fetch 48x48px image (2x for retina)
+  height={48}
+  className="size-6"  // Display at 24x24px via CSS
+/>
+
+// ❌ Wrong - Low resolution on retina displays
+<Image
+  src={logoUrl}
+  alt="Logo"
+  width={24}    // Only fetches 24x24px
+  height={24}
+  className="size-6"
+/>
+```
+
+### Logo Infrastructure
+
+- **Logo fetching**: Use `getInstitutionLogoUrl()` and `getTickerLogoUrl()` from `src/lib/logoUtils.ts`
+- **Institution utilities**: Use helpers from `src/lib/institutionUtils.ts` for brand colors and labels
+- **Logo components**: See `InstitutionLogo` component for reusable logo with fallback to initials
+
+## Component Organization and Refactoring
+
+### When to Create Shared Components
+
+Extract shared components when:
+- Code is duplicated in 2+ places
+- Component has clear, reusable purpose
+- Reduces maintenance burden
+
+### File Organization
+
+```
+src/
+├── components/
+│   ├── ui/                    # Shared UI components
+│   │   ├── AccountSelector.tsx
+│   │   ├── InstitutionLogo.tsx
+│   │   └── data-table-*/      # Table-specific components
+│   │       ├── columns.tsx    # Column definitions
+│   │       ├── types.ts       # TypeScript interfaces
+│   │       └── TableName.tsx  # Main table component
+│   └── [PageComponents].tsx   # Page-specific components
+└── lib/
+    ├── utils.ts               # General utilities
+    ├── institutionUtils.ts    # Domain-specific utilities
+    └── logoUtils.ts           # API integrations
+```
+
+## Data Table Patterns
+
+### TanStack Table Structure
+
+Each data table should follow this pattern:
+
+1. **types.ts** - Define interfaces for data and props
+2. **columns.tsx** - Column definitions with proper typing
+3. **MainTable.tsx** - Table component with:
+   - Filtering, sorting, pagination via TanStack Table
+   - Proper TypeScript typing
+   - Memoized column definitions
+
+### Performance Optimizations
+
+```typescript
+// Cache expensive operations
+const domainCache = new Map<string, string>()
+
+// Memoize calculations
+const columns = React.useMemo(
+  () => createColumns({ onEdit, onDelete }),
+  [onEdit, onDelete]
+)
+
+// Conditional API calls
+if (!domainCache.has(ticker)) {
+  // Fetch only if not cached
+}
+```
+
+## TypeScript Patterns
+
+### Table References
+
+When dealing with circular dependencies in tables:
+
+```typescript
+// Use ref with any type to avoid circular deps
+const tableRef = React.useRef<any>(null)
+
+// Store table instance after creation
+React.useEffect(() => {
+  tableRef.current = table
+}, [table])
+```
+
+### Component Props
+
+Always define explicit interfaces:
+
+```typescript
+interface ComponentProps {
+  data: DataType[]
+  onAction?: (item: DataType) => void
+  className?: string
+}
+```
+
+## Next.js Specific Patterns
+
+### Client Components
+
+Always mark client-side components:
+
+```typescript
+"use client"  // Required at top of file
+
+import { useState } from "react"
+// ... rest of component
+```
+
+### Dynamic Imports
+
+For heavy libraries or conditional loading:
+
+```typescript
+const HeavyComponent = dynamic(
+  () => import("@/components/HeavyComponent"),
+  { ssr: false }
+)
+```
 
 ## Important Notes
 

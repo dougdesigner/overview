@@ -4,14 +4,25 @@ import { Card } from "@/components/Card"
 import { toProperCase } from "@/lib/utils"
 import Highcharts from "highcharts"
 import HighchartsReact from "highcharts-react-official"
+import HighchartsTreemap from "highcharts/modules/treemap"
+import HighchartsExporting from "highcharts/modules/exporting"
+import HighchartsExportData from "highcharts/modules/export-data"
 import { useTheme } from "next-themes"
 import { useRef, useState } from "react"
 import { StockExposure } from "./types"
 
-// Import Highcharts modules for side effects (auto-initializes in Highcharts v12+)
-import "highcharts/modules/treemap"
-import "highcharts/modules/exporting"
-import "highcharts/modules/export-data"
+// Initialize Highcharts modules for Next.js
+if (typeof Highcharts === "object") {
+  if (typeof HighchartsTreemap === "function") {
+    HighchartsTreemap(Highcharts)
+  }
+  if (typeof HighchartsExporting === "function") {
+    HighchartsExporting(Highcharts)
+  }
+  if (typeof HighchartsExportData === "function") {
+    HighchartsExportData(Highcharts)
+  }
+}
 
 interface ExposureTreemapHighchartsProps {
   exposures: StockExposure[]
