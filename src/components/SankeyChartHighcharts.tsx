@@ -3,9 +3,9 @@
 import { type AvailableChartColorsKeys } from "@/lib/chartUtils"
 import Highcharts from "highcharts"
 import HighchartsReact from "highcharts-react-official"
-import HighchartsSankey from "highcharts/modules/sankey"
-import HighchartsExporting from "highcharts/modules/exporting"
 import HighchartsExportData from "highcharts/modules/export-data"
+import HighchartsExporting from "highcharts/modules/exporting"
+import HighchartsSankey from "highcharts/modules/sankey"
 import { useTheme } from "next-themes"
 import { useEffect, useRef, useState } from "react"
 

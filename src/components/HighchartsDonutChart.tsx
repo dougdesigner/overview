@@ -66,61 +66,42 @@ export function HighchartsDonutChart({
       style: {
         fontFamily: "inherit",
       },
-      custom: {},
-      events: {
-        render() {
-          const chart = this as any
-          const series = chart.series[0]
-          let customLabel = chart.options.chart.custom.label
-
-          if (!customLabel) {
-            customLabel = chart.options.chart.custom.label = chart.renderer
-              .label(
-                `<strong>${valueFormatter(totalValue)}</strong>`,
-                0,
-                0,
-                undefined,
-                undefined,
-                undefined,
-                true,
-              )
-              .css({
-                color: isDark ? "#f9fafb" : "#111827",
-                textAnchor: "middle",
-              })
-              .add()
-          }
-
-          const x = series.center[0] + chart.plotLeft
-          const y =
-            series.center[1] + chart.plotTop - customLabel.attr("height") / 2
-
-          customLabel.attr({
-            x,
-            y,
-          })
-
-          // Set font size based on chart diameter
-          customLabel.css({
-            fontSize: `${series.center[2] / 12}px`,
-          })
-        },
-      },
     },
     title: {
-      text: undefined,
+      text: valueFormatter(totalValue),
+      verticalAlign: "middle",
+      style: {
+        fontSize: "20px",
+        fontWeight: "600",
+        color: isDark ? "#f9fafb" : "#111827",
+      },
     },
     credits: {
       enabled: false,
     },
     tooltip: {
+      useHTML: true,
+      headerFormat: "",
       pointFormat:
-        "Allocation: <b>{point.percentage:.1f}%</b><br/>Value: <b>${point.y:,.0f}</b>",
-      // valuePrefix: "$",
+        '<div style="padding: 2px;">' +
+        '<div style="font-weight: 600; margin-bottom: 4px;">{point.name}</div>' +
+        '<div>Allocation: <b>{point.percentage:.1f}%</b></div>' +
+        '<div>Value: <b>${point.y:,.0f}</b></div>' +
+        '</div>',
       backgroundColor: isDark ? "#1f2937" : "#ffffff",
-      borderColor: isDark ? "#374151" : "#e5e7eb",
+      borderColor: isDark ? "#4b5563" : "#e5e7eb",
+      borderRadius: 6,
+      borderWidth: 1,
+      shadow: {
+        color: "rgba(0, 0, 0, 0.1)",
+        offsetX: 0,
+        offsetY: 2,
+        opacity: 0.1,
+        width: 3,
+      },
       style: {
-        color: isDark ? "#f9fafb" : "#111827",
+        color: isDark ? "#f3f4f6" : "#111827",
+        fontSize: "12px",
       },
     },
     legend: {
@@ -131,30 +112,20 @@ export function HighchartsDonutChart({
         allowPointSelect: true,
         cursor: "pointer",
         innerSize: "60%",
-        // borderWidth: 0,
+        borderWidth: 2,
+        borderColor: isDark ? "#1f2937" : "#ffffff",
         borderRadius: 8,
-        dataLabels: [
-          {
-            enabled: true,
-            distance: 20,
-            format: "{point.name}",
-            style: {
-              color: isDark ? "#9ca3af" : "#6b7280",
-              fontSize: "14px",
-              fontWeight: "normal",
-            },
+        dataLabels: {
+          enabled: true,
+          distance: -30,
+          format: "{point.percentage:.0f}%",
+          style: {
+            color: isDark ? "#f3f4f6" : "#111827",
+            fontSize: "12px",
+            fontWeight: "600",
+            textOutline: "none",
           },
-          {
-            enabled: true,
-            distance: -30,
-            format: "{point.percentage:.0f}%",
-            style: {
-              color: isDark ? "#f9fafb" : "#111827",
-              fontSize: "14px",
-              fontWeight: "600",
-            },
-          },
-        ] as Highcharts.DataLabelsOptions[],
+        },
         states: {
           hover: {
             halo: {
@@ -176,31 +147,38 @@ export function HighchartsDonutChart({
   // Update chart when theme or data changes
   useEffect(() => {
     if (chartRef.current?.chart) {
-      const chart = chartRef.current.chart as any
+      const chart = chartRef.current.chart
 
-      // Update custom label if it exists
-      if (chart.options?.chart?.custom?.label) {
-        chart.options.chart.custom.label.attr({
-          text: `<strong>${valueFormatter(totalValue)}</strong>`,
-        })
-        chart.options.chart.custom.label.css({
-          color: isDark ? "#f9fafb" : "#111827",
-        })
-      }
-
-      // Update tooltip colors
+      // Update title and colors based on theme
       chart.update({
-        tooltip: {
-          backgroundColor: isDark ? "#1f2937" : "#ffffff",
-          borderColor: isDark ? "#374151" : "#e5e7eb",
+        title: {
+          text: valueFormatter(totalValue),
           style: {
+            fontSize: "20px",
+            fontWeight: "600",
             color: isDark ? "#f9fafb" : "#111827",
           },
         },
+        tooltip: {
+          backgroundColor: isDark ? "#1f2937" : "#ffffff",
+          borderColor: isDark ? "#4b5563" : "#e5e7eb",
+          style: {
+            color: isDark ? "#f3f4f6" : "#111827",
+            fontSize: "12px",
+          },
+        },
+        plotOptions: {
+          pie: {
+            dataLabels: {
+              style: {
+                color: isDark ? "#f3f4f6" : "#111827",
+                fontSize: "12px",
+                fontWeight: "600",
+              },
+            },
+          },
+        },
       })
-
-      // Trigger re-render to update label
-      chart.redraw()
     }
   }, [isDark, totalValue, valueFormatter])
 

@@ -200,7 +200,10 @@ export function HoldingsSunburst({
             value: 16,
           },
           style: {
-            // textOutline: "none",
+            color: isDark ? "#f3f4f6" : "#111827",
+            fontSize: "12px",
+            fontWeight: "600",
+            textOutline: "none",
           },
         },
         borderRadius: 3,
@@ -293,7 +296,11 @@ export function HoldingsSunburst({
         fontSize: "12px",
       },
       pointFormat:
-        "<b>{point.name}</b><br/>Value: ${point.value:,.0f}<br/>Portfolio: {point.percentage:.1f}%",
+        '<div style="padding: 2px;">' +
+        '<div style="font-weight: 600; margin-bottom: 4px;">{point.name}</div>' +
+        '<div>Value: <b>${point.value:,.0f}</b></div>' +
+        '<div>Portfolio: <b>{point.percentage:.1f}%</b></div>' +
+        '</div>',
     },
   }
 

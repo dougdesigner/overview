@@ -215,8 +215,10 @@ export function ExposureTreemapHighcharts({
         dataLabels: {
           enabled: true,
           style: {
-            textOutline: "none",
             color: isDark ? "#f3f4f6" : "#111827",
+            fontSize: "12px",
+            fontWeight: "600",
+            textOutline: "none",
           },
         },
       } as Highcharts.SeriesTreemapOptions,
@@ -243,9 +245,11 @@ export function ExposureTreemapHighcharts({
         const point = this as any
         const value = typeof point.value === "number" ? point.value : 0
         const percentage = ((value / totalValue) * 100).toFixed(1)
-        return `<b>${point.name}</b><br/>
-                Value: ${formatValue(value)}<br/>
-                Portfolio: ${percentage}%`
+        return `<div style="padding: 2px;">
+                  <div style="font-weight: 600; margin-bottom: 4px;">${point.name}</div>
+                  <div>Value: <b>${formatValue(value)}</b></div>
+                  <div>Portfolio: <b>${percentage}%</b></div>
+                </div>`
       },
     },
   }
