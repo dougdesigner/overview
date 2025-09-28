@@ -5,6 +5,7 @@ import {
   PortfolioHolding,
   StockExposure,
 } from "@/components/ui/data-table-exposure/types"
+import { getETFHoldings } from "@/data/etf-holdings/etfHoldingsData"
 
 export class ExposureCalculator {
   private etfProfiles: Map<string, ETFProfile> = new Map()
@@ -273,6 +274,8 @@ export class ExposureCalculator {
         // Update or create exposure
         const existing = exposureMap.get(stockSymbol)
         const overview = this.companyOverviews.get(stockSymbol)
+        // Use sector from ETF data if available, fallback to overview
+        const sector = stockInETF.sector || overview?.sector
 
         if (existing) {
           console.log(
@@ -283,6 +286,10 @@ export class ExposureCalculator {
           existing.totalShares = existing.directShares + existing.etfExposure
           existing.totalValue = existing.directValue + existing.etfValue
           existing.exposureSources.push(exposureSource)
+          // Update sector if not already set and we have it from ETF data
+          if (!existing.sector && sector) {
+            existing.sector = sector
+          }
         } else {
           console.log(
             `Creating new exposure for ${stockSymbol}: ${sharesViaETF} shares via ${etfSymbol}`,
@@ -291,7 +298,7 @@ export class ExposureCalculator {
             id: `stock-${stockSymbol}`,
             ticker: stockSymbol,
             name: stockInETF.name,
-            sector: overview?.sector,
+            sector: sector,
             industry: overview?.industry,
             directShares: 0,
             etfExposure: sharesViaETF,
@@ -374,69 +381,22 @@ export class ExposureCalculator {
   }
 
   private getMockETFProfile(symbol: string): ETFProfile {
-    const mockProfiles: Record<string, ETFProfile> = {
-      VOO: {
-        symbol: "VOO",
-        name: "Vanguard S&P 500 ETF",
-        holdings: [
-          { symbol: "AAPL", name: "Apple Inc.", weight: 7.28 },
-          { symbol: "MSFT", name: "Microsoft Corporation", weight: 7.03 },
-          { symbol: "AMZN", name: "Amazon.com Inc.", weight: 3.51 },
-          { symbol: "NVDA", name: "NVIDIA Corporation", weight: 3.12 },
-          { symbol: "GOOGL", name: "Alphabet Inc. Class A", weight: 2.15 },
-          { symbol: "TSLA", name: "Tesla Inc.", weight: 1.62 },
-        ],
-        lastUpdated: new Date(),
-      },
-      SPY: {
-        symbol: "SPY",
-        name: "SPDR S&P 500 ETF Trust",
-        holdings: [
-          { symbol: "AAPL", name: "Apple Inc.", weight: 7.27 },
-          { symbol: "MSFT", name: "Microsoft Corporation", weight: 7.02 },
-          { symbol: "AMZN", name: "Amazon.com Inc.", weight: 3.5 },
-          { symbol: "NVDA", name: "NVIDIA Corporation", weight: 3.11 },
-          { symbol: "GOOGL", name: "Alphabet Inc. Class A", weight: 2.14 },
-          { symbol: "TSLA", name: "Tesla Inc.", weight: 1.61 },
-        ],
-        lastUpdated: new Date(),
-      },
-      QQQ: {
-        symbol: "QQQ",
-        name: "Invesco QQQ Trust",
-        holdings: [
-          { symbol: "AAPL", name: "Apple Inc.", weight: 8.94 },
-          { symbol: "MSFT", name: "Microsoft Corporation", weight: 8.64 },
-          { symbol: "AMZN", name: "Amazon.com Inc.", weight: 5.42 },
-          { symbol: "NVDA", name: "NVIDIA Corporation", weight: 4.85 },
-          { symbol: "GOOGL", name: "Alphabet Inc. Class A", weight: 2.64 },
-          { symbol: "TSLA", name: "Tesla Inc.", weight: 2.51 },
-        ],
-        lastUpdated: new Date(),
-      },
-      VTI: {
-        symbol: "VTI",
-        name: "Vanguard Total Stock Market ETF",
-        holdings: [
-          { symbol: "AAPL", name: "Apple Inc.", weight: 6.52 },
-          { symbol: "MSFT", name: "Microsoft Corporation", weight: 6.31 },
-          { symbol: "AMZN", name: "Amazon.com Inc.", weight: 3.15 },
-          { symbol: "NVDA", name: "NVIDIA Corporation", weight: 2.81 },
-          { symbol: "GOOGL", name: "Alphabet Inc. Class A", weight: 1.93 },
-          { symbol: "TSLA", name: "Tesla Inc.", weight: 1.46 },
-        ],
-        lastUpdated: new Date(),
-      },
+    // First try to get comprehensive hardcoded data
+    const hardcodedProfile = getETFHoldings(symbol)
+    if (hardcodedProfile) {
+      console.log(
+        `Using comprehensive hardcoded data for ${symbol} with ${hardcodedProfile.holdings.length} holdings`
+      )
+      return hardcodedProfile
     }
 
-    return (
-      mockProfiles[symbol] || {
-        symbol,
-        name: `${symbol} ETF`,
-        holdings: [],
-        lastUpdated: new Date(),
-      }
-    )
+    // Fallback for unknown ETFs
+    return {
+      symbol,
+      name: `${symbol} ETF`,
+      holdings: [],
+      lastUpdated: new Date(),
+    }
   }
 
   // Helper method to fetch real stock prices (optional enhancement)

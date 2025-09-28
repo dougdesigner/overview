@@ -30,6 +30,7 @@ export interface ETFHolding {
   name: string
   weight: number // Percentage weight in the ETF
   shares?: number // Optional: actual share count in the ETF
+  sector?: string // Optional: sector classification
 }
 
 export interface ETFProfile {
