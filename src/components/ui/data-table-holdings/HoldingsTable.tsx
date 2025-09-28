@@ -15,6 +15,7 @@ import {
   TableHeaderCell,
   TableRow,
 } from "@/components/Table"
+import { getInstitutionLogoUrl } from "@/lib/logoUtils"
 import { cx } from "@/lib/utils"
 import {
   ExpandedState,
@@ -27,6 +28,7 @@ import {
   SortingState,
   useReactTable,
 } from "@tanstack/react-table"
+import Image from "next/image"
 import React from "react"
 import { DataTablePagination } from "../data-table/DataTablePagination"
 import { createColumns } from "./columns"
@@ -66,7 +68,7 @@ const getInstitutionInitials = (institutionLabel: string): string => {
     .toUpperCase()
 }
 
-// Map institutions to labels
+// Map institutions to labels (matching the names in logoUtils)
 const institutionLabels: Record<string, string> = {
   fidelity: "Fidelity Investments",
   vanguard: "Vanguard",
@@ -83,6 +85,45 @@ const institutionLabels: Record<string, string> = {
   citi: "Citibank",
   amex: "American Express",
   other: "Other",
+}
+
+// Component for rendering institution logo with fallback
+function InstitutionLogo({
+  institution,
+  className = "size-5",
+}: {
+  institution: string
+  className?: string
+}) {
+  const [logoError, setLogoError] = React.useState(false)
+  const institutionLabel = institutionLabels[institution] || institution
+  const logoUrl = getInstitutionLogoUrl(institutionLabel)
+
+  if (!logoUrl || logoError) {
+    // Fallback to initials
+    return (
+      <div
+        className={cx(
+          "flex shrink-0 items-center justify-center rounded-full text-[10px] font-semibold text-white",
+          className,
+          getInstitutionBrandColor(institution),
+        )}
+      >
+        {getInstitutionInitials(institutionLabel)}
+      </div>
+    )
+  }
+
+  return (
+    <Image
+      src={logoUrl}
+      alt={institutionLabel}
+      width={20}
+      height={20}
+      className={cx("shrink-0 rounded-full bg-white object-cover", className)}
+      onError={() => setLogoError(true)}
+    />
+  )
 }
 
 // Group holdings by ticker and account for nested display
@@ -255,16 +296,11 @@ export function HoldingsTable({
                         (a) => a.id === selectedAccount,
                       )
                       if (selectedAccountData) {
-                        const institutionLabel =
-                          institutionLabels[selectedAccountData.institution] ||
-                          selectedAccountData.institution
                         return (
                           <div className="flex items-center gap-2">
-                            <div
-                              className={`flex size-5 shrink-0 items-center justify-center rounded-full text-[10px] font-semibold text-white ${getInstitutionBrandColor(selectedAccountData.institution)}`}
-                            >
-                              {getInstitutionInitials(institutionLabel)}
-                            </div>
+                            <InstitutionLogo
+                              institution={selectedAccountData.institution}
+                            />
                             <span className="truncate">
                               {selectedAccountData.name}
                             </span>
@@ -283,11 +319,7 @@ export function HoldingsTable({
                 return (
                   <SelectItem key={account.id} value={account.id}>
                     <div className="flex items-start gap-2">
-                      <div
-                        className={`flex size-5 shrink-0 items-center justify-center rounded-full text-[10px] font-semibold text-white ${getInstitutionBrandColor(account.institution)}`}
-                      >
-                        {getInstitutionInitials(institutionLabel)}
-                      </div>
+                      <InstitutionLogo institution={account.institution} />
                       <div className="flex flex-col">
                         <span>{account.name}</span>
                         <span className="text-xs text-gray-500">
