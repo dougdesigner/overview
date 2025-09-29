@@ -110,7 +110,7 @@ export function ExposureTreemapHighchartsWithLogos({
     // Determine display strategy based on cell dimensions only
     if (cellHeight >= 50 && cellWidth >= 50) {
       return "full" // Show logo + ticker
-    } else if (cellHeight >= 20 && cellWidth >= 20) {
+    } else if (cellHeight >= 24 && cellWidth >= 24) {
       return "logo-only" // Show only logo
     } else {
       return "none" // Don't show anything to avoid overflow
@@ -290,7 +290,7 @@ export function ExposureTreemapHighchartsWithLogos({
                   const logoSize = calculateLogoSize(point)
                   if (logoUrl) {
                     return `<div style="text-align: center; display: flex; align-items: center; justify-content: center; height: 100%; overflow: hidden;">
-                      <div style="width: ${logoSize}px; height: ${logoSize}px; border-radius: 50%; background: white; overflow: hidden; display: flex; align-items: center; justify-content: center;">
+                      <div style="width: ${logoSize}px; height: ${logoSize}px; border-radius: 50%; background: transparent; overflow: hidden; display: flex; align-items: center; justify-content: center;">
                         <img src="${logoUrl}"
                              alt="${ticker}"
                              style="width: 100%; height: 100%; object-fit: contain;"
@@ -309,7 +309,7 @@ export function ExposureTreemapHighchartsWithLogos({
                   const logoSize = calculateLogoSize(point)
                   if (logoUrl) {
                     return `<div style="text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; overflow: hidden;">
-                    <div style="width: ${logoSize}px; height: ${logoSize}px; border-radius: 50%; background: white; overflow: hidden; display: flex; align-items: center; justify-content: center; margin-bottom: 2px;">
+                    <div style="width: ${logoSize}px; height: ${logoSize}px; border-radius: 50%; background: transparent; overflow: hidden; display: flex; align-items: center; justify-content: center; margin-bottom: 2px;">
                       <img src="${logoUrl}"
                            alt="${ticker}"
                            style="width: 100%; height: 100%; object-fit: contain;"
