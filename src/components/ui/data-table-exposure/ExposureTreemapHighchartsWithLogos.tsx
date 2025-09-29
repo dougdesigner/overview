@@ -72,7 +72,7 @@ export function ExposureTreemapHighchartsWithLogos({
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const calculateLogoSize = (point: any): number => {
     const minSize = 20 // Increased minimum for better visibility
-    const maxSize = 36 // Reduced max to prevent overflow
+    const maxSize = 48 // Increased max for larger logos
 
     // Try to get cell dimensions from the point's graphic element
     if (point.graphic && point.graphic.element) {
@@ -112,7 +112,7 @@ export function ExposureTreemapHighchartsWithLogos({
     // Determine display strategy based on thresholds
     if (cellHeight >= 50 && cellWidth >= 50 && percentage >= 0.5) {
       return "full" // Show logo + ticker
-    } else if (cellHeight >= 30 && cellWidth >= 30 && percentage >= 0.2) {
+    } else if (cellHeight >= 20 && cellWidth >= 20 && percentage >= 0.1) {
       return "logo-only" // Show only logo
     } else {
       return "none" // Don't show anything to avoid overflow
