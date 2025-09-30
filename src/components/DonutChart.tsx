@@ -16,7 +16,14 @@ import { cx } from "@/lib/utils"
 
 interface ChartTooltipProps {
   active?: boolean
-  payload?: any
+  payload?: Array<{
+    name: string
+    value: number
+    payload: {
+      color?: string
+      [key: string]: unknown
+    }
+  }>
   label?: string
   valueFormatter?: (value: number) => string
 }
@@ -55,7 +62,7 @@ const ChartTooltip = ({
 export interface DonutChartProps extends React.HTMLAttributes<HTMLDivElement> {
   data: Array<{
     name: string
-    [key: string]: any
+    [key: string]: string | number | boolean | undefined
   }>
   value?: string
   category?: string
@@ -96,7 +103,7 @@ const DonutChart = React.forwardRef<HTMLDivElement, DonutChartProps>(
     }, [data, value])
 
     const renderCustomLabel = React.useCallback(
-      (props: any) => {
+      (props: { cx: number; cy: number }) => {
         const { cx, cy } = props
 
         if (!showLabel) return null
