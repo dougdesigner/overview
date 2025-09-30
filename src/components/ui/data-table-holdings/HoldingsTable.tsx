@@ -85,7 +85,9 @@ export function HoldingsTable({
   onAccountFilterChange,
 }: HoldingsTableProps) {
   const [expanded, setExpanded] = React.useState<ExpandedState>({})
-  const [sorting, setSorting] = React.useState<SortingState>([])
+  const [sorting, setSorting] = React.useState<SortingState>([
+    { id: "allocation", desc: true },
+  ])
   const [selectedAccount, setSelectedAccount] =
     React.useState<string>(initialAccountFilter)
 

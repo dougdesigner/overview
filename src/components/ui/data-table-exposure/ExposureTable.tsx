@@ -39,7 +39,7 @@ import {
 export function ExposureTable({ holdings }: ExposureTableProps) {
   const [data, setData] = React.useState<StockExposure[]>([])
   const [sorting, setSorting] = React.useState<SortingState>([
-    { id: "totalValue", desc: true },
+    { id: "percentOfPortfolio", desc: true },
   ])
   const [globalFilter, setGlobalFilter] = React.useState("")
   const [expanded, setExpanded] = React.useState<ExpandedState>({})
