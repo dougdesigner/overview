@@ -191,7 +191,7 @@ export const createColumns = ({
     enableSorting: false,
     meta: {
       className: "!w-6 !pr-0",
-    } as any,
+    },
   },
   {
     header: ({ column }) => {
@@ -227,7 +227,7 @@ export const createColumns = ({
     enableSorting: true,
     meta: {
       className: "text-left",
-    } as any,
+    },
   },
   {
     header: ({ column }) => {
@@ -310,7 +310,7 @@ export const createColumns = ({
     enableSorting: true,
     meta: {
       className: "text-right",
-    } as any,
+    },
   },
   {
     header: ({ column }) => {
@@ -346,7 +346,7 @@ export const createColumns = ({
     enableSorting: true,
     meta: {
       className: "text-right",
-    } as any,
+    },
   },
   {
     header: ({ column }) => {
@@ -373,7 +373,7 @@ export const createColumns = ({
     enableSorting: true,
     meta: {
       className: "text-right",
-    } as any,
+    },
   },
   {
     header: ({ column }) => {
@@ -404,7 +404,7 @@ export const createColumns = ({
     enableSorting: true,
     meta: {
       className: "text-right",
-    } as any,
+    },
   },
   {
     id: "actions",
