@@ -194,7 +194,6 @@ export function HoldingsDrawer({
                       handleUpdateForm({ ticker: value })
                     }
                     placeholder="Select or enter ticker"
-                    required
                   />
                 </FormField>
 
