@@ -277,7 +277,7 @@ export function ExposureTreemap({
       }
 
       // Level 3: Stock nodes
-      if (pathLength === 3) {
+      if (pathLength === 3 && node.pathComponents) {
         const industryName = node.pathComponents[1]
         return (
           industryColors[industryName] || generateColorForString(industryName)
