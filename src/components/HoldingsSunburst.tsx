@@ -26,13 +26,11 @@ if (typeof Highcharts === "object") {
 interface HoldingsSunburstProps {
   holdings: Holding[]
   height?: number
-  animate?: boolean
 }
 
 export function HoldingsSunburst({
   holdings,
   height = 350,
-  animate = true,
 }: HoldingsSunburstProps) {
   const { theme } = useTheme()
   const isDark = theme === "dark"
@@ -53,19 +51,32 @@ export function HoldingsSunburst({
     "#3b82f6", // blue
   ]
 
-  // Color palette for asset types
-  const typeColors = {
-    stock: "#3b82f6", // blue
-    fund: "#10b981", // emerald
-    cash: "#f59e0b", // amber
-  }
-
   // Calculate total portfolio value
   const totalValue = holdings.reduce((sum, h) => sum + h.marketValue, 0)
 
   // Transform holdings data to sunburst format
-  const transformToSunburstData = (): any[] => {
-    const data: any[] = []
+  const transformToSunburstData = (): Array<{
+    id: string
+    parent: string
+    name: string
+    value: number
+    color?: string
+    ticker?: string
+    fullName?: string
+    quantity?: number
+    lastPrice?: number
+  }> => {
+    const data: Array<{
+      id: string
+      parent: string
+      name: string
+      value: number
+      color?: string
+      ticker?: string
+      fullName?: string
+      quantity?: number
+      lastPrice?: number
+    }> = []
 
     // Root node (center)
     data.push({
