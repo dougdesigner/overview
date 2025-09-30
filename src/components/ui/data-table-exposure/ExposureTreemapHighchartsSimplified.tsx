@@ -13,14 +13,17 @@ import { StockExposure } from "./types"
 
 // Initialize Highcharts modules for Next.js
 if (typeof Highcharts === "object") {
-  if (typeof HighchartsTreemap === "function") {
-    HighchartsTreemap(Highcharts)
+  const treemapModule = HighchartsTreemap as unknown as (H: typeof Highcharts) => void
+  if (typeof treemapModule === "function") {
+    treemapModule(Highcharts)
   }
-  if (typeof HighchartsExporting === "function") {
-    HighchartsExporting(Highcharts)
+  const exportingModule = HighchartsExporting as unknown as (H: typeof Highcharts) => void
+  if (typeof exportingModule === "function") {
+    exportingModule(Highcharts)
   }
-  if (typeof HighchartsExportData === "function") {
-    HighchartsExportData(Highcharts)
+  const exportDataModule = HighchartsExportData as unknown as (H: typeof Highcharts) => void
+  if (typeof exportDataModule === "function") {
+    exportDataModule(Highcharts)
   }
 }
 
