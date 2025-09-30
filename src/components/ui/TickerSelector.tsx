@@ -18,7 +18,6 @@ interface TickerSelectorProps {
   placeholder?: string
   className?: string
   id?: string
-  required?: boolean
 }
 
 export function TickerSelector({
@@ -27,7 +26,6 @@ export function TickerSelector({
   placeholder = "Select a ticker",
   className,
   id,
-  required,
 }: TickerSelectorProps) {
   const renderTickerOption = (ticker: TickerOption) => {
     return (
