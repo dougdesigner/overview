@@ -105,7 +105,7 @@ function TickerCell({
           })
       }
     }
-  }, [ticker, isETFBreakdown, companyDomain, logoUrl])
+  }, [ticker, isETFBreakdown, companyDomain, logoUrl, treatAsStock])
 
   return (
     <div className="flex items-center gap-2">
