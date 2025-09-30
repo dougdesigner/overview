@@ -4,16 +4,13 @@ import { Card } from "@/components/Card"
 import { toProperCase } from "@/lib/utils"
 import Highcharts from "highcharts"
 import HighchartsReact from "highcharts-react-official"
-import HighchartsTreemap from "highcharts/modules/treemap"
 import { useTheme } from "next-themes"
 import { useEffect, useRef, useState } from "react"
 import { StockExposure } from "./types"
 
 // Initialize Highcharts modules for Next.js
-if (typeof Highcharts === "object") {
-  if (typeof HighchartsTreemap === "function") {
-    HighchartsTreemap(Highcharts)
-  }
+if (typeof window !== "undefined") {
+  require("highcharts/modules/treemap")(Highcharts)
 }
 
 interface ExposureTreemapHighchartsProps {
