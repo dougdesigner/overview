@@ -195,7 +195,7 @@ export default function AccountCard({
             <DropdownMenuItem
               onClick={(e) => {
                 e.stopPropagation()
-                onEdit()
+                onEdit?.()
               }}
             >
               <RiEditLine className="mr-2 h-4 w-4" />
@@ -204,7 +204,7 @@ export default function AccountCard({
             <DropdownMenuItem
               onClick={(e) => {
                 e.stopPropagation()
-                onDelete()
+                onDelete?.()
               }}
               className="text-red-600 dark:text-red-400"
             >
