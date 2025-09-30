@@ -405,8 +405,8 @@ export default function AccountsPage() {
             <AccountCard
               key={account.id}
               name={account.name}
-              accountType={account.accountTypeLabel}
-              institution={account.institutionLabel}
+              accountType={account.accountTypeLabel as "Traditional 401(k)" | "Roth IRA" | "Personal Investment" | "Checking" | "Savings"}
+              institution={account.institutionLabel as "Fidelity Investments" | "Chase" | "American Express" | "Wealthfront" | "Vanguard"}
               totalValue={account.totalValue}
               holdingsCount={account.holdingsCount}
               assetAllocation={account.assetAllocation}
