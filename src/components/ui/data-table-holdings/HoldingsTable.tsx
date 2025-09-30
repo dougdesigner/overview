@@ -119,20 +119,20 @@ export function HoldingsTable({
   }
 
   // We need to create the table first before we can use it in toggleExpandAll
-  const tableRef = React.useRef<any>(null)
+  const tableRef = React.useRef<ReturnType<typeof useReactTable<Holding>> | null>(null)
 
   const toggleExpandAll = React.useCallback(() => {
     if (!tableRef.current) return
     const allExpandableRows = tableRef.current
       .getRowModel()
-      .rows.filter((row: any) => row.getCanExpand())
-    const allExpanded = allExpandableRows.every((row: any) => row.getIsExpanded())
+      .rows.filter((row) => row.getCanExpand())
+    const allExpanded = allExpandableRows.every((row) => row.getIsExpanded())
 
     if (allExpanded) {
       setExpanded({})
     } else {
       const newExpanded: ExpandedState = {}
-      allExpandableRows.forEach((row: any) => {
+      allExpandableRows.forEach((row) => {
         newExpanded[row.id] = true
       })
       setExpanded(newExpanded)
@@ -142,10 +142,10 @@ export function HoldingsTable({
   const areAllExpanded = React.useCallback(() => {
     if (!tableRef.current) return false
     const allExpandableRows =
-      tableRef.current.getRowModel().rows.filter((row: any) => row.getCanExpand()) || []
+      tableRef.current.getRowModel().rows.filter((row) => row.getCanExpand()) || []
     return (
       allExpandableRows.length > 0 &&
-      allExpandableRows.every((row: any) => row.getIsExpanded())
+      allExpandableRows.every((row) => row.getIsExpanded())
     )
   }, [])
 
