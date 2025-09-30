@@ -36,7 +36,7 @@ import {
   StockExposure,
 } from "./types"
 
-export function ExposureTable({ holdings, onRefresh }: ExposureTableProps) {
+export function ExposureTable({ holdings }: ExposureTableProps) {
   const [data, setData] = React.useState<StockExposure[]>([])
   const [sorting, setSorting] = React.useState<SortingState>([
     { id: "totalValue", desc: true },
@@ -64,8 +64,15 @@ export function ExposureTable({ holdings, onRefresh }: ExposureTableProps) {
     calculateExposuresAsync()
   }, [holdings])
 
+  const areAllExpanded = React.useCallback(() => {
+    const expandableRows = data.filter(
+      (row) => row.subRows && row.subRows.length > 0,
+    )
+    if (expandableRows.length === 0) return false
+    return expandableRows.every((row) => expanded[data.indexOf(row)])
+  }, [data, expanded])
 
-  const toggleExpandAll = () => {
+  const toggleExpandAll = React.useCallback(() => {
     const allExpanded = areAllExpanded()
     if (allExpanded) {
       setExpanded({})
@@ -78,15 +85,7 @@ export function ExposureTable({ holdings, onRefresh }: ExposureTableProps) {
       })
       setExpanded(newExpanded)
     }
-  }
-
-  const areAllExpanded = () => {
-    const expandableRows = data.filter(
-      (row) => row.subRows && row.subRows.length > 0,
-    )
-    if (expandableRows.length === 0) return false
-    return expandableRows.every((row) => expanded[data.indexOf(row)])
-  }
+  }, [data, areAllExpanded])
 
   const columns = React.useMemo(
     () =>
