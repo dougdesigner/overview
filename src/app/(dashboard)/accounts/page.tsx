@@ -4,7 +4,7 @@ import AccountCard from "@/components/AccountCard"
 import { Button } from "@/components/Button"
 import { Card } from "@/components/Card"
 import { Divider } from "@/components/Divider"
-import SankeyChartHighcharts from "@/components/SankeyChartHighcharts"
+import { SankeyChartHighcharts } from "@/components/SankeyChartHighchartsWrapper"
 import {
   AccountDrawer,
   type AccountFormData,

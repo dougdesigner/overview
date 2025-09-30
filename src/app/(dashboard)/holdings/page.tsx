@@ -2,7 +2,7 @@
 
 import { Button } from "@/components/Button"
 import { Divider } from "@/components/Divider"
-import { HoldingsSunburst } from "@/components/HoldingsSunburst"
+import { HoldingsSunburst } from "@/components/HoldingsSunburstWrapper"
 import {
   HoldingsDrawer,
   type HoldingFormData,
