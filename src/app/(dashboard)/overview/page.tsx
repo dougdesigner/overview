@@ -7,8 +7,6 @@ import PortfolioValueCard from "@/components/PortfolioValueCard"
 import React from "react"
 
 export default function OverviewPage() {
-  const [isOpen, setIsOpen] = React.useState(false)
-
   // Calculate account count from Sankey data
   const accountCount = 5 // 401(k), Personal Investment, Roth IRA, Savings, Checking
 
