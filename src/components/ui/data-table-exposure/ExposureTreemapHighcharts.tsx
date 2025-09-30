@@ -4,13 +4,17 @@ import { Card } from "@/components/Card"
 import { toProperCase } from "@/lib/utils"
 import Highcharts from "highcharts"
 import HighchartsReact from "highcharts-react-official"
+import HighchartsTreemap from "highcharts/modules/treemap"
 import { useTheme } from "next-themes"
 import { useEffect, useRef, useState } from "react"
 import { StockExposure } from "./types"
 
 // Initialize Highcharts modules for Next.js
-if (typeof window !== "undefined") {
-  require("highcharts/modules/treemap")(Highcharts)
+if (typeof Highcharts === "object") {
+  const treemapModule = HighchartsTreemap as unknown as (H: typeof Highcharts) => void
+  if (typeof treemapModule === "function") {
+    treemapModule(Highcharts)
+  }
 }
 
 interface ExposureTreemapHighchartsProps {
@@ -25,9 +29,14 @@ export function ExposureTreemapHighcharts({
   totalValue,
 }: ExposureTreemapHighchartsProps) {
   const [groupingMode, setGroupingMode] = useState<GroupingMode>("sector")
+  const [isTreemapLoaded, setIsTreemapLoaded] = useState(false)
   const { theme } = useTheme()
   const isDark = theme === "dark"
   const chartRef = useRef<HighchartsReact.RefObject>(null)
+
+  useEffect(() => {
+    setIsTreemapLoaded(true)
+  }, [])
 
   // Define color scheme for sectors
   const sectorColors: Record<string, string> = {
@@ -312,10 +321,11 @@ export function ExposureTreemapHighcharts({
         color: isDark ? "#f3f4f6" : "#111827",
         fontSize: "12px",
       },
-      formatter: function () {
-        const point = this.point as Highcharts.Point & {
+      formatter: function (this: { point: Highcharts.Point }) {
+        const point = this.point as unknown as Highcharts.Point & {
           name: string
           value?: number
+          id?: string
         }
         const percentage = point.value
           ? ((point.value / totalValue) * 100).toFixed(2)
@@ -326,7 +336,7 @@ export function ExposureTreemapHighcharts({
           return `
             <div style="padding: 2px;">
               <div style="font-weight: 600; margin-bottom: 4px;">${point.name}</div>
-              <div>Value: ${formatValue(point.value)}</div>
+              <div>Value: ${formatValue(point.value ?? 0)}</div>
               <div>Portfolio: ${percentage}%</div>
             </div>
           `
