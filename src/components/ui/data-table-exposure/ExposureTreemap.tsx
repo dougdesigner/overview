@@ -237,7 +237,7 @@ export function ExposureTreemap({
       }
 
       // Level 3: Industry nodes within sectors
-      if (pathLength === 3) {
+      if (pathLength === 3 && node.pathComponents) {
         const sectorName = node.pathComponents[1]
         const baseColor =
           sectorColors[sectorName] || generateColorForString(sectorName)
@@ -252,7 +252,7 @@ export function ExposureTreemap({
       }
 
       // Level 4: Stock nodes
-      if (pathLength === 4) {
+      if (pathLength === 4 && node.pathComponents) {
         const sectorName = node.pathComponents[1]
         const industryName = node.pathComponents[2]
         const baseColor =

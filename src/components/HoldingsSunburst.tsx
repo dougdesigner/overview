@@ -13,13 +13,13 @@ import { useEffect, useRef, useState } from "react"
 // Initialize Highcharts modules for Next.js
 if (typeof Highcharts === "object") {
   if (typeof HighchartsSunburst === "function") {
-    HighchartsSunburst(Highcharts)
+    ;(HighchartsSunburst as (H: typeof Highcharts) => void)(Highcharts)
   }
   if (typeof HighchartsExporting === "function") {
-    HighchartsExporting(Highcharts)
+    ;(HighchartsExporting as (H: typeof Highcharts) => void)(Highcharts)
   }
   if (typeof HighchartsExportData === "function") {
-    HighchartsExportData(Highcharts)
+    ;(HighchartsExportData as (H: typeof Highcharts) => void)(Highcharts)
   }
 }
 

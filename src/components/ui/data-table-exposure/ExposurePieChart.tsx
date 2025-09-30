@@ -50,8 +50,8 @@ export function ExposurePieChart({ exposures, totalValue }: ExposurePieChartProp
       <div className="mt-6">
         <DonutChart
           data={chartData}
-          category="value"
-          index="name"
+          value="value"
+          category="name"
           valueFormatter={formatCurrency}
           className="h-72"
         />

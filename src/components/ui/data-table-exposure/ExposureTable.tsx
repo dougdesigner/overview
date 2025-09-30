@@ -69,7 +69,10 @@ export function ExposureTable({ holdings }: ExposureTableProps) {
       (row) => row.subRows && row.subRows.length > 0,
     )
     if (expandableRows.length === 0) return false
-    return expandableRows.every((row) => expanded[data.indexOf(row)])
+    return expandableRows.every((row) => {
+      const index = data.indexOf(row).toString()
+      return expanded[index as keyof typeof expanded]
+    })
   }, [data, expanded])
 
   const toggleExpandAll = React.useCallback(() => {
@@ -80,7 +83,7 @@ export function ExposureTable({ holdings }: ExposureTableProps) {
       const newExpanded: ExpandedState = {}
       data.forEach((row, index) => {
         if (row.subRows && row.subRows.length > 0) {
-          newExpanded[index] = true
+          newExpanded[index.toString()] = true
         }
       })
       setExpanded(newExpanded)

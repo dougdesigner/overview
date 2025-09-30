@@ -12,13 +12,13 @@ import { useEffect, useRef, useState } from "react"
 // Initialize Highcharts modules for Next.js
 if (typeof Highcharts === "object") {
   if (typeof HighchartsSankey === "function") {
-    HighchartsSankey(Highcharts)
+    ;(HighchartsSankey as (H: typeof Highcharts) => void)(Highcharts)
   }
   if (typeof HighchartsExporting === "function") {
-    HighchartsExporting(Highcharts)
+    ;(HighchartsExporting as (H: typeof Highcharts) => void)(Highcharts)
   }
   if (typeof HighchartsExportData === "function") {
-    HighchartsExportData(Highcharts)
+    ;(HighchartsExportData as (H: typeof Highcharts) => void)(Highcharts)
   }
 }
 
@@ -191,7 +191,6 @@ export default function SankeyChartHighcharts({
         nodes: highchartsNodes,
         nodeWidth: 20,
         nodePadding: 40,
-        borderRadius: 3,
         linkOpacity: 0.33,
         minLinkWidth: 1,
         linkColorMode: "gradient",

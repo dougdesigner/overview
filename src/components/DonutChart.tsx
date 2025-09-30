@@ -20,7 +20,7 @@ interface ChartTooltipProps {
     name: string
     value: number
     payload: {
-      color?: string
+      color?: AvailableChartColorsKeys
       [key: string]: unknown
     }
   }>
@@ -99,7 +99,10 @@ const DonutChart = React.forwardRef<HTMLDivElement, DonutChartProps>(
     }, [data, colors])
 
     const totalValue = React.useMemo(() => {
-      return data.reduce((sum, item) => sum + (item[value] || 0), 0)
+      return data.reduce((sum, item) => {
+        const val = item[value]
+        return sum + (typeof val === 'number' ? val : 0)
+      }, 0)
     }, [data, value])
 
     const renderCustomLabel = React.useCallback(
@@ -169,7 +172,7 @@ const DonutChart = React.forwardRef<HTMLDivElement, DonutChartProps>(
                 content={({ active, payload }) => (
                   <ChartTooltip
                     active={active}
-                    payload={payload}
+                    payload={payload as ChartTooltipProps['payload']}
                     valueFormatter={valueFormatter}
                   />
                 )}
