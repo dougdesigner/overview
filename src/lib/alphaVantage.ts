@@ -55,7 +55,7 @@ class AlphaVantageClient {
     return entry.data as T
   }
 
-  private setCache<T>(key: string, data: T): void {
+  private setCache(key: string, data: ETFProfileResponse | CompanyOverview): void {
     this.cache.set(key, {
       data,
       timestamp: Date.now()

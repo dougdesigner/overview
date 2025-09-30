@@ -6,7 +6,7 @@ export interface TickerOption {
   type: "stock" | "etf"
 }
 
-export const popularTickers: TickerOption[] = [
+export const popularTickers = [
   // Popular Stocks
   { symbol: "AAPL", name: "Apple Inc.", type: "stock" },
   { symbol: "MSFT", name: "Microsoft Corporation", type: "stock" },
@@ -91,7 +91,9 @@ export const popularTickers: TickerOption[] = [
   { symbol: "MUB", name: "iShares National Muni Bond ETF", type: "etf" },
   { symbol: "SCHX", name: "Schwab US Large-Cap ETF", type: "etf" },
   { symbol: "SCHB", name: "Schwab US Broad Market ETF", type: "etf" },
-].sort((a, b) => {
+] as TickerOption[]
+
+popularTickers.sort((a, b) => {
   // Sort by type (stocks first) then alphabetically
   if (a.type !== b.type) {
     return a.type === "stock" ? -1 : 1
