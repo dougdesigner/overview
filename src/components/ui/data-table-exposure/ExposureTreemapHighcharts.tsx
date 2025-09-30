@@ -321,8 +321,8 @@ export function ExposureTreemapHighcharts({
         color: isDark ? "#f3f4f6" : "#111827",
         fontSize: "12px",
       },
-      formatter: function (this: { point: Highcharts.Point }) {
-        const point = this.point as unknown as Highcharts.Point & {
+      formatter: function () {
+        const point = this as unknown as Highcharts.Point & {
           name: string
           value?: number
           id?: string
