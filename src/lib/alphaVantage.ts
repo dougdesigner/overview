@@ -31,7 +31,7 @@ interface CacheEntry<T = ETFProfileResponse | CompanyOverview> {
 
 class AlphaVantageClient {
   private baseURL = "https://www.alphavantage.co/query"
-  private cache: Map<string, CacheEntry<any>> = new Map()
+  private cache: Map<string, CacheEntry<ETFProfileResponse | CompanyOverview>> = new Map()
   private cacheDuration: number
 
   constructor() {
