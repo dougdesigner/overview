@@ -191,6 +191,7 @@ export const createColumns = ({
     enableSorting: false,
     meta: {
       className: "!w-6 !pr-0",
+      displayName: "Expand",
     },
   },
   {
@@ -227,6 +228,7 @@ export const createColumns = ({
     enableSorting: true,
     meta: {
       className: "text-left",
+      displayName: "Account",
     },
   },
   {
@@ -268,6 +270,7 @@ export const createColumns = ({
     enableSorting: true,
     meta: {
       className: "text-left min-w-80",
+      displayName: "Name",
     },
   },
   {
@@ -310,6 +313,7 @@ export const createColumns = ({
     enableSorting: true,
     meta: {
       className: "text-right",
+      displayName: "Quantity",
     },
   },
   {
@@ -346,6 +350,7 @@ export const createColumns = ({
     enableSorting: true,
     meta: {
       className: "text-right",
+      displayName: "Last Price",
     },
   },
   {
@@ -373,6 +378,7 @@ export const createColumns = ({
     enableSorting: true,
     meta: {
       className: "text-right",
+      displayName: "Market Value",
     },
   },
   {
@@ -404,6 +410,7 @@ export const createColumns = ({
     enableSorting: true,
     meta: {
       className: "text-right",
+      displayName: "Portfolio %",
     },
   },
   {
@@ -441,6 +448,7 @@ export const createColumns = ({
     enableSorting: false,
     meta: {
       className: "text-center w-16",
+      displayName: "Actions",
     },
   },
 ]
