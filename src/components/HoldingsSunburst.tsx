@@ -4,8 +4,17 @@ import { Card } from "@/components/Card"
 import type { Holding } from "@/components/ui/data-table-holdings/types"
 import Highcharts from "highcharts"
 import HighchartsReact from "highcharts-react-official"
+import HighchartsSunburst from "highcharts/modules/sunburst"
+import HighchartsExporting from "highcharts/modules/exporting"
+import HighchartsExportData from "highcharts/modules/export-data"
 import { useTheme } from "next-themes"
 import { useEffect, useRef, useState } from "react"
+
+// Track if modules are initialized globally to prevent duplicate initialization
+let sunburstModulesInitialized = false
+
+// Type assertion for module initialization functions
+type HighchartsModule = (H: typeof Highcharts) => void
 
 interface HoldingsSunburstProps {
   holdings: Holding[]
@@ -25,25 +34,30 @@ export function HoldingsSunburst({
   useEffect(() => {
     setIsClient(true)
 
-    // Load Highcharts modules dynamically
-    if (typeof Highcharts === "object") {
-      Promise.all([
-        import("highcharts/modules/sunburst"),
-        import("highcharts/modules/exporting"),
-        import("highcharts/modules/export-data")
-      ]).then(([sunburstModule, exportingModule, exportDataModule]) => {
-        if (typeof sunburstModule.default === "function") {
-          sunburstModule.default(Highcharts)
+    // Initialize Highcharts modules only once on client side
+    if (!sunburstModulesInitialized && typeof Highcharts === "object") {
+      try {
+        // Cast modules to callable functions
+        const sunburstInit = HighchartsSunburst as unknown as HighchartsModule
+        const exportingInit = HighchartsExporting as unknown as HighchartsModule
+        const exportDataInit = HighchartsExportData as unknown as HighchartsModule
+
+        if (typeof sunburstInit === "function") {
+          sunburstInit(Highcharts)
         }
-        if (typeof exportingModule.default === "function") {
-          exportingModule.default(Highcharts)
+        if (typeof exportingInit === "function") {
+          exportingInit(Highcharts)
         }
-        if (typeof exportDataModule.default === "function") {
-          exportDataModule.default(Highcharts)
+        if (typeof exportDataInit === "function") {
+          exportDataInit(Highcharts)
         }
-        setModulesLoaded(true)
-      })
+        sunburstModulesInitialized = true
+      } catch (e) {
+        // Modules may already be initialized
+        console.log("Highcharts modules initialization:", e)
+      }
     }
+    setModulesLoaded(true)
   }, [])
 
   // Color palette for accounts
