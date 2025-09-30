@@ -287,7 +287,7 @@ export function HoldingsSunburst({
             color: isDark ? "#f3f4f6" : "#111827",
           },
         },
-      } as any,
+      } as Highcharts.SeriesSunburstOptions,
     ],
     tooltip: {
       useHTML: true,
