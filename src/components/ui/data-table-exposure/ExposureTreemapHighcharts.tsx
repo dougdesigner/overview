@@ -28,7 +28,6 @@ export function ExposureTreemapHighcharts({
   totalValue,
 }: ExposureTreemapHighchartsProps) {
   const [groupingMode, setGroupingMode] = useState<GroupingMode>("sector")
-  const [isTreemapLoaded, setIsTreemapLoaded] = useState(false)
   const { theme } = useTheme()
   const isDark = theme === "dark"
   const chartRef = useRef<HighchartsReact.RefObject>(null)
@@ -80,7 +79,13 @@ export function ExposureTreemapHighcharts({
       (exp) => !exp.isETFBreakdown && exp.totalValue > 0,
     )
 
-    const data: any[] = []
+    const data: Array<{
+      id: string
+      parent?: string
+      name: string
+      value?: number
+      color?: string
+    }> = []
     const colorMap = new Map<string, string>()
     let colorIndex = 0
 
@@ -291,7 +296,7 @@ export function ExposureTreemapHighcharts({
             },
           },
         ],
-      } as any,
+      } as Highcharts.SeriesTreemapOptions,
     ],
     tooltip: {
       useHTML: true,
@@ -311,7 +316,10 @@ export function ExposureTreemapHighcharts({
         fontSize: "12px",
       },
       formatter: function () {
-        const point = this.point as any
+        const point = this.point as Highcharts.Point & {
+          name: string
+          value?: number
+        }
         const percentage = point.value
           ? ((point.value / totalValue) * 100).toFixed(2)
           : "0"
