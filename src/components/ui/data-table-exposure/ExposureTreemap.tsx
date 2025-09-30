@@ -204,7 +204,16 @@ export function ExposureTreemap({
   }
 
   // Color function for Nivo treemap - receives the node datum
-  const getColor = (node: any) => {
+  const getColor = (node: {
+    id: string
+    pathComponents?: string[]
+    parent?: {
+      children?: Array<{ id: string }>
+      parent?: {
+        children?: Array<{ id: string }>
+      }
+    }
+  }) => {
     // The node object from Nivo has these properties:
     // - pathComponents: array of IDs from root to current node
     // - isLeaf: boolean indicating if it's a leaf node
@@ -237,7 +246,7 @@ export function ExposureTreemap({
         // Convert hex to HSL, adjust lightness/saturation slightly
         const industryIndex =
           node.parent?.children?.findIndex(
-            (child: any) => child.id === node.id,
+            (child: { id: string }) => child.id === node.id,
           ) || 0
         return adjustColorBrightness(baseColor, 1 + industryIndex * 0.15)
       }
@@ -252,7 +261,7 @@ export function ExposureTreemap({
         // Stocks get a slight variation of their industry's color
         const industryNodes = node.parent?.parent?.children || []
         const industryIndex =
-          industryNodes.findIndex((child: any) => child.id === industryName) ||
+          industryNodes.findIndex((child: { id: string }) => child.id === industryName) ||
           0
         return adjustColorBrightness(baseColor, 1 + industryIndex * 0.15)
       }
