@@ -240,7 +240,6 @@ export function HoldingsDrawer({
                         key={preset}
                         type="button"
                         variant="secondary"
-                        size="sm"
                         onClick={() => handleCashPresetClick(preset)}
                         className="text-xs"
                       >
