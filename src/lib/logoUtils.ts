@@ -4,7 +4,7 @@
 // These take precedence over Alpha Vantage's OfficialSite to avoid API limits
 const stockDomainOverrides: Record<string, string> = {
   // Tech Giants
-  AAPL: "apple.com",
+  AAPL: "apple.com.cn",
   MSFT: "office.com",
   GOOGL: "google.com",
   GOOG: "google.com",
@@ -35,6 +35,7 @@ const stockDomainOverrides: Record<string, string> = {
   ZM: "zoom.com",
   DOCU: "docusign.com",
   PLTR: "palantir.com",
+  APP: "applovin.com",
 
   // Financial
   JPM: "jpmorganchase.com",
@@ -68,6 +69,7 @@ const stockDomainOverrides: Record<string, string> = {
   TJX: "tjx.com",
   CVX: "chevron.com",
   XOM: "exxonmobil.com",
+  LIN: "linde.com",
 
   // Healthcare
   JNJ: "jnj.com",

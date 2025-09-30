@@ -124,7 +124,8 @@ function TickerCell({
           alt={ticker}
           width={48}
           height={48}
-          className="size-6 rounded-full bg-white object-cover"
+          className="size-6 rounded-full object-cover"
+          style={{ backgroundColor: "#f1f3fa" }}
           onError={() => setLogoError(true)}
         />
       ) : (

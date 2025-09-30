@@ -94,6 +94,42 @@ export function ExposureTreemapHighchartsWithLogos({
     return Math.round(minSize + (maxSize - minSize) * scaleFactor)
   }
 
+  // Calculate text sizes based on cell dimensions
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const calculateTextSizes = (
+    point: any,
+  ): { tickerSize: number; weightSize: number } => {
+    const minTickerSize = 10
+    const maxTickerSize = 16
+    const minWeightSize = 8
+    const maxWeightSize = 12
+
+    // Try to get cell dimensions from the point's graphic element
+    if (point.graphic && point.graphic.element) {
+      const bbox = point.graphic.getBBox()
+      const cellHeight = bbox.height
+
+      // Ticker size: 15-20% of cell height
+      const tickerTarget = cellHeight * 0.17
+      const tickerSize = Math.max(
+        minTickerSize,
+        Math.min(maxTickerSize, Math.round(tickerTarget)),
+      )
+
+      // Weight size: 12-15% of cell height (slightly smaller than ticker)
+      const weightTarget = cellHeight * 0.14
+      const weightSize = Math.max(
+        minWeightSize,
+        Math.min(maxWeightSize, Math.round(weightTarget)),
+      )
+
+      return { tickerSize, weightSize }
+    }
+
+    // Fallback to default sizes
+    return { tickerSize: 12, weightSize: 10 }
+  }
+
   // Determine what content to display based on cell size
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const getContentStrategy = (
@@ -256,7 +292,7 @@ export function ExposureTreemapHighchartsWithLogos({
           {
             level: 1,
             layoutAlgorithm:
-              groupingMode === "sector" ? "sliceAndDice" : "squarified",
+              groupingMode === "sector" ? "squarified" : "squarified",
             dataLabels: {
               enabled: true,
               headers: true,
@@ -294,7 +330,7 @@ export function ExposureTreemapHighchartsWithLogos({
                   const logoSize = calculateLogoSize(point)
                   if (logoUrl) {
                     return `<div style="text-align: center; display: flex; align-items: center; justify-content: center; height: 100%; overflow: hidden;">
-                      <div style="width: ${logoSize}px; height: ${logoSize}px; border-radius: 50%; background: transparent; overflow: hidden; display: flex; align-items: center; justify-content: center;">
+                      <div style="width: ${logoSize}px; height: ${logoSize}px; border-radius: 50%; background: #f1f3fa; overflow: hidden; display: flex; align-items: center; justify-content: center;">
                         <img src="${logoUrl}"
                              alt="${ticker}"
                              style="width: 100%; height: 100%; object-fit: contain;"
@@ -311,23 +347,24 @@ export function ExposureTreemapHighchartsWithLogos({
                 // Logo + ticker for medium-large cells
                 if (contentStrategy === "logo-ticker") {
                   const logoSize = calculateLogoSize(point)
+                  const { tickerSize } = calculateTextSizes(point)
                   if (logoUrl) {
                     return `<div style="text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; overflow: hidden;">
-                    <div style="width: ${logoSize}px; height: ${logoSize}px; border-radius: 50%; background: transparent; overflow: hidden; display: flex; align-items: center; justify-content: center; margin-bottom: 2px;">
+                    <div style="width: ${logoSize}px; height: ${logoSize}px; border-radius: 50%; background: #f1f3fa; overflow: hidden; display: flex; align-items: center; justify-content: center; margin-bottom: 2px;">
                       <img src="${logoUrl}"
                            alt="${ticker}"
                            style="width: 100%; height: 100%; object-fit: contain;"
                            onerror="this.style.display='none'"
                       />
                     </div>
-                    <span style="color: ${isDark ? "#f3f4f6" : "#f3f4f6"}; font-size: 12px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                    <span style="color: ${isDark ? "#f3f4f6" : "#f3f4f6"}; font-size: ${tickerSize}px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
                       ${ticker}
                     </span>
                   </div>`
                   } else {
                     // Fallback to text only if no logo available
                     return `<div style="text-align: center; overflow: hidden; height: 100%; display: flex; align-items: center; justify-content: center;">
-                      <span style="color: ${isDark ? "#f3f4f6" : "#f3f4f6"}; font-size: 12px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                      <span style="color: ${isDark ? "#f3f4f6" : "#f3f4f6"}; font-size: ${tickerSize}px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
                         ${ticker}
                       </span>
                     </div>`
@@ -337,30 +374,31 @@ export function ExposureTreemapHighchartsWithLogos({
                 // Full content (logo + ticker + weight) for largest cells
                 if (contentStrategy === "full") {
                   const logoSize = calculateLogoSize(point)
+                  const { tickerSize, weightSize } = calculateTextSizes(point)
                   const percentage = point.percentage?.toFixed(1) || "0.0"
                   if (logoUrl) {
                     return `<div style="text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; overflow: hidden;">
-                    <div style="width: ${logoSize}px; height: ${logoSize}px; border-radius: 50%; background: transparent; overflow: hidden; display: flex; align-items: center; justify-content: center; margin-bottom: 2px;">
+                    <div style="width: ${logoSize}px; height: ${logoSize}px; border-radius: 50%; background: #f1f3fa; overflow: hidden; display: flex; align-items: center; justify-content: center; margin-bottom: 2px;">
                       <img src="${logoUrl}"
                            alt="${ticker}"
                            style="width: 100%; height: 100%; object-fit: contain;"
                            onerror="this.style.display='none'"
                       />
                     </div>
-                    <span style="color: ${isDark ? "#f3f4f6" : "#f3f4f6"}; font-size: 12px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                    <span style="color: ${isDark ? "#f3f4f6" : "#f3f4f6"}; font-size: ${tickerSize}px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
                       ${ticker}
                     </span>
-                    <span style="color: ${isDark ? "#f3f4f6" : "#f3f4f6"}; font-size: 10px; font-weight: 500; white-space: nowrap; margin-top: 1px;">
+                    <span style="color: ${isDark ? "#f3f4f6" : "#f3f4f6"}; font-size: ${weightSize}px; font-weight: 500; white-space: nowrap; margin-top: 1px;">
                       ${percentage}%
                     </span>
                   </div>`
                   } else {
                     // Fallback to text only if no logo available for full display
                     return `<div style="text-align: center; overflow: hidden; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center;">
-                      <span style="color: ${isDark ? "#f3f4f6" : "#f3f4f6"}; font-size: 12px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                      <span style="color: ${isDark ? "#f3f4f6" : "#f3f4f6"}; font-size: ${tickerSize}px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
                         ${ticker}
                       </span>
-                      <span style="color: ${isDark ? "#f3f4f6" : "#f3f4f6"}; font-size: 10px; font-weight: 500; white-space: nowrap; margin-top: 1px;">
+                      <span style="color: ${isDark ? "#f3f4f6" : "#f3f4f6"}; font-size: ${weightSize}px; font-weight: 500; white-space: nowrap; margin-top: 1px;">
                         ${percentage}%
                       </span>
                     </div>`
