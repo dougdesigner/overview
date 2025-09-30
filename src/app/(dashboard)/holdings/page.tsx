@@ -11,9 +11,9 @@ import { HoldingsTable } from "@/components/ui/data-table-holdings/HoldingsTable
 import { Holding } from "@/components/ui/data-table-holdings/types"
 import { RiAddLine } from "@remixicon/react"
 import { useSearchParams } from "next/navigation"
-import React from "react"
+import React, { Suspense } from "react"
 
-export default function HoldingsPage() {
+function HoldingsContent() {
   const searchParams = useSearchParams()
   const [isOpen, setIsOpen] = React.useState(false)
   const [editingHolding, setEditingHolding] = React.useState<Holding | null>(null)
@@ -276,5 +276,17 @@ export default function HoldingsPage() {
         />
       </div>
     </main>
+  )
+}
+
+export default function HoldingsPage() {
+  return (
+    <Suspense fallback={
+      <div className="flex h-full items-center justify-center">
+        <div className="text-sm text-gray-500">Loading...</div>
+      </div>
+    }>
+      <HoldingsContent />
+    </Suspense>
   )
 }
