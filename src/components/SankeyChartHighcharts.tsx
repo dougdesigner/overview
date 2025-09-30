@@ -205,7 +205,7 @@ export default function SankeyChartHighcharts({
             fontWeight: "600",
           },
         },
-      } as any,
+      } as Highcharts.SeriesSankeyOptions,
     ],
     tooltip: {
       useHTML: true,
@@ -226,8 +226,12 @@ export default function SankeyChartHighcharts({
         fontSize: "12px",
       },
       pointFormatter: function () {
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        const point = this as any
+        const point = this as Highcharts.Point & {
+          from: string
+          to: string
+          weight: number
+          fromNode: { sum: number }
+        }
         return `<div style="padding: 2px;">
           <div style="font-weight: 600; margin-bottom: 4px;">
             ${point.from} → ${point.to}
@@ -242,12 +246,15 @@ export default function SankeyChartHighcharts({
         curveFactor: 0.33,
         tooltip: {
           nodeFormatter: function () {
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            const point = this as any
+            const point = this as Highcharts.Point & {
+              name: string
+              sum?: number
+              linksFrom?: Array<{ weight: number }>
+            }
             const total =
               point.sum ||
               point.linksFrom?.reduce(
-                (sum: number, link: any) => sum + link.weight,
+                (sum: number, link: { weight: number }) => sum + link.weight,
                 0,
               ) ||
               0
