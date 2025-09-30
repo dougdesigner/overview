@@ -16,13 +16,13 @@ import { StockExposure } from "./types"
 if (typeof Highcharts === "object") {
   // Type assertion to handle module initialization
   if (typeof HighchartsTreemap === "function") {
-    ;(HighchartsTreemap as any)(Highcharts)
+    ;(HighchartsTreemap as (H: typeof Highcharts) => void)(Highcharts)
   }
   if (typeof HighchartsExporting === "function") {
-    ;(HighchartsExporting as any)(Highcharts)
+    ;(HighchartsExporting as (H: typeof Highcharts) => void)(Highcharts)
   }
   if (typeof HighchartsExportData === "function") {
-    ;(HighchartsExportData as any)(Highcharts)
+    ;(HighchartsExportData as (H: typeof Highcharts) => void)(Highcharts)
   }
 }
 
@@ -38,6 +38,15 @@ interface ExtendedTreemapPoint extends Highcharts.PointOptionsObject {
   logoUrl?: string | null
   percentage?: number
   ticker?: string
+}
+
+// Type for point with graphic element
+interface PointWithGraphic {
+  graphic?: {
+    element?: unknown
+    getBBox: () => { height: number; width: number }
+  }
+  percentage?: number
 }
 
 export function ExposureTreemapHighchartsWithLogos({
@@ -95,9 +104,8 @@ export function ExposureTreemapHighchartsWithLogos({
   }
 
   // Calculate text sizes based on cell dimensions
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const calculateTextSizes = (
-    point: any,
+    point: PointWithGraphic,
   ): { tickerSize: number; weightSize: number } => {
     const minTickerSize = 10
     const maxTickerSize = 16
@@ -131,9 +139,8 @@ export function ExposureTreemapHighchartsWithLogos({
   }
 
   // Determine what content to display based on cell size
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const getContentStrategy = (
-    point: any,
+    point: PointWithGraphic,
   ): "full" | "logo-ticker" | "logo-only" | "none" => {
     // Try to get actual cell dimensions
     let cellHeight = 0
