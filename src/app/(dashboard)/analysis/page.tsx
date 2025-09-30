@@ -12,7 +12,6 @@ import { volume } from "@/data/support/volume"
 import React from "react"
 
 export default function AnalysisPage() {
-  const [isOpen, setIsOpen] = React.useState(false)
   return (
     <main>
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
