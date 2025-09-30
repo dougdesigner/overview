@@ -4,24 +4,8 @@ import { Card } from "@/components/Card"
 import type { Holding } from "@/components/ui/data-table-holdings/types"
 import Highcharts from "highcharts"
 import HighchartsReact from "highcharts-react-official"
-import HighchartsExportData from "highcharts/modules/export-data"
-import HighchartsExporting from "highcharts/modules/exporting"
-import HighchartsSunburst from "highcharts/modules/sunburst"
 import { useTheme } from "next-themes"
 import { useEffect, useRef, useState } from "react"
-
-// Initialize Highcharts modules for Next.js
-if (typeof Highcharts === "object") {
-  if (typeof HighchartsSunburst === "function") {
-    ;(HighchartsSunburst as (H: typeof Highcharts) => void)(Highcharts)
-  }
-  if (typeof HighchartsExporting === "function") {
-    ;(HighchartsExporting as (H: typeof Highcharts) => void)(Highcharts)
-  }
-  if (typeof HighchartsExportData === "function") {
-    ;(HighchartsExportData as (H: typeof Highcharts) => void)(Highcharts)
-  }
-}
 
 interface HoldingsSunburstProps {
   holdings: Holding[]
@@ -36,9 +20,30 @@ export function HoldingsSunburst({
   const isDark = theme === "dark"
   const chartRef = useRef<HighchartsReact.RefObject>(null)
   const [isClient, setIsClient] = useState(false)
+  const [modulesLoaded, setModulesLoaded] = useState(false)
 
   useEffect(() => {
     setIsClient(true)
+
+    // Load Highcharts modules dynamically
+    if (typeof Highcharts === "object") {
+      Promise.all([
+        import("highcharts/modules/sunburst"),
+        import("highcharts/modules/exporting"),
+        import("highcharts/modules/export-data")
+      ]).then(([sunburstModule, exportingModule, exportDataModule]) => {
+        if (typeof sunburstModule.default === "function") {
+          sunburstModule.default(Highcharts)
+        }
+        if (typeof exportingModule.default === "function") {
+          exportingModule.default(Highcharts)
+        }
+        if (typeof exportDataModule.default === "function") {
+          exportDataModule.default(Highcharts)
+        }
+        setModulesLoaded(true)
+      })
+    }
   }, [])
 
   // Color palette for accounts
@@ -316,7 +321,7 @@ export function HoldingsSunburst({
     },
   }
 
-  if (!isClient) {
+  if (!isClient || !modulesLoaded) {
     return (
       <Card className="p-6">
         <div className="flex h-[400px] items-center justify-center">

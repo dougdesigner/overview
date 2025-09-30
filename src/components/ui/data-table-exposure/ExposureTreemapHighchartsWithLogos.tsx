@@ -5,26 +5,9 @@ import { getTickerLogoUrl } from "@/lib/logoUtils"
 import { toProperCase } from "@/lib/utils"
 import Highcharts from "highcharts"
 import HighchartsReact from "highcharts-react-official"
-import HighchartsExportData from "highcharts/modules/export-data"
-import HighchartsExporting from "highcharts/modules/exporting"
-import HighchartsTreemap from "highcharts/modules/treemap"
 import { useTheme } from "next-themes"
-import { useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { StockExposure } from "./types"
-
-// Initialize Highcharts modules for Next.js
-if (typeof Highcharts === "object") {
-  // Type assertion to handle module initialization
-  if (typeof HighchartsTreemap === "function") {
-    ;(HighchartsTreemap as (H: typeof Highcharts) => void)(Highcharts)
-  }
-  if (typeof HighchartsExporting === "function") {
-    ;(HighchartsExporting as (H: typeof Highcharts) => void)(Highcharts)
-  }
-  if (typeof HighchartsExportData === "function") {
-    ;(HighchartsExportData as (H: typeof Highcharts) => void)(Highcharts)
-  }
-}
 
 interface ExposureTreemapHighchartsProps {
   exposures: StockExposure[]
@@ -54,9 +37,32 @@ export function ExposureTreemapHighchartsWithLogos({
   totalValue,
 }: ExposureTreemapHighchartsProps) {
   const [groupingMode, setGroupingMode] = useState<GroupingMode>("sector")
+  const [modulesLoaded, setModulesLoaded] = useState(false)
   const { theme } = useTheme()
   const isDark = theme === "dark"
   const chartRef = useRef<HighchartsReact.RefObject>(null)
+
+  useEffect(() => {
+    // Load Highcharts modules dynamically
+    if (typeof Highcharts === "object") {
+      Promise.all([
+        import("highcharts/modules/treemap"),
+        import("highcharts/modules/exporting"),
+        import("highcharts/modules/export-data")
+      ]).then(([treemapModule, exportingModule, exportDataModule]) => {
+        if (typeof treemapModule.default === "function") {
+          treemapModule.default(Highcharts)
+        }
+        if (typeof exportingModule.default === "function") {
+          exportingModule.default(Highcharts)
+        }
+        if (typeof exportDataModule.default === "function") {
+          exportDataModule.default(Highcharts)
+        }
+        setModulesLoaded(true)
+      })
+    }
+  }, [])
 
   // Simple color palette
   const colors = [
@@ -476,6 +482,16 @@ export function ExposureTreemapHighchartsWithLogos({
   )
     .sort((a, b) => b[1] - a[1])
     .slice(0, 6)
+
+  if (!modulesLoaded) {
+    return (
+      <Card className="pb-4 pt-6">
+        <div className="flex h-[400px] items-center justify-center">
+          <div className="text-sm text-gray-500">Loading chart...</div>
+        </div>
+      </Card>
+    )
+  }
 
   return (
     <Card className="pb-4 pt-6">

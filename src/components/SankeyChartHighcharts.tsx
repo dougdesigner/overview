@@ -3,24 +3,8 @@
 import { type AvailableChartColorsKeys } from "@/lib/chartUtils"
 import Highcharts from "highcharts"
 import HighchartsReact from "highcharts-react-official"
-import HighchartsExportData from "highcharts/modules/export-data"
-import HighchartsExporting from "highcharts/modules/exporting"
-import HighchartsSankey from "highcharts/modules/sankey"
 import { useTheme } from "next-themes"
 import { useEffect, useRef, useState } from "react"
-
-// Initialize Highcharts modules for Next.js
-if (typeof Highcharts === "object") {
-  if (typeof HighchartsSankey === "function") {
-    ;(HighchartsSankey as (H: typeof Highcharts) => void)(Highcharts)
-  }
-  if (typeof HighchartsExporting === "function") {
-    ;(HighchartsExporting as (H: typeof Highcharts) => void)(Highcharts)
-  }
-  if (typeof HighchartsExportData === "function") {
-    ;(HighchartsExportData as (H: typeof Highcharts) => void)(Highcharts)
-  }
-}
 
 interface SankeyNode {
   id: string
@@ -73,9 +57,30 @@ export default function SankeyChartHighcharts({
   const isDark = theme === "dark"
   const chartRef = useRef<HighchartsReact.RefObject>(null)
   const [isClient, setIsClient] = useState(false)
+  const [modulesLoaded, setModulesLoaded] = useState(false)
 
   useEffect(() => {
     setIsClient(true)
+
+    // Load Highcharts modules dynamically
+    if (typeof Highcharts === "object") {
+      Promise.all([
+        import("highcharts/modules/sankey"),
+        import("highcharts/modules/exporting"),
+        import("highcharts/modules/export-data")
+      ]).then(([sankeyModule, exportingModule, exportDataModule]) => {
+        if (typeof sankeyModule.default === "function") {
+          sankeyModule.default(Highcharts)
+        }
+        if (typeof exportingModule.default === "function") {
+          exportingModule.default(Highcharts)
+        }
+        if (typeof exportDataModule.default === "function") {
+          exportDataModule.default(Highcharts)
+        }
+        setModulesLoaded(true)
+      })
+    }
   }, [])
 
   // Get node color based on node type and position
@@ -268,7 +273,7 @@ export default function SankeyChartHighcharts({
     },
   }
 
-  if (!isClient) {
+  if (!isClient || !modulesLoaded) {
     return (
       <div
         style={{
