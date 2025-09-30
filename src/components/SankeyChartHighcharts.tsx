@@ -3,8 +3,17 @@
 import { type AvailableChartColorsKeys } from "@/lib/chartUtils"
 import Highcharts from "highcharts"
 import HighchartsReact from "highcharts-react-official"
+import HighchartsSankey from "highcharts/modules/sankey"
+import HighchartsExporting from "highcharts/modules/exporting"
+import HighchartsExportData from "highcharts/modules/export-data"
 import { useTheme } from "next-themes"
 import { useEffect, useRef, useState } from "react"
+
+// Track if modules are initialized globally to prevent duplicate initialization
+let sankeyModulesInitialized = false
+
+// Type assertion for module initialization functions
+type HighchartsModule = (H: typeof Highcharts) => void
 
 interface SankeyNode {
   id: string
@@ -62,25 +71,30 @@ export default function SankeyChartHighcharts({
   useEffect(() => {
     setIsClient(true)
 
-    // Load Highcharts modules dynamically
-    if (typeof Highcharts === "object") {
-      Promise.all([
-        import("highcharts/modules/sankey"),
-        import("highcharts/modules/exporting"),
-        import("highcharts/modules/export-data")
-      ]).then(([sankeyModule, exportingModule, exportDataModule]) => {
-        if (typeof sankeyModule.default === "function") {
-          sankeyModule.default(Highcharts)
+    // Initialize Highcharts modules only once on client side
+    if (!sankeyModulesInitialized && typeof Highcharts === "object") {
+      try {
+        // Cast modules to callable functions
+        const sankeyInit = HighchartsSankey as unknown as HighchartsModule
+        const exportingInit = HighchartsExporting as unknown as HighchartsModule
+        const exportDataInit = HighchartsExportData as unknown as HighchartsModule
+
+        if (typeof sankeyInit === "function") {
+          sankeyInit(Highcharts)
         }
-        if (typeof exportingModule.default === "function") {
-          exportingModule.default(Highcharts)
+        if (typeof exportingInit === "function") {
+          exportingInit(Highcharts)
         }
-        if (typeof exportDataModule.default === "function") {
-          exportDataModule.default(Highcharts)
+        if (typeof exportDataInit === "function") {
+          exportDataInit(Highcharts)
         }
-        setModulesLoaded(true)
-      })
+        sankeyModulesInitialized = true
+      } catch (e) {
+        // Modules may already be initialized
+        console.log("Highcharts modules initialization:", e)
+      }
     }
+    setModulesLoaded(true)
   }, [])
 
   // Get node color based on node type and position

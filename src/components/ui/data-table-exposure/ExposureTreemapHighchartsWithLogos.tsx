@@ -5,9 +5,18 @@ import { getTickerLogoUrl } from "@/lib/logoUtils"
 import { toProperCase } from "@/lib/utils"
 import Highcharts from "highcharts"
 import HighchartsReact from "highcharts-react-official"
+import HighchartsTreemap from "highcharts/modules/treemap"
+import HighchartsExporting from "highcharts/modules/exporting"
+import HighchartsExportData from "highcharts/modules/export-data"
 import { useTheme } from "next-themes"
 import { useEffect, useRef, useState } from "react"
 import { StockExposure } from "./types"
+
+// Track if modules are initialized globally to prevent duplicate initialization
+let treemapLogoModulesInitialized = false
+
+// Type assertion for module initialization functions
+type HighchartsModule = (H: typeof Highcharts) => void
 
 interface ExposureTreemapHighchartsProps {
   exposures: StockExposure[]
@@ -43,25 +52,30 @@ export function ExposureTreemapHighchartsWithLogos({
   const chartRef = useRef<HighchartsReact.RefObject>(null)
 
   useEffect(() => {
-    // Load Highcharts modules dynamically
-    if (typeof Highcharts === "object") {
-      Promise.all([
-        import("highcharts/modules/treemap"),
-        import("highcharts/modules/exporting"),
-        import("highcharts/modules/export-data")
-      ]).then(([treemapModule, exportingModule, exportDataModule]) => {
-        if (typeof treemapModule.default === "function") {
-          treemapModule.default(Highcharts)
+    // Initialize Highcharts modules only once on client side
+    if (!treemapLogoModulesInitialized && typeof Highcharts === "object") {
+      try {
+        // Cast modules to callable functions
+        const treemapInit = HighchartsTreemap as unknown as HighchartsModule
+        const exportingInit = HighchartsExporting as unknown as HighchartsModule
+        const exportDataInit = HighchartsExportData as unknown as HighchartsModule
+
+        if (typeof treemapInit === "function") {
+          treemapInit(Highcharts)
         }
-        if (typeof exportingModule.default === "function") {
-          exportingModule.default(Highcharts)
+        if (typeof exportingInit === "function") {
+          exportingInit(Highcharts)
         }
-        if (typeof exportDataModule.default === "function") {
-          exportDataModule.default(Highcharts)
+        if (typeof exportDataInit === "function") {
+          exportDataInit(Highcharts)
         }
-        setModulesLoaded(true)
-      })
+        treemapLogoModulesInitialized = true
+      } catch (e) {
+        // Modules may already be initialized
+        console.log("Highcharts modules initialization:", e)
+      }
     }
+    setModulesLoaded(true)
   }, [])
 
   // Simple color palette
