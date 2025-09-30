@@ -44,7 +44,6 @@ export function ExposureTable({ holdings, onRefresh }: ExposureTableProps) {
   const [globalFilter, setGlobalFilter] = React.useState("")
   const [expanded, setExpanded] = React.useState<ExpandedState>({})
   const [isLoading, setIsLoading] = React.useState(false)
-  const [lastUpdated, setLastUpdated] = React.useState<Date | null>(null)
   const [totalPortfolioValue, setTotalPortfolioValue] = React.useState(0)
 
   // Calculate exposures on mount and when holdings change
@@ -56,7 +55,6 @@ export function ExposureTable({ holdings, onRefresh }: ExposureTableProps) {
           await exposureCalculator.calculateExposures(holdings)
         setData(result.exposures)
         setTotalPortfolioValue(result.totalPortfolioValue)
-        setLastUpdated(result.lastCalculated)
       } catch (error) {
         console.error("Error calculating exposures:", error)
       } finally {
@@ -66,25 +64,6 @@ export function ExposureTable({ holdings, onRefresh }: ExposureTableProps) {
     calculateExposuresAsync()
   }, [holdings])
 
-  const calculateExposures = async () => {
-    setIsLoading(true)
-    try {
-      const result: ExposureCalculationResult =
-        await exposureCalculator.calculateExposures(holdings)
-      setData(result.exposures)
-      setTotalPortfolioValue(result.totalPortfolioValue)
-      setLastUpdated(result.lastCalculated)
-    } catch (error) {
-      console.error("Error calculating exposures:", error)
-    } finally {
-      setIsLoading(false)
-    }
-  }
-
-  const handleRefresh = async () => {
-    await calculateExposures()
-    onRefresh?.()
-  }
 
   const toggleExpandAll = () => {
     const allExpanded = areAllExpanded()
@@ -115,7 +94,7 @@ export function ExposureTable({ holdings, onRefresh }: ExposureTableProps) {
         toggleExpandAll,
         areAllExpanded,
       }),
-    [expanded, data, toggleExpandAll, areAllExpanded],
+    [toggleExpandAll, areAllExpanded],
   )
 
   const table = useReactTable({
@@ -141,11 +120,6 @@ export function ExposureTable({ holdings, onRefresh }: ExposureTableProps) {
       },
     },
   })
-
-  // Calculate summary statistics
-  const totalStocks = data.filter((d) => !d.isETFBreakdown).length
-  const stocksWithETFExposure = data.filter((d) => d.etfExposure > 0).length
-  const topConcentration = data[0]?.percentOfPortfolio || 0
 
   return (
     <div className="space-y-6">
