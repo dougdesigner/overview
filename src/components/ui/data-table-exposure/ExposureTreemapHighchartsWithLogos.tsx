@@ -96,7 +96,9 @@ export function ExposureTreemapHighchartsWithLogos({
 
   // Determine what content to display based on cell size
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const getContentStrategy = (point: any): "full" | "logo-only" | "none" => {
+  const getContentStrategy = (
+    point: any,
+  ): "full" | "logo-ticker" | "logo-only" | "none" => {
     // Try to get actual cell dimensions
     let cellHeight = 0
     let cellWidth = 0
@@ -108,8 +110,10 @@ export function ExposureTreemapHighchartsWithLogos({
     }
 
     // Determine display strategy based on cell dimensions only
-    if (cellHeight >= 50 && cellWidth >= 50) {
-      return "full" // Show logo + ticker
+    if (cellHeight >= 70 && cellWidth >= 70) {
+      return "full" // Show logo + ticker + weight
+    } else if (cellHeight >= 50 && cellWidth >= 50) {
+      return "logo-ticker" // Show logo + ticker
     } else if (cellHeight >= 24 && cellWidth >= 24) {
       return "logo-only" // Show only logo
     } else {
@@ -285,7 +289,7 @@ export function ExposureTreemapHighchartsWithLogos({
                   return ""
                 }
 
-                // Logo only for medium cells
+                // Logo only for small cells
                 if (contentStrategy === "logo-only") {
                   const logoSize = calculateLogoSize(point)
                   if (logoUrl) {
@@ -304,8 +308,8 @@ export function ExposureTreemapHighchartsWithLogos({
                   }
                 }
 
-                // Full content (logo + ticker) for large cells
-                if (contentStrategy === "full") {
+                // Logo + ticker for medium-large cells
+                if (contentStrategy === "logo-ticker") {
                   const logoSize = calculateLogoSize(point)
                   if (logoUrl) {
                     return `<div style="text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; overflow: hidden;">
@@ -316,15 +320,48 @@ export function ExposureTreemapHighchartsWithLogos({
                            onerror="this.style.display='none'"
                       />
                     </div>
-                    <span style="color: ${isDark ? "#f3f4f6" : "#111827"}; font-size: 12px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                    <span style="color: ${isDark ? "#f3f4f6" : "#f3f4f6"}; font-size: 12px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
                       ${ticker}
                     </span>
                   </div>`
                   } else {
-                    // Fallback to text only if no logo available for full display
+                    // Fallback to text only if no logo available
                     return `<div style="text-align: center; overflow: hidden; height: 100%; display: flex; align-items: center; justify-content: center;">
-                      <span style="color: ${isDark ? "#f3f4f6" : "#111827"}; font-size: 12px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                      <span style="color: ${isDark ? "#f3f4f6" : "#f3f4f6"}; font-size: 12px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
                         ${ticker}
+                      </span>
+                    </div>`
+                  }
+                }
+
+                // Full content (logo + ticker + weight) for largest cells
+                if (contentStrategy === "full") {
+                  const logoSize = calculateLogoSize(point)
+                  const percentage = point.percentage?.toFixed(1) || "0.0"
+                  if (logoUrl) {
+                    return `<div style="text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; overflow: hidden;">
+                    <div style="width: ${logoSize}px; height: ${logoSize}px; border-radius: 50%; background: transparent; overflow: hidden; display: flex; align-items: center; justify-content: center; margin-bottom: 2px;">
+                      <img src="${logoUrl}"
+                           alt="${ticker}"
+                           style="width: 100%; height: 100%; object-fit: contain;"
+                           onerror="this.style.display='none'"
+                      />
+                    </div>
+                    <span style="color: ${isDark ? "#f3f4f6" : "#f3f4f6"}; font-size: 12px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                      ${ticker}
+                    </span>
+                    <span style="color: ${isDark ? "#f3f4f6" : "#f3f4f6"}; font-size: 10px; font-weight: 500; white-space: nowrap; margin-top: 1px;">
+                      ${percentage}%
+                    </span>
+                  </div>`
+                  } else {
+                    // Fallback to text only if no logo available for full display
+                    return `<div style="text-align: center; overflow: hidden; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                      <span style="color: ${isDark ? "#f3f4f6" : "#f3f4f6"}; font-size: 12px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                        ${ticker}
+                      </span>
+                      <span style="color: ${isDark ? "#f3f4f6" : "#f3f4f6"}; font-size: 10px; font-weight: 500; white-space: nowrap; margin-top: 1px;">
+                        ${percentage}%
                       </span>
                     </div>`
                   }
