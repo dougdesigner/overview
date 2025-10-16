@@ -1,0 +1,349 @@
+{
+  "etfs": {
+    "VTI": {
+      "name": "Vanguard Total Stock Market ETF",
+      "breakdown": [
+        { "class": "us_equity", "percentage": 100, "subClass": "total_market" }
+      ]
+    },
+    "VOO": {
+      "name": "Vanguard S&P 500 ETF",
+      "breakdown": [
+        { "class": "us_equity", "percentage": 100, "subClass": "large_cap" }
+      ]
+    },
+    "SPY": {
+      "name": "SPDR S&P 500 ETF",
+      "breakdown": [
+        { "class": "us_equity", "percentage": 100, "subClass": "large_cap" }
+      ]
+    },
+    "VXUS": {
+      "name": "Vanguard Total International Stock ETF",
+      "breakdown": [
+        { "class": "intl_equity", "percentage": 100, "subClass": "total_international" }
+      ]
+    },
+    "BND": {
+      "name": "Vanguard Total Bond Market ETF",
+      "breakdown": [
+        { "class": "fixed_income", "percentage": 100, "subClass": "us_bonds" }
+      ]
+    },
+    "BNDX": {
+      "name": "Vanguard Total International Bond ETF",
+      "breakdown": [
+        { "class": "fixed_income", "percentage": 100, "subClass": "intl_bonds" }
+      ]
+    },
+    "QQQ": {
+      "name": "Invesco QQQ Trust",
+      "breakdown": [
+        { "class": "us_equity", "percentage": 100, "subClass": "large_cap_growth" }
+      ]
+    },
+    "QQQM": {
+      "name": "Invesco NASDAQ 100 ETF",
+      "breakdown": [
+        { "class": "us_equity", "percentage": 100, "subClass": "large_cap_growth" }
+      ]
+    },
+    "IWM": {
+      "name": "iShares Russell 2000 ETF",
+      "breakdown": [
+        { "class": "us_equity", "percentage": 100, "subClass": "small_cap" }
+      ]
+    },
+    "VEA": {
+      "name": "Vanguard FTSE Developed Markets ETF",
+      "breakdown": [
+        { "class": "intl_equity", "percentage": 100, "subClass": "developed_markets" }
+      ]
+    },
+    "VWO": {
+      "name": "Vanguard FTSE Emerging Markets ETF",
+      "breakdown": [
+        { "class": "intl_equity", "percentage": 100, "subClass": "emerging_markets" }
+      ]
+    },
+    "VNQ": {
+      "name": "Vanguard Real Estate ETF",
+      "breakdown": [
+        { "class": "real_estate", "percentage": 100, "subClass": "us_reits" }
+      ]
+    },
+    "GLD": {
+      "name": "SPDR Gold Shares",
+      "breakdown": [
+        { "class": "commodity", "percentage": 100, "subClass": "gold" }
+      ]
+    },
+    "VT": {
+      "name": "Vanguard Total World Stock ETF",
+      "breakdown": [
+        { "class": "us_equity", "percentage": 60, "subClass": "total_market" },
+        { "class": "intl_equity", "percentage": 40, "subClass": "total_international" }
+      ]
+    },
+    "AGG": {
+      "name": "iShares Core U.S. Aggregate Bond ETF",
+      "breakdown": [
+        { "class": "fixed_income", "percentage": 100, "subClass": "us_aggregate_bonds" }
+      ]
+    },
+    "TLT": {
+      "name": "iShares 20+ Year Treasury Bond ETF",
+      "breakdown": [
+        { "class": "fixed_income", "percentage": 100, "subClass": "long_term_treasuries" }
+      ]
+    },
+    "HYG": {
+      "name": "iShares iBoxx High Yield Corporate Bond ETF",
+      "breakdown": [
+        { "class": "fixed_income", "percentage": 100, "subClass": "high_yield_bonds" }
+      ]
+    },
+    "VIG": {
+      "name": "Vanguard Dividend Appreciation ETF",
+      "breakdown": [
+        { "class": "us_equity", "percentage": 100, "subClass": "dividend_growth" }
+      ]
+    },
+    "VYM": {
+      "name": "Vanguard High Dividend Yield ETF",
+      "breakdown": [
+        { "class": "us_equity", "percentage": 100, "subClass": "high_dividend" }
+      ]
+    },
+    "VUG": {
+      "name": "Vanguard Growth ETF",
+      "breakdown": [
+        { "class": "us_equity", "percentage": 100, "subClass": "large_cap_growth" }
+      ]
+    },
+    "VTV": {
+      "name": "Vanguard Value ETF",
+      "breakdown": [
+        { "class": "us_equity", "percentage": 100, "subClass": "large_cap_value" }
+      ]
+    },
+    "VB": {
+      "name": "Vanguard Small-Cap ETF",
+      "breakdown": [
+        { "class": "us_equity", "percentage": 100, "subClass": "small_cap" }
+      ]
+    },
+    "VO": {
+      "name": "Vanguard Mid-Cap ETF",
+      "breakdown": [
+        { "class": "us_equity", "percentage": 100, "subClass": "mid_cap" }
+      ]
+    }
+  },
+  "stocks": {
+    "AAPL": {
+      "name": "Apple Inc.",
+      "class": "us_equity",
+      "subClass": "large_cap",
+      "region": "US",
+      "sector": "Technology",
+      "industry": "Consumer Electronics"
+    },
+    "MSFT": {
+      "name": "Microsoft Corporation",
+      "class": "us_equity",
+      "subClass": "large_cap",
+      "region": "US",
+      "sector": "Technology",
+      "industry": "Software"
+    },
+    "NVDA": {
+      "name": "NVIDIA Corporation",
+      "class": "us_equity",
+      "subClass": "large_cap",
+      "region": "US",
+      "sector": "Technology",
+      "industry": "Semiconductors"
+    },
+    "AMZN": {
+      "name": "Amazon.com Inc.",
+      "class": "us_equity",
+      "subClass": "large_cap",
+      "region": "US",
+      "sector": "Consumer Cyclical",
+      "industry": "Internet Retail"
+    },
+    "GOOGL": {
+      "name": "Alphabet Inc. Class A",
+      "class": "us_equity",
+      "subClass": "large_cap",
+      "region": "US",
+      "sector": "Communication Services",
+      "industry": "Internet Content"
+    },
+    "META": {
+      "name": "Meta Platforms Inc.",
+      "class": "us_equity",
+      "subClass": "large_cap",
+      "region": "US",
+      "sector": "Communication Services",
+      "industry": "Social Media"
+    },
+    "TSLA": {
+      "name": "Tesla Inc.",
+      "class": "us_equity",
+      "subClass": "large_cap",
+      "region": "US",
+      "sector": "Consumer Cyclical",
+      "industry": "Auto Manufacturers"
+    },
+    "BRK.B": {
+      "name": "Berkshire Hathaway Inc. Class B",
+      "class": "us_equity",
+      "subClass": "large_cap",
+      "region": "US",
+      "sector": "Financial Services",
+      "industry": "Insurance"
+    },
+    "TSM": {
+      "name": "Taiwan Semiconductor",
+      "class": "intl_equity",
+      "subClass": "large_cap",
+      "region": "Asia",
+      "sector": "Technology",
+      "industry": "Semiconductors"
+    },
+    "NESN": {
+      "name": "Nestle SA",
+      "class": "intl_equity",
+      "subClass": "large_cap",
+      "region": "Europe",
+      "sector": "Consumer Defensive",
+      "industry": "Food Products"
+    },
+    "SAP": {
+      "name": "SAP SE",
+      "class": "intl_equity",
+      "subClass": "large_cap",
+      "region": "Europe",
+      "sector": "Technology",
+      "industry": "Software"
+    },
+    "ASML": {
+      "name": "ASML Holding NV",
+      "class": "intl_equity",
+      "subClass": "large_cap",
+      "region": "Europe",
+      "sector": "Technology",
+      "industry": "Semiconductor Equipment"
+    },
+    "NVO": {
+      "name": "Novo Nordisk",
+      "class": "intl_equity",
+      "subClass": "large_cap",
+      "region": "Europe",
+      "sector": "Healthcare",
+      "industry": "Pharmaceuticals"
+    },
+    "JPM": {
+      "name": "JPMorgan Chase & Co.",
+      "class": "us_equity",
+      "subClass": "large_cap",
+      "region": "US",
+      "sector": "Financial Services",
+      "industry": "Banks"
+    },
+    "JNJ": {
+      "name": "Johnson & Johnson",
+      "class": "us_equity",
+      "subClass": "large_cap",
+      "region": "US",
+      "sector": "Healthcare",
+      "industry": "Pharmaceuticals"
+    },
+    "XOM": {
+      "name": "Exxon Mobil Corporation",
+      "class": "us_equity",
+      "subClass": "large_cap",
+      "region": "US",
+      "sector": "Energy",
+      "industry": "Oil & Gas"
+    },
+    "UNH": {
+      "name": "UnitedHealth Group Inc.",
+      "class": "us_equity",
+      "subClass": "large_cap",
+      "region": "US",
+      "sector": "Healthcare",
+      "industry": "Healthcare Plans"
+    },
+    "V": {
+      "name": "Visa Inc.",
+      "class": "us_equity",
+      "subClass": "large_cap",
+      "region": "US",
+      "sector": "Financial Services",
+      "industry": "Payment Processing"
+    },
+    "MA": {
+      "name": "Mastercard Inc.",
+      "class": "us_equity",
+      "subClass": "large_cap",
+      "region": "US",
+      "sector": "Financial Services",
+      "industry": "Payment Processing"
+    }
+  },
+  "assetClasses": {
+    "us_equity": {
+      "name": "US Equity",
+      "description": "Stocks of US-based companies",
+      "color": "#1E40AF"
+    },
+    "intl_equity": {
+      "name": "International Equity",
+      "description": "Stocks of non-US companies",
+      "color": "#059669"
+    },
+    "fixed_income": {
+      "name": "Fixed Income",
+      "description": "Bonds and other debt securities",
+      "color": "#DC2626"
+    },
+    "real_estate": {
+      "name": "Real Estate",
+      "description": "Real estate investment trusts (REITs)",
+      "color": "#7C3AED"
+    },
+    "commodity": {
+      "name": "Commodities",
+      "description": "Physical goods like gold, oil, etc.",
+      "color": "#CA8A04"
+    },
+    "cash": {
+      "name": "Cash & Equivalents",
+      "description": "Money market funds and cash positions",
+      "color": "#6B7280"
+    }
+  },
+  "subClasses": {
+    "large_cap": "Large Cap (>$10B)",
+    "mid_cap": "Mid Cap ($2B-$10B)",
+    "small_cap": "Small Cap (<$2B)",
+    "large_cap_growth": "Large Cap Growth",
+    "large_cap_value": "Large Cap Value",
+    "dividend_growth": "Dividend Growth",
+    "high_dividend": "High Dividend Yield",
+    "total_market": "Total Market",
+    "total_international": "Total International",
+    "developed_markets": "Developed Markets",
+    "emerging_markets": "Emerging Markets",
+    "us_bonds": "US Bonds",
+    "intl_bonds": "International Bonds",
+    "us_aggregate_bonds": "US Aggregate Bonds",
+    "long_term_treasuries": "Long-term Treasuries",
+    "high_yield_bonds": "High Yield Bonds",
+    "us_reits": "US REITs",
+    "gold": "Gold"
+  }
+}

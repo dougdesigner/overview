@@ -1,0 +1,335 @@
+{
+  "VTSAX": {
+    "name": "Vanguard Total Stock Market Index Admiral",
+    "description": "Total US stock market index fund",
+    "mappings": [
+      {
+        "etf": "VTI",
+        "percentage": 100,
+        "notes": "Direct equivalent - Total Stock Market ETF"
+      }
+    ]
+  },
+  "VTIAX": {
+    "name": "Vanguard Total International Stock Index Admiral",
+    "description": "Total international stock market index fund",
+    "mappings": [
+      {
+        "etf": "VXUS",
+        "percentage": 100,
+        "notes": "Direct equivalent - Total International Stock ETF"
+      }
+    ]
+  },
+  "VFIAX": {
+    "name": "Vanguard 500 Index Admiral",
+    "description": "S&P 500 index fund",
+    "mappings": [
+      {
+        "etf": "VOO",
+        "percentage": 100,
+        "notes": "Direct equivalent - S&P 500 ETF"
+      }
+    ]
+  },
+  "FZROX": {
+    "name": "Fidelity ZERO Total Market Index",
+    "description": "Total US stock market index fund with zero fees",
+    "mappings": [
+      {
+        "etf": "VTI",
+        "percentage": 100,
+        "notes": "Equivalent to total stock market"
+      }
+    ]
+  },
+  "FXAIX": {
+    "name": "Fidelity 500 Index",
+    "description": "S&P 500 index fund",
+    "mappings": [
+      {
+        "etf": "SPY",
+        "percentage": 100,
+        "notes": "S&P 500 equivalent"
+      }
+    ]
+  },
+  "SWTSX": {
+    "name": "Schwab Total Stock Market Index",
+    "description": "Total US stock market index fund",
+    "mappings": [
+      {
+        "etf": "VTI",
+        "percentage": 100,
+        "notes": "Total stock market equivalent"
+      }
+    ]
+  },
+  "SWPPX": {
+    "name": "Schwab S&P 500 Index",
+    "description": "S&P 500 index fund",
+    "mappings": [
+      {
+        "etf": "SPY",
+        "percentage": 100,
+        "notes": "S&P 500 equivalent"
+      }
+    ]
+  },
+  "VFFVX": {
+    "name": "Vanguard Target Retirement 2055",
+    "description": "Target date fund for 2055 retirement",
+    "mappings": [
+      {
+        "etf": "VTI",
+        "percentage": 54,
+        "notes": "US Total Market portion"
+      },
+      {
+        "etf": "VXUS",
+        "percentage": 36,
+        "notes": "International stocks portion"
+      },
+      {
+        "etf": "BND",
+        "percentage": 7,
+        "notes": "US Bonds portion"
+      },
+      {
+        "etf": "BNDX",
+        "percentage": 3,
+        "notes": "International bonds portion"
+      }
+    ]
+  },
+  "VFIFX": {
+    "name": "Vanguard Target Retirement 2050",
+    "description": "Target date fund for 2050 retirement",
+    "mappings": [
+      {
+        "etf": "VTI",
+        "percentage": 54,
+        "notes": "US Total Market portion"
+      },
+      {
+        "etf": "VXUS",
+        "percentage": 36,
+        "notes": "International stocks portion"
+      },
+      {
+        "etf": "BND",
+        "percentage": 7,
+        "notes": "US Bonds portion"
+      },
+      {
+        "etf": "BNDX",
+        "percentage": 3,
+        "notes": "International bonds portion"
+      }
+    ]
+  },
+  "VFORX": {
+    "name": "Vanguard Target Retirement 2040",
+    "description": "Target date fund for 2040 retirement",
+    "mappings": [
+      {
+        "etf": "VTI",
+        "percentage": 42,
+        "notes": "US stocks - more conservative than 2055"
+      },
+      {
+        "etf": "VXUS",
+        "percentage": 28,
+        "notes": "International stocks"
+      },
+      {
+        "etf": "BND",
+        "percentage": 21,
+        "notes": "US bonds - higher allocation than 2055"
+      },
+      {
+        "etf": "BNDX",
+        "percentage": 9,
+        "notes": "International bonds"
+      }
+    ]
+  },
+  "VTHRX": {
+    "name": "Vanguard Target Retirement 2030",
+    "description": "Target date fund for 2030 retirement",
+    "mappings": [
+      {
+        "etf": "VTI",
+        "percentage": 32,
+        "notes": "US stocks - conservative allocation"
+      },
+      {
+        "etf": "VXUS",
+        "percentage": 21,
+        "notes": "International stocks"
+      },
+      {
+        "etf": "BND",
+        "percentage": 34,
+        "notes": "US bonds - high allocation"
+      },
+      {
+        "etf": "BNDX",
+        "percentage": 13,
+        "notes": "International bonds"
+      }
+    ]
+  },
+  "VTTSX": {
+    "name": "Vanguard Target Retirement 2060",
+    "description": "Target date fund for 2060 retirement",
+    "mappings": [
+      {
+        "etf": "VTI",
+        "percentage": 54,
+        "notes": "US Total Market - aggressive allocation"
+      },
+      {
+        "etf": "VXUS",
+        "percentage": 36,
+        "notes": "International stocks"
+      },
+      {
+        "etf": "BND",
+        "percentage": 7,
+        "notes": "US Bonds - minimal allocation"
+      },
+      {
+        "etf": "BNDX",
+        "percentage": 3,
+        "notes": "International bonds"
+      }
+    ]
+  },
+  "VTIVX": {
+    "name": "Vanguard Target Retirement Income",
+    "description": "Target date fund for those already in retirement",
+    "mappings": [
+      {
+        "etf": "VTI",
+        "percentage": 18,
+        "notes": "US stocks - very conservative"
+      },
+      {
+        "etf": "VXUS",
+        "percentage": 12,
+        "notes": "International stocks"
+      },
+      {
+        "etf": "BND",
+        "percentage": 49,
+        "notes": "US bonds - majority allocation"
+      },
+      {
+        "etf": "BNDX",
+        "percentage": 21,
+        "notes": "International bonds"
+      }
+    ]
+  },
+  "VBIAX": {
+    "name": "Vanguard Balanced Index Admiral",
+    "description": "60/40 balanced fund",
+    "mappings": [
+      {
+        "etf": "VTI",
+        "percentage": 60,
+        "notes": "US stocks portion"
+      },
+      {
+        "etf": "BND",
+        "percentage": 40,
+        "notes": "US bonds portion"
+      }
+    ]
+  },
+  "VWELX": {
+    "name": "Vanguard Wellington",
+    "description": "Conservative balanced fund",
+    "mappings": [
+      {
+        "etf": "VTI",
+        "percentage": 65,
+        "notes": "US stocks portion (large-cap value tilt)"
+      },
+      {
+        "etf": "BND",
+        "percentage": 35,
+        "notes": "US bonds portion"
+      }
+    ]
+  },
+  "FBALX": {
+    "name": "Fidelity Balanced",
+    "description": "Balanced fund with active management",
+    "mappings": [
+      {
+        "etf": "VOO",
+        "percentage": 60,
+        "notes": "Large-cap US stocks"
+      },
+      {
+        "etf": "BND",
+        "percentage": 40,
+        "notes": "Investment-grade bonds"
+      }
+    ]
+  },
+  "FDKLX": {
+    "name": "Fidelity Freedom 2060",
+    "description": "Fidelity target date fund for 2060",
+    "mappings": [
+      {
+        "etf": "VTI",
+        "percentage": 51,
+        "notes": "US stocks"
+      },
+      {
+        "etf": "VXUS",
+        "percentage": 39,
+        "notes": "International stocks"
+      },
+      {
+        "etf": "BND",
+        "percentage": 8,
+        "notes": "US bonds"
+      },
+      {
+        "etf": "BNDX",
+        "percentage": 2,
+        "notes": "International bonds"
+      }
+    ]
+  },
+  "TRRBX": {
+    "name": "T. Rowe Price Retirement 2040",
+    "description": "T. Rowe Price target date fund",
+    "mappings": [
+      {
+        "etf": "VTI",
+        "percentage": 45,
+        "notes": "US stocks"
+      },
+      {
+        "etf": "VXUS",
+        "percentage": 30,
+        "notes": "International stocks"
+      },
+      {
+        "etf": "BND",
+        "percentage": 20,
+        "notes": "US bonds"
+      },
+      {
+        "etf": "BNDX",
+        "percentage": 5,
+        "notes": "International bonds"
+      }
+    ]
+  }
+}
