@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test QQQM ETF Name</title>
+</head>
+<body>
+    <h1>Testing QQQM ETF Name Update</h1>
+    <div id="status"></div>
+    <button onclick="testETFMetadata()">Test ETF Metadata API</button>
+    <button onclick="refreshETFNames()">Refresh ETF Names</button>
+    <pre id="output"></pre>
+
+    <script>
+        const statusDiv = document.getElementById('status');
+        const output = document.getElementById('output');
+
+        // Check current QQQM holding
+        function checkCurrentHolding() {
+            const portfolioData = localStorage.getItem('portfolio_data');
+            if (portfolioData) {
+                const parsed = JSON.parse(portfolioData);
+                const holdings = parsed.data.holdings || [];
+                const qqqm = holdings.find(h => h.ticker === 'QQQM');
+
+                if (qqqm) {
+                    output.textContent = 'Current QQQM holding:\n' + JSON.stringify(qqqm, null, 2);
+
+                    if (qqqm.name.includes('Invesco')) {
+                        statusDiv.innerHTML = '<h2 style="color: green;">✅ QQQM name is properly set to: ' + qqqm.name + '</h2>';
+                    } else {
+                        statusDiv.innerHTML = '<h2 style="color: orange;">⚠️ QQQM name needs updating. Current: ' + qqqm.name + '</h2>';
+                    }
+                } else {
+                    statusDiv.innerHTML = '<h2>No QQQM holding found. Please add QQQM to test.</h2>';
+                    output.textContent = 'No QQQM holding found in localStorage';
+                }
+            } else {
+                statusDiv.innerHTML = '<h2>No portfolio data found.</h2>';
+            }
+        }
+
+        // Test ETF metadata API
+        async function testETFMetadata() {
+            try {
+                const response = await fetch('/api/etf-metadata', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ symbols: ['QQQM'] })
+                });
+
+                const data = await response.json();
+                output.textContent = 'ETF Metadata API Response:\n' + JSON.stringify(data, null, 2);
+
+                if (data.QQQM && data.QQQM.name.includes('Invesco')) {
+                    statusDiv.innerHTML += '<br><span style="color: green;">✅ API returns correct name: ' + data.QQQM.name + '</span>';
+                } else {
+                    statusDiv.innerHTML += '<br><span style="color: red;">❌ API returns incorrect name</span>';
+                }
+            } catch (error) {
+                output.textContent = 'Error testing API: ' + error.message;
+            }
+        }
+
+        // Refresh ETF names (simulate what the app does)
+        function refreshETFNames() {
+            statusDiv.innerHTML += '<br><span>Refreshing ETF names...</span>';
+            // This would trigger the refresh in the actual app
+            // For now, just reload the page to simulate the effect
+            setTimeout(() => {
+                location.reload();
+            }, 1000);
+        }
+
+        // Check on load
+        checkCurrentHolding();
+    </script>
+</body>
+</html>

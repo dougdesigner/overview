@@ -2,6 +2,9 @@
 
 import { useCallback, useEffect, useMemo, useState } from "react"
 import { getFromStorage, setToStorage, STORAGE_KEYS, isStorageAvailable } from "@/lib/localStorage"
+import { etfMetadataService } from "@/lib/etfMetadataService"
+import { stockPriceService } from "@/lib/stockPriceService"
+import { isKnownETF, getKnownETFName } from "@/lib/knownETFNames"
 
 // Account type definitions
 export interface Account {
@@ -309,7 +312,7 @@ export function usePortfolioStore() {
   useEffect(() => {
     if (hasInitialized) return
 
-    const loadData = () => {
+    const loadData = async () => {
       try {
         if (!isStorageAvailable()) {
           setError("Local storage is not available")
@@ -339,7 +342,14 @@ export function usePortfolioStore() {
         const storedHoldings = getFromStorage<Holding[]>(STORAGE_KEYS.holdings)
         if (storedHoldings !== null) {
           // User has saved data (even if empty)
-          setHoldingsState(storedHoldings)
+          // Migrate ETF names if needed
+          const migratedHoldings = await migrateETFNames(storedHoldings)
+          setHoldingsState(migratedHoldings)
+
+          // Save migrated holdings back to storage if they changed
+          if (JSON.stringify(migratedHoldings) !== JSON.stringify(storedHoldings)) {
+            setToStorage(STORAGE_KEYS.holdings, migratedHoldings)
+          }
         } else {
           // First time user or cleared storage - start with empty data
           setHoldingsState([])
@@ -361,6 +371,82 @@ export function usePortfolioStore() {
 
     loadData()
   }, [hasInitialized])
+
+  // Migrate ETF names for existing holdings
+  const migrateETFNames = async (holdings: Holding[]): Promise<Holding[]> => {
+    // First pass: Update all holdings with known ETF names immediately
+    let updatedHoldings = holdings.map(holding => {
+      if (!holding.ticker) return holding
+
+      const upperTicker = holding.ticker.toUpperCase()
+      const knownName = getKnownETFName(upperTicker)
+
+      // If we have a known name and it's different from current name, update it
+      if (knownName && holding.name !== knownName) {
+        console.log(`Updating ${upperTicker} from "${holding.name}" to known name "${knownName}"`)
+        return { ...holding, name: knownName, type: 'fund' as const }
+      }
+
+      return holding
+    })
+
+    // Second pass: Get tickers that still might need API updates
+    const etfTickersNeedingApiUpdate = updatedHoldings
+      .filter(h => {
+        if (!h.ticker) return false
+
+        // Skip if we already have a good name from known ETFs
+        const knownName = getKnownETFName(h.ticker.toUpperCase())
+        if (knownName) return false
+
+        // Check if it's marked as a fund
+        if (h.type === "fund") return true
+
+        // Check if the name is just the ticker (needs update)
+        if (h.name === h.ticker || h.name === `${h.ticker} ETF`) return true
+
+        // Check if it looks like an ETF ticker (2-5 uppercase letters)
+        const upperTicker = h.ticker.toUpperCase()
+        if (h.ticker === upperTicker && h.ticker.length >= 2 && h.ticker.length <= 5) {
+          // Check against known ETF patterns
+          const knownETFPatterns = [
+            'ETF', 'QQQ', 'SPY', 'ARK', 'SCH', 'XL', 'SPDR', 'GDX', 'SMH', 'GLD',
+            'SLV', 'TAN', 'ICLN', 'HACK', 'ROBO', 'JEPI', 'JEPQ', 'BOTZ', 'CLOU'
+          ]
+          return knownETFPatterns.some(pattern => upperTicker.includes(pattern))
+        }
+
+        return false
+      })
+      .map(h => h.ticker!)
+
+    // If there are ETFs that need API updates, fetch their metadata
+    if (etfTickersNeedingApiUpdate.length > 0) {
+      try {
+        console.log(`Fetching API metadata for unknown ETFs: ${etfTickersNeedingApiUpdate.join(', ')}`)
+
+        // Fetch metadata for unknown ETFs
+        const metadata = await etfMetadataService.getETFMetadataBatch(etfTickersNeedingApiUpdate)
+
+        // Update holdings with API-fetched names
+        updatedHoldings = updatedHoldings.map(holding => {
+          if (holding.ticker && metadata.has(holding.ticker.toUpperCase())) {
+            const etfMeta = metadata.get(holding.ticker.toUpperCase())!
+
+            if (etfMeta.name && etfMeta.name !== `${holding.ticker} ETF` && etfMeta.name !== holding.name) {
+              console.log(`Updating ${holding.ticker} name from "${holding.name}" to API name "${etfMeta.name}"`)
+              return { ...holding, name: etfMeta.name, type: 'fund' as const }
+            }
+          }
+          return holding
+        })
+      } catch (error) {
+        console.error("Error fetching ETF metadata from API:", error)
+      }
+    }
+
+    return updatedHoldings
+  }
 
   // Auto-save accounts whenever they change
   useEffect(() => {
@@ -586,6 +672,66 @@ export function usePortfolioStore() {
     setToStorage(STORAGE_KEYS.holdings, defaultHoldings)
   }, [])
 
+  // Update prices for all holdings
+  const updatePrices = useCallback(async () => {
+    const tickersToUpdate = holdings
+      .filter(h => h.ticker && h.type !== "cash")
+      .map(h => h.ticker!)
+
+    if (tickersToUpdate.length === 0) return
+
+    try {
+      const prices = await stockPriceService.getPrices(tickersToUpdate)
+
+      // Update holdings with new prices
+      const updatedHoldings = holdings.map(holding => {
+        if (holding.ticker && prices.has(holding.ticker)) {
+          const priceData = prices.get(holding.ticker)!
+          const newMarketValue = holding.quantity * priceData.lastPrice
+          return {
+            ...holding,
+            lastPrice: priceData.lastPrice,
+            marketValue: newMarketValue
+          }
+        }
+        return holding
+      })
+
+      // Only update if prices actually changed
+      if (JSON.stringify(updatedHoldings) !== JSON.stringify(holdings)) {
+        setHoldingsState(updatedHoldings)
+      }
+    } catch (error) {
+      console.error("Error updating prices:", error)
+    }
+  }, [holdings])
+
+  // Force refresh ETF names
+  const refreshETFNames = useCallback(async () => {
+    console.log("Refreshing ETF names...")
+    const migratedHoldings = await migrateETFNames(holdings)
+    if (JSON.stringify(migratedHoldings) !== JSON.stringify(holdings)) {
+      setHoldingsState(migratedHoldings)
+      setToStorage(STORAGE_KEYS.holdings, migratedHoldings)
+      console.log("ETF names refreshed and saved")
+    }
+  }, [holdings])
+
+  // Auto-update prices on mount and periodically
+  useEffect(() => {
+    if (!hasInitialized || isLoading || holdings.length === 0) return
+
+    // Update prices immediately
+    updatePrices()
+
+    // Update prices every 5 minutes
+    const interval = setInterval(() => {
+      updatePrices()
+    }, 5 * 60 * 1000)
+
+    return () => clearInterval(interval)
+  }, [hasInitialized, isLoading, holdings.length, updatePrices])
+
   return {
     // State
     accounts,
@@ -611,5 +757,7 @@ export function usePortfolioStore() {
     // Utility functions
     clearAllData,
     resetToDefaults,
+    updatePrices,
+    refreshETFNames,
   }
 }

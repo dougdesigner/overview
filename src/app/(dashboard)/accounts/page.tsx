@@ -31,6 +31,7 @@ export default function AccountsPage() {
   // Use the portfolio store for accounts data
   const {
     accounts,
+    holdings,
     isLoading,
     error,
     addAccount,
@@ -185,8 +186,8 @@ export default function AccountsPage() {
       </div>
       <Divider />
 
-      {/* Account Flow Sankey Chart */}
-      {accounts.length > 0 && (
+      {/* Account Flow Sankey Chart - only show when there are holdings */}
+      {accounts.length > 0 && holdings.length > 0 && (
         <Card className="mt-8">
           <p className="py-1.5 text-base font-medium text-gray-900 dark:text-gray-50">
             Account flow

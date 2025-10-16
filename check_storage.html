@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Check Storage</title>
+</head>
+<body>
+    <h1>Checking LocalStorage for QQQM</h1>
+    <pre id="output"></pre>
+    <script>
+        const output = document.getElementById('output');
+        
+        // Get portfolio data
+        const portfolioData = localStorage.getItem('portfolio_data');
+        if (portfolioData) {
+            const parsed = JSON.parse(portfolioData);
+            const holdings = parsed.data.holdings || [];
+            
+            // Find QQQM holding
+            const qqqm = holdings.find(h => h.ticker === 'QQQM');
+            
+            if (qqqm) {
+                output.textContent = 'QQQM holding found:\n' + JSON.stringify(qqqm, null, 2);
+            } else {
+                output.textContent = 'No QQQM holding found in localStorage';
+            }
+            
+            // Also show all holdings with their names
+            output.textContent += '\n\nAll holdings:\n';
+            holdings.forEach(h => {
+                output.textContent += `${h.ticker}: name="${h.name}", type="${h.type}"\n`;
+            });
+        } else {
+            output.textContent = 'No portfolio data in localStorage';
+        }
+    </script>
+</body>
+</html>

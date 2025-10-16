@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Comprehensive ETF Names</title>
+    <style>
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        h1 { color: #333; }
+        .test-section {
+            margin: 20px 0;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background: #f9f9f9;
+        }
+        .success { color: green; font-weight: bold; }
+        .warning { color: orange; font-weight: bold; }
+        .error { color: red; font-weight: bold; }
+        button {
+            padding: 10px 20px;
+            margin: 5px;
+            border: none;
+            border-radius: 4px;
+            background: #4CAF50;
+            color: white;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover { background: #45a049; }
+        pre {
+            background: #f4f4f4;
+            padding: 10px;
+            border-radius: 4px;
+            overflow-x: auto;
+        }
+        .etf-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 10px;
+            margin-top: 20px;
+        }
+        .etf-item {
+            padding: 8px;
+            background: white;
+            border-radius: 4px;
+            border: 1px solid #e0e0e0;
+        }
+        .etf-ticker {
+            font-weight: bold;
+            color: #2196F3;
+        }
+    </style>
+</head>
+<body>
+    <h1>Comprehensive ETF Names Test</h1>
+
+    <div class="test-section">
+        <h2>Test ETF Metadata API</h2>
+        <button onclick="testPopularETFs()">Test Popular ETFs</button>
+        <button onclick="testAllCategories()">Test All Categories</button>
+        <button onclick="testCustomETF()">Test Custom ETF</button>
+        <input type="text" id="customTicker" placeholder="Enter ETF ticker" value="ARKK" />
+        <div id="apiResults"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>Current Holdings</h2>
+        <button onclick="checkCurrentHoldings()">Check Holdings</button>
+        <button onclick="refreshETFNames()">Refresh All ETF Names</button>
+        <div id="holdingsResults"></div>
+    </div>
+
+    <script>
+        // Popular ETFs to test
+        const popularETFs = ['SPY', 'QQQ', 'QQQM', 'VOO', 'VTI', 'IVV', 'ARKK', 'SCHD', 'GLD', 'TLT'];
+
+        // ETFs by category for comprehensive testing
+        const etfCategories = {
+            'Vanguard': ['VOO', 'VTI', 'VXUS', 'BND', 'VEA', 'VWO'],
+            'iShares': ['IVV', 'AGG', 'IEMG', 'EFA', 'TLT', 'HYG'],
+            'SPDR': ['SPY', 'GLD', 'XLF', 'XLK', 'XLE', 'MDY'],
+            'Invesco': ['QQQ', 'QQQM', 'RSP', 'SPHQ', 'SPLV'],
+            'ARK': ['ARKK', 'ARKG', 'ARKW', 'ARKF', 'ARKQ', 'ARKX'],
+            'ProShares': ['TQQQ', 'SQQQ', 'UPRO', 'SPXU'],
+            'Schwab': ['SCHB', 'SCHD', 'SCHF', 'SCHX', 'SCHE'],
+            'Sector': ['XLF', 'XLK', 'XLE', 'XLV', 'XLY', 'XLP'],
+            'Commodity': ['GLD', 'SLV', 'USO', 'UNG', 'DBA'],
+            'International': ['EFA', 'EEM', 'IEMG', 'VEA', 'VWO', 'EWJ']
+        };
+
+        async function testPopularETFs() {
+            const resultsDiv = document.getElementById('apiResults');
+            resultsDiv.innerHTML = '<h3>Testing Popular ETFs...</h3>';
+
+            try {
+                const response = await fetch('/api/etf-metadata', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ symbols: popularETFs })
+                });
+
+                const data = await response.json();
+
+                let html = '<h4>Results:</h4><div class="etf-grid">';
+                let successCount = 0;
+                let genericCount = 0;
+
+                for (const ticker of popularETFs) {
+                    if (data[ticker]) {
+                        const name = data[ticker].name;
+                        const isGeneric = name === `${ticker} ETF`;
+                        const statusClass = isGeneric ? 'warning' : 'success';
+
+                        if (!isGeneric) successCount++;
+                        else genericCount++;
+
+                        html += `<div class="etf-item">
+                            <span class="etf-ticker">${ticker}:</span>
+                            <span class="${statusClass}">${name}</span>
+                        </div>`;
+                    }
+                }
+                html += '</div>';
+
+                html += `<p class="success">✅ ${successCount}/${popularETFs.length} ETFs have detailed names</p>`;
+                if (genericCount > 0) {
+                    html += `<p class="warning">⚠️ ${genericCount} ETFs have generic names</p>`;
+                }
+
+                resultsDiv.innerHTML += html;
+            } catch (error) {
+                resultsDiv.innerHTML += `<p class="error">❌ Error: ${error.message}</p>`;
+            }
+        }
+
+        async function testAllCategories() {
+            const resultsDiv = document.getElementById('apiResults');
+            resultsDiv.innerHTML = '<h3>Testing All ETF Categories...</h3>';
+
+            for (const [category, tickers] of Object.entries(etfCategories)) {
+                resultsDiv.innerHTML += `<h4>Testing ${category} ETFs...</h4>`;
+
+                try {
+                    const response = await fetch('/api/etf-metadata', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ symbols: tickers })
+                    });
+
+                    const data = await response.json();
+
+                    let successCount = 0;
+                    let results = [];
+
+                    for (const ticker of tickers) {
+                        if (data[ticker]) {
+                            const name = data[ticker].name;
+                            const isGeneric = name === `${ticker} ETF`;
+                            if (!isGeneric) successCount++;
+                            results.push(`${ticker}: ${name}`);
+                        }
+                    }
+
+                    const status = successCount === tickers.length ? 'success' :
+                                  successCount > 0 ? 'warning' : 'error';
+                    const icon = successCount === tickers.length ? '✅' :
+                                successCount > 0 ? '⚠️' : '❌';
+
+                    resultsDiv.innerHTML += `<p class="${status}">${icon} ${category}: ${successCount}/${tickers.length} have detailed names</p>`;
+
+                    // Add delay to avoid overwhelming the API
+                    await new Promise(resolve => setTimeout(resolve, 500));
+
+                } catch (error) {
+                    resultsDiv.innerHTML += `<p class="error">❌ ${category} Error: ${error.message}</p>`;
+                }
+            }
+        }
+
+        async function testCustomETF() {
+            const ticker = document.getElementById('customTicker').value.toUpperCase();
+            if (!ticker) {
+                alert('Please enter an ETF ticker');
+                return;
+            }
+
+            const resultsDiv = document.getElementById('apiResults');
+            resultsDiv.innerHTML = `<h3>Testing ${ticker}...</h3>`;
+
+            try {
+                const response = await fetch('/api/etf-metadata', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ symbols: [ticker] })
+                });
+
+                const data = await response.json();
+
+                if (data[ticker]) {
+                    const name = data[ticker].name;
+                    const isGeneric = name === `${ticker} ETF`;
+                    const statusClass = isGeneric ? 'warning' : 'success';
+                    const icon = isGeneric ? '⚠️' : '✅';
+
+                    resultsDiv.innerHTML += `
+                        <div class="${statusClass}">
+                            ${icon} <strong>${ticker}:</strong> ${name}
+                        </div>
+                        <pre>${JSON.stringify(data[ticker], null, 2)}</pre>
+                    `;
+                } else {
+                    resultsDiv.innerHTML += `<p class="error">❌ No data returned for ${ticker}</p>`;
+                }
+            } catch (error) {
+                resultsDiv.innerHTML += `<p class="error">❌ Error: ${error.message}</p>`;
+            }
+        }
+
+        function checkCurrentHoldings() {
+            const resultsDiv = document.getElementById('holdingsResults');
+            const portfolioData = localStorage.getItem('portfolio_data');
+
+            if (portfolioData) {
+                const parsed = JSON.parse(portfolioData);
+                const holdings = parsed.data.holdings || [];
+
+                // Filter for ETF/fund holdings
+                const etfHoldings = holdings.filter(h => h.type === 'fund' || isLikelyETF(h.ticker));
+
+                if (etfHoldings.length === 0) {
+                    resultsDiv.innerHTML = '<p>No ETF holdings found in portfolio</p>';
+                    return;
+                }
+
+                let html = '<h4>ETF Holdings:</h4><div class="etf-grid">';
+                let detailedCount = 0;
+                let genericCount = 0;
+
+                for (const holding of etfHoldings) {
+                    const isGeneric = holding.name === holding.ticker ||
+                                     holding.name === `${holding.ticker} ETF`;
+                    const statusClass = isGeneric ? 'warning' : 'success';
+
+                    if (!isGeneric) detailedCount++;
+                    else genericCount++;
+
+                    html += `<div class="etf-item">
+                        <span class="etf-ticker">${holding.ticker}:</span>
+                        <span class="${statusClass}">${holding.name}</span>
+                        <small> (${holding.type})</small>
+                    </div>`;
+                }
+                html += '</div>';
+
+                html += `<p class="success">✅ ${detailedCount} ETFs have detailed names</p>`;
+                if (genericCount > 0) {
+                    html += `<p class="warning">⚠️ ${genericCount} ETFs need name updates</p>`;
+                    html += '<p>Click "Refresh All ETF Names" to update them</p>';
+                }
+
+                resultsDiv.innerHTML = html;
+            } else {
+                resultsDiv.innerHTML = '<p>No portfolio data found</p>';
+            }
+        }
+
+        function isLikelyETF(ticker) {
+            if (!ticker) return false;
+            return ticker.length >= 2 && ticker.length <= 5 &&
+                   ticker === ticker.toUpperCase();
+        }
+
+        function refreshETFNames() {
+            const resultsDiv = document.getElementById('holdingsResults');
+            resultsDiv.innerHTML = '<p>ETF name refresh would be triggered here in the actual app.</p>';
+            resultsDiv.innerHTML += '<p>Navigate to the Holdings page and it will automatically refresh ETF names.</p>';
+        }
+
+        // Run initial test on load
+        window.addEventListener('load', () => {
+            checkCurrentHoldings();
+        });
+    </script>
+</body>
+</html>

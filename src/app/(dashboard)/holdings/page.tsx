@@ -13,6 +13,9 @@ import { RiAddLine } from "@remixicon/react"
 import { useSearchParams } from "next/navigation"
 import React, { Suspense, useMemo } from "react"
 import { usePortfolioStore } from "@/hooks/usePortfolioStore"
+import { getETFName } from "@/lib/etfMetadataService"
+import { getStockPrice } from "@/lib/stockPriceService"
+import { isKnownETF, getKnownETFName } from "@/lib/knownETFNames"
 
 function HoldingsContent() {
   const searchParams = useSearchParams()
@@ -30,7 +33,8 @@ function HoldingsContent() {
     error,
     addHolding,
     updateHolding,
-    deleteHolding
+    deleteHolding,
+    refreshETFNames
   } = usePortfolioStore()
 
   // Convert accounts to the format expected by components
@@ -43,6 +47,19 @@ function HoldingsContent() {
     [storeAccounts]
   )
 
+  // Refresh ETF names on mount if needed
+  React.useEffect(() => {
+    // Check if any holdings have QQQM with non-detailed name
+    const hasQQQMWithBasicName = holdings.some(h =>
+      h.ticker?.toUpperCase() === 'QQQM' && !h.name.includes('Invesco')
+    )
+
+    if (hasQQQMWithBasicName) {
+      console.log('Detected QQQM with basic name, refreshing ETF names...')
+      refreshETFNames()
+    }
+  }, []) // Only run once on mount
+
   // Calculate allocations for all holdings
   const holdingsWithAllocations = useMemo(() => {
     const totalValue = holdings.reduce((sum, h) => sum + h.marketValue, 0)
@@ -52,7 +69,7 @@ function HoldingsContent() {
     }))
   }, [holdings])
 
-  const handleHoldingSubmit = (holding: HoldingFormData) => {
+  const handleHoldingSubmit = async (holding: HoldingFormData) => {
     if (editingHolding) {
       // Update existing holding
       updateHolding(editingHolding.id, {
@@ -69,15 +86,72 @@ function HoldingsContent() {
         return
       }
 
+      // Determine if it's an ETF/Fund and get proper name
+      let name = holding.ticker || holding.description || ""
+      let type: "stock" | "fund" | "cash" = "stock"
+      let lastPrice = 100 // Default price
+
+      if (holding.holdingType === "cash") {
+        type = "cash"
+        name = holding.description || "Cash"
+        lastPrice = 1
+      } else if (holding.ticker) {
+        // First, check if we have a known ETF name locally
+        const knownName = getKnownETFName(holding.ticker)
+
+        if (knownName) {
+          // We have a known name - use it immediately
+          name = knownName
+          type = "fund"
+          console.log(`Using known ETF name for ${holding.ticker}: ${knownName}`)
+        } else {
+          // Check if it's likely an ETF based on ticker format
+          const isLikelyETF = holding.ticker.length >= 2 && holding.ticker.length <= 5 &&
+                             holding.ticker === holding.ticker.toUpperCase()
+
+          if (isLikelyETF) {
+            // Try to fetch from API for unknown ETFs
+            const etfNameResult = await getETFName(holding.ticker)
+            if (etfNameResult && etfNameResult !== `${holding.ticker} ETF`) {
+              name = etfNameResult
+              type = "fund"
+              console.log(`Fetched ETF name for ${holding.ticker}: ${etfNameResult}`)
+            } else {
+              // Default name for unknown ETFs
+              name = holding.ticker
+            }
+          } else {
+            // Not an ETF, just use ticker as name
+            name = holding.ticker
+          }
+        }
+
+        // Fetch price (always needed regardless of ETF status)
+        try {
+          const price = await getStockPrice(holding.ticker)
+          if (price) {
+            lastPrice = price
+            console.log(`Fetched price for ${holding.ticker}: $${lastPrice}`)
+          } else {
+            console.log(`Using default price for ${holding.ticker}`)
+          }
+        } catch (error) {
+          console.log(`Error fetching price for ${holding.ticker}, using default`)
+        }
+      }
+
+      const quantity = holding.shares || holding.amount || 0
+      const marketValue = quantity * lastPrice
+
       addHolding({
         accountId: holding.accountId,
         accountName: account.name,
         ticker: holding.ticker,
-        name: holding.ticker || holding.description || "",
-        quantity: holding.shares || holding.amount || 0,
-        lastPrice: holding.holdingType === "cash" ? 1 : 100, // In real app, would fetch from API
-        marketValue: (holding.shares || holding.amount || 0) * (holding.holdingType === "cash" ? 1 : 100),
-        type: holding.holdingType === "cash" ? "cash" : holding.holdingType === "stocks-funds" && holding.ticker?.includes("ETF") ? "fund" : "stock",
+        name: name,
+        quantity: quantity,
+        lastPrice: lastPrice,
+        marketValue: marketValue,
+        type: type,
       })
     }
     setEditingHolding(null)

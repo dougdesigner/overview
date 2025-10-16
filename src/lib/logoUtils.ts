@@ -167,6 +167,7 @@ const etfProviderDomains: Record<string, string> = {
 
   // Invesco ETFs
   QQQ: "invesco.com",
+  QQQM: "invesco.com",  // Invesco NASDAQ 100 ETF (lower fee version of QQQ)
   RSP: "invesco.com",
   PBW: "invesco.com",
   QQM: "invesco.com",

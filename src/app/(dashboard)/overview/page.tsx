@@ -233,6 +233,7 @@ export default function OverviewPage() {
 
       <dl className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-1 lg:grid-cols-1">
         <AssetAllocationCard
+          defaultTab={holdings.length === 0 ? "Accounts" : undefined}
           data={[
             {
               name: "Holdings",

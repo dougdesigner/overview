@@ -243,7 +243,9 @@ const AssetAllocationCard = React.forwardRef<
     forwardedRef,
   ) => {
     const allocationData = data || getDefaultData()
-    const defaultTabValue = defaultTab || allocationData[0]?.name
+    // Find first tab with data, or use the provided defaultTab
+    const firstTabWithData = allocationData.find(category => category.data.length > 0)?.name
+    const defaultTabValue = defaultTab || firstTabWithData || allocationData[0]?.name
 
     const currencyFormatter = (number: number) => {
       return "$" + Intl.NumberFormat("us").format(number).toString()
@@ -276,7 +278,7 @@ const AssetAllocationCard = React.forwardRef<
         </div>
         <Tabs defaultValue={defaultTabValue}>
           <TabsList className="px-6 pt-6">
-            {allocationData.map((category) => (
+            {allocationData.filter(category => category.data.length > 0).map((category) => (
               <TabsTrigger key={category.name} value={category.name}>
                 {category.name}
               </TabsTrigger>
@@ -295,15 +297,17 @@ const AssetAllocationCard = React.forwardRef<
                     height={280}
                   />
                 </div>
-                <p className="mt-8 flex items-center justify-between text-xs text-gray-500 dark:text-gray-500">
-                  <span>Category</span>
-                  <span>Value / Allocation</span>
-                </p>
-                <ul
-                  role="list"
-                  className="mt-2 divide-y divide-gray-200 text-sm text-gray-500 dark:divide-gray-800 dark:text-gray-500"
-                >
-                  {category.data.map((item) => (
+                {category.data.length > 0 && (
+                  <>
+                    <p className="mt-8 flex items-center justify-between text-xs text-gray-500 dark:text-gray-500">
+                      <span>Category</span>
+                      <span>Value / Allocation</span>
+                    </p>
+                    <ul
+                      role="list"
+                      className="mt-2 divide-y divide-gray-200 text-sm text-gray-500 dark:divide-gray-800 dark:text-gray-500"
+                    >
+                      {category.data.map((item) => (
                     <li
                       key={item.name}
                       className="flex items-center justify-between space-x-6 py-2"
@@ -379,7 +383,9 @@ const AssetAllocationCard = React.forwardRef<
                       </div>
                     </li>
                   ))}
-                </ul>
+                    </ul>
+                  </>
+                )}
               </TabsContent>
             ))}
           </div>

@@ -139,6 +139,25 @@ function getMockDataForSymbol(symbol: string): any {
       ],
       lastUpdated: new Date().toISOString()
     },
+    QQQM: {
+      symbol: "QQQM",
+      name: "Invesco NASDAQ 100 ETF",
+      holdings: [
+        // Same holdings as QQQ but with slightly different weights
+        { symbol: "NVDA", name: "NVIDIA Corp", weight: 9.507 },
+        { symbol: "MSFT", name: "Microsoft Corp", weight: 8.347 },
+        { symbol: "AAPL", name: "Apple Inc", weight: 8.324 },
+        { symbol: "AVGO", name: "Broadcom Inc", weight: 5.714 },
+        { symbol: "AMZN", name: "Amazon.com Inc", weight: 5.146 },
+        { symbol: "META", name: "Meta Platforms Inc", weight: 3.542 },
+        { symbol: "TSLA", name: "Tesla Inc", weight: 3.524 },
+        { symbol: "GOOGL", name: "Alphabet Inc Class A", weight: 3.149 },
+        { symbol: "GOOG", name: "Alphabet Inc Class C", weight: 2.947 },
+        { symbol: "NFLX", name: "Netflix Inc", weight: 2.779 },
+        // Add more as needed
+      ],
+      lastUpdated: new Date().toISOString()
+    },
     VTI: {
       symbol: "VTI",
       name: "Vanguard Total Stock Market ETF",
