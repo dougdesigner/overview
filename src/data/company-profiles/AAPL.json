@@ -1,0 +1,9 @@
+{
+  "symbol": "AAPL",
+  "name": "Apple Inc",
+  "sector": "TECHNOLOGY",
+  "industry": "CONSUMER ELECTRONICS",
+  "officialSite": "https://www.apple.com",
+  "cachedAt": "2025-10-16T08:52:54.763Z",
+  "source": "Alpha Vantage API"
+}
