@@ -362,40 +362,6 @@ export const createColumns = ({
           className="flex w-full items-center justify-end gap-1 font-medium hover:text-gray-900 dark:hover:text-gray-50"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
-          Quantity
-          {column.getIsSorted() === "asc" && (
-            <RiArrowUpSLine className="h-4 w-4" />
-          )}
-          {column.getIsSorted() === "desc" && (
-            <RiArrowDownSLine className="h-4 w-4" />
-          )}
-        </button>
-      )
-    },
-    accessorKey: "totalShares",
-    cell: ({ row }) => {
-      const isETFBreakdown = row.original.isETFBreakdown
-      return (
-        <span
-          className={cx(!isETFBreakdown && "text-gray-900 dark:text-gray-50")}
-        >
-          {formatNumber(row.original.totalShares)}
-        </span>
-      )
-    },
-    enableSorting: true,
-    meta: {
-      className: "text-right",
-      displayName: "Quantity",
-    },
-  },
-  {
-    header: ({ column }) => {
-      return (
-        <button
-          className="flex w-full items-center justify-end gap-1 font-medium hover:text-gray-900 dark:hover:text-gray-50"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        >
           Market Value
           {column.getIsSorted() === "asc" && (
             <RiArrowUpSLine className="h-4 w-4" />
