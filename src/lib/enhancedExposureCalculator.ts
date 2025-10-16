@@ -289,7 +289,8 @@ export class EnhancedExposureCalculator {
       // Process each stock within the ETF
       for (const stockInETF of etfProfile.holdings) {
         const stockSymbol = stockInETF.symbol
-        const weightInETF = stockInETF.weight / 100 // Convert percentage to decimal
+        // Check if weight is already a decimal (< 1) or needs conversion from percentage
+        const weightInETF = stockInETF.weight > 1 ? stockInETF.weight / 100 : stockInETF.weight
 
         // Calculate market value exposure (NOT equivalent shares)
         const stockValueViaETF = etfValue * weightInETF
@@ -339,6 +340,14 @@ export class EnhancedExposureCalculator {
     }
   }
 
+  // Public method for calculating asset class breakdown without full exposure calculation
+  public calculateAssetClassBreakdownOnly(
+    holdings: PortfolioHolding[]
+  ): AssetClassBreakdown[] {
+    const totalValue = holdings.reduce((sum, h) => sum + h.marketValue, 0)
+    return this.calculateAssetClassBreakdown(holdings, totalValue)
+  }
+
   private calculateAssetClassBreakdown(
     holdings: PortfolioHolding[],
     totalPortfolioValue: number
@@ -358,16 +367,42 @@ export class EnhancedExposureCalculator {
       // Check if it's a mutual fund
       const mfData = this.mutualFunds[holding.ticker]
       if (mfData) {
+        console.log(`Processing mutual fund ${holding.ticker} (${mfData.name}) with market value $${holding.marketValue.toFixed(2)}`)
+
         // Process mutual fund mappings
+        mfData.mappings.forEach(mapping => {
+          const etfData = this.assetClasses.etfs[mapping.etf as keyof typeof assetClassifications.etfs]
+          if (etfData) {
+            console.log(`  - ${mapping.etf}: ${mapping.percentage}% of fund`)
+
+            etfData.breakdown.forEach(breakdown => {
+              const value = holding.marketValue * (mapping.percentage / 100) * (breakdown.percentage / 100)
+              const current = assetClassMap.get(breakdown.class) || 0
+              assetClassMap.set(breakdown.class, current + value)
+
+              console.log(`    → ${breakdown.class}: $${value.toFixed(2)} (${breakdown.percentage}% of ${mapping.etf})`)
+            })
+          } else {
+            console.log(`  - WARNING: No asset classification found for ETF ${mapping.etf}`)
+          }
+        })
+
+        // Log summary for this mutual fund
+        console.log(`  Total asset class allocation from ${holding.ticker}:`)
+        const tempMap = new Map<string, number>()
         mfData.mappings.forEach(mapping => {
           const etfData = this.assetClasses.etfs[mapping.etf as keyof typeof assetClassifications.etfs]
           if (etfData) {
             etfData.breakdown.forEach(breakdown => {
               const value = holding.marketValue * (mapping.percentage / 100) * (breakdown.percentage / 100)
-              const current = assetClassMap.get(breakdown.class) || 0
-              assetClassMap.set(breakdown.class, current + value)
+              const current = tempMap.get(breakdown.class) || 0
+              tempMap.set(breakdown.class, current + value)
             })
           }
+        })
+        tempMap.forEach((value, className) => {
+          const percentage = (value / holding.marketValue) * 100
+          console.log(`    ${className}: $${value.toFixed(2)} (${percentage.toFixed(1)}%)`)
         })
       }
       // Check if it's an ETF
@@ -406,6 +441,14 @@ export class EnhancedExposureCalculator {
         color: classData?.color || "#6B7280",
       })
     })
+
+    // Log final asset class breakdown
+    console.log("=== FINAL ASSET CLASS BREAKDOWN ===")
+    console.log(`Total Portfolio Value: $${totalPortfolioValue.toFixed(2)}`)
+    breakdown.forEach(item => {
+      console.log(`${item.className}: $${item.marketValue.toFixed(2)} (${item.percentage.toFixed(2)}%)`)
+    })
+    console.log("===================================")
 
     // Sort by value descending
     return breakdown.sort((a, b) => b.marketValue - a.marketValue)

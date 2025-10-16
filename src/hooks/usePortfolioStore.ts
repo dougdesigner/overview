@@ -5,6 +5,7 @@ import { getFromStorage, setToStorage, STORAGE_KEYS, isStorageAvailable } from "
 import { etfMetadataService } from "@/lib/etfMetadataService"
 import { stockPriceService } from "@/lib/stockPriceService"
 import { isKnownETF, getKnownETFName } from "@/lib/knownETFNames"
+import { enhancedExposureCalculator } from "@/lib/enhancedExposureCalculator"
 
 // Account type definitions
 export interface Account {
@@ -486,60 +487,97 @@ export function usePortfolioStore() {
   useEffect(() => {
     if (!hasInitialized || isLoading) return
 
-    const updatedAccounts = accounts.map(account => {
-      const accountHoldings = holdings.filter(h => h.accountId === account.id)
-      const totalValue = accountHoldings.reduce((sum, h) => sum + h.marketValue, 0)
-      const holdingsCount = accountHoldings.length
+    const updateAccounts = async () => {
+      const updatedAccounts = await Promise.all(accounts.map(async (account) => {
+        const accountHoldings = holdings.filter(h => h.accountId === account.id)
+        const totalValue = accountHoldings.reduce((sum, h) => sum + h.marketValue, 0)
+        const holdingsCount = accountHoldings.length
 
-      // Calculate asset allocation
-      let usStocks = 0
-      let nonUsStocks = 0
-      let fixedIncome = 0
-      let cash = 0
+        // Convert holdings to format expected by enhanced calculator
+        const portfolioHoldings = accountHoldings.map(h => ({
+          id: h.id,
+          accountId: h.accountId,
+          accountName: h.accountName,
+          ticker: h.ticker,
+          name: h.name,
+          quantity: h.quantity,
+          lastPrice: h.lastPrice,
+          marketValue: h.marketValue,
+          type: h.type as "stock" | "fund" | "cash",
+        }))
 
-      accountHoldings.forEach(holding => {
-        if (holding.type === "cash") {
-          cash += holding.marketValue
-        } else if (holding.type === "fund") {
-          // Simple allocation based on fund type (could be enhanced with actual fund data)
-          if (holding.ticker === "BND" || holding.ticker?.includes("BOND")) {
-            fixedIncome += holding.marketValue
-          } else if (holding.ticker === "VXUS" || holding.ticker?.includes("INTL")) {
-            nonUsStocks += holding.marketValue
-          } else {
-            usStocks += holding.marketValue
-          }
-        } else {
-          // Stocks default to US stocks (could be enhanced with actual company data)
-          usStocks += holding.marketValue
+        // Calculate asset allocation using enhanced calculator
+        let assetAllocation = {
+          usStocks: 0,
+          nonUsStocks: 0,
+          fixedIncome: 0,
+          cash: 0,
         }
-      })
 
-      const assetAllocation = totalValue > 0 ? {
-        usStocks: (usStocks / totalValue) * 100,
-        nonUsStocks: (nonUsStocks / totalValue) * 100,
-        fixedIncome: (fixedIncome / totalValue) * 100,
-        cash: (cash / totalValue) * 100,
-      } : {
-        usStocks: 0,
-        nonUsStocks: 0,
-        fixedIncome: 0,
-        cash: 0,
+        if (totalValue > 0) {
+          try {
+            const assetBreakdown = enhancedExposureCalculator.calculateAssetClassBreakdownOnly(portfolioHoldings)
+
+            // Map asset classes to account allocation structure
+            assetBreakdown.forEach(item => {
+              switch (item.class) {
+                case "us_equity":
+                  assetAllocation.usStocks = item.percentage
+                  break
+                case "intl_equity":
+                  assetAllocation.nonUsStocks = item.percentage
+                  break
+                case "fixed_income":
+                  assetAllocation.fixedIncome = item.percentage
+                  break
+                case "cash":
+                  assetAllocation.cash = item.percentage
+                  break
+                // Handle other asset classes by defaulting to US equity
+                case "real_estate":
+                case "commodity":
+                default:
+                  assetAllocation.usStocks += item.percentage
+                  break
+              }
+            })
+          } catch (error) {
+            console.error("Error calculating asset allocation:", error)
+            // Fallback to simple calculation on error
+            accountHoldings.forEach(holding => {
+              if (holding.type === "cash") {
+                assetAllocation.cash += (holding.marketValue / totalValue) * 100
+              } else if (holding.type === "fund") {
+                if (holding.ticker === "BND" || holding.ticker?.includes("BOND")) {
+                  assetAllocation.fixedIncome += (holding.marketValue / totalValue) * 100
+                } else if (holding.ticker === "VXUS" || holding.ticker?.includes("INTL")) {
+                  assetAllocation.nonUsStocks += (holding.marketValue / totalValue) * 100
+                } else {
+                  assetAllocation.usStocks += (holding.marketValue / totalValue) * 100
+                }
+              } else {
+                assetAllocation.usStocks += (holding.marketValue / totalValue) * 100
+              }
+            })
+          }
+        }
+
+        return {
+          ...account,
+          totalValue,
+          holdingsCount,
+          assetAllocation,
+        }
+      }))
+
+      // Only update if values actually changed
+      const hasChanged = JSON.stringify(updatedAccounts) !== JSON.stringify(accounts)
+      if (hasChanged) {
+        setAccountsState(updatedAccounts)
       }
-
-      return {
-        ...account,
-        totalValue,
-        holdingsCount,
-        assetAllocation,
-      }
-    })
-
-    // Only update if values actually changed
-    const hasChanged = JSON.stringify(updatedAccounts) !== JSON.stringify(accounts)
-    if (hasChanged) {
-      setAccountsState(updatedAccounts)
     }
+
+    updateAccounts()
   }, [holdings, hasInitialized, isLoading]) // Note: intentionally not including accounts to avoid infinite loop
 
   // Account CRUD operations

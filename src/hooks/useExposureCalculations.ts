@@ -1,26 +1,16 @@
 "use client"
 
-import { useEffect, useMemo, useState } from "react"
+import { useEffect, useState, useMemo, useCallback } from "react"
 import { usePortfolioStore } from "./usePortfolioStore"
-import { calculateExposures, StockExposure } from "@/lib/enhancedExposureCalculator"
-
-export interface ExposureData {
-  exposures: StockExposure[]
-  totalValue: number
-  assetClassBreakdown: {
-    label: string
-    value: number
-    percentage: number
-    color: string
-  }[]
-  sectorBreakdown: {
-    label: string
-    value: number
-    percentage: number
-  }[]
-  isCalculating: boolean
-  error: string | null
-}
+import {
+  enhancedExposureCalculator,
+  type EnhancedExposureResult,
+  type AssetClassBreakdown
+} from "@/lib/enhancedExposureCalculator"
+import type {
+  StockExposure,
+  PortfolioHolding
+} from "@/components/ui/data-table-exposure/types"
 
 /**
  * Hook that automatically calculates exposures whenever holdings change
@@ -30,83 +20,73 @@ export function useExposureCalculations() {
   const { holdings, accounts } = usePortfolioStore()
   const [isCalculating, setIsCalculating] = useState(false)
   const [error, setError] = useState<string | null>(null)
+  const [exposureResult, setExposureResult] = useState<EnhancedExposureResult | null>(null)
 
   // Convert holdings to the format expected by the exposure calculator
-  const portfolioHoldings = useMemo(() => {
+  const portfolioHoldings = useMemo((): PortfolioHolding[] => {
     return holdings.map(holding => ({
-      ticker: holding.ticker || "",
-      name: holding.name,
-      shares: holding.quantity,
-      price: holding.lastPrice,
-      value: holding.marketValue,
-      type: holding.type as "stock" | "fund" | "cash",
+      id: holding.id,
       accountId: holding.accountId,
       accountName: holding.accountName,
+      ticker: holding.ticker,
+      name: holding.name,
+      quantity: holding.quantity,
+      lastPrice: holding.lastPrice,
+      marketValue: holding.marketValue,
+      type: holding.type as "stock" | "fund" | "cash",
     }))
   }, [holdings])
 
   // Calculate exposures whenever holdings change
-  const calculatedData = useMemo(() => {
+  useEffect(() => {
     if (holdings.length === 0) {
-      return {
-        exposures: [],
-        totalValue: 0,
-        assetClassBreakdown: [],
-        sectorBreakdown: [],
+      setExposureResult(null)
+      return
+    }
+
+    const calculateAsync = async () => {
+      setIsCalculating(true)
+      setError(null)
+
+      try {
+        const result = await enhancedExposureCalculator.calculateExposures(portfolioHoldings)
+        setExposureResult(result)
+      } catch (err) {
+        console.error("Error calculating exposures:", err)
+        setError(err instanceof Error ? err.message : "Failed to calculate exposures")
+        setExposureResult(null)
+      } finally {
+        setIsCalculating(false)
       }
     }
 
-    setIsCalculating(true)
-    setError(null)
-
-    try {
-      const result = calculateExposures(portfolioHoldings)
-
-      // Calculate total portfolio value
-      const totalValue = portfolioHoldings.reduce((sum, h) => sum + h.value, 0)
-
-      // Extract asset class breakdown from the result
-      const assetClasses = result.assetClassBreakdown || []
-      const assetClassBreakdown = assetClasses.map(ac => ({
-        label: ac.label,
-        value: ac.value,
-        percentage: ac.percentage,
-        color: ac.color || "#6B7280", // Default gray if no color
-      }))
-
-      // Extract sector breakdown from the result
-      const sectors = result.sectorBreakdown || []
-      const sectorBreakdown = sectors.map(s => ({
-        label: s.label,
-        value: s.value,
-        percentage: s.percentage,
-      }))
-
-      setIsCalculating(false)
-      return {
-        exposures: result.exposures,
-        totalValue,
-        assetClassBreakdown,
-        sectorBreakdown,
-      }
-    } catch (err) {
-      console.error("Error calculating exposures:", err)
-      setError(err instanceof Error ? err.message : "Failed to calculate exposures")
-      setIsCalculating(false)
-
-      return {
-        exposures: [],
-        totalValue: 0,
-        assetClassBreakdown: [],
-        sectorBreakdown: [],
-      }
-    }
+    calculateAsync()
   }, [portfolioHoldings])
+
+  // Extract data from the result
+  const exposures = exposureResult?.exposures || []
+  const totalValue = exposureResult?.totalPortfolioValue || 0
+  const assetClassBreakdown = useMemo(() => {
+    if (!exposureResult?.assetClassBreakdown) return []
+    return exposureResult.assetClassBreakdown.map(ac => ({
+      label: ac.className,
+      value: ac.marketValue,
+      percentage: ac.percentage,
+      color: ac.color,
+    }))
+  }, [exposureResult])
+
+  const sectorBreakdown = useMemo(() => {
+    if (!exposureResult?.sectorBreakdown) return []
+    return exposureResult.sectorBreakdown.map(s => ({
+      label: s.sector,
+      value: s.value,
+      percentage: s.percentage,
+    }))
+  }, [exposureResult])
 
   // Calculate treemap data for visualization
   const treemapData = useMemo(() => {
-    const { exposures } = calculatedData
-
     if (exposures.length === 0) {
       return []
     }
@@ -133,35 +113,35 @@ export function useExposureCalculations() {
         percentage: stock.percentOfPortfolio,
       })),
     }))
-  }, [calculatedData])
+  }, [exposures])
 
   // Get exposures for a specific account
-  const getExposuresByAccount = (accountId: string) => {
+  const getExposuresByAccount = useCallback(async (accountId: string) => {
     const accountHoldings = portfolioHoldings.filter(h => h.accountId === accountId)
     if (accountHoldings.length === 0) return []
 
     try {
-      const result = calculateExposures(accountHoldings)
+      const result = await enhancedExposureCalculator.calculateExposures(accountHoldings)
       return result.exposures
     } catch (err) {
       console.error(`Error calculating exposures for account ${accountId}:`, err)
       return []
     }
-  }
+  }, [portfolioHoldings])
 
   // Get top exposures by value
-  const getTopExposures = (limit = 10) => {
-    return calculatedData.exposures
+  const getTopExposures = useCallback((limit = 10) => {
+    return exposures
       .sort((a, b) => b.totalValue - a.totalValue)
       .slice(0, limit)
-  }
+  }, [exposures])
 
   // Check if a holding would create concentration risk
-  const checkConcentrationRisk = (ticker: string, additionalValue: number) => {
-    const currentExposure = calculatedData.exposures.find(e => e.ticker === ticker)
+  const checkConcentrationRisk = useCallback((ticker: string, additionalValue: number) => {
+    const currentExposure = exposures.find(e => e.ticker === ticker)
     const currentValue = currentExposure?.totalValue || 0
     const newValue = currentValue + additionalValue
-    const newTotal = calculatedData.totalValue + additionalValue
+    const newTotal = totalValue + additionalValue
     const newPercentage = (newValue / newTotal) * 100
 
     return {
@@ -170,14 +150,14 @@ export function useExposureCalculations() {
       newPercentage,
       currentPercentage: currentExposure?.percentOfPortfolio || 0,
     }
-  }
+  }, [exposures, totalValue])
 
   return {
     // Core exposure data
-    exposures: calculatedData.exposures,
-    totalValue: calculatedData.totalValue,
-    assetClassBreakdown: calculatedData.assetClassBreakdown,
-    sectorBreakdown: calculatedData.sectorBreakdown,
+    exposures,
+    totalValue,
+    assetClassBreakdown,
+    sectorBreakdown,
 
     // Status
     isCalculating,

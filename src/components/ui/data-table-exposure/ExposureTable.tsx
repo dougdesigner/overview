@@ -9,7 +9,7 @@ import {
   TableHeaderCell,
   TableRow,
 } from "@/components/Table"
-import { enhancedExposureCalculator, type EnhancedExposureResult, type AssetClassBreakdown } from "@/lib/enhancedExposureCalculator"
+import { enhancedExposureCalculator, type EnhancedExposureResult } from "@/lib/enhancedExposureCalculator"
 import { cx } from "@/lib/utils"
 import { RiRefreshLine } from "@remixicon/react"
 import {
@@ -44,8 +44,6 @@ export function ExposureTable({ holdings }: ExposureTableProps) {
   const [expanded, setExpanded] = React.useState<ExpandedState>({})
   const [isLoading, setIsLoading] = React.useState(false)
   const [totalPortfolioValue, setTotalPortfolioValue] = React.useState(0)
-  const [assetClassBreakdown, setAssetClassBreakdown] = React.useState<AssetClassBreakdown[]>([])
-  const [sectorBreakdown, setSectorBreakdown] = React.useState<{ sector: string; value: number; percentage: number }[]>([])
 
   // Calculate exposures on mount and when holdings change
   React.useEffect(() => {
@@ -56,12 +54,8 @@ export function ExposureTable({ holdings }: ExposureTableProps) {
           await enhancedExposureCalculator.calculateExposures(holdings)
         setData(result.exposures)
         setTotalPortfolioValue(result.totalPortfolioValue)
-        setAssetClassBreakdown(result.assetClassBreakdown)
-        setSectorBreakdown(result.sectorBreakdown)
 
         // Log the improvements
-        console.log("Asset Class Breakdown:", result.assetClassBreakdown)
-        console.log("Sector Breakdown:", result.sectorBreakdown)
         console.log("Total stocks with exposure:", result.exposures.length)
         console.log("API calls saved by not fetching individual stock prices!")
       } catch (error) {
@@ -190,41 +184,6 @@ export function ExposureTable({ holdings }: ExposureTableProps) {
           </div>
         )}
       </div> */}
-
-      {/* Asset Class Breakdown */}
-      {assetClassBreakdown.length > 0 && (
-        <Card className="p-4">
-          <h3 className="text-base font-semibold text-gray-900 dark:text-gray-50 mb-3">
-            Asset Allocation
-          </h3>
-          <div className="flex flex-wrap gap-2">
-            {assetClassBreakdown.map((asset) => (
-              <div
-                key={asset.class}
-                className="flex items-center gap-2 rounded-lg bg-gray-50 dark:bg-gray-800 px-3 py-2"
-              >
-                <div
-                  className="h-3 w-3 rounded-full"
-                  style={{ backgroundColor: asset.color }}
-                />
-                <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                  {asset.className}
-                </span>
-                <span className="text-sm text-gray-600 dark:text-gray-400">
-                  {asset.percentage.toFixed(1)}%
-                </span>
-              </div>
-            ))}
-          </div>
-          <div className="mt-3 text-xs text-gray-500 dark:text-gray-400">
-            {sectorBreakdown.length > 0 && (
-              <span>
-                Top sectors: {sectorBreakdown.slice(0, 3).map(s => `${s.sector} (${s.percentage.toFixed(1)}%)`).join(", ")}
-              </span>
-            )}
-          </div>
-        </Card>
-      )}
 
       {/* Treemap Visualization */}
       {data.length > 0 && (
