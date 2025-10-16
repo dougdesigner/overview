@@ -257,6 +257,8 @@ export default function OverviewPage() {
                 .filter(h => h.marketValue > 0)
                 .map((h, index) => ({
                   name: h.ticker || h.name,
+                  ticker: h.ticker,
+                  type: h.type || "other",
                   amount: h.marketValue,
                   share: totalPortfolioValue > 0
                     ? `${((h.marketValue / totalPortfolioValue) * 100).toFixed(1)}%`

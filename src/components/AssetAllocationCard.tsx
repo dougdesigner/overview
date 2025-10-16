@@ -17,6 +17,8 @@ export interface AssetAllocationItem {
   share: string
   borderColor: string
   institution?: string // For accounts tab
+  type?: "stock" | "fund" | "cash" | "other" // For holdings tab to determine logo display
+  ticker?: string // Optional ticker symbol (may differ from name)
 }
 
 export interface AssetAllocationData {
@@ -180,7 +182,7 @@ const getDefaultData = (): AssetAllocationData[] => {
 
   return [
     {
-      name: "Assets",
+      name: "Holdings",
       data: dataByAssets,
       colors: [
         "blue",
@@ -314,9 +316,9 @@ const AssetAllocationCard = React.forwardRef<
                       className="flex items-center justify-between space-x-6 py-2"
                     >
                       <div className="flex items-center space-x-2.5 truncate">
-                        {category.name === "Assets" &&
-                        getTickerType(item.name) !== "other" ? (
-                          // Special styling for stock/fund tickers in Assets tab
+                        {category.name === "Holdings" &&
+                        item.type !== "cash" && item.type !== "other" ? (
+                          // Special styling for stock/fund tickers in Holdings tab
                           <>
                             {/* Legend color indicator (matches donut chart) */}
                             <span
@@ -328,8 +330,8 @@ const AssetAllocationCard = React.forwardRef<
                             />
                             {/* Ticker logo */}
                             <TickerLogo
-                              ticker={item.name}
-                              type={getTickerType(item.name) as "stock" | "etf"}
+                              ticker={item.ticker || item.name}
+                              type={item.type === "fund" ? "etf" : "stock"}
                               className="size-6"
                             />
                             {/* Ticker symbol badge */}
