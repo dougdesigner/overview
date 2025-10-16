@@ -5,7 +5,7 @@ import {
   PortfolioHolding,
   StockExposure,
 } from "@/components/ui/data-table-exposure/types"
-import { getETFHoldings } from "@/data/etf-holdings/etfHoldingsData"
+import { etfDataService } from "@/lib/etfDataService"
 import mutualFundMappings from "@/data/mutual-fund-mappings.json"
 import assetClassifications from "@/data/asset-classifications.json"
 
@@ -159,47 +159,23 @@ export class EnhancedExposureCalculator {
 
     if (etfSymbols.length === 0) return
 
-    // Initialize with mock/hardcoded data
-    for (const symbol of etfSymbols) {
-      const mockProfile = this.getMockETFProfile(symbol)
-      if (mockProfile && mockProfile.holdings.length > 0) {
-        this.etfProfiles.set(symbol, mockProfile)
-        console.log(`Set ETF profile for ${symbol} with ${mockProfile.holdings.length} holdings`)
-      }
+    console.log(`Fetching ETF profiles for: ${etfSymbols.join(', ')}`)
+
+    // Fetch ETF data using the service (which handles caching and API calls)
+    const profiles = await etfDataService.fetchETFHoldings(etfSymbols)
+
+    // Store fetched profiles
+    for (const [symbol, profile] of profiles) {
+      this.etfProfiles.set(symbol, profile)
+      console.log(`Loaded ETF profile for ${symbol} with ${profile.holdings.length} holdings`)
     }
 
-    // Try to fetch real data if API is available
-    try {
-      const response = await fetch("/api/etf-data", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ symbols: etfSymbols }),
-      })
-
-      if (response.ok) {
-        const profiles = await response.json()
-        for (const symbol of etfSymbols) {
-          const profile = profiles[symbol]
-          if (profile?.holdings?.data) {
-            this.etfProfiles.set(symbol, {
-              symbol: profile.symbol,
-              name: profile.name,
-              holdings: profile.holdings.data.map(
-                (h: any) => ({
-                  symbol: h.symbol,
-                  name: h.name,
-                  weight: parseFloat(h.weight) || 0,
-                  sector: h.sector,
-                }),
-              ),
-              lastUpdated: new Date(),
-            })
-          }
-        }
-      }
-    } catch (error) {
-      console.log("Using cached/mock ETF data")
-    }
+    // Log statistics
+    const totalHoldings = Array.from(this.etfProfiles.values()).reduce(
+      (sum, p) => sum + p.holdings.length,
+      0
+    )
+    console.log(`Total ETF holdings loaded: ${totalHoldings} across ${this.etfProfiles.size} ETFs`)
   }
 
   private async fetchCompanyOverviews(holdings: PortfolioHolding[]): Promise<void> {
@@ -514,22 +490,6 @@ export class EnhancedExposureCalculator {
     return exposures.sort((a, b) => b.totalValue - a.totalValue)
   }
 
-  private getMockETFProfile(symbol: string): ETFProfile {
-    // Try to get comprehensive hardcoded data first
-    const hardcodedProfile = getETFHoldings(symbol)
-    if (hardcodedProfile) {
-      console.log(`Using hardcoded data for ${symbol} with ${hardcodedProfile.holdings.length} holdings`)
-      return hardcodedProfile
-    }
-
-    // Fallback for unknown ETFs
-    return {
-      symbol,
-      name: `${symbol} ETF`,
-      holdings: [],
-      lastUpdated: new Date(),
-    }
-  }
 }
 
 export const enhancedExposureCalculator = new EnhancedExposureCalculator()

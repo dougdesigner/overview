@@ -1,14 +1,36 @@
 "use client"
 
 import AssetAllocationCard from "@/components/AssetAllocationCard"
+import { Button } from "@/components/Button"
 import { Divider } from "@/components/Divider"
 import KPICard from "@/components/KPICard"
 import PortfolioValueCard from "@/components/PortfolioValueCard"
-import React from "react"
+import { usePortfolioStore } from "@/hooks/usePortfolioStore"
+import { useExposureCalculations } from "@/hooks/useExposureCalculations"
+import React, { useMemo } from "react"
 
 export default function OverviewPage() {
-  // Calculate account count from Sankey data
-  const accountCount = 5 // 401(k), Personal Investment, Roth IRA, Savings, Checking
+  // Get data from portfolio store
+  const {
+    accounts,
+    holdings,
+    totalPortfolioValue,
+    portfolioAllocation,
+    isLoading
+  } = usePortfolioStore()
+
+  // Get exposure calculations for asset breakdown
+  const { assetClassBreakdown } = useExposureCalculations()
+
+  // Calculate asset values from portfolio allocation
+  const assetValues = useMemo(() => {
+    return {
+      usStocks: (totalPortfolioValue * portfolioAllocation.usStocks) / 100,
+      nonUsStocks: (totalPortfolioValue * portfolioAllocation.nonUsStocks) / 100,
+      fixedIncome: (totalPortfolioValue * portfolioAllocation.fixedIncome) / 100,
+      cash: (totalPortfolioValue * portfolioAllocation.cash) / 100,
+    }
+  }, [totalPortfolioValue, portfolioAllocation])
 
   return (
     <main>
@@ -32,9 +54,68 @@ export default function OverviewPage() {
       </div>
       <Divider />
 
+      {isLoading ? (
+        // Loading state
+        <div className="mt-8 animate-pulse">
+          <div className="h-48 bg-gray-100 dark:bg-gray-800 rounded-lg mb-6"></div>
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            <div className="h-32 bg-gray-100 dark:bg-gray-800 rounded-lg"></div>
+            <div className="h-32 bg-gray-100 dark:bg-gray-800 rounded-lg"></div>
+            <div className="h-32 bg-gray-100 dark:bg-gray-800 rounded-lg"></div>
+            <div className="h-32 bg-gray-100 dark:bg-gray-800 rounded-lg"></div>
+          </div>
+        </div>
+      ) : accounts.length === 0 ? (
+        // Empty state
+        <div className="mt-8 py-12 text-center">
+          <h3 className="text-lg font-medium text-gray-900 dark:text-gray-50 mb-2">
+            Welcome to your portfolio dashboard
+          </h3>
+          <p className="text-gray-500 dark:text-gray-400 mb-4">
+            Start by adding your first account to see your portfolio overview.
+          </p>
+          <Button
+            onClick={() => window.location.href = '/accounts'}
+            className="inline-flex items-center gap-2"
+          >
+            Add Your First Account
+          </Button>
+        </div>
+      ) : (
+        <>
       <dl className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-1 lg:grid-cols-1">
         {/* Portfolio Value Card */}
-        <PortfolioValueCard accountCount={accountCount} />
+        <PortfolioValueCard
+          value={totalPortfolioValue}
+          accountCount={accounts.length}
+          holdingsCount={holdings.length}
+          assetClasses={[
+            {
+              name: "U.S. Stocks",
+              percentage: portfolioAllocation.usStocks,
+              color: "blue" as const,
+              bgColorClass: "bg-blue-600 dark:bg-blue-500",
+            },
+            {
+              name: "Non-U.S. Stocks",
+              percentage: portfolioAllocation.nonUsStocks,
+              color: "cyan" as const,
+              bgColorClass: "bg-cyan-600 dark:bg-cyan-500",
+            },
+            {
+              name: "Fixed Income",
+              percentage: portfolioAllocation.fixedIncome,
+              color: "amber" as const,
+              bgColorClass: "bg-amber-600 dark:bg-amber-500",
+            },
+            {
+              name: "Cash",
+              percentage: portfolioAllocation.cash,
+              color: "emerald" as const,
+              bgColorClass: "bg-emerald-600 dark:bg-emerald-500",
+            },
+          ]}
+        />
 
         {/* Asset Allocation Donut Chart */}
         {/* <Card>
@@ -126,28 +207,125 @@ export default function OverviewPage() {
       <dl className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
         <KPICard
           name="U.S. Stocks"
-          stat="$85,129"
-          change="34.4%"
+          stat={`$${assetValues.usStocks.toLocaleString('en-US', { maximumFractionDigits: 0 })}`}
+          change={`${portfolioAllocation.usStocks.toFixed(1)}%`}
           color="blue"
         />
         <KPICard
           name="Non-U.S. Stocks"
-          stat="$75,725"
-          change="30.6%"
+          stat={`$${assetValues.nonUsStocks.toLocaleString('en-US', { maximumFractionDigits: 0 })}`}
+          change={`${portfolioAllocation.nonUsStocks.toFixed(1)}%`}
           color="cyan"
         />
         <KPICard
           name="Fixed Income"
-          stat="$51,721"
-          change="20.9%"
+          stat={`$${assetValues.fixedIncome.toLocaleString('en-US', { maximumFractionDigits: 0 })}`}
+          change={`${portfolioAllocation.fixedIncome.toFixed(1)}%`}
           color="amber"
         />
-        <KPICard name="Cash" stat="$34,893" change="14.1%" color="emerald" />
+        <KPICard
+          name="Cash"
+          stat={`$${assetValues.cash.toLocaleString('en-US', { maximumFractionDigits: 0 })}`}
+          change={`${portfolioAllocation.cash.toFixed(1)}%`}
+          color="emerald"
+        />
       </dl>
 
       <dl className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-1 lg:grid-cols-1">
-        <AssetAllocationCard />
+        <AssetAllocationCard
+          data={[
+            {
+              name: "Holdings",
+              data: holdings
+                .sort((a, b) => b.marketValue - a.marketValue)
+                .slice(0, 5)
+                .concat({
+                  id: 'others',
+                  accountId: '',
+                  accountName: '',
+                  name: 'Others',
+                  quantity: 0,
+                  lastPrice: 0,
+                  marketValue: holdings
+                    .slice(5)
+                    .reduce((sum, h) => sum + h.marketValue, 0),
+                  allocation: 0,
+                  type: 'stock',
+                } as any)
+                .filter(h => h.marketValue > 0)
+                .map((h, index) => ({
+                  name: h.ticker || h.name,
+                  amount: h.marketValue,
+                  share: totalPortfolioValue > 0
+                    ? `${((h.marketValue / totalPortfolioValue) * 100).toFixed(1)}%`
+                    : '0%',
+                  borderColor: [
+                    "border-blue-500 dark:border-blue-500",
+                    "border-gray-500 dark:border-gray-500",
+                    "border-cyan-500 dark:border-cyan-500",
+                    "border-amber-500 dark:border-amber-500",
+                    "border-emerald-500 dark:border-emerald-500",
+                    "border-violet-500 dark:border-violet-500",
+                  ][index] || "border-gray-500 dark:border-gray-500",
+                })),
+              colors: ["blue", "gray", "cyan", "amber", "emerald", "violet"] as any,
+            },
+            {
+              name: "Asset Classes",
+              data: [
+                {
+                  name: "U.S. Stocks",
+                  amount: assetValues.usStocks,
+                  share: `${portfolioAllocation.usStocks.toFixed(1)}%`,
+                  borderColor: "border-blue-500 dark:border-blue-500",
+                },
+                {
+                  name: "Non-U.S. Stocks",
+                  amount: assetValues.nonUsStocks,
+                  share: `${portfolioAllocation.nonUsStocks.toFixed(1)}%`,
+                  borderColor: "border-cyan-500 dark:border-cyan-500",
+                },
+                {
+                  name: "Fixed Income",
+                  amount: assetValues.fixedIncome,
+                  share: `${portfolioAllocation.fixedIncome.toFixed(1)}%`,
+                  borderColor: "border-amber-500 dark:border-amber-500",
+                },
+                {
+                  name: "Cash",
+                  amount: assetValues.cash,
+                  share: `${portfolioAllocation.cash.toFixed(1)}%`,
+                  borderColor: "border-emerald-500 dark:border-emerald-500",
+                },
+              ].filter(item => item.amount > 0),
+              colors: ["blue", "cyan", "amber", "emerald"] as any,
+            },
+            {
+              name: "Accounts",
+              data: accounts
+                .sort((a, b) => b.totalValue - a.totalValue)
+                .map((account, index) => ({
+                  name: account.name,
+                  amount: account.totalValue,
+                  share: totalPortfolioValue > 0
+                    ? `${((account.totalValue / totalPortfolioValue) * 100).toFixed(1)}%`
+                    : '0%',
+                  borderColor: [
+                    "border-violet-500 dark:border-violet-500",
+                    "border-fuchsia-500 dark:border-fuchsia-500",
+                    "border-pink-500 dark:border-pink-500",
+                    "border-sky-500 dark:border-sky-500",
+                    "border-lime-500 dark:border-lime-500",
+                  ][index] || "border-gray-500 dark:border-gray-500",
+                  institution: account.institution,
+                })),
+              colors: ["violet", "fuchsia", "pink", "sky", "lime"] as any,
+            },
+          ]}
+        />
       </dl>
+      </>
+      )}
     </main>
   )
 }

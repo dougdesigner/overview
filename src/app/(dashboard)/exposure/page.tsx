@@ -1,163 +1,93 @@
 "use client"
 
+import { Button } from "@/components/Button"
 import { Divider } from "@/components/Divider"
 import { ExposureTable } from "@/components/ui/data-table-exposure/ExposureTable"
-import { PortfolioHolding } from "@/components/ui/data-table-exposure/types"
-import React from "react"
+import { usePortfolioStore } from "@/hooks/usePortfolioStore"
+import { useExposureCalculations } from "@/hooks/useExposureCalculations"
+import React, { useMemo } from "react"
 
 export default function ExposurePage() {
-  // Example holdings data - in a real app this would come from state or API
-  // This includes both direct stock holdings and ETF holdings
-  const [holdings] = React.useState<PortfolioHolding[]>([
-    // ETF Holdings
-    {
-      id: "h1",
-      accountId: "1",
-      accountName: "Retirement Fund",
-      ticker: "VOO",
-      name: "Vanguard S&P 500 ETF",
-      quantity: 100,
-      lastPrice: 455.32,
-      marketValue: 45532.0,
-      type: "fund",
-    },
-    {
-      id: "h4",
-      accountId: "3",
-      accountName: "Tax-Free Growth",
-      ticker: "VTI",
-      name: "Vanguard Total Stock Market ETF",
-      quantity: 75,
-      lastPrice: 238.45,
-      marketValue: 17883.75,
-      type: "fund",
-    },
-    {
-      id: "h10",
-      accountId: "3",
-      accountName: "Tax-Free Growth",
-      ticker: "QQQ",
-      name: "Invesco QQQ Trust",
-      quantity: 50,
-      lastPrice: 455.32,
-      marketValue: 22766.0,
-      type: "fund",
-    },
-    {
-      id: "h11",
-      accountId: "2",
-      accountName: "Personal Investment",
-      ticker: "SPY",
-      name: "SPDR S&P 500 ETF Trust",
-      quantity: 30,
-      lastPrice: 450.0,
-      marketValue: 13500.0,
-      type: "fund",
-    },
-    // Direct Stock Holdings
-    {
-      id: "h2",
-      accountId: "2",
-      accountName: "Personal Investment",
-      ticker: "AAPL",
-      name: "Apple Inc.",
-      quantity: 50,
-      lastPrice: 189.87,
-      marketValue: 9493.5,
-      type: "stock",
-    },
-    {
-      id: "h3",
-      accountId: "1",
-      accountName: "Retirement Fund",
-      ticker: "AAPL",
-      name: "Apple Inc.",
-      quantity: 25,
-      lastPrice: 189.87,
-      marketValue: 4746.75,
-      type: "stock",
-    },
-    {
-      id: "h6",
-      accountId: "2",
-      accountName: "Personal Investment",
-      ticker: "MSFT",
-      name: "Microsoft Corporation",
-      quantity: 30,
-      lastPrice: 378.52,
-      marketValue: 11355.6,
-      type: "stock",
-    },
-    {
-      id: "h8",
-      accountId: "3",
-      accountName: "Tax-Free Growth",
-      ticker: "GOOGL",
-      name: "Alphabet Inc. Class A",
-      quantity: 20,
-      lastPrice: 139.67,
-      marketValue: 2793.4,
-      type: "stock",
-    },
-    {
-      id: "h12",
-      accountId: "1",
-      accountName: "Retirement Fund",
-      ticker: "NVDA",
-      name: "NVIDIA Corporation",
-      quantity: 15,
-      lastPrice: 485.0,
-      marketValue: 7275.0,
-      type: "stock",
-    },
-    {
-      id: "h13",
-      accountId: "2",
-      accountName: "Personal Investment",
-      ticker: "AMZN",
-      name: "Amazon.com Inc.",
-      quantity: 10,
-      lastPrice: 145.0,
-      marketValue: 1450.0,
-      type: "stock",
-    },
-    {
-      id: "h14",
-      accountId: "1",
-      accountName: "Retirement Fund",
-      ticker: "TSLA",
-      name: "Tesla Inc.",
-      quantity: 20,
-      lastPrice: 250.0,
-      marketValue: 5000.0,
-      type: "stock",
-    },
-    // Cash holdings (not included in exposure calculation)
-    {
-      id: "h5",
-      accountId: "4",
-      accountName: "Emergency Fund",
-      name: "Emergency Savings",
-      quantity: 25000,
-      lastPrice: 1,
-      marketValue: 25000.0,
-      type: "cash",
-    },
-    {
-      id: "h9",
-      accountId: "2",
-      accountName: "Personal Investment",
-      name: "Settlement Fund",
-      quantity: 5000,
-      lastPrice: 1,
-      marketValue: 5000.0,
-      type: "cash",
-    },
-  ])
+  // Use portfolio store for holdings and accounts data
+  const { holdings, accounts, isLoading: holdingsLoading } = usePortfolioStore()
+
+  // Get exposure calculations
+  const {
+    exposures,
+    assetClassBreakdown,
+    sectorBreakdown,
+    isCalculating,
+    error
+  } = useExposureCalculations()
+
+  // Convert holdings to the format expected by ExposureTable
+  const portfolioHoldings = useMemo(() => {
+    return holdings.map(holding => ({
+      id: holding.id,
+      accountId: holding.accountId,
+      accountName: holding.accountName,
+      ticker: holding.ticker,
+      name: holding.name,
+      quantity: holding.quantity,
+      lastPrice: holding.lastPrice,
+      marketValue: holding.marketValue,
+      type: holding.type,
+    }))
+  }, [holdings])
 
   const handleRefresh = () => {
-    // In a real app, this would refresh data from API
+    // This will trigger recalculation through the hook
+    // In a real app, you might also refresh prices from an API
     console.log("Refreshing exposure data...")
+  }
+
+  // Show loading state
+  const isLoading = holdingsLoading || isCalculating
+
+  if (isLoading) {
+    return (
+      <main>
+        <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+          <div>
+            <h1 className="text-2xl font-semibold text-gray-900 dark:text-gray-50">
+              Exposure
+            </h1>
+            <p className="text-gray-500 sm:text-sm/6 dark:text-gray-500">
+              Calculating your exposure analysis...
+            </p>
+          </div>
+        </div>
+        <Divider />
+        <div className="animate-pulse py-8">
+          <div className="h-64 bg-gray-100 dark:bg-gray-800 rounded-lg mb-4"></div>
+          <div className="h-96 bg-gray-100 dark:bg-gray-800 rounded-lg"></div>
+        </div>
+      </main>
+    )
+  }
+
+  // Show error if there's one
+  if (error && !holdings.length) {
+    return (
+      <main>
+        <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+          <div>
+            <h1 className="text-2xl font-semibold text-gray-900 dark:text-gray-50">
+              Exposure
+            </h1>
+            <p className="text-gray-500 sm:text-sm/6 dark:text-gray-500">
+              Error loading exposure data
+            </p>
+          </div>
+        </div>
+        <Divider />
+        <div className="rounded-lg bg-red-50 dark:bg-red-900/10 p-4 mt-8">
+          <p className="text-sm text-red-800 dark:text-red-200">
+            {error}
+          </p>
+        </div>
+      </main>
+    )
   }
 
   return (
@@ -176,7 +106,60 @@ export default function ExposurePage() {
 
       {/* Exposure Table */}
       <div className="mt-8">
-        <ExposureTable holdings={holdings} onRefresh={handleRefresh} />
+        {holdingsLoading ? (
+          // Loading state is already handled above
+          null
+        ) : portfolioHoldings.length === 0 ? (
+          // Empty state
+          <div className="py-12 text-center">
+            {accounts.length === 0 ? (
+              // No accounts at all
+              <>
+                <h3 className="text-lg font-medium text-gray-900 dark:text-gray-50 mb-2">
+                  No accounts yet
+                </h3>
+                <p className="text-gray-500 dark:text-gray-400 mb-4">
+                  Please add an account first to start tracking your portfolio exposure.
+                </p>
+                <Button
+                  onClick={() => window.location.href = '/accounts'}
+                  className="inline-flex items-center gap-2"
+                >
+                  Go to Accounts
+                </Button>
+              </>
+            ) : holdings.length === 0 ? (
+              // Has accounts but no holdings
+              <>
+                <h3 className="text-lg font-medium text-gray-900 dark:text-gray-50 mb-2">
+                  No holdings to analyze
+                </h3>
+                <p className="text-gray-500 dark:text-gray-400 mb-4">
+                  Add holdings to your accounts to see exposure analysis.
+                </p>
+                <Button
+                  onClick={() => window.location.href = '/holdings'}
+                  className="inline-flex items-center gap-2"
+                >
+                  Add Holdings
+                </Button>
+              </>
+            ) : (
+              // Has holdings but no portfolio holdings (shouldn't happen, but just in case)
+              <>
+                <h3 className="text-lg font-medium text-gray-900 dark:text-gray-50 mb-2">
+                  No exposure data available
+                </h3>
+                <p className="text-gray-500 dark:text-gray-400">
+                  Unable to calculate exposures for your current holdings.
+                </p>
+              </>
+            )}
+          </div>
+        ) : (
+          // Show the exposure table with data
+          <ExposureTable holdings={portfolioHoldings} onRefresh={handleRefresh} />
+        )}
       </div>
     </main>
   )
