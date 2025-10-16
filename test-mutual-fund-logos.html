@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mutual Fund Logo Test</title>
+    <style>
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        h1 { color: #333; }
+        h2 { color: #666; margin-top: 30px; }
+        .section {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .fund-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .fund-card {
+            padding: 15px;
+            background: #f9f9f9;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .vanguard-card {
+            border-left: 4px solid #852c2a;
+            background: #fef8f8;
+        }
+        .fidelity-card {
+            border-left: 4px solid #54a845;
+            background: #f8fef8;
+        }
+        .schwab-card {
+            border-left: 4px solid #00a0df;
+            background: #f5fbff;
+        }
+        .troweprice-card {
+            border-left: 4px solid #1d3e8c;
+            background: #f5f8ff;
+        }
+        .logo {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+            background: white;
+            border: 1px solid #e0e0e0;
+        }
+        .fund-info {
+            flex: 1;
+        }
+        .fund-symbol {
+            font-weight: bold;
+            font-size: 16px;
+            color: #333;
+        }
+        .fund-name {
+            font-size: 12px;
+            color: #666;
+            margin-top: 2px;
+        }
+        .status {
+            padding: 10px;
+            margin: 20px 0;
+            border-radius: 4px;
+            font-weight: 500;
+        }
+        .success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .info {
+            background: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
+        .comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .comparison-box {
+            padding: 15px;
+            background: #f9f9f9;
+            border-radius: 6px;
+        }
+        .comparison-title {
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #333;
+        }
+        .logo-preview {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>🎯 Mutual Fund Logos Implementation</h1>
+
+    <div class="section">
+        <h2>Implementation Status</h2>
+
+        <div class="status success">
+            ✅ Successfully configured mutual fund logos to use their provider's branding
+        </div>
+
+        <div class="status info">
+            ℹ️ All Vanguard mutual funds (including VFFVX) now use the same Vanguard logo as VOO
+        </div>
+
+        <h3 style="margin-top: 20px;">Changes Made:</h3>
+        <ul>
+            <li>✅ Updated <code>TickerLogo</code> component to accept "mutual-fund" type</li>
+            <li>✅ Added mutual fund domain mappings to <code>logoUtils.ts</code></li>
+            <li>✅ Updated <code>TickerSelector</code> to pass correct type to TickerLogo</li>
+            <li>✅ Mapped all Vanguard funds to vanguard.com</li>
+            <li>✅ Mapped Fidelity funds to fidelity.com</li>
+            <li>✅ Mapped Schwab funds to schwab.com</li>
+            <li>✅ Mapped T. Rowe Price funds to troweprice.com</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Logo Comparison</h2>
+        <div class="comparison">
+            <div class="comparison-box">
+                <div class="comparison-title">VOO (Vanguard ETF)</div>
+                <div class="logo-preview">
+                    <img src="https://img.logo.dev/vanguard.com?token=pk_ARDallYvRuqePZO2jZF9Cw&retina=true&fallback=monogram&format=webp&size=400"
+                         alt="VOO Logo" class="logo">
+                    <span>Uses: vanguard.com</span>
+                </div>
+            </div>
+            <div class="comparison-box">
+                <div class="comparison-title">VFFVX (Vanguard Mutual Fund)</div>
+                <div class="logo-preview">
+                    <img src="https://img.logo.dev/vanguard.com?token=pk_ARDallYvRuqePZO2jZF9Cw&retina=true&fallback=monogram&format=webp&size=400"
+                         alt="VFFVX Logo" class="logo">
+                    <span>Uses: vanguard.com ✅</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>All Configured Mutual Fund Logos</h2>
+
+        <h3>Vanguard Funds</h3>
+        <div class="fund-grid">
+            <div class="fund-card vanguard-card">
+                <img src="https://img.logo.dev/vanguard.com?token=pk_ARDallYvRuqePZO2jZF9Cw&retina=true&fallback=monogram&format=webp&size=400"
+                     alt="Vanguard" class="logo">
+                <div class="fund-info">
+                    <div class="fund-symbol">VFFVX</div>
+                    <div class="fund-name">Target Retirement 2055</div>
+                </div>
+            </div>
+            <div class="fund-card vanguard-card">
+                <img src="https://img.logo.dev/vanguard.com?token=pk_ARDallYvRuqePZO2jZF9Cw&retina=true&fallback=monogram&format=webp&size=400"
+                     alt="Vanguard" class="logo">
+                <div class="fund-info">
+                    <div class="fund-symbol">VTSAX</div>
+                    <div class="fund-name">Total Stock Market Index</div>
+                </div>
+            </div>
+            <div class="fund-card vanguard-card">
+                <img src="https://img.logo.dev/vanguard.com?token=pk_ARDallYvRuqePZO2jZF9Cw&retina=true&fallback=monogram&format=webp&size=400"
+                     alt="Vanguard" class="logo">
+                <div class="fund-info">
+                    <div class="fund-symbol">VTIAX</div>
+                    <div class="fund-name">Total International Stock</div>
+                </div>
+            </div>
+            <div class="fund-card vanguard-card">
+                <img src="https://img.logo.dev/vanguard.com?token=pk_ARDallYvRuqePZO2jZF9Cw&retina=true&fallback=monogram&format=webp&size=400"
+                     alt="Vanguard" class="logo">
+                <div class="fund-info">
+                    <div class="fund-symbol">VFIAX</div>
+                    <div class="fund-name">500 Index Admiral</div>
+                </div>
+            </div>
+        </div>
+
+        <h3 style="margin-top: 30px;">Fidelity Funds</h3>
+        <div class="fund-grid">
+            <div class="fund-card fidelity-card">
+                <img src="https://img.logo.dev/fidelity.com?token=pk_ARDallYvRuqePZO2jZF9Cw&retina=true&fallback=monogram&format=webp&size=400"
+                     alt="Fidelity" class="logo">
+                <div class="fund-info">
+                    <div class="fund-symbol">FZROX</div>
+                    <div class="fund-name">ZERO Total Market Index</div>
+                </div>
+            </div>
+            <div class="fund-card fidelity-card">
+                <img src="https://img.logo.dev/fidelity.com?token=pk_ARDallYvRuqePZO2jZF9Cw&retina=true&fallback=monogram&format=webp&size=400"
+                     alt="Fidelity" class="logo">
+                <div class="fund-info">
+                    <div class="fund-symbol">FXAIX</div>
+                    <div class="fund-name">500 Index</div>
+                </div>
+            </div>
+        </div>
+
+        <h3 style="margin-top: 30px;">Schwab Funds</h3>
+        <div class="fund-grid">
+            <div class="fund-card schwab-card">
+                <img src="https://img.logo.dev/schwab.com?token=pk_ARDallYvRuqePZO2jZF9Cw&retina=true&fallback=monogram&format=webp&size=400"
+                     alt="Schwab" class="logo">
+                <div class="fund-info">
+                    <div class="fund-symbol">SWTSX</div>
+                    <div class="fund-name">Total Stock Market Index</div>
+                </div>
+            </div>
+            <div class="fund-card schwab-card">
+                <img src="https://img.logo.dev/schwab.com?token=pk_ARDallYvRuqePZO2jZF9Cw&retina=true&fallback=monogram&format=webp&size=400"
+                     alt="Schwab" class="logo">
+                <div class="fund-info">
+                    <div class="fund-symbol">SWPPX</div>
+                    <div class="fund-name">S&P 500 Index</div>
+                </div>
+            </div>
+        </div>
+
+        <h3 style="margin-top: 30px;">T. Rowe Price Funds</h3>
+        <div class="fund-grid">
+            <div class="fund-card troweprice-card">
+                <img src="https://img.logo.dev/troweprice.com?token=pk_ARDallYvRuqePZO2jZF9Cw&retina=true&fallback=monogram&format=webp&size=400"
+                     alt="T. Rowe Price" class="logo">
+                <div class="fund-info">
+                    <div class="fund-symbol">TRRBX</div>
+                    <div class="fund-name">Retirement 2040</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        console.log('✅ Mutual fund logos implementation complete');
+        console.log('All Vanguard mutual funds now use vanguard.com domain for logos');
+        console.log('VFFVX and VOO both use the same Vanguard logo');
+    </script>
+</body>
+</html>

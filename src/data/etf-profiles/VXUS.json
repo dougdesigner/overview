@@ -1,0 +1,157 @@
+{
+  "symbol": "VXUS",
+  "name": "VXUS ETF",
+  "holdings": [
+    {
+      "symbol": "RY",
+      "weight": 0.0054
+    },
+    {
+      "symbol": "SHOP",
+      "weight": 0.0041
+    },
+    {
+      "symbol": "ENB",
+      "weight": 0.003
+    },
+    {
+      "symbol": "TD",
+      "weight": 0.003
+    },
+    {
+      "symbol": "BN",
+      "weight": 0.0027
+    },
+    {
+      "symbol": "BMO",
+      "weight": 0.0023
+    },
+    {
+      "symbol": "CP",
+      "weight": 0.0022
+    },
+    {
+      "symbol": "PDD",
+      "weight": 0.0022
+    },
+    {
+      "symbol": "BNS",
+      "weight": 0.0021
+    },
+    {
+      "symbol": "CNQ",
+      "weight": 0.002
+    },
+    {
+      "symbol": "CRH",
+      "weight": 0.002
+    },
+    {
+      "symbol": "CM",
+      "weight": 0.0019
+    },
+    {
+      "symbol": "MFC",
+      "weight": 0.0017
+    },
+    {
+      "symbol": "RACE",
+      "weight": 0.0016
+    },
+    {
+      "symbol": "SU",
+      "weight": 0.0015
+    },
+    {
+      "symbol": "TRP",
+      "weight": 0.0015
+    },
+    {
+      "symbol": "WCN",
+      "weight": 0.0014
+    },
+    {
+      "symbol": "ALC",
+      "weight": 0.0013
+    },
+    {
+      "symbol": "VWO",
+      "weight": 0.0013
+    },
+    {
+      "symbol": "AEM",
+      "weight": 0.0012
+    },
+    {
+      "symbol": "SLF",
+      "weight": 0.0011
+    },
+    {
+      "symbol": "SW",
+      "weight": 0.0009
+    },
+    {
+      "symbol": "WPM",
+      "weight": 0.0008
+    },
+    {
+      "symbol": "BAM",
+      "weight": 0.0007
+    },
+    {
+      "symbol": "QSR",
+      "weight": 0.0007
+    },
+    {
+      "symbol": "FNV",
+      "weight": 0.0007
+    },
+    {
+      "symbol": "FTS",
+      "weight": 0.0007
+    },
+    {
+      "symbol": "NTR",
+      "weight": 0.0007
+    },
+    {
+      "symbol": "TRI",
+      "weight": 0.0007
+    },
+    {
+      "symbol": "YUMC",
+      "weight": 0.0006
+    },
+    {
+      "symbol": "RBA",
+      "weight": 0.0005
+    },
+    {
+      "symbol": "TEF",
+      "weight": 0.0005
+    },
+    {
+      "symbol": "CLS",
+      "weight": 0.0003
+    },
+    {
+      "symbol": "IMO",
+      "weight": 0.0003
+    },
+    {
+      "symbol": "GFL",
+      "weight": 0.0003
+    },
+    {
+      "symbol": "YMM",
+      "weight": 0.0003
+    },
+    {
+      "symbol": "STN",
+      "weight": 0.0003
+    }
+  ],
+  "lastUpdated": "2025-10-16T07:58:33.538Z",
+  "cachedAt": "2025-10-16T07:58:33.538Z",
+  "source": "Alpha Vantage API"
+}
