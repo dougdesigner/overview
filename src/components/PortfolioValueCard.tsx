@@ -77,6 +77,16 @@ const PortfolioValueCard = React.forwardRef<
       return "$" + Intl.NumberFormat("us").format(number).toString()
     }
 
+    // Format percentage: show integers without decimals, non-integers with up to 2 decimal places
+    const formatPercentage = (value: number): string => {
+      // Check if the value is effectively an integer (within floating point precision)
+      if (Number.isInteger(value) || Math.abs(value - Math.round(value)) < 0.0001) {
+        return Math.round(value).toString()
+      }
+      // For non-integers, use up to 2 decimal places and remove trailing zeros
+      return value.toFixed(2).replace(/\.?0+$/, '')
+    }
+
     // Extract percentages and colors for CategoryBar
     const percentages = classes.slice(0, 4).map((item) => item.percentage) // Exclude "Other" if 0%
     const colors = classes.slice(0, 4).map((item) => item.color)
@@ -106,7 +116,7 @@ const PortfolioValueCard = React.forwardRef<
           {classes.map((item) => (
             <li key={item.name}>
               <span className="text-base font-semibold text-gray-900 dark:text-gray-50">
-                {item.percentage}%
+                {formatPercentage(item.percentage)}%
               </span>
               <div className="flex items-center gap-2">
                 <span
