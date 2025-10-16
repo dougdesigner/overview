@@ -5,7 +5,24 @@ import { Divider } from "@/components/Divider"
 import { ExposureTable } from "@/components/ui/data-table-exposure/ExposureTable"
 import { usePortfolioStore } from "@/hooks/usePortfolioStore"
 import { useExposureCalculations } from "@/hooks/useExposureCalculations"
-import React, { useMemo } from "react"
+import React, { useMemo, useEffect } from "react"
+
+// Function to clear ETF cache from localStorage
+function clearETFCache() {
+  if (typeof window === "undefined") return
+
+  const keys = Object.keys(localStorage)
+  const etfKeys = keys.filter(k => k.startsWith("etf_holdings_"))
+
+  etfKeys.forEach(key => {
+    localStorage.removeItem(key)
+    console.log(`Removed ${key} from localStorage`)
+  })
+
+  console.log(`Cleared ${etfKeys.length} ETF cache entries from localStorage`)
+  // Reload the page to fetch fresh data
+  window.location.reload()
+}
 
 export default function ExposurePage() {
   // Use portfolio store for holdings and accounts data
@@ -101,6 +118,13 @@ export default function ExposurePage() {
             See your true stock exposure across all ETFs and direct holdings
           </p>
         </div>
+        <Button
+          onClick={clearETFCache}
+          variant="secondary"
+          className="text-sm"
+        >
+          Clear Cache & Refresh
+        </Button>
       </div>
       <Divider />
 
