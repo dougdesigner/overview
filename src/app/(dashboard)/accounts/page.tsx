@@ -9,10 +9,14 @@ import {
   AccountDrawer,
   type AccountFormData,
 } from "@/components/ui/AccountDrawer"
+import {
+  accountTypeLabels,
+  institutionLabels,
+  usePortfolioStore,
+} from "@/hooks/usePortfolioStore"
 import { RiAddLine } from "@remixicon/react"
 import { useRouter } from "next/navigation"
 import React from "react"
-import { usePortfolioStore, accountTypeLabels, institutionLabels } from "@/hooks/usePortfolioStore"
 
 export default function AccountsPage() {
   const router = useRouter()
@@ -20,9 +24,9 @@ export default function AccountsPage() {
   const [drawerMode, setDrawerMode] = React.useState<"create" | "edit">(
     "create",
   )
-  const [editingAccount, setEditingAccount] = React.useState<ReturnType<typeof usePortfolioStore>["accounts"][0] | null>(
-    null,
-  )
+  const [editingAccount, setEditingAccount] = React.useState<
+    ReturnType<typeof usePortfolioStore>["accounts"][0] | null
+  >(null)
 
   // Use the portfolio store for accounts data
   const {
@@ -31,7 +35,7 @@ export default function AccountsPage() {
     error,
     addAccount,
     updateAccount,
-    deleteAccount
+    deleteAccount,
   } = usePortfolioStore()
 
   // Handle adding or editing account from the drawer
@@ -45,12 +49,10 @@ export default function AccountsPage() {
           formData.accountType,
         accountType: formData.accountType,
         accountTypeLabel:
-          accountTypeLabels[formData.accountType] ||
-          formData.accountType,
+          accountTypeLabels[formData.accountType] || formData.accountType,
         institution: formData.institution,
         institutionLabel:
-          institutionLabels[formData.institution] ||
-          formData.institution,
+          institutionLabels[formData.institution] || formData.institution,
       })
     } else {
       // Create new account
@@ -115,17 +117,17 @@ export default function AccountsPage() {
             <h1 className="text-2xl font-semibold text-gray-900 dark:text-gray-50">
               Accounts
             </h1>
-            <p className="text-gray-500 sm:text-sm/6 dark:text-gray-400">
+            <p className="text-gray-500 dark:text-gray-400 sm:text-sm/6">
               Loading your portfolio data...
             </p>
           </div>
         </div>
         <Divider />
         <div className="animate-pulse py-8">
-          <div className="h-48 bg-gray-100 dark:bg-gray-800 rounded-lg mb-4"></div>
+          <div className="mb-4 h-48 rounded-lg bg-gray-100 dark:bg-gray-800"></div>
           <div className="space-y-4">
-            <div className="h-24 bg-gray-100 dark:bg-gray-800 rounded-lg"></div>
-            <div className="h-24 bg-gray-100 dark:bg-gray-800 rounded-lg"></div>
+            <div className="h-24 rounded-lg bg-gray-100 dark:bg-gray-800"></div>
+            <div className="h-24 rounded-lg bg-gray-100 dark:bg-gray-800"></div>
           </div>
         </div>
       </main>
@@ -133,13 +135,14 @@ export default function AccountsPage() {
   }
 
   // Show error state if there's an error (but continue to show data if available)
-  const errorMessage = error && !accounts.length ? (
-    <div className="rounded-lg bg-red-50 dark:bg-red-900/10 p-4 mb-4">
-      <p className="text-sm text-red-800 dark:text-red-200">
-        {error} - Using default data
-      </p>
-    </div>
-  ) : null
+  const errorMessage =
+    error && !accounts.length ? (
+      <div className="mb-4 rounded-lg bg-red-50 p-4 dark:bg-red-900/10">
+        <p className="text-sm text-red-800 dark:text-red-200">
+          {error} - Using default data
+        </p>
+      </div>
+    ) : null
 
   return (
     <main>
@@ -149,7 +152,7 @@ export default function AccountsPage() {
           <h1 className="text-2xl font-semibold text-gray-900 dark:text-gray-50">
             Accounts
           </h1>
-          <p className="text-gray-500 sm:text-sm/6 dark:text-gray-400">
+          <p className="text-gray-500 dark:text-gray-400 sm:text-sm/6">
             Organize your holdings by account for clearer insights
           </p>
         </div>
@@ -264,8 +267,22 @@ export default function AccountsPage() {
             <AccountCard
               key={account.id}
               name={account.name}
-              accountType={account.accountTypeLabel as "Traditional 401(k)" | "Roth IRA" | "Personal Investment" | "Checking" | "Savings"}
-              institution={account.institutionLabel as "Fidelity Investments" | "Chase" | "American Express" | "Wealthfront" | "Vanguard"}
+              accountType={
+                account.accountTypeLabel as
+                  | "Traditional 401(k)"
+                  | "Roth IRA"
+                  | "Personal Investment"
+                  | "Checking"
+                  | "Savings"
+              }
+              institution={
+                account.institutionLabel as
+                  | "Fidelity Investments"
+                  | "Chase"
+                  | "American Express"
+                  | "Wealthfront"
+                  | "Vanguard"
+              }
               totalValue={account.totalValue}
               holdingsCount={account.holdingsCount}
               assetAllocation={account.assetAllocation}
@@ -299,11 +316,12 @@ export default function AccountsPage() {
         {/* Empty state */}
         {accounts.length === 0 && (
           <div className="py-12 text-center">
-            <h3 className="text-lg font-medium text-gray-900 dark:text-gray-50 mb-2">
+            <h3 className="mb-2 text-lg font-medium text-gray-900 dark:text-gray-50">
               Welcome to your portfolio dashboard
             </h3>
-            <p className="text-gray-500 dark:text-gray-400 mb-4">
-              Start by adding your first account to begin tracking your investments.
+            <p className="mb-4 text-gray-500 dark:text-gray-400">
+              Start by adding your first account to begin tracking your
+              investments.
             </p>
             <Button
               onClick={() => {
@@ -314,7 +332,6 @@ export default function AccountsPage() {
               className="inline-flex items-center gap-2"
             >
               Add Your First Account
-              <RiAddLine className="-mr-0.5 size-5 shrink-0" aria-hidden="true" />
             </Button>
           </div>
         )}
