@@ -16,6 +16,7 @@ import { usePortfolioStore } from "@/hooks/usePortfolioStore"
 import { getETFName } from "@/lib/etfMetadataService"
 import { getStockPrice } from "@/lib/stockPriceService"
 import { isKnownETF, getKnownETFName } from "@/lib/knownETFNames"
+import mutualFundMappings from "@/data/mutual-fund-mappings.json"
 
 function HoldingsContent() {
   const searchParams = useSearchParams()
@@ -96,33 +97,43 @@ function HoldingsContent() {
         name = holding.description || "Cash"
         lastPrice = 1
       } else if (holding.ticker) {
-        // First, check if we have a known ETF name locally
-        const knownName = getKnownETFName(holding.ticker)
+        // First, check if it's a mutual fund
+        const mutualFund = mutualFundMappings[holding.ticker as keyof typeof mutualFundMappings]
 
-        if (knownName) {
-          // We have a known name - use it immediately
-          name = knownName
+        if (mutualFund) {
+          // It's a mutual fund
+          name = mutualFund.name
           type = "fund"
-          console.log(`Using known ETF name for ${holding.ticker}: ${knownName}`)
+          console.log(`Using mutual fund name for ${holding.ticker}: ${name}`)
         } else {
-          // Check if it's likely an ETF based on ticker format
-          const isLikelyETF = holding.ticker.length >= 2 && holding.ticker.length <= 5 &&
-                             holding.ticker === holding.ticker.toUpperCase()
+          // Check if we have a known ETF name locally
+          const knownName = getKnownETFName(holding.ticker)
 
-          if (isLikelyETF) {
-            // Try to fetch from API for unknown ETFs
-            const etfNameResult = await getETFName(holding.ticker)
-            if (etfNameResult && etfNameResult !== `${holding.ticker} ETF`) {
-              name = etfNameResult
-              type = "fund"
-              console.log(`Fetched ETF name for ${holding.ticker}: ${etfNameResult}`)
+          if (knownName) {
+            // We have a known name - use it immediately
+            name = knownName
+            type = "fund"
+            console.log(`Using known ETF name for ${holding.ticker}: ${knownName}`)
+          } else {
+            // Check if it's likely an ETF based on ticker format
+            const isLikelyETF = holding.ticker.length >= 2 && holding.ticker.length <= 5 &&
+                               holding.ticker === holding.ticker.toUpperCase()
+
+            if (isLikelyETF) {
+              // Try to fetch from API for unknown ETFs
+              const etfNameResult = await getETFName(holding.ticker)
+              if (etfNameResult && etfNameResult !== `${holding.ticker} ETF`) {
+                name = etfNameResult
+                type = "fund"
+                console.log(`Fetched ETF name for ${holding.ticker}: ${etfNameResult}`)
+              } else {
+                // Default name for unknown ETFs
+                name = holding.ticker
+              }
             } else {
-              // Default name for unknown ETFs
+              // Not an ETF, just use ticker as name
               name = holding.ticker
             }
-          } else {
-            // Not an ETF, just use ticker as name
-            name = holding.ticker
           }
         }
 

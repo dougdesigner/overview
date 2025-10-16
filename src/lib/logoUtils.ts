@@ -241,6 +241,35 @@ const etfProviderDomains: Record<string, string> = {
   FXI: "ftportfolios.com",
 }
 
+// Map mutual fund tickers to their provider domains for logo.dev API
+const mutualFundProviderDomains: Record<string, string> = {
+  // Vanguard Mutual Funds
+  VFFVX: "vanguard.com", // Target Retirement 2055
+  VTSAX: "vanguard.com", // Total Stock Market Index Admiral
+  VTIAX: "vanguard.com", // Total International Stock Index Admiral
+  VFIAX: "vanguard.com", // 500 Index Admiral
+  VFIFX: "vanguard.com", // Target Retirement 2050
+  VFORX: "vanguard.com", // Target Retirement 2040
+  VTHRX: "vanguard.com", // Target Retirement 2030
+  VTTSX: "vanguard.com", // Target Retirement 2060
+  VTIVX: "vanguard.com", // Target Retirement Income
+  VBIAX: "vanguard.com", // Balanced Index Admiral
+  VWELX: "vanguard.com", // Wellington
+
+  // Fidelity Mutual Funds
+  FZROX: "fidelity.com", // ZERO Total Market Index
+  FXAIX: "fidelity.com", // 500 Index
+  FBALX: "fidelity.com", // Balanced
+  FDKLX: "fidelity.com", // Freedom 2060
+
+  // Schwab Mutual Funds
+  SWTSX: "schwab.com", // Total Stock Market Index
+  SWPPX: "schwab.com", // S&P 500 Index
+
+  // T. Rowe Price Mutual Funds
+  TRRBX: "troweprice.com", // Retirement 2040
+}
+
 // Map institution names to their domain names for logo.dev API
 const institutionDomains: Record<string, string | null> = {
   "Ally Bank": "ally.com",
@@ -325,6 +354,12 @@ export function getTickerLogoUrl(
     return `https://img.logo.dev/${etfDomain}?token=${token}&retina=true&fallback=monogram&format=webp&size=400`
   }
 
-  // 4. Return null for unknown (will trigger API lookup or use fallback)
+  // 4. Check if it's a mutual fund and use the provider domain
+  const mutualFundDomain = mutualFundProviderDomains[upperTicker]
+  if (mutualFundDomain) {
+    return `https://img.logo.dev/${mutualFundDomain}?token=${token}&retina=true&fallback=monogram&format=webp&size=400`
+  }
+
+  // 5. Return null for unknown (will trigger API lookup or use fallback)
   return null
 }

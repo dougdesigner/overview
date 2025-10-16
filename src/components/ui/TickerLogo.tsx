@@ -8,7 +8,7 @@ import React from "react"
 
 interface TickerLogoProps {
   ticker: string
-  type?: "stock" | "etf"
+  type?: "stock" | "etf" | "mutual-fund"
   className?: string
 }
 
@@ -31,7 +31,9 @@ export function TickerLogo({
   const logoUrl = isBerkshire ? null : getTickerLogoUrl(ticker)
 
   // Get fallback color
-  const color = type === "etf" ? "bg-blue-600" : getTickerColor(ticker, "stock")
+  const color = type === "etf" ? "bg-blue-600" :
+                type === "mutual-fund" ? "bg-purple-600" :
+                getTickerColor(ticker, "stock")
 
   if (isBerkshire) {
     // Custom Berkshire Hathaway logo

@@ -3,7 +3,7 @@
 export interface TickerOption {
   symbol: string
   name: string
-  type: "stock" | "etf"
+  type: "stock" | "etf" | "mutual-fund"
 }
 
 export const popularTickers = [
@@ -91,12 +91,33 @@ export const popularTickers = [
   { symbol: "MUB", name: "iShares National Muni Bond ETF", type: "etf" },
   { symbol: "SCHX", name: "Schwab US Large-Cap ETF", type: "etf" },
   { symbol: "SCHB", name: "Schwab US Broad Market ETF", type: "etf" },
+
+  // Popular Mutual Funds
+  { symbol: "VFFVX", name: "Vanguard Target Retirement 2055", type: "mutual-fund" },
+  { symbol: "VTSAX", name: "Vanguard Total Stock Market Index Admiral", type: "mutual-fund" },
+  { symbol: "VTIAX", name: "Vanguard Total International Stock Index Admiral", type: "mutual-fund" },
+  { symbol: "VFIAX", name: "Vanguard 500 Index Admiral", type: "mutual-fund" },
+  { symbol: "VFIFX", name: "Vanguard Target Retirement 2050", type: "mutual-fund" },
+  { symbol: "VFORX", name: "Vanguard Target Retirement 2040", type: "mutual-fund" },
+  { symbol: "VTHRX", name: "Vanguard Target Retirement 2030", type: "mutual-fund" },
+  { symbol: "VTTSX", name: "Vanguard Target Retirement 2060", type: "mutual-fund" },
+  { symbol: "VTIVX", name: "Vanguard Target Retirement Income", type: "mutual-fund" },
+  { symbol: "VBIAX", name: "Vanguard Balanced Index Admiral", type: "mutual-fund" },
+  { symbol: "VWELX", name: "Vanguard Wellington", type: "mutual-fund" },
+  { symbol: "FZROX", name: "Fidelity ZERO Total Market Index", type: "mutual-fund" },
+  { symbol: "FXAIX", name: "Fidelity 500 Index", type: "mutual-fund" },
+  { symbol: "FBALX", name: "Fidelity Balanced", type: "mutual-fund" },
+  { symbol: "FDKLX", name: "Fidelity Freedom 2060", type: "mutual-fund" },
+  { symbol: "SWTSX", name: "Schwab Total Stock Market Index", type: "mutual-fund" },
+  { symbol: "SWPPX", name: "Schwab S&P 500 Index", type: "mutual-fund" },
+  { symbol: "TRRBX", name: "T. Rowe Price Retirement 2040", type: "mutual-fund" },
 ] as TickerOption[]
 
 popularTickers.sort((a, b) => {
-  // Sort by type (stocks first) then alphabetically
+  // Sort by type (stocks first, then ETFs, then mutual funds) then alphabetically
+  const typeOrder = { "stock": 0, "etf": 1, "mutual-fund": 2 }
   if (a.type !== b.type) {
-    return a.type === "stock" ? -1 : 1
+    return typeOrder[a.type] - typeOrder[b.type]
   }
   return a.symbol.localeCompare(b.symbol)
 })

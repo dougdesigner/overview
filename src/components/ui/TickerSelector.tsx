@@ -32,7 +32,7 @@ export function TickerSelector({
       <div className="flex items-center gap-2">
         <TickerLogo
           ticker={ticker.symbol}
-          type={ticker.type}
+          type={ticker.type === "mutual-fund" ? "mutual-fund" : ticker.type}
           className="size-5"
         />
         <div className="flex flex-1 items-center gap-2">
@@ -43,10 +43,12 @@ export function TickerSelector({
               "text-xs",
               ticker.type === "etf"
                 ? "bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-400"
+                : ticker.type === "mutual-fund"
+                ? "bg-purple-100 text-purple-800 dark:bg-purple-900/30 dark:text-purple-400"
                 : "bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-400",
             )}
           >
-            {ticker.type === "etf" ? "ETF" : "Stock"}
+            {ticker.type === "etf" ? "ETF" : ticker.type === "mutual-fund" ? "MF" : "Stock"}
           </Badge>
         </div>
         <span className="max-w-[150px] truncate text-xs text-gray-500 dark:text-gray-400">
@@ -63,7 +65,7 @@ export function TickerSelector({
         <div className="flex items-center gap-2">
           <TickerLogo
             ticker={selectedTicker.symbol}
-            type={selectedTicker.type}
+            type={selectedTicker.type === "mutual-fund" ? "mutual-fund" : selectedTicker.type}
             className="size-5"
           />
           <span className="font-medium">{selectedTicker.symbol}</span>
@@ -73,10 +75,12 @@ export function TickerSelector({
               "text-xs",
               selectedTicker.type === "etf"
                 ? "bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-400"
+                : selectedTicker.type === "mutual-fund"
+                ? "bg-purple-100 text-purple-800 dark:bg-purple-900/30 dark:text-purple-400"
                 : "bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-400",
             )}
           >
-            {selectedTicker.type.toUpperCase()}
+            {selectedTicker.type === "etf" ? "ETF" : selectedTicker.type === "mutual-fund" ? "MF" : "STOCK"}
           </Badge>
         </div>
       )
@@ -85,9 +89,10 @@ export function TickerSelector({
     return null
   }
 
-  // Separate stocks and ETFs
+  // Separate stocks, ETFs, and mutual funds
   const stocks = popularTickers.filter((t) => t.type === "stock")
   const etfs = popularTickers.filter((t) => t.type === "etf")
+  const mutualFunds = popularTickers.filter((t) => t.type === "mutual-fund")
 
   return (
     <Select value={value} onValueChange={onValueChange}>
@@ -112,6 +117,16 @@ export function TickerSelector({
           ETFs
         </div>
         {etfs.map((ticker) => (
+          <SelectItem key={ticker.symbol} value={ticker.symbol}>
+            {renderTickerOption(ticker)}
+          </SelectItem>
+        ))}
+
+        {/* Mutual Funds section */}
+        <div className="mt-2 px-2 py-1 text-xs font-medium text-gray-500 dark:text-gray-400">
+          Mutual Funds
+        </div>
+        {mutualFunds.map((ticker) => (
           <SelectItem key={ticker.symbol} value={ticker.symbol}>
             {renderTickerOption(ticker)}
           </SelectItem>
