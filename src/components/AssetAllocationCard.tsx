@@ -295,6 +295,7 @@ const AssetAllocationCard = React.forwardRef<
                     valueFormatter={currencyFormatter}
                     colors={category.colors}
                     height={280}
+                    useAssetClassColors={category.name === "Asset Classes"}
                   />
                 </div>
                 {category.data.length > 0 && (

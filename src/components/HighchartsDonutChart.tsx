@@ -4,6 +4,7 @@ import Highcharts from "highcharts"
 import HighchartsReact from "highcharts-react-official"
 import { useTheme } from "next-themes"
 import { useEffect, useRef, useState } from "react"
+import { getAssetClassHexColor } from "@/lib/assetClassColors"
 
 interface HighchartsDonutChartProps {
   data: {
@@ -16,6 +17,8 @@ interface HighchartsDonutChartProps {
   totalValue: number
   valueFormatter: (value: number) => string
   colors: string[]
+  colorMapping?: Record<string, string> // Optional explicit color mapping
+  useAssetClassColors?: boolean // Flag to use asset class specific colors
 }
 
 export function HighchartsDonutChart({
@@ -24,6 +27,8 @@ export function HighchartsDonutChart({
   totalValue,
   valueFormatter,
   colors,
+  colorMapping,
+  useAssetClassColors = false,
 }: HighchartsDonutChartProps) {
   const { theme } = useTheme()
   const isDark = theme === "dark"
@@ -51,12 +56,28 @@ export function HighchartsDonutChart({
     orange: "#fb923c",
   }
 
-  // Transform data for Highcharts
-  const chartData = data.map((item, index) => ({
-    name: item.name,
-    y: item.amount,
-    color: colorMap[colors[index]] || colorMap.blue,
-  }))
+  // Transform data for Highcharts with improved color mapping
+  const chartData = data.map((item, index) => {
+    let color: string
+
+    if (useAssetClassColors) {
+      // Use asset class specific colors
+      color = getAssetClassHexColor(item.name)
+    } else if (colorMapping && colorMapping[item.name]) {
+      // Use explicit color mapping if provided
+      color = colorMapping[item.name]
+    } else {
+      // Fall back to index-based color mapping
+      const colorName = colors[index] || "blue"
+      color = colorMap[colorName] || colorMap.blue
+    }
+
+    return {
+      name: item.name,
+      y: item.amount,
+      color: color,
+    }
+  })
 
   const options: Highcharts.Options = {
     chart: {

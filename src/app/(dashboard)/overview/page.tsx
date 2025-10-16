@@ -7,6 +7,7 @@ import KPICard from "@/components/KPICard"
 import PortfolioValueCard from "@/components/PortfolioValueCard"
 import { usePortfolioStore } from "@/hooks/usePortfolioStore"
 import { useExposureCalculations } from "@/hooks/useExposureCalculations"
+import { getAssetClassColor, getAssetClassBgColor, getAssetClassBorderColor } from "@/lib/assetClassColors"
 import React, { useMemo } from "react"
 
 export default function OverviewPage() {
@@ -93,26 +94,26 @@ export default function OverviewPage() {
             {
               name: "U.S. Stocks",
               percentage: portfolioAllocation.usStocks,
-              color: "blue" as const,
-              bgColorClass: "bg-blue-600 dark:bg-blue-500",
+              color: getAssetClassColor("U.S. Stocks"),
+              bgColorClass: getAssetClassBgColor("U.S. Stocks"),
             },
             {
               name: "Non-U.S. Stocks",
               percentage: portfolioAllocation.nonUsStocks,
-              color: "cyan" as const,
-              bgColorClass: "bg-cyan-600 dark:bg-cyan-500",
+              color: getAssetClassColor("Non-U.S. Stocks"),
+              bgColorClass: getAssetClassBgColor("Non-U.S. Stocks"),
             },
             {
               name: "Fixed Income",
               percentage: portfolioAllocation.fixedIncome,
-              color: "amber" as const,
-              bgColorClass: "bg-amber-600 dark:bg-amber-500",
+              color: getAssetClassColor("Fixed Income"),
+              bgColorClass: getAssetClassBgColor("Fixed Income"),
             },
             {
               name: "Cash",
               percentage: portfolioAllocation.cash,
-              color: "emerald" as const,
-              bgColorClass: "bg-emerald-600 dark:bg-emerald-500",
+              color: getAssetClassColor("Cash"),
+              bgColorClass: getAssetClassBgColor("Cash"),
             },
           ]}
         />
@@ -209,25 +210,25 @@ export default function OverviewPage() {
           name="U.S. Stocks"
           stat={`$${assetValues.usStocks.toLocaleString('en-US', { maximumFractionDigits: 0 })}`}
           change={`${portfolioAllocation.usStocks.toFixed(1)}%`}
-          color="blue"
+          color={getAssetClassColor("U.S. Stocks")}
         />
         <KPICard
           name="Non-U.S. Stocks"
           stat={`$${assetValues.nonUsStocks.toLocaleString('en-US', { maximumFractionDigits: 0 })}`}
           change={`${portfolioAllocation.nonUsStocks.toFixed(1)}%`}
-          color="cyan"
+          color={getAssetClassColor("Non-U.S. Stocks")}
         />
         <KPICard
           name="Fixed Income"
           stat={`$${assetValues.fixedIncome.toLocaleString('en-US', { maximumFractionDigits: 0 })}`}
           change={`${portfolioAllocation.fixedIncome.toFixed(1)}%`}
-          color="amber"
+          color={getAssetClassColor("Fixed Income")}
         />
         <KPICard
           name="Cash"
           stat={`$${assetValues.cash.toLocaleString('en-US', { maximumFractionDigits: 0 })}`}
           change={`${portfolioAllocation.cash.toFixed(1)}%`}
-          color="emerald"
+          color={getAssetClassColor("Cash")}
         />
       </dl>
 
@@ -278,27 +279,28 @@ export default function OverviewPage() {
                   name: "U.S. Stocks",
                   amount: assetValues.usStocks,
                   share: `${portfolioAllocation.usStocks.toFixed(1)}%`,
-                  borderColor: "border-blue-500 dark:border-blue-500",
+                  borderColor: getAssetClassBorderColor("U.S. Stocks"),
                 },
                 {
                   name: "Non-U.S. Stocks",
                   amount: assetValues.nonUsStocks,
                   share: `${portfolioAllocation.nonUsStocks.toFixed(1)}%`,
-                  borderColor: "border-cyan-500 dark:border-cyan-500",
+                  borderColor: getAssetClassBorderColor("Non-U.S. Stocks"),
                 },
                 {
                   name: "Fixed Income",
                   amount: assetValues.fixedIncome,
                   share: `${portfolioAllocation.fixedIncome.toFixed(1)}%`,
-                  borderColor: "border-amber-500 dark:border-amber-500",
+                  borderColor: getAssetClassBorderColor("Fixed Income"),
                 },
                 {
                   name: "Cash",
                   amount: assetValues.cash,
                   share: `${portfolioAllocation.cash.toFixed(1)}%`,
-                  borderColor: "border-emerald-500 dark:border-emerald-500",
+                  borderColor: getAssetClassBorderColor("Cash"),
                 },
               ].filter(item => item.amount > 0),
+              // These colors are not used when useAssetClassColors is true, but kept for compatibility
               colors: ["blue", "cyan", "amber", "emerald"] as any,
             },
             {
