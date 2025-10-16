@@ -1,8 +1,13 @@
 import { NextRequest, NextResponse } from "next/server"
+import fs from "fs/promises"
+import path from "path"
 
 // Cache ETF data for 24 hours to avoid hitting API limits
 const ETF_CACHE_DURATION = 24 * 60 * 60 * 1000 // 24 hours in milliseconds
 const etfCache = new Map<string, { data: any; timestamp: number }>()
+
+// File-based cache directory
+const CACHE_DIR = path.join(process.cwd(), "src", "data", "etf-profiles")
 
 interface ETFHolding {
   symbol: string
@@ -18,6 +23,40 @@ interface AlphaVantageETFResponse {
   holdings?: ETFHolding[]
 }
 
+// Helper function to read cached ETF profile from file
+async function readCachedProfile(symbol: string): Promise<any | null> {
+  try {
+    const filePath = path.join(CACHE_DIR, `${symbol}.json`)
+    const fileContent = await fs.readFile(filePath, "utf-8")
+    const data = JSON.parse(fileContent)
+    console.log(`Loaded cached profile for ${symbol} from file with ${data.holdings?.length || 0} holdings`)
+    return data
+  } catch (error) {
+    // File doesn't exist or can't be read
+    return null
+  }
+}
+
+// Helper function to write ETF profile to cache file
+async function writeCachedProfile(symbol: string, data: any): Promise<void> {
+  try {
+    // Ensure directory exists
+    await fs.mkdir(CACHE_DIR, { recursive: true })
+
+    const filePath = path.join(CACHE_DIR, `${symbol}.json`)
+    const dataToCache = {
+      ...data,
+      cachedAt: new Date().toISOString(),
+      source: "Alpha Vantage API"
+    }
+
+    await fs.writeFile(filePath, JSON.stringify(dataToCache, null, 2))
+    console.log(`Saved ${symbol} profile to cache file with ${data.holdings?.length || 0} holdings`)
+  } catch (error) {
+    console.error(`Failed to cache ${symbol} profile:`, error)
+  }
+}
+
 export async function POST(request: NextRequest) {
   try {
     const { symbols } = await request.json()
@@ -30,18 +69,51 @@ export async function POST(request: NextRequest) {
     }
 
     const apiKey = process.env.ALPHA_VANTAGE_API_KEY
+
+    // If no API key, try to load from file cache
     if (!apiKey) {
-      console.warn("ALPHA_VANTAGE_API_KEY not configured, returning mock data")
-      return NextResponse.json(getMockData(symbols))
+      console.warn("ALPHA_VANTAGE_API_KEY not configured, using cached data only...")
+      const results: Record<string, any> = {}
+
+      for (const symbol of symbols) {
+        const fileCached = await readCachedProfile(symbol)
+        if (fileCached) {
+          results[symbol] = fileCached
+        } else {
+          // Return empty data if no cache exists
+          console.log(`No cached file for ${symbol}, no data available without API key`)
+          results[symbol] = {
+            symbol,
+            name: `${symbol} ETF`,
+            holdings: [],
+            lastUpdated: new Date().toISOString(),
+            error: "No cached data available. API key required for initial fetch."
+          }
+        }
+      }
+
+      return NextResponse.json(results)
     }
 
     const results: Record<string, any> = {}
 
     for (const symbol of symbols) {
-      // Check cache first
+      // Check file-based cache first
+      const fileCached = await readCachedProfile(symbol)
+      if (fileCached) {
+        results[symbol] = fileCached
+        // Also store in memory cache for faster access
+        etfCache.set(symbol, {
+          data: fileCached,
+          timestamp: Date.now()
+        })
+        continue
+      }
+
+      // Check memory cache
       const cached = etfCache.get(symbol)
       if (cached && Date.now() - cached.timestamp < ETF_CACHE_DURATION) {
-        console.log(`Using cached data for ${symbol}`)
+        console.log(`Using memory cached data for ${symbol}`)
         results[symbol] = cached.data
         continue
       }
@@ -49,21 +121,46 @@ export async function POST(request: NextRequest) {
       try {
         // Fetch from Alpha Vantage
         const url = `https://www.alphavantage.co/query?function=ETF_PROFILE&symbol=${symbol}&apikey=${apiKey}`
-        console.log(`Fetching ETF profile for ${symbol}...`)
+        console.log(`Fetching ETF profile for ${symbol} from API...`)
 
         const response = await fetch(url)
         const data: AlphaVantageETFResponse = await response.json()
 
         if (!response.ok) {
           console.error(`Failed to fetch ${symbol}: ${response.statusText}`)
-          results[symbol] = getMockDataForSymbol(symbol)
+          // Try to use cached data if API fails
+          const cachedData = await readCachedProfile(symbol)
+          if (cachedData) {
+            console.log(`Using cached data for ${symbol} due to API failure`)
+            results[symbol] = cachedData
+          } else {
+            results[symbol] = {
+              symbol,
+              name: `${symbol} ETF`,
+              holdings: [],
+              lastUpdated: new Date().toISOString(),
+              error: `API request failed: ${response.statusText}`
+            }
+          }
           continue
         }
 
         // Check for API limit message
         if ('Note' in data || 'Information' in data) {
-          console.warn(`API limit reached for ${symbol}, using mock data`)
-          results[symbol] = getMockDataForSymbol(symbol)
+          console.warn(`API limit reached for ${symbol}, checking cache...`)
+          const cachedData = await readCachedProfile(symbol)
+          if (cachedData) {
+            console.log(`Using cached data for ${symbol} due to API limit`)
+            results[symbol] = cachedData
+          } else {
+            results[symbol] = {
+              symbol,
+              name: `${symbol} ETF`,
+              holdings: [],
+              lastUpdated: new Date().toISOString(),
+              error: "API limit reached. No cached data available."
+            }
+          }
           continue
         }
 
@@ -80,21 +177,37 @@ export async function POST(request: NextRequest) {
           lastUpdated: new Date().toISOString()
         }
 
-        // Cache the processed data
+        // Cache the processed data in memory
         etfCache.set(symbol, {
           data: processedData,
           timestamp: Date.now()
         })
 
+        // Save to file cache for persistence
+        await writeCachedProfile(symbol, processedData)
+
         results[symbol] = processedData
-        console.log(`Fetched ${processedData.holdings.length} holdings for ${symbol}`)
+        console.log(`Fetched ${processedData.holdings.length} holdings for ${symbol} and saved to cache`)
 
         // Add small delay to avoid rate limiting
         await new Promise(resolve => setTimeout(resolve, 200))
 
       } catch (error) {
         console.error(`Error fetching ${symbol}:`, error)
-        results[symbol] = getMockDataForSymbol(symbol)
+        // Try to use cached data on any error
+        const cachedData = await readCachedProfile(symbol)
+        if (cachedData) {
+          console.log(`Using cached data for ${symbol} due to error`)
+          results[symbol] = cachedData
+        } else {
+          results[symbol] = {
+            symbol,
+            name: `${symbol} ETF`,
+            holdings: [],
+            lastUpdated: new Date().toISOString(),
+            error: `Error fetching data: ${error instanceof Error ? error.message : 'Unknown error'}`
+          }
+        }
       }
     }
 
@@ -106,149 +219,5 @@ export async function POST(request: NextRequest) {
       { error: "Failed to fetch ETF holdings" },
       { status: 500 }
     )
-  }
-}
-
-// Mock data fallback when API is not available
-function getMockData(symbols: string[]): Record<string, any> {
-  const results: Record<string, any> = {}
-  for (const symbol of symbols) {
-    results[symbol] = getMockDataForSymbol(symbol)
-  }
-  return results
-}
-
-function getMockDataForSymbol(symbol: string): any {
-  // Import existing mock data if available
-  const mockProfiles: Record<string, any> = {
-    QQQ: {
-      symbol: "QQQ",
-      name: "Invesco QQQ Trust",
-      holdings: [
-        { symbol: "NVDA", name: "NVIDIA Corp", weight: 9.507 },
-        { symbol: "MSFT", name: "Microsoft Corp", weight: 8.347 },
-        { symbol: "AAPL", name: "Apple Inc", weight: 8.324 },
-        { symbol: "AVGO", name: "Broadcom Inc", weight: 5.714 },
-        { symbol: "AMZN", name: "Amazon.com Inc", weight: 5.146 },
-        { symbol: "META", name: "Meta Platforms Inc", weight: 3.542 },
-        { symbol: "TSLA", name: "Tesla Inc", weight: 3.524 },
-        { symbol: "GOOGL", name: "Alphabet Inc Class A", weight: 3.149 },
-        { symbol: "GOOG", name: "Alphabet Inc Class C", weight: 2.947 },
-        { symbol: "NFLX", name: "Netflix Inc", weight: 2.779 },
-        // Add more as needed
-      ],
-      lastUpdated: new Date().toISOString()
-    },
-    QQQM: {
-      symbol: "QQQM",
-      name: "Invesco NASDAQ 100 ETF",
-      holdings: [
-        // Same holdings as QQQ but with slightly different weights
-        { symbol: "NVDA", name: "NVIDIA Corp", weight: 9.507 },
-        { symbol: "MSFT", name: "Microsoft Corp", weight: 8.347 },
-        { symbol: "AAPL", name: "Apple Inc", weight: 8.324 },
-        { symbol: "AVGO", name: "Broadcom Inc", weight: 5.714 },
-        { symbol: "AMZN", name: "Amazon.com Inc", weight: 5.146 },
-        { symbol: "META", name: "Meta Platforms Inc", weight: 3.542 },
-        { symbol: "TSLA", name: "Tesla Inc", weight: 3.524 },
-        { symbol: "GOOGL", name: "Alphabet Inc Class A", weight: 3.149 },
-        { symbol: "GOOG", name: "Alphabet Inc Class C", weight: 2.947 },
-        { symbol: "NFLX", name: "Netflix Inc", weight: 2.779 },
-        // Add more as needed
-      ],
-      lastUpdated: new Date().toISOString()
-    },
-    VTI: {
-      symbol: "VTI",
-      name: "Vanguard Total Stock Market ETF",
-      holdings: [
-        { symbol: "AAPL", name: "Apple Inc", weight: 6.52 },
-        { symbol: "MSFT", name: "Microsoft Corporation", weight: 6.31 },
-        { symbol: "AMZN", name: "Amazon.com Inc", weight: 3.15 },
-        { symbol: "NVDA", name: "NVIDIA Corporation", weight: 2.81 },
-        { symbol: "GOOGL", name: "Alphabet Inc Class A", weight: 1.93 },
-        { symbol: "TSLA", name: "Tesla Inc", weight: 1.46 },
-        { symbol: "BRK.B", name: "Berkshire Hathaway Inc Class B", weight: 1.40 },
-        { symbol: "META", name: "Meta Platforms Inc", weight: 1.30 },
-        { symbol: "JNJ", name: "Johnson & Johnson", weight: 1.08 },
-        { symbol: "XOM", name: "Exxon Mobil Corporation", weight: 1.03 },
-        // This would have 4000+ holdings from API
-      ],
-      lastUpdated: new Date().toISOString()
-    },
-    VXUS: {
-      symbol: "VXUS",
-      name: "Vanguard Total International Stock ETF",
-      holdings: [
-        { symbol: "TSM", name: "Taiwan Semiconductor", weight: 1.45 },
-        { symbol: "NVS", name: "Novartis AG", weight: 0.89 },
-        { symbol: "NESN", name: "Nestle SA", weight: 0.85 },
-        { symbol: "ASML", name: "ASML Holding NV", weight: 0.82 },
-        { symbol: "SAP", name: "SAP SE", weight: 0.71 },
-        { symbol: "TM", name: "Toyota Motor Corp", weight: 0.68 },
-        { symbol: "SHEL", name: "Shell PLC", weight: 0.65 },
-        { symbol: "AZN", name: "AstraZeneca PLC", weight: 0.62 },
-        { symbol: "HSBAS", name: "HSBC Holdings PLC", weight: 0.58 },
-        { symbol: "UL", name: "Unilever PLC", weight: 0.52 },
-        // This would have 7000+ holdings from API
-      ],
-      lastUpdated: new Date().toISOString()
-    },
-    VOO: {
-      symbol: "VOO",
-      name: "Vanguard S&P 500 ETF",
-      holdings: [
-        { symbol: "AAPL", name: "Apple Inc", weight: 7.28 },
-        { symbol: "MSFT", name: "Microsoft Corporation", weight: 7.03 },
-        { symbol: "AMZN", name: "Amazon.com Inc", weight: 3.51 },
-        { symbol: "NVDA", name: "NVIDIA Corporation", weight: 3.12 },
-        { symbol: "GOOGL", name: "Alphabet Inc Class A", weight: 2.15 },
-        { symbol: "TSLA", name: "Tesla Inc", weight: 1.62 },
-        { symbol: "BRK.B", name: "Berkshire Hathaway Inc Class B", weight: 1.55 },
-        { symbol: "META", name: "Meta Platforms Inc", weight: 1.45 },
-        { symbol: "JNJ", name: "Johnson & Johnson", weight: 1.20 },
-        { symbol: "XOM", name: "Exxon Mobil Corporation", weight: 1.15 },
-      ],
-      lastUpdated: new Date().toISOString()
-    },
-    SPY: {
-      symbol: "SPY",
-      name: "SPDR S&P 500 ETF Trust",
-      holdings: [
-        { symbol: "AAPL", name: "Apple Inc", weight: 7.27 },
-        { symbol: "MSFT", name: "Microsoft Corporation", weight: 7.02 },
-        { symbol: "AMZN", name: "Amazon.com Inc", weight: 3.50 },
-        { symbol: "NVDA", name: "NVIDIA Corporation", weight: 3.11 },
-        { symbol: "GOOGL", name: "Alphabet Inc Class A", weight: 2.14 },
-        { symbol: "TSLA", name: "Tesla Inc", weight: 1.61 },
-        { symbol: "BRK.B", name: "Berkshire Hathaway Inc Class B", weight: 1.54 },
-        { symbol: "META", name: "Meta Platforms Inc", weight: 1.44 },
-        { symbol: "JNJ", name: "Johnson & Johnson", weight: 1.19 },
-        { symbol: "XOM", name: "Exxon Mobil Corporation", weight: 1.14 },
-      ],
-      lastUpdated: new Date().toISOString()
-    },
-    BND: {
-      symbol: "BND",
-      name: "Vanguard Total Bond Market ETF",
-      holdings: [
-        { symbol: "UST-10Y", name: "US Treasury 10 Year", weight: 15.2 },
-        { symbol: "UST-30Y", name: "US Treasury 30 Year", weight: 12.8 },
-        { symbol: "UST-5Y", name: "US Treasury 5 Year", weight: 10.5 },
-        { symbol: "MBS", name: "Mortgage Backed Securities", weight: 25.3 },
-        { symbol: "CORP-AAA", name: "AAA Corporate Bonds", weight: 18.6 },
-        { symbol: "CORP-AA", name: "AA Corporate Bonds", weight: 8.4 },
-        { symbol: "MUNI", name: "Municipal Bonds", weight: 5.2 },
-        { symbol: "INTL-BOND", name: "International Bonds", weight: 4.0 },
-      ],
-      lastUpdated: new Date().toISOString()
-    }
-  }
-
-  return mockProfiles[symbol] || {
-    symbol,
-    name: `${symbol} ETF`,
-    holdings: [],
-    lastUpdated: new Date().toISOString()
   }
 }

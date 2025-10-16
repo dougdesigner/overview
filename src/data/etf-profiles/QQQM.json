@@ -1,0 +1,429 @@
+{
+  "symbol": "QQQM",
+  "name": "QQQM ETF",
+  "holdings": [
+    {
+      "symbol": "NVDA",
+      "weight": 0.0971
+    },
+    {
+      "symbol": "MSFT",
+      "weight": 0.0841
+    },
+    {
+      "symbol": "AAPL",
+      "weight": 0.0822
+    },
+    {
+      "symbol": "AVGO",
+      "weight": 0.0565
+    },
+    {
+      "symbol": "AMZN",
+      "weight": 0.0511
+    },
+    {
+      "symbol": "TSLA",
+      "weight": 0.0341
+    },
+    {
+      "symbol": "META",
+      "weight": 0.0334
+    },
+    {
+      "symbol": "GOOGL",
+      "weight": 0.0309
+    },
+    {
+      "symbol": "GOOG",
+      "weight": 0.029
+    },
+    {
+      "symbol": "NFLX",
+      "weight": 0.0269
+    },
+    {
+      "symbol": "PLTR",
+      "weight": 0.022
+    },
+    {
+      "symbol": "COST",
+      "weight": 0.0216
+    },
+    {
+      "symbol": "AMD",
+      "weight": 0.0182
+    },
+    {
+      "symbol": "CSCO",
+      "weight": 0.0145
+    },
+    {
+      "symbol": "TMUS",
+      "weight": 0.0136
+    },
+    {
+      "symbol": "LIN",
+      "weight": 0.0117
+    },
+    {
+      "symbol": "MU",
+      "weight": 0.011
+    },
+    {
+      "symbol": "SHOP",
+      "weight": 0.0105
+    },
+    {
+      "symbol": "APP",
+      "weight": 0.0103
+    },
+    {
+      "symbol": "PEP",
+      "weight": 0.0102
+    },
+    {
+      "symbol": "INTU",
+      "weight": 0.0098
+    },
+    {
+      "symbol": "QCOM",
+      "weight": 0.0095
+    },
+    {
+      "symbol": "LRCX",
+      "weight": 0.0094
+    },
+    {
+      "symbol": "BKNG",
+      "weight": 0.009
+    },
+    {
+      "symbol": "AMAT",
+      "weight": 0.009
+    },
+    {
+      "symbol": "TXN",
+      "weight": 0.0086
+    },
+    {
+      "symbol": "INTC",
+      "weight": 0.0086
+    },
+    {
+      "symbol": "AMGN",
+      "weight": 0.0085
+    },
+    {
+      "symbol": "ISRG",
+      "weight": 0.0084
+    },
+    {
+      "symbol": "ADBE",
+      "weight": 0.0079
+    },
+    {
+      "symbol": "GILD",
+      "weight": 0.0077
+    },
+    {
+      "symbol": "KLAC",
+      "weight": 0.0076
+    },
+    {
+      "symbol": "PANW",
+      "weight": 0.0075
+    },
+    {
+      "symbol": "HON",
+      "weight": 0.0071
+    },
+    {
+      "symbol": "CRWD",
+      "weight": 0.0065
+    },
+    {
+      "symbol": "ADP",
+      "weight": 0.0063
+    },
+    {
+      "symbol": "ADI",
+      "weight": 0.0061
+    },
+    {
+      "symbol": "CMCSA",
+      "weight": 0.006
+    },
+    {
+      "symbol": "CEG",
+      "weight": 0.0059
+    },
+    {
+      "symbol": "DASH",
+      "weight": 0.0059
+    },
+    {
+      "symbol": "MELI",
+      "weight": 0.0059
+    },
+    {
+      "symbol": "VRTX",
+      "weight": 0.0056
+    },
+    {
+      "symbol": "CDNS",
+      "weight": 0.005
+    },
+    {
+      "symbol": "SBUX",
+      "weight": 0.0049
+    },
+    {
+      "symbol": "SNPS",
+      "weight": 0.0047
+    },
+    {
+      "symbol": "PDD",
+      "weight": 0.0047
+    },
+    {
+      "symbol": "ORLY",
+      "weight": 0.0046
+    },
+    {
+      "symbol": "MSTR",
+      "weight": 0.0046
+    },
+    {
+      "symbol": "ASML",
+      "weight": 0.0045
+    },
+    {
+      "symbol": "CTAS",
+      "weight": 0.0043
+    },
+    {
+      "symbol": "MDLZ",
+      "weight": 0.0043
+    },
+    {
+      "symbol": "MRVL",
+      "weight": 0.004
+    },
+    {
+      "symbol": "MAR",
+      "weight": 0.0039
+    },
+    {
+      "symbol": "PYPL",
+      "weight": 0.0038
+    },
+    {
+      "symbol": "TRI",
+      "weight": 0.0036
+    },
+    {
+      "symbol": "CSX",
+      "weight": 0.0036
+    },
+    {
+      "symbol": "ADSK",
+      "weight": 0.0036
+    },
+    {
+      "symbol": "FTNT",
+      "weight": 0.0035
+    },
+    {
+      "symbol": "MNST",
+      "weight": 0.0035
+    },
+    {
+      "symbol": "AEP",
+      "weight": 0.0034
+    },
+    {
+      "symbol": "REGN",
+      "weight": 0.0032
+    },
+    {
+      "symbol": "AXON",
+      "weight": 0.003
+    },
+    {
+      "symbol": "ROP",
+      "weight": 0.0029
+    },
+    {
+      "symbol": "NXPI",
+      "weight": 0.0029
+    },
+    {
+      "symbol": "FAST",
+      "weight": 0.0029
+    },
+    {
+      "symbol": "IDXX",
+      "weight": 0.0027
+    },
+    {
+      "symbol": "EA",
+      "weight": 0.0027
+    },
+    {
+      "symbol": "WDAY",
+      "weight": 0.0027
+    },
+    {
+      "symbol": "PCAR",
+      "weight": 0.0027
+    },
+    {
+      "symbol": "AZN",
+      "weight": 0.0027
+    },
+    {
+      "symbol": "DDOG",
+      "weight": 0.0027
+    },
+    {
+      "symbol": "ABNB",
+      "weight": 0.0027
+    },
+    {
+      "symbol": "ROST",
+      "weight": 0.0026
+    },
+    {
+      "symbol": "XEL",
+      "weight": 0.0026
+    },
+    {
+      "symbol": "TTWO",
+      "weight": 0.0026
+    },
+    {
+      "symbol": "BKR",
+      "weight": 0.0025
+    },
+    {
+      "symbol": "EXC",
+      "weight": 0.0025
+    },
+    {
+      "symbol": "ZS",
+      "weight": 0.0024
+    },
+    {
+      "symbol": "WBD",
+      "weight": 0.0024
+    },
+    {
+      "symbol": "PAYX",
+      "weight": 0.0024
+    },
+    {
+      "symbol": "FANG",
+      "weight": 0.0023
+    },
+    {
+      "symbol": "CPRT",
+      "weight": 0.0023
+    },
+    {
+      "symbol": "CCEP",
+      "weight": 0.0021
+    },
+    {
+      "symbol": "CHTR",
+      "weight": 0.002
+    },
+    {
+      "symbol": "MCHP",
+      "weight": 0.0019
+    },
+    {
+      "symbol": "KDP",
+      "weight": 0.0018
+    },
+    {
+      "symbol": "GEHC",
+      "weight": 0.0018
+    },
+    {
+      "symbol": "CTSH",
+      "weight": 0.0018
+    },
+    {
+      "symbol": "CSGP",
+      "weight": 0.0018
+    },
+    {
+      "symbol": "VRSK",
+      "weight": 0.0018
+    },
+    {
+      "symbol": "ODFL",
+      "weight": 0.0016
+    },
+    {
+      "symbol": "KHC",
+      "weight": 0.0016
+    },
+    {
+      "symbol": "DXCM",
+      "weight": 0.0014
+    },
+    {
+      "symbol": "TEAM",
+      "weight": 0.0013
+    },
+    {
+      "symbol": "TTD",
+      "weight": 0.0013
+    },
+    {
+      "symbol": "n/a",
+      "weight": 0.0013
+    },
+    {
+      "symbol": "ARM",
+      "weight": 0.0012
+    },
+    {
+      "symbol": "BIIB",
+      "weight": 0.0012
+    },
+    {
+      "symbol": "AGPXX",
+      "weight": 0.0012
+    },
+    {
+      "symbol": "LULU",
+      "weight": 0.0011
+    },
+    {
+      "symbol": "CDW",
+      "weight": 0.0011
+    },
+    {
+      "symbol": "ON",
+      "weight": 0.001
+    },
+    {
+      "symbol": "GFS",
+      "weight": 0.001
+    },
+    {
+      "symbol": "n/a",
+      "weight": 0
+    },
+    {
+      "symbol": "n/a",
+      "weight": 0
+    }
+  ],
+  "lastUpdated": "2025-10-16T07:34:09.052Z",
+  "cachedAt": "2025-10-16T07:34:09.052Z",
+  "source": "Alpha Vantage API"
+}
