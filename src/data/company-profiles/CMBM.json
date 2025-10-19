@@ -1,8 +1,9 @@
 {
   "symbol": "CMBM",
-  "name": "CMBM Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:34:12.783Z",
-  "source": "Alpha Vantage API"
+  "name": "Cambium Networks Corp",
+  "sector": "TECHNOLOGY",
+  "industry": "COMMUNICATION EQUIPMENT",
+  "officialSite": "https://www.cambiumnetworks.com",
+  "cachedAt": "2025-10-19T05:19:17.702Z",
+  "source": "Alpha Vantage API (fixed)"
 }

@@ -1,8 +1,9 @@
 {
   "symbol": "BALL",
-  "name": "BALL Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:30.484Z",
-  "source": "Alpha Vantage API"
+  "name": "Ball Corporation",
+  "sector": "CONSUMER CYCLICAL",
+  "industry": "PACKAGING & CONTAINERS",
+  "officialSite": "https://www.ball.com",
+  "cachedAt": "2025-10-19T05:14:08.815Z",
+  "source": "Alpha Vantage API (fixed)"
 }

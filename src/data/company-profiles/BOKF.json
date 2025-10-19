@@ -1,8 +1,9 @@
 {
   "symbol": "BOKF",
-  "name": "BOKF Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:34:05.529Z",
-  "source": "Alpha Vantage API"
+  "name": "BOK Financial Corporation",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "BANKS - REGIONAL",
+  "officialSite": "https://investor.bokf.com",
+  "cachedAt": "2025-10-19T05:15:41.600Z",
+  "source": "Alpha Vantage API (fixed)"
 }

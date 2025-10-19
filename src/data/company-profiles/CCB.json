@@ -1,8 +1,9 @@
 {
   "symbol": "CCB",
-  "name": "CCB Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:34:28.742Z",
-  "source": "Alpha Vantage API"
+  "name": "Coastal Financial Corp",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "BANKS - REGIONAL",
+  "officialSite": "https://www.coastalbank.com",
+  "cachedAt": "2025-10-19T05:18:33.836Z",
+  "source": "Alpha Vantage API (fixed)"
 }

@@ -1,8 +1,9 @@
 {
   "symbol": "ARKR",
-  "name": "ARKR Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:34:40.038Z",
-  "source": "Alpha Vantage API"
+  "name": "Ark Restaurants Corp",
+  "sector": "CONSUMER CYCLICAL",
+  "industry": "RESTAURANTS",
+  "officialSite": "https://arkrestaurants.com",
+  "cachedAt": "2025-10-19T05:09:10.342Z",
+  "source": "Alpha Vantage API (fixed)"
 }

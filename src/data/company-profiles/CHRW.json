@@ -1,8 +1,9 @@
 {
   "symbol": "CHRW",
-  "name": "CHRW Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:14.351Z",
-  "source": "Alpha Vantage API"
+  "name": "CH Robinson Worldwide Inc",
+  "sector": "INDUSTRIALS",
+  "industry": "INTEGRATED FREIGHT & LOGISTICS",
+  "officialSite": "https://www.chrobinson.com",
+  "cachedAt": "2025-10-19T05:19:05.491Z",
+  "source": "Alpha Vantage API (fixed)"
 }

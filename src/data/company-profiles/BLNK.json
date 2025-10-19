@@ -1,8 +1,9 @@
 {
   "symbol": "BLNK",
-  "name": "BLNK Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:35:08.731Z",
-  "source": "Alpha Vantage API"
+  "name": "Blink Charging Co",
+  "sector": "INDUSTRIALS",
+  "industry": "ENGINEERING & CONSTRUCTION",
+  "officialSite": "https://www.blinkcharging.com",
+  "cachedAt": "2025-10-19T05:15:31.956Z",
+  "source": "Alpha Vantage API (fixed)"
 }

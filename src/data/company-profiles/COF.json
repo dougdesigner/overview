@@ -1,8 +1,9 @@
 {
   "symbol": "COF",
-  "name": "COF Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:29:41.628Z",
-  "source": "Alpha Vantage API"
+  "name": "Capital One Financial Corporation",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "CREDIT SERVICES",
+  "officialSite": "https://www.capitalone.com",
+  "cachedAt": "2025-10-19T05:19:41.031Z",
+  "source": "Alpha Vantage API (fixed)"
 }

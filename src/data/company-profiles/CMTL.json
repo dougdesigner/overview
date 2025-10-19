@@ -1,8 +1,9 @@
 {
   "symbol": "CMTL",
-  "name": "CMTL Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:34:33.211Z",
-  "source": "Alpha Vantage API"
+  "name": "Comtech Telecommunications Corp",
+  "sector": "TECHNOLOGY",
+  "industry": "COMMUNICATION EQUIPMENT",
+  "officialSite": "https://comtech.com",
+  "cachedAt": "2025-10-19T05:19:26.478Z",
+  "source": "Alpha Vantage API (fixed)"
 }

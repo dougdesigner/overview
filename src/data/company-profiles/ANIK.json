@@ -1,8 +1,9 @@
 {
   "symbol": "ANIK",
-  "name": "ANIK Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:34:36.046Z",
-  "source": "Alpha Vantage API"
+  "name": "Anika Therapeutics Inc",
+  "sector": "HEALTHCARE",
+  "industry": "DRUG MANUFACTURERS - SPECIALTY & GENERIC",
+  "officialSite": "https://www.anika.com",
+  "cachedAt": "2025-10-19T05:08:40.200Z",
+  "source": "Alpha Vantage API (fixed)"
 }

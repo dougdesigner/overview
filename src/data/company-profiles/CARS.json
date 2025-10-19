@@ -1,8 +1,9 @@
 {
   "symbol": "CARS",
-  "name": "CARS Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:34:07.462Z",
-  "source": "Alpha Vantage API"
+  "name": "Cars.com Inc",
+  "sector": "COMMUNICATION SERVICES",
+  "industry": "INTERNET CONTENT & INFORMATION",
+  "officialSite": "https://www.cars.com",
+  "cachedAt": "2025-10-19T05:18:21.204Z",
+  "source": "Alpha Vantage API (fixed)"
 }

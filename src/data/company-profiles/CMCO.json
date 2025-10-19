@@ -1,8 +1,9 @@
 {
   "symbol": "CMCO",
-  "name": "CMCO Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:34:26.418Z",
-  "source": "Alpha Vantage API"
+  "name": "Columbus McKinnon Corporation",
+  "sector": "INDUSTRIALS",
+  "industry": "FARM & HEAVY CONSTRUCTION MACHINERY",
+  "officialSite": "https://www.cmco.com",
+  "cachedAt": "2025-10-19T05:19:18.670Z",
+  "source": "Alpha Vantage API (fixed)"
 }

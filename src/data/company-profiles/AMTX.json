@@ -1,8 +1,9 @@
 {
   "symbol": "AMTX",
-  "name": "AMTX Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:04.452Z",
-  "source": "Alpha Vantage API"
+  "name": "Aemetis Inc",
+  "sector": "BASIC MATERIALS",
+  "industry": "SPECIALTY CHEMICALS",
+  "officialSite": "https://www.aemetis.com",
+  "cachedAt": "2025-10-19T05:08:34.306Z",
+  "source": "Alpha Vantage API (fixed)"
 }

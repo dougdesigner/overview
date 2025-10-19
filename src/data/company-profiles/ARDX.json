@@ -1,8 +1,9 @@
 {
   "symbol": "ARDX",
-  "name": "ARDX Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:34:40.968Z",
-  "source": "Alpha Vantage API"
+  "name": "Ardelyx Inc",
+  "sector": "HEALTHCARE",
+  "industry": "BIOTECHNOLOGY",
+  "officialSite": "https://www.ardelyx.com",
+  "cachedAt": "2025-10-19T05:09:03.574Z",
+  "source": "Alpha Vantage API (fixed)"
 }

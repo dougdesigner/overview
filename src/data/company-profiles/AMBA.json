@@ -1,8 +1,9 @@
 {
   "symbol": "AMBA",
-  "name": "AMBA Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:34:37.941Z",
-  "source": "Alpha Vantage API"
+  "name": "Ambarella Inc",
+  "sector": "TECHNOLOGY",
+  "industry": "SEMICONDUCTOR EQUIPMENT & MATERIALS",
+  "officialSite": "https://www.ambarella.com",
+  "cachedAt": "2025-10-19T05:08:29.468Z",
+  "source": "Alpha Vantage API (fixed)"
 }

@@ -1,8 +1,9 @@
 {
   "symbol": "AMH",
-  "name": "AMH Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:13.401Z",
-  "source": "Alpha Vantage API"
+  "name": "American Homes 4 Rent",
+  "sector": "REAL ESTATE",
+  "industry": "REIT - RESIDENTIAL",
+  "officialSite": "https://www.amh.com",
+  "cachedAt": "2025-10-19T05:08:31.402Z",
+  "source": "Alpha Vantage API (fixed)"
 }

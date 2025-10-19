@@ -1,8 +1,9 @@
 {
   "symbol": "AVXL",
-  "name": "AVXL Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:34:36.778Z",
-  "source": "Alpha Vantage API"
+  "name": "Anavex Life Sciences Corp",
+  "sector": "HEALTHCARE",
+  "industry": "BIOTECHNOLOGY",
+  "officialSite": "https://www.anavex.com",
+  "cachedAt": "2025-10-19T05:13:53.175Z",
+  "source": "Alpha Vantage API (fixed)"
 }

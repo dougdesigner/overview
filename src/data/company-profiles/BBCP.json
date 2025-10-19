@@ -1,8 +1,9 @@
 {
   "symbol": "BBCP",
-  "name": "BBCP Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:34:32.870Z",
-  "source": "Alpha Vantage API"
+  "name": "Concrete Pumping Holdings Class A",
+  "sector": "INDUSTRIALS",
+  "industry": "ENGINEERING & CONSTRUCTION",
+  "officialSite": "https://www.concretepumpingholdings.com",
+  "cachedAt": "2025-10-19T05:14:18.629Z",
+  "source": "Alpha Vantage API (fixed)"
 }

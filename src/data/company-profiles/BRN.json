@@ -1,8 +1,9 @@
 {
   "symbol": "BRN",
-  "name": "BRN Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:35:01.528Z",
-  "source": "Alpha Vantage API"
+  "name": "Barnwell Industries Inc",
+  "sector": "ENERGY",
+  "industry": "OIL & GAS E&P",
+  "officialSite": "https://www.brninc.com",
+  "cachedAt": "2025-10-19T05:15:58.167Z",
+  "source": "Alpha Vantage API (fixed)"
 }

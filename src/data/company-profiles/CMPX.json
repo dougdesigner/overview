@@ -1,8 +1,9 @@
 {
   "symbol": "CMPX",
-  "name": "CMPX Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:34:24.966Z",
-  "source": "Alpha Vantage API"
+  "name": "Compass Therapeutics Inc.",
+  "sector": "HEALTHCARE",
+  "industry": "BIOTECHNOLOGY",
+  "officialSite": "https://www.compasstherapeutics.com",
+  "cachedAt": "2025-10-19T05:19:24.518Z",
+  "source": "Alpha Vantage API (fixed)"
 }

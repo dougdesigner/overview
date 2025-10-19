@@ -1,8 +1,9 @@
 {
   "symbol": "ARQ",
-  "name": "ARQ Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:34:38.974Z",
-  "source": "Alpha Vantage API"
+  "name": "Arq Inc",
+  "sector": "INDUSTRIALS",
+  "industry": "POLLUTION & TREATMENT CONTROLS",
+  "officialSite": "https://www.arq.com",
+  "cachedAt": "2025-10-19T05:13:01.298Z",
+  "source": "Alpha Vantage API (fixed)"
 }

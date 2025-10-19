@@ -1,8 +1,9 @@
 {
   "symbol": "BOX",
-  "name": "BOX Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:32:05.112Z",
-  "source": "Alpha Vantage API"
+  "name": "Box Inc",
+  "sector": "TECHNOLOGY",
+  "industry": "SOFTWARE - INFRASTRUCTURE",
+  "officialSite": "https://www.box.com",
+  "cachedAt": "2025-10-19T05:15:46.485Z",
+  "source": "Alpha Vantage API (fixed)"
 }

@@ -1,8 +1,9 @@
 {
   "symbol": "BLBD",
-  "name": "BLBD Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:35:08.107Z",
-  "source": "Alpha Vantage API"
+  "name": "Blue Bird Corp",
+  "sector": "INDUSTRIALS",
+  "industry": "FARM & HEAVY CONSTRUCTION MACHINERY",
+  "officialSite": "https://www.blue-bird.com",
+  "cachedAt": "2025-10-19T05:15:24.194Z",
+  "source": "Alpha Vantage API (fixed)"
 }

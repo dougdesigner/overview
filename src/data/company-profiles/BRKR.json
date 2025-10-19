@@ -1,8 +1,9 @@
 {
   "symbol": "BRKR",
-  "name": "BRKR Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:31:03.880Z",
-  "source": "Alpha Vantage API"
+  "name": "Bruker Corporation",
+  "sector": "HEALTHCARE",
+  "industry": "MEDICAL DEVICES",
+  "officialSite": "https://www.bruker.com",
+  "cachedAt": "2025-10-19T05:15:57.199Z",
+  "source": "Alpha Vantage API (fixed)"
 }

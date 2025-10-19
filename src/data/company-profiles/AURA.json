@@ -1,8 +1,9 @@
 {
   "symbol": "AURA",
-  "name": "AURA Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:35:22.586Z",
-  "source": "Alpha Vantage API"
+  "name": "Aura Biosciences Inc",
+  "sector": "HEALTHCARE",
+  "industry": "BIOTECHNOLOGY",
+  "officialSite": "https://www.aurabiosciences.com",
+  "cachedAt": "2025-10-19T05:13:41.431Z",
+  "source": "Alpha Vantage API (fixed)"
 }

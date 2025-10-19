@@ -1,8 +1,9 @@
 {
   "symbol": "AOSL",
-  "name": "AOSL Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:34:38.651Z",
-  "source": "Alpha Vantage API"
+  "name": "Alpha and Omega Semiconductor Ltd",
+  "sector": "TECHNOLOGY",
+  "industry": "SEMICONDUCTORS",
+  "officialSite": "https://www.aosmd.com",
+  "cachedAt": "2025-10-19T05:08:48.978Z",
+  "source": "Alpha Vantage API (fixed)"
 }

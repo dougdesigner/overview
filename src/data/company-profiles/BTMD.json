@@ -1,8 +1,9 @@
 {
   "symbol": "BTMD",
-  "name": "BTMD Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:35:12.173Z",
-  "source": "Alpha Vantage API"
+  "name": "biote Corp",
+  "sector": "HEALTHCARE",
+  "industry": "MEDICAL CARE FACILITIES",
+  "officialSite": "https://www.biote.com",
+  "cachedAt": "2025-10-19T05:16:10.831Z",
+  "source": "Alpha Vantage API (fixed)"
 }

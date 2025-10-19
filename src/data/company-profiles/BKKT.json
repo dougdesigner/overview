@@ -1,8 +1,9 @@
 {
   "symbol": "BKKT",
-  "name": "BKKT Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:35:06.568Z",
-  "source": "Alpha Vantage API"
+  "name": "Bakkt Holdings Inc",
+  "sector": "TECHNOLOGY",
+  "industry": "SOFTWARE - INFRASTRUCTURE",
+  "officialSite": "https://www.bakkt.com",
+  "cachedAt": "2025-10-19T05:15:17.236Z",
+  "source": "Alpha Vantage API (fixed)"
 }

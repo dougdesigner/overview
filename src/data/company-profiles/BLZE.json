@@ -1,8 +1,9 @@
 {
   "symbol": "BLZE",
-  "name": "BLZE Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:35:06.872Z",
-  "source": "Alpha Vantage API"
+  "name": "Backblaze Inc",
+  "sector": "TECHNOLOGY",
+  "industry": "SOFTWARE - INFRASTRUCTURE",
+  "officialSite": "https://www.backblaze.com",
+  "cachedAt": "2025-10-19T05:15:32.911Z",
+  "source": "Alpha Vantage API (fixed)"
 }

@@ -1,8 +1,9 @@
 {
   "symbol": "CODA",
-  "name": "CODA Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:34:28.418Z",
-  "source": "Alpha Vantage API"
+  "name": "Coda Octopus Group Inc",
+  "sector": "INDUSTRIALS",
+  "industry": "AEROSPACE & DEFENSE",
+  "officialSite": "https://www.codaoctopusgroup.com",
+  "cachedAt": "2025-10-19T05:19:38.142Z",
+  "source": "Alpha Vantage API (fixed)"
 }

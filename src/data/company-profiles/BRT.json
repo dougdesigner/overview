@@ -1,8 +1,9 @@
 {
   "symbol": "BRT",
-  "name": "BRT Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:34:04.367Z",
-  "source": "Alpha Vantage API"
+  "name": "BRT Realty Trust",
+  "sector": "REAL ESTATE",
+  "industry": "REIT - RESIDENTIAL",
+  "officialSite": "https://www.brtapartments.com",
+  "cachedAt": "2025-10-19T05:16:00.119Z",
+  "source": "Alpha Vantage API (fixed)"
 }

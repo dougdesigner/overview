@@ -1,8 +1,9 @@
 {
   "symbol": "ALKS",
-  "name": "ALKS Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:31:08.958Z",
-  "source": "Alpha Vantage API"
+  "name": "Alkermes Plc",
+  "sector": "HEALTHCARE",
+  "industry": "DRUG MANUFACTURERS - SPECIALTY & GENERIC",
+  "officialSite": "https://www.alkermes.com",
+  "cachedAt": "2025-10-19T05:08:24.643Z",
+  "source": "Alpha Vantage API (fixed)"
 }

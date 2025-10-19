@@ -1,8 +1,9 @@
 {
   "symbol": "ADPT",
-  "name": "ADPT Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:07.860Z",
-  "source": "Alpha Vantage API"
+  "name": "Adaptive Biotechnologies Corp",
+  "sector": "HEALTHCARE",
+  "industry": "BIOTECHNOLOGY",
+  "officialSite": "https://www.adaptivebiotech.com",
+  "cachedAt": "2025-10-19T05:07:54.411Z",
+  "source": "Alpha Vantage API (fixed)"
 }

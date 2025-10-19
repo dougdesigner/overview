@@ -1,8 +1,9 @@
 {
   "symbol": "CLMT",
-  "name": "CLMT Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:34:12.974Z",
-  "source": "Alpha Vantage API"
+  "name": "Calumet Specialty Products Partners",
+  "sector": "BASIC MATERIALS",
+  "industry": "SPECIALTY CHEMICALS",
+  "officialSite": "https://calumet.com",
+  "cachedAt": "2025-10-19T05:19:13.823Z",
+  "source": "Alpha Vantage API (fixed)"
 }

@@ -1,8 +1,9 @@
 {
   "symbol": "CNR",
-  "name": "CNR Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:31:36.622Z",
-  "source": "Alpha Vantage API"
+  "name": "Core Natural Resources, Inc.",
+  "sector": "ENERGY",
+  "industry": "THERMAL COAL",
+  "officialSite": "https://corenaturalresources.com",
+  "cachedAt": "2025-10-19T05:19:33.314Z",
+  "source": "Alpha Vantage API (fixed)"
 }

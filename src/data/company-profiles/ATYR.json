@@ -1,8 +1,9 @@
 {
   "symbol": "ATYR",
-  "name": "ATYR Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:35:23.107Z",
-  "source": "Alpha Vantage API"
+  "name": "aTyr Pharma, Inc.",
+  "sector": "HEALTHCARE",
+  "industry": "BIOTECHNOLOGY",
+  "officialSite": "https://atyrpharma.com",
+  "cachedAt": "2025-10-19T05:13:37.578Z",
+  "source": "Alpha Vantage API (fixed)"
 }

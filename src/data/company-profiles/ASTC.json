@@ -1,8 +1,9 @@
 {
   "symbol": "ASTC",
-  "name": "ASTC Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:35:15.864Z",
-  "source": "Alpha Vantage API"
+  "name": "Astrotech Corp",
+  "sector": "TECHNOLOGY",
+  "industry": "SCIENTIFIC & TECHNICAL INSTRUMENTS",
+  "officialSite": "https://www.astrotechcorp.com",
+  "cachedAt": "2025-10-19T05:13:17.790Z",
+  "source": "Alpha Vantage API (fixed)"
 }

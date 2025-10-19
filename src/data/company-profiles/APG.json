@@ -1,8 +1,9 @@
 {
   "symbol": "APG",
-  "name": "APG Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:27.512Z",
-  "source": "Alpha Vantage API"
+  "name": "Api Group Corp",
+  "sector": "INDUSTRIALS",
+  "industry": "ENGINEERING & CONSTRUCTION",
+  "officialSite": "https://www.apigroupcorp.com",
+  "cachedAt": "2025-10-19T05:08:52.869Z",
+  "source": "Alpha Vantage API (fixed)"
 }

@@ -1,8 +1,9 @@
 {
   "symbol": "BCAB",
-  "name": "BCAB Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:35:13.430Z",
-  "source": "Alpha Vantage API"
+  "name": "Bioatla Inc",
+  "sector": "HEALTHCARE",
+  "industry": "BIOTECHNOLOGY",
+  "officialSite": "https://www.bioatla.com",
+  "cachedAt": "2025-10-19T05:14:22.498Z",
+  "source": "Alpha Vantage API (fixed)"
 }

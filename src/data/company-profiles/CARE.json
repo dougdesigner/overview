@@ -1,8 +1,9 @@
 {
   "symbol": "CARE",
-  "name": "CARE Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:34:07.150Z",
-  "source": "Alpha Vantage API"
+  "name": "Carter Bank and Trust",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "BANKS - REGIONAL",
+  "officialSite": "https://www.carterbank.com",
+  "cachedAt": "2025-10-19T05:18:18.276Z",
+  "source": "Alpha Vantage API (fixed)"
 }

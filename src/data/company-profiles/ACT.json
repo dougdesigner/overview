@@ -1,8 +1,9 @@
 {
   "symbol": "ACT",
-  "name": "ACT Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:36:15.003Z",
-  "source": "Alpha Vantage API"
+  "name": "Enact Holdings Inc",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "INSURANCE - SPECIALTY",
+  "officialSite": "https://enactmi.com",
+  "cachedAt": "2025-10-19T05:07:47.558Z",
+  "source": "Alpha Vantage API (fixed)"
 }

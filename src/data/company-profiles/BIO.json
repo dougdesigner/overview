@@ -1,8 +1,9 @@
 {
   "symbol": "BIO",
-  "name": "BIO Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:31:12.961Z",
-  "source": "Alpha Vantage API"
+  "name": "Bio-Rad Laboratories Inc",
+  "sector": "HEALTHCARE",
+  "industry": "MEDICAL DEVICES",
+  "officialSite": "https://www.bio-rad.com",
+  "cachedAt": "2025-10-19T05:15:12.217Z",
+  "source": "Alpha Vantage API (fixed)"
 }

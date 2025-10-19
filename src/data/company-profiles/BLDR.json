@@ -1,8 +1,9 @@
 {
   "symbol": "BLDR",
-  "name": "BLDR Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:37.587Z",
-  "source": "Alpha Vantage API"
+  "name": "Builders FirstSource Inc",
+  "sector": "INDUSTRIALS",
+  "industry": "BUILDING PRODUCTS & EQUIPMENT",
+  "officialSite": "https://www.bldr.com",
+  "cachedAt": "2025-10-19T05:15:27.128Z",
+  "source": "Alpha Vantage API (fixed)"
 }

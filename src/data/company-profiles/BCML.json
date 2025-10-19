@@ -1,8 +1,9 @@
 {
   "symbol": "BCML",
-  "name": "BCML Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:35:00.548Z",
-  "source": "Alpha Vantage API"
+  "name": "BayCom Corp",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "BANKS - REGIONAL",
+  "officialSite": "https://www.unitedbusinessbank.com",
+  "cachedAt": "2025-10-19T05:14:26.367Z",
+  "source": "Alpha Vantage API (fixed)"
 }

@@ -1,8 +1,9 @@
 {
   "symbol": "AGX",
-  "name": "AGX Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:34:40.537Z",
-  "source": "Alpha Vantage API"
+  "name": "Argan Inc",
+  "sector": "INDUSTRIALS",
+  "industry": "ENGINEERING & CONSTRUCTION",
+  "officialSite": "https://arganinc.com",
+  "cachedAt": "2025-10-19T05:08:11.035Z",
+  "source": "Alpha Vantage API (fixed)"
 }

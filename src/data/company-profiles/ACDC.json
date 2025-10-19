@@ -1,8 +1,9 @@
 {
   "symbol": "ACDC",
-  "name": "ACDC Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:32:19.841Z",
-  "source": "Alpha Vantage API"
+  "name": "ProFrac Holding Corp.",
+  "sector": "ENERGY",
+  "industry": "OIL & GAS EQUIPMENT & SERVICES",
+  "officialSite": "https://www.pfholdingscorp.com",
+  "cachedAt": "2025-10-19T05:07:37.813Z",
+  "source": "Alpha Vantage API (fixed)"
 }

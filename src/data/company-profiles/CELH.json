@@ -1,8 +1,9 @@
 {
   "symbol": "CELH",
-  "name": "CELH Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:31:38.411Z",
-  "source": "Alpha Vantage API"
+  "name": "Celsius Holdings Inc",
+  "sector": "CONSUMER DEFENSIVE",
+  "industry": "BEVERAGES - NON-ALCOHOLIC",
+  "officialSite": "https://celsiusholdingsinc.com",
+  "cachedAt": "2025-10-19T05:18:49.844Z",
+  "source": "Alpha Vantage API (fixed)"
 }

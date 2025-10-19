@@ -1,8 +1,9 @@
 {
   "symbol": "CCL",
-  "name": "CCL Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:36.964Z",
-  "source": "Alpha Vantage API"
+  "name": "Carnival Corporation",
+  "sector": "CONSUMER CYCLICAL",
+  "industry": "TRAVEL SERVICES",
+  "officialSite": "https://www.carnivalcorp.com",
+  "cachedAt": "2025-10-19T05:18:37.851Z",
+  "source": "Alpha Vantage API (fixed)"
 }

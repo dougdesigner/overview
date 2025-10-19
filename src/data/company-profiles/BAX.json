@@ -1,8 +1,9 @@
 {
   "symbol": "BAX",
-  "name": "BAX Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:31.417Z",
-  "source": "Alpha Vantage API"
+  "name": "Baxter International Inc",
+  "sector": "HEALTHCARE",
+  "industry": "MEDICAL INSTRUMENTS & SUPPLIES",
+  "officialSite": "https://www.baxter.com",
+  "cachedAt": "2025-10-19T05:14:17.661Z",
+  "source": "Alpha Vantage API (fixed)"
 }

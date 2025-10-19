@@ -1,8 +1,9 @@
 {
   "symbol": "AN",
-  "name": "AN Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:31:01.777Z",
-  "source": "Alpha Vantage API"
+  "name": "AutoNation Inc",
+  "sector": "CONSUMER CYCLICAL",
+  "industry": "AUTO & TRUCK DEALERSHIPS",
+  "officialSite": "https://www.autonation.com",
+  "cachedAt": "2025-10-19T05:08:35.274Z",
+  "source": "Alpha Vantage API (fixed)"
 }

@@ -1,8 +1,9 @@
 {
   "symbol": "COHU",
-  "name": "COHU Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:34:27.171Z",
-  "source": "Alpha Vantage API"
+  "name": "Cohu Inc",
+  "sector": "TECHNOLOGY",
+  "industry": "SEMICONDUCTOR EQUIPMENT & MATERIALS",
+  "officialSite": "https://www.cohu.com",
+  "cachedAt": "2025-10-19T05:19:45.002Z",
+  "source": "Alpha Vantage API (fixed)"
 }

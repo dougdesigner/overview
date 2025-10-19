@@ -1,8 +1,9 @@
 {
   "symbol": "BKSY",
-  "name": "BKSY Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:35:09.662Z",
-  "source": "Alpha Vantage API"
+  "name": "Blacksky Technology Inc",
+  "sector": "INDUSTRIALS",
+  "industry": "SPECIALTY BUSINESS SERVICES",
+  "officialSite": "https://www.blacksky.com",
+  "cachedAt": "2025-10-19T05:15:19.202Z",
+  "source": "Alpha Vantage API (fixed)"
 }

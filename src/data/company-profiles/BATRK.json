@@ -1,8 +1,9 @@
 {
   "symbol": "BATRK",
-  "name": "BATRK Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:35:24.260Z",
-  "source": "Alpha Vantage API"
+  "name": "Atlanta Braves Holdings, Inc. Series C Common Stock",
+  "sector": "COMMUNICATION SERVICES",
+  "industry": "ENTERTAINMENT",
+  "officialSite": "https://www.bravesholdings.com",
+  "cachedAt": "2025-10-19T05:14:16.678Z",
+  "source": "Alpha Vantage API (fixed)"
 }

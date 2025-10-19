@@ -1,8 +1,9 @@
 {
   "symbol": "AWRE",
-  "name": "AWRE Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:35:20.932Z",
-  "source": "Alpha Vantage API"
+  "name": "Aware Inc",
+  "sector": "TECHNOLOGY",
+  "industry": "SOFTWARE - APPLICATION",
+  "officialSite": "https://www.aware.com",
+  "cachedAt": "2025-10-19T05:13:56.067Z",
+  "source": "Alpha Vantage API (fixed)"
 }

@@ -1,8 +1,9 @@
 {
   "symbol": "BJRI",
-  "name": "BJRI Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:35:11.212Z",
-  "source": "Alpha Vantage API"
+  "name": "BJs Restaurants Inc",
+  "sector": "CONSUMER CYCLICAL",
+  "industry": "RESTAURANTS",
+  "officialSite": "https://www.bjsrestaurants.com",
+  "cachedAt": "2025-10-19T05:15:16.267Z",
+  "source": "Alpha Vantage API (fixed)"
 }

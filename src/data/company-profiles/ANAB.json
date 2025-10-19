@@ -1,8 +1,9 @@
 {
   "symbol": "ANAB",
-  "name": "ANAB Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:34:36.999Z",
-  "source": "Alpha Vantage API"
+  "name": "AnaptysBio Inc",
+  "sector": "HEALTHCARE",
+  "industry": "BIOTECHNOLOGY",
+  "officialSite": "https://www.anaptysbio.com",
+  "cachedAt": "2025-10-19T05:08:36.258Z",
+  "source": "Alpha Vantage API (fixed)"
 }

@@ -1,8 +1,9 @@
 {
   "symbol": "CNC",
-  "name": "CNC Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:01.309Z",
-  "source": "Alpha Vantage API"
+  "name": "Centene Corp",
+  "sector": "HEALTHCARE",
+  "industry": "HEALTHCARE PLANS",
+  "officialSite": "https://www.centene.com",
+  "cachedAt": "2025-10-19T05:19:27.477Z",
+  "source": "Alpha Vantage API (fixed)"
 }

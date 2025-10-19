@@ -1,8 +1,9 @@
 {
   "symbol": "ARE",
-  "name": "ARE Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:17.767Z",
-  "source": "Alpha Vantage API"
+  "name": "Alexandria Real Estate Equities Inc",
+  "sector": "REAL ESTATE",
+  "industry": "REIT - OFFICE",
+  "officialSite": "https://www.are.com",
+  "cachedAt": "2025-10-19T05:09:04.560Z",
+  "source": "Alpha Vantage API (fixed)"
 }

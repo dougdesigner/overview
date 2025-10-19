@@ -1,8 +1,9 @@
 {
   "symbol": "BFC",
-  "name": "BFC Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:35:05.307Z",
-  "source": "Alpha Vantage API"
+  "name": "Bank First National Corp",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "BANKS - REGIONAL",
+  "officialSite": "https://www.bankfirst.com",
+  "cachedAt": "2025-10-19T05:14:59.625Z",
+  "source": "Alpha Vantage API (fixed)"
 }

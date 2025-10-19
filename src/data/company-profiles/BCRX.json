@@ -1,8 +1,9 @@
 {
   "symbol": "BCRX",
-  "name": "BCRX Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:35:13.115Z",
-  "source": "Alpha Vantage API"
+  "name": "BioCryst Pharmaceuticals Inc",
+  "sector": "HEALTHCARE",
+  "industry": "DRUG MANUFACTURERS - SPECIALTY & GENERIC",
+  "officialSite": "https://www.biocryst.com",
+  "cachedAt": "2025-10-19T05:14:28.296Z",
+  "source": "Alpha Vantage API (fixed)"
 }

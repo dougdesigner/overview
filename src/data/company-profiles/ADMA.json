@@ -1,8 +1,9 @@
 {
   "symbol": "ADMA",
-  "name": "ADMA Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:31:41.474Z",
-  "source": "Alpha Vantage API"
+  "name": "ADMA Biologics Inc",
+  "sector": "HEALTHCARE",
+  "industry": "BIOTECHNOLOGY",
+  "officialSite": "https://www.admabiologics.com",
+  "cachedAt": "2025-10-19T05:07:53.447Z",
+  "source": "Alpha Vantage API (fixed)"
 }

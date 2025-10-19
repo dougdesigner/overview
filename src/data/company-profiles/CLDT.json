@@ -1,8 +1,9 @@
 {
   "symbol": "CLDT",
-  "name": "CLDT Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:34:00.882Z",
-  "source": "Alpha Vantage API"
+  "name": "Chatham Lodging Trust REIT",
+  "sector": "REAL ESTATE",
+  "industry": "REIT - HOTEL & MOTEL",
+  "officialSite": "https://www.chathamlodgingtrust.com",
+  "cachedAt": "2025-10-19T05:19:12.727Z",
+  "source": "Alpha Vantage API (fixed)"
 }

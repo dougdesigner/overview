@@ -1,8 +1,9 @@
 {
   "symbol": "CIX",
-  "name": "CIX Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:34:33.933Z",
-  "source": "Alpha Vantage API"
+  "name": "CompX International Inc",
+  "sector": "INDUSTRIALS",
+  "industry": "SECURITY & PROTECTION SERVICES",
+  "officialSite": "https://compxinternational.com",
+  "cachedAt": "2025-10-19T05:19:07.459Z",
+  "source": "Alpha Vantage API (fixed)"
 }

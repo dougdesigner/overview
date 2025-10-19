@@ -1,8 +1,9 @@
 {
   "symbol": "ACRV",
-  "name": "ACRV Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:06.948Z",
-  "source": "Alpha Vantage API"
+  "name": "Acrivon Therapeutics, Inc. Common Stock",
+  "sector": "HEALTHCARE",
+  "industry": "BIOTECHNOLOGY",
+  "officialSite": "https://acrivon.com",
+  "cachedAt": "2025-10-19T05:07:46.592Z",
+  "source": "Alpha Vantage API (fixed)"
 }

@@ -1,8 +1,9 @@
 {
   "symbol": "BBWI",
-  "name": "BBWI Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:31:10.567Z",
-  "source": "Alpha Vantage API"
+  "name": "Bath & Body Works Inc.",
+  "sector": "CONSUMER CYCLICAL",
+  "industry": "SPECIALTY RETAIL",
+  "officialSite": "https://www.bbwinc.com",
+  "cachedAt": "2025-10-19T05:14:20.574Z",
+  "source": "Alpha Vantage API (fixed)"
 }

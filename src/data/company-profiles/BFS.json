@@ -1,8 +1,9 @@
 {
   "symbol": "BFS",
-  "name": "BFS Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:32.922Z",
-  "source": "Alpha Vantage API"
+  "name": "Saul Centers Inc",
+  "sector": "REAL ESTATE",
+  "industry": "REIT - RETAIL",
+  "officialSite": "https://www.saulcenters.com",
+  "cachedAt": "2025-10-19T05:15:03.161Z",
+  "source": "Alpha Vantage API (fixed)"
 }

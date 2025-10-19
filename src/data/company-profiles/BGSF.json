@@ -1,8 +1,9 @@
 {
   "symbol": "BGSF",
-  "name": "BGSF Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:35:14.567Z",
-  "source": "Alpha Vantage API"
+  "name": "BG Staffing Inc",
+  "sector": "INDUSTRIALS",
+  "industry": "STAFFING & EMPLOYMENT SERVICES",
+  "officialSite": "https://bgsf.com",
+  "cachedAt": "2025-10-19T05:15:06.174Z",
+  "source": "Alpha Vantage API (fixed)"
 }

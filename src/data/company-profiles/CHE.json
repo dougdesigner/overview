@@ -1,8 +1,9 @@
 {
   "symbol": "CHE",
-  "name": "CHE Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:13.712Z",
-  "source": "Alpha Vantage API"
+  "name": "Chemed Corp",
+  "sector": "HEALTHCARE",
+  "industry": "MEDICAL CARE FACILITIES",
+  "officialSite": "https://www.chemed.com",
+  "cachedAt": "2025-10-19T05:19:02.525Z",
+  "source": "Alpha Vantage API (fixed)"
 }

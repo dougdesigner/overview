@@ -1,8 +1,9 @@
 {
   "symbol": "ANIX",
-  "name": "ANIX Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:34:35.848Z",
-  "source": "Alpha Vantage API"
+  "name": "Anixa Biosciences Inc",
+  "sector": "HEALTHCARE",
+  "industry": "BIOTECHNOLOGY",
+  "officialSite": "https://www.anixa.com",
+  "cachedAt": "2025-10-19T05:08:41.162Z",
+  "source": "Alpha Vantage API (fixed)"
 }

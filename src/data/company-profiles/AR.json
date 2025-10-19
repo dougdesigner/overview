@@ -1,8 +1,9 @@
 {
   "symbol": "AR",
-  "name": "AR Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:26.248Z",
-  "source": "Alpha Vantage API"
+  "name": "Antero Resources Corp",
+  "sector": "ENERGY",
+  "industry": "OIL & GAS E&P",
+  "officialSite": "https://www.anteroresources.com",
+  "cachedAt": "2025-10-19T05:08:59.656Z",
+  "source": "Alpha Vantage API (fixed)"
 }

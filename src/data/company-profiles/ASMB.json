@@ -1,8 +1,9 @@
 {
   "symbol": "ASMB",
-  "name": "ASMB Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:35:17.136Z",
-  "source": "Alpha Vantage API"
+  "name": "Assembly Biosciences Inc",
+  "sector": "HEALTHCARE",
+  "industry": "BIOTECHNOLOGY",
+  "officialSite": "https://www.assemblybio.com",
+  "cachedAt": "2025-10-19T05:13:13.913Z",
+  "source": "Alpha Vantage API (fixed)"
 }

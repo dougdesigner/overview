@@ -1,8 +1,9 @@
 {
   "symbol": "ALLY",
-  "name": "ALLY Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:19.690Z",
-  "source": "Alpha Vantage API"
+  "name": "Ally Financial Inc",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "CREDIT SERVICES",
+  "officialSite": "https://www.ally.com",
+  "cachedAt": "2025-10-19T05:08:25.607Z",
+  "source": "Alpha Vantage API (fixed)"
 }

@@ -1,8 +1,9 @@
 {
   "symbol": "BMI",
-  "name": "BMI Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:31:14.869Z",
-  "source": "Alpha Vantage API"
+  "name": "Badger Meter Inc",
+  "sector": "TECHNOLOGY",
+  "industry": "SCIENTIFIC & TECHNICAL INSTRUMENTS",
+  "officialSite": "https://www.badgermeter.com",
+  "cachedAt": "2025-10-19T05:15:34.848Z",
+  "source": "Alpha Vantage API (fixed)"
 }

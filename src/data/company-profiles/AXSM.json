@@ -1,8 +1,9 @@
 {
   "symbol": "AXSM",
-  "name": "AXSM Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:31:13.714Z",
-  "source": "Alpha Vantage API"
+  "name": "Axsome Therapeutics Inc",
+  "sector": "HEALTHCARE",
+  "industry": "BIOTECHNOLOGY",
+  "officialSite": "https://www.axsome.com",
+  "cachedAt": "2025-10-19T05:14:01.067Z",
+  "source": "Alpha Vantage API (fixed)"
 }

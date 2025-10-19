@@ -1,8 +1,9 @@
 {
   "symbol": "CMS",
-  "name": "CMS Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:14.993Z",
-  "source": "Alpha Vantage API"
+  "name": "CMS Energy Corporation",
+  "sector": "UTILITIES",
+  "industry": "UTILITIES - REGULATED ELECTRIC",
+  "officialSite": "https://www.cmsenergy.com",
+  "cachedAt": "2025-10-19T05:19:25.507Z",
+  "source": "Alpha Vantage API (fixed)"
 }

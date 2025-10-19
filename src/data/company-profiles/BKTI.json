@@ -1,8 +1,9 @@
 {
   "symbol": "BKTI",
-  "name": "BKTI Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:35:10.904Z",
-  "source": "Alpha Vantage API"
+  "name": "BK Technologies Inc",
+  "sector": "TECHNOLOGY",
+  "industry": "COMMUNICATION EQUIPMENT",
+  "officialSite": "https://www.bktechnologies.com",
+  "cachedAt": "2025-10-19T05:15:20.180Z",
+  "source": "Alpha Vantage API (fixed)"
 }

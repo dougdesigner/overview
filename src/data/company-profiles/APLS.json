@@ -1,8 +1,9 @@
 {
   "symbol": "APLS",
-  "name": "APLS Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:34:35.093Z",
-  "source": "Alpha Vantage API"
+  "name": "Apellis Pharmaceuticals Inc",
+  "sector": "HEALTHCARE",
+  "industry": "BIOTECHNOLOGY",
+  "officialSite": "https://apellis.com",
+  "cachedAt": "2025-10-19T05:08:55.771Z",
+  "source": "Alpha Vantage API (fixed)"
 }

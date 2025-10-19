@@ -1,8 +1,9 @@
 {
   "symbol": "BSET",
-  "name": "BSET Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:35:00.901Z",
-  "source": "Alpha Vantage API"
+  "name": "Bassett Furniture Industries",
+  "sector": "CONSUMER CYCLICAL",
+  "industry": "FURNISHINGS, FIXTURES & APPLIANCES",
+  "officialSite": "https://www.bassettfurniture.com",
+  "cachedAt": "2025-10-19T05:16:04.011Z",
+  "source": "Alpha Vantage API (fixed)"
 }

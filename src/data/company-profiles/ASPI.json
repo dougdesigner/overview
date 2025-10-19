@@ -1,8 +1,9 @@
 {
   "symbol": "ASPI",
-  "name": "ASPI Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:35:17.445Z",
-  "source": "Alpha Vantage API"
+  "name": "ASP Isotopes Inc. Common Stock",
+  "sector": "BASIC MATERIALS",
+  "industry": "CHEMICALS",
+  "officialSite": "https://aspisotopes.com",
+  "cachedAt": "2025-10-19T05:13:14.885Z",
+  "source": "Alpha Vantage API (fixed)"
 }

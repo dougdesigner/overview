@@ -1,8 +1,9 @@
 {
   "symbol": "BGS",
-  "name": "BGS Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:35:20.007Z",
-  "source": "Alpha Vantage API"
+  "name": "B&G Foods Inc",
+  "sector": "CONSUMER DEFENSIVE",
+  "industry": "PACKAGED FOODS",
+  "officialSite": "https://bgfoods.com",
+  "cachedAt": "2025-10-19T05:15:05.163Z",
+  "source": "Alpha Vantage API (fixed)"
 }

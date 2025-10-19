@@ -1,8 +1,9 @@
 {
   "symbol": "ABOS",
-  "name": "ABOS Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:06.512Z",
-  "source": "Alpha Vantage API"
+  "name": "Acumen Pharmaceuticals Inc",
+  "sector": "HEALTHCARE",
+  "industry": "BIOTECHNOLOGY",
+  "officialSite": "https://acumenpharm.com",
+  "cachedAt": "2025-10-19T05:07:33.904Z",
+  "source": "Alpha Vantage API (fixed)"
 }

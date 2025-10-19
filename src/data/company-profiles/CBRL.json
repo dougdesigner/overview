@@ -1,8 +1,9 @@
 {
   "symbol": "CBRL",
-  "name": "CBRL Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:34:30.982Z",
-  "source": "Alpha Vantage API"
+  "name": "Cracker Barrel Old Country Store",
+  "sector": "CONSUMER CYCLICAL",
+  "industry": "RESTAURANTS",
+  "officialSite": "https://www.crackerbarrel.com",
+  "cachedAt": "2025-10-19T05:18:31.893Z",
+  "source": "Alpha Vantage API (fixed)"
 }

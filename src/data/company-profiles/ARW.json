@@ -1,8 +1,9 @@
 {
   "symbol": "ARW",
-  "name": "ARW Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:31:25.722Z",
-  "source": "Alpha Vantage API"
+  "name": "Arrow Electronics Inc",
+  "sector": "TECHNOLOGY",
+  "industry": "ELECTRONICS & COMPUTER DISTRIBUTION",
+  "officialSite": "https://www.arrow.com",
+  "cachedAt": "2025-10-19T05:13:07.093Z",
+  "source": "Alpha Vantage API (fixed)"
 }

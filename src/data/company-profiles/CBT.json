@@ -1,8 +1,9 @@
 {
   "symbol": "CBT",
-  "name": "CBT Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:32:01.657Z",
-  "source": "Alpha Vantage API"
+  "name": "Cabot Corporation",
+  "sector": "BASIC MATERIALS",
+  "industry": "SPECIALTY CHEMICALS",
+  "officialSite": "https://www.cabotcorp.com",
+  "cachedAt": "2025-10-19T05:18:32.864Z",
+  "source": "Alpha Vantage API (fixed)"
 }

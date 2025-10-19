@@ -1,8 +1,9 @@
 {
   "symbol": "APOG",
-  "name": "APOG Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:34:35.013Z",
-  "source": "Alpha Vantage API"
+  "name": "Apogee Enterprises Inc",
+  "sector": "INDUSTRIALS",
+  "industry": "BUILDING PRODUCTS & EQUIPMENT",
+  "officialSite": "https://www.apog.com",
+  "cachedAt": "2025-10-19T05:08:56.752Z",
+  "source": "Alpha Vantage API (fixed)"
 }

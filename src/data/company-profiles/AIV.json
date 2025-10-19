@@ -1,8 +1,9 @@
 {
   "symbol": "AIV",
-  "name": "AIV Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:34:35.326Z",
-  "source": "Alpha Vantage API"
+  "name": "Apartment Investment and Management Co",
+  "sector": "REAL ESTATE",
+  "industry": "REIT - RESIDENTIAL",
+  "officialSite": "https://www.aimco.com",
+  "cachedAt": "2025-10-19T05:08:18.743Z",
+  "source": "Alpha Vantage API (fixed)"
 }

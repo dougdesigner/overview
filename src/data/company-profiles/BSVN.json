@@ -1,8 +1,9 @@
 {
   "symbol": "BSVN",
-  "name": "BSVN Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:35:04.055Z",
-  "source": "Alpha Vantage API"
+  "name": "Bank7 Corp",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "BANKS - REGIONAL",
+  "officialSite": "https://www.bank7.com",
+  "cachedAt": "2025-10-19T05:16:05.948Z",
+  "source": "Alpha Vantage API (fixed)"
 }

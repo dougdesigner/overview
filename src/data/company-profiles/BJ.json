@@ -1,8 +1,9 @@
 {
   "symbol": "BJ",
-  "name": "BJ Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:37.274Z",
-  "source": "Alpha Vantage API"
+  "name": "BJs Wholesale Club Holdings Inc",
+  "sector": "CONSUMER DEFENSIVE",
+  "industry": "DISCOUNT STORES",
+  "officialSite": "https://www.bjs.com",
+  "cachedAt": "2025-10-19T05:15:15.298Z",
+  "source": "Alpha Vantage API (fixed)"
 }

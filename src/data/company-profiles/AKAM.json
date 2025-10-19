@@ -1,8 +1,9 @@
 {
   "symbol": "AKAM",
-  "name": "AKAM Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:19.076Z",
-  "source": "Alpha Vantage API"
+  "name": "Akamai Technologies Inc",
+  "sector": "TECHNOLOGY",
+  "industry": "SOFTWARE - INFRASTRUCTURE",
+  "officialSite": "https://www.akamai.com",
+  "cachedAt": "2025-10-19T05:08:19.735Z",
+  "source": "Alpha Vantage API (fixed)"
 }

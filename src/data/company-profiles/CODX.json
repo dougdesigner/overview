@@ -1,8 +1,9 @@
 {
   "symbol": "CODX",
-  "name": "CODX Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:34:28.937Z",
-  "source": "Alpha Vantage API"
+  "name": "Co-Diagnostics Inc",
+  "sector": "HEALTHCARE",
+  "industry": "MEDICAL DEVICES",
+  "officialSite": "https://co-dx.com",
+  "cachedAt": "2025-10-19T05:19:40.082Z",
+  "source": "Alpha Vantage API (fixed)"
 }

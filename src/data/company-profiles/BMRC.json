@@ -1,8 +1,9 @@
 {
   "symbol": "BMRC",
-  "name": "BMRC Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:35:04.697Z",
-  "source": "Alpha Vantage API"
+  "name": "Bank of Marin Bancorp",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "BANKS - REGIONAL",
+  "officialSite": "https://www.bankofmarin.com",
+  "cachedAt": "2025-10-19T05:15:35.816Z",
+  "source": "Alpha Vantage API (fixed)"
 }

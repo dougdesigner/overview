@@ -1,8 +1,9 @@
 {
   "symbol": "CMG",
-  "name": "CMG Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:29:40.244Z",
-  "source": "Alpha Vantage API"
+  "name": "Chipotle Mexican Grill Inc",
+  "sector": "CONSUMER CYCLICAL",
+  "industry": "RESTAURANTS",
+  "officialSite": "https://www.chipotle.com",
+  "cachedAt": "2025-10-19T05:19:19.639Z",
+  "source": "Alpha Vantage API (fixed)"
 }

@@ -1,8 +1,9 @@
 {
   "symbol": "APT",
-  "name": "APT Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:34:38.350Z",
-  "source": "Alpha Vantage API"
+  "name": "Alpha Pro Tech Ltd",
+  "sector": "INDUSTRIALS",
+  "industry": "BUILDING PRODUCTS & EQUIPMENT",
+  "officialSite": "https://www.alphaprotech.com",
+  "cachedAt": "2025-10-19T05:08:58.689Z",
+  "source": "Alpha Vantage API (fixed)"
 }

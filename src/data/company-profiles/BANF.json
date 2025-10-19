@@ -1,8 +1,9 @@
 {
   "symbol": "BANF",
-  "name": "BANF Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:35:05.947Z",
-  "source": "Alpha Vantage API"
+  "name": "BancFirst Corporation",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "BANKS - REGIONAL",
+  "officialSite": "https://www.bancfirst.bank",
+  "cachedAt": "2025-10-19T05:14:12.756Z",
+  "source": "Alpha Vantage API (fixed)"
 }

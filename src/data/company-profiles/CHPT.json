@@ -1,8 +1,9 @@
 {
   "symbol": "CHPT",
-  "name": "CHPT Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:34:01.120Z",
-  "source": "Alpha Vantage API"
+  "name": "ChargePoint Holdings Inc",
+  "sector": "CONSUMER CYCLICAL",
+  "industry": "SPECIALTY RETAIL",
+  "officialSite": "https://www.chargepoint.com",
+  "cachedAt": "2025-10-19T05:19:03.496Z",
+  "source": "Alpha Vantage API (fixed)"
 }

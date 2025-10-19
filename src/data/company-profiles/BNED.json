@@ -1,8 +1,9 @@
 {
   "symbol": "BNED",
-  "name": "BNED Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:35:01.575Z",
-  "source": "Alpha Vantage API"
+  "name": "Barnes & Noble Education Inc",
+  "sector": "CONSUMER CYCLICAL",
+  "industry": "SPECIALTY RETAIL",
+  "officialSite": "https://www.bned.com",
+  "cachedAt": "2025-10-19T05:15:37.740Z",
+  "source": "Alpha Vantage API (fixed)"
 }

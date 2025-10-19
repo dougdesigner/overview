@@ -1,8 +1,9 @@
 {
   "symbol": "AMR",
-  "name": "AMR Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:34:38.561Z",
-  "source": "Alpha Vantage API"
+  "name": "Alpha Metallurgical Resources Inc",
+  "sector": "BASIC MATERIALS",
+  "industry": "COKING COAL",
+  "officialSite": "https://www.alphametresources.com",
+  "cachedAt": "2025-10-19T05:08:32.360Z",
+  "source": "Alpha Vantage API (fixed)"
 }

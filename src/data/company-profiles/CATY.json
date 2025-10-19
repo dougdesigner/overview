@@ -1,8 +1,9 @@
 {
   "symbol": "CATY",
-  "name": "CATY Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:31:35.590Z",
-  "source": "Alpha Vantage API"
+  "name": "Cathay General Bancorp",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "BANKS - REGIONAL",
+  "officialSite": "https://www.cathaygeneralbancorp.com",
+  "cachedAt": "2025-10-19T05:18:26.027Z",
+  "source": "Alpha Vantage API (fixed)"
 }

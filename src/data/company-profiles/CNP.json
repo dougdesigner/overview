@@ -1,8 +1,9 @@
 {
   "symbol": "CNP",
-  "name": "CNP Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:11.570Z",
-  "source": "Alpha Vantage API"
+  "name": "CenterPoint Energy Inc",
+  "sector": "UTILITIES",
+  "industry": "UTILITIES - REGULATED ELECTRIC",
+  "officialSite": "https://www.centerpointenergy.com",
+  "cachedAt": "2025-10-19T05:19:32.334Z",
+  "source": "Alpha Vantage API (fixed)"
 }

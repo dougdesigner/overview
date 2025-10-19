@@ -1,8 +1,9 @@
 {
   "symbol": "BF-B",
-  "name": "BF-B Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:27.331Z",
-  "source": "Alpha Vantage API"
+  "name": "Brown-Forman Corporation",
+  "sector": "CONSUMER DEFENSIVE",
+  "industry": "BEVERAGES - WINERIES & DISTILLERIES",
+  "officialSite": "https://www.brown-forman.com",
+  "cachedAt": "2025-10-19T05:14:35.065Z",
+  "source": "Alpha Vantage API (fixed)"
 }

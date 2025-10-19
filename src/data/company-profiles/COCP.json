@@ -1,8 +1,9 @@
 {
   "symbol": "COCP",
-  "name": "COCP Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:34:28.622Z",
-  "source": "Alpha Vantage API"
+  "name": "Cocrystal Pharma Inc",
+  "sector": "HEALTHCARE",
+  "industry": "BIOTECHNOLOGY",
+  "officialSite": "https://www.cocrystalpharma.com",
+  "cachedAt": "2025-10-19T05:19:37.190Z",
+  "source": "Alpha Vantage API (fixed)"
 }

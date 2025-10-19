@@ -1,8 +1,9 @@
 {
   "symbol": "CGEM",
-  "name": "CGEM Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:34:30.027Z",
-  "source": "Alpha Vantage API"
+  "name": "Cullinan Oncology LLC",
+  "sector": "HEALTHCARE",
+  "industry": "BIOTECHNOLOGY",
+  "officialSite": "https://cullinantherapeutics.com",
+  "cachedAt": "2025-10-19T05:18:57.635Z",
+  "source": "Alpha Vantage API (fixed)"
 }

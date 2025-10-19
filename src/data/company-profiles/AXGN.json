@@ -1,8 +1,9 @@
 {
   "symbol": "AXGN",
-  "name": "AXGN Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:35:20.455Z",
-  "source": "Alpha Vantage API"
+  "name": "Axogen Inc",
+  "sector": "HEALTHCARE",
+  "industry": "MEDICAL DEVICES",
+  "officialSite": "https://www.axogeninc.com",
+  "cachedAt": "2025-10-19T05:13:57.994Z",
+  "source": "Alpha Vantage API (fixed)"
 }

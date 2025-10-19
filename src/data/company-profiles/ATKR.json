@@ -1,8 +1,9 @@
 {
   "symbol": "ATKR",
-  "name": "ATKR Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:35:24.568Z",
-  "source": "Alpha Vantage API"
+  "name": "Atkore International Group Inc",
+  "sector": "INDUSTRIALS",
+  "industry": "ELECTRICAL EQUIPMENT & PARTS",
+  "officialSite": "https://www.atkore.com",
+  "cachedAt": "2025-10-19T05:13:25.949Z",
+  "source": "Alpha Vantage API (fixed)"
 }

@@ -1,8 +1,9 @@
 {
   "symbol": "ASUR",
-  "name": "ASUR Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:35:15.613Z",
-  "source": "Alpha Vantage API"
+  "name": "Asure Software Inc",
+  "sector": "TECHNOLOGY",
+  "industry": "SOFTWARE - APPLICATION",
+  "officialSite": "https://www.asuresoftware.com",
+  "cachedAt": "2025-10-19T05:13:23.040Z",
+  "source": "Alpha Vantage API (fixed)"
 }

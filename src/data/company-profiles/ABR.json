@@ -1,8 +1,9 @@
 {
   "symbol": "ABR",
-  "name": "ABR Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:34:42.450Z",
-  "source": "Alpha Vantage API"
+  "name": "Arbor Realty Trust",
+  "sector": "REAL ESTATE",
+  "industry": "REIT - MORTGAGE",
+  "officialSite": "https://arbor.com",
+  "cachedAt": "2025-10-19T05:07:34.867Z",
+  "source": "Alpha Vantage API (fixed)"
 }

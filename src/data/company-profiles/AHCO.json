@@ -1,8 +1,9 @@
 {
   "symbol": "AHCO",
-  "name": "AHCO Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:06.016Z",
-  "source": "Alpha Vantage API"
+  "name": "Adapthealth Corp",
+  "sector": "HEALTHCARE",
+  "industry": "MEDICAL DEVICES",
+  "officialSite": "https://adapthealth.com",
+  "cachedAt": "2025-10-19T05:08:12.003Z",
+  "source": "Alpha Vantage API (fixed)"
 }

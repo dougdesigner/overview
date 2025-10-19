@@ -1,8 +1,9 @@
 {
   "symbol": "ADEA",
-  "name": "ADEA Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:05.584Z",
-  "source": "Alpha Vantage API"
+  "name": "ADEIA CORP",
+  "sector": "TECHNOLOGY",
+  "industry": "SOFTWARE - APPLICATION",
+  "officialSite": "https://adeia.com",
+  "cachedAt": "2025-10-19T05:07:51.449Z",
+  "source": "Alpha Vantage API (fixed)"
 }

@@ -1,8 +1,9 @@
 {
   "symbol": "BCG",
-  "name": "BCG Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:35:14.060Z",
-  "source": "Alpha Vantage API"
+  "name": "Binah Capital Group, Inc. Common Stock",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "ASSET MANAGEMENT",
+  "officialSite": "https://www.wentworthms.com",
+  "cachedAt": "2025-10-19T05:14:25.401Z",
+  "source": "Alpha Vantage API (fixed)"
 }

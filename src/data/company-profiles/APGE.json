@@ -1,8 +1,9 @@
 {
   "symbol": "APGE",
-  "name": "APGE Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:34:34.782Z",
-  "source": "Alpha Vantage API"
+  "name": "Apogee Therapeutics, Inc. Common Stock",
+  "sector": "HEALTHCARE",
+  "industry": "BIOTECHNOLOGY",
+  "officialSite": "https://www.apogeetherapeutics.com",
+  "cachedAt": "2025-10-19T05:08:53.827Z",
+  "source": "Alpha Vantage API (fixed)"
 }

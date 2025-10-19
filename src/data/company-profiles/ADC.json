@@ -1,8 +1,9 @@
 {
   "symbol": "ADC",
-  "name": "ADC Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:21.847Z",
-  "source": "Alpha Vantage API"
+  "name": "Agree Realty Corporation",
+  "sector": "REAL ESTATE",
+  "industry": "REIT - RETAIL",
+  "officialSite": "https://www.agreerealty.com",
+  "cachedAt": "2025-10-19T05:07:50.451Z",
+  "source": "Alpha Vantage API (fixed)"
 }

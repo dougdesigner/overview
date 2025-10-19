@@ -1,8 +1,9 @@
 {
   "symbol": "ADTN",
-  "name": "ADTN Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:05.269Z",
-  "source": "Alpha Vantage API"
+  "name": "ADTRAN Inc",
+  "sector": "TECHNOLOGY",
+  "industry": "COMMUNICATION EQUIPMENT",
+  "officialSite": "https://www.adtran.com",
+  "cachedAt": "2025-10-19T05:07:56.367Z",
+  "source": "Alpha Vantage API (fixed)"
 }

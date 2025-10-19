@@ -1,8 +1,9 @@
 {
   "symbol": "ADT",
-  "name": "ADT Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:31:34.343Z",
-  "source": "Alpha Vantage API"
+  "name": "ADT Inc",
+  "sector": "INDUSTRIALS",
+  "industry": "SECURITY & PROTECTION SERVICES",
+  "officialSite": "https://www.adt.com",
+  "cachedAt": "2025-10-19T05:07:55.370Z",
+  "source": "Alpha Vantage API (fixed)"
 }

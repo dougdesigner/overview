@@ -1,8 +1,9 @@
 {
   "symbol": "ATLC",
-  "name": "ATLC Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:35:24.041Z",
-  "source": "Alpha Vantage API"
+  "name": "Atlanticus Holdings Corporation",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "CREDIT SERVICES",
+  "officialSite": "https://www.atlanticus.com",
+  "cachedAt": "2025-10-19T05:13:26.911Z",
+  "source": "Alpha Vantage API (fixed)"
 }

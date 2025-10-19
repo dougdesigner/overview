@@ -1,8 +1,9 @@
 {
   "symbol": "ALGN",
-  "name": "ALGN Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:18.268Z",
-  "source": "Alpha Vantage API"
+  "name": "Align Technology Inc",
+  "sector": "HEALTHCARE",
+  "industry": "MEDICAL INSTRUMENTS & SUPPLIES",
+  "officialSite": "https://www.aligntech.com",
+  "cachedAt": "2025-10-19T05:08:23.663Z",
+  "source": "Alpha Vantage API (fixed)"
 }

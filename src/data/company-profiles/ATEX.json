@@ -1,8 +1,9 @@
 {
   "symbol": "ATEX",
-  "name": "ATEX Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:34:35.419Z",
-  "source": "Alpha Vantage API"
+  "name": "Anterix Inc",
+  "sector": "COMMUNICATION SERVICES",
+  "industry": "TELECOM SERVICES",
+  "officialSite": "https://www.anterix.com",
+  "cachedAt": "2025-10-19T05:13:24.010Z",
+  "source": "Alpha Vantage API (fixed)"
 }

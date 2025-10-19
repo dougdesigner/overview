@@ -1,8 +1,9 @@
 {
   "symbol": "AVDL",
-  "name": "AVDL Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:35:24.888Z",
-  "source": "Alpha Vantage API"
+  "name": "Avadel Pharmaceuticals PLC",
+  "sector": "HEALTHCARE",
+  "industry": "DRUG MANUFACTURERS - SPECIALTY & GENERIC",
+  "officialSite": "https://www.avadel.com",
+  "cachedAt": "2025-10-19T05:13:46.314Z",
+  "source": "Alpha Vantage API (fixed)"
 }

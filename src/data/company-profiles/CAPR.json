@@ -1,8 +1,9 @@
 {
   "symbol": "CAPR",
-  "name": "CAPR Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:34:13.277Z",
-  "source": "Alpha Vantage API"
+  "name": "Capricor Therapeutics Inc",
+  "sector": "HEALTHCARE",
+  "industry": "BIOTECHNOLOGY",
+  "officialSite": "https://www.capricor.com",
+  "cachedAt": "2025-10-19T05:18:16.348Z",
+  "source": "Alpha Vantage API (fixed)"
 }

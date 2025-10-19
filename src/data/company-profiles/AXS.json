@@ -1,8 +1,9 @@
 {
   "symbol": "AXS",
-  "name": "AXS Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:31:04.954Z",
-  "source": "Alpha Vantage API"
+  "name": "AXIS Capital Holdings Ltd",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "INSURANCE - SPECIALTY",
+  "officialSite": "https://www.axiscapital.com",
+  "cachedAt": "2025-10-19T05:13:59.929Z",
+  "source": "Alpha Vantage API (fixed)"
 }

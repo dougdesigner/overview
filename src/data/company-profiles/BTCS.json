@@ -1,8 +1,9 @@
 {
   "symbol": "BTCS",
-  "name": "BTCS Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:34:04.271Z",
-  "source": "Alpha Vantage API"
+  "name": "BTCS Inc",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "CAPITAL MARKETS",
+  "officialSite": "https://www.btcs.com",
+  "cachedAt": "2025-10-19T05:16:07.890Z",
+  "source": "Alpha Vantage API (fixed)"
 }

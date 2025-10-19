@@ -1,8 +1,9 @@
 {
   "symbol": "AZZ",
-  "name": "AZZ Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:35:20.260Z",
-  "source": "Alpha Vantage API"
+  "name": "AZZ Incorporated",
+  "sector": "INDUSTRIALS",
+  "industry": "SPECIALTY BUSINESS SERVICES",
+  "officialSite": "https://www.azz.com",
+  "cachedAt": "2025-10-19T05:14:05.893Z",
+  "source": "Alpha Vantage API (fixed)"
 }

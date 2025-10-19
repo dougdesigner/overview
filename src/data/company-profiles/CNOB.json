@@ -1,8 +1,9 @@
 {
   "symbol": "CNOB",
-  "name": "CNOB Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:34:32.137Z",
-  "source": "Alpha Vantage API"
+  "name": "ConnectOne Bancorp Inc",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "BANKS - REGIONAL",
+  "officialSite": "https://www.connectonebank.com",
+  "cachedAt": "2025-10-19T05:19:31.363Z",
+  "source": "Alpha Vantage API (fixed)"
 }

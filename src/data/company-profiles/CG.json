@@ -1,8 +1,9 @@
 {
   "symbol": "CG",
-  "name": "CG Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:19.996Z",
-  "source": "Alpha Vantage API"
+  "name": "Carlyle Group Inc",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "ASSET MANAGEMENT",
+  "officialSite": "https://www.carlyle.com",
+  "cachedAt": "2025-10-19T05:18:56.670Z",
+  "source": "Alpha Vantage API (fixed)"
 }

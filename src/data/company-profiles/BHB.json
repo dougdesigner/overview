@@ -1,8 +1,9 @@
 {
   "symbol": "BHB",
-  "name": "BHB Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:35:02.495Z",
-  "source": "Alpha Vantage API"
+  "name": "Bar Harbor Bankshares Inc",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "BANKS - REGIONAL",
+  "officialSite": "https://www.barharbor.bank",
+  "cachedAt": "2025-10-19T05:15:07.138Z",
+  "source": "Alpha Vantage API (fixed)"
 }

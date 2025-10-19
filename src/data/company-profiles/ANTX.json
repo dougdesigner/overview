@@ -1,8 +1,9 @@
 {
   "symbol": "ANTX",
-  "name": "ANTX Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:34:37.096Z",
-  "source": "Alpha Vantage API"
+  "name": "AN2 Therapeutics Inc",
+  "sector": "HEALTHCARE",
+  "industry": "BIOTECHNOLOGY",
+  "officialSite": "https://www.an2therapeutics.com",
+  "cachedAt": "2025-10-19T05:08:44.042Z",
+  "source": "Alpha Vantage API (fixed)"
 }

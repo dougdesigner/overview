@@ -1,8 +1,9 @@
 {
   "symbol": "ASPN",
-  "name": "ASPN Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:35:17.173Z",
-  "source": "Alpha Vantage API"
+  "name": "Aspen Aerogels Inc",
+  "sector": "INDUSTRIALS",
+  "industry": "BUILDING PRODUCTS & EQUIPMENT",
+  "officialSite": "https://www.aerogel.com",
+  "cachedAt": "2025-10-19T05:13:15.855Z",
+  "source": "Alpha Vantage API (fixed)"
 }

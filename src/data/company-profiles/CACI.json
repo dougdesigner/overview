@@ -1,8 +1,9 @@
 {
   "symbol": "CACI",
-  "name": "CACI Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:16.843Z",
-  "source": "Alpha Vantage API"
+  "name": "CACI International Inc",
+  "sector": "TECHNOLOGY",
+  "industry": "INFORMATION TECHNOLOGY SERVICES",
+  "officialSite": "https://www.caci.com",
+  "cachedAt": "2025-10-19T05:16:29.366Z",
+  "source": "Alpha Vantage API (fixed)"
 }

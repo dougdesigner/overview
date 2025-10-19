@@ -1,8 +1,9 @@
 {
   "symbol": "ACNT",
-  "name": "ACNT Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:35:18.067Z",
-  "source": "Alpha Vantage API"
+  "name": "Synalloy Corporation",
+  "sector": "BASIC MATERIALS",
+  "industry": "STEEL",
+  "officialSite": "https://ascentco.com",
+  "cachedAt": "2025-10-19T05:07:43.680Z",
+  "source": "Alpha Vantage API (fixed)"
 }

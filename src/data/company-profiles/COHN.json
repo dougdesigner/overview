@@ -1,8 +1,9 @@
 {
   "symbol": "COHN",
-  "name": "COHN Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:34:27.674Z",
-  "source": "Alpha Vantage API"
+  "name": "Cohen & Company Inc",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "CAPITAL MARKETS",
+  "officialSite": "https://www.cohenandcompany.com",
+  "cachedAt": "2025-10-19T05:19:44.038Z",
+  "source": "Alpha Vantage API (fixed)"
 }

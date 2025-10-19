@@ -1,8 +1,9 @@
 {
   "symbol": "CHCT",
-  "name": "CHCT Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:34:25.760Z",
-  "source": "Alpha Vantage API"
+  "name": "Community Healthcare Trust Inc",
+  "sector": "REAL ESTATE",
+  "industry": "REIT - HEALTHCARE FACILITIES",
+  "officialSite": "https://www.chct.reit",
+  "cachedAt": "2025-10-19T05:19:00.576Z",
+  "source": "Alpha Vantage API (fixed)"
 }

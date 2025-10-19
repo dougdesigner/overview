@@ -1,8 +1,9 @@
 {
   "symbol": "BAND",
-  "name": "BAND Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:35:05.623Z",
-  "source": "Alpha Vantage API"
+  "name": "Bandwidth Inc",
+  "sector": "TECHNOLOGY",
+  "industry": "SOFTWARE - INFRASTRUCTURE",
+  "officialSite": "https://www.bandwidth.com",
+  "cachedAt": "2025-10-19T05:14:11.794Z",
+  "source": "Alpha Vantage API (fixed)"
 }

@@ -1,8 +1,9 @@
 {
   "symbol": "AEE",
-  "name": "AEE Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:07.305Z",
-  "source": "Alpha Vantage API"
+  "name": "Ameren Corp",
+  "sector": "UTILITIES",
+  "industry": "UTILITIES - REGULATED ELECTRIC",
+  "officialSite": "https://www.amereninvestors.com",
+  "cachedAt": "2025-10-19T05:08:00.280Z",
+  "source": "Alpha Vantage API (fixed)"
 }

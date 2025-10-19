@@ -1,8 +1,9 @@
 {
   "symbol": "CALX",
-  "name": "CALX Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:34:10.797Z",
-  "source": "Alpha Vantage API"
+  "name": "Calix Inc",
+  "sector": "TECHNOLOGY",
+  "industry": "SOFTWARE - INFRASTRUCTURE",
+  "officialSite": "https://www.calix.com",
+  "cachedAt": "2025-10-19T05:18:14.401Z",
+  "source": "Alpha Vantage API (fixed)"
 }

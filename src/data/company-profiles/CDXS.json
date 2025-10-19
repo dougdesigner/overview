@@ -1,8 +1,9 @@
 {
   "symbol": "CDXS",
-  "name": "CDXS Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:34:28.296Z",
-  "source": "Alpha Vantage API"
+  "name": "Codexis Inc",
+  "sector": "HEALTHCARE",
+  "industry": "BIOTECHNOLOGY",
+  "officialSite": "https://www.codexis.com",
+  "cachedAt": "2025-10-19T05:18:46.923Z",
+  "source": "Alpha Vantage API (fixed)"
 }

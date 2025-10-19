@@ -1,8 +1,9 @@
 {
   "symbol": "BWFG",
-  "name": "BWFG Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:35:03.119Z",
-  "source": "Alpha Vantage API"
+  "name": "Bankwell Financial Group Inc",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "BANKS - REGIONAL",
+  "officialSite": "https://www.mybankwell.com",
+  "cachedAt": "2025-10-19T05:16:17.651Z",
+  "source": "Alpha Vantage API (fixed)"
 }

@@ -1,8 +1,9 @@
 {
   "symbol": "BILL",
-  "name": "BILL Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:31:12.365Z",
-  "source": "Alpha Vantage API"
+  "name": "Bill Com Holdings Inc",
+  "sector": "TECHNOLOGY",
+  "industry": "SOFTWARE - APPLICATION",
+  "officialSite": "https://www.bill.com",
+  "cachedAt": "2025-10-19T05:15:11.191Z",
+  "source": "Alpha Vantage API (fixed)"
 }

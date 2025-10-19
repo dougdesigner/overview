@@ -1,8 +1,9 @@
 {
   "symbol": "ASRT",
-  "name": "ASRT Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:35:16.865Z",
-  "source": "Alpha Vantage API"
+  "name": "Assertio Therapeutics Inc",
+  "sector": "HEALTHCARE",
+  "industry": "DRUG MANUFACTURERS - SPECIALTY & GENERIC",
+  "officialSite": "https://www.assertiotx.com",
+  "cachedAt": "2025-10-19T05:13:16.835Z",
+  "source": "Alpha Vantage API (fixed)"
 }

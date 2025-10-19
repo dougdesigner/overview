@@ -1,8 +1,9 @@
 {
   "symbol": "AROW",
-  "name": "AROW Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:35:19.611Z",
-  "source": "Alpha Vantage API"
+  "name": "Arrow Financial Corporation",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "BANKS - REGIONAL",
+  "officialSite": "https://www.arrowfinancial.com",
+  "cachedAt": "2025-10-19T05:13:00.292Z",
+  "source": "Alpha Vantage API (fixed)"
 }

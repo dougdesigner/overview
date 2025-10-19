@@ -1,8 +1,9 @@
 {
   "symbol": "AVO",
-  "name": "AVO Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:35:33.225Z",
-  "source": "Alpha Vantage API"
+  "name": "Mission Produce Inc",
+  "sector": "CONSUMER DEFENSIVE",
+  "industry": "FOOD DISTRIBUTION",
+  "officialSite": "https://missionproduce.com",
+  "cachedAt": "2025-10-19T05:13:51.185Z",
+  "source": "Alpha Vantage API (fixed)"
 }

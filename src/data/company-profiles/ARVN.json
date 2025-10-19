@@ -1,8 +1,9 @@
 {
   "symbol": "ARVN",
-  "name": "ARVN Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:35:18.380Z",
-  "source": "Alpha Vantage API"
+  "name": "Arvinas Inc",
+  "sector": "HEALTHCARE",
+  "industry": "BIOTECHNOLOGY",
+  "officialSite": "https://www.arvinas.com",
+  "cachedAt": "2025-10-19T05:13:06.136Z",
+  "source": "Alpha Vantage API (fixed)"
 }

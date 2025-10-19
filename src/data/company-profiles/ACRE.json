@@ -1,8 +1,9 @@
 {
   "symbol": "ACRE",
-  "name": "ACRE Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:34:40.658Z",
-  "source": "Alpha Vantage API"
+  "name": "Ares Commercial Real Estate",
+  "sector": "REAL ESTATE",
+  "industry": "REIT - MORTGAGE",
+  "officialSite": "https://www.arescre.com",
+  "cachedAt": "2025-10-19T05:07:45.632Z",
+  "source": "Alpha Vantage API (fixed)"
 }

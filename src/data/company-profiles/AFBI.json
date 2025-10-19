@@ -1,8 +1,9 @@
 {
   "symbol": "AFBI",
-  "name": "AFBI Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:04.016Z",
-  "source": "Alpha Vantage API"
+  "name": "Affinity Bancshares Inc",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "BANKS - REGIONAL",
+  "officialSite": "https://myaffinitybank.com",
+  "cachedAt": "2025-10-19T05:08:05.217Z",
+  "source": "Alpha Vantage API (fixed)"
 }

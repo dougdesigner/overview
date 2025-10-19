@@ -1,8 +1,9 @@
 {
   "symbol": "CDRE",
-  "name": "CDRE Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:34:02.491Z",
-  "source": "Alpha Vantage API"
+  "name": "Cadre Holdings Inc",
+  "sector": "INDUSTRIALS",
+  "industry": "AEROSPACE & DEFENSE",
+  "officialSite": "https://www.cadre-holdings.com",
+  "cachedAt": "2025-10-19T05:18:45.636Z",
+  "source": "Alpha Vantage API (fixed)"
 }

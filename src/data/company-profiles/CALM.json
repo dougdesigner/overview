@@ -1,8 +1,9 @@
 {
   "symbol": "CALM",
-  "name": "CALM Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:32:02.633Z",
-  "source": "Alpha Vantage API"
+  "name": "Cal-Maine Foods Inc",
+  "sector": "CONSUMER DEFENSIVE",
+  "industry": "FARM PRODUCTS",
+  "officialSite": "https://www.calmainefoods.com",
+  "cachedAt": "2025-10-19T05:16:33.278Z",
+  "source": "Alpha Vantage API (fixed)"
 }

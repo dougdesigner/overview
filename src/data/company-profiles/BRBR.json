@@ -1,8 +1,9 @@
 {
   "symbol": "BRBR",
-  "name": "BRBR Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:23.916Z",
-  "source": "Alpha Vantage API"
+  "name": "Bellring Brands LLC",
+  "sector": "CONSUMER DEFENSIVE",
+  "industry": "PACKAGED FOODS",
+  "officialSite": "https://bellring.com",
+  "cachedAt": "2025-10-19T05:15:51.328Z",
+  "source": "Alpha Vantage API (fixed)"
 }

@@ -1,8 +1,9 @@
 {
   "symbol": "AGO",
-  "name": "AGO Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:31:31.371Z",
-  "source": "Alpha Vantage API"
+  "name": "Assured Guaranty Ltd",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "INSURANCE - SPECIALTY",
+  "officialSite": "https://www.assuredguaranty.com",
+  "cachedAt": "2025-10-19T05:08:09.108Z",
+  "source": "Alpha Vantage API (fixed)"
 }

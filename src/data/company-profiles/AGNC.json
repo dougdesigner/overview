@@ -1,8 +1,9 @@
 {
   "symbol": "AGNC",
-  "name": "AGNC Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:19.520Z",
-  "source": "Alpha Vantage API"
+  "name": "AGNC Investment Corp",
+  "sector": "REAL ESTATE",
+  "industry": "REIT - MORTGAGE",
+  "officialSite": "https://agnc.com",
+  "cachedAt": "2025-10-19T05:08:08.123Z",
+  "source": "Alpha Vantage API (fixed)"
 }

@@ -1,8 +1,9 @@
 {
   "symbol": "BMRN",
-  "name": "BMRN Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:25.472Z",
-  "source": "Alpha Vantage API"
+  "name": "Biomarin Pharmaceutical Inc",
+  "sector": "HEALTHCARE",
+  "industry": "BIOTECHNOLOGY",
+  "officialSite": "https://www.biomarin.com",
+  "cachedAt": "2025-10-19T05:15:36.775Z",
+  "source": "Alpha Vantage API (fixed)"
 }

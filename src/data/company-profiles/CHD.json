@@ -1,8 +1,9 @@
 {
   "symbol": "CHD",
-  "name": "CHD Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:11.244Z",
-  "source": "Alpha Vantage API"
+  "name": "Church & Dwight Company Inc",
+  "sector": "CONSUMER DEFENSIVE",
+  "industry": "HOUSEHOLD & PERSONAL PRODUCTS",
+  "officialSite": "https://www.churchdwight.com",
+  "cachedAt": "2025-10-19T05:19:01.548Z",
+  "source": "Alpha Vantage API (fixed)"
 }

@@ -1,8 +1,9 @@
 {
   "symbol": "BXC",
-  "name": "BXC Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:34:05.905Z",
-  "source": "Alpha Vantage API"
+  "name": "BlueLinx Holdings Inc",
+  "sector": "INDUSTRIALS",
+  "industry": "INDUSTRIAL DISTRIBUTION",
+  "officialSite": "https://bluelinxco.com",
+  "cachedAt": "2025-10-19T05:16:19.587Z",
+  "source": "Alpha Vantage API (fixed)"
 }

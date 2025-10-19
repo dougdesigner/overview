@@ -1,8 +1,9 @@
 {
   "symbol": "ACHR",
-  "name": "ACHR Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:34:41.817Z",
-  "source": "Alpha Vantage API"
+  "name": "Archer Aviation Inc",
+  "sector": "INDUSTRIALS",
+  "industry": "AEROSPACE & DEFENSE",
+  "officialSite": "https://www.archer.com",
+  "cachedAt": "2025-10-19T05:07:39.781Z",
+  "source": "Alpha Vantage API (fixed)"
 }

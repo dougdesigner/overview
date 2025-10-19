@@ -1,8 +1,9 @@
 {
   "symbol": "ADM",
-  "name": "ADM Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:23.227Z",
-  "source": "Alpha Vantage API"
+  "name": "Archer-Daniels-Midland Company",
+  "sector": "CONSUMER DEFENSIVE",
+  "industry": "FARM PRODUCTS",
+  "officialSite": "https://www.adm.com",
+  "cachedAt": "2025-10-19T05:07:52.418Z",
+  "source": "Alpha Vantage API (fixed)"
 }

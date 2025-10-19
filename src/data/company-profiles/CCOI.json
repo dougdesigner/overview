@@ -1,8 +1,9 @@
 {
   "symbol": "CCOI",
-  "name": "CCOI Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:34:27.984Z",
-  "source": "Alpha Vantage API"
+  "name": "Cogent Communications Group Inc",
+  "sector": "COMMUNICATION SERVICES",
+  "industry": "TELECOM SERVICES",
+  "officialSite": "https://www.cogentco.com",
+  "cachedAt": "2025-10-19T05:18:40.778Z",
+  "source": "Alpha Vantage API (fixed)"
 }

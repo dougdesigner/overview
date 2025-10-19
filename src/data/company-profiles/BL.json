@@ -1,8 +1,9 @@
 {
   "symbol": "BL",
-  "name": "BL Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:35:09.973Z",
-  "source": "Alpha Vantage API"
+  "name": "Blackline Inc",
+  "sector": "TECHNOLOGY",
+  "industry": "SOFTWARE - APPLICATION",
+  "officialSite": "https://www.blackline.com",
+  "cachedAt": "2025-10-19T05:15:23.229Z",
+  "source": "Alpha Vantage API (fixed)"
 }

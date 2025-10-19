@@ -1,8 +1,9 @@
 {
   "symbol": "CBAN",
-  "name": "CBAN Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:34:26.858Z",
-  "source": "Alpha Vantage API"
+  "name": "Colony Bankcorp Inc.",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "BANKS - REGIONAL",
+  "officialSite": "https://colony.bank",
+  "cachedAt": "2025-10-19T05:18:28.968Z",
+  "source": "Alpha Vantage API (fixed)"
 }

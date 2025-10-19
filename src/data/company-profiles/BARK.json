@@ -1,8 +1,9 @@
 {
   "symbol": "BARK",
-  "name": "BARK Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:35:01.895Z",
-  "source": "Alpha Vantage API"
+  "name": "Original Bark Co",
+  "sector": "CONSUMER CYCLICAL",
+  "industry": "SPECIALTY RETAIL",
+  "officialSite": "https://bark.co",
+  "cachedAt": "2025-10-19T05:14:14.694Z",
+  "source": "Alpha Vantage API (fixed)"
 }

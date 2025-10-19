@@ -1,8 +1,9 @@
 {
   "symbol": "ATOS",
-  "name": "ATOS Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:35:23.418Z",
-  "source": "Alpha Vantage API"
+  "name": "Atossa Genetics Inc",
+  "sector": "HEALTHCARE",
+  "industry": "BIOTECHNOLOGY",
+  "officialSite": "https://www.atossatherapeutics.com",
+  "cachedAt": "2025-10-19T05:13:31.750Z",
+  "source": "Alpha Vantage API (fixed)"
 }

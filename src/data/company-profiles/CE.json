@@ -1,8 +1,9 @@
 {
   "symbol": "CE",
-  "name": "CE Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:31:36.001Z",
-  "source": "Alpha Vantage API"
+  "name": "Celanese Corporation",
+  "sector": "BASIC MATERIALS",
+  "industry": "CHEMICALS",
+  "officialSite": "https://www.celanese.com",
+  "cachedAt": "2025-10-19T05:18:48.871Z",
+  "source": "Alpha Vantage API (fixed)"
 }

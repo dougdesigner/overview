@@ -1,8 +1,9 @@
 {
   "symbol": "AAP",
-  "name": "AAP Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:05.071Z",
-  "source": "Alpha Vantage API"
+  "name": "Advance Auto Parts Inc",
+  "sector": "CONSUMER CYCLICAL",
+  "industry": "AUTO PARTS",
+  "officialSite": "https://shop.advanceautoparts.com",
+  "cachedAt": "2025-10-19T05:07:32.931Z",
+  "source": "Alpha Vantage API (fixed)"
 }

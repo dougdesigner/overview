@@ -1,8 +1,9 @@
 {
   "symbol": "BYD",
-  "name": "BYD Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:32:05.840Z",
-  "source": "Alpha Vantage API"
+  "name": "Boyd Gaming Corporation",
+  "sector": "CONSUMER CYCLICAL",
+  "industry": "RESORTS & CASINOS",
+  "officialSite": "https://www.boydgaming.com",
+  "cachedAt": "2025-10-19T05:16:22.491Z",
+  "source": "Alpha Vantage API (fixed)"
 }

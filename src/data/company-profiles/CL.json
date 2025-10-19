@@ -1,8 +1,9 @@
 {
   "symbol": "CL",
-  "name": "CL Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:29:39.758Z",
-  "source": "Alpha Vantage API"
+  "name": "Colgate-Palmolive Company",
+  "sector": "CONSUMER DEFENSIVE",
+  "industry": "HOUSEHOLD & PERSONAL PRODUCTS",
+  "officialSite": "https://www.colgatepalmolive.com",
+  "cachedAt": "2025-10-19T05:19:09.395Z",
+  "source": "Alpha Vantage API (fixed)"
 }

@@ -1,8 +1,9 @@
 {
   "symbol": "AORT",
-  "name": "AORT Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:35:18.412Z",
-  "source": "Alpha Vantage API"
+  "name": "Artivion Inc",
+  "sector": "HEALTHCARE",
+  "industry": "MEDICAL DEVICES",
+  "officialSite": "https://artivion.com",
+  "cachedAt": "2025-10-19T05:08:46.975Z",
+  "source": "Alpha Vantage API (fixed)"
 }

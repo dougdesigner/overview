@@ -1,8 +1,9 @@
 {
   "symbol": "AVY",
-  "name": "AVY Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:29.556Z",
-  "source": "Alpha Vantage API"
+  "name": "Avery Dennison Corp",
+  "sector": "CONSUMER CYCLICAL",
+  "industry": "PACKAGING & CONTAINERS",
+  "officialSite": "https://www.averydennison.com",
+  "cachedAt": "2025-10-19T05:13:54.143Z",
+  "source": "Alpha Vantage API (fixed)"
 }

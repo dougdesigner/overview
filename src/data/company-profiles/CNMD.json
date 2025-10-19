@@ -1,8 +1,9 @@
 {
   "symbol": "CNMD",
-  "name": "CNMD Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:34:32.560Z",
-  "source": "Alpha Vantage API"
+  "name": "CONMED Corporation",
+  "sector": "HEALTHCARE",
+  "industry": "MEDICAL DEVICES",
+  "officialSite": "https://www.conmed.com",
+  "cachedAt": "2025-10-19T05:19:29.418Z",
+  "source": "Alpha Vantage API (fixed)"
 }

@@ -1,8 +1,9 @@
 {
   "symbol": "ARLO",
-  "name": "ARLO Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:34:39.902Z",
-  "source": "Alpha Vantage API"
+  "name": "Arlo Technologies",
+  "sector": "INDUSTRIALS",
+  "industry": "BUILDING PRODUCTS & EQUIPMENT",
+  "officialSite": "https://www.arlo.com",
+  "cachedAt": "2025-10-19T05:09:11.321Z",
+  "source": "Alpha Vantage API (fixed)"
 }

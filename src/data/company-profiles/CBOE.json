@@ -1,8 +1,9 @@
 {
   "symbol": "CBOE",
-  "name": "CBOE Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:17.937Z",
-  "source": "Alpha Vantage API"
+  "name": "Cboe Global Markets Inc",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "FINANCIAL DATA & STOCK EXCHANGES",
+  "officialSite": "https://www.cboe.com",
+  "cachedAt": "2025-10-19T05:18:30.904Z",
+  "source": "Alpha Vantage API (fixed)"
 }

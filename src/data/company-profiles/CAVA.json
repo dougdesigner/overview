@@ -1,8 +1,9 @@
 {
   "symbol": "CAVA",
-  "name": "CAVA Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:17.451Z",
-  "source": "Alpha Vantage API"
+  "name": "CAVA Group, Inc.",
+  "sector": "CONSUMER CYCLICAL",
+  "industry": "RESTAURANTS",
+  "officialSite": "https://www.cava.com",
+  "cachedAt": "2025-10-19T05:18:26.999Z",
+  "source": "Alpha Vantage API (fixed)"
 }

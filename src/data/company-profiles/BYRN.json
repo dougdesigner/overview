@@ -1,8 +1,9 @@
 {
   "symbol": "BYRN",
-  "name": "BYRN Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:34:06.217Z",
-  "source": "Alpha Vantage API"
+  "name": "Byrna Technologies Inc",
+  "sector": "INDUSTRIALS",
+  "industry": "AEROSPACE & DEFENSE",
+  "officialSite": "https://www.byrna.com",
+  "cachedAt": "2025-10-19T05:16:24.430Z",
+  "source": "Alpha Vantage API (fixed)"
 }

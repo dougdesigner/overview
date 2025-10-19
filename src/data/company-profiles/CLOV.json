@@ -1,8 +1,9 @@
 {
   "symbol": "CLOV",
-  "name": "CLOV Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:34:29.250Z",
-  "source": "Alpha Vantage API"
+  "name": "Clover Health Investments Corp",
+  "sector": "HEALTHCARE",
+  "industry": "HEALTHCARE PLANS",
+  "officialSite": "https://www.cloverhealth.com",
+  "cachedAt": "2025-10-19T05:19:14.790Z",
+  "source": "Alpha Vantage API (fixed)"
 }

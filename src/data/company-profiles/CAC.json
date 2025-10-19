@@ -1,8 +1,9 @@
 {
   "symbol": "CAC",
-  "name": "CAC Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:34:12.665Z",
-  "source": "Alpha Vantage API"
+  "name": "Camden National Corporation",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "BANKS - REGIONAL",
+  "officialSite": "https://www.camdennational.com",
+  "cachedAt": "2025-10-19T05:16:28.387Z",
+  "source": "Alpha Vantage API (fixed)"
 }

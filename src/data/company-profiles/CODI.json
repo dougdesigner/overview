@@ -1,8 +1,9 @@
 {
   "symbol": "CODI",
-  "name": "CODI Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:34:25.274Z",
-  "source": "Alpha Vantage API"
+  "name": "Compass Diversified Holdings",
+  "sector": "INDUSTRIALS",
+  "industry": "CONGLOMERATES",
+  "officialSite": "https://www.compassdiversified.com",
+  "cachedAt": "2025-10-19T05:19:39.122Z",
+  "source": "Alpha Vantage API (fixed)"
 }

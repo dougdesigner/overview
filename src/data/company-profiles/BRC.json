@@ -1,8 +1,9 @@
 {
   "symbol": "BRC",
-  "name": "BRC Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:32:06.154Z",
-  "source": "Alpha Vantage API"
+  "name": "Brady Corporation",
+  "sector": "INDUSTRIALS",
+  "industry": "SECURITY & PROTECTION SERVICES",
+  "officialSite": "https://www.bradyid.com",
+  "cachedAt": "2025-10-19T05:15:53.299Z",
+  "source": "Alpha Vantage API (fixed)"
 }

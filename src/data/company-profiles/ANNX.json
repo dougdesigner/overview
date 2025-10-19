@@ -1,8 +1,9 @@
 {
   "symbol": "ANNX",
-  "name": "ANNX Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:34:35.735Z",
-  "source": "Alpha Vantage API"
+  "name": "Annexon Inc",
+  "sector": "HEALTHCARE",
+  "industry": "BIOTECHNOLOGY",
+  "officialSite": "https://www.annexonbio.com",
+  "cachedAt": "2025-10-19T05:08:42.111Z",
+  "source": "Alpha Vantage API (fixed)"
 }

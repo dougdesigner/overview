@@ -1,8 +1,9 @@
 {
   "symbol": "ASTE",
-  "name": "ASTE Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:35:16.553Z",
-  "source": "Alpha Vantage API"
+  "name": "Astec Industries Inc",
+  "sector": "INDUSTRIALS",
+  "industry": "FARM & HEAVY CONSTRUCTION MACHINERY",
+  "officialSite": "https://www.astecindustries.com",
+  "cachedAt": "2025-10-19T05:13:18.758Z",
+  "source": "Alpha Vantage API (fixed)"
 }

@@ -1,8 +1,9 @@
 {
   "symbol": "BRFH",
-  "name": "BRFH Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:35:02.195Z",
-  "source": "Alpha Vantage API"
+  "name": "Barfresh Food Group Inc",
+  "sector": "CONSUMER DEFENSIVE",
+  "industry": "BEVERAGES - NON-ALCOHOLIC",
+  "officialSite": "https://www.barfresh.com",
+  "cachedAt": "2025-10-19T05:15:55.275Z",
+  "source": "Alpha Vantage API (fixed)"
 }

@@ -1,8 +1,9 @@
 {
   "symbol": "BWXT",
-  "name": "BWXT Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:27.024Z",
-  "source": "Alpha Vantage API"
+  "name": "BWX Technologies Inc",
+  "sector": "INDUSTRIALS",
+  "industry": "AEROSPACE & DEFENSE",
+  "officialSite": "https://www.bwxt.com",
+  "cachedAt": "2025-10-19T05:16:18.623Z",
+  "source": "Alpha Vantage API (fixed)"
 }

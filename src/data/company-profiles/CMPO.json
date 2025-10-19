@@ -1,8 +1,9 @@
 {
   "symbol": "CMPO",
-  "name": "CMPO Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:34:34.153Z",
-  "source": "Alpha Vantage API"
+  "name": "CompoSecure, Inc.",
+  "sector": "INDUSTRIALS",
+  "industry": "METAL FABRICATION",
+  "officialSite": "https://www.composecure.com",
+  "cachedAt": "2025-10-19T05:19:22.580Z",
+  "source": "Alpha Vantage API (fixed)"
 }

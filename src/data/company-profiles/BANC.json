@@ -1,8 +1,9 @@
 {
   "symbol": "BANC",
-  "name": "BANC Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:35:06.257Z",
-  "source": "Alpha Vantage API"
+  "name": "Banc of California, Inc.",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "BANKS - REGIONAL",
+  "officialSite": "https://bancofcal.com",
+  "cachedAt": "2025-10-19T05:14:09.776Z",
+  "source": "Alpha Vantage API (fixed)"
 }

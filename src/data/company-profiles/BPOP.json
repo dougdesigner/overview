@@ -1,8 +1,9 @@
 {
   "symbol": "BPOP",
-  "name": "BPOP Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:31:37.480Z",
-  "source": "Alpha Vantage API"
+  "name": "Popular Inc",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "BANKS - REGIONAL",
+  "officialSite": "https://www.popular.com",
+  "cachedAt": "2025-10-19T05:15:48.415Z",
+  "source": "Alpha Vantage API (fixed)"
 }

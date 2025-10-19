@@ -1,8 +1,9 @@
 {
   "symbol": "BBY",
-  "name": "BBY Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:24.036Z",
-  "source": "Alpha Vantage API"
+  "name": "Best Buy Co. Inc",
+  "sector": "CONSUMER CYCLICAL",
+  "industry": "SPECIALTY RETAIL",
+  "officialSite": "https://bestbuy.com",
+  "cachedAt": "2025-10-19T05:14:21.542Z",
+  "source": "Alpha Vantage API (fixed)"
 }

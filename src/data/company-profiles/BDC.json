@@ -1,8 +1,9 @@
 {
   "symbol": "BDC",
-  "name": "BDC Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:31:11.858Z",
-  "source": "Alpha Vantage API"
+  "name": "Belden Inc",
+  "sector": "TECHNOLOGY",
+  "industry": "COMMUNICATION EQUIPMENT",
+  "officialSite": "https://www.belden.com",
+  "cachedAt": "2025-10-19T05:14:29.284Z",
+  "source": "Alpha Vantage API (fixed)"
 }

@@ -1,8 +1,9 @@
 {
   "symbol": "AXTI",
-  "name": "AXTI Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:35:20.316Z",
-  "source": "Alpha Vantage API"
+  "name": "AXT Inc",
+  "sector": "TECHNOLOGY",
+  "industry": "SEMICONDUCTOR EQUIPMENT & MATERIALS",
+  "officialSite": "https://www.axt.com",
+  "cachedAt": "2025-10-19T05:14:02.990Z",
+  "source": "Alpha Vantage API (fixed)"
 }

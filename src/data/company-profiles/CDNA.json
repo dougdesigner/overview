@@ -1,8 +1,9 @@
 {
   "symbol": "CDNA",
-  "name": "CDNA Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:34:09.646Z",
-  "source": "Alpha Vantage API"
+  "name": "CareDx Inc",
+  "sector": "HEALTHCARE",
+  "industry": "DIAGNOSTICS & RESEARCH",
+  "officialSite": "https://caredx.com",
+  "cachedAt": "2025-10-19T05:18:43.692Z",
+  "source": "Alpha Vantage API (fixed)"
 }

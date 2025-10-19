@@ -1,8 +1,9 @@
 {
   "symbol": "CCNE",
-  "name": "CCNE Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:34:29.054Z",
-  "source": "Alpha Vantage API"
+  "name": "CNB Financial Corporation",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "BANKS - REGIONAL",
+  "officialSite": "https://www.cnbbank.bank",
+  "cachedAt": "2025-10-19T05:18:39.797Z",
+  "source": "Alpha Vantage API (fixed)"
 }

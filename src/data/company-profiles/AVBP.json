@@ -1,8 +1,9 @@
 {
   "symbol": "AVBP",
-  "name": "AVBP Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:35:19.698Z",
-  "source": "Alpha Vantage API"
+  "name": "ArriVent BioPharma, Inc. Common Stock",
+  "sector": "HEALTHCARE",
+  "industry": "BIOTECHNOLOGY",
+  "officialSite": "https://arrivent.com",
+  "cachedAt": "2025-10-19T05:13:44.334Z",
+  "source": "Alpha Vantage API (fixed)"
 }

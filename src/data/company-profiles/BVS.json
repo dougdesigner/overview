@@ -1,8 +1,9 @@
 {
   "symbol": "BVS",
-  "name": "BVS Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:35:15.297Z",
-  "source": "Alpha Vantage API"
+  "name": "Bioventus Inc",
+  "sector": "HEALTHCARE",
+  "industry": "MEDICAL DEVICES",
+  "officialSite": "https://www.bioventus.com",
+  "cachedAt": "2025-10-19T05:16:15.699Z",
+  "source": "Alpha Vantage API (fixed)"
 }

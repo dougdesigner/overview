@@ -1,8 +1,9 @@
 {
   "symbol": "ADUS",
-  "name": "ADUS Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:05.696Z",
-  "source": "Alpha Vantage API"
+  "name": "Addus HomeCare Corporation",
+  "sector": "HEALTHCARE",
+  "industry": "MEDICAL CARE FACILITIES",
+  "officialSite": "https://www.addus.com",
+  "cachedAt": "2025-10-19T05:07:58.323Z",
+  "source": "Alpha Vantage API (fixed)"
 }

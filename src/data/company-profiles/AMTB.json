@@ -1,8 +1,9 @@
 {
   "symbol": "AMTB",
-  "name": "AMTB Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:34:37.627Z",
-  "source": "Alpha Vantage API"
+  "name": "Amerant Bancorp Inc.",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "BANKS - REGIONAL",
+  "officialSite": "https://www.amerantbank.com",
+  "cachedAt": "2025-10-19T05:08:33.346Z",
+  "source": "Alpha Vantage API (fixed)"
 }

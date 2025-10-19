@@ -1,8 +1,9 @@
 {
   "symbol": "BRO",
-  "name": "BRO Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:07.943Z",
-  "source": "Alpha Vantage API"
+  "name": "Brown & Brown Inc",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "INSURANCE BROKERS",
+  "officialSite": "https://www.bbrown.com",
+  "cachedAt": "2025-10-19T05:15:59.139Z",
+  "source": "Alpha Vantage API (fixed)"
 }

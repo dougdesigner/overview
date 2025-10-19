@@ -1,8 +1,9 @@
 {
   "symbol": "BHM",
-  "name": "BHM Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:34:05.831Z",
-  "source": "Alpha Vantage API"
+  "name": "Bluerock Homes Trust Inc.",
+  "sector": "REAL ESTATE",
+  "industry": "REIT - RESIDENTIAL",
+  "officialSite": "https://www.bluerock.com/bluerock-homes-trust/",
+  "cachedAt": "2025-10-19T05:15:09.082Z",
+  "source": "Alpha Vantage API (fixed)"
 }

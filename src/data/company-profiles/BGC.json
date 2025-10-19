@@ -1,8 +1,9 @@
 {
   "symbol": "BGC",
-  "name": "BGC Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:31:12.172Z",
-  "source": "Alpha Vantage API"
+  "name": "BGC Group Inc. ",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "CAPITAL MARKETS",
+  "officialSite": "https://www.bgcg.com",
+  "cachedAt": "2025-10-19T05:15:04.141Z",
+  "source": "Alpha Vantage API (fixed)"
 }

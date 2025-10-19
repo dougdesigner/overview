@@ -1,8 +1,9 @@
 {
   "symbol": "BLND",
-  "name": "BLND Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:35:09.039Z",
-  "source": "Alpha Vantage API"
+  "name": "Blend Labs Inc",
+  "sector": "TECHNOLOGY",
+  "industry": "SOFTWARE - APPLICATION",
+  "officialSite": "https://blend.com",
+  "cachedAt": "2025-10-19T05:15:30.990Z",
+  "source": "Alpha Vantage API (fixed)"
 }

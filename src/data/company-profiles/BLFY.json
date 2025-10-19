@@ -1,8 +1,9 @@
 {
   "symbol": "BLFY",
-  "name": "BLFY Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:35:07.800Z",
-  "source": "Alpha Vantage API"
+  "name": "Blue Foundry Bancorp",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "BANKS - REGIONAL",
+  "officialSite": "https://www.bluefoundrybank.com",
+  "cachedAt": "2025-10-19T05:15:29.048Z",
+  "source": "Alpha Vantage API (fixed)"
 }

@@ -1,8 +1,9 @@
 {
   "symbol": "CCCC",
-  "name": "CCCC Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:34:03.307Z",
-  "source": "Alpha Vantage API"
+  "name": "C4 Therapeutics Inc",
+  "sector": "HEALTHCARE",
+  "industry": "BIOTECHNOLOGY",
+  "officialSite": "https://www.c4therapeutics.com",
+  "cachedAt": "2025-10-19T05:18:35.902Z",
+  "source": "Alpha Vantage API (fixed)"
 }

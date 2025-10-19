@@ -1,8 +1,9 @@
 {
   "symbol": "ALTS",
-  "name": "ALTS Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:34:38.247Z",
-  "source": "Alpha Vantage API"
+  "name": "ALT5 Sigma Corporation",
+  "sector": "TECHNOLOGY",
+  "industry": "SOFTWARE - APPLICATION",
+  "officialSite": "https://alt5sigma.com",
+  "cachedAt": "2025-10-19T05:08:27.539Z",
+  "source": "Alpha Vantage API (fixed)"
 }

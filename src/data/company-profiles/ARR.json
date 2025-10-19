@@ -1,8 +1,9 @@
 {
   "symbol": "ARR",
-  "name": "ARR Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:34:39.193Z",
-  "source": "Alpha Vantage API"
+  "name": "ARMOUR Residential REIT Inc",
+  "sector": "REAL ESTATE",
+  "industry": "REIT - MORTGAGE",
+  "officialSite": "https://www.armourreit.com",
+  "cachedAt": "2025-10-19T05:13:02.269Z",
+  "source": "Alpha Vantage API (fixed)"
 }

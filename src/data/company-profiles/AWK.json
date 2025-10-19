@@ -1,8 +1,9 @@
 {
   "symbol": "AWK",
-  "name": "AWK Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:08.368Z",
-  "source": "Alpha Vantage API"
+  "name": "American Water Works",
+  "sector": "UTILITIES",
+  "industry": "UTILITIES - REGULATED WATER",
+  "officialSite": "https://www.amwater.com",
+  "cachedAt": "2025-10-19T05:13:55.111Z",
+  "source": "Alpha Vantage API (fixed)"
 }

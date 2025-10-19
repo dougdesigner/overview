@@ -1,8 +1,9 @@
 {
   "symbol": "CBNK",
-  "name": "CBNK Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:34:11.414Z",
-  "source": "Alpha Vantage API"
+  "name": "Capital Bancorp",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "BANKS - REGIONAL",
+  "officialSite": "https://capitalbankmd.com",
+  "cachedAt": "2025-10-19T05:18:29.939Z",
+  "source": "Alpha Vantage API (fixed)"
 }

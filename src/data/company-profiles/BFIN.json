@@ -1,8 +1,9 @@
 {
   "symbol": "BFIN",
-  "name": "BFIN Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:35:03.759Z",
-  "source": "Alpha Vantage API"
+  "name": "BankFinancial Corporation",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "BANKS - REGIONAL",
+  "officialSite": "https://www.bankfinancial.com",
+  "cachedAt": "2025-10-19T05:15:02.199Z",
+  "source": "Alpha Vantage API (fixed)"
 }

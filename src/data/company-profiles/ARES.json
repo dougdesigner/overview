@@ -1,8 +1,9 @@
 {
   "symbol": "ARES",
-  "name": "ARES Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:07.445Z",
-  "source": "Alpha Vantage API"
+  "name": "Ares Management LP",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "ASSET MANAGEMENT",
+  "officialSite": "https://www.aresmgmt.com",
+  "cachedAt": "2025-10-19T05:09:05.525Z",
+  "source": "Alpha Vantage API (fixed)"
 }

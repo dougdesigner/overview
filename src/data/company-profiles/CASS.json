@@ -1,8 +1,9 @@
 {
   "symbol": "CASS",
-  "name": "CASS Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:34:03.742Z",
-  "source": "Alpha Vantage API"
+  "name": "Cass Information Systems Inc",
+  "sector": "INDUSTRIALS",
+  "industry": "SPECIALTY BUSINESS SERVICES",
+  "officialSite": "https://www.cassinfo.com",
+  "cachedAt": "2025-10-19T05:18:23.128Z",
+  "source": "Alpha Vantage API (fixed)"
 }

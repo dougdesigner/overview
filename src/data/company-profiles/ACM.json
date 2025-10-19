@@ -1,8 +1,9 @@
 {
   "symbol": "ACM",
-  "name": "ACM Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:14.664Z",
-  "source": "Alpha Vantage API"
+  "name": "Aecom Technology Corporation",
+  "sector": "INDUSTRIALS",
+  "industry": "ENGINEERING & CONSTRUCTION",
+  "officialSite": "https://www.aecom.com",
+  "cachedAt": "2025-10-19T05:07:42.704Z",
+  "source": "Alpha Vantage API (fixed)"
 }

@@ -1,8 +1,9 @@
 {
   "symbol": "ANVS",
-  "name": "ANVS Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:34:35.533Z",
-  "source": "Alpha Vantage API"
+  "name": "Annovis Bio Inc",
+  "sector": "HEALTHCARE",
+  "industry": "BIOTECHNOLOGY",
+  "officialSite": "https://www.annovisbio.com",
+  "cachedAt": "2025-10-19T05:08:44.994Z",
+  "source": "Alpha Vantage API (fixed)"
 }

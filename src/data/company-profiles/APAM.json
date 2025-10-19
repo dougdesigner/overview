@@ -1,8 +1,9 @@
 {
   "symbol": "APAM",
-  "name": "APAM Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:35:18.740Z",
-  "source": "Alpha Vantage API"
+  "name": "Artisan Partners Asset Management Inc",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "ASSET MANAGEMENT",
+  "officialSite": "https://www.artisanpartners.com",
+  "cachedAt": "2025-10-19T05:08:50.931Z",
+  "source": "Alpha Vantage API (fixed)"
 }

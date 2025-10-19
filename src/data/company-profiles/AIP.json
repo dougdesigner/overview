@@ -1,8 +1,9 @@
 {
   "symbol": "AIP",
-  "name": "AIP Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:35:19.081Z",
-  "source": "Alpha Vantage API"
+  "name": "Arteris Inc",
+  "sector": "TECHNOLOGY",
+  "industry": "SEMICONDUCTORS",
+  "officialSite": "https://www.arteris.com",
+  "cachedAt": "2025-10-19T05:08:16.827Z",
+  "source": "Alpha Vantage API (fixed)"
 }

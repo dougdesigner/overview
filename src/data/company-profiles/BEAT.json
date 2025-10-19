@@ -1,8 +1,9 @@
 {
   "symbol": "BEAT",
-  "name": "BEAT Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:36:05.071Z",
-  "source": "Alpha Vantage API"
+  "name": "Heartbeam Inc",
+  "sector": "HEALTHCARE",
+  "industry": "HEALTH INFORMATION SERVICES",
+  "officialSite": "https://www.heartbeam.com",
+  "cachedAt": "2025-10-19T05:14:32.173Z",
+  "source": "Alpha Vantage API (fixed)"
 }

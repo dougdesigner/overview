@@ -1,8 +1,9 @@
 {
   "symbol": "BURL",
-  "name": "BURL Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:36.644Z",
-  "source": "Alpha Vantage API"
+  "name": "Burlington Stores Inc",
+  "sector": "CONSUMER CYCLICAL",
+  "industry": "APPAREL RETAIL",
+  "officialSite": "https://www.burlingtoninvestors.com",
+  "cachedAt": "2025-10-19T05:16:13.750Z",
+  "source": "Alpha Vantage API (fixed)"
 }

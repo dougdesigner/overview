@@ -1,8 +1,9 @@
 {
   "symbol": "ANDE",
-  "name": "ANDE Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:34:36.665Z",
-  "source": "Alpha Vantage API"
+  "name": "The Andersons Inc",
+  "sector": "CONSUMER DEFENSIVE",
+  "industry": "FOOD DISTRIBUTION",
+  "officialSite": "https://andersonsinc.com",
+  "cachedAt": "2025-10-19T05:08:37.292Z",
+  "source": "Alpha Vantage API (fixed)"
 }

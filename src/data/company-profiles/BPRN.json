@@ -1,8 +1,9 @@
 {
   "symbol": "BPRN",
-  "name": "BPRN Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:32:21.105Z",
-  "source": "Alpha Vantage API"
+  "name": "Bank Of Princeton",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "BANKS - REGIONAL",
+  "officialSite": "https://www.thebankofprinceton.com",
+  "cachedAt": "2025-10-19T05:15:49.376Z",
+  "source": "Alpha Vantage API (fixed)"
 }

@@ -1,8 +1,9 @@
 {
   "symbol": "BDSX",
-  "name": "BDSX Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:35:12.805Z",
-  "source": "Alpha Vantage API"
+  "name": "Biodesix Inc",
+  "sector": "HEALTHCARE",
+  "industry": "DIAGNOSTICS & RESEARCH",
+  "officialSite": "https://www.biodesix.com",
+  "cachedAt": "2025-10-19T05:14:30.250Z",
+  "source": "Alpha Vantage API (fixed)"
 }

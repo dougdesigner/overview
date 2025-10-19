@@ -1,8 +1,9 @@
 {
   "symbol": "ATXS",
-  "name": "ATXS Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:35:16.241Z",
-  "source": "Alpha Vantage API"
+  "name": "Astria Therapeutics Inc",
+  "sector": "HEALTHCARE",
+  "industry": "BIOTECHNOLOGY",
+  "officialSite": "https://www.astriatx.com",
+  "cachedAt": "2025-10-19T05:13:36.617Z",
+  "source": "Alpha Vantage API (fixed)"
 }

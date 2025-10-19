@@ -1,8 +1,9 @@
 {
   "symbol": "BOH",
-  "name": "BOH Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:35:05.003Z",
-  "source": "Alpha Vantage API"
+  "name": "Bank of Hawaii Corporation",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "BANKS - REGIONAL",
+  "officialSite": "https://www.boh.com",
+  "cachedAt": "2025-10-19T05:15:40.632Z",
+  "source": "Alpha Vantage API (fixed)"
 }

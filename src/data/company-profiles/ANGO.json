@@ -1,8 +1,9 @@
 {
   "symbol": "ANGO",
-  "name": "ANGO Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:34:36.158Z",
-  "source": "Alpha Vantage API"
+  "name": "AngioDynamics Inc",
+  "sector": "HEALTHCARE",
+  "industry": "MEDICAL INSTRUMENTS & SUPPLIES",
+  "officialSite": "https://www.angiodynamics.com",
+  "cachedAt": "2025-10-19T05:08:39.231Z",
+  "source": "Alpha Vantage API (fixed)"
 }

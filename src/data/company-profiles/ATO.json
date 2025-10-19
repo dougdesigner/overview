@@ -1,8 +1,9 @@
 {
   "symbol": "ATO",
-  "name": "ATO Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:12.749Z",
-  "source": "Alpha Vantage API"
+  "name": "Atmos Energy Corporation",
+  "sector": "UTILITIES",
+  "industry": "UTILITIES - REGULATED GAS",
+  "officialSite": "https://www.atmosenergy.com",
+  "cachedAt": "2025-10-19T05:13:29.814Z",
+  "source": "Alpha Vantage API (fixed)"
 }

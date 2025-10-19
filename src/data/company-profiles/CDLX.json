@@ -1,8 +1,9 @@
 {
   "symbol": "CDLX",
-  "name": "CDLX Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:34:10.278Z",
-  "source": "Alpha Vantage API"
+  "name": "Cardlytics Inc",
+  "sector": "COMMUNICATION SERVICES",
+  "industry": "ADVERTISING AGENCIES",
+  "officialSite": "https://www.cardlytics.com",
+  "cachedAt": "2025-10-19T05:18:42.712Z",
+  "source": "Alpha Vantage API (fixed)"
 }

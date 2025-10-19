@@ -1,8 +1,9 @@
 {
   "symbol": "APPN",
-  "name": "APPN Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:34:34.471Z",
-  "source": "Alpha Vantage API"
+  "name": "Appian Corp",
+  "sector": "TECHNOLOGY",
+  "industry": "SOFTWARE - INFRASTRUCTURE",
+  "officialSite": "https://www.appian.com",
+  "cachedAt": "2025-10-19T05:08:57.724Z",
+  "source": "Alpha Vantage API (fixed)"
 }

@@ -1,8 +1,9 @@
 {
   "symbol": "BRK-A",
-  "name": "BRK-A Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:01.957Z",
-  "source": "Alpha Vantage API"
+  "name": "Berkshire Hathaway Inc",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "INSURANCE - DIVERSIFIED",
+  "officialSite": "https://www.berkshirehathaway.com",
+  "cachedAt": "2025-10-19T05:15:56.242Z",
+  "source": "Alpha Vantage API (fixed)"
 }

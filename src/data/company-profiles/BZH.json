@@ -1,8 +1,9 @@
 {
   "symbol": "BZH",
-  "name": "BZH Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:35:12.048Z",
-  "source": "Alpha Vantage API"
+  "name": "Beazer Homes USA Inc",
+  "sector": "CONSUMER CYCLICAL",
+  "industry": "RESIDENTIAL CONSTRUCTION",
+  "officialSite": "https://www.beazer.com",
+  "cachedAt": "2025-10-19T05:16:25.444Z",
+  "source": "Alpha Vantage API (fixed)"
 }

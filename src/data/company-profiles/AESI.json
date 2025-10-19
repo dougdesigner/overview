@@ -1,8 +1,9 @@
 {
   "symbol": "AESI",
-  "name": "AESI Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:35:23.945Z",
-  "source": "Alpha Vantage API"
+  "name": "Atlas Energy Solutions Inc.",
+  "sector": "ENERGY",
+  "industry": "OIL & GAS EQUIPMENT & SERVICES",
+  "officialSite": "https://atlas.energy",
+  "cachedAt": "2025-10-19T05:08:02.300Z",
+  "source": "Alpha Vantage API (fixed)"
 }

@@ -1,8 +1,9 @@
 {
   "symbol": "BMEA",
-  "name": "BMEA Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:35:12.368Z",
-  "source": "Alpha Vantage API"
+  "name": "Biomea Fusion Inc",
+  "sector": "HEALTHCARE",
+  "industry": "BIOTECHNOLOGY",
+  "officialSite": "https://biomeafusion.com",
+  "cachedAt": "2025-10-19T05:15:33.870Z",
+  "source": "Alpha Vantage API (fixed)"
 }

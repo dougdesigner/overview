@@ -1,8 +1,9 @@
 {
   "symbol": "ATR",
-  "name": "ATR Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:31:03.365Z",
-  "source": "Alpha Vantage API"
+  "name": "AptarGroup Inc",
+  "sector": "HEALTHCARE",
+  "industry": "MEDICAL INSTRUMENTS & SUPPLIES",
+  "officialSite": "https://www.aptar.com",
+  "cachedAt": "2025-10-19T05:13:32.705Z",
+  "source": "Alpha Vantage API (fixed)"
 }

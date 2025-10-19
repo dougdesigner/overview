@@ -1,8 +1,9 @@
 {
   "symbol": "CADL",
-  "name": "CADL Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:34:12.154Z",
-  "source": "Alpha Vantage API"
+  "name": "Candel Therapeutics Inc",
+  "sector": "HEALTHCARE",
+  "industry": "BIOTECHNOLOGY",
+  "officialSite": "https://www.candeltx.com",
+  "cachedAt": "2025-10-19T05:16:31.309Z",
+  "source": "Alpha Vantage API (fixed)"
 }

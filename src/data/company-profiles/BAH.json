@@ -1,8 +1,9 @@
 {
   "symbol": "BAH",
-  "name": "BAH Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:05.561Z",
-  "source": "Alpha Vantage API"
+  "name": "Booz Allen Hamilton Holding",
+  "sector": "INDUSTRIALS",
+  "industry": "CONSULTING SERVICES",
+  "officialSite": "https://www.boozallen.com",
+  "cachedAt": "2025-10-19T05:14:07.834Z",
+  "source": "Alpha Vantage API (fixed)"
 }

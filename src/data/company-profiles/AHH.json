@@ -1,8 +1,9 @@
 {
   "symbol": "AHH",
-  "name": "AHH Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:34:39.609Z",
-  "source": "Alpha Vantage API"
+  "name": "Armada Hflr Pr",
+  "sector": "REAL ESTATE",
+  "industry": "REIT - DIVERSIFIED",
+  "officialSite": "https://www.armadahoffler.com",
+  "cachedAt": "2025-10-19T05:08:12.968Z",
+  "source": "Alpha Vantage API (fixed)"
 }

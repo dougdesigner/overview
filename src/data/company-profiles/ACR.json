@@ -1,8 +1,9 @@
 {
   "symbol": "ACR",
-  "name": "ACR Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:07.135Z",
-  "source": "Alpha Vantage API"
+  "name": "Acres Commercial Realty Corp",
+  "sector": "REAL ESTATE",
+  "industry": "REIT - MORTGAGE",
+  "officialSite": "https://www.acresreit.com",
+  "cachedAt": "2025-10-19T05:07:44.664Z",
+  "source": "Alpha Vantage API (fixed)"
 }

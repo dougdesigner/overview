@@ -1,8 +1,9 @@
 {
   "symbol": "AHR",
-  "name": "AHR Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:31:32.291Z",
-  "source": "Alpha Vantage API"
+  "name": "American Healthcare REIT, Inc.",
+  "sector": "REAL ESTATE",
+  "industry": "REIT - HEALTHCARE FACILITIES",
+  "officialSite": "https://www.americanhealthcarereit.com",
+  "cachedAt": "2025-10-19T05:08:13.927Z",
+  "source": "Alpha Vantage API (fixed)"
 }

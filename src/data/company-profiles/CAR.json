@@ -1,8 +1,9 @@
 {
   "symbol": "CAR",
-  "name": "CAR Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:35:21.248Z",
-  "source": "Alpha Vantage API"
+  "name": "Avis Budget Group Inc",
+  "sector": "INDUSTRIALS",
+  "industry": "RENTAL & LEASING SERVICES",
+  "officialSite": "https://www.avisbudgetgroup.com",
+  "cachedAt": "2025-10-19T05:18:17.308Z",
+  "source": "Alpha Vantage API (fixed)"
 }

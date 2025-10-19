@@ -1,8 +1,9 @@
 {
   "symbol": "ARDT",
-  "name": "ARDT Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:34:40.841Z",
-  "source": "Alpha Vantage API"
+  "name": "Ardent Health Partners, Inc.",
+  "sector": "HEALTHCARE",
+  "industry": "MEDICAL CARE FACILITIES",
+  "officialSite": "https://www.ardenthealth.com",
+  "cachedAt": "2025-10-19T05:09:02.550Z",
+  "source": "Alpha Vantage API (fixed)"
 }

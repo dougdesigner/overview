@@ -1,8 +1,9 @@
 {
   "symbol": "BCPC",
-  "name": "BCPC Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:31:15.313Z",
-  "source": "Alpha Vantage API"
+  "name": "Balchem Corporation",
+  "sector": "BASIC MATERIALS",
+  "industry": "SPECIALTY CHEMICALS",
+  "officialSite": "https://www.balchem.com",
+  "cachedAt": "2025-10-19T05:14:27.337Z",
+  "source": "Alpha Vantage API (fixed)"
 }

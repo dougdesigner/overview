@@ -1,8 +1,9 @@
 {
   "symbol": "BY",
-  "name": "BY Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:34:03.950Z",
-  "source": "Alpha Vantage API"
+  "name": "Byline Bancorp Inc",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "BANKS - REGIONAL",
+  "officialSite": "https://www.bylinebancorp.com",
+  "cachedAt": "2025-10-19T05:16:21.525Z",
+  "source": "Alpha Vantage API (fixed)"
 }

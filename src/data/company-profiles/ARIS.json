@@ -1,8 +1,9 @@
 {
   "symbol": "ARIS",
-  "name": "ARIS Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:34:40.230Z",
-  "source": "Alpha Vantage API"
+  "name": "Aris Water Solutions Inc",
+  "sector": "UTILITIES",
+  "industry": "UTILITIES - REGULATED WATER",
+  "officialSite": "https://www.ariswater.com",
+  "cachedAt": "2025-10-19T05:09:08.402Z",
+  "source": "Alpha Vantage API (fixed)"
 }

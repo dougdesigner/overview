@@ -1,8 +1,9 @@
 {
   "symbol": "CJMB",
-  "name": "CJMB Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:34:13.099Z",
-  "source": "Alpha Vantage API"
+  "name": "Callan JMB Inc. Common Stock",
+  "sector": "INDUSTRIALS",
+  "industry": "INTEGRATED FREIGHT & LOGISTICS",
+  "officialSite": "https://callanjmb.com",
+  "cachedAt": "2025-10-19T05:19:08.427Z",
+  "source": "Alpha Vantage API (fixed)"
 }

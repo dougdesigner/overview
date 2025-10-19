@@ -1,8 +1,9 @@
 {
   "symbol": "ASLE",
-  "name": "ASLE Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:04.325Z",
-  "source": "Alpha Vantage API"
+  "name": "AerSale Corp",
+  "sector": "INDUSTRIALS",
+  "industry": "AIRPORTS & AIR SERVICES",
+  "officialSite": "https://www.aersale.com",
+  "cachedAt": "2025-10-19T05:13:12.895Z",
+  "source": "Alpha Vantage API (fixed)"
 }

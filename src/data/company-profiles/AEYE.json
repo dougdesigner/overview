@@ -1,8 +1,9 @@
 {
   "symbol": "AEYE",
-  "name": "AEYE Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:35:22.797Z",
-  "source": "Alpha Vantage API"
+  "name": "AudioEye Inc",
+  "sector": "TECHNOLOGY",
+  "industry": "SOFTWARE - APPLICATION",
+  "officialSite": "https://www.audioeye.com",
+  "cachedAt": "2025-10-19T05:08:04.251Z",
+  "source": "Alpha Vantage API (fixed)"
 }

@@ -1,8 +1,9 @@
 {
   "symbol": "CASH",
-  "name": "CASH Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:32:32.741Z",
-  "source": "Alpha Vantage API"
+  "name": "Meta Financial Group Inc",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "BANKS - REGIONAL",
+  "officialSite": "https://www.pathwardfinancial.com",
+  "cachedAt": "2025-10-19T05:18:22.172Z",
+  "source": "Alpha Vantage API (fixed)"
 }

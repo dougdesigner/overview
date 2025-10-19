@@ -1,8 +1,9 @@
 {
   "symbol": "CAMP",
-  "name": "CAMP Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:34:12.467Z",
-  "source": "Alpha Vantage API"
+  "name": "CAMP4 THERAPEUTICS CORPORATION",
+  "sector": "HEALTHCARE",
+  "industry": "BIOTECHNOLOGY",
+  "officialSite": "https://www.camp4tx.com",
+  "cachedAt": "2025-10-19T05:18:15.380Z",
+  "source": "Alpha Vantage API (fixed)"
 }

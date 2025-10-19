@@ -1,8 +1,9 @@
 {
   "symbol": "CLX",
-  "name": "CLX Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:29.236Z",
-  "source": "Alpha Vantage API"
+  "name": "The Clorox Company",
+  "sector": "CONSUMER DEFENSIVE",
+  "industry": "HOUSEHOLD & PERSONAL PRODUCTS",
+  "officialSite": "https://www.thecloroxcompany.com",
+  "cachedAt": "2025-10-19T05:19:16.735Z",
+  "source": "Alpha Vantage API (fixed)"
 }

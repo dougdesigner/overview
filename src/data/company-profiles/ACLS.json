@@ -1,8 +1,9 @@
 {
   "symbol": "ACLS",
-  "name": "ACLS Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:35:20.769Z",
-  "source": "Alpha Vantage API"
+  "name": "Axcelis Technologies Inc",
+  "sector": "TECHNOLOGY",
+  "industry": "SEMICONDUCTOR EQUIPMENT & MATERIALS",
+  "officialSite": "https://www.axcelis.com",
+  "cachedAt": "2025-10-19T05:07:41.717Z",
+  "source": "Alpha Vantage API (fixed)"
 }

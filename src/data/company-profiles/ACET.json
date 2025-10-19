@@ -1,8 +1,9 @@
 {
   "symbol": "ACET",
-  "name": "ACET Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:05.385Z",
-  "source": "Alpha Vantage API"
+  "name": "Adicet Bio Inc",
+  "sector": "HEALTHCARE",
+  "industry": "BIOTECHNOLOGY",
+  "officialSite": "https://www.adicetbio.com",
+  "cachedAt": "2025-10-19T05:07:38.787Z",
+  "source": "Alpha Vantage API (fixed)"
 }

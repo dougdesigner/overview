@@ -1,8 +1,9 @@
 {
   "symbol": "BRY",
-  "name": "BRY Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:35:14.875Z",
-  "source": "Alpha Vantage API"
+  "name": "Berry Petroleum Corp",
+  "sector": "ENERGY",
+  "industry": "OIL & GAS E&P",
+  "officialSite": "https://www.bry.com",
+  "cachedAt": "2025-10-19T05:16:02.055Z",
+  "source": "Alpha Vantage API (fixed)"
 }

@@ -1,8 +1,9 @@
 {
   "symbol": "APA",
-  "name": "APA Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:31:26.358Z",
-  "source": "Alpha Vantage API"
+  "name": "APA Corporation",
+  "sector": "ENERGY",
+  "industry": "OIL & GAS E&P",
+  "officialSite": "https://www.apacorp.com",
+  "cachedAt": "2025-10-19T05:08:49.943Z",
+  "source": "Alpha Vantage API (fixed)"
 }

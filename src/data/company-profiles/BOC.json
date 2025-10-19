@@ -1,8 +1,9 @@
 {
   "symbol": "BOC",
-  "name": "BOC Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:34:04.970Z",
-  "source": "Alpha Vantage API"
+  "name": "Boston Omaha Corp",
+  "sector": "INDUSTRIALS",
+  "industry": "CONGLOMERATES",
+  "officialSite": "https://www.bostonomaha.com",
+  "cachedAt": "2025-10-19T05:15:39.676Z",
+  "source": "Alpha Vantage API (fixed)"
 }

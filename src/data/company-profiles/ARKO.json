@@ -1,8 +1,9 @@
 {
   "symbol": "ARKO",
-  "name": "ARKO Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:34:39.917Z",
-  "source": "Alpha Vantage API"
+  "name": "Arko Corp",
+  "sector": "CONSUMER CYCLICAL",
+  "industry": "SPECIALTY RETAIL",
+  "officialSite": "https://www.arkocorp.com",
+  "cachedAt": "2025-10-19T05:09:09.382Z",
+  "source": "Alpha Vantage API (fixed)"
 }

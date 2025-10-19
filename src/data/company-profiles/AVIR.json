@@ -1,8 +1,9 @@
 {
   "symbol": "AVIR",
-  "name": "AVIR Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:35:22.488Z",
-  "source": "Alpha Vantage API"
+  "name": "Atea Pharmaceuticals Inc",
+  "sector": "HEALTHCARE",
+  "industry": "BIOTECHNOLOGY",
+  "officialSite": "https://ateapharma.com",
+  "cachedAt": "2025-10-19T05:13:48.289Z",
+  "source": "Alpha Vantage API (fixed)"
 }

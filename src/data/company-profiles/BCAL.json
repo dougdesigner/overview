@@ -1,8 +1,9 @@
 {
   "symbol": "BCAL",
-  "name": "BCAL Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:34:01.506Z",
-  "source": "Alpha Vantage API"
+  "name": "Southern California Bancorp Common Stock",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "BANKS - REGIONAL",
+  "officialSite": "https://www.californiabankofcommerce.com",
+  "cachedAt": "2025-10-19T05:14:23.469Z",
+  "source": "Alpha Vantage API (fixed)"
 }

@@ -1,8 +1,9 @@
 {
   "symbol": "AUBN",
-  "name": "AUBN Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:35:22.893Z",
-  "source": "Alpha Vantage API"
+  "name": "Auburn National Bancorporation Inc",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "BANKS - REGIONAL",
+  "officialSite": "https://www.auburnbank.com",
+  "cachedAt": "2025-10-19T05:13:39.506Z",
+  "source": "Alpha Vantage API (fixed)"
 }

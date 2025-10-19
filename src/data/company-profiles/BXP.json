@@ -1,8 +1,9 @@
 {
   "symbol": "BXP",
-  "name": "BXP Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:13.543Z",
-  "source": "Alpha Vantage API"
+  "name": "Boston Properties Inc",
+  "sector": "REAL ESTATE",
+  "industry": "REIT - OFFICE",
+  "officialSite": "https://www.bxp.com",
+  "cachedAt": "2025-10-19T05:16:20.546Z",
+  "source": "Alpha Vantage API (fixed)"
 }

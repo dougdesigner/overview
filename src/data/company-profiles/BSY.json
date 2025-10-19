@@ -1,8 +1,9 @@
 {
   "symbol": "BSY",
-  "name": "BSY Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:31:12.050Z",
-  "source": "Alpha Vantage API"
+  "name": "Bentley Systems Inc",
+  "sector": "TECHNOLOGY",
+  "industry": "SOFTWARE - APPLICATION",
+  "officialSite": "https://www.bentley.com",
+  "cachedAt": "2025-10-19T05:16:06.923Z",
+  "source": "Alpha Vantage API (fixed)"
 }

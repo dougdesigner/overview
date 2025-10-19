@@ -1,8 +1,9 @@
 {
   "symbol": "ABUS",
-  "name": "ABUS Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:34:42.416Z",
-  "source": "Alpha Vantage API"
+  "name": "Arbutus Biopharma Corp",
+  "sector": "HEALTHCARE",
+  "industry": "BIOTECHNOLOGY",
+  "officialSite": "https://www.arbutusbio.com",
+  "cachedAt": "2025-10-19T05:07:35.823Z",
+  "source": "Alpha Vantage API (fixed)"
 }

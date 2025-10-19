@@ -1,8 +1,9 @@
 {
   "symbol": "ATRA",
-  "name": "ATRA Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:35:15.557Z",
-  "source": "Alpha Vantage API"
+  "name": "Atara Biotherapeutics Inc",
+  "sector": "HEALTHCARE",
+  "industry": "BIOTECHNOLOGY",
+  "officialSite": "https://www.atarabio.com",
+  "cachedAt": "2025-10-19T05:13:33.702Z",
+  "source": "Alpha Vantage API (fixed)"
 }

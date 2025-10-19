@@ -1,8 +1,9 @@
 {
   "symbol": "ANEB",
-  "name": "ANEB Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:34:38.869Z",
-  "source": "Alpha Vantage API"
+  "name": "Anebulo Pharmaceuticals Inc",
+  "sector": "HEALTHCARE",
+  "industry": "BIOTECHNOLOGY",
+  "officialSite": "https://www.anebulo.com",
+  "cachedAt": "2025-10-19T05:08:38.267Z",
+  "source": "Alpha Vantage API (fixed)"
 }

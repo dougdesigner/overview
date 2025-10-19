@@ -1,8 +1,9 @@
 {
   "symbol": "BNL",
-  "name": "BNL Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:31:03.051Z",
-  "source": "Alpha Vantage API"
+  "name": "Broadstone Net Lease Inc",
+  "sector": "REAL ESTATE",
+  "industry": "REIT - DIVERSIFIED",
+  "officialSite": "https://www.broadstone.com",
+  "cachedAt": "2025-10-19T05:15:38.700Z",
+  "source": "Alpha Vantage API (fixed)"
 }

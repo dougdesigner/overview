@@ -1,8 +1,9 @@
 {
   "symbol": "ARTNA",
-  "name": "ARTNA Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:35:19.005Z",
-  "source": "Alpha Vantage API"
+  "name": "Artesian Resources Corporation",
+  "sector": "UTILITIES",
+  "industry": "UTILITIES - REGULATED WATER",
+  "officialSite": "https://www.artesianwater.com",
+  "cachedAt": "2025-10-19T05:13:04.198Z",
+  "source": "Alpha Vantage API (fixed)"
 }

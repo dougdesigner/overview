@@ -1,8 +1,9 @@
 {
   "symbol": "AX",
-  "name": "AX Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:31:08.027Z",
-  "source": "Alpha Vantage API"
+  "name": "Axos Financial Inc",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "BANKS - REGIONAL",
+  "officialSite": "https://investors.axosfinancial.com/corporate-prof",
+  "cachedAt": "2025-10-19T05:13:57.018Z",
+  "source": "Alpha Vantage API (fixed)"
 }

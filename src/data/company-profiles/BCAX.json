@@ -1,8 +1,9 @@
 {
   "symbol": "BCAX",
-  "name": "BCAX Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:35:14.369Z",
-  "source": "Alpha Vantage API"
+  "name": "Bicara Therapeutics Inc. Common Stock",
+  "sector": "HEALTHCARE",
+  "industry": "BIOTECHNOLOGY",
+  "officialSite": "https://www.bicara.com",
+  "cachedAt": "2025-10-19T05:14:24.433Z",
+  "source": "Alpha Vantage API (fixed)"
 }

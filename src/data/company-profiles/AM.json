@@ -1,8 +1,9 @@
 {
   "symbol": "AM",
-  "name": "AM Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:31:24.619Z",
-  "source": "Alpha Vantage API"
+  "name": "Antero Midstream Partners LP",
+  "sector": "ENERGY",
+  "industry": "OIL & GAS MIDSTREAM",
+  "officialSite": "https://www.anteromidstream.com",
+  "cachedAt": "2025-10-19T05:08:28.499Z",
+  "source": "Alpha Vantage API (fixed)"
 }

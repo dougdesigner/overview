@@ -1,8 +1,9 @@
 {
   "symbol": "ALOT",
-  "name": "ALOT Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:35:15.925Z",
-  "source": "Alpha Vantage API"
+  "name": "AstroNova Inc",
+  "sector": "TECHNOLOGY",
+  "industry": "COMPUTER HARDWARE",
+  "officialSite": "https://www.astronovainc.com",
+  "cachedAt": "2025-10-19T05:08:26.578Z",
+  "source": "Alpha Vantage API (fixed)"
 }

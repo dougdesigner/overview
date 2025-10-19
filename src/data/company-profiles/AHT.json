@@ -1,8 +1,9 @@
 {
   "symbol": "AHT",
-  "name": "AHT Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:35:17.757Z",
-  "source": "Alpha Vantage API"
+  "name": "Ashford Hospitality Trust Inc",
+  "sector": "REAL ESTATE",
+  "industry": "REIT - HOTEL & MOTEL",
+  "officialSite": "https://www.ahtreit.com",
+  "cachedAt": "2025-10-19T05:08:14.888Z",
+  "source": "Alpha Vantage API (fixed)"
 }

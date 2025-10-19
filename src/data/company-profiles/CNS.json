@@ -1,8 +1,9 @@
 {
   "symbol": "CNS",
-  "name": "CNS Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:34:27.482Z",
-  "source": "Alpha Vantage API"
+  "name": "Cohen & Steers Inc",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "ASSET MANAGEMENT",
+  "officialSite": "https://www.cohenandsteers.com",
+  "cachedAt": "2025-10-19T05:19:34.286Z",
+  "source": "Alpha Vantage API (fixed)"
 }

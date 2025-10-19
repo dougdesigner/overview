@@ -1,8 +1,9 @@
 {
   "symbol": "AVB",
-  "name": "AVB Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:03.219Z",
-  "source": "Alpha Vantage API"
+  "name": "AvalonBay Communities Inc",
+  "sector": "REAL ESTATE",
+  "industry": "REIT - RESIDENTIAL",
+  "officialSite": "https://www.avalonbay.com",
+  "cachedAt": "2025-10-19T05:13:43.354Z",
+  "source": "Alpha Vantage API (fixed)"
 }

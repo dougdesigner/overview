@@ -1,8 +1,9 @@
 {
   "symbol": "ATNI",
-  "name": "ATNI Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:35:23.728Z",
-  "source": "Alpha Vantage API"
+  "name": "ATN International Inc",
+  "sector": "COMMUNICATION SERVICES",
+  "industry": "TELECOM SERVICES",
+  "officialSite": "https://www.atni.com",
+  "cachedAt": "2025-10-19T05:13:27.876Z",
+  "source": "Alpha Vantage API (fixed)"
 }

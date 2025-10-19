@@ -1,8 +1,9 @@
 {
   "symbol": "ACTU",
-  "name": "ACTU Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:06.637Z",
-  "source": "Alpha Vantage API"
+  "name": "Actuate Therapeutics, Inc. Common stock",
+  "sector": "HEALTHCARE",
+  "industry": "BIOTECHNOLOGY",
+  "officialSite": "https://actuatetherapeutics.com",
+  "cachedAt": "2025-10-19T05:07:48.537Z",
+  "source": "Alpha Vantage API (fixed)"
 }

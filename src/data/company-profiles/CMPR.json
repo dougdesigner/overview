@@ -1,8 +1,9 @@
 {
   "symbol": "CMPR",
-  "name": "CMPR Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:34:01.432Z",
-  "source": "Alpha Vantage API"
+  "name": "Cimpress NV",
+  "sector": "INDUSTRIALS",
+  "industry": "SPECIALTY BUSINESS SERVICES",
+  "officialSite": "https://cimpress.com",
+  "cachedAt": "2025-10-19T05:19:23.555Z",
+  "source": "Alpha Vantage API (fixed)"
 }

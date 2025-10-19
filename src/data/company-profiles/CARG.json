@@ -1,8 +1,9 @@
 {
   "symbol": "CARG",
-  "name": "CARG Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:34:09.006Z",
-  "source": "Alpha Vantage API"
+  "name": "CarGurus",
+  "sector": "CONSUMER CYCLICAL",
+  "industry": "AUTO & TRUCK DEALERSHIPS",
+  "officialSite": "https://www.cargurus.com",
+  "cachedAt": "2025-10-19T05:18:19.241Z",
+  "source": "Alpha Vantage API (fixed)"
 }

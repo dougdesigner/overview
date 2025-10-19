@@ -1,8 +1,9 @@
 {
   "symbol": "BTU",
-  "name": "BTU Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:32:18.886Z",
-  "source": "Alpha Vantage API"
+  "name": "Peabody Energy Corp",
+  "sector": "ENERGY",
+  "industry": "THERMAL COAL",
+  "officialSite": "https://www.peabodyenergy.com",
+  "cachedAt": "2025-10-19T05:16:12.779Z",
+  "source": "Alpha Vantage API (fixed)"
 }

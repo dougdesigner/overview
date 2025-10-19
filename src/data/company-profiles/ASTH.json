@@ -1,8 +1,9 @@
 {
   "symbol": "ASTH",
-  "name": "ASTH Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:35:16.515Z",
-  "source": "Alpha Vantage API"
+  "name": "Astrana Health Inc",
+  "sector": "HEALTHCARE",
+  "industry": "MEDICAL CARE FACILITIES",
+  "officialSite": "https://www.astranahealth.com",
+  "cachedAt": "2025-10-19T05:13:20.779Z",
+  "source": "Alpha Vantage API (fixed)"
 }

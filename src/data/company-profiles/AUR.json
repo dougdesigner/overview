@@ -1,8 +1,9 @@
 {
   "symbol": "AUR",
-  "name": "AUR Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:31:30.114Z",
-  "source": "Alpha Vantage API"
+  "name": "Aurora Innovation Inc",
+  "sector": "TECHNOLOGY",
+  "industry": "INFORMATION TECHNOLOGY SERVICES",
+  "officialSite": "https://aurora.tech",
+  "cachedAt": "2025-10-19T05:13:40.470Z",
+  "source": "Alpha Vantage API (fixed)"
 }

@@ -1,8 +1,9 @@
 {
   "symbol": "CABO",
-  "name": "CABO Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:34:02.999Z",
-  "source": "Alpha Vantage API"
+  "name": "Cable One Inc",
+  "sector": "COMMUNICATION SERVICES",
+  "industry": "TELECOM SERVICES",
+  "officialSite": "https://www.cableone.biz",
+  "cachedAt": "2025-10-19T05:16:27.411Z",
+  "source": "Alpha Vantage API (fixed)"
 }

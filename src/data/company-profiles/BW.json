@@ -1,8 +1,9 @@
 {
   "symbol": "BW",
-  "name": "BW Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:35:07.181Z",
-  "source": "Alpha Vantage API"
+  "name": "Babcock & Wilcox Enterprises Inc",
+  "sector": "INDUSTRIALS",
+  "industry": "SPECIALTY INDUSTRIAL MACHINERY",
+  "officialSite": "https://www.babcock.com",
+  "cachedAt": "2025-10-19T05:16:16.686Z",
+  "source": "Alpha Vantage API (fixed)"
 }

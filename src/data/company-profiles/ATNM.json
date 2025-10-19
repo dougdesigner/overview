@@ -1,8 +1,9 @@
 {
   "symbol": "ATNM",
-  "name": "ATNM Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:06.824Z",
-  "source": "Alpha Vantage API"
+  "name": "Actinium Pharmaceuticals Inc",
+  "sector": "HEALTHCARE",
+  "industry": "BIOTECHNOLOGY",
+  "officialSite": "https://www.actiniumpharma.com",
+  "cachedAt": "2025-10-19T05:13:28.846Z",
+  "source": "Alpha Vantage API (fixed)"
 }

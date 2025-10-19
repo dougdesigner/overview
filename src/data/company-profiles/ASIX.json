@@ -1,8 +1,9 @@
 {
   "symbol": "ASIX",
-  "name": "ASIX Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:04.962Z",
-  "source": "Alpha Vantage API"
+  "name": "AdvanSix Inc",
+  "sector": "BASIC MATERIALS",
+  "industry": "CHEMICALS",
+  "officialSite": "https://www.advansix.com",
+  "cachedAt": "2025-10-19T05:13:11.933Z",
+  "source": "Alpha Vantage API (fixed)"
 }

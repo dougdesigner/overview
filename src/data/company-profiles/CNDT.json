@@ -1,8 +1,9 @@
 {
   "symbol": "CNDT",
-  "name": "CNDT Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:34:32.642Z",
-  "source": "Alpha Vantage API"
+  "name": "Conduent Inc",
+  "sector": "TECHNOLOGY",
+  "industry": "INFORMATION TECHNOLOGY SERVICES",
+  "officialSite": "https://www.conduent.com",
+  "cachedAt": "2025-10-19T05:19:28.451Z",
+  "source": "Alpha Vantage API (fixed)"
 }

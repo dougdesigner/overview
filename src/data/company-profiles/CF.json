@@ -1,8 +1,9 @@
 {
   "symbol": "CF",
-  "name": "CF Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:21.227Z",
-  "source": "Alpha Vantage API"
+  "name": "CF Industries Holdings Inc",
+  "sector": "BASIC MATERIALS",
+  "industry": "AGRICULTURAL INPUTS",
+  "officialSite": "https://www.cfindustries.com",
+  "cachedAt": "2025-10-19T05:18:50.816Z",
+  "source": "Alpha Vantage API (fixed)"
 }

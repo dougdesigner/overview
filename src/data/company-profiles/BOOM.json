@@ -1,8 +1,9 @@
 {
   "symbol": "BOOM",
-  "name": "BOOM Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:34:21.950Z",
-  "source": "Alpha Vantage API"
+  "name": "Dmc Global Inc",
+  "sector": "INDUSTRIALS",
+  "industry": "CONGLOMERATES",
+  "officialSite": "https://www.dmcglobal.com",
+  "cachedAt": "2025-10-19T05:15:44.542Z",
+  "source": "Alpha Vantage API (fixed)"
 }

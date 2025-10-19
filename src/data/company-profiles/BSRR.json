@@ -1,8 +1,9 @@
 {
   "symbol": "BSRR",
-  "name": "BSRR Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:24.803Z",
-  "source": "Alpha Vantage API"
+  "name": "Sierra Bancorp",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "BANKS - REGIONAL",
+  "officialSite": "https://sierrabancorp.q4ir.com",
+  "cachedAt": "2025-10-19T05:16:04.975Z",
+  "source": "Alpha Vantage API (fixed)"
 }
