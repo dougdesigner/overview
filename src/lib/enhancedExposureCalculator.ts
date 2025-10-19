@@ -36,7 +36,10 @@ interface MutualFundData {
 
 export class EnhancedExposureCalculator {
   private etfProfiles: Map<string, ETFProfile> = new Map()
-  private companyOverviews: Map<string, { sector: string; industry: string }> = new Map()
+  private companyOverviews: Map<
+    string,
+    { name: string; sector: string; industry: string }
+  > = new Map()
   private mutualFunds: Record<string, MutualFundData> = mutualFundMappings as Record<string, MutualFundData>
   private assetClasses = assetClassifications
 
@@ -201,6 +204,7 @@ export class EnhancedExposureCalculator {
       const stockData = this.assetClasses.stocks[symbol as keyof typeof assetClassifications.stocks]
       if (stockData) {
         this.companyOverviews.set(symbol, {
+          name: stockData.name || symbol,
           sector: stockData.sector || "Unknown",
           industry: stockData.industry || "Unknown",
         })
@@ -221,7 +225,10 @@ export class EnhancedExposureCalculator {
         if (response.ok) {
           const overviews = await response.json()
           for (const [symbol, overview] of Object.entries(overviews)) {
-            this.companyOverviews.set(symbol, overview as { sector: string; industry: string })
+            this.companyOverviews.set(
+              symbol,
+              overview as { name: string; sector: string; industry: string }
+            )
           }
         }
       } catch (error) {
@@ -243,11 +250,15 @@ export class EnhancedExposureCalculator {
         // Aggregate multiple holdings of the same stock
         existing.directValue += holding.marketValue
         existing.totalValue = existing.directValue + existing.etfValue
+        // Update name if we have a better one from company overview
+        if (overview?.name && !existing.name) {
+          existing.name = overview.name
+        }
       } else {
         exposureMap.set(ticker, {
           id: `stock-${ticker}`,
           ticker,
-          name: holding.name,
+          name: overview?.name || holding.name,
           sector: overview?.sector,
           industry: overview?.industry,
           directShares: 0, // Not calculating shares anymore
@@ -318,11 +329,15 @@ export class EnhancedExposureCalculator {
           if (!existing.sector && sector) {
             existing.sector = sector
           }
+          // Update name if we have a better one from company overview
+          if (overview?.name && !existing.name) {
+            existing.name = overview.name
+          }
         } else {
           exposureMap.set(stockSymbol, {
             id: `stock-${stockSymbol}`,
             ticker: stockSymbol,
-            name: stockInETF.name,
+            name: overview?.name || stockInETF.name,
             sector: sector,
             industry: overview?.industry,
             directShares: 0,
