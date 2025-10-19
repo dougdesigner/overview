@@ -1,8 +1,9 @@
 {
   "symbol": "CPAY",
-  "name": "CPAY Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:18.432Z",
-  "source": "Alpha Vantage API"
+  "name": "Corpay Inc",
+  "sector": "TECHNOLOGY",
+  "industry": "SOFTWARE - INFRASTRUCTURE",
+  "officialSite": "https://www.corpay.com",
+  "cachedAt": "2025-10-19T05:25:29.968Z",
+  "source": "Alpha Vantage API (fixed)"
 }

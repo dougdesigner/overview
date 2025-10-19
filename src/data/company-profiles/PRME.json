@@ -1,8 +1,9 @@
 {
   "symbol": "PRME",
-  "name": "PRME Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:32:21.621Z",
-  "source": "Alpha Vantage API"
+  "name": "Prime Medicine, Inc. Common Stock",
+  "sector": "HEALTHCARE",
+  "industry": "BIOTECHNOLOGY",
+  "officialSite": "https://primemedicine.com",
+  "cachedAt": "2025-10-19T06:00:44.654Z",
+  "source": "Alpha Vantage API (fixed)"
 }

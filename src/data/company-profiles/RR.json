@@ -1,8 +1,9 @@
 {
   "symbol": "RR",
-  "name": "RR Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:32:08.877Z",
-  "source": "Alpha Vantage API"
+  "name": "Richtech Robotics Inc. Class B Common Stock",
+  "sector": "INDUSTRIALS",
+  "industry": "SPECIALTY INDUSTRIAL MACHINERY",
+  "officialSite": "https://www.richtechrobotics.com",
+  "cachedAt": "2025-10-19T06:02:47.286Z",
+  "source": "Alpha Vantage API (fixed)"
 }

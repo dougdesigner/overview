@@ -1,8 +1,9 @@
 {
   "symbol": "NX",
-  "name": "NX Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:32:15.353Z",
-  "source": "Alpha Vantage API"
+  "name": "Quanex Building Products",
+  "sector": "INDUSTRIALS",
+  "industry": "BUILDING PRODUCTS & EQUIPMENT",
+  "officialSite": "https://www.quanex.com",
+  "cachedAt": "2025-10-19T05:54:51.043Z",
+  "source": "Alpha Vantage API (fixed)"
 }

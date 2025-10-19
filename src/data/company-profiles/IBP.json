@@ -1,8 +1,9 @@
 {
   "symbol": "IBP",
-  "name": "IBP Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:31:16.271Z",
-  "source": "Alpha Vantage API"
+  "name": "Installed Building Products Inc",
+  "sector": "CONSUMER CYCLICAL",
+  "industry": "RESIDENTIAL CONSTRUCTION",
+  "officialSite": "https://www.installedbuildingproducts.com",
+  "cachedAt": "2025-10-19T05:42:12.809Z",
+  "source": "Alpha Vantage API (fixed)"
 }

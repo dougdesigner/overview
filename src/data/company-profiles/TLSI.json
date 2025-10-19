@@ -1,8 +1,9 @@
 {
   "symbol": "TLSI",
-  "name": "TLSI Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:32:40.393Z",
-  "source": "Alpha Vantage API"
+  "name": "TriSalus Life Sciences Inc.",
+  "sector": "HEALTHCARE",
+  "industry": "MEDICAL DEVICES",
+  "officialSite": "https://trisaluslifesci.com",
+  "cachedAt": "2025-10-19T06:07:52.642Z",
+  "source": "Alpha Vantage API (fixed)"
 }

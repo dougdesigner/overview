@@ -1,8 +1,9 @@
 {
   "symbol": "RWT",
-  "name": "RWT Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:32:33.587Z",
-  "source": "Alpha Vantage API"
+  "name": "Redwood Trust Inc",
+  "sector": "REAL ESTATE",
+  "industry": "REIT - MORTGAGE",
+  "officialSite": "https://www.redwoodtrust.com",
+  "cachedAt": "2025-10-19T06:02:58.946Z",
+  "source": "Alpha Vantage API (fixed)"
 }

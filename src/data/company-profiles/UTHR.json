@@ -1,8 +1,9 @@
 {
   "symbol": "UTHR",
-  "name": "UTHR Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:28.924Z",
-  "source": "Alpha Vantage API"
+  "name": "United Therapeutics Corporation",
+  "sector": "HEALTHCARE",
+  "industry": "DRUG MANUFACTURERS - SPECIALTY & GENERIC",
+  "officialSite": "https://www.unither.com",
+  "cachedAt": "2025-10-19T06:09:16.553Z",
+  "source": "Alpha Vantage API (fixed)"
 }

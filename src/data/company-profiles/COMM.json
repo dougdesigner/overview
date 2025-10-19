@@ -1,8 +1,9 @@
 {
   "symbol": "COMM",
-  "name": "COMM Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:34:26.101Z",
-  "source": "Alpha Vantage API"
+  "name": "CommScope Holding Co Inc",
+  "sector": "TECHNOLOGY",
+  "industry": "COMMUNICATION EQUIPMENT",
+  "officialSite": "https://www.commscope.com",
+  "cachedAt": "2025-10-19T05:25:24.205Z",
+  "source": "Alpha Vantage API (fixed)"
 }

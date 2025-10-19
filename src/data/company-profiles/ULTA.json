@@ -1,8 +1,9 @@
 {
   "symbol": "ULTA",
-  "name": "ULTA Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:32.564Z",
-  "source": "Alpha Vantage API"
+  "name": "Ulta Beauty Inc",
+  "sector": "CONSUMER CYCLICAL",
+  "industry": "SPECIALTY RETAIL",
+  "officialSite": "https://www.ulta.com",
+  "cachedAt": "2025-10-19T06:08:58.494Z",
+  "source": "Alpha Vantage API (fixed)"
 }

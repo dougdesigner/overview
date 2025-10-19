@@ -1,8 +1,9 @@
 {
   "symbol": "CRNX",
-  "name": "CRNX Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:31:42.103Z",
-  "source": "Alpha Vantage API"
+  "name": "Crinetics Pharmaceuticals Inc",
+  "sector": "HEALTHCARE",
+  "industry": "BIOTECHNOLOGY",
+  "officialSite": "https://www.crinetics.com",
+  "cachedAt": "2025-10-19T05:25:46.517Z",
+  "source": "Alpha Vantage API (fixed)"
 }

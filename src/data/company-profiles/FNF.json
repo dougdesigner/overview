@@ -1,8 +1,9 @@
 {
   "symbol": "FNF",
-  "name": "FNF Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:31.108Z",
-  "source": "Alpha Vantage API"
+  "name": "Fidelity National Financial Inc",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "INSURANCE - SPECIALTY",
+  "officialSite": "https://www.fnf.com",
+  "cachedAt": "2025-10-19T05:31:19.278Z",
+  "source": "Alpha Vantage API (fixed)"
 }

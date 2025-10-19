@@ -1,8 +1,9 @@
 {
   "symbol": "SACH",
-  "name": "SACH Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:31.979Z",
-  "source": "Alpha Vantage API"
+  "name": "Sachem Capital Corp",
+  "sector": "REAL ESTATE",
+  "industry": "REIT - MORTGAGE",
+  "officialSite": "https://www.sachemcapitalcorp.com",
+  "cachedAt": "2025-10-19T06:03:08.797Z",
+  "source": "Alpha Vantage API (fixed)"
 }

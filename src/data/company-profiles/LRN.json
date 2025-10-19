@@ -1,8 +1,9 @@
 {
   "symbol": "LRN",
-  "name": "LRN Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:31:35.175Z",
-  "source": "Alpha Vantage API"
+  "name": "Stride Inc",
+  "sector": "CONSUMER DEFENSIVE",
+  "industry": "EDUCATION & TRAINING SERVICES",
+  "officialSite": "https://stridelearning.com",
+  "cachedAt": "2025-10-19T05:48:33.812Z",
+  "source": "Alpha Vantage API (fixed)"
 }

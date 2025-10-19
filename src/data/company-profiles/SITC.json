@@ -1,8 +1,9 @@
 {
   "symbol": "SITC",
-  "name": "SITC Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:22.647Z",
-  "source": "Alpha Vantage API"
+  "name": "Site Centers Corp",
+  "sector": "REAL ESTATE",
+  "industry": "REIT - RETAIL",
+  "officialSite": "https://www.sitecenters.com",
+  "cachedAt": "2025-10-19T06:04:44.666Z",
+  "source": "Alpha Vantage API (fixed)"
 }

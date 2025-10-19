@@ -1,8 +1,9 @@
 {
   "symbol": "VGAS",
-  "name": "VGAS Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:15.915Z",
-  "source": "Alpha Vantage API"
+  "name": "Verde Clean Fuels Inc.",
+  "sector": "UTILITIES",
+  "industry": "UTILITIES - RENEWABLE",
+  "officialSite": "https://www.verdecleanfuels.com",
+  "cachedAt": "2025-10-19T06:09:35.332Z",
+  "source": "Alpha Vantage API (fixed)"
 }

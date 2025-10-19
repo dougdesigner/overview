@@ -1,8 +1,9 @@
 {
   "symbol": "DXR",
-  "name": "DXR Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:34:14.044Z",
-  "source": "Alpha Vantage API"
+  "name": "Daxor Corporation",
+  "sector": "HEALTHCARE",
+  "industry": "MEDICAL INSTRUMENTS & SUPPLIES",
+  "officialSite": "https://www.daxor.com",
+  "cachedAt": "2025-10-19T05:29:23.333Z",
+  "source": "Alpha Vantage API (fixed)"
 }

@@ -1,8 +1,9 @@
 {
   "symbol": "CVLG",
-  "name": "CVLG Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:34:34.254Z",
-  "source": "Alpha Vantage API"
+  "name": "Covenant Logistics Group, Inc.",
+  "sector": "INDUSTRIALS",
+  "industry": "TRUCKING",
+  "officialSite": "https://www.covenantlogistics.com",
+  "cachedAt": "2025-10-19T05:26:16.806Z",
+  "source": "Alpha Vantage API (fixed)"
 }

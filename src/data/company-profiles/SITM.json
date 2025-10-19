@@ -1,8 +1,9 @@
 {
   "symbol": "SITM",
-  "name": "SITM Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:31:07.085Z",
-  "source": "Alpha Vantage API"
+  "name": "Sitime Corporation",
+  "sector": "TECHNOLOGY",
+  "industry": "SEMICONDUCTORS",
+  "officialSite": "https://www.sitime.com",
+  "cachedAt": "2025-10-19T06:04:46.612Z",
+  "source": "Alpha Vantage API (fixed)"
 }

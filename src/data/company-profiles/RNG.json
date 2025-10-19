@@ -1,8 +1,9 @@
 {
   "symbol": "RNG",
-  "name": "RNG Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:29.476Z",
-  "source": "Alpha Vantage API"
+  "name": "Ringcentral Inc",
+  "sector": "TECHNOLOGY",
+  "industry": "SOFTWARE - APPLICATION",
+  "officialSite": "https://www.ringcentral.com",
+  "cachedAt": "2025-10-19T06:02:35.486Z",
+  "source": "Alpha Vantage API (fixed)"
 }

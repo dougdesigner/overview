@@ -1,8 +1,9 @@
 {
   "symbol": "SLGN",
-  "name": "SLGN Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:31:33.534Z",
-  "source": "Alpha Vantage API"
+  "name": "Silgan Holdings Inc",
+  "sector": "CONSUMER CYCLICAL",
+  "industry": "PACKAGING & CONTAINERS",
+  "officialSite": "https://www.silganholdings.com",
+  "cachedAt": "2025-10-19T06:04:57.509Z",
+  "source": "Alpha Vantage API (fixed)"
 }

@@ -1,8 +1,9 @@
 {
   "symbol": "ZM",
-  "name": "ZM Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:28.784Z",
-  "source": "Alpha Vantage API"
+  "name": "Zoom Video Communications Inc",
+  "sector": "TECHNOLOGY",
+  "industry": "SOFTWARE - APPLICATION",
+  "officialSite": "https://www.zoom.com",
+  "cachedAt": "2025-10-19T06:12:50.505Z",
+  "source": "Alpha Vantage API (fixed)"
 }

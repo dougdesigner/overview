@@ -1,8 +1,9 @@
 {
   "symbol": "EEFT",
-  "name": "EEFT Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:31:16.732Z",
-  "source": "Alpha Vantage API"
+  "name": "Euronet Worldwide Inc",
+  "sector": "TECHNOLOGY",
+  "industry": "SOFTWARE - INFRASTRUCTURE",
+  "officialSite": "https://www.euronetworldwide.com",
+  "cachedAt": "2025-10-19T05:29:35.967Z",
+  "source": "Alpha Vantage API (fixed)"
 }

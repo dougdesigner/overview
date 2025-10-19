@@ -1,8 +1,9 @@
 {
   "symbol": "HELE",
-  "name": "HELE Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:36:04.523Z",
-  "source": "Alpha Vantage API"
+  "name": "Helen of Troy Ltd",
+  "sector": "CONSUMER DEFENSIVE",
+  "industry": "HOUSEHOLD & PERSONAL PRODUCTS",
+  "officialSite": "https://www.helenoftroy.com",
+  "cachedAt": "2025-10-19T05:37:27.794Z",
+  "source": "Alpha Vantage API (fixed)"
 }

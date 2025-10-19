@@ -1,8 +1,9 @@
 {
   "symbol": "UTI",
-  "name": "UTI Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:11.363Z",
-  "source": "Alpha Vantage API"
+  "name": "Universal Technical Institute Inc",
+  "sector": "CONSUMER DEFENSIVE",
+  "industry": "EDUCATION & TRAINING SERVICES",
+  "officialSite": "https://www.uti.edu",
+  "cachedAt": "2025-10-19T06:09:17.525Z",
+  "source": "Alpha Vantage API (fixed)"
 }

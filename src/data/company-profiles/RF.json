@@ -1,8 +1,9 @@
 {
   "symbol": "RF",
-  "name": "RF Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:05.238Z",
-  "source": "Alpha Vantage API"
+  "name": "Regions Financial Corporation",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "BANKS - REGIONAL",
+  "officialSite": "https://www.regions.com/personal-banking",
+  "cachedAt": "2025-10-19T06:02:02.823Z",
+  "source": "Alpha Vantage API (fixed)"
 }

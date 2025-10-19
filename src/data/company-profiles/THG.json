@@ -1,8 +1,9 @@
 {
   "symbol": "THG",
-  "name": "THG Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:31:36.117Z",
-  "source": "Alpha Vantage API"
+  "name": "The Hanover Insurance Group Inc",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "INSURANCE - PROPERTY & CASUALTY",
+  "officialSite": "https://www.hanover.com",
+  "cachedAt": "2025-10-19T06:07:44.764Z",
+  "source": "Alpha Vantage API (fixed)"
 }

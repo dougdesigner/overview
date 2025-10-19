@@ -1,8 +1,9 @@
 {
   "symbol": "TTEC",
-  "name": "TTEC Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:32:38.023Z",
-  "source": "Alpha Vantage API"
+  "name": "TTEC Holdings Inc",
+  "sector": "TECHNOLOGY",
+  "industry": "INFORMATION TECHNOLOGY SERVICES",
+  "officialSite": "https://www.ttec.com",
+  "cachedAt": "2025-10-19T06:08:21.674Z",
+  "source": "Alpha Vantage API (fixed)"
 }

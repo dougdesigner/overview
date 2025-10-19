@@ -1,8 +1,9 @@
 {
   "symbol": "VANI",
-  "name": "VANI Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:16.860Z",
-  "source": "Alpha Vantage API"
+  "name": "Vivani Medical Inc.",
+  "sector": "HEALTHCARE",
+  "industry": "BIOTECHNOLOGY",
+  "officialSite": "https://www.vivani.com",
+  "cachedAt": "2025-10-19T06:09:24.513Z",
+  "source": "Alpha Vantage API (fixed)"
 }

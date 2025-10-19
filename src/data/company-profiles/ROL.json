@@ -1,8 +1,9 @@
 {
   "symbol": "ROL",
-  "name": "ROL Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:00.634Z",
-  "source": "Alpha Vantage API"
+  "name": "Rollins Inc",
+  "sector": "CONSUMER CYCLICAL",
+  "industry": "PERSONAL SERVICES",
+  "officialSite": "https://www.rollins.com",
+  "cachedAt": "2025-10-19T06:02:44.326Z",
+  "source": "Alpha Vantage API (fixed)"
 }

@@ -1,8 +1,9 @@
 {
   "symbol": "NTWK",
-  "name": "NTWK Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:36:03.875Z",
-  "source": "Alpha Vantage API"
+  "name": "NetSol Technologies Inc",
+  "sector": "TECHNOLOGY",
+  "industry": "SOFTWARE - APPLICATION",
+  "officialSite": "https://www.netsoltech.com",
+  "cachedAt": "2025-10-19T05:54:45.207Z",
+  "source": "Alpha Vantage API (fixed)"
 }

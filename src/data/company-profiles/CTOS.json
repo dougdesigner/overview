@@ -1,8 +1,9 @@
 {
   "symbol": "CTOS",
-  "name": "CTOS Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:34:17.594Z",
-  "source": "Alpha Vantage API"
+  "name": "Custom Truck One Source Inc",
+  "sector": "INDUSTRIALS",
+  "industry": "RENTAL & LEASING SERVICES",
+  "officialSite": "https://www.customtruck.com",
+  "cachedAt": "2025-10-19T05:25:59.165Z",
+  "source": "Alpha Vantage API (fixed)"
 }

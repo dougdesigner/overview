@@ -1,8 +1,9 @@
 {
   "symbol": "FNB",
-  "name": "FNB Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:31:15.007Z",
-  "source": "Alpha Vantage API"
+  "name": "F.N.B. Corp",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "BANKS - REGIONAL",
+  "officialSite": "https://www.fnb-online.com",
+  "cachedAt": "2025-10-19T05:31:17.306Z",
+  "source": "Alpha Vantage API (fixed)"
 }

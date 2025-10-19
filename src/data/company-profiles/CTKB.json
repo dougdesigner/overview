@@ -1,8 +1,9 @@
 {
   "symbol": "CTKB",
-  "name": "CTKB Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:34:16.374Z",
-  "source": "Alpha Vantage API"
+  "name": "Cytek Biosciences Inc",
+  "sector": "HEALTHCARE",
+  "industry": "MEDICAL DEVICES",
+  "officialSite": "https://cytekbio.com",
+  "cachedAt": "2025-10-19T05:25:55.289Z",
+  "source": "Alpha Vantage API (fixed)"
 }

@@ -1,8 +1,9 @@
 {
   "symbol": "CPRX",
-  "name": "CPRX Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:31:34.858Z",
-  "source": "Alpha Vantage API"
+  "name": "Catalyst Pharmaceuticals Inc",
+  "sector": "HEALTHCARE",
+  "industry": "BIOTECHNOLOGY",
+  "officialSite": "https://catalystpharma.com",
+  "cachedAt": "2025-10-19T05:25:33.833Z",
+  "source": "Alpha Vantage API (fixed)"
 }

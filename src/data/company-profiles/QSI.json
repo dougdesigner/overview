@@ -1,8 +1,9 @@
 {
   "symbol": "QSI",
-  "name": "QSI Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:32:16.060Z",
-  "source": "Alpha Vantage API"
+  "name": "QuantumSi Inc",
+  "sector": "HEALTHCARE",
+  "industry": "MEDICAL DEVICES",
+  "officialSite": "https://www.quantum-si.com",
+  "cachedAt": "2025-10-19T06:01:15.638Z",
+  "source": "Alpha Vantage API (fixed)"
 }

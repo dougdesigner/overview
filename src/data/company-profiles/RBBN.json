@@ -1,8 +1,9 @@
 {
   "symbol": "RBBN",
-  "name": "RBBN Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:32:08.976Z",
-  "source": "Alpha Vantage API"
+  "name": "Ribbon Communications Inc",
+  "sector": "TECHNOLOGY",
+  "industry": "SOFTWARE - APPLICATION",
+  "officialSite": "https://www.ribboncommunications.com",
+  "cachedAt": "2025-10-19T06:01:23.409Z",
+  "source": "Alpha Vantage API (fixed)"
 }

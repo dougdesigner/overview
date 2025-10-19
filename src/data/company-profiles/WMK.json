@@ -1,8 +1,9 @@
 {
   "symbol": "WMK",
-  "name": "WMK Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:03.319Z",
-  "source": "Alpha Vantage API"
+  "name": "Weis Markets Inc",
+  "sector": "CONSUMER DEFENSIVE",
+  "industry": "GROCERY STORES",
+  "officialSite": "https://www.weismarkets.com",
+  "cachedAt": "2025-10-19T06:12:17.937Z",
+  "source": "Alpha Vantage API (fixed)"
 }

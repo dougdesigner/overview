@@ -1,8 +1,9 @@
 {
   "symbol": "NBIX",
-  "name": "NBIX Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:31:02.432Z",
-  "source": "Alpha Vantage API"
+  "name": "Neurocrine Biosciences Inc",
+  "sector": "HEALTHCARE",
+  "industry": "DRUG MANUFACTURERS - SPECIALTY & GENERIC",
+  "officialSite": "https://www.neurocrine.com",
+  "cachedAt": "2025-10-19T05:53:47.760Z",
+  "source": "Alpha Vantage API (fixed)"
 }

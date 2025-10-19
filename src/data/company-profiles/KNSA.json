@@ -1,8 +1,9 @@
 {
   "symbol": "KNSA",
-  "name": "KNSA Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:36:27.671Z",
-  "source": "Alpha Vantage API"
+  "name": "Kiniksa Pharmaceuticals Ltd",
+  "sector": "HEALTHCARE",
+  "industry": "DRUG MANUFACTURERS - SPECIALTY & GENERIC",
+  "officialSite": "https://www.kiniksa.com",
+  "cachedAt": "2025-10-19T05:44:22.454Z",
+  "source": "Alpha Vantage API (fixed)"
 }

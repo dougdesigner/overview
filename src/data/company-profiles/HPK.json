@@ -1,8 +1,9 @@
 {
   "symbol": "HPK",
-  "name": "HPK Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:36:12.605Z",
-  "source": "Alpha Vantage API"
+  "name": "Highpeak Energy Acquisition Corp",
+  "sector": "ENERGY",
+  "industry": "OIL & GAS E&P",
+  "officialSite": "https://www.highpeakenergy.com",
+  "cachedAt": "2025-10-19T05:41:38.650Z",
+  "source": "Alpha Vantage API (fixed)"
 }

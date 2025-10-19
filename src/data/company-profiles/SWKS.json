@@ -1,8 +1,9 @@
 {
   "symbol": "SWKS",
-  "name": "SWKS Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:22.788Z",
-  "source": "Alpha Vantage API"
+  "name": "Skyworks Solutions Inc",
+  "sector": "TECHNOLOGY",
+  "industry": "SEMICONDUCTORS",
+  "officialSite": "https://www.skyworksinc.com",
+  "cachedAt": "2025-10-19T06:07:18.760Z",
+  "source": "Alpha Vantage API (fixed)"
 }

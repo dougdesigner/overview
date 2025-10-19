@@ -1,8 +1,9 @@
 {
   "symbol": "JBTM",
-  "name": "JBTM Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:39.139Z",
-  "source": "Alpha Vantage API"
+  "name": "JBTMarel Corp",
+  "sector": "INDUSTRIALS",
+  "industry": "SPECIALTY INDUSTRIAL MACHINERY",
+  "officialSite": "https://www.jbtc.com",
+  "cachedAt": "2025-10-19T05:44:09.823Z",
+  "source": "Alpha Vantage API (fixed)"
 }

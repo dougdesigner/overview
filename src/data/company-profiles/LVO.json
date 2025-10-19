@@ -1,8 +1,9 @@
 {
   "symbol": "LVO",
-  "name": "LVO Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:36:28.627Z",
-  "source": "Alpha Vantage API"
+  "name": "LiveOne Inc",
+  "sector": "COMMUNICATION SERVICES",
+  "industry": "ENTERTAINMENT",
+  "officialSite": "https://www.liveone.com",
+  "cachedAt": "2025-10-19T05:48:43.636Z",
+  "source": "Alpha Vantage API (fixed)"
 }

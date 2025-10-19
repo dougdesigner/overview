@@ -1,8 +1,9 @@
 {
   "symbol": "JAZZ",
-  "name": "JAZZ Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:31:35.064Z",
-  "source": "Alpha Vantage API"
+  "name": "Jazz Pharmaceuticals PLC",
+  "sector": "HEALTHCARE",
+  "industry": "BIOTECHNOLOGY",
+  "officialSite": "https://www.jazzpharma.com",
+  "cachedAt": "2025-10-19T05:44:07.858Z",
+  "source": "Alpha Vantage API (fixed)"
 }

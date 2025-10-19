@@ -1,8 +1,9 @@
 {
   "symbol": "SHEN",
-  "name": "SHEN Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:17.905Z",
-  "source": "Alpha Vantage API"
+  "name": "Shenandoah Telecommunications Co",
+  "sector": "COMMUNICATION SERVICES",
+  "industry": "TELECOM SERVICES",
+  "officialSite": "https://www.shentel.com",
+  "cachedAt": "2025-10-19T06:04:31.926Z",
+  "source": "Alpha Vantage API (fixed)"
 }

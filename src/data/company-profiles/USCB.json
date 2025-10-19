@@ -1,8 +1,9 @@
 {
   "symbol": "USCB",
-  "name": "USCB Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:09.654Z",
-  "source": "Alpha Vantage API"
+  "name": "US Century Bank",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "BANKS - REGIONAL",
+  "officialSite": "https://www.uscentury.com",
+  "cachedAt": "2025-10-19T06:09:09.616Z",
+  "source": "Alpha Vantage API (fixed)"
 }

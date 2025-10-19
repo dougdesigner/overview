@@ -1,8 +1,9 @@
 {
   "symbol": "LCNB",
-  "name": "LCNB Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:36:23.870Z",
-  "source": "Alpha Vantage API"
+  "name": "LCNB Corporation",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "BANKS - REGIONAL",
+  "officialSite": "https://www.lcnb.com",
+  "cachedAt": "2025-10-19T05:44:56.527Z",
+  "source": "Alpha Vantage API (fixed)"
 }

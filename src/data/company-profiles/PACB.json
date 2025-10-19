@@ -1,8 +1,9 @@
 {
   "symbol": "PACB",
-  "name": "PACB Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:32:35.249Z",
-  "source": "Alpha Vantage API"
+  "name": "Pacific Biosciences of California",
+  "sector": "HEALTHCARE",
+  "industry": "MEDICAL DEVICES",
+  "officialSite": "https://www.pacb.com",
+  "cachedAt": "2025-10-19T05:55:59.224Z",
+  "source": "Alpha Vantage API (fixed)"
 }

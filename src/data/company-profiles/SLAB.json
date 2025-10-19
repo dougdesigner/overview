@@ -1,8 +1,9 @@
 {
   "symbol": "SLAB",
-  "name": "SLAB Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:31:33.721Z",
-  "source": "Alpha Vantage API"
+  "name": "Silicon Laboratories Inc",
+  "sector": "TECHNOLOGY",
+  "industry": "SEMICONDUCTORS",
+  "officialSite": "https://www.silabs.com",
+  "cachedAt": "2025-10-19T06:04:56.450Z",
+  "source": "Alpha Vantage API (fixed)"
 }

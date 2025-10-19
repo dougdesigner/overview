@@ -1,8 +1,9 @@
 {
   "symbol": "HOMB",
-  "name": "HOMB Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:31:23.029Z",
-  "source": "Alpha Vantage API"
+  "name": "Home BancShares Inc",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "BANKS - REGIONAL",
+  "officialSite": "https://www.homebancshares.com",
+  "cachedAt": "2025-10-19T05:37:52.128Z",
+  "source": "Alpha Vantage API (fixed)"
 }

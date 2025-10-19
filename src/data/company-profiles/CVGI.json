@@ -1,8 +1,9 @@
 {
   "symbol": "CVGI",
-  "name": "CVGI Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:34:26.230Z",
-  "source": "Alpha Vantage API"
+  "name": "Commercial Vehicle Group Inc",
+  "sector": "CONSUMER CYCLICAL",
+  "industry": "AUTO PARTS",
+  "officialSite": "https://cvgrp.com",
+  "cachedAt": "2025-10-19T05:26:12.913Z",
+  "source": "Alpha Vantage API (fixed)"
 }

@@ -1,8 +1,9 @@
 {
   "symbol": "GOCO",
-  "name": "GOCO Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:36:07.860Z",
-  "source": "Alpha Vantage API"
+  "name": "GoHealth Inc.",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "INSURANCE BROKERS",
+  "officialSite": "https://www.gohealth.com",
+  "cachedAt": "2025-10-19T05:36:55.034Z",
+  "source": "Alpha Vantage API (fixed)"
 }

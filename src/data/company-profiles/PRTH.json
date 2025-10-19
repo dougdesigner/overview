@@ -1,8 +1,9 @@
 {
   "symbol": "PRTH",
-  "name": "PRTH Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:32:20.992Z",
-  "source": "Alpha Vantage API"
+  "name": "Priority Technology Holdings Inc",
+  "sector": "TECHNOLOGY",
+  "industry": "SOFTWARE - INFRASTRUCTURE",
+  "officialSite": "https://prioritycommerce.com",
+  "cachedAt": "2025-10-19T06:00:48.606Z",
+  "source": "Alpha Vantage API (fixed)"
 }

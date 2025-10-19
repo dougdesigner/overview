@@ -1,8 +1,9 @@
 {
   "symbol": "LFCR",
-  "name": "LFCR Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:36:33.081Z",
-  "source": "Alpha Vantage API"
+  "name": "Lifecore Biomedical Inc.",
+  "sector": "HEALTHCARE",
+  "industry": "DRUG MANUFACTURERS - SPECIALTY & GENERIC",
+  "officialSite": "https://www.lifecore.com",
+  "cachedAt": "2025-10-19T05:45:05.590Z",
+  "source": "Alpha Vantage API (fixed)"
 }

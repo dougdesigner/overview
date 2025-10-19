@@ -1,8 +1,9 @@
 {
   "symbol": "SND",
-  "name": "SND Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:21.384Z",
-  "source": "Alpha Vantage API"
+  "name": "Smart Sand Inc",
+  "sector": "ENERGY",
+  "industry": "OIL & GAS EQUIPMENT & SERVICES",
+  "officialSite": "https://www.smartsand.com",
+  "cachedAt": "2025-10-19T06:05:13.241Z",
+  "source": "Alpha Vantage API (fixed)"
 }

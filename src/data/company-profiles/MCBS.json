@@ -1,8 +1,9 @@
 {
   "symbol": "MCBS",
-  "name": "MCBS Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:35:27.384Z",
-  "source": "Alpha Vantage API"
+  "name": "MetroCity Bankshares",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "BANKS - REGIONAL",
+  "officialSite": "https://www.metrocitybank.bank",
+  "cachedAt": "2025-10-19T05:49:10.988Z",
+  "source": "Alpha Vantage API (fixed)"
 }

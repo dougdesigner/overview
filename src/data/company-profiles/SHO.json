@@ -1,8 +1,9 @@
 {
   "symbol": "SHO",
-  "name": "SHO Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:35.230Z",
-  "source": "Alpha Vantage API"
+  "name": "Sunstone Hotel Investors Inc",
+  "sector": "REAL ESTATE",
+  "industry": "REIT - HOTEL & MOTEL",
+  "officialSite": "https://www.sunstonehotels.com",
+  "cachedAt": "2025-10-19T06:04:34.887Z",
+  "source": "Alpha Vantage API (fixed)"
 }

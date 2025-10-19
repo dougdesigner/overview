@@ -1,8 +1,9 @@
 {
   "symbol": "ST",
-  "name": "ST Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:31:25.879Z",
-  "source": "Alpha Vantage API"
+  "name": "Sensata Technologies Holding NV",
+  "sector": "TECHNOLOGY",
+  "industry": "SCIENTIFIC & TECHNICAL INSTRUMENTS",
+  "officialSite": "https://www.sensata.com",
+  "cachedAt": "2025-10-19T06:06:47.542Z",
+  "source": "Alpha Vantage API (fixed)"
 }

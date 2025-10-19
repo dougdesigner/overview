@@ -1,8 +1,9 @@
 {
   "symbol": "NATL",
-  "name": "NATL Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:36:03.823Z",
-  "source": "Alpha Vantage API"
+  "name": "NCR Atleos Corporation",
+  "sector": "TECHNOLOGY",
+  "industry": "SOFTWARE - APPLICATION",
+  "officialSite": "https://www.ncratleos.com",
+  "cachedAt": "2025-10-19T05:53:46.794Z",
+  "source": "Alpha Vantage API (fixed)"
 }

@@ -1,8 +1,9 @@
 {
   "symbol": "LPTH",
-  "name": "LPTH Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:36:31.850Z",
-  "source": "Alpha Vantage API"
+  "name": "LightPath Technologies Inc",
+  "sector": "TECHNOLOGY",
+  "industry": "ELECTRONIC COMPONENTS",
+  "officialSite": "https://www.lightpath.com",
+  "cachedAt": "2025-10-19T05:48:30.911Z",
+  "source": "Alpha Vantage API (fixed)"
 }

@@ -1,8 +1,9 @@
 {
   "symbol": "IMKTA",
-  "name": "IMKTA Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:36:39.465Z",
-  "source": "Alpha Vantage API"
+  "name": "Ingles Markets Incorporated",
+  "sector": "CONSUMER DEFENSIVE",
+  "industry": "GROCERY STORES",
+  "officialSite": "https://www.ingles-markets.com",
+  "cachedAt": "2025-10-19T05:42:20.590Z",
+  "source": "Alpha Vantage API (fixed)"
 }

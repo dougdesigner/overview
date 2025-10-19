@@ -1,8 +1,9 @@
 {
   "symbol": "OMCL",
-  "name": "OMCL Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:32:10.433Z",
-  "source": "Alpha Vantage API"
+  "name": "Omnicell Inc",
+  "sector": "HEALTHCARE",
+  "industry": "HEALTH INFORMATION SERVICES",
+  "officialSite": "https://www.omnicell.com",
+  "cachedAt": "2025-10-19T05:55:12.486Z",
+  "source": "Alpha Vantage API (fixed)"
 }

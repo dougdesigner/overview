@@ -1,8 +1,9 @@
 {
   "symbol": "LXU",
-  "name": "LXU Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:35:38.870Z",
-  "source": "Alpha Vantage API"
+  "name": "Lsb Industries Inc",
+  "sector": "BASIC MATERIALS",
+  "industry": "CHEMICALS",
+  "officialSite": "https://www.lsbindustries.com",
+  "cachedAt": "2025-10-19T05:48:48.532Z",
+  "source": "Alpha Vantage API (fixed)"
 }

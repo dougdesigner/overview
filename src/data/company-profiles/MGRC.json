@@ -1,8 +1,9 @@
 {
   "symbol": "MGRC",
-  "name": "MGRC Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:35:40.289Z",
-  "source": "Alpha Vantage API"
+  "name": "McGrath RentCorp",
+  "sector": "INDUSTRIALS",
+  "industry": "RENTAL & LEASING SERVICES",
+  "officialSite": "https://www.mgrc.com",
+  "cachedAt": "2025-10-19T05:52:39.440Z",
+  "source": "Alpha Vantage API (fixed)"
 }

@@ -1,8 +1,9 @@
 {
   "symbol": "VYX",
-  "name": "VYX Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:36:03.566Z",
-  "source": "Alpha Vantage API"
+  "name": "NCR Voyix Corporation",
+  "sector": "TECHNOLOGY",
+  "industry": "INFORMATION TECHNOLOGY SERVICES",
+  "officialSite": "https://www.ncr.com",
+  "cachedAt": "2025-10-19T06:09:58.039Z",
+  "source": "Alpha Vantage API (fixed)"
 }

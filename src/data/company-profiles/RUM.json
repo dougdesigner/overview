@@ -1,8 +1,9 @@
 {
   "symbol": "RUM",
-  "name": "RUM Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:27.499Z",
-  "source": "Alpha Vantage API"
+  "name": "Rumble Inc.",
+  "sector": "COMMUNICATION SERVICES",
+  "industry": "INTERNET CONTENT & INFORMATION",
+  "officialSite": "https://rumble.com",
+  "cachedAt": "2025-10-19T06:02:51.194Z",
+  "source": "Alpha Vantage API (fixed)"
 }

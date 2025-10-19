@@ -1,8 +1,9 @@
 {
   "symbol": "LGL",
-  "name": "LGL Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:36:31.545Z",
-  "source": "Alpha Vantage API"
+  "name": "LGL Group Inc",
+  "sector": "TECHNOLOGY",
+  "industry": "SCIENTIFIC & TECHNICAL INSTRUMENTS",
+  "officialSite": "https://www.lglgroup.com",
+  "cachedAt": "2025-10-19T05:45:12.416Z",
+  "source": "Alpha Vantage API (fixed)"
 }

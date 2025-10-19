@@ -1,8 +1,9 @@
 {
   "symbol": "ELSE",
-  "name": "ELSE Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:36:17.194Z",
-  "source": "Alpha Vantage API"
+  "name": "Electro-Sensors Inc",
+  "sector": "TECHNOLOGY",
+  "industry": "SCIENTIFIC & TECHNICAL INSTRUMENTS",
+  "officialSite": "https://www.electro-sensors.com",
+  "cachedAt": "2025-10-19T05:29:49.629Z",
+  "source": "Alpha Vantage API (fixed)"
 }

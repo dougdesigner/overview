@@ -1,8 +1,9 @@
 {
   "symbol": "CVV",
-  "name": "CVV Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:34:16.996Z",
-  "source": "Alpha Vantage API"
+  "name": "CVD Equipment Corporation",
+  "sector": "INDUSTRIALS",
+  "industry": "SPECIALTY INDUSTRIAL MACHINERY",
+  "officialSite": "https://cvdequipment.com",
+  "cachedAt": "2025-10-19T05:26:19.709Z",
+  "source": "Alpha Vantage API (fixed)"
 }

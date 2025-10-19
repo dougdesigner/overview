@@ -1,8 +1,9 @@
 {
   "symbol": "LARK",
-  "name": "LARK Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:36:24.259Z",
-  "source": "Alpha Vantage API"
+  "name": "Landmark Bancorp Inc",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "BANKS - REGIONAL",
+  "officialSite": "https://www.banklandmark.com",
+  "cachedAt": "2025-10-19T05:44:50.683Z",
+  "source": "Alpha Vantage API (fixed)"
 }

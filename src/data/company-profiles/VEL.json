@@ -1,8 +1,9 @@
 {
   "symbol": "VEL",
-  "name": "VEL Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:08.497Z",
-  "source": "Alpha Vantage API"
+  "name": "Velocity Financial Llc",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "MORTGAGE FINANCE",
+  "officialSite": "https://www.velfinance.com",
+  "cachedAt": "2025-10-19T06:09:30.505Z",
+  "source": "Alpha Vantage API (fixed)"
 }

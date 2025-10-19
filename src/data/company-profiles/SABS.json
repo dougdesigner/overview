@@ -1,8 +1,9 @@
 {
   "symbol": "SABS",
-  "name": "SABS Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:25.839Z",
-  "source": "Alpha Vantage API"
+  "name": "SAB Biotherapeutics Inc",
+  "sector": "HEALTHCARE",
+  "industry": "BIOTECHNOLOGY",
+  "officialSite": "https://www.sabbiotherapeutics.com",
+  "cachedAt": "2025-10-19T06:03:07.830Z",
+  "source": "Alpha Vantage API (fixed)"
 }

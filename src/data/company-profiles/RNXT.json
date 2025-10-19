@@ -1,8 +1,9 @@
 {
   "symbol": "RNXT",
-  "name": "RNXT Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:32:26.401Z",
-  "source": "Alpha Vantage API"
+  "name": "RenovoRx Inc",
+  "sector": "HEALTHCARE",
+  "industry": "BIOTECHNOLOGY",
+  "officialSite": "https://renovorx.com",
+  "cachedAt": "2025-10-19T06:02:39.414Z",
+  "source": "Alpha Vantage API (fixed)"
 }

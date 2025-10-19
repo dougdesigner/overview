@@ -1,8 +1,9 @@
 {
   "symbol": "GBIO",
-  "name": "GBIO Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:36:22.081Z",
-  "source": "Alpha Vantage API"
+  "name": "Generation Bio Co",
+  "sector": "HEALTHCARE",
+  "industry": "BIOTECHNOLOGY",
+  "officialSite": "https://generationbio.com",
+  "cachedAt": "2025-10-19T05:31:46.701Z",
+  "source": "Alpha Vantage API (fixed)"
 }

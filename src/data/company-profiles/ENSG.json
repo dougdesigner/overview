@@ -1,8 +1,9 @@
 {
   "symbol": "ENSG",
-  "name": "ENSG Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:31:10.882Z",
-  "source": "Alpha Vantage API"
+  "name": "The Ensign Group Inc",
+  "sector": "HEALTHCARE",
+  "industry": "MEDICAL CARE FACILITIES",
+  "officialSite": "https://ensigngroup.net",
+  "cachedAt": "2025-10-19T05:29:57.440Z",
+  "source": "Alpha Vantage API (fixed)"
 }

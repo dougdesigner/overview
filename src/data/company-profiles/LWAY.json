@@ -1,8 +1,9 @@
 {
   "symbol": "LWAY",
-  "name": "LWAY Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:36:32.306Z",
-  "source": "Alpha Vantage API"
+  "name": "Lifeway Foods Inc",
+  "sector": "CONSUMER DEFENSIVE",
+  "industry": "PACKAGED FOODS",
+  "officialSite": "https://lifewaykefir.com",
+  "cachedAt": "2025-10-19T05:48:45.557Z",
+  "source": "Alpha Vantage API (fixed)"
 }

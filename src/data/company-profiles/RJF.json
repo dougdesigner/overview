@@ -1,8 +1,9 @@
 {
   "symbol": "RJF",
-  "name": "RJF Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:11.797Z",
-  "source": "Alpha Vantage API"
+  "name": "Raymond James Financial Inc.",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "ASSET MANAGEMENT",
+  "officialSite": "https://www.raymondjames.com",
+  "cachedAt": "2025-10-19T06:02:21.839Z",
+  "source": "Alpha Vantage API (fixed)"
 }

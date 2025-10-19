@@ -1,8 +1,9 @@
 {
   "symbol": "RS",
-  "name": "RS Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:06.196Z",
-  "source": "Alpha Vantage API"
+  "name": "Reliance Steel & Aluminum Co",
+  "sector": "BASIC MATERIALS",
+  "industry": "STEEL",
+  "officialSite": "https://reliance.com",
+  "cachedAt": "2025-10-19T06:02:48.260Z",
+  "source": "Alpha Vantage API (fixed)"
 }

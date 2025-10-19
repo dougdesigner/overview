@@ -1,8 +1,9 @@
 {
   "symbol": "NRDY",
-  "name": "NRDY Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:36:02.319Z",
-  "source": "Alpha Vantage API"
+  "name": "Nerdy Inc",
+  "sector": "TECHNOLOGY",
+  "industry": "SOFTWARE - APPLICATION",
+  "officialSite": "https://www.nerdy.com",
+  "cachedAt": "2025-10-19T05:54:35.578Z",
+  "source": "Alpha Vantage API (fixed)"
 }

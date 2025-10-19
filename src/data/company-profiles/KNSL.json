@@ -1,8 +1,9 @@
 {
   "symbol": "KNSL",
-  "name": "KNSL Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:38.815Z",
-  "source": "Alpha Vantage API"
+  "name": "Kinsale Capital Group Inc",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "INSURANCE - PROPERTY & CASUALTY",
+  "officialSite": "https://www.kinsalecapitalgroup.com",
+  "cachedAt": "2025-10-19T05:44:23.412Z",
+  "source": "Alpha Vantage API (fixed)"
 }

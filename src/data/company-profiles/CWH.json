@@ -1,8 +1,9 @@
 {
   "symbol": "CWH",
-  "name": "CWH Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:34:12.357Z",
-  "source": "Alpha Vantage API"
+  "name": "Camping World Holdings Inc",
+  "sector": "CONSUMER CYCLICAL",
+  "industry": "AUTO & TRUCK DEALERSHIPS",
+  "officialSite": "https://www.campingworld.com",
+  "cachedAt": "2025-10-19T05:26:22.638Z",
+  "source": "Alpha Vantage API (fixed)"
 }

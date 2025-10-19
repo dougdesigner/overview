@@ -1,8 +1,9 @@
 {
   "symbol": "HBIO",
-  "name": "HBIO Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:36:06.315Z",
-  "source": "Alpha Vantage API"
+  "name": "Harvard Bioscience Inc",
+  "sector": "HEALTHCARE",
+  "industry": "MEDICAL INSTRUMENTS & SUPPLIES",
+  "officialSite": "https://www.harvardbioscience.com",
+  "cachedAt": "2025-10-19T05:37:20.941Z",
+  "source": "Alpha Vantage API (fixed)"
 }

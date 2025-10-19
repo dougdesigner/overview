@@ -1,8 +1,9 @@
 {
   "symbol": "DHAI",
-  "name": "DHAI Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:34:22.588Z",
-  "source": "Alpha Vantage API"
+  "name": "DIH Holdings US, Inc. Class A Common Stock",
+  "sector": "HEALTHCARE",
+  "industry": "MEDICAL DEVICES",
+  "officialSite": "https://www.dih.com",
+  "cachedAt": "2025-10-19T05:28:45.358Z",
+  "source": "Alpha Vantage API (fixed)"
 }

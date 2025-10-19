@@ -1,8 +1,9 @@
 {
   "symbol": "RHI",
-  "name": "RHI Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:37.882Z",
-  "source": "Alpha Vantage API"
+  "name": "Robert Half International Inc",
+  "sector": "INDUSTRIALS",
+  "industry": "STAFFING & EMPLOYMENT SERVICES",
+  "officialSite": "https://www.roberthalf.com",
+  "cachedAt": "2025-10-19T06:02:12.558Z",
+  "source": "Alpha Vantage API (fixed)"
 }

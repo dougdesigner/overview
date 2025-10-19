@@ -1,8 +1,9 @@
 {
   "symbol": "OWLT",
-  "name": "OWLT Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:32:34.629Z",
-  "source": "Alpha Vantage API"
+  "name": "Owlet Inc",
+  "sector": "HEALTHCARE",
+  "industry": "MEDICAL DEVICES",
+  "officialSite": "https://www.owletcare.com",
+  "cachedAt": "2025-10-19T05:55:55.340Z",
+  "source": "Alpha Vantage API (fixed)"
 }

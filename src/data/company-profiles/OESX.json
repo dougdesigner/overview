@@ -1,8 +1,9 @@
 {
   "symbol": "OESX",
-  "name": "OESX Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:32:30.569Z",
-  "source": "Alpha Vantage API"
+  "name": "Orion Energy Systems Inc",
+  "sector": "CONSUMER CYCLICAL",
+  "industry": "FURNISHINGS, FIXTURES & APPLIANCES",
+  "officialSite": "https://www.orionlighting.com",
+  "cachedAt": "2025-10-19T05:55:02.758Z",
+  "source": "Alpha Vantage API (fixed)"
 }

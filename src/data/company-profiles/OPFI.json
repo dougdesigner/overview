@@ -1,8 +1,9 @@
 {
   "symbol": "OPFI",
-  "name": "OPFI Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:32:06.672Z",
-  "source": "Alpha Vantage API"
+  "name": "OppFi Inc",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "CREDIT SERVICES",
+  "officialSite": "https://www.oppfi.com",
+  "cachedAt": "2025-10-19T05:55:28.118Z",
+  "source": "Alpha Vantage API (fixed)"
 }

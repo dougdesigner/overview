@@ -3,6 +3,11 @@
 /**
  * Script to fix company profiles that have "Unknown" sector/industry
  * These are companies where the initial API call failed or returned no data
+ *
+ * Usage:
+ *   pnpm exec tsx scripts/fix-unknown-companies.ts        # Start from beginning
+ *   pnpm exec tsx scripts/fix-unknown-companies.ts A      # Start from letter A
+ *   pnpm exec tsx scripts/fix-unknown-companies.ts M      # Start from letter M
  */
 
 import fs from "fs/promises"
@@ -13,6 +18,9 @@ const API_KEY = "4ZD7C2SAXMYRALJ8" // Using the API key from user's example
 const BATCH_SIZE = 25 // Process 25 symbols at a time
 const BATCH_DELAY = 1000 // 1 second delay between batches
 const API_DELAY = 850 // 850ms between API calls to stay under 75 req/min limit
+
+// Get starting letter from command line argument
+const startingLetter = process.argv[2]?.toUpperCase() || null
 
 interface CompanyProfile {
   symbol: string
@@ -70,11 +78,11 @@ async function fetchCompanyOverview(symbol: string): Promise<CompanyProfile | nu
     console.log(`       Industry: ${profile.industry}`)
 
     return profile
-  } catch (error: any) {
-    if (error.message === "API_LIMIT") {
+  } catch (error) {
+    if (error instanceof Error && error.message === "API_LIMIT") {
       throw error // Re-throw API limit errors to stop processing
     }
-    console.error(`    ❌ Error fetching ${symbol}:`, error.message)
+    console.error(`    ❌ Error fetching ${symbol}:`, error instanceof Error ? error.message : String(error))
     return null
   }
 }
@@ -86,6 +94,9 @@ async function updateCompanyProfile(symbol: string, profile: CompanyProfile): Pr
 
 async function main() {
   console.log("🔧 Fixing company profiles with Unknown sectors...")
+  if (startingLetter) {
+    console.log(`📍 Starting from letter: ${startingLetter}`)
+  }
   console.log()
 
   // Get all JSON files in the cache directory
@@ -95,7 +106,7 @@ async function main() {
   console.log(`📁 Found ${jsonFiles.length} total company profiles`)
 
   // Find companies with Unknown sector
-  const unknownCompanies: string[] = []
+  let unknownCompanies: string[] = []
 
   for (const file of jsonFiles) {
     const filePath = path.join(CACHE_DIR, file)
@@ -109,6 +120,26 @@ async function main() {
   }
 
   console.log(`❓ Found ${unknownCompanies.length} companies with Unknown sector/industry`)
+
+  // Filter by starting letter if provided
+  if (startingLetter) {
+    // Sort alphabetically first
+    unknownCompanies.sort()
+
+    // Find the index of the first symbol that starts with the specified letter or comes after it
+    const startIndex = unknownCompanies.findIndex(symbol =>
+      symbol.charAt(0).toUpperCase() >= startingLetter
+    )
+
+    if (startIndex === -1) {
+      console.log(`❌ No companies found starting with ${startingLetter} or later`)
+      return
+    }
+
+    unknownCompanies = unknownCompanies.slice(startIndex)
+    console.log(`🔤 Filtered to ${unknownCompanies.length} companies starting from ${startingLetter}`)
+  }
+
   console.log()
 
   // Ask user to confirm before proceeding with large batch
@@ -155,12 +186,12 @@ async function main() {
         // Delay between API calls
         await new Promise(resolve => setTimeout(resolve, API_DELAY))
 
-      } catch (error: any) {
-        if (error.message === "API_LIMIT") {
+      } catch (error) {
+        if (error instanceof Error && error.message === "API_LIMIT") {
           console.error("\n🛑 API rate limit reached. Please wait and run the script again.")
           break
         }
-        console.error(`   ❌ Failed to process ${symbol}:`, error.message)
+        console.error(`   ❌ Failed to process ${symbol}:`, error instanceof Error ? error.message : String(error))
         totalFailed++
       }
     }

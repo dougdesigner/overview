@@ -1,8 +1,9 @@
 {
   "symbol": "RENT",
-  "name": "RENT Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:32:26.172Z",
-  "source": "Alpha Vantage API"
+  "name": "Rent the Runway Inc",
+  "sector": "CONSUMER CYCLICAL",
+  "industry": "APPAREL RETAIL",
+  "officialSite": "https://www.renttherunway.com",
+  "cachedAt": "2025-10-19T06:01:54.318Z",
+  "source": "Alpha Vantage API (fixed)"
 }

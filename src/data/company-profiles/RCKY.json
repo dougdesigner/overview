@@ -1,8 +1,9 @@
 {
   "symbol": "RCKY",
-  "name": "RCKY Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:28.305Z",
-  "source": "Alpha Vantage API"
+  "name": "Rocky Brands Inc",
+  "sector": "CONSUMER CYCLICAL",
+  "industry": "FOOTWEAR & ACCESSORIES",
+  "officialSite": "https://www.rockybrands.com",
+  "cachedAt": "2025-10-19T06:01:28.280Z",
+  "source": "Alpha Vantage API (fixed)"
 }

@@ -1,8 +1,9 @@
 {
   "symbol": "HHS",
-  "name": "HHS Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:36:06.443Z",
-  "source": "Alpha Vantage API"
+  "name": "Harte Hanks Inc",
+  "sector": "INDUSTRIALS",
+  "industry": "CONGLOMERATES",
+  "officialSite": "https://www.hartehanks.com",
+  "cachedAt": "2025-10-19T05:37:32.677Z",
+  "source": "Alpha Vantage API (fixed)"
 }

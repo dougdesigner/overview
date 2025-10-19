@@ -1,8 +1,9 @@
 {
   "symbol": "SELF",
-  "name": "SELF Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:36:18.491Z",
-  "source": "Alpha Vantage API"
+  "name": "Global Self Storage Inc",
+  "sector": "REAL ESTATE",
+  "industry": "REIT - SPECIALTY",
+  "officialSite": "https://www.globalselfstorage.us",
+  "cachedAt": "2025-10-19T06:04:07.993Z",
+  "source": "Alpha Vantage API (fixed)"
 }

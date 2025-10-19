@@ -1,8 +1,9 @@
 {
   "symbol": "MSGE",
-  "name": "MSGE Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:35:36.936Z",
-  "source": "Alpha Vantage API"
+  "name": "Madison Square Garden Entertainment Corp",
+  "sector": "CONSUMER CYCLICAL",
+  "industry": "LEISURE",
+  "officialSite": "https://www.msgentertainment.com",
+  "cachedAt": "2025-10-19T05:53:26.326Z",
+  "source": "Alpha Vantage API (fixed)"
 }

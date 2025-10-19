@@ -1,8 +1,9 @@
 {
   "symbol": "FDP",
-  "name": "FDP Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:36:22.392Z",
-  "source": "Alpha Vantage API"
+  "name": "Fresh Del Monte Produce Inc",
+  "sector": "CONSUMER DEFENSIVE",
+  "industry": "FARM PRODUCTS",
+  "officialSite": "https://www.freshdelmonte.com",
+  "cachedAt": "2025-10-19T05:30:57.490Z",
+  "source": "Alpha Vantage API (fixed)"
 }

@@ -1,8 +1,9 @@
 {
   "symbol": "ONMD",
-  "name": "ONMD Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:32:08.048Z",
-  "source": "Alpha Vantage API"
+  "name": "OneMedNet Corp.",
+  "sector": "HEALTHCARE",
+  "industry": "HEALTH INFORMATION SERVICES",
+  "officialSite": "https://www.onemednet.com",
+  "cachedAt": "2025-10-19T05:55:20.277Z",
+  "source": "Alpha Vantage API (fixed)"
 }

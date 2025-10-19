@@ -1,8 +1,9 @@
 {
   "symbol": "WY",
-  "name": "WY Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:15.935Z",
-  "source": "Alpha Vantage API"
+  "name": "Weyerhaeuser Company",
+  "sector": "REAL ESTATE",
+  "industry": "REIT - SPECIALTY",
+  "officialSite": "https://www.weyerhaeuser.com",
+  "cachedAt": "2025-10-19T06:12:33.756Z",
+  "source": "Alpha Vantage API (fixed)"
 }

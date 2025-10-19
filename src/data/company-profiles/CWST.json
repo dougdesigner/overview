@@ -1,8 +1,9 @@
 {
   "symbol": "CWST",
-  "name": "CWST Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:31:42.150Z",
-  "source": "Alpha Vantage API"
+  "name": "Casella Waste Systems Inc",
+  "sector": "INDUSTRIALS",
+  "industry": "WASTE MANAGEMENT",
+  "officialSite": "https://www.casella.com",
+  "cachedAt": "2025-10-19T05:26:24.577Z",
+  "source": "Alpha Vantage API (fixed)"
 }

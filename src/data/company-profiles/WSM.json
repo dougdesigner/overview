@@ -1,8 +1,9 @@
 {
   "symbol": "WSM",
-  "name": "WSM Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:19.391Z",
-  "source": "Alpha Vantage API"
+  "name": "Williams-Sonoma Inc",
+  "sector": "CONSUMER CYCLICAL",
+  "industry": "SPECIALTY RETAIL",
+  "officialSite": "https://www.williams-sonomainc.com",
+  "cachedAt": "2025-10-19T06:12:27.014Z",
+  "source": "Alpha Vantage API (fixed)"
 }

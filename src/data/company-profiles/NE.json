@@ -1,8 +1,9 @@
 {
   "symbol": "NE",
-  "name": "NE Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:31:23.659Z",
-  "source": "Alpha Vantage API"
+  "name": "Noble Corporation plc",
+  "sector": "ENERGY",
+  "industry": "OIL & GAS DRILLING",
+  "officialSite": "https://www.noblecorp.com",
+  "cachedAt": "2025-10-19T05:53:52.613Z",
+  "source": "Alpha Vantage API (fixed)"
 }

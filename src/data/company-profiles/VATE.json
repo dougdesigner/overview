@@ -1,8 +1,9 @@
 {
   "symbol": "VATE",
-  "name": "VATE Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:36:36.865Z",
-  "source": "Alpha Vantage API"
+  "name": "Innovate Corp",
+  "sector": "INDUSTRIALS",
+  "industry": "ENGINEERING & CONSTRUCTION",
+  "officialSite": "https://www.innovatecorp.com",
+  "cachedAt": "2025-10-19T06:09:25.481Z",
+  "source": "Alpha Vantage API (fixed)"
 }

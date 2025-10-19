@@ -1,8 +1,9 @@
 {
   "symbol": "STRA",
-  "name": "STRA Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:37.647Z",
-  "source": "Alpha Vantage API"
+  "name": "Strategic Education Inc",
+  "sector": "CONSUMER DEFENSIVE",
+  "industry": "EDUCATION & TRAINING SERVICES",
+  "officialSite": "https://www.strategiceducation.com",
+  "cachedAt": "2025-10-19T06:06:55.310Z",
+  "source": "Alpha Vantage API (fixed)"
 }

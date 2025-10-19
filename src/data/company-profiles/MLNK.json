@@ -1,8 +1,9 @@
 {
   "symbol": "MLNK",
-  "name": "MLNK Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:35:28.626Z",
-  "source": "Alpha Vantage API"
+  "name": "Meridianlink Inc",
+  "sector": "TECHNOLOGY",
+  "industry": "SOFTWARE - APPLICATION",
+  "officialSite": "https://www.meridianlink.com",
+  "cachedAt": "2025-10-19T05:52:52.046Z",
+  "source": "Alpha Vantage API (fixed)"
 }

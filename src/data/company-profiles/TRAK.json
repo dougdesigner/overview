@@ -1,8 +1,9 @@
 {
   "symbol": "TRAK",
-  "name": "TRAK Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:32:25.165Z",
-  "source": "Alpha Vantage API"
+  "name": "ReposiTrak",
+  "sector": "TECHNOLOGY",
+  "industry": "SOFTWARE - APPLICATION",
+  "officialSite": "https://repositrak.com",
+  "cachedAt": "2025-10-19T06:08:08.007Z",
+  "source": "Alpha Vantage API (fixed)"
 }

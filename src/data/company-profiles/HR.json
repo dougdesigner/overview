@@ -1,8 +1,9 @@
 {
   "symbol": "HR",
-  "name": "HR Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:31:18.171Z",
-  "source": "Alpha Vantage API"
+  "name": "Healthcare Realty Trust Incorporated",
+  "sector": "REAL ESTATE",
+  "industry": "REIT - HEALTHCARE FACILITIES",
+  "officialSite": "https://www.healthcarerealty.com",
+  "cachedAt": "2025-10-19T05:41:42.536Z",
+  "source": "Alpha Vantage API (fixed)"
 }

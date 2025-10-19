@@ -1,8 +1,9 @@
 {
   "symbol": "CVBF",
-  "name": "CVBF Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:34:17.282Z",
-  "source": "Alpha Vantage API"
+  "name": "CVB Financial Corporation",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "BANKS - REGIONAL",
+  "officialSite": "https://www.cbbank.com",
+  "cachedAt": "2025-10-19T05:26:10.954Z",
+  "source": "Alpha Vantage API (fixed)"
 }

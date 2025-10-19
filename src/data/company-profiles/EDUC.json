@@ -1,8 +1,9 @@
 {
   "symbol": "EDUC",
-  "name": "EDUC Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:36:17.938Z",
-  "source": "Alpha Vantage API"
+  "name": "Educational Development Corporation",
+  "sector": "COMMUNICATION SERVICES",
+  "industry": "PUBLISHING",
+  "officialSite": "https://www.edcpub.com",
+  "cachedAt": "2025-10-19T05:29:34.987Z",
+  "source": "Alpha Vantage API (fixed)"
 }

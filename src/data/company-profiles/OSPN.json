@@ -1,8 +1,9 @@
 {
   "symbol": "OSPN",
-  "name": "OSPN Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:32:08.357Z",
-  "source": "Alpha Vantage API"
+  "name": "OneSpan Inc",
+  "sector": "TECHNOLOGY",
+  "industry": "SOFTWARE - INFRASTRUCTURE",
+  "officialSite": "https://www.onespan.com",
+  "cachedAt": "2025-10-19T05:55:45.629Z",
+  "source": "Alpha Vantage API (fixed)"
 }

@@ -1,8 +1,9 @@
 {
   "symbol": "ZVIA",
-  "name": "ZVIA Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:06.001Z",
-  "source": "Alpha Vantage API"
+  "name": "Zevia Pbc",
+  "sector": "CONSUMER DEFENSIVE",
+  "industry": "BEVERAGES - NON-ALCOHOLIC",
+  "officialSite": "https://www.zevia.com",
+  "cachedAt": "2025-10-19T06:12:53.389Z",
+  "source": "Alpha Vantage API (fixed)"
 }

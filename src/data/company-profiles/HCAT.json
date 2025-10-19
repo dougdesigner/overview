@@ -1,8 +1,9 @@
 {
   "symbol": "HCAT",
-  "name": "HCAT Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:36:05.478Z",
-  "source": "Alpha Vantage API"
+  "name": "Health Catalyst Inc",
+  "sector": "HEALTHCARE",
+  "industry": "HEALTH INFORMATION SERVICES",
+  "officialSite": "https://www.healthcatalyst.com",
+  "cachedAt": "2025-10-19T05:37:22.897Z",
+  "source": "Alpha Vantage API (fixed)"
 }

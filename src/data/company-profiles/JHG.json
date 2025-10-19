@@ -1,8 +1,9 @@
 {
   "symbol": "JHG",
-  "name": "JHG Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:31:40.590Z",
-  "source": "Alpha Vantage API"
+  "name": "Janus Henderson Group PLC",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "ASSET MANAGEMENT",
+  "officialSite": "https://www.janushenderson.com",
+  "cachedAt": "2025-10-19T05:44:11.758Z",
+  "source": "Alpha Vantage API (fixed)"
 }

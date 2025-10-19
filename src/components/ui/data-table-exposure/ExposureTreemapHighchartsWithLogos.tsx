@@ -1,6 +1,13 @@
 "use client"
 
 import { Card } from "@/components/Card"
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/Select"
 import { getTickerLogoUrl } from "@/lib/logoUtils"
 import { toProperCase } from "@/lib/utils"
 import Highcharts from "highcharts"
@@ -21,9 +28,10 @@ type HighchartsModule = (H: typeof Highcharts) => void
 interface ExposureTreemapHighchartsProps {
   exposures: StockExposure[]
   totalValue: number
+  percentageMode?: "total" | "stocks"
 }
 
-type GroupingMode = "sector" | "industry"
+type GroupingMode = "none" | "sector" | "industry"
 
 // Extended data point type to include custom properties
 interface ExtendedTreemapPoint extends Highcharts.PointOptionsObject {
@@ -44,6 +52,7 @@ interface PointWithGraphic {
 export function ExposureTreemapHighchartsWithLogos({
   exposures,
   totalValue,
+  percentageMode = "total",
 }: ExposureTreemapHighchartsProps) {
   const [groupingMode, setGroupingMode] = useState<GroupingMode>("sector")
   const [modulesLoaded, setModulesLoaded] = useState(false)
@@ -191,6 +200,31 @@ export function ExposureTreemapHighchartsWithLogos({
     )
 
     const data: ExtendedTreemapPoint[] = []
+
+    // Handle "none" mode - flat structure without grouping
+    if (groupingMode === "none") {
+      // Sort by value descending to show largest holdings first
+      const sortedExposures = [...validExposures].sort((a, b) => b.totalValue - a.totalValue)
+
+      sortedExposures.forEach((stock) => {
+        const percentage = (stock.totalValue / totalValue) * 100
+        const logoUrl = getTickerLogoUrl(stock.ticker)
+
+        data.push({
+          id: stock.ticker,
+          name: stock.ticker,
+          value: stock.totalValue,
+          color: colors[0], // Use first color (blue) for all stocks in no-group mode
+          logoUrl: logoUrl,
+          percentage: percentage,
+          ticker: stock.ticker,
+        } as ExtendedTreemapPoint)
+      })
+
+      return data
+    }
+
+    // Handle grouped modes (sector or industry)
     const groupKey =
       groupingMode === "sector" ? "sector" : ("industry" as keyof StockExposure)
 
@@ -273,7 +307,7 @@ export function ExposureTreemapHighchartsWithLogos({
       {
         type: "treemap",
         name: "All",
-        allowTraversingTree: true,
+        allowTraversingTree: groupingMode !== "none", // Disable tree traversing for flat structure
         layoutAlgorithm: "squarified",
         alternateStartingDirection: true,
         data: getTreemapData(),
@@ -318,15 +352,118 @@ export function ExposureTreemapHighchartsWithLogos({
         levels: [
           {
             level: 1,
-            layoutAlgorithm:
-              groupingMode === "sector" ? "squarified" : "squarified",
+            layoutAlgorithm: "squarified",
             dataLabels: {
               enabled: true,
-              headers: true,
-              style: {
-                textOutline: "none",
-                color: isDark ? "#f3f4f6" : "#111827",
-              },
+              ...(groupingMode === "none" ? {
+                // For "none" mode, use the same formatter as level 2 to show logos
+                useHTML: true,
+                inside: true,
+                verticalAlign: "middle",
+                align: "center",
+                formatter: function () {
+                  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                  const point = (this as any).point as any
+                  const ticker = point.ticker || point.name
+                  const logoUrl = point.logoUrl
+                  const contentStrategy = getContentStrategy(point)
+
+                  // Return empty for very small cells
+                  if (contentStrategy === "none") {
+                    return ""
+                  }
+
+                  // Logo only for small cells
+                  if (contentStrategy === "logo-only") {
+                    const logoSize = calculateLogoSize(point)
+                    if (logoUrl) {
+                      return `<div style="text-align: center; display: flex; align-items: center; justify-content: center; height: 100%; overflow: hidden;">
+                        <div style="width: ${logoSize}px; height: ${logoSize}px; border-radius: 50%; background: #f1f3fa; overflow: hidden; display: flex; align-items: center; justify-content: center;">
+                          <img src="${logoUrl}"
+                               alt="${ticker}"
+                               style="width: 100%; height: 100%; object-fit: contain;"
+                               onerror="this.style.display='none'"
+                          />
+                        </div>
+                      </div>`
+                    } else {
+                      // Fallback to empty if no logo available
+                      return ""
+                    }
+                  }
+
+                  // Logo + ticker for medium-large cells
+                  if (contentStrategy === "logo-ticker") {
+                    const logoSize = calculateLogoSize(point)
+                    const { tickerSize } = calculateTextSizes(point)
+                    if (logoUrl) {
+                      return `<div style="text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; overflow: hidden;">
+                      <div style="width: ${logoSize}px; height: ${logoSize}px; border-radius: 50%; background: #f1f3fa; overflow: hidden; display: flex; align-items: center; justify-content: center; margin-bottom: 2px;">
+                        <img src="${logoUrl}"
+                             alt="${ticker}"
+                             style="width: 100%; height: 100%; object-fit: contain;"
+                             onerror="this.style.display='none'"
+                        />
+                      </div>
+                      <span style="color: ${isDark ? "#f3f4f6" : "#f3f4f6"}; font-size: ${tickerSize}px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                        ${ticker}
+                      </span>
+                    </div>`
+                    } else {
+                      // Fallback to text only if no logo available
+                      return `<div style="text-align: center; overflow: hidden; height: 100%; display: flex; align-items: center; justify-content: center;">
+                        <span style="color: ${isDark ? "#f3f4f6" : "#f3f4f6"}; font-size: ${tickerSize}px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                          ${ticker}
+                        </span>
+                      </div>`
+                    }
+                  }
+
+                  // Full content (logo + ticker + weight) for largest cells
+                  if (contentStrategy === "full") {
+                    const logoSize = calculateLogoSize(point)
+                    const { tickerSize, weightSize } = calculateTextSizes(point)
+                    const percentage = point.percentage?.toFixed(1) || "0.0"
+                    if (logoUrl) {
+                      return `<div style="text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; overflow: hidden;">
+                      <div style="width: ${logoSize}px; height: ${logoSize}px; border-radius: 50%; background: #f1f3fa; overflow: hidden; display: flex; align-items: center; justify-content: center; margin-bottom: 2px;">
+                        <img src="${logoUrl}"
+                             alt="${ticker}"
+                             style="width: 100%; height: 100%; object-fit: contain;"
+                             onerror="this.style.display='none'"
+                        />
+                      </div>
+                      <span style="color: ${isDark ? "#f3f4f6" : "#f3f4f6"}; font-size: ${tickerSize}px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                        ${ticker}
+                      </span>
+                      <span style="color: ${isDark ? "#f3f4f6" : "#f3f4f6"}; font-size: ${weightSize}px; font-weight: 500; white-space: nowrap; margin-top: 1px;">
+                        ${percentage}%
+                      </span>
+                    </div>`
+                    } else {
+                      // Fallback to text only if no logo available for full display
+                      return `<div style="text-align: center; overflow: hidden; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                        <span style="color: ${isDark ? "#f3f4f6" : "#f3f4f6"}; font-size: ${tickerSize}px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                          ${ticker}
+                        </span>
+                        <span style="color: ${isDark ? "#f3f4f6" : "#f3f4f6"}; font-size: ${weightSize}px; font-weight: 500; white-space: nowrap; margin-top: 1px;">
+                          ${percentage}%
+                        </span>
+                      </div>`
+                    }
+                  }
+
+                  // Should not reach here, but return empty as fallback
+                  return ""
+                },
+              } : {
+                // For grouped modes, use simple headers
+                headers: true,
+                style: {
+                  textOutline: "none",
+                  color: isDark ? "#f3f4f6" : "#111827",
+                },
+              }),
             },
             borderWidth: 3,
             borderRadius: 3,
@@ -478,24 +615,37 @@ export function ExposureTreemapHighchartsWithLogos({
     },
   }
 
-  // Calculate top groups for legend
-  const topGroups = Object.entries(
-    exposures
-      .filter((exp) => !exp.isETFBreakdown && exp.totalValue > 0)
-      .reduce(
-        (acc, exp) => {
-          const key =
-            groupingMode === "sector"
-              ? toProperCase(exp.sector || "Unknown Sector")
-              : toProperCase(exp.industry || "Unknown Industry")
-          acc[key] = (acc[key] || 0) + exp.totalValue
-          return acc
-        },
-        {} as Record<string, number>,
-      ),
-  )
-    .sort((a, b) => b[1] - a[1])
-    .slice(0, 6)
+  // Calculate top groups or holdings for legend
+  const topGroups = (() => {
+    const validExposures = exposures.filter(
+      (exp) => !exp.isETFBreakdown && exp.totalValue > 0,
+    )
+
+    if (groupingMode === "none") {
+      // For "none" mode, show top holdings
+      return validExposures
+        .sort((a, b) => b.totalValue - a.totalValue)
+        .slice(0, 6)
+        .map((exp) => [exp.ticker, exp.totalValue] as [string, number])
+    } else {
+      // For grouped modes, show top sectors/industries
+      return Object.entries(
+        validExposures.reduce(
+          (acc, exp) => {
+            const key =
+              groupingMode === "sector"
+                ? toProperCase(exp.sector || "Unknown Sector")
+                : toProperCase(exp.industry || "Unknown Industry")
+            acc[key] = (acc[key] || 0) + exp.totalValue
+            return acc
+          },
+          {} as Record<string, number>,
+        ),
+      )
+        .sort((a, b) => b[1] - a[1])
+        .slice(0, 6)
+    }
+  })()
 
   if (!modulesLoaded) {
     return (
@@ -511,31 +661,19 @@ export function ExposureTreemapHighchartsWithLogos({
     <Card className="pb-4 pt-6">
       <div className="flex items-center justify-between">
         <h3 className="text-base font-medium text-gray-900 dark:text-gray-50">
-          Exposure map
+          Exposure map {percentageMode === "stocks" && <span className="text-sm font-normal text-gray-600 dark:text-gray-400">(Stocks Only)</span>}
         </h3>
 
-        <div className="flex items-center rounded-lg bg-gray-100 p-1 dark:bg-gray-800">
-          <button
-            onClick={() => setGroupingMode("sector")}
-            className={`rounded-md px-3 py-1 text-sm font-medium transition-colors ${
-              groupingMode === "sector"
-                ? "bg-white text-gray-900 shadow-sm dark:bg-gray-700 dark:text-gray-50"
-                : "text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-50"
-            }`}
-          >
-            By Sector
-          </button>
-          <button
-            onClick={() => setGroupingMode("industry")}
-            className={`rounded-md px-3 py-1 text-sm font-medium transition-colors ${
-              groupingMode === "industry"
-                ? "bg-white text-gray-900 shadow-sm dark:bg-gray-700 dark:text-gray-50"
-                : "text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-50"
-            }`}
-          >
-            By Industry
-          </button>
-        </div>
+        <Select value={groupingMode} onValueChange={(value) => setGroupingMode(value as GroupingMode)}>
+          <SelectTrigger className="w-[180px]">
+            <SelectValue />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="none">No group</SelectItem>
+            <SelectItem value="sector">Sector</SelectItem>
+            <SelectItem value="industry">Industry</SelectItem>
+          </SelectContent>
+        </Select>
       </div>
 
       <div className="mt-4">
@@ -549,7 +687,7 @@ export function ExposureTreemapHighchartsWithLogos({
       {/* Legend */}
       <div className="mt-4">
         <p className="mb-1 text-sm font-medium text-gray-700 dark:text-gray-300">
-          {groupingMode === "sector" ? "Top Sectors" : "Top Industries"}
+          {groupingMode === "none" ? "Top Holdings" : groupingMode === "sector" ? "Top Sectors" : "Top Industries"}
         </p>
         <ul className="flex flex-wrap gap-x-10 gap-y-4 text-sm">
           {topGroups.map(([name, value], index) => (
@@ -560,7 +698,7 @@ export function ExposureTreemapHighchartsWithLogos({
               <div className="flex items-center gap-2">
                 <span
                   className="size-2.5 shrink-0 rounded-sm"
-                  style={{ backgroundColor: colors[index % colors.length] }}
+                  style={{ backgroundColor: groupingMode === "none" ? colors[0] : colors[index % colors.length] }}
                   aria-hidden="true"
                 />
                 <span className="text-sm">{name}</span>

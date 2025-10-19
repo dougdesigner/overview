@@ -1,8 +1,9 @@
 {
   "symbol": "OPBK",
-  "name": "OPBK Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:32:12.610Z",
-  "source": "Alpha Vantage API"
+  "name": "OP Bancorp",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "BANKS - REGIONAL",
+  "officialSite": "https://www.myopenbank.com",
+  "cachedAt": "2025-10-19T05:55:25.182Z",
+  "source": "Alpha Vantage API (fixed)"
 }

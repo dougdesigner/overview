@@ -1,8 +1,9 @@
 {
   "symbol": "MNSB",
-  "name": "MNSB Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:35:36.281Z",
-  "source": "Alpha Vantage API"
+  "name": "Mainstreet Bank",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "BANKS - REGIONAL",
+  "officialSite": "https://mstreetbank.com",
+  "cachedAt": "2025-10-19T05:53:00.833Z",
+  "source": "Alpha Vantage API (fixed)"
 }

@@ -1,8 +1,9 @@
 {
   "symbol": "FCFS",
-  "name": "FCFS Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:31:05.252Z",
-  "source": "Alpha Vantage API"
+  "name": "FirstCash Inc",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "CREDIT SERVICES",
+  "officialSite": "https://firstcash.com",
+  "cachedAt": "2025-10-19T05:30:53.559Z",
+  "source": "Alpha Vantage API (fixed)"
 }

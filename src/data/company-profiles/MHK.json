@@ -1,8 +1,9 @@
 {
   "symbol": "MHK",
-  "name": "MHK Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:31:39.660Z",
-  "source": "Alpha Vantage API"
+  "name": "Mohawk Industries Inc",
+  "sector": "CONSUMER CYCLICAL",
+  "industry": "FURNISHINGS, FIXTURES & APPLIANCES",
+  "officialSite": "https://www.mohawkind.com",
+  "cachedAt": "2025-10-19T05:52:42.347Z",
+  "source": "Alpha Vantage API (fixed)"
 }

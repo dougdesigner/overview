@@ -1,8 +1,9 @@
 {
   "symbol": "MBUU",
-  "name": "MBUU Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:35:35.964Z",
-  "source": "Alpha Vantage API"
+  "name": "Malibu Boats Inc",
+  "sector": "CONSUMER CYCLICAL",
+  "industry": "RECREATIONAL VEHICLES",
+  "officialSite": "https://www.malibuboats.com",
+  "cachedAt": "2025-10-19T05:49:07.083Z",
+  "source": "Alpha Vantage API (fixed)"
 }

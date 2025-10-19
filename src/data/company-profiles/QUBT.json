@@ -1,8 +1,9 @@
 {
   "symbol": "QUBT",
-  "name": "QUBT Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:32:15.721Z",
-  "source": "Alpha Vantage API"
+  "name": "Quantum Computing Inc",
+  "sector": "TECHNOLOGY",
+  "industry": "COMPUTER HARDWARE",
+  "officialSite": "https://www.quantumcomputinginc.com",
+  "cachedAt": "2025-10-19T06:01:19.529Z",
+  "source": "Alpha Vantage API (fixed)"
 }

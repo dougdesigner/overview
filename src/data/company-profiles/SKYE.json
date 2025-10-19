@@ -1,8 +1,9 @@
 {
   "symbol": "SKYE",
-  "name": "SKYE Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:21.900Z",
-  "source": "Alpha Vantage API"
+  "name": "Skye Bioscience, Inc. Common Stock",
+  "sector": "HEALTHCARE",
+  "industry": "BIOTECHNOLOGY",
+  "officialSite": "https://skyebioscience.com",
+  "cachedAt": "2025-10-19T06:04:51.494Z",
+  "source": "Alpha Vantage API (fixed)"
 }

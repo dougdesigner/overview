@@ -1,8 +1,9 @@
 {
   "symbol": "MPAA",
-  "name": "MPAA Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:35:30.852Z",
-  "source": "Alpha Vantage API"
+  "name": "Motorcar Parts of America Inc",
+  "sector": "CONSUMER CYCLICAL",
+  "industry": "AUTO PARTS",
+  "officialSite": "https://www.motorcarparts.com",
+  "cachedAt": "2025-10-19T05:53:11.522Z",
+  "source": "Alpha Vantage API (fixed)"
 }

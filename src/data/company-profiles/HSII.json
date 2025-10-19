@@ -1,8 +1,9 @@
 {
   "symbol": "HSII",
-  "name": "HSII Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:36:04.761Z",
-  "source": "Alpha Vantage API"
+  "name": "Heidrick & Struggles International",
+  "sector": "INDUSTRIALS",
+  "industry": "STAFFING & EMPLOYMENT SERVICES",
+  "officialSite": "https://www.heidrick.com",
+  "cachedAt": "2025-10-19T05:41:49.324Z",
+  "source": "Alpha Vantage API (fixed)"
 }

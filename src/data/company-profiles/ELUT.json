@@ -1,8 +1,9 @@
 {
   "symbol": "ELUT",
-  "name": "ELUT Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:36:15.951Z",
-  "source": "Alpha Vantage API"
+  "name": "Elutia Inc.",
+  "sector": "HEALTHCARE",
+  "industry": "MEDICAL DEVICES",
+  "officialSite": "https://elutia.com",
+  "cachedAt": "2025-10-19T05:29:51.568Z",
+  "source": "Alpha Vantage API (fixed)"
 }

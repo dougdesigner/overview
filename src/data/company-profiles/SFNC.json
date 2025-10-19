@@ -1,8 +1,9 @@
 {
   "symbol": "SFNC",
-  "name": "SFNC Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:23.263Z",
-  "source": "Alpha Vantage API"
+  "name": "Simmons First National Corporation",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "BANKS - REGIONAL",
+  "officialSite": "https://www.simmonsbank.com",
+  "cachedAt": "2025-10-19T06:04:20.679Z",
+  "source": "Alpha Vantage API (fixed)"
 }

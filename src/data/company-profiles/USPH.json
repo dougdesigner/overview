@@ -1,8 +1,9 @@
 {
   "symbol": "USPH",
-  "name": "USPH Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:09.972Z",
-  "source": "Alpha Vantage API"
+  "name": "US Physicalrapy Inc",
+  "sector": "HEALTHCARE",
+  "industry": "MEDICAL CARE FACILITIES",
+  "officialSite": "https://www.usph.com",
+  "cachedAt": "2025-10-19T06:09:15.582Z",
+  "source": "Alpha Vantage API (fixed)"
 }

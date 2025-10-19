@@ -1,8 +1,9 @@
 {
   "symbol": "VRA",
-  "name": "VRA Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:16.744Z",
-  "source": "Alpha Vantage API"
+  "name": "Vera Bradley Inc",
+  "sector": "CONSUMER CYCLICAL",
+  "industry": "FOOTWEAR & ACCESSORIES",
+  "officialSite": "https://verabradley.com",
+  "cachedAt": "2025-10-19T06:09:41.148Z",
+  "source": "Alpha Vantage API (fixed)"
 }

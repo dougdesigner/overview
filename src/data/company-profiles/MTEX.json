@@ -1,8 +1,9 @@
 {
   "symbol": "MTEX",
-  "name": "MTEX Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:35:34.952Z",
-  "source": "Alpha Vantage API"
+  "name": "Mannatech Incorporated",
+  "sector": "CONSUMER DEFENSIVE",
+  "industry": "FOOD DISTRIBUTION",
+  "officialSite": "https://www.mannatech.com",
+  "cachedAt": "2025-10-19T05:53:30.229Z",
+  "source": "Alpha Vantage API (fixed)"
 }

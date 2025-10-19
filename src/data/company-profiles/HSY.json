@@ -1,8 +1,9 @@
 {
   "symbol": "HSY",
-  "name": "HSY Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:12.304Z",
-  "source": "Alpha Vantage API"
+  "name": "Hershey Co",
+  "sector": "CONSUMER DEFENSIVE",
+  "industry": "CONFECTIONERS",
+  "officialSite": "https://www.thehersheycompany.com",
+  "cachedAt": "2025-10-19T05:41:51.275Z",
+  "source": "Alpha Vantage API (fixed)"
 }

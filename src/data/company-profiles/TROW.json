@@ -1,8 +1,9 @@
 {
   "symbol": "TROW",
-  "name": "TROW Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:14.196Z",
-  "source": "Alpha Vantage API"
+  "name": "T. Rowe Price Group Inc",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "ASSET MANAGEMENT",
+  "officialSite": "https://www.troweprice.com",
+  "cachedAt": "2025-10-19T06:08:10.911Z",
+  "source": "Alpha Vantage API (fixed)"
 }

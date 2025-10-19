@@ -1,8 +1,9 @@
 {
   "symbol": "CTO",
-  "name": "CTO Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:34:30.543Z",
-  "source": "Alpha Vantage API"
+  "name": "CTO Realty Growth Inc",
+  "sector": "REAL ESTATE",
+  "industry": "REIT - DIVERSIFIED",
+  "officialSite": "https://www.ctoreit.com",
+  "cachedAt": "2025-10-19T05:25:58.198Z",
+  "source": "Alpha Vantage API (fixed)"
 }

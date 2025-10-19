@@ -1,8 +1,9 @@
 {
   "symbol": "KMTS",
-  "name": "KMTS Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:36:27.991Z",
-  "source": "Alpha Vantage API"
+  "name": "Kestra Medical Technologies, Ltd. Common Stock",
+  "sector": "HEALTHCARE",
+  "industry": "MEDICAL INSTRUMENTS & SUPPLIES",
+  "officialSite": "https://kestramedical.com",
+  "cachedAt": "2025-10-19T05:44:20.511Z",
+  "source": "Alpha Vantage API (fixed)"
 }

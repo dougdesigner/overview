@@ -1,8 +1,9 @@
 {
   "symbol": "HRTG",
-  "name": "HRTG Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:36:13.126Z",
-  "source": "Alpha Vantage API"
+  "name": "Heritage Insurance Hldgs Inc",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "INSURANCE - PROPERTY & CASUALTY",
+  "officialSite": "https://www.heritagepci.com",
+  "cachedAt": "2025-10-19T05:41:47.395Z",
+  "source": "Alpha Vantage API (fixed)"
 }

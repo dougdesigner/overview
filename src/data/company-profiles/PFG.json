@@ -1,8 +1,9 @@
 {
   "symbol": "PFG",
-  "name": "PFG Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:06.061Z",
-  "source": "Alpha Vantage API"
+  "name": "Principal Financial Group Inc",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "ASSET MANAGEMENT",
+  "officialSite": "https://www.principal.com",
+  "cachedAt": "2025-10-19T06:00:00.193Z",
+  "source": "Alpha Vantage API (fixed)"
 }

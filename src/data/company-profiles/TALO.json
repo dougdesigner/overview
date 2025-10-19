@@ -1,8 +1,9 @@
 {
   "symbol": "TALO",
-  "name": "TALO Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:39.831Z",
-  "source": "Alpha Vantage API"
+  "name": "Talos Energy",
+  "sector": "ENERGY",
+  "industry": "OIL & GAS E&P",
+  "officialSite": "https://www.talosenergy.com",
+  "cachedAt": "2025-10-19T06:07:28.486Z",
+  "source": "Alpha Vantage API (fixed)"
 }

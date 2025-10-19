@@ -1,8 +1,9 @@
 {
   "symbol": "VNDA",
-  "name": "VNDA Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:09.029Z",
-  "source": "Alpha Vantage API"
+  "name": "Vanda Pharmaceuticals Inc",
+  "sector": "HEALTHCARE",
+  "industry": "BIOTECHNOLOGY",
+  "officialSite": "https://www.vandapharma.com",
+  "cachedAt": "2025-10-19T06:09:39.208Z",
+  "source": "Alpha Vantage API (fixed)"
 }

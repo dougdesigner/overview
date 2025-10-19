@@ -1,8 +1,9 @@
 {
   "symbol": "PECO",
-  "name": "PECO Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:32:05.420Z",
-  "source": "Alpha Vantage API"
+  "name": "Phillips Edison & Co Inc",
+  "sector": "REAL ESTATE",
+  "industry": "REIT - RETAIL",
+  "officialSite": "https://www.phillipsedison.com",
+  "cachedAt": "2025-10-19T05:59:57.294Z",
+  "source": "Alpha Vantage API (fixed)"
 }

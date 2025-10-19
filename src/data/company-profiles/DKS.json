@@ -1,8 +1,9 @@
 {
   "symbol": "DKS",
-  "name": "DKS Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:40.049Z",
-  "source": "Alpha Vantage API"
+  "name": "Dick’s Sporting Goods Inc",
+  "sector": "CONSUMER CYCLICAL",
+  "industry": "SPECIALTY RETAIL",
+  "officialSite": "https://www.dickssportinggoods.com",
+  "cachedAt": "2025-10-19T05:28:54.158Z",
+  "source": "Alpha Vantage API (fixed)"
 }

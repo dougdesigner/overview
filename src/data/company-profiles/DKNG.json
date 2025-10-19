@@ -1,8 +1,9 @@
 {
   "symbol": "DKNG",
-  "name": "DKNG Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:36.023Z",
-  "source": "Alpha Vantage API"
+  "name": "DraftKings Inc",
+  "sector": "CONSUMER CYCLICAL",
+  "industry": "GAMBLING",
+  "officialSite": "https://www.draftkings.com",
+  "cachedAt": "2025-10-19T05:28:53.155Z",
+  "source": "Alpha Vantage API (fixed)"
 }

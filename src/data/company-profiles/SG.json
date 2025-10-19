@@ -1,8 +1,9 @@
 {
   "symbol": "SG",
-  "name": "SG Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:41.827Z",
-  "source": "Alpha Vantage API"
+  "name": "Sweetgreen Inc",
+  "sector": "CONSUMER CYCLICAL",
+  "industry": "RESTAURANTS",
+  "officialSite": "https://www.sweetgreen.com",
+  "cachedAt": "2025-10-19T06:04:21.651Z",
+  "source": "Alpha Vantage API (fixed)"
 }

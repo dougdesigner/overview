@@ -1,8 +1,9 @@
 {
   "symbol": "RPAY",
-  "name": "RPAY Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:32:26.095Z",
-  "source": "Alpha Vantage API"
+  "name": "Repay Holdings Corp",
+  "sector": "TECHNOLOGY",
+  "industry": "SOFTWARE - INFRASTRUCTURE",
+  "officialSite": "https://www.repay.com",
+  "cachedAt": "2025-10-19T06:02:46.318Z",
+  "source": "Alpha Vantage API (fixed)"
 }

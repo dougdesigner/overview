@@ -1,8 +1,9 @@
 {
   "symbol": "SYM",
-  "name": "SYM Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:41.521Z",
-  "source": "Alpha Vantage API"
+  "name": "Symbotic Inc",
+  "sector": "INDUSTRIALS",
+  "industry": "SPECIALTY INDUSTRIAL MACHINERY",
+  "officialSite": "https://www.symbotic.com",
+  "cachedAt": "2025-10-19T06:07:23.653Z",
+  "source": "Alpha Vantage API (fixed)"
 }

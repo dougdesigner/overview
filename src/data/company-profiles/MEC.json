@@ -1,8 +1,9 @@
 {
   "symbol": "MEC",
-  "name": "MEC Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:35:40.936Z",
-  "source": "Alpha Vantage API"
+  "name": "Mayville Engineering Co Inc",
+  "sector": "INDUSTRIALS",
+  "industry": "METAL FABRICATION",
+  "officialSite": "https://www.mecinc.com",
+  "cachedAt": "2025-10-19T05:49:21.651Z",
+  "source": "Alpha Vantage API (fixed)"
 }

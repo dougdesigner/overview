@@ -1,8 +1,9 @@
 {
   "symbol": "SVCO",
-  "name": "SVCO Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:23.874Z",
-  "source": "Alpha Vantage API"
+  "name": "Silvaco Group, Inc. Common Stock",
+  "sector": "TECHNOLOGY",
+  "industry": "SOFTWARE - APPLICATION",
+  "officialSite": "https://www.silvaco.com",
+  "cachedAt": "2025-10-19T06:07:11.973Z",
+  "source": "Alpha Vantage API (fixed)"
 }

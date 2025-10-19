@@ -1,8 +1,9 @@
 {
   "symbol": "ORN",
-  "name": "ORN Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:32:29.313Z",
-  "source": "Alpha Vantage API"
+  "name": "Orion Group Holdings Inc",
+  "sector": "INDUSTRIALS",
+  "industry": "ENGINEERING & CONSTRUCTION",
+  "officialSite": "https://www.oriongroupholdingsinc.com",
+  "cachedAt": "2025-10-19T05:55:40.782Z",
+  "source": "Alpha Vantage API (fixed)"
 }

@@ -1,8 +1,9 @@
 {
   "symbol": "SNDR",
-  "name": "SNDR Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:32.206Z",
-  "source": "Alpha Vantage API"
+  "name": "Schneider National Inc",
+  "sector": "INDUSTRIALS",
+  "industry": "TRUCKING",
+  "officialSite": "https://schneider.com",
+  "cachedAt": "2025-10-19T06:05:14.212Z",
+  "source": "Alpha Vantage API (fixed)"
 }

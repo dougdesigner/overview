@@ -1,8 +1,9 @@
 {
   "symbol": "FHB",
-  "name": "FHB Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:31:08.338Z",
-  "source": "Alpha Vantage API"
+  "name": "First Hawaiian Inc",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "BANKS - REGIONAL",
+  "officialSite": "https://www.fhb.com",
+  "cachedAt": "2025-10-19T05:31:04.670Z",
+  "source": "Alpha Vantage API (fixed)"
 }

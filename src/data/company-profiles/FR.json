@@ -1,8 +1,9 @@
 {
   "symbol": "FR",
-  "name": "FR Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:31:09.266Z",
-  "source": "Alpha Vantage API"
+  "name": "First Industrial Realty Trust Inc",
+  "sector": "REAL ESTATE",
+  "industry": "REIT - INDUSTRIAL",
+  "officialSite": "https://www.firstindustrial.com",
+  "cachedAt": "2025-10-19T05:31:23.184Z",
+  "source": "Alpha Vantage API (fixed)"
 }

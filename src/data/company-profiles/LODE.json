@@ -1,8 +1,9 @@
 {
   "symbol": "LODE",
-  "name": "LODE Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:34:33.525Z",
-  "source": "Alpha Vantage API"
+  "name": "Comstock Mining Inc",
+  "sector": "BASIC MATERIALS",
+  "industry": "OTHER PRECIOUS METALS & MINING",
+  "officialSite": "https://www.comstock.inc",
+  "cachedAt": "2025-10-19T05:48:25.085Z",
+  "source": "Alpha Vantage API (fixed)"
 }

@@ -1,8 +1,9 @@
 {
   "symbol": "FUNC",
-  "name": "FUNC Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:36:23.322Z",
-  "source": "Alpha Vantage API"
+  "name": "First United Corporation",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "BANKS - REGIONAL",
+  "officialSite": "https://mybank.com",
+  "cachedAt": "2025-10-19T05:31:36.950Z",
+  "source": "Alpha Vantage API (fixed)"
 }

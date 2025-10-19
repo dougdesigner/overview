@@ -1,8 +1,9 @@
 {
   "symbol": "FSFG",
-  "name": "FSFG Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:36:13.747Z",
-  "source": "Alpha Vantage API"
+  "name": "First Savings Financial Group Inc",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "BANKS - REGIONAL",
+  "officialSite": "https://www.fsbbank.net",
+  "cachedAt": "2025-10-19T05:31:28.184Z",
+  "source": "Alpha Vantage API (fixed)"
 }

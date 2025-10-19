@@ -1,8 +1,9 @@
 {
   "symbol": "SRFM",
-  "name": "SRFM Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:34.612Z",
-  "source": "Alpha Vantage API"
+  "name": "Surf Air Mobility Inc.",
+  "sector": "INDUSTRIALS",
+  "industry": "AIRLINES",
+  "officialSite": "https://www.surfair.com",
+  "cachedAt": "2025-10-19T06:05:32.246Z",
+  "source": "Alpha Vantage API (fixed)"
 }

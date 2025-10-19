@@ -1,8 +1,9 @@
 {
   "symbol": "PARR",
-  "name": "PARR Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:32:31.197Z",
-  "source": "Alpha Vantage API"
+  "name": "Par Pacific Holdings Inc",
+  "sector": "ENERGY",
+  "industry": "OIL & GAS REFINING & MARKETING",
+  "officialSite": "https://www.parpacific.com",
+  "cachedAt": "2025-10-19T05:56:04.084Z",
+  "source": "Alpha Vantage API (fixed)"
 }

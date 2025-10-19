@@ -1,8 +1,9 @@
 {
   "symbol": "PBF",
-  "name": "PBF Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:32:17.321Z",
-  "source": "Alpha Vantage API"
+  "name": "PBF Energy Inc",
+  "sector": "ENERGY",
+  "industry": "OIL & GAS REFINING & MARKETING",
+  "officialSite": "https://www.pbfenergy.com",
+  "cachedAt": "2025-10-19T05:56:09.926Z",
+  "source": "Alpha Vantage API (fixed)"
 }

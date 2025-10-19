@@ -1,8 +1,9 @@
 {
   "symbol": "ESS",
-  "name": "ESS Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:32.256Z",
-  "source": "Alpha Vantage API"
+  "name": "Essex Property Trust Inc",
+  "sector": "REAL ESTATE",
+  "industry": "REIT - RESIDENTIAL",
+  "officialSite": "https://www.essexapartmenthomes.com",
+  "cachedAt": "2025-10-19T05:30:37.954Z",
+  "source": "Alpha Vantage API (fixed)"
 }

@@ -1,8 +1,9 @@
 {
   "symbol": "RDNT",
-  "name": "RDNT Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:31:12.482Z",
-  "source": "Alpha Vantage API"
+  "name": "RadNet Inc",
+  "sector": "HEALTHCARE",
+  "industry": "DIAGNOSTICS & RESEARCH",
+  "officialSite": "https://www.radnet.com",
+  "cachedAt": "2025-10-19T06:01:47.496Z",
+  "source": "Alpha Vantage API (fixed)"
 }

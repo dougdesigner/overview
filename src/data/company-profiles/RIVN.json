@@ -1,8 +1,9 @@
 {
   "symbol": "RIVN",
-  "name": "RIVN Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:13.857Z",
-  "source": "Alpha Vantage API"
+  "name": "Rivian Automotive Inc",
+  "sector": "CONSUMER CYCLICAL",
+  "industry": "AUTO MANUFACTURERS",
+  "officialSite": "https://www.rivian.com",
+  "cachedAt": "2025-10-19T06:02:20.867Z",
+  "source": "Alpha Vantage API (fixed)"
 }

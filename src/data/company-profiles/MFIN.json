@@ -1,8 +1,9 @@
 {
   "symbol": "MFIN",
-  "name": "MFIN Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:35:40.139Z",
-  "source": "Alpha Vantage API"
+  "name": "Medallion Financial Corp",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "CREDIT SERVICES",
+  "officialSite": "https://www.medallion.com",
+  "cachedAt": "2025-10-19T05:52:34.520Z",
+  "source": "Alpha Vantage API (fixed)"
 }

@@ -1,8 +1,9 @@
 {
   "symbol": "OSS",
-  "name": "OSS Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:32:09.190Z",
-  "source": "Alpha Vantage API"
+  "name": "One Stop Systems Inc",
+  "sector": "TECHNOLOGY",
+  "industry": "COMPUTER HARDWARE",
+  "officialSite": "https://www.onestopsystems.com",
+  "cachedAt": "2025-10-19T05:55:47.591Z",
+  "source": "Alpha Vantage API (fixed)"
 }

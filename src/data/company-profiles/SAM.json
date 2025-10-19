@@ -1,8 +1,9 @@
 {
   "symbol": "SAM",
-  "name": "SAM Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:34:05.217Z",
-  "source": "Alpha Vantage API"
+  "name": "Boston Beer Company Inc",
+  "sector": "CONSUMER DEFENSIVE",
+  "industry": "BEVERAGES - BREWERS",
+  "officialSite": "https://www.bostonbeer.com",
+  "cachedAt": "2025-10-19T06:03:12.741Z",
+  "source": "Alpha Vantage API (fixed)"
 }

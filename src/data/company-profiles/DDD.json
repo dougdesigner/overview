@@ -1,8 +1,9 @@
 {
   "symbol": "DDD",
-  "name": "DDD Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:06.199Z",
-  "source": "Alpha Vantage API"
+  "name": "3D Systems Corporation",
+  "sector": "TECHNOLOGY",
+  "industry": "COMPUTER HARDWARE",
+  "officialSite": "https://www.3dsystems.com",
+  "cachedAt": "2025-10-19T05:26:46.064Z",
+  "source": "Alpha Vantage API (fixed)"
 }

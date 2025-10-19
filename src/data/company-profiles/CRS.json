@@ -1,8 +1,9 @@
 {
   "symbol": "CRS",
-  "name": "CRS Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:18.753Z",
-  "source": "Alpha Vantage API"
+  "name": "Carpenter Technology Corporation",
+  "sector": "INDUSTRIALS",
+  "industry": "METAL FABRICATION",
+  "officialSite": "https://www.carpentertechnology.com",
+  "cachedAt": "2025-10-19T05:25:48.467Z",
+  "source": "Alpha Vantage API (fixed)"
 }

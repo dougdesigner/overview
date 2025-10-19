@@ -1,8 +1,9 @@
 {
   "symbol": "SMBK",
-  "name": "SMBK Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:21.098Z",
-  "source": "Alpha Vantage API"
+  "name": "SmartFinancial, Inc.",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "BANKS - REGIONAL",
+  "officialSite": "https://www.smartbank.com",
+  "cachedAt": "2025-10-19T06:05:02.482Z",
+  "source": "Alpha Vantage API (fixed)"
 }

@@ -1,8 +1,9 @@
 {
   "symbol": "PRA",
-  "name": "PRA Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:32:20.374Z",
-  "source": "Alpha Vantage API"
+  "name": "ProAssurance Corporation",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "INSURANCE - PROPERTY & CASUALTY",
+  "officialSite": "https://www.proassurance.com",
+  "cachedAt": "2025-10-19T06:00:35.883Z",
+  "source": "Alpha Vantage API (fixed)"
 }

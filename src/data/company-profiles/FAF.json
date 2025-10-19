@@ -1,8 +1,9 @@
 {
   "symbol": "FAF",
-  "name": "FAF Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:31:05.260Z",
-  "source": "Alpha Vantage API"
+  "name": "First American Corporation",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "INSURANCE - SPECIALTY",
+  "officialSite": "https://www.firstam.com",
+  "cachedAt": "2025-10-19T05:30:50.627Z",
+  "source": "Alpha Vantage API (fixed)"
 }

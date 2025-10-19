@@ -1,8 +1,9 @@
 {
   "symbol": "MITK",
-  "name": "MITK Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:35:32.779Z",
-  "source": "Alpha Vantage API"
+  "name": "Mitek Systems Inc",
+  "sector": "TECHNOLOGY",
+  "industry": "SOFTWARE - APPLICATION",
+  "officialSite": "https://www.miteksystems.com",
+  "cachedAt": "2025-10-19T05:52:46.247Z",
+  "source": "Alpha Vantage API (fixed)"
 }

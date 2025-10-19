@@ -1,8 +1,9 @@
 {
   "symbol": "PLAY",
-  "name": "PLAY Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:34:14.518Z",
-  "source": "Alpha Vantage API"
+  "name": "Dave & Buster’s Entertainment",
+  "sector": "COMMUNICATION SERVICES",
+  "industry": "ENTERTAINMENT",
+  "officialSite": "https://daveandbusters.com",
+  "cachedAt": "2025-10-19T06:00:22.222Z",
+  "source": "Alpha Vantage API (fixed)"
 }

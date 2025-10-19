@@ -1,8 +1,9 @@
 {
   "symbol": "UDR",
-  "name": "UDR Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:32.676Z",
-  "source": "Alpha Vantage API"
+  "name": "UDR Inc",
+  "sector": "REAL ESTATE",
+  "industry": "REIT - RESIDENTIAL",
+  "officialSite": "https://www.udr.com",
+  "cachedAt": "2025-10-19T06:08:51.594Z",
+  "source": "Alpha Vantage API (fixed)"
 }

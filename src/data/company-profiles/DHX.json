@@ -1,8 +1,9 @@
 {
   "symbol": "DHX",
-  "name": "DHX Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:34:23.841Z",
-  "source": "Alpha Vantage API"
+  "name": "DHI Group Inc",
+  "sector": "TECHNOLOGY",
+  "industry": "SOFTWARE - APPLICATION",
+  "officialSite": "https://www.dhigroupinc.com",
+  "cachedAt": "2025-10-19T05:28:47.301Z",
+  "source": "Alpha Vantage API (fixed)"
 }

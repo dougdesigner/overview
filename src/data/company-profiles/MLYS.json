@@ -1,8 +1,9 @@
 {
   "symbol": "MLYS",
-  "name": "MLYS Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:35:33.871Z",
-  "source": "Alpha Vantage API"
+  "name": "Mineralys Therapeutics, Inc. Common Stock",
+  "sector": "HEALTHCARE",
+  "industry": "BIOTECHNOLOGY",
+  "officialSite": "https://mineralystx.com",
+  "cachedAt": "2025-10-19T05:52:56.942Z",
+  "source": "Alpha Vantage API (fixed)"
 }

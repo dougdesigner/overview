@@ -1,8 +1,9 @@
 {
   "symbol": "MYE",
-  "name": "MYE Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:35:29.735Z",
-  "source": "Alpha Vantage API"
+  "name": "Myers Industries Inc",
+  "sector": "CONSUMER CYCLICAL",
+  "industry": "PACKAGING & CONTAINERS",
+  "officialSite": "https://www.myersindustries.com",
+  "cachedAt": "2025-10-19T05:53:43.861Z",
+  "source": "Alpha Vantage API (fixed)"
 }

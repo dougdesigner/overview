@@ -1,8 +1,9 @@
 {
   "symbol": "FOX",
-  "name": "FOX Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:31:29.806Z",
-  "source": "Alpha Vantage API"
+  "name": "Fox Corp Class B",
+  "sector": "COMMUNICATION SERVICES",
+  "industry": "ENTERTAINMENT",
+  "officialSite": "https://www.foxcorporation.com",
+  "cachedAt": "2025-10-19T05:31:22.190Z",
+  "source": "Alpha Vantage API (fixed)"
 }

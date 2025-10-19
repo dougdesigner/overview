@@ -1,8 +1,9 @@
 {
   "symbol": "MOV",
-  "name": "MOV Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:35:30.688Z",
-  "source": "Alpha Vantage API"
+  "name": "Movado Group Inc",
+  "sector": "CONSUMER CYCLICAL",
+  "industry": "LUXURY GOODS",
+  "officialSite": "https://www.movadogroup.com",
+  "cachedAt": "2025-10-19T05:53:09.578Z",
+  "source": "Alpha Vantage API (fixed)"
 }

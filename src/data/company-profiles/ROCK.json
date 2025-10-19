@@ -1,8 +1,9 @@
 {
   "symbol": "ROCK",
-  "name": "ROCK Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:36:20.290Z",
-  "source": "Alpha Vantage API"
+  "name": "Gibraltar Industries Inc",
+  "sector": "INDUSTRIALS",
+  "industry": "BUILDING PRODUCTS & EQUIPMENT",
+  "officialSite": "https://www.gibraltar1.com",
+  "cachedAt": "2025-10-19T06:02:41.377Z",
+  "source": "Alpha Vantage API (fixed)"
 }

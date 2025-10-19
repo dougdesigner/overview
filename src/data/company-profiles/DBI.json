@@ -1,8 +1,9 @@
 {
   "symbol": "DBI",
-  "name": "DBI Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:34:24.150Z",
-  "source": "Alpha Vantage API"
+  "name": "Designer Brands Inc",
+  "sector": "CONSUMER CYCLICAL",
+  "industry": "FOOTWEAR & ACCESSORIES",
+  "officialSite": "https://www.designerbrands.com",
+  "cachedAt": "2025-10-19T05:26:43.116Z",
+  "source": "Alpha Vantage API (fixed)"
 }

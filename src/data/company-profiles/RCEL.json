@@ -1,8 +1,9 @@
 {
   "symbol": "RCEL",
-  "name": "RCEL Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:35:21.083Z",
-  "source": "Alpha Vantage API"
+  "name": "Avita Medical Ltd",
+  "sector": "HEALTHCARE",
+  "industry": "MEDICAL DEVICES",
+  "officialSite": "https://avitamedical.com",
+  "cachedAt": "2025-10-19T06:01:26.338Z",
+  "source": "Alpha Vantage API (fixed)"
 }

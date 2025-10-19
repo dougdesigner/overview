@@ -1,8 +1,9 @@
 {
   "symbol": "OMF",
-  "name": "OMF Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:31:04.023Z",
-  "source": "Alpha Vantage API"
+  "name": "OneMain Holdings Inc",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "CREDIT SERVICES",
+  "officialSite": "https://www.onemainfinancial.com",
+  "cachedAt": "2025-10-19T05:55:14.437Z",
+  "source": "Alpha Vantage API (fixed)"
 }

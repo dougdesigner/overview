@@ -1,8 +1,9 @@
 {
   "symbol": "GTM",
-  "name": "GTM Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:07.444Z",
-  "source": "Alpha Vantage API"
+  "name": "ZoomInfo Technologies Inc.",
+  "sector": "TECHNOLOGY",
+  "industry": "SOFTWARE - APPLICATION",
+  "officialSite": "https://www.zoominfo.com",
+  "cachedAt": "2025-10-19T05:37:10.234Z",
+  "source": "Alpha Vantage API (fixed)"
 }

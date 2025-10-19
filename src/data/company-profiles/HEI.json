@@ -1,8 +1,9 @@
 {
   "symbol": "HEI",
-  "name": "HEI Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:31:26.023Z",
-  "source": "Alpha Vantage API"
+  "name": "Heico Corporation",
+  "sector": "INDUSTRIALS",
+  "industry": "AEROSPACE & DEFENSE",
+  "officialSite": "https://www.heico.com",
+  "cachedAt": "2025-10-19T05:37:26.810Z",
+  "source": "Alpha Vantage API (fixed)"
 }

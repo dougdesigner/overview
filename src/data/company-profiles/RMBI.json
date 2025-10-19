@@ -1,8 +1,9 @@
 {
   "symbol": "RMBI",
-  "name": "RMBI Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:32:10.869Z",
-  "source": "Alpha Vantage API"
+  "name": "Richmond Mutual Bancorporation Inc",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "BANKS - REGIONAL",
+  "officialSite": "https://www.firstbankrichmond.com",
+  "cachedAt": "2025-10-19T06:02:28.651Z",
+  "source": "Alpha Vantage API (fixed)"
 }

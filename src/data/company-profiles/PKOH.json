@@ -1,8 +1,9 @@
 {
   "symbol": "PKOH",
-  "name": "PKOH Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:32:32.349Z",
-  "source": "Alpha Vantage API"
+  "name": "Park Ohio Holdings Corp",
+  "sector": "INDUSTRIALS",
+  "industry": "SPECIALTY INDUSTRIAL MACHINERY",
+  "officialSite": "https://pkoh.com",
+  "cachedAt": "2025-10-19T06:00:21.234Z",
+  "source": "Alpha Vantage API (fixed)"
 }

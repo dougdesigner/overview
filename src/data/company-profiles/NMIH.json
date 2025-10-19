@@ -1,8 +1,9 @@
 {
   "symbol": "NMIH",
-  "name": "NMIH Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:31:24.306Z",
-  "source": "Alpha Vantage API"
+  "name": "NMI Holdings Inc",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "INSURANCE - SPECIALTY",
+  "officialSite": "https://www.nationalmi.com",
+  "cachedAt": "2025-10-19T05:54:04.292Z",
+  "source": "Alpha Vantage API (fixed)"
 }

@@ -1,8 +1,9 @@
 {
   "symbol": "CVI",
-  "name": "CVI Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:34:16.983Z",
-  "source": "Alpha Vantage API"
+  "name": "CVR Energy Inc",
+  "sector": "ENERGY",
+  "industry": "OIL & GAS REFINING & MARKETING",
+  "officialSite": "https://www.cvrenergy.com",
+  "cachedAt": "2025-10-19T05:26:14.865Z",
+  "source": "Alpha Vantage API (fixed)"
 }

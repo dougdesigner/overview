@@ -1,8 +1,9 @@
 {
   "symbol": "NVST",
-  "name": "NVST Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:31:10.235Z",
-  "source": "Alpha Vantage API"
+  "name": "Envista Holdings Corp",
+  "sector": "HEALTHCARE",
+  "industry": "MEDICAL INSTRUMENTS & SUPPLIES",
+  "officialSite": "https://envistaco.com",
+  "cachedAt": "2025-10-19T05:54:50.062Z",
+  "source": "Alpha Vantage API (fixed)"
 }

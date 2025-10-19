@@ -1,8 +1,9 @@
 {
   "symbol": "KWR",
-  "name": "KWR Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:32:15.089Z",
-  "source": "Alpha Vantage API"
+  "name": "Quaker Chemical Corporation",
+  "sector": "BASIC MATERIALS",
+  "industry": "SPECIALTY CHEMICALS",
+  "officialSite": "https://home.quakerhoughton.com",
+  "cachedAt": "2025-10-19T05:44:41.961Z",
+  "source": "Alpha Vantage API (fixed)"
 }

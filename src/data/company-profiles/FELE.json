@@ -1,8 +1,9 @@
 {
   "symbol": "FELE",
-  "name": "FELE Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:31:29.495Z",
-  "source": "Alpha Vantage API"
+  "name": "Franklin Electric Co Inc",
+  "sector": "INDUSTRIALS",
+  "industry": "SPECIALTY INDUSTRIAL MACHINERY",
+  "officialSite": "https://www.franklin-electric.com",
+  "cachedAt": "2025-10-19T05:31:00.422Z",
+  "source": "Alpha Vantage API (fixed)"
 }

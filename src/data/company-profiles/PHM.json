@@ -1,8 +1,9 @@
 {
   "symbol": "PHM",
-  "name": "PHM Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:20.145Z",
-  "source": "Alpha Vantage API"
+  "name": "PulteGroup Inc",
+  "sector": "CONSUMER CYCLICAL",
+  "industry": "RESIDENTIAL CONSTRUCTION",
+  "officialSite": "https://www.pultegroup.com",
+  "cachedAt": "2025-10-19T06:00:09.113Z",
+  "source": "Alpha Vantage API (fixed)"
 }

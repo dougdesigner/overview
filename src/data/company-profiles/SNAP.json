@@ -1,8 +1,9 @@
 {
   "symbol": "SNAP",
-  "name": "SNAP Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:24.353Z",
-  "source": "Alpha Vantage API"
+  "name": "Snap Inc",
+  "sector": "COMMUNICATION SERVICES",
+  "industry": "INTERNET CONTENT & INFORMATION",
+  "officialSite": "https://www.snap.com",
+  "cachedAt": "2025-10-19T06:05:09.330Z",
+  "source": "Alpha Vantage API (fixed)"
 }

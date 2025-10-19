@@ -1,8 +1,9 @@
 {
   "symbol": "EBS",
-  "name": "EBS Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:36:15.636Z",
-  "source": "Alpha Vantage API"
+  "name": "Emergent Biosolutions Inc",
+  "sector": "HEALTHCARE",
+  "industry": "DRUG MANUFACTURERS - SPECIALTY & GENERIC",
+  "officialSite": "https://www.emergentbiosolutions.com",
+  "cachedAt": "2025-10-19T05:29:28.196Z",
+  "source": "Alpha Vantage API (fixed)"
 }

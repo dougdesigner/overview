@@ -1,8 +1,9 @@
 {
   "symbol": "MAZE",
-  "name": "MAZE Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:35:40.764Z",
-  "source": "Alpha Vantage API"
+  "name": "Maze Therapeutics, Inc. Common Stock",
+  "sector": "HEALTHCARE",
+  "industry": "BIOTECHNOLOGY",
+  "officialSite": "https://www.mazetx.com",
+  "cachedAt": "2025-10-19T05:49:01.207Z",
+  "source": "Alpha Vantage API (fixed)"
 }

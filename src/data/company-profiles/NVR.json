@@ -1,8 +1,9 @@
 {
   "symbol": "NVR",
-  "name": "NVR Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:17.620Z",
-  "source": "Alpha Vantage API"
+  "name": "NVR Inc",
+  "sector": "CONSUMER CYCLICAL",
+  "industry": "RESIDENTIAL CONSTRUCTION",
+  "officialSite": "https://www.nvrinc.com",
+  "cachedAt": "2025-10-19T05:54:48.135Z",
+  "source": "Alpha Vantage API (fixed)"
 }

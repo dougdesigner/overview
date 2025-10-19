@@ -1,8 +1,9 @@
 {
   "symbol": "MFA",
-  "name": "MFA Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:35:26.760Z",
-  "source": "Alpha Vantage API"
+  "name": "MFA Financial Inc",
+  "sector": "REAL ESTATE",
+  "industry": "REIT - MORTGAGE",
+  "officialSite": "https://www.mfafinancial.com",
+  "cachedAt": "2025-10-19T05:52:33.548Z",
+  "source": "Alpha Vantage API (fixed)"
 }

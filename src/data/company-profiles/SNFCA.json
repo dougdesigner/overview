@@ -1,8 +1,9 @@
 {
   "symbol": "SNFCA",
-  "name": "SNFCA Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:30.729Z",
-  "source": "Alpha Vantage API"
+  "name": "Security National Financial",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "MORTGAGE FINANCE",
+  "officialSite": "https://www.securitynational.com",
+  "cachedAt": "2025-10-19T06:05:17.148Z",
+  "source": "Alpha Vantage API (fixed)"
 }

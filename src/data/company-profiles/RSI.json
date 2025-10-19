@@ -1,8 +1,9 @@
 {
   "symbol": "RSI",
-  "name": "RSI Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:27.096Z",
-  "source": "Alpha Vantage API"
+  "name": "Rush Street Interactive Inc",
+  "sector": "CONSUMER CYCLICAL",
+  "industry": "GAMBLING",
+  "officialSite": "https://www.rushstreetinteractive.com",
+  "cachedAt": "2025-10-19T06:02:49.230Z",
+  "source": "Alpha Vantage API (fixed)"
 }

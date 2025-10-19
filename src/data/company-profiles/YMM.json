@@ -1,8 +1,9 @@
 {
   "symbol": "YMM",
-  "name": "YMM Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:37:01.682Z",
-  "source": "Alpha Vantage API"
+  "name": "Full Truck Alliance Co Ltd ADR",
+  "sector": "TECHNOLOGY",
+  "industry": "SOFTWARE - APPLICATION",
+  "officialSite": "https://www.fulltruckalliance.com",
+  "cachedAt": "2025-10-19T06:12:45.503Z",
+  "source": "Alpha Vantage API (fixed)"
 }

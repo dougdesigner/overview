@@ -1,8 +1,9 @@
 {
   "symbol": "STBA",
-  "name": "STBA Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:26.171Z",
-  "source": "Alpha Vantage API"
+  "name": "S&T Bancorp Inc",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "BANKS - REGIONAL",
+  "officialSite": "https://www.stbancorp.com",
+  "cachedAt": "2025-10-19T06:06:49.488Z",
+  "source": "Alpha Vantage API (fixed)"
 }

@@ -1,8 +1,9 @@
 {
   "symbol": "DVA",
-  "name": "DVA Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:32:01.040Z",
-  "source": "Alpha Vantage API"
+  "name": "DaVita HealthCare Partners Inc",
+  "sector": "HEALTHCARE",
+  "industry": "MEDICAL CARE FACILITIES",
+  "officialSite": "https://www.davita.com",
+  "cachedAt": "2025-10-19T05:29:15.528Z",
+  "source": "Alpha Vantage API (fixed)"
 }

@@ -1,8 +1,9 @@
 {
   "symbol": "EHTH",
-  "name": "EHTH Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:36:17.503Z",
-  "source": "Alpha Vantage API"
+  "name": "eHealth Inc",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "INSURANCE BROKERS",
+  "officialSite": "https://www.ehealthinsurance.com",
+  "cachedAt": "2025-10-19T05:29:43.804Z",
+  "source": "Alpha Vantage API (fixed)"
 }

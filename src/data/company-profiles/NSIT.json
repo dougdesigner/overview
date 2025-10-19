@@ -1,8 +1,9 @@
 {
   "symbol": "NSIT",
-  "name": "NSIT Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:31:14.340Z",
-  "source": "Alpha Vantage API"
+  "name": "Insight Enterprises Inc",
+  "sector": "TECHNOLOGY",
+  "industry": "ELECTRONICS & COMPUTER DISTRIBUTION",
+  "officialSite": "https://www.insight.com",
+  "cachedAt": "2025-10-19T05:54:37.503Z",
+  "source": "Alpha Vantage API (fixed)"
 }

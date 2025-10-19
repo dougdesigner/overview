@@ -1,8 +1,9 @@
 {
   "symbol": "KIM",
-  "name": "KIM Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:03.935Z",
-  "source": "Alpha Vantage API"
+  "name": "Kimco Realty Corporation",
+  "sector": "REAL ESTATE",
+  "industry": "REIT - RETAIL",
+  "officialSite": "https://www.kimcorealty.com",
+  "cachedAt": "2025-10-19T05:44:18.558Z",
+  "source": "Alpha Vantage API (fixed)"
 }

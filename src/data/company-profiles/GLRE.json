@@ -1,8 +1,9 @@
 {
   "symbol": "GLRE",
-  "name": "GLRE Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:36:07.391Z",
-  "source": "Alpha Vantage API"
+  "name": "Greenlight Capital Re Ltd",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "INSURANCE - REINSURANCE",
+  "officialSite": "https://greenlightre.com",
+  "cachedAt": "2025-10-19T05:36:45.335Z",
+  "source": "Alpha Vantage API (fixed)"
 }

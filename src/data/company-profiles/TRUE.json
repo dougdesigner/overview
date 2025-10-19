@@ -1,8 +1,9 @@
 {
   "symbol": "TRUE",
-  "name": "TRUE Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:32:39.163Z",
-  "source": "Alpha Vantage API"
+  "name": "TrueCar Inc",
+  "sector": "COMMUNICATION SERVICES",
+  "industry": "INTERNET CONTENT & INFORMATION",
+  "officialSite": "https://www.truecar.com",
+  "cachedAt": "2025-10-19T06:08:13.871Z",
+  "source": "Alpha Vantage API (fixed)"
 }

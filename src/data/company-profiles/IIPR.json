@@ -1,8 +1,9 @@
 {
   "symbol": "IIPR",
-  "name": "IIPR Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:36:36.566Z",
-  "source": "Alpha Vantage API"
+  "name": "Innovative Industrial Properties Inc",
+  "sector": "REAL ESTATE",
+  "industry": "REIT - INDUSTRIAL",
+  "officialSite": "https://www.innovativeindustrialproperties.com",
+  "cachedAt": "2025-10-19T05:42:18.650Z",
+  "source": "Alpha Vantage API (fixed)"
 }

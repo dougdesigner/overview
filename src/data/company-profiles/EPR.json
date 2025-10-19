@@ -1,8 +1,9 @@
 {
   "symbol": "EPR",
-  "name": "EPR Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:31:10.102Z",
-  "source": "Alpha Vantage API"
+  "name": "EPR Properties",
+  "sector": "REAL ESTATE",
+  "industry": "REIT - SPECIALTY",
+  "officialSite": "https://www.eprkc.com",
+  "cachedAt": "2025-10-19T05:30:02.763Z",
+  "source": "Alpha Vantage API (fixed)"
 }

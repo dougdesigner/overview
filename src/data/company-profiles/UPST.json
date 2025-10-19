@@ -1,8 +1,9 @@
 {
   "symbol": "UPST",
-  "name": "UPST Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:31:33.837Z",
-  "source": "Alpha Vantage API"
+  "name": "Upstart Holdings Inc",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "CREDIT SERVICES",
+  "officialSite": "https://www.upstart.com",
+  "cachedAt": "2025-10-19T06:09:06.297Z",
+  "source": "Alpha Vantage API (fixed)"
 }

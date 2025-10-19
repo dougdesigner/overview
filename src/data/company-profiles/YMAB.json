@@ -1,8 +1,9 @@
 {
   "symbol": "YMAB",
-  "name": "YMAB Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:00.448Z",
-  "source": "Alpha Vantage API"
+  "name": "Y mAbs Therapeutics",
+  "sector": "HEALTHCARE",
+  "industry": "BIOTECHNOLOGY",
+  "officialSite": "https://www.ymabs.com",
+  "cachedAt": "2025-10-19T06:12:44.535Z",
+  "source": "Alpha Vantage API (fixed)"
 }

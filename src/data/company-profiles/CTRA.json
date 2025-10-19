@@ -1,8 +1,9 @@
 {
   "symbol": "CTRA",
-  "name": "CTRA Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:27.656Z",
-  "source": "Alpha Vantage API"
+  "name": "Coterra Energy Inc",
+  "sector": "ENERGY",
+  "industry": "OIL & GAS E&P",
+  "officialSite": "https://www.coterra.com",
+  "cachedAt": "2025-10-19T05:26:01.156Z",
+  "source": "Alpha Vantage API (fixed)"
 }

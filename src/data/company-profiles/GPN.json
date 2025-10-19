@@ -1,8 +1,9 @@
 {
   "symbol": "GPN",
-  "name": "GPN Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:29.734Z",
-  "source": "Alpha Vantage API"
+  "name": "Global Payments Inc",
+  "sector": "INDUSTRIALS",
+  "industry": "SPECIALTY BUSINESS SERVICES",
+  "officialSite": "https://www.globalpayments.com/en-ap",
+  "cachedAt": "2025-10-19T05:37:02.453Z",
+  "source": "Alpha Vantage API (fixed)"
 }

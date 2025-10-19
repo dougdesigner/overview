@@ -1,8 +1,9 @@
 {
   "symbol": "ZG",
-  "name": "ZG Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:07.853Z",
-  "source": "Alpha Vantage API"
+  "name": "Zillow Group Inc",
+  "sector": "COMMUNICATION SERVICES",
+  "industry": "INTERNET CONTENT & INFORMATION",
+  "officialSite": "https://www.zillowgroup.com",
+  "cachedAt": "2025-10-19T06:12:47.544Z",
+  "source": "Alpha Vantage API (fixed)"
 }

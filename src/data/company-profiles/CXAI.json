@@ -1,8 +1,9 @@
 {
   "symbol": "CXAI",
-  "name": "CXAI Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:34:16.665Z",
-  "source": "Alpha Vantage API"
+  "name": "CXApp Inc.",
+  "sector": "TECHNOLOGY",
+  "industry": "SOFTWARE - APPLICATION",
+  "officialSite": "https://cxapp.com",
+  "cachedAt": "2025-10-19T05:26:27.556Z",
+  "source": "Alpha Vantage API (fixed)"
 }

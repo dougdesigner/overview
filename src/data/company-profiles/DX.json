@@ -1,8 +1,9 @@
 {
   "symbol": "DX",
-  "name": "DX Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:34:19.687Z",
-  "source": "Alpha Vantage API"
+  "name": "Dynex Capital Inc",
+  "sector": "REAL ESTATE",
+  "industry": "REIT - MORTGAGE",
+  "officialSite": "https://www.dynexcapital.com",
+  "cachedAt": "2025-10-19T05:29:20.429Z",
+  "source": "Alpha Vantage API (fixed)"
 }

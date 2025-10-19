@@ -1,8 +1,9 @@
 {
   "symbol": "VTYX",
-  "name": "VTYX Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:14.521Z",
-  "source": "Alpha Vantage API"
+  "name": "Ventyx Biosciences Inc",
+  "sector": "HEALTHCARE",
+  "industry": "BIOTECHNOLOGY",
+  "officialSite": "https://ventyxbio.com",
+  "cachedAt": "2025-10-19T06:09:51.268Z",
+  "source": "Alpha Vantage API (fixed)"
 }

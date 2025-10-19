@@ -1,8 +1,9 @@
 {
   "symbol": "TSN",
-  "name": "TSN Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:29.412Z",
-  "source": "Alpha Vantage API"
+  "name": "Tyson Foods Inc",
+  "sector": "CONSUMER DEFENSIVE",
+  "industry": "FARM PRODUCTS",
+  "officialSite": "https://www.tysonfoods.com",
+  "cachedAt": "2025-10-19T06:08:18.735Z",
+  "source": "Alpha Vantage API (fixed)"
 }

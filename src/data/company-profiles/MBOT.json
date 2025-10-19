@@ -1,8 +1,9 @@
 {
   "symbol": "MBOT",
-  "name": "MBOT Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:35:26.449Z",
-  "source": "Alpha Vantage API"
+  "name": "Microbot Medical Inc",
+  "sector": "HEALTHCARE",
+  "industry": "MEDICAL INSTRUMENTS & SUPPLIES",
+  "officialSite": "https://microbotmedical.com",
+  "cachedAt": "2025-10-19T05:49:06.100Z",
+  "source": "Alpha Vantage API (fixed)"
 }

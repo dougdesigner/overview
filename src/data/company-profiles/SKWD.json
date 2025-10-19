@@ -1,8 +1,9 @@
 {
   "symbol": "SKWD",
-  "name": "SKWD Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:21.723Z",
-  "source": "Alpha Vantage API"
+  "name": "Skyward Specialty Insurance Group, Inc. Common Stock",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "INSURANCE - PROPERTY & CASUALTY",
+  "officialSite": "https://skywardinsurance.com",
+  "cachedAt": "2025-10-19T06:04:50.525Z",
+  "source": "Alpha Vantage API (fixed)"
 }

@@ -1,8 +1,9 @@
 {
   "symbol": "PATK",
-  "name": "PATK Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:32:32.967Z",
-  "source": "Alpha Vantage API"
+  "name": "Patrick Industries Inc",
+  "sector": "CONSUMER CYCLICAL",
+  "industry": "FURNISHINGS, FIXTURES & APPLIANCES",
+  "officialSite": "https://ir.patrickind.com",
+  "cachedAt": "2025-10-19T05:56:06.011Z",
+  "source": "Alpha Vantage API (fixed)"
 }

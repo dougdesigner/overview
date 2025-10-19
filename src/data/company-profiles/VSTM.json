@@ -1,8 +1,9 @@
 {
   "symbol": "VSTM",
-  "name": "VSTM Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:16.220Z",
-  "source": "Alpha Vantage API"
+  "name": "Verastem Inc",
+  "sector": "HEALTHCARE",
+  "industry": "BIOTECHNOLOGY",
+  "officialSite": "https://www.verastem.com",
+  "cachedAt": "2025-10-19T06:09:48.372Z",
+  "source": "Alpha Vantage API (fixed)"
 }

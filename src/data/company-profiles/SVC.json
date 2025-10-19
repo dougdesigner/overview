@@ -1,8 +1,9 @@
 {
   "symbol": "SVC",
-  "name": "SVC Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:18.828Z",
-  "source": "Alpha Vantage API"
+  "name": "Service Properties Trust",
+  "sector": "REAL ESTATE",
+  "industry": "REIT - HOTEL & MOTEL",
+  "officialSite": "https://www.svcreit.com",
+  "cachedAt": "2025-10-19T06:07:11.005Z",
+  "source": "Alpha Vantage API (fixed)"
 }

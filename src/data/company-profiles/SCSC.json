@@ -1,8 +1,9 @@
 {
   "symbol": "SCSC",
-  "name": "SCSC Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:32.287Z",
-  "source": "Alpha Vantage API"
+  "name": "ScanSource Inc",
+  "sector": "TECHNOLOGY",
+  "industry": "ELECTRONICS & COMPUTER DISTRIBUTION",
+  "officialSite": "https://www.scansource.com",
+  "cachedAt": "2025-10-19T06:03:25.464Z",
+  "source": "Alpha Vantage API (fixed)"
 }

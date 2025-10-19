@@ -1,8 +1,9 @@
 {
   "symbol": "SOND",
-  "name": "SOND Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:32:37.939Z",
-  "source": "Alpha Vantage API"
+  "name": "Sonder Holdings Inc",
+  "sector": "CONSUMER CYCLICAL",
+  "industry": "LODGING",
+  "officialSite": "https://www.sonder.com",
+  "cachedAt": "2025-10-19T06:05:24.965Z",
+  "source": "Alpha Vantage API (fixed)"
 }

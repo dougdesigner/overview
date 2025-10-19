@@ -1,8 +1,9 @@
 {
   "symbol": "CYRX",
-  "name": "CYRX Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:34:30.787Z",
-  "source": "Alpha Vantage API"
+  "name": "Cryoport Inc",
+  "sector": "INDUSTRIALS",
+  "industry": "INTEGRATED FREIGHT & LOGISTICS",
+  "officialSite": "https://www.cryoportinc.com",
+  "cachedAt": "2025-10-19T05:26:29.490Z",
+  "source": "Alpha Vantage API (fixed)"
 }

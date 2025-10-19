@@ -1,8 +1,9 @@
 {
   "symbol": "MLM",
-  "name": "MLM Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:04.261Z",
-  "source": "Alpha Vantage API"
+  "name": "Martin Marietta Materials Inc",
+  "sector": "BASIC MATERIALS",
+  "industry": "BUILDING MATERIALS",
+  "officialSite": "https://www.martinmarietta.com",
+  "cachedAt": "2025-10-19T05:52:51.086Z",
+  "source": "Alpha Vantage API (fixed)"
 }

@@ -1,8 +1,9 @@
 {
   "symbol": "PVH",
-  "name": "PVH Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:32:01.556Z",
-  "source": "Alpha Vantage API"
+  "name": "PVH Corp",
+  "sector": "CONSUMER CYCLICAL",
+  "industry": "APPAREL MANUFACTURING",
+  "officialSite": "https://www.pvh.com",
+  "cachedAt": "2025-10-19T06:01:02.409Z",
+  "source": "Alpha Vantage API (fixed)"
 }

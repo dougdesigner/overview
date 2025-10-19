@@ -1,8 +1,9 @@
 {
   "symbol": "NEOG",
-  "name": "NEOG Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:36:02.943Z",
-  "source": "Alpha Vantage API"
+  "name": "Neogen Corporation",
+  "sector": "HEALTHCARE",
+  "industry": "DIAGNOSTICS & RESEARCH",
+  "officialSite": "https://www.neogen.com",
+  "cachedAt": "2025-10-19T05:53:54.540Z",
+  "source": "Alpha Vantage API (fixed)"
 }

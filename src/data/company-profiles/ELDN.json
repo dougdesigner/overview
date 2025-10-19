@@ -1,8 +1,9 @@
 {
   "symbol": "ELDN",
-  "name": "ELDN Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:36:16.809Z",
-  "source": "Alpha Vantage API"
+  "name": "Eledon Pharmaceuticals Inc",
+  "sector": "HEALTHCARE",
+  "industry": "BIOTECHNOLOGY",
+  "officialSite": "https://eledon.com",
+  "cachedAt": "2025-10-19T05:29:45.747Z",
+  "source": "Alpha Vantage API (fixed)"
 }

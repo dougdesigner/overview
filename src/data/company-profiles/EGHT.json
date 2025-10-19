@@ -1,8 +1,9 @@
 {
   "symbol": "EGHT",
-  "name": "EGHT Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:36:28.827Z",
-  "source": "Alpha Vantage API"
+  "name": "8x8 Inc Common Stock",
+  "sector": "TECHNOLOGY",
+  "industry": "SOFTWARE - APPLICATION",
+  "officialSite": "https://www.8x8.com",
+  "cachedAt": "2025-10-19T05:29:40.844Z",
+  "source": "Alpha Vantage API (fixed)"
 }

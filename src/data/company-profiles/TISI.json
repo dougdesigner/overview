@@ -1,8 +1,9 @@
 {
   "symbol": "TISI",
-  "name": "TISI Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:38.995Z",
-  "source": "Alpha Vantage API"
+  "name": "Team Inc",
+  "sector": "INDUSTRIALS",
+  "industry": "SPECIALTY BUSINESS SERVICES",
+  "officialSite": "https://www.teaminc.com",
+  "cachedAt": "2025-10-19T06:07:47.672Z",
+  "source": "Alpha Vantage API (fixed)"
 }

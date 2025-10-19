@@ -1,8 +1,9 @@
 {
   "symbol": "HOG",
-  "name": "HOG Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:36:07.076Z",
-  "source": "Alpha Vantage API"
+  "name": "Harley-Davidson Inc",
+  "sector": "CONSUMER CYCLICAL",
+  "industry": "RECREATIONAL VEHICLES",
+  "officialSite": "https://www.harley-davidson.com",
+  "cachedAt": "2025-10-19T05:37:51.165Z",
+  "source": "Alpha Vantage API (fixed)"
 }

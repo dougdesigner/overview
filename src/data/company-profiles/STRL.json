@@ -1,8 +1,9 @@
 {
   "symbol": "STRL",
-  "name": "STRL Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:31:39.126Z",
-  "source": "Alpha Vantage API"
+  "name": "Sterling Construction Company Inc",
+  "sector": "INDUSTRIALS",
+  "industry": "ENGINEERING & CONSTRUCTION",
+  "officialSite": "https://www.strlco.com",
+  "cachedAt": "2025-10-19T06:06:56.265Z",
+  "source": "Alpha Vantage API (fixed)"
 }

@@ -1,8 +1,9 @@
 {
   "symbol": "NRG",
-  "name": "NRG Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:20.303Z",
-  "source": "Alpha Vantage API"
+  "name": "NRG Energy Inc.",
+  "sector": "UTILITIES",
+  "industry": "UTILITIES - INDEPENDENT POWER PRODUCERS",
+  "officialSite": "https://www.nrg.com",
+  "cachedAt": "2025-10-19T05:54:36.538Z",
+  "source": "Alpha Vantage API (fixed)"
 }

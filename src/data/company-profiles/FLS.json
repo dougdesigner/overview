@@ -1,8 +1,9 @@
 {
   "symbol": "FLS",
-  "name": "FLS Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:31:04.626Z",
-  "source": "Alpha Vantage API"
+  "name": "Flowserve Corporation",
+  "sector": "INDUSTRIALS",
+  "industry": "SPECIALTY INDUSTRIAL MACHINERY",
+  "officialSite": "https://www.flowserve.com",
+  "cachedAt": "2025-10-19T05:31:13.422Z",
+  "source": "Alpha Vantage API (fixed)"
 }

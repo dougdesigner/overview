@@ -1,8 +1,9 @@
 {
   "symbol": "PLMR",
-  "name": "PLMR Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:31:14.211Z",
-  "source": "Alpha Vantage API"
+  "name": "Palomar Holdings Inc",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "INSURANCE - PROPERTY & CASUALTY",
+  "officialSite": "https://plmr.com",
+  "cachedAt": "2025-10-19T06:00:23.190Z",
+  "source": "Alpha Vantage API (fixed)"
 }

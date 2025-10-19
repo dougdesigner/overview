@@ -1,8 +1,9 @@
 {
   "symbol": "CTS",
-  "name": "CTS Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:34:30.450Z",
-  "source": "Alpha Vantage API"
+  "name": "CTS Corporation",
+  "sector": "TECHNOLOGY",
+  "industry": "ELECTRONIC COMPONENTS",
+  "officialSite": "https://www.ctscorp.com",
+  "cachedAt": "2025-10-19T05:26:03.154Z",
+  "source": "Alpha Vantage API (fixed)"
 }

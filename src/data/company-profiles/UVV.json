@@ -1,8 +1,9 @@
 {
   "symbol": "UVV",
-  "name": "UVV Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:12.452Z",
-  "source": "Alpha Vantage API"
+  "name": "Universal Corporation",
+  "sector": "CONSUMER DEFENSIVE",
+  "industry": "TOBACCO",
+  "officialSite": "https://www.universalcorp.com",
+  "cachedAt": "2025-10-19T06:09:22.509Z",
+  "source": "Alpha Vantage API (fixed)"
 }

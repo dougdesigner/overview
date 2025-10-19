@@ -1,8 +1,9 @@
 {
   "symbol": "PRAA",
-  "name": "PRAA Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:32:21.301Z",
-  "source": "Alpha Vantage API"
+  "name": "PRA Group Inc",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "CREDIT SERVICES",
+  "officialSite": "https://www.pragroup.com",
+  "cachedAt": "2025-10-19T06:00:36.858Z",
+  "source": "Alpha Vantage API (fixed)"
 }

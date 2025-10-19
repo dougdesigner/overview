@@ -1,8 +1,9 @@
 {
   "symbol": "MURA",
-  "name": "MURA Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:35:30.040Z",
-  "source": "Alpha Vantage API"
+  "name": "Mural Oncology plc",
+  "sector": "HEALTHCARE",
+  "industry": "BIOTECHNOLOGY",
+  "officialSite": "https://www.muraloncology.com",
+  "cachedAt": "2025-10-19T05:53:37.125Z",
+  "source": "Alpha Vantage API (fixed)"
 }

@@ -1,8 +1,9 @@
 {
   "symbol": "UNIT",
-  "name": "UNIT Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:32:41.627Z",
-  "source": "Alpha Vantage API"
+  "name": "Uniti Group Inc",
+  "sector": "REAL ESTATE",
+  "industry": "REIT - SPECIALTY",
+  "officialSite": "https://www.uniti.com",
+  "cachedAt": "2025-10-19T06:09:00.489Z",
+  "source": "Alpha Vantage API (fixed)"
 }

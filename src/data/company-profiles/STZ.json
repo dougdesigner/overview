@@ -1,8 +1,9 @@
 {
   "symbol": "STZ",
-  "name": "STZ Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:11.450Z",
-  "source": "Alpha Vantage API"
+  "name": "Constellation Brands Inc Class A",
+  "sector": "CONSUMER DEFENSIVE",
+  "industry": "BEVERAGES - BREWERS",
+  "officialSite": "https://www.cbrands.com",
+  "cachedAt": "2025-10-19T06:07:06.161Z",
+  "source": "Alpha Vantage API (fixed)"
 }

@@ -1,8 +1,9 @@
 {
   "symbol": "INO",
-  "name": "INO Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:36:34.502Z",
-  "source": "Alpha Vantage API"
+  "name": "Inovio Pharmaceuticals Inc",
+  "sector": "HEALTHCARE",
+  "industry": "BIOTECHNOLOGY",
+  "officialSite": "https://www.inovio.com",
+  "cachedAt": "2025-10-19T05:42:32.291Z",
+  "source": "Alpha Vantage API (fixed)"
 }

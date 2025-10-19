@@ -1,8 +1,9 @@
 {
   "symbol": "MOH",
-  "name": "MOH Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:33.332Z",
-  "source": "Alpha Vantage API"
+  "name": "Molina Healthcare Inc",
+  "sector": "HEALTHCARE",
+  "industry": "HEALTHCARE PLANS",
+  "officialSite": "https://www.molinahealthcare.com",
+  "cachedAt": "2025-10-19T05:53:07.626Z",
+  "source": "Alpha Vantage API (fixed)"
 }

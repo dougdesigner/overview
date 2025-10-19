@@ -1,8 +1,9 @@
 {
   "symbol": "HCC",
-  "name": "HCC Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:12.644Z",
-  "source": "Alpha Vantage API"
+  "name": "Warrior Met Coal Inc",
+  "sector": "BASIC MATERIALS",
+  "industry": "COKING COAL",
+  "officialSite": "https://warriormetcoal.com",
+  "cachedAt": "2025-10-19T05:37:23.869Z",
+  "source": "Alpha Vantage API (fixed)"
 }

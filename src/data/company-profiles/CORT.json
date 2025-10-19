@@ -1,8 +1,9 @@
 {
   "symbol": "CORT",
-  "name": "CORT Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:31:36.746Z",
-  "source": "Alpha Vantage API"
+  "name": "Corcept Therapeutics Incorporated",
+  "sector": "HEALTHCARE",
+  "industry": "BIOTECHNOLOGY",
+  "officialSite": "https://www.corcept.com",
+  "cachedAt": "2025-10-19T05:25:28.050Z",
+  "source": "Alpha Vantage API (fixed)"
 }

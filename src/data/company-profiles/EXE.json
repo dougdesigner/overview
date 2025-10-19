@@ -1,8 +1,9 @@
 {
   "symbol": "EXE",
-  "name": "EXE Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:25.933Z",
-  "source": "Alpha Vantage API"
+  "name": "Expand Energy Corporation",
+  "sector": "ENERGY",
+  "industry": "OIL & GAS E&P",
+  "officialSite": "https://www.expandenergy.com",
+  "cachedAt": "2025-10-19T05:30:44.798Z",
+  "source": "Alpha Vantage API (fixed)"
 }

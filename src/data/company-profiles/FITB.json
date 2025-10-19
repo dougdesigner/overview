@@ -1,8 +1,9 @@
 {
   "symbol": "FITB",
-  "name": "FITB Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:25.777Z",
-  "source": "Alpha Vantage API"
+  "name": "Fifth Third Bancorp",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "BANKS - REGIONAL",
+  "officialSite": "https://www.53.com",
+  "cachedAt": "2025-10-19T05:31:07.621Z",
+  "source": "Alpha Vantage API (fixed)"
 }

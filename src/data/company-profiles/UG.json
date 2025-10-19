@@ -1,8 +1,9 @@
 {
   "symbol": "UG",
-  "name": "UG Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:32:41.932Z",
-  "source": "Alpha Vantage API"
+  "name": "United-Guardian Inc",
+  "sector": "CONSUMER DEFENSIVE",
+  "industry": "HOUSEHOLD & PERSONAL PRODUCTS",
+  "officialSite": "https://u-g.com",
+  "cachedAt": "2025-10-19T06:08:54.550Z",
+  "source": "Alpha Vantage API (fixed)"
 }

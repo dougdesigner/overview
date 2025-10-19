@@ -1,8 +1,9 @@
 {
   "symbol": "POWL",
-  "name": "POWL Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:32:20.155Z",
-  "source": "Alpha Vantage API"
+  "name": "Powell Industries Inc",
+  "sector": "INDUSTRIALS",
+  "industry": "ELECTRICAL EQUIPMENT & PARTS",
+  "officialSite": "https://www.powellind.com",
+  "cachedAt": "2025-10-19T06:00:31.950Z",
+  "source": "Alpha Vantage API (fixed)"
 }

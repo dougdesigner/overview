@@ -1,8 +1,9 @@
 {
   "symbol": "RICK",
-  "name": "RICK Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:32:35.861Z",
-  "source": "Alpha Vantage API"
+  "name": "RCI Hospitality Holdings Inc",
+  "sector": "CONSUMER CYCLICAL",
+  "industry": "RESTAURANTS",
+  "officialSite": "https://www.rcihospitality.com",
+  "cachedAt": "2025-10-19T06:02:14.522Z",
+  "source": "Alpha Vantage API (fixed)"
 }

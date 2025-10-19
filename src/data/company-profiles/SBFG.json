@@ -1,8 +1,9 @@
 {
   "symbol": "SBFG",
-  "name": "SBFG Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:32.515Z",
-  "source": "Alpha Vantage API"
+  "name": "SB Financial Group Inc",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "BANKS - REGIONAL",
+  "officialSite": "https://ir.yourstatebank.com/corporate-profile/def",
+  "cachedAt": "2025-10-19T06:03:18.565Z",
+  "source": "Alpha Vantage API (fixed)"
 }

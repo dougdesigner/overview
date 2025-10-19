@@ -1,8 +1,9 @@
 {
   "symbol": "MAGN",
-  "name": "MAGN Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:35:39.340Z",
-  "source": "Alpha Vantage API"
+  "name": "Magnera Corp placeholder",
+  "sector": "BASIC MATERIALS",
+  "industry": "PAPER & PAPER PRODUCTS",
+  "officialSite": "https://magnera.com",
+  "cachedAt": "2025-10-19T05:48:53.354Z",
+  "source": "Alpha Vantage API (fixed)"
 }

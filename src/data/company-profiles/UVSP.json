@@ -1,8 +1,9 @@
 {
   "symbol": "UVSP",
-  "name": "UVSP Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:11.144Z",
-  "source": "Alpha Vantage API"
+  "name": "Univest Corporation Pennsylvania",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "BANKS - REGIONAL",
+  "officialSite": "https://www.univest.net",
+  "cachedAt": "2025-10-19T06:09:21.549Z",
+  "source": "Alpha Vantage API (fixed)"
 }

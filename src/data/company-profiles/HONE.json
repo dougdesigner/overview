@@ -1,8 +1,9 @@
 {
   "symbol": "HONE",
-  "name": "HONE Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:36:07.243Z",
-  "source": "Alpha Vantage API"
+  "name": "HarborOne Bancorp Inc",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "BANKS - REGIONAL",
+  "officialSite": "https://www.harboronebancorp.com",
+  "cachedAt": "2025-10-19T05:37:53.111Z",
+  "source": "Alpha Vantage API (fixed)"
 }

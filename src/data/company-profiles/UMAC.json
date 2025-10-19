@@ -1,8 +1,9 @@
 {
   "symbol": "UMAC",
-  "name": "UMAC Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:10.928Z",
-  "source": "Alpha Vantage API"
+  "name": "Unusual Machines, Inc.",
+  "sector": "TECHNOLOGY",
+  "industry": "COMPUTER HARDWARE",
+  "officialSite": "https://www.unusualmachines.com",
+  "cachedAt": "2025-10-19T06:08:59.454Z",
+  "source": "Alpha Vantage API (fixed)"
 }

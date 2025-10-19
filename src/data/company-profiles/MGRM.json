@@ -1,8 +1,9 @@
 {
   "symbol": "MGRM",
-  "name": "MGRM Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:35:31.627Z",
-  "source": "Alpha Vantage API"
+  "name": "Monogram Orthopaedics Inc. Common Stock",
+  "sector": "HEALTHCARE",
+  "industry": "MEDICAL DEVICES",
+  "officialSite": "https://www.monogramtechnologies.com",
+  "cachedAt": "2025-10-19T05:52:40.404Z",
+  "source": "Alpha Vantage API (fixed)"
 }

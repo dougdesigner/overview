@@ -1,8 +1,9 @@
 {
   "symbol": "GD",
-  "name": "GD Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:29:40.685Z",
-  "source": "Alpha Vantage API"
+  "name": "General Dynamics Corporation",
+  "sector": "INDUSTRIALS",
+  "industry": "AEROSPACE & DEFENSE",
+  "officialSite": "https://www.gd.com",
+  "cachedAt": "2025-10-19T05:31:49.629Z",
+  "source": "Alpha Vantage API (fixed)"
 }

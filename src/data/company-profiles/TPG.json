@@ -1,8 +1,9 @@
 {
   "symbol": "TPG",
-  "name": "TPG Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:32:03.000Z",
-  "source": "Alpha Vantage API"
+  "name": "TPG Inc",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "ASSET MANAGEMENT",
+  "officialSite": "https://www.tpg.com",
+  "cachedAt": "2025-10-19T06:08:04.959Z",
+  "source": "Alpha Vantage API (fixed)"
 }

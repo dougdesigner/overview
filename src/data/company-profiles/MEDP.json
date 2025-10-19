@@ -1,8 +1,9 @@
 {
   "symbol": "MEDP",
-  "name": "MEDP Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:31:38.179Z",
-  "source": "Alpha Vantage API"
+  "name": "Medpace Holdings Inc",
+  "sector": "HEALTHCARE",
+  "industry": "DIAGNOSTICS & RESEARCH",
+  "officialSite": "https://www.medpace.com",
+  "cachedAt": "2025-10-19T05:49:23.602Z",
+  "source": "Alpha Vantage API (fixed)"
 }

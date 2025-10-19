@@ -1,8 +1,9 @@
 {
   "symbol": "DJCO",
-  "name": "DJCO Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:34:15.608Z",
-  "source": "Alpha Vantage API"
+  "name": "Daily Journal Corp",
+  "sector": "TECHNOLOGY",
+  "industry": "SOFTWARE - APPLICATION",
+  "officialSite": "https://www.dailyjournal.com",
+  "cachedAt": "2025-10-19T05:28:50.209Z",
+  "source": "Alpha Vantage API (fixed)"
 }

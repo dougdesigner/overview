@@ -1,8 +1,9 @@
 {
   "symbol": "HTLD",
-  "name": "HTLD Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:36:04.835Z",
-  "source": "Alpha Vantage API"
+  "name": "Heartland Express Inc",
+  "sector": "INDUSTRIALS",
+  "industry": "TRUCKING",
+  "officialSite": "https://www.heartlandexpress.com",
+  "cachedAt": "2025-10-19T05:41:55.175Z",
+  "source": "Alpha Vantage API (fixed)"
 }

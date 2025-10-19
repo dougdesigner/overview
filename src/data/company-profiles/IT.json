@@ -1,8 +1,9 @@
 {
   "symbol": "IT",
-  "name": "IT Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:02.586Z",
-  "source": "Alpha Vantage API"
+  "name": "Gartner Inc",
+  "sector": "TECHNOLOGY",
+  "industry": "INFORMATION TECHNOLOGY SERVICES",
+  "officialSite": "https://www.gartner.com",
+  "cachedAt": "2025-10-19T05:42:46.926Z",
+  "source": "Alpha Vantage API (fixed)"
 }

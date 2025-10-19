@@ -1,8 +1,9 @@
 {
   "symbol": "FSS",
-  "name": "FSS Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:31:14.022Z",
-  "source": "Alpha Vantage API"
+  "name": "Federal Signal Corporation",
+  "sector": "INDUSTRIALS",
+  "industry": "POLLUTION & TREATMENT CONTROLS",
+  "officialSite": "https://www.federalsignal.com",
+  "cachedAt": "2025-10-19T05:36:32.651Z",
+  "source": "Alpha Vantage API (fixed)"
 }

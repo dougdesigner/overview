@@ -1,8 +1,9 @@
 {
   "symbol": "RMNI",
-  "name": "RMNI Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:29.787Z",
-  "source": "Alpha Vantage API"
+  "name": "Rimini Street Inc",
+  "sector": "TECHNOLOGY",
+  "industry": "SOFTWARE - APPLICATION",
+  "officialSite": "https://www.riministreet.com",
+  "cachedAt": "2025-10-19T06:02:32.571Z",
+  "source": "Alpha Vantage API (fixed)"
 }

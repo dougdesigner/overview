@@ -1,8 +1,9 @@
 {
   "symbol": "PRTS",
-  "name": "PRTS Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:34:08.077Z",
-  "source": "Alpha Vantage API"
+  "name": "CarParts.Com Inc",
+  "sector": "CONSUMER CYCLICAL",
+  "industry": "AUTO PARTS",
+  "officialSite": "https://www.carparts.com",
+  "cachedAt": "2025-10-19T06:00:49.578Z",
+  "source": "Alpha Vantage API (fixed)"
 }

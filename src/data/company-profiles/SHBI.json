@@ -1,8 +1,9 @@
 {
   "symbol": "SHBI",
-  "name": "SHBI Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:17.166Z",
-  "source": "Alpha Vantage API"
+  "name": "Shore Bancshares Inc",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "BANKS - REGIONAL",
+  "officialSite": "https://shorebancshares.q4ir.com",
+  "cachedAt": "2025-10-19T06:04:30.955Z",
+  "source": "Alpha Vantage API (fixed)"
 }

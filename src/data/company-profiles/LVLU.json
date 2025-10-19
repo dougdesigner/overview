@@ -1,8 +1,9 @@
 {
   "symbol": "LVLU",
-  "name": "LVLU Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:35:38.119Z",
-  "source": "Alpha Vantage API"
+  "name": "Lulu's Fashion Lounge Holdings Inc",
+  "sector": "CONSUMER CYCLICAL",
+  "industry": "APPAREL RETAIL",
+  "officialSite": "https://www.lulus.com",
+  "cachedAt": "2025-10-19T05:48:42.651Z",
+  "source": "Alpha Vantage API (fixed)"
 }

@@ -1,8 +1,9 @@
 {
   "symbol": "RUN",
-  "name": "RUN Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:35.334Z",
-  "source": "Alpha Vantage API"
+  "name": "Sunrun Inc",
+  "sector": "TECHNOLOGY",
+  "industry": "SOLAR",
+  "officialSite": "https://www.sunrun.com",
+  "cachedAt": "2025-10-19T06:02:52.158Z",
+  "source": "Alpha Vantage API (fixed)"
 }

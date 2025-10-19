@@ -1,8 +1,9 @@
 {
   "symbol": "UHAL-B",
-  "name": "UHAL-B Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:31:11.403Z",
-  "source": "Alpha Vantage API"
+  "name": "U-Haul Holding Company",
+  "sector": "INDUSTRIALS",
+  "industry": "RENTAL & LEASING SERVICES",
+  "officialSite": "https://uhaul.com",
+  "cachedAt": "2025-10-19T06:08:55.514Z",
+  "source": "Alpha Vantage API (fixed)"
 }

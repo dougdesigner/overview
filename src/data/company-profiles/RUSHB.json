@@ -1,8 +1,9 @@
 {
   "symbol": "RUSHB",
-  "name": "RUSHB Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:27.198Z",
-  "source": "Alpha Vantage API"
+  "name": "Rush Enterprises B Inc",
+  "sector": "CONSUMER CYCLICAL",
+  "industry": "AUTO & TRUCK DEALERSHIPS",
+  "officialSite": "https://www.rushenterprises.com",
+  "cachedAt": "2025-10-19T06:02:53.118Z",
+  "source": "Alpha Vantage API (fixed)"
 }

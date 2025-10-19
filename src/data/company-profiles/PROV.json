@@ -1,8 +1,9 @@
 {
   "symbol": "PROV",
-  "name": "PROV Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:32:23.821Z",
-  "source": "Alpha Vantage API"
+  "name": "Provident Financial Holdings Inc",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "BANKS - REGIONAL",
+  "officialSite": "https://www.myprovident.com",
+  "cachedAt": "2025-10-19T06:00:46.653Z",
+  "source": "Alpha Vantage API (fixed)"
 }

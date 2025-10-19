@@ -1,8 +1,9 @@
 {
   "symbol": "PSN",
-  "name": "PSN Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:31:09.911Z",
-  "source": "Alpha Vantage API"
+  "name": "Parsons Corp",
+  "sector": "TECHNOLOGY",
+  "industry": "INFORMATION TECHNOLOGY SERVICES",
+  "officialSite": "https://www.parsons.com",
+  "cachedAt": "2025-10-19T06:00:52.498Z",
+  "source": "Alpha Vantage API (fixed)"
 }

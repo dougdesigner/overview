@@ -1,8 +1,9 @@
 {
   "symbol": "MYFW",
-  "name": "MYFW Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:36:22.817Z",
-  "source": "Alpha Vantage API"
+  "name": "First Western Financial Inc",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "BANKS - REGIONAL",
+  "officialSite": "https://myfw.com",
+  "cachedAt": "2025-10-19T05:53:44.831Z",
+  "source": "Alpha Vantage API (fixed)"
 }

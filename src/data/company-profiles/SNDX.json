@@ -1,8 +1,9 @@
 {
   "symbol": "SNDX",
-  "name": "SNDX Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:41.083Z",
-  "source": "Alpha Vantage API"
+  "name": "Syndax Pharmaceuticals Inc",
+  "sector": "HEALTHCARE",
+  "industry": "BIOTECHNOLOGY",
+  "officialSite": "https://syndax.com",
+  "cachedAt": "2025-10-19T06:05:15.185Z",
+  "source": "Alpha Vantage API (fixed)"
 }

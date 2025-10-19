@@ -1,8 +1,9 @@
 {
   "symbol": "SBAC",
-  "name": "SBAC Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:07.008Z",
-  "source": "Alpha Vantage API"
+  "name": "SBA Communications Corp",
+  "sector": "REAL ESTATE",
+  "industry": "REIT - SPECIALTY",
+  "officialSite": "https://www.sbasite.com",
+  "cachedAt": "2025-10-19T06:03:16.613Z",
+  "source": "Alpha Vantage API (fixed)"
 }

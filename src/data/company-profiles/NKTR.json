@@ -1,8 +1,9 @@
 {
   "symbol": "NKTR",
-  "name": "NKTR Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:36:03.255Z",
-  "source": "Alpha Vantage API"
+  "name": "Nektar Therapeutics",
+  "sector": "HEALTHCARE",
+  "industry": "BIOTECHNOLOGY",
+  "officialSite": "https://www.nektar.com",
+  "cachedAt": "2025-10-19T05:54:01.388Z",
+  "source": "Alpha Vantage API (fixed)"
 }

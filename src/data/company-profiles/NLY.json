@@ -1,8 +1,9 @@
 {
   "symbol": "NLY",
-  "name": "NLY Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:14.044Z",
-  "source": "Alpha Vantage API"
+  "name": "Annaly Capital Management, Inc.",
+  "sector": "REAL ESTATE",
+  "industry": "REIT - MORTGAGE",
+  "officialSite": "https://www.annaly.com",
+  "cachedAt": "2025-10-19T05:54:03.324Z",
+  "source": "Alpha Vantage API (fixed)"
 }

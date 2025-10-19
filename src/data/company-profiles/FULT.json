@@ -1,8 +1,9 @@
 {
   "symbol": "FULT",
-  "name": "FULT Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:31:28.247Z",
-  "source": "Alpha Vantage API"
+  "name": "Fulton Financial Corporation",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "BANKS - REGIONAL",
+  "officialSite": "https://www.fultonbank.com",
+  "cachedAt": "2025-10-19T05:31:35.014Z",
+  "source": "Alpha Vantage API (fixed)"
 }

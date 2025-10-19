@@ -1,8 +1,9 @@
 {
   "symbol": "LAKE",
-  "name": "LAKE Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:36:24.499Z",
-  "source": "Alpha Vantage API"
+  "name": "Lakeland Industries Inc",
+  "sector": "CONSUMER CYCLICAL",
+  "industry": "APPAREL MANUFACTURING",
+  "officialSite": "https://www.lakeland.com",
+  "cachedAt": "2025-10-19T05:44:46.821Z",
+  "source": "Alpha Vantage API (fixed)"
 }

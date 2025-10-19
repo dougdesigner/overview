@@ -1,8 +1,9 @@
 {
   "symbol": "GSAT",
-  "name": "GSAT Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:36:08.346Z",
-  "source": "Alpha Vantage API"
+  "name": "Globalstar, Inc. Common Stock",
+  "sector": "COMMUNICATION SERVICES",
+  "industry": "TELECOM SERVICES",
+  "officialSite": "https://www.globalstar.com",
+  "cachedAt": "2025-10-19T05:37:06.357Z",
+  "source": "Alpha Vantage API (fixed)"
 }

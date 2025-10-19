@@ -1,8 +1,9 @@
 {
   "symbol": "KORE",
-  "name": "KORE Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:36:27.281Z",
-  "source": "Alpha Vantage API"
+  "name": "KORE Group Holdings Inc",
+  "sector": "COMMUNICATION SERVICES",
+  "industry": "TELECOM SERVICES",
+  "officialSite": "https://www.korewireless.com",
+  "cachedAt": "2025-10-19T05:44:28.290Z",
+  "source": "Alpha Vantage API (fixed)"
 }

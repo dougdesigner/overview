@@ -1,8 +1,9 @@
 {
   "symbol": "SOFI",
-  "name": "SOFI Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:24.988Z",
-  "source": "Alpha Vantage API"
+  "name": "SoFi Technologies Inc.",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "CREDIT SERVICES",
+  "officialSite": "https://www.sofi.com",
+  "cachedAt": "2025-10-19T06:05:23.025Z",
+  "source": "Alpha Vantage API (fixed)"
 }

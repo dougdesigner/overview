@@ -1,8 +1,9 @@
 {
   "symbol": "SRTS",
-  "name": "SRTS Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:20.016Z",
-  "source": "Alpha Vantage API"
+  "name": "Sensus Healthcare Inc",
+  "sector": "HEALTHCARE",
+  "industry": "MEDICAL DEVICES",
+  "officialSite": "https://sensushealthcare.com",
+  "cachedAt": "2025-10-19T06:05:37.124Z",
+  "source": "Alpha Vantage API (fixed)"
 }

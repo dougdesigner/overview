@@ -1,8 +1,9 @@
 {
   "symbol": "PCYO",
-  "name": "PCYO Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:32:22.253Z",
-  "source": "Alpha Vantage API"
+  "name": "Pure Cycle Corporation",
+  "sector": "UTILITIES",
+  "industry": "UTILITIES - REGULATED WATER",
+  "officialSite": "https://www.purecyclewater.com",
+  "cachedAt": "2025-10-19T05:59:51.452Z",
+  "source": "Alpha Vantage API (fixed)"
 }

@@ -1,8 +1,9 @@
 {
   "symbol": "SSTK",
-  "name": "SSTK Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:17.054Z",
-  "source": "Alpha Vantage API"
+  "name": "Shutterstock",
+  "sector": "COMMUNICATION SERVICES",
+  "industry": "INTERNET CONTENT & INFORMATION",
+  "officialSite": "https://www.shutterstock.com",
+  "cachedAt": "2025-10-19T06:06:46.573Z",
+  "source": "Alpha Vantage API (fixed)"
 }

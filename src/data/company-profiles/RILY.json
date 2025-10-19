@@ -1,8 +1,9 @@
 {
   "symbol": "RILY",
-  "name": "RILY Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:35:17.486Z",
-  "source": "Alpha Vantage API"
+  "name": "B. Riley Financial Inc",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "FINANCIAL CONGLOMERATES",
+  "officialSite": "https://brileyfin.com",
+  "cachedAt": "2025-10-19T06:02:17.763Z",
+  "source": "Alpha Vantage API (fixed)"
 }

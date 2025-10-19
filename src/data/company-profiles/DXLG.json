@@ -1,8 +1,9 @@
 {
   "symbol": "DXLG",
-  "name": "DXLG Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:34:24.130Z",
-  "source": "Alpha Vantage API"
+  "name": "Destination XL Group Inc",
+  "sector": "CONSUMER CYCLICAL",
+  "industry": "APPAREL RETAIL",
+  "officialSite": "https://www.dxl.com",
+  "cachedAt": "2025-10-19T05:29:21.393Z",
+  "source": "Alpha Vantage API (fixed)"
 }

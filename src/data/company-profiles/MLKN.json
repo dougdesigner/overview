@@ -1,8 +1,9 @@
 {
   "symbol": "MLKN",
-  "name": "MLKN Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:35:32.168Z",
-  "source": "Alpha Vantage API"
+  "name": "MillerKnoll Inc",
+  "sector": "CONSUMER CYCLICAL",
+  "industry": "FURNISHINGS, FIXTURES & APPLIANCES",
+  "officialSite": "https://www.millerknoll.com",
+  "cachedAt": "2025-10-19T05:52:50.106Z",
+  "source": "Alpha Vantage API (fixed)"
 }

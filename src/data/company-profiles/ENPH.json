@@ -1,8 +1,9 @@
 {
   "symbol": "ENPH",
-  "name": "ENPH Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:31:11.192Z",
-  "source": "Alpha Vantage API"
+  "name": "Enphase Energy Inc",
+  "sector": "TECHNOLOGY",
+  "industry": "SOLAR",
+  "officialSite": "https://www.enphase.com",
+  "cachedAt": "2025-10-19T05:29:55.480Z",
+  "source": "Alpha Vantage API (fixed)"
 }

@@ -1,8 +1,9 @@
 {
   "symbol": "EMBC",
-  "name": "EMBC Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:36:18.256Z",
-  "source": "Alpha Vantage API"
+  "name": "Embecta Corp",
+  "sector": "HEALTHCARE",
+  "industry": "MEDICAL INSTRUMENTS & SUPPLIES",
+  "officialSite": "https://www.embecta.com",
+  "cachedAt": "2025-10-19T05:29:52.539Z",
+  "source": "Alpha Vantage API (fixed)"
 }

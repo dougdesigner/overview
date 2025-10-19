@@ -1,8 +1,9 @@
 {
   "symbol": "FUN",
-  "name": "FUN Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:31:08.646Z",
-  "source": "Alpha Vantage API"
+  "name": "Six Flags Entertainment Corporation",
+  "sector": "CONSUMER CYCLICAL",
+  "industry": "LEISURE",
+  "officialSite": "https://www.sixflags.com",
+  "cachedAt": "2025-10-19T05:31:35.983Z",
+  "source": "Alpha Vantage API (fixed)"
 }

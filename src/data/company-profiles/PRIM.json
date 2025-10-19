@@ -1,8 +1,9 @@
 {
   "symbol": "PRIM",
-  "name": "PRIM Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:40.355Z",
-  "source": "Alpha Vantage API"
+  "name": "Primoris Services Corporation",
+  "sector": "INDUSTRIALS",
+  "industry": "ENGINEERING & CONSTRUCTION",
+  "officialSite": "https://www.prim.com",
+  "cachedAt": "2025-10-19T06:00:41.746Z",
+  "source": "Alpha Vantage API (fixed)"
 }

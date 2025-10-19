@@ -1,8 +1,9 @@
 {
   "symbol": "OSK",
-  "name": "OSK Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:31:19.518Z",
-  "source": "Alpha Vantage API"
+  "name": "Oshkosh Corporation",
+  "sector": "INDUSTRIALS",
+  "industry": "FARM & HEAVY CONSTRUCTION MACHINERY",
+  "officialSite": "https://www.oshkoshcorp.com",
+  "cachedAt": "2025-10-19T05:55:44.660Z",
+  "source": "Alpha Vantage API (fixed)"
 }

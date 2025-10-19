@@ -1,8 +1,9 @@
 {
   "symbol": "WNEB",
-  "name": "WNEB Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:02.380Z",
-  "source": "Alpha Vantage API"
+  "name": "Western New England Bancorp Inc",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "BANKS - REGIONAL",
+  "officialSite": "https://www.westfieldbank.com",
+  "cachedAt": "2025-10-19T06:12:20.805Z",
+  "source": "Alpha Vantage API (fixed)"
 }

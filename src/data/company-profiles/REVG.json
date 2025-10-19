@@ -1,8 +1,9 @@
 {
   "symbol": "REVG",
-  "name": "REVG Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:32:08.257Z",
-  "source": "Alpha Vantage API"
+  "name": "Rev Group Inc",
+  "sector": "INDUSTRIALS",
+  "industry": "FARM & HEAVY CONSTRUCTION MACHINERY",
+  "officialSite": "https://www.revgroup.com",
+  "cachedAt": "2025-10-19T06:01:58.197Z",
+  "source": "Alpha Vantage API (fixed)"
 }

@@ -1,8 +1,9 @@
 {
   "symbol": "TVRD",
-  "name": "TVRD Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:32:36.776Z",
-  "source": "Alpha Vantage API"
+  "name": "Tvardi Therapeutics, Inc.",
+  "sector": "HEALTHCARE",
+  "industry": "BIOTECHNOLOGY",
+  "officialSite": "https://tvarditherapeutics.com",
+  "cachedAt": "2025-10-19T06:08:34.981Z",
+  "source": "Alpha Vantage API (fixed)"
 }

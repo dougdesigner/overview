@@ -1,8 +1,9 @@
 {
   "symbol": "TPCS",
-  "name": "TPCS Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:38.903Z",
-  "source": "Alpha Vantage API"
+  "name": "TechPrecision Corporation Common stock",
+  "sector": "INDUSTRIALS",
+  "industry": "METAL FABRICATION",
+  "officialSite": "https://www.techprecision.com",
+  "cachedAt": "2025-10-19T06:08:03.996Z",
+  "source": "Alpha Vantage API (fixed)"
 }

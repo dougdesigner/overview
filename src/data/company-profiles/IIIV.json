@@ -1,8 +1,9 @@
 {
   "symbol": "IIIV",
-  "name": "IIIV Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:36:25.773Z",
-  "source": "Alpha Vantage API"
+  "name": "i3 Verticals Inc",
+  "sector": "TECHNOLOGY",
+  "industry": "SOFTWARE - INFRASTRUCTURE",
+  "officialSite": "https://www.i3verticals.com",
+  "cachedAt": "2025-10-19T05:42:17.679Z",
+  "source": "Alpha Vantage API (fixed)"
 }

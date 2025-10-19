@@ -1,8 +1,9 @@
 {
   "symbol": "SNSE",
-  "name": "SNSE Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:20.328Z",
-  "source": "Alpha Vantage API"
+  "name": "Sensei Biotherapeutics Inc",
+  "sector": "HEALTHCARE",
+  "industry": "BIOTECHNOLOGY",
+  "officialSite": "https://www.senseibio.com",
+  "cachedAt": "2025-10-19T06:05:18.129Z",
+  "source": "Alpha Vantage API (fixed)"
 }

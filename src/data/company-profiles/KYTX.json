@@ -1,8 +1,9 @@
 {
   "symbol": "KYTX",
-  "name": "KYTX Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:36:25.183Z",
-  "source": "Alpha Vantage API"
+  "name": "Kyverna Therapeutics, Inc. Common Stock",
+  "sector": "HEALTHCARE",
+  "industry": "BIOTECHNOLOGY",
+  "officialSite": "https://kyvernatx.com",
+  "cachedAt": "2025-10-19T05:44:43.903Z",
+  "source": "Alpha Vantage API (fixed)"
 }

@@ -1,8 +1,9 @@
 {
   "symbol": "GMRE",
-  "name": "GMRE Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:36:18.938Z",
-  "source": "Alpha Vantage API"
+  "name": "Global Medical REIT Inc",
+  "sector": "REAL ESTATE",
+  "industry": "REIT - HEALTHCARE FACILITIES",
+  "officialSite": "https://www.globalmedicalreit.com",
+  "cachedAt": "2025-10-19T05:36:48.259Z",
+  "source": "Alpha Vantage API (fixed)"
 }

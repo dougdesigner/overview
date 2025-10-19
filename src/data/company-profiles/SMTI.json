@@ -1,8 +1,9 @@
 {
   "symbol": "SMTI",
-  "name": "SMTI Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:33.143Z",
-  "source": "Alpha Vantage API"
+  "name": "Sanara Medtech Inc",
+  "sector": "HEALTHCARE",
+  "industry": "MEDICAL INSTRUMENTS & SUPPLIES",
+  "officialSite": "https://sanaramedtech.com",
+  "cachedAt": "2025-10-19T06:05:08.354Z",
+  "source": "Alpha Vantage API (fixed)"
 }

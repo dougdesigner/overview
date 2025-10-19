@@ -1,8 +1,9 @@
 {
   "symbol": "WNC",
-  "name": "WNC Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:13.435Z",
-  "source": "Alpha Vantage API"
+  "name": "Wabash National Corporation",
+  "sector": "INDUSTRIALS",
+  "industry": "FARM & HEAVY CONSTRUCTION MACHINERY",
+  "officialSite": "https://onewabash.com",
+  "cachedAt": "2025-10-19T06:12:19.832Z",
+  "source": "Alpha Vantage API (fixed)"
 }

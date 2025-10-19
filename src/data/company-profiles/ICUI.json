@@ -1,8 +1,9 @@
 {
   "symbol": "ICUI",
-  "name": "ICUI Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:31:18.938Z",
-  "source": "Alpha Vantage API"
+  "name": "ICU Medical Inc",
+  "sector": "HEALTHCARE",
+  "industry": "MEDICAL INSTRUMENTS & SUPPLIES",
+  "officialSite": "https://www.icumed.com",
+  "cachedAt": "2025-10-19T05:42:14.747Z",
+  "source": "Alpha Vantage API (fixed)"
 }

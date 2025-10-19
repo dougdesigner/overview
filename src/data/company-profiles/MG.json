@@ -1,8 +1,9 @@
 {
   "symbol": "MG",
-  "name": "MG Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:35:32.908Z",
-  "source": "Alpha Vantage API"
+  "name": "Mistras Group Inc",
+  "sector": "INDUSTRIALS",
+  "industry": "SECURITY & PROTECTION SERVICES",
+  "officialSite": "https://www.mistrasgroup.com",
+  "cachedAt": "2025-10-19T05:52:35.511Z",
+  "source": "Alpha Vantage API (fixed)"
 }

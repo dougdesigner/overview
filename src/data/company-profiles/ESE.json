@@ -1,8 +1,9 @@
 {
   "symbol": "ESE",
-  "name": "ESE Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:31:17.381Z",
-  "source": "Alpha Vantage API"
+  "name": "ESCO Technologies Inc",
+  "sector": "TECHNOLOGY",
+  "industry": "SCIENTIFIC & TECHNICAL INSTRUMENTS",
+  "officialSite": "https://www.escotechnologies.com",
+  "cachedAt": "2025-10-19T05:30:07.696Z",
+  "source": "Alpha Vantage API (fixed)"
 }

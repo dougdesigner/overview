@@ -1,8 +1,9 @@
 {
   "symbol": "VXRT",
-  "name": "VXRT Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:08.834Z",
-  "source": "Alpha Vantage API"
+  "name": "Vaxart Inc",
+  "sector": "HEALTHCARE",
+  "industry": "BIOTECHNOLOGY",
+  "officialSite": "https://vaxart.com",
+  "cachedAt": "2025-10-19T06:09:55.140Z",
+  "source": "Alpha Vantage API (fixed)"
 }

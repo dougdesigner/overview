@@ -1,8 +1,9 @@
 {
   "symbol": "NTGR",
-  "name": "NTGR Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:36:01.927Z",
-  "source": "Alpha Vantage API"
+  "name": "NETGEAR Inc",
+  "sector": "TECHNOLOGY",
+  "industry": "COMMUNICATION EQUIPMENT",
+  "officialSite": "https://www.netgear.com",
+  "cachedAt": "2025-10-19T05:54:40.384Z",
+  "source": "Alpha Vantage API (fixed)"
 }

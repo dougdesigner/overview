@@ -1,8 +1,9 @@
 {
   "symbol": "CZR",
-  "name": "CZR Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:32:02.378Z",
-  "source": "Alpha Vantage API"
+  "name": "Caesars Entertainment Corporation",
+  "sector": "CONSUMER CYCLICAL",
+  "industry": "RESORTS & CASINOS",
+  "officialSite": "https://www.caesars.com",
+  "cachedAt": "2025-10-19T05:26:31.413Z",
+  "source": "Alpha Vantage API (fixed)"
 }

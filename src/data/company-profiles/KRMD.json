@@ -1,8 +1,9 @@
 {
   "symbol": "KRMD",
-  "name": "KRMD Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:36:26.870Z",
-  "source": "Alpha Vantage API"
+  "name": "Repro Med Systems Inc",
+  "sector": "HEALTHCARE",
+  "industry": "MEDICAL INSTRUMENTS & SUPPLIES",
+  "officialSite": "https://www.korumedical.com",
+  "cachedAt": "2025-10-19T05:44:33.181Z",
+  "source": "Alpha Vantage API (fixed)"
 }

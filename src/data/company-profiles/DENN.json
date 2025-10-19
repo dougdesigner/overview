@@ -1,8 +1,9 @@
 {
   "symbol": "DENN",
-  "name": "DENN Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:34:24.490Z",
-  "source": "Alpha Vantage API"
+  "name": "Denny’s Corp",
+  "sector": "CONSUMER CYCLICAL",
+  "industry": "RESTAURANTS",
+  "officialSite": "https://investor.dennys.com",
+  "cachedAt": "2025-10-19T05:26:49.968Z",
+  "source": "Alpha Vantage API (fixed)"
 }

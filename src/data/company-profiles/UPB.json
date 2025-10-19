@@ -1,8 +1,9 @@
 {
   "symbol": "UPB",
-  "name": "UPB Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:10.392Z",
-  "source": "Alpha Vantage API"
+  "name": "Upstream Bio, Inc.",
+  "sector": "HEALTHCARE",
+  "industry": "BIOTECHNOLOGY",
+  "officialSite": "https://upstreambio.com",
+  "cachedAt": "2025-10-19T06:09:02.421Z",
+  "source": "Alpha Vantage API (fixed)"
 }

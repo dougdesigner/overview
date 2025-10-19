@@ -1,8 +1,9 @@
 {
   "symbol": "PGNY",
-  "name": "PGNY Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:32:23.509Z",
-  "source": "Alpha Vantage API"
+  "name": "Progyny Inc",
+  "sector": "HEALTHCARE",
+  "industry": "HEALTHCARE PLANS",
+  "officialSite": "https://www.progyny.com",
+  "cachedAt": "2025-10-19T06:00:05.516Z",
+  "source": "Alpha Vantage API (fixed)"
 }

@@ -1,8 +1,9 @@
 {
   "symbol": "MVIS",
-  "name": "MVIS Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:35:26.132Z",
-  "source": "Alpha Vantage API"
+  "name": "Microvision Inc",
+  "sector": "TECHNOLOGY",
+  "industry": "SCIENTIFIC & TECHNICAL INSTRUMENTS",
+  "officialSite": "https://www.microvision.com",
+  "cachedAt": "2025-10-19T05:53:39.044Z",
+  "source": "Alpha Vantage API (fixed)"
 }

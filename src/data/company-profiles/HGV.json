@@ -1,8 +1,9 @@
 {
   "symbol": "HGV",
-  "name": "HGV Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:36:11.544Z",
-  "source": "Alpha Vantage API"
+  "name": "Hilton Grand Vacations Inc",
+  "sector": "CONSUMER CYCLICAL",
+  "industry": "RESORTS & CASINOS",
+  "officialSite": "https://www.hgv.com",
+  "cachedAt": "2025-10-19T05:37:30.733Z",
+  "source": "Alpha Vantage API (fixed)"
 }

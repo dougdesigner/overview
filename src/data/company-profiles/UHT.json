@@ -1,8 +1,9 @@
 {
   "symbol": "UHT",
-  "name": "UHT Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:11.992Z",
-  "source": "Alpha Vantage API"
+  "name": "Universal Health Realty Income Trust",
+  "sector": "REAL ESTATE",
+  "industry": "REIT - HEALTHCARE FACILITIES",
+  "officialSite": "https://www.uhrit.com",
+  "cachedAt": "2025-10-19T06:08:56.576Z",
+  "source": "Alpha Vantage API (fixed)"
 }

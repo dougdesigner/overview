@@ -1,8 +1,9 @@
 {
   "symbol": "RNAC",
-  "name": "RNAC Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:34:06.528Z",
-  "source": "Alpha Vantage API"
+  "name": "Cartesian Therapeutics Inc.",
+  "sector": "HEALTHCARE",
+  "industry": "BIOTECHNOLOGY",
+  "officialSite": "https://www.cartesiantherapeutics.com",
+  "cachedAt": "2025-10-19T06:02:34.511Z",
+  "source": "Alpha Vantage API (fixed)"
 }

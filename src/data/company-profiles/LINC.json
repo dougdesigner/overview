@@ -1,8 +1,9 @@
 {
   "symbol": "LINC",
-  "name": "LINC Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:36:31.031Z",
-  "source": "Alpha Vantage API"
+  "name": "Lincoln Educational Services",
+  "sector": "CONSUMER DEFENSIVE",
+  "industry": "EDUCATION & TRAINING SERVICES",
+  "officialSite": "https://www.lincolntech.edu",
+  "cachedAt": "2025-10-19T05:45:16.332Z",
+  "source": "Alpha Vantage API (fixed)"
 }

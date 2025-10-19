@@ -1,8 +1,9 @@
 {
   "symbol": "LOB",
-  "name": "LOB Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:36:28.947Z",
-  "source": "Alpha Vantage API"
+  "name": "Live Oak Bancshares, Inc.",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "BANKS - REGIONAL",
+  "officialSite": "https://www.liveoak.bank",
+  "cachedAt": "2025-10-19T05:48:22.173Z",
+  "source": "Alpha Vantage API (fixed)"
 }

@@ -1,8 +1,9 @@
 {
   "symbol": "SOLV",
-  "name": "SOLV Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:25.305Z",
-  "source": "Alpha Vantage API"
+  "name": "Solventum Corp.",
+  "sector": "HEALTHCARE",
+  "industry": "MEDICAL INSTRUMENTS & SUPPLIES",
+  "officialSite": "https://www.solventum.com",
+  "cachedAt": "2025-10-19T06:05:23.997Z",
+  "source": "Alpha Vantage API (fixed)"
 }

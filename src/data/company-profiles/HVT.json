@@ -1,8 +1,9 @@
 {
   "symbol": "HVT",
-  "name": "HVT Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:36:08.467Z",
-  "source": "Alpha Vantage API"
+  "name": "Haverty Furniture Companies Inc",
+  "sector": "CONSUMER CYCLICAL",
+  "industry": "HOME IMPROVEMENT RETAIL",
+  "officialSite": "https://www.havertys.com",
+  "cachedAt": "2025-10-19T05:42:05.984Z",
+  "source": "Alpha Vantage API (fixed)"
 }

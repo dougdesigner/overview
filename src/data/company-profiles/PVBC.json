@@ -1,8 +1,9 @@
 {
   "symbol": "PVBC",
-  "name": "PVBC Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:32:24.037Z",
-  "source": "Alpha Vantage API"
+  "name": "Provident Bancorp Inc",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "BANKS - REGIONAL",
+  "officialSite": "https://bankprov.com",
+  "cachedAt": "2025-10-19T06:01:01.436Z",
+  "source": "Alpha Vantage API (fixed)"
 }

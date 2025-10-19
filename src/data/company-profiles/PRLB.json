@@ -1,8 +1,9 @@
 {
   "symbol": "PRLB",
-  "name": "PRLB Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:32:24.239Z",
-  "source": "Alpha Vantage API"
+  "name": "Proto Labs Inc",
+  "sector": "INDUSTRIALS",
+  "industry": "METAL FABRICATION",
+  "officialSite": "https://www.protolabs.com",
+  "cachedAt": "2025-10-19T06:00:43.682Z",
+  "source": "Alpha Vantage API (fixed)"
 }

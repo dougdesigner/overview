@@ -1,8 +1,9 @@
 {
   "symbol": "SJM",
-  "name": "SJM Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:14.509Z",
-  "source": "Alpha Vantage API"
+  "name": "The J. M. Smucker Company",
+  "sector": "CONSUMER DEFENSIVE",
+  "industry": "PACKAGED FOODS",
+  "officialSite": "https://www.jmsmucker.com",
+  "cachedAt": "2025-10-19T06:04:47.606Z",
+  "source": "Alpha Vantage API (fixed)"
 }

@@ -1,8 +1,9 @@
 {
   "symbol": "CTRE",
-  "name": "CTRE Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:32:04.885Z",
-  "source": "Alpha Vantage API"
+  "name": "CareTrust REIT Inc.",
+  "sector": "REAL ESTATE",
+  "industry": "REIT - HEALTHCARE FACILITIES",
+  "officialSite": "https://www.caretrustreit.com",
+  "cachedAt": "2025-10-19T05:26:02.186Z",
+  "source": "Alpha Vantage API (fixed)"
 }

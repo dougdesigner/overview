@@ -1,8 +1,9 @@
 {
   "symbol": "TRMB",
-  "name": "TRMB Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:35.557Z",
-  "source": "Alpha Vantage API"
+  "name": "Trimble Inc",
+  "sector": "TECHNOLOGY",
+  "industry": "SCIENTIFIC & TECHNICAL INSTRUMENTS",
+  "officialSite": "https://www.trimble.com",
+  "cachedAt": "2025-10-19T06:08:08.978Z",
+  "source": "Alpha Vantage API (fixed)"
 }

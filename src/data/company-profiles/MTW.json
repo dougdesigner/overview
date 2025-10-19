@@ -1,8 +1,9 @@
 {
   "symbol": "MTW",
-  "name": "MTW Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:35:35.340Z",
-  "source": "Alpha Vantage API"
+  "name": "Manitowoc Company Inc",
+  "sector": "INDUSTRIALS",
+  "industry": "FARM & HEAVY CONSTRUCTION MACHINERY",
+  "officialSite": "https://www.manitowoc.com",
+  "cachedAt": "2025-10-19T05:53:35.189Z",
+  "source": "Alpha Vantage API (fixed)"
 }

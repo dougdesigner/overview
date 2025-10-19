@@ -1,8 +1,9 @@
 {
   "symbol": "PPBI",
-  "name": "PPBI Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:32:35.461Z",
-  "source": "Alpha Vantage API"
+  "name": "Pacific Premier Bancorp Inc",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "BANKS - REGIONAL",
+  "officialSite": "https://www.ppbi.com",
+  "cachedAt": "2025-10-19T06:00:32.928Z",
+  "source": "Alpha Vantage API (fixed)"
 }

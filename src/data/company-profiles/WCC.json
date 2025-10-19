@@ -1,8 +1,9 @@
 {
   "symbol": "WCC",
-  "name": "WCC Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:31:34.030Z",
-  "source": "Alpha Vantage API"
+  "name": "WESCO International Inc",
+  "sector": "INDUSTRIALS",
+  "industry": "INDUSTRIAL DISTRIBUTION",
+  "officialSite": "https://www.wesco.com",
+  "cachedAt": "2025-10-19T06:10:04.475Z",
+  "source": "Alpha Vantage API (fixed)"
 }

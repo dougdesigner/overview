@@ -1,8 +1,9 @@
 {
   "symbol": "STT",
-  "name": "STT Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:06.821Z",
-  "source": "Alpha Vantage API"
+  "name": "State Street Corp",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "ASSET MANAGEMENT",
+  "officialSite": "https://www.statestreet.com",
+  "cachedAt": "2025-10-19T06:07:02.228Z",
+  "source": "Alpha Vantage API (fixed)"
 }

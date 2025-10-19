@@ -1,8 +1,9 @@
 {
   "symbol": "PYXS",
-  "name": "PYXS Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:32:14.318Z",
-  "source": "Alpha Vantage API"
+  "name": "Pyxis Oncology Inc",
+  "sector": "HEALTHCARE",
+  "industry": "BIOTECHNOLOGY",
+  "officialSite": "https://www.pyxisoncology.com",
+  "cachedAt": "2025-10-19T06:01:04.341Z",
+  "source": "Alpha Vantage API (fixed)"
 }

@@ -1,8 +1,9 @@
 {
   "symbol": "LEA",
-  "name": "LEA Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:31:24.498Z",
-  "source": "Alpha Vantage API"
+  "name": "Lear Corporation",
+  "sector": "CONSUMER CYCLICAL",
+  "industry": "AUTO PARTS",
+  "officialSite": "https://www.lear.com",
+  "cachedAt": "2025-10-19T05:45:01.676Z",
+  "source": "Alpha Vantage API (fixed)"
 }

@@ -1,8 +1,9 @@
 {
   "symbol": "FHI",
-  "name": "FHI Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:31:13.906Z",
-  "source": "Alpha Vantage API"
+  "name": "Federated Investors Inc B",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "ASSET MANAGEMENT",
+  "officialSite": "https://www.federatedhermes.com/us/home.do",
+  "cachedAt": "2025-10-19T05:31:06.646Z",
+  "source": "Alpha Vantage API (fixed)"
 }

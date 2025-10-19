@@ -1,8 +1,9 @@
 {
   "symbol": "LII",
-  "name": "LII Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:27.823Z",
-  "source": "Alpha Vantage API"
+  "name": "Lennox International Inc",
+  "sector": "INDUSTRIALS",
+  "industry": "BUILDING PRODUCTS & EQUIPMENT",
+  "officialSite": "https://www.lennox.com",
+  "cachedAt": "2025-10-19T05:45:15.360Z",
+  "source": "Alpha Vantage API (fixed)"
 }

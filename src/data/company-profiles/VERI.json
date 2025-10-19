@@ -1,8 +1,9 @@
 {
   "symbol": "VERI",
-  "name": "VERI Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:15.176Z",
-  "source": "Alpha Vantage API"
+  "name": "Veritone Inc",
+  "sector": "TECHNOLOGY",
+  "industry": "SOFTWARE - INFRASTRUCTURE",
+  "officialSite": "https://www.veritone.com",
+  "cachedAt": "2025-10-19T06:09:32.440Z",
+  "source": "Alpha Vantage API (fixed)"
 }

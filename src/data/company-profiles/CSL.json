@@ -1,8 +1,9 @@
 {
   "symbol": "CSL",
-  "name": "CSL Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:35.091Z",
-  "source": "Alpha Vantage API"
+  "name": "Carlisle Companies Incorporated",
+  "sector": "INDUSTRIALS",
+  "industry": "BUILDING PRODUCTS & EQUIPMENT",
+  "officialSite": "https://www.carlisle.com",
+  "cachedAt": "2025-10-19T05:25:51.413Z",
+  "source": "Alpha Vantage API (fixed)"
 }

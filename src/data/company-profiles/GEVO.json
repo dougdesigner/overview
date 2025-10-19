@@ -1,8 +1,9 @@
 {
   "symbol": "GEVO",
-  "name": "GEVO Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:36:20.495Z",
-  "source": "Alpha Vantage API"
+  "name": "Gevo Inc",
+  "sector": "BASIC MATERIALS",
+  "industry": "SPECIALTY CHEMICALS",
+  "officialSite": "https://gevo.com",
+  "cachedAt": "2025-10-19T05:36:34.564Z",
+  "source": "Alpha Vantage API (fixed)"
 }

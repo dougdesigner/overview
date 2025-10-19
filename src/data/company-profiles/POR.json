@@ -1,8 +1,9 @@
 {
   "symbol": "POR",
-  "name": "POR Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:31:37.558Z",
-  "source": "Alpha Vantage API"
+  "name": "Portland General Electric Co",
+  "sector": "UTILITIES",
+  "industry": "UTILITIES - REGULATED ELECTRIC",
+  "officialSite": "https://www.portlandgeneral.com",
+  "cachedAt": "2025-10-19T06:00:30.986Z",
+  "source": "Alpha Vantage API (fixed)"
 }

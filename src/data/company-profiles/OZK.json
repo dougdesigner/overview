@@ -1,8 +1,9 @@
 {
   "symbol": "OZK",
-  "name": "OZK Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:31:16.426Z",
-  "source": "Alpha Vantage API"
+  "name": "Bank Ozk",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "BANKS - REGIONAL",
+  "officialSite": "https://www.ozk.com",
+  "cachedAt": "2025-10-19T05:55:58.249Z",
+  "source": "Alpha Vantage API (fixed)"
 }

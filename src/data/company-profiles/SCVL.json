@@ -1,8 +1,9 @@
 {
   "symbol": "SCVL",
-  "name": "SCVL Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:17.368Z",
-  "source": "Alpha Vantage API"
+  "name": "Shoe Carnival Inc",
+  "sector": "CONSUMER CYCLICAL",
+  "industry": "APPAREL RETAIL",
+  "officialSite": "https://www.shoecarnival.com",
+  "cachedAt": "2025-10-19T06:03:26.414Z",
+  "source": "Alpha Vantage API (fixed)"
 }

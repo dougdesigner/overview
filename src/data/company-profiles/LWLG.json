@@ -1,8 +1,9 @@
 {
   "symbol": "LWLG",
-  "name": "LWLG Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:36:31.659Z",
-  "source": "Alpha Vantage API"
+  "name": "Lightwave Logic Inc",
+  "sector": "BASIC MATERIALS",
+  "industry": "SPECIALTY CHEMICALS",
+  "officialSite": "https://lightwavelogic.com",
+  "cachedAt": "2025-10-19T05:48:46.524Z",
+  "source": "Alpha Vantage API (fixed)"
 }

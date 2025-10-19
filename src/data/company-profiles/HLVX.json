@@ -1,8 +1,9 @@
 {
   "symbol": "HLVX",
-  "name": "HLVX Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:36:11.980Z",
-  "source": "Alpha Vantage API"
+  "name": "Hillevax Inc",
+  "sector": "HEALTHCARE",
+  "industry": "BIOTECHNOLOGY",
+  "officialSite": "https://www.hillevax.com",
+  "cachedAt": "2025-10-19T05:37:45.336Z",
+  "source": "Alpha Vantage API (fixed)"
 }

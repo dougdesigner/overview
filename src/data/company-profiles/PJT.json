@@ -1,8 +1,9 @@
 {
   "symbol": "PJT",
-  "name": "PJT Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:31:41.208Z",
-  "source": "Alpha Vantage API"
+  "name": "PJT Partners Inc",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "CAPITAL MARKETS",
+  "officialSite": "https://www.pjtpartners.com",
+  "cachedAt": "2025-10-19T06:00:15.962Z",
+  "source": "Alpha Vantage API (fixed)"
 }

@@ -1,8 +1,9 @@
 {
   "symbol": "SRRK",
-  "name": "SRRK Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:38.190Z",
-  "source": "Alpha Vantage API"
+  "name": "Scholar Rock Holding Corp",
+  "sector": "HEALTHCARE",
+  "industry": "BIOTECHNOLOGY",
+  "officialSite": "https://www.scholarrock.com",
+  "cachedAt": "2025-10-19T06:05:36.148Z",
+  "source": "Alpha Vantage API (fixed)"
 }

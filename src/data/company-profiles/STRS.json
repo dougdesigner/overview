@@ -1,8 +1,9 @@
 {
   "symbol": "STRS",
-  "name": "STRS Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:37.332Z",
-  "source": "Alpha Vantage API"
+  "name": "Stratus Properties Inc",
+  "sector": "REAL ESTATE",
+  "industry": "REAL ESTATE - DIVERSIFIED",
+  "officialSite": "https://www.stratusproperties.com",
+  "cachedAt": "2025-10-19T06:06:59.274Z",
+  "source": "Alpha Vantage API (fixed)"
 }

@@ -1,8 +1,9 @@
 {
   "symbol": "LAZR",
-  "name": "LAZR Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:35:37.789Z",
-  "source": "Alpha Vantage API"
+  "name": "Luminar Technologies",
+  "sector": "CONSUMER CYCLICAL",
+  "industry": "AUTO PARTS",
+  "officialSite": "https://www.luminartech.com",
+  "cachedAt": "2025-10-19T05:44:52.609Z",
+  "source": "Alpha Vantage API (fixed)"
 }

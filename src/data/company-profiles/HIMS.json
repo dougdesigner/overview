@@ -1,8 +1,9 @@
 {
   "symbol": "HIMS",
-  "name": "HIMS Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:31:23.979Z",
-  "source": "Alpha Vantage API"
+  "name": "Hims Hers Health Inc",
+  "sector": "CONSUMER DEFENSIVE",
+  "industry": "HOUSEHOLD & PERSONAL PRODUCTS",
+  "officialSite": "https://www.hims.com",
+  "cachedAt": "2025-10-19T05:37:35.585Z",
+  "source": "Alpha Vantage API (fixed)"
 }

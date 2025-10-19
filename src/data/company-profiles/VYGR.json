@@ -1,8 +1,9 @@
 {
   "symbol": "VYGR",
-  "name": "VYGR Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:14.063Z",
-  "source": "Alpha Vantage API"
+  "name": "Voyager Therapeutics Inc",
+  "sector": "HEALTHCARE",
+  "industry": "BIOTECHNOLOGY",
+  "officialSite": "https://www.voyagertherapeutics.com",
+  "cachedAt": "2025-10-19T06:09:56.104Z",
+  "source": "Alpha Vantage API (fixed)"
 }

@@ -1,8 +1,9 @@
 {
   "symbol": "SPXC",
-  "name": "SPXC Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:42.106Z",
-  "source": "Alpha Vantage API"
+  "name": "SPX Corp",
+  "sector": "INDUSTRIALS",
+  "industry": "BUILDING PRODUCTS & EQUIPMENT",
+  "officialSite": "https://www.spx.com",
+  "cachedAt": "2025-10-19T06:05:28.913Z",
+  "source": "Alpha Vantage API (fixed)"
 }

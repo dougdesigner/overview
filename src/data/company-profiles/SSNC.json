@@ -1,8 +1,9 @@
 {
   "symbol": "SSNC",
-  "name": "SSNC Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:02.276Z",
-  "source": "Alpha Vantage API"
+  "name": "SS&C Technologies Holdings Inc",
+  "sector": "TECHNOLOGY",
+  "industry": "SOFTWARE - APPLICATION",
+  "officialSite": "https://www.ssctech.com",
+  "cachedAt": "2025-10-19T06:05:43.972Z",
+  "source": "Alpha Vantage API (fixed)"
 }

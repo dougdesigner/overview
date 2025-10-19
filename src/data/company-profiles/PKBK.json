@@ -1,8 +1,9 @@
 {
   "symbol": "PKBK",
-  "name": "PKBK Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:32:32.429Z",
-  "source": "Alpha Vantage API"
+  "name": "Parke Bancorp Inc",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "BANKS - REGIONAL",
+  "officialSite": "https://www.parkebank.com",
+  "cachedAt": "2025-10-19T06:00:18.314Z",
+  "source": "Alpha Vantage API (fixed)"
 }

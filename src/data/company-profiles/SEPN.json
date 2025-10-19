@@ -1,8 +1,9 @@
 {
   "symbol": "SEPN",
-  "name": "SEPN Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:19.829Z",
-  "source": "Alpha Vantage API"
+  "name": "Septerna, Inc. Common Stock",
+  "sector": "HEALTHCARE",
+  "industry": "BIOTECHNOLOGY",
+  "officialSite": "https://septerna.com",
+  "cachedAt": "2025-10-19T06:04:12.865Z",
+  "source": "Alpha Vantage API (fixed)"
 }

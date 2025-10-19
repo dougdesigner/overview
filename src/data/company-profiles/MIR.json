@@ -1,8 +1,9 @@
 {
   "symbol": "MIR",
-  "name": "MIR Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:31:37.869Z",
-  "source": "Alpha Vantage API"
+  "name": "Mirion Technologies Inc",
+  "sector": "INDUSTRIALS",
+  "industry": "SPECIALTY INDUSTRIAL MACHINERY",
+  "officialSite": "https://www.mirion.com",
+  "cachedAt": "2025-10-19T05:52:44.293Z",
+  "source": "Alpha Vantage API (fixed)"
 }

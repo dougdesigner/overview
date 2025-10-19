@@ -1,8 +1,9 @@
 {
   "symbol": "EDIT",
-  "name": "EDIT Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:36:18.038Z",
-  "source": "Alpha Vantage API"
+  "name": "Editas Medicine Inc",
+  "sector": "HEALTHCARE",
+  "industry": "BIOTECHNOLOGY",
+  "officialSite": "https://www.editasmedicine.com",
+  "cachedAt": "2025-10-19T05:29:34.026Z",
+  "source": "Alpha Vantage API (fixed)"
 }

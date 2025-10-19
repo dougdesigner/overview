@@ -1,8 +1,9 @@
 {
   "symbol": "LNT",
-  "name": "LNT Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:34.779Z",
-  "source": "Alpha Vantage API"
+  "name": "Alliant Energy Corp",
+  "sector": "UTILITIES",
+  "industry": "UTILITIES - REGULATED ELECTRIC",
+  "officialSite": "https://www.alliantenergy.com",
+  "cachedAt": "2025-10-19T05:48:19.249Z",
+  "source": "Alpha Vantage API (fixed)"
 }

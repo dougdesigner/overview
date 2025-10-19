@@ -1,8 +1,9 @@
 {
   "symbol": "UBSI",
-  "name": "UBSI Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:31:17.690Z",
-  "source": "Alpha Vantage API"
+  "name": "United Bankshares Inc",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "BANKS - REGIONAL",
+  "officialSite": "https://www.ubsi-inc.com",
+  "cachedAt": "2025-10-19T06:08:48.662Z",
+  "source": "Alpha Vantage API (fixed)"
 }

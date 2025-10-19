@@ -1,8 +1,9 @@
 {
   "symbol": "KFY",
-  "name": "KFY Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:31:15.811Z",
-  "source": "Alpha Vantage API"
+  "name": "Korn Ferry",
+  "sector": "INDUSTRIALS",
+  "industry": "STAFFING & EMPLOYMENT SERVICES",
+  "officialSite": "https://www.kornferry.com",
+  "cachedAt": "2025-10-19T05:44:16.629Z",
+  "source": "Alpha Vantage API (fixed)"
 }

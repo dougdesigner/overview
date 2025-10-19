@@ -1,8 +1,9 @@
 {
   "symbol": "SMRT",
-  "name": "SMRT Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:36.276Z",
-  "source": "Alpha Vantage API"
+  "name": "SmartRent Inc",
+  "sector": "TECHNOLOGY",
+  "industry": "SOFTWARE - APPLICATION",
+  "officialSite": "https://smartrent.com",
+  "cachedAt": "2025-10-19T06:05:07.373Z",
+  "source": "Alpha Vantage API (fixed)"
 }

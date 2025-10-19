@@ -1,8 +1,9 @@
 {
   "symbol": "KODK",
-  "name": "KODK Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:34:18.987Z",
-  "source": "Alpha Vantage API"
+  "name": "Eastman Kodak Co",
+  "sector": "INDUSTRIALS",
+  "industry": "SPECIALTY BUSINESS SERVICES",
+  "officialSite": "https://www.kodak.com",
+  "cachedAt": "2025-10-19T05:44:25.370Z",
+  "source": "Alpha Vantage API (fixed)"
 }

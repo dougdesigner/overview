@@ -1,8 +1,9 @@
 {
   "symbol": "QBTS",
-  "name": "QBTS Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:34:15.744Z",
-  "source": "Alpha Vantage API"
+  "name": "D-Wave Quantum Inc.",
+  "sector": "TECHNOLOGY",
+  "industry": "COMPUTER HARDWARE",
+  "officialSite": "https://www.dwavesys.com",
+  "cachedAt": "2025-10-19T06:01:08.250Z",
+  "source": "Alpha Vantage API (fixed)"
 }

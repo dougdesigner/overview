@@ -1,8 +1,9 @@
 {
   "symbol": "GVA",
-  "name": "GVA Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:31:30.423Z",
-  "source": "Alpha Vantage API"
+  "name": "Granite Construction Incorporated",
+  "sector": "INDUSTRIALS",
+  "industry": "ENGINEERING & CONSTRUCTION",
+  "officialSite": "https://www.graniteconstruction.com",
+  "cachedAt": "2025-10-19T05:37:12.190Z",
+  "source": "Alpha Vantage API (fixed)"
 }

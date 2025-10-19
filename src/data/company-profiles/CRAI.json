@@ -1,8 +1,9 @@
 {
   "symbol": "CRAI",
-  "name": "CRAI Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:34:31.165Z",
-  "source": "Alpha Vantage API"
+  "name": "CRA International Inc",
+  "sector": "INDUSTRIALS",
+  "industry": "CONSULTING SERVICES",
+  "officialSite": "https://www.crai.com",
+  "cachedAt": "2025-10-19T05:25:38.769Z",
+  "source": "Alpha Vantage API (fixed)"
 }

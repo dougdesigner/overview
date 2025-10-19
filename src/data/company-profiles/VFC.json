@@ -1,8 +1,9 @@
 {
   "symbol": "VFC",
-  "name": "VFC Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:31:25.122Z",
-  "source": "Alpha Vantage API"
+  "name": "VF Corporation",
+  "sector": "CONSUMER CYCLICAL",
+  "industry": "APPAREL MANUFACTURING",
+  "officialSite": "https://www.vfc.com",
+  "cachedAt": "2025-10-19T06:09:33.401Z",
+  "source": "Alpha Vantage API (fixed)"
 }

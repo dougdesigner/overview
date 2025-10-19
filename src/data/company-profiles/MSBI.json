@@ -1,8 +1,9 @@
 {
   "symbol": "MSBI",
-  "name": "MSBI Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:35:25.512Z",
-  "source": "Alpha Vantage API"
+  "name": "Midland States Bancorp Inc",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "BANKS - REGIONAL",
+  "officialSite": "https://www.midlandsb.com",
+  "cachedAt": "2025-10-19T05:53:24.365Z",
+  "source": "Alpha Vantage API (fixed)"
 }

@@ -1,8 +1,9 @@
 {
   "symbol": "LIND",
-  "name": "LIND Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:36:30.715Z",
-  "source": "Alpha Vantage API"
+  "name": "Lindblad Expeditions Holdings Inc",
+  "sector": "CONSUMER CYCLICAL",
+  "industry": "TRAVEL SERVICES",
+  "officialSite": "https://www.expeditions.com",
+  "cachedAt": "2025-10-19T05:45:17.300Z",
+  "source": "Alpha Vantage API (fixed)"
 }

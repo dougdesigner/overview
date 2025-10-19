@@ -1,8 +1,9 @@
 {
   "symbol": "HOV",
-  "name": "HOV Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:36:09.295Z",
-  "source": "Alpha Vantage API"
+  "name": "Hovnanian Enterprises Inc",
+  "sector": "CONSUMER CYCLICAL",
+  "industry": "RESIDENTIAL CONSTRUCTION",
+  "officialSite": "https://www.khov.com",
+  "cachedAt": "2025-10-19T05:41:35.684Z",
+  "source": "Alpha Vantage API (fixed)"
 }

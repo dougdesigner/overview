@@ -1,8 +1,9 @@
 {
   "symbol": "MCRI",
-  "name": "MCRI Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:35:31.813Z",
-  "source": "Alpha Vantage API"
+  "name": "Monarch Casino & Resort Inc",
+  "sector": "CONSUMER CYCLICAL",
+  "industry": "RESORTS & CASINOS",
+  "officialSite": "https://www.monarchcasino.com",
+  "cachedAt": "2025-10-19T05:49:15.799Z",
+  "source": "Alpha Vantage API (fixed)"
 }

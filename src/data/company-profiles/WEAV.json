@@ -1,8 +1,9 @@
 {
   "symbol": "WEAV",
-  "name": "WEAV Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:03.535Z",
-  "source": "Alpha Vantage API"
+  "name": "Weave Communications Inc",
+  "sector": "HEALTHCARE",
+  "industry": "HEALTH INFORMATION SERVICES",
+  "officialSite": "https://www.getweave.com",
+  "cachedAt": "2025-10-19T06:10:07.395Z",
+  "source": "Alpha Vantage API (fixed)"
 }

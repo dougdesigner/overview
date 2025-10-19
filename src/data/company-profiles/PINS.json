@@ -1,8 +1,9 @@
 {
   "symbol": "PINS",
-  "name": "PINS Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:00.329Z",
-  "source": "Alpha Vantage API"
+  "name": "Pinterest Inc",
+  "sector": "COMMUNICATION SERVICES",
+  "industry": "INTERNET CONTENT & INFORMATION",
+  "officialSite": "https://www.pinterest.com",
+  "cachedAt": "2025-10-19T06:00:13.002Z",
+  "source": "Alpha Vantage API (fixed)"
 }

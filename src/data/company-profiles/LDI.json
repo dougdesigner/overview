@@ -1,8 +1,9 @@
 {
   "symbol": "LDI",
-  "name": "LDI Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:35:39.192Z",
-  "source": "Alpha Vantage API"
+  "name": "Loandepot Inc",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "MORTGAGE FINANCE",
+  "officialSite": "https://www.loandepot.com",
+  "cachedAt": "2025-10-19T05:44:59.453Z",
+  "source": "Alpha Vantage API (fixed)"
 }

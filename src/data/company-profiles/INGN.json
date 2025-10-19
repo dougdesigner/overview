@@ -1,8 +1,9 @@
 {
   "symbol": "INGN",
-  "name": "INGN Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:36:35.348Z",
-  "source": "Alpha Vantage API"
+  "name": "Inogen Inc",
+  "sector": "HEALTHCARE",
+  "industry": "MEDICAL DEVICES",
+  "officialSite": "https://www.inogen.com",
+  "cachedAt": "2025-10-19T05:42:28.394Z",
+  "source": "Alpha Vantage API (fixed)"
 }

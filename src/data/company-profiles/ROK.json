@@ -1,8 +1,9 @@
 {
   "symbol": "ROK",
-  "name": "ROK Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:09.659Z",
-  "source": "Alpha Vantage API"
+  "name": "Rockwell Automation Inc",
+  "sector": "INDUSTRIALS",
+  "industry": "SPECIALTY INDUSTRIAL MACHINERY",
+  "officialSite": "https://www.rockwellautomation.com",
+  "cachedAt": "2025-10-19T06:02:43.358Z",
+  "source": "Alpha Vantage API (fixed)"
 }

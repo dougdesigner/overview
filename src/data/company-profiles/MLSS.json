@@ -1,8 +1,9 @@
 {
   "symbol": "MLSS",
-  "name": "MLSS Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:35:25.204Z",
-  "source": "Alpha Vantage API"
+  "name": "Milestone Scientific",
+  "sector": "HEALTHCARE",
+  "industry": "MEDICAL INSTRUMENTS & SUPPLIES",
+  "officialSite": "https://www.milestonescientific.com",
+  "cachedAt": "2025-10-19T05:52:55.975Z",
+  "source": "Alpha Vantage API (fixed)"
 }

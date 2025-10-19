@@ -1,8 +1,9 @@
 {
   "symbol": "RYI",
-  "name": "RYI Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:26.484Z",
-  "source": "Alpha Vantage API"
+  "name": "Ryerson Holding Corp",
+  "sector": "INDUSTRIALS",
+  "industry": "METAL FABRICATION",
+  "officialSite": "https://www.ryerson.com",
+  "cachedAt": "2025-10-19T06:03:04.905Z",
+  "source": "Alpha Vantage API (fixed)"
 }

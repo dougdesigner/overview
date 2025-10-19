@@ -1,8 +1,9 @@
 {
   "symbol": "PBPB",
-  "name": "PBPB Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:32:19.325Z",
-  "source": "Alpha Vantage API"
+  "name": "Potbelly Co",
+  "sector": "CONSUMER CYCLICAL",
+  "industry": "RESTAURANTS",
+  "officialSite": "https://www.potbelly.com",
+  "cachedAt": "2025-10-19T05:56:10.881Z",
+  "source": "Alpha Vantage API (fixed)"
 }

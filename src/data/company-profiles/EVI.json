@@ -1,8 +1,9 @@
 {
   "symbol": "EVI",
-  "name": "EVI Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:36:14.175Z",
-  "source": "Alpha Vantage API"
+  "name": "EVI Industries Inc",
+  "sector": "INDUSTRIALS",
+  "industry": "INDUSTRIAL DISTRIBUTION",
+  "officialSite": "https://www.evi-ind.com",
+  "cachedAt": "2025-10-19T05:30:40.899Z",
+  "source": "Alpha Vantage API (fixed)"
 }

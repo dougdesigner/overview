@@ -1,8 +1,9 @@
 {
   "symbol": "DRH",
-  "name": "DRH Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:34:23.487Z",
-  "source": "Alpha Vantage API"
+  "name": "Diamondrock Hospitality Company",
+  "sector": "REAL ESTATE",
+  "industry": "REIT - HOTEL & MOTEL",
+  "officialSite": "https://www.drhc.com",
+  "cachedAt": "2025-10-19T05:29:07.757Z",
+  "source": "Alpha Vantage API (fixed)"
 }

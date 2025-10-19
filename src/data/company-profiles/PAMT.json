@@ -1,8 +1,9 @@
 {
   "symbol": "PAMT",
-  "name": "PAMT Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:32:30.877Z",
-  "source": "Alpha Vantage API"
+  "name": "PAMT CORP",
+  "sector": "INDUSTRIALS",
+  "industry": "TRUCKING",
+  "officialSite": "https://www.pamtransport.com",
+  "cachedAt": "2025-10-19T05:56:02.132Z",
+  "source": "Alpha Vantage API (fixed)"
 }

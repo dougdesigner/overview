@@ -1,8 +1,9 @@
 {
   "symbol": "FUSB",
-  "name": "FUSB Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:36:23.145Z",
-  "source": "Alpha Vantage API"
+  "name": "First US Bancshares Inc",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "BANKS - REGIONAL",
+  "officialSite": "https://www.fusb.com",
+  "cachedAt": "2025-10-19T05:31:37.933Z",
+  "source": "Alpha Vantage API (fixed)"
 }

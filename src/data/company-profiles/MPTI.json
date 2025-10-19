@@ -1,8 +1,9 @@
 {
   "symbol": "MPTI",
-  "name": "MPTI Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:35:37.392Z",
-  "source": "Alpha Vantage API"
+  "name": "M-tron Industries, Inc.",
+  "sector": "TECHNOLOGY",
+  "industry": "ELECTRONIC COMPONENTS",
+  "officialSite": "https://www.mtron.com",
+  "cachedAt": "2025-10-19T05:53:13.498Z",
+  "source": "Alpha Vantage API (fixed)"
 }

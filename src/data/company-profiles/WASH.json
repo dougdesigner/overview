@@ -1,8 +1,9 @@
 {
   "symbol": "WASH",
-  "name": "WASH Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:10.204Z",
-  "source": "Alpha Vantage API"
+  "name": "Washington Trust Bancorp Inc",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "BANKS - REGIONAL",
+  "officialSite": "https://www.washtrust.com",
+  "cachedAt": "2025-10-19T06:10:03.504Z",
+  "source": "Alpha Vantage API (fixed)"
 }

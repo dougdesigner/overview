@@ -1,8 +1,9 @@
 {
   "symbol": "QRVO",
-  "name": "QRVO Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:40.661Z",
-  "source": "Alpha Vantage API"
+  "name": "Qorvo Inc",
+  "sector": "TECHNOLOGY",
+  "industry": "SEMICONDUCTORS",
+  "officialSite": "https://www.qorvo.com",
+  "cachedAt": "2025-10-19T06:01:13.721Z",
+  "source": "Alpha Vantage API (fixed)"
 }

@@ -1,8 +1,9 @@
 {
   "symbol": "FDS",
-  "name": "FDS Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:30.047Z",
-  "source": "Alpha Vantage API"
+  "name": "FactSet Research Systems Inc",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "FINANCIAL DATA & STOCK EXCHANGES",
+  "officialSite": "https://www.factset.com",
+  "cachedAt": "2025-10-19T05:30:58.467Z",
+  "source": "Alpha Vantage API (fixed)"
 }

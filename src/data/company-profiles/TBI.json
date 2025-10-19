@@ -1,8 +1,9 @@
 {
   "symbol": "TBI",
-  "name": "TBI Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:32:39.361Z",
-  "source": "Alpha Vantage API"
+  "name": "TrueBlue Inc",
+  "sector": "INDUSTRIALS",
+  "industry": "STAFFING & EMPLOYMENT SERVICES",
+  "officialSite": "https://www.trueblue.com",
+  "cachedAt": "2025-10-19T06:07:32.395Z",
+  "source": "Alpha Vantage API (fixed)"
 }

@@ -1,8 +1,9 @@
 {
   "symbol": "SYBX",
-  "name": "SYBX Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:40.773Z",
-  "source": "Alpha Vantage API"
+  "name": "Synlogic Inc",
+  "sector": "HEALTHCARE",
+  "industry": "BIOTECHNOLOGY",
+  "officialSite": "https://www.synlogictx.com",
+  "cachedAt": "2025-10-19T06:07:21.637Z",
+  "source": "Alpha Vantage API (fixed)"
 }

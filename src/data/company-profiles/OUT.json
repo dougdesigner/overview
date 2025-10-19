@@ -1,8 +1,9 @@
 {
   "symbol": "OUT",
-  "name": "OUT Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:32:27.433Z",
-  "source": "Alpha Vantage API"
+  "name": "Outfront Media Inc",
+  "sector": "REAL ESTATE",
+  "industry": "REIT - SPECIALTY",
+  "officialSite": "https://www.outfrontmedia.com",
+  "cachedAt": "2025-10-19T05:55:52.424Z",
+  "source": "Alpha Vantage API (fixed)"
 }

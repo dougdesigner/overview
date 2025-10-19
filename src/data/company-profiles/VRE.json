@@ -1,8 +1,9 @@
 {
   "symbol": "VRE",
-  "name": "VRE Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:15.483Z",
-  "source": "Alpha Vantage API"
+  "name": "Veris Residential Inc",
+  "sector": "REAL ESTATE",
+  "industry": "REIT - RESIDENTIAL",
+  "officialSite": "https://www.verisresidential.com",
+  "cachedAt": "2025-10-19T06:09:42.107Z",
+  "source": "Alpha Vantage API (fixed)"
 }

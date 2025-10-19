@@ -1,8 +1,9 @@
 {
   "symbol": "MCFT",
-  "name": "MCFT Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:35:42.514Z",
-  "source": "Alpha Vantage API"
+  "name": "MCBC Holdings Inc",
+  "sector": "CONSUMER CYCLICAL",
+  "industry": "RECREATIONAL VEHICLES",
+  "officialSite": "https://www.mastercraft.com",
+  "cachedAt": "2025-10-19T05:49:11.946Z",
+  "source": "Alpha Vantage API (fixed)"
 }

@@ -1,8 +1,9 @@
 {
   "symbol": "GGG",
-  "name": "GGG Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:30.356Z",
-  "source": "Alpha Vantage API"
+  "name": "Graco Inc",
+  "sector": "INDUSTRIALS",
+  "industry": "SPECIALTY INDUSTRIAL MACHINERY",
+  "officialSite": "https://www.graco.com",
+  "cachedAt": "2025-10-19T05:36:36.495Z",
+  "source": "Alpha Vantage API (fixed)"
 }

@@ -1,8 +1,9 @@
 {
   "symbol": "THO",
-  "name": "THO Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:31:39.351Z",
-  "source": "Alpha Vantage API"
+  "name": "Thor Industries Inc",
+  "sector": "CONSUMER CYCLICAL",
+  "industry": "RECREATIONAL VEHICLES",
+  "officialSite": "https://www.thorindustries.com",
+  "cachedAt": "2025-10-19T06:07:45.732Z",
+  "source": "Alpha Vantage API (fixed)"
 }

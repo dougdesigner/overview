@@ -1,8 +1,9 @@
 {
   "symbol": "FWONK",
-  "name": "FWONK Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:32.875Z",
-  "source": "Alpha Vantage API"
+  "name": "Liberty Media Corporation Series C Liberty Formula One Common Stock",
+  "sector": "COMMUNICATION SERVICES",
+  "industry": "ENTERTAINMENT",
+  "officialSite": "https://www.libertymedia.com/tracking-stocks/formu",
+  "cachedAt": "2025-10-19T05:31:39.876Z",
+  "source": "Alpha Vantage API (fixed)"
 }

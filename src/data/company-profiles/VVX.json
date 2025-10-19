@@ -1,8 +1,9 @@
 {
   "symbol": "VVX",
-  "name": "VVX Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:09.344Z",
-  "source": "Alpha Vantage API"
+  "name": "V2X Inc",
+  "sector": "INDUSTRIALS",
+  "industry": "AEROSPACE & DEFENSE",
+  "officialSite": "https://www.gov2x.com",
+  "cachedAt": "2025-10-19T06:09:53.212Z",
+  "source": "Alpha Vantage API (fixed)"
 }

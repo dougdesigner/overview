@@ -1,8 +1,9 @@
 {
   "symbol": "CTBI",
-  "name": "CTBI Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:34:25.589Z",
-  "source": "Alpha Vantage API"
+  "name": "Community Trust Bancorp Inc",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "BANKS - REGIONAL",
+  "officialSite": "https://www.ctbi.com",
+  "cachedAt": "2025-10-19T05:25:54.321Z",
+  "source": "Alpha Vantage API (fixed)"
 }

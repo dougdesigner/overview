@@ -1,8 +1,9 @@
 {
   "symbol": "SCHL",
-  "name": "SCHL Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:34.295Z",
-  "source": "Alpha Vantage API"
+  "name": "Scholastic Corporation",
+  "sector": "COMMUNICATION SERVICES",
+  "industry": "PUBLISHING",
+  "officialSite": "https://www.scholastic.com",
+  "cachedAt": "2025-10-19T06:03:20.946Z",
+  "source": "Alpha Vantage API (fixed)"
 }

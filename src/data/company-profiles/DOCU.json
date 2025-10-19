@@ -1,8 +1,9 @@
 {
   "symbol": "DOCU",
-  "name": "DOCU Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:36.528Z",
-  "source": "Alpha Vantage API"
+  "name": "DocuSign Inc",
+  "sector": "TECHNOLOGY",
+  "industry": "SOFTWARE - APPLICATION",
+  "officialSite": "https://www.docusign.com",
+  "cachedAt": "2025-10-19T05:29:04.825Z",
+  "source": "Alpha Vantage API (fixed)"
 }

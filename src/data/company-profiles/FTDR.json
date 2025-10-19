@@ -1,8 +1,9 @@
 {
   "symbol": "FTDR",
-  "name": "FTDR Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:31:28.567Z",
-  "source": "Alpha Vantage API"
+  "name": "Frontdoor Inc",
+  "sector": "CONSUMER CYCLICAL",
+  "industry": "PERSONAL SERVICES",
+  "officialSite": "https://www.frontdoorhome.com",
+  "cachedAt": "2025-10-19T05:31:32.092Z",
+  "source": "Alpha Vantage API (fixed)"
 }

@@ -1,8 +1,9 @@
 {
   "symbol": "SENEA",
-  "name": "SENEA Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:20.455Z",
-  "source": "Alpha Vantage API"
+  "name": "Seneca Foods Corp A",
+  "sector": "CONSUMER DEFENSIVE",
+  "industry": "PACKAGED FOODS",
+  "officialSite": "https://www.senecafoods.com",
+  "cachedAt": "2025-10-19T06:04:10.936Z",
+  "source": "Alpha Vantage API (fixed)"
 }

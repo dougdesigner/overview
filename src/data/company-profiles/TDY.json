@@ -1,8 +1,9 @@
 {
   "symbol": "TDY",
-  "name": "TDY Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:15.319Z",
-  "source": "Alpha Vantage API"
+  "name": "Teledyne Technologies Incorporated",
+  "sector": "TECHNOLOGY",
+  "industry": "SCIENTIFIC & TECHNICAL INSTRUMENTS",
+  "officialSite": "https://www.teledyne.com",
+  "cachedAt": "2025-10-19T06:07:37.249Z",
+  "source": "Alpha Vantage API (fixed)"
 }

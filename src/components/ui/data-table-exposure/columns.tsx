@@ -150,11 +150,13 @@ function TickerCell({
 interface ColumnsProps {
   toggleExpandAll: () => void
   areAllExpanded: () => boolean
+  percentageMode?: "total" | "stocks"
 }
 
 export const createColumns = ({
   toggleExpandAll,
   areAllExpanded,
+  percentageMode = "total",
 }: ColumnsProps): ColumnDef<StockExposure>[] => [
   {
     id: "expander",
@@ -400,7 +402,7 @@ export const createColumns = ({
           className="flex w-full items-center justify-end gap-1 font-medium hover:text-gray-900 dark:hover:text-gray-50"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
-          Allocation (%)
+          {percentageMode === "stocks" ? "% of Stocks" : "Allocation (%)"}
           {column.getIsSorted() === "asc" && (
             <RiArrowUpSLine className="h-4 w-4" />
           )}

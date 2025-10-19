@@ -1,8 +1,9 @@
 {
   "symbol": "GCO",
-  "name": "GCO Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:36:21.874Z",
-  "source": "Alpha Vantage API"
+  "name": "Genesco Inc",
+  "sector": "CONSUMER CYCLICAL",
+  "industry": "APPAREL RETAIL",
+  "officialSite": "https://www.genesco.com",
+  "cachedAt": "2025-10-19T05:31:48.647Z",
+  "source": "Alpha Vantage API (fixed)"
 }

@@ -1,8 +1,9 @@
 {
   "symbol": "RH",
-  "name": "RH Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:31:27.627Z",
-  "source": "Alpha Vantage API"
+  "name": "RH",
+  "sector": "CONSUMER CYCLICAL",
+  "industry": "SPECIALTY RETAIL",
+  "officialSite": "https://www.rh.com",
+  "cachedAt": "2025-10-19T06:02:10.581Z",
+  "source": "Alpha Vantage API (fixed)"
 }

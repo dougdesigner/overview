@@ -1,8 +1,9 @@
 {
   "symbol": "SPRY",
-  "name": "SPRY Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:35:19.307Z",
-  "source": "Alpha Vantage API"
+  "name": "ARS Pharmaceuticals, Inc",
+  "sector": "HEALTHCARE",
+  "industry": "BIOTECHNOLOGY",
+  "officialSite": "https://ars-pharma.com",
+  "cachedAt": "2025-10-19T06:05:26.921Z",
+  "source": "Alpha Vantage API (fixed)"
 }

@@ -1,8 +1,9 @@
 {
   "symbol": "SGA",
-  "name": "SGA Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:33.551Z",
-  "source": "Alpha Vantage API"
+  "name": "Saga Communications Inc",
+  "sector": "COMMUNICATION SERVICES",
+  "industry": "BROADCASTING",
+  "officialSite": "https://www.sagacom.com",
+  "cachedAt": "2025-10-19T06:04:22.628Z",
+  "source": "Alpha Vantage API (fixed)"
 }

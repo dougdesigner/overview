@@ -1,8 +1,9 @@
 {
   "symbol": "VG",
-  "name": "VG Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:08.248Z",
-  "source": "Alpha Vantage API"
+  "name": "Venture Global, Inc.",
+  "sector": "ENERGY",
+  "industry": "OIL & GAS MIDSTREAM",
+  "officialSite": "https://ventureglobal.com",
+  "cachedAt": "2025-10-19T06:09:34.368Z",
+  "source": "Alpha Vantage API (fixed)"
 }

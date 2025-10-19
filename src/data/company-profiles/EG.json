@@ -1,8 +1,9 @@
 {
   "symbol": "EG",
-  "name": "EG Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:31.956Z",
-  "source": "Alpha Vantage API"
+  "name": "Everest Group Ltd",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "INSURANCE - REINSURANCE",
+  "officialSite": "https://www.everestglobal.com",
+  "cachedAt": "2025-10-19T05:29:38.892Z",
+  "source": "Alpha Vantage API (fixed)"
 }

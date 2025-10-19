@@ -1,8 +1,9 @@
 {
   "symbol": "MCO",
-  "name": "MCO Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:29:40.081Z",
-  "source": "Alpha Vantage API"
+  "name": "Moodys Corporation",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "FINANCIAL DATA & STOCK EXCHANGES",
+  "officialSite": "https://www.moodys.com",
+  "cachedAt": "2025-10-19T05:49:13.871Z",
+  "source": "Alpha Vantage API (fixed)"
 }

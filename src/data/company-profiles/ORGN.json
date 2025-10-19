@@ -1,8 +1,9 @@
 {
   "symbol": "ORGN",
-  "name": "ORGN Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:32:29.005Z",
-  "source": "Alpha Vantage API"
+  "name": "Origin Materials Inc",
+  "sector": "BASIC MATERIALS",
+  "industry": "CHEMICALS",
+  "officialSite": "https://www.originmaterials.com",
+  "cachedAt": "2025-10-19T05:55:36.870Z",
+  "source": "Alpha Vantage API (fixed)"
 }

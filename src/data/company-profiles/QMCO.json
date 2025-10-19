@@ -1,8 +1,9 @@
 {
   "symbol": "QMCO",
-  "name": "QMCO Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:32:15.983Z",
-  "source": "Alpha Vantage API"
+  "name": "Quantum Corporation",
+  "sector": "TECHNOLOGY",
+  "industry": "COMPUTER HARDWARE",
+  "officialSite": "https://www.quantum.com",
+  "cachedAt": "2025-10-19T06:01:10.197Z",
+  "source": "Alpha Vantage API (fixed)"
 }

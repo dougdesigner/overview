@@ -1,8 +1,9 @@
 {
   "symbol": "HP",
-  "name": "HP Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:36:04.134Z",
-  "source": "Alpha Vantage API"
+  "name": "Helmerich and Payne Inc",
+  "sector": "ENERGY",
+  "industry": "OIL & GAS DRILLING",
+  "officialSite": "https://www.helmerichpayne.com",
+  "cachedAt": "2025-10-19T05:41:37.628Z",
+  "source": "Alpha Vantage API (fixed)"
 }

@@ -1,8 +1,9 @@
 {
   "symbol": "QUIK",
-  "name": "QUIK Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:32:18.573Z",
-  "source": "Alpha Vantage API"
+  "name": "QuickLogic Corporation",
+  "sector": "TECHNOLOGY",
+  "industry": "SEMICONDUCTORS",
+  "officialSite": "https://www.quicklogic.com",
+  "cachedAt": "2025-10-19T06:01:20.495Z",
+  "source": "Alpha Vantage API (fixed)"
 }

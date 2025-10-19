@@ -1,8 +1,9 @@
 {
   "symbol": "USFD",
-  "name": "USFD Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:31.631Z",
-  "source": "Alpha Vantage API"
+  "name": "US Foods Holding Corp",
+  "sector": "CONSUMER DEFENSIVE",
+  "industry": "FOOD DISTRIBUTION",
+  "officialSite": "https://www.usfoods.com",
+  "cachedAt": "2025-10-19T06:09:11.657Z",
+  "source": "Alpha Vantage API (fixed)"
 }

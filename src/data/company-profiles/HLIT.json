@@ -1,8 +1,9 @@
 {
   "symbol": "HLIT",
-  "name": "HLIT Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:36:06.931Z",
-  "source": "Alpha Vantage API"
+  "name": "Harmonic Inc",
+  "sector": "TECHNOLOGY",
+  "industry": "COMMUNICATION EQUIPMENT",
+  "officialSite": "https://www.harmonicinc.com",
+  "cachedAt": "2025-10-19T05:37:41.425Z",
+  "source": "Alpha Vantage API (fixed)"
 }

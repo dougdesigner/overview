@@ -1,8 +1,9 @@
 {
   "symbol": "GWRS",
-  "name": "GWRS Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:36:15.868Z",
-  "source": "Alpha Vantage API"
+  "name": "Global Water Resources Inc",
+  "sector": "UTILITIES",
+  "industry": "UTILITIES - REGULATED WATER",
+  "officialSite": "https://www.gwresources.com",
+  "cachedAt": "2025-10-19T05:37:13.170Z",
+  "source": "Alpha Vantage API (fixed)"
 }

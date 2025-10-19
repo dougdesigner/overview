@@ -1,8 +1,9 @@
 {
   "symbol": "MTVA",
-  "name": "MTVA Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:35:27.699Z",
-  "source": "Alpha Vantage API"
+  "name": "MetaVia Inc.",
+  "sector": "HEALTHCARE",
+  "industry": "BIOTECHNOLOGY",
+  "officialSite": "https://www.metaviatx.com",
+  "cachedAt": "2025-10-19T05:53:34.205Z",
+  "source": "Alpha Vantage API (fixed)"
 }

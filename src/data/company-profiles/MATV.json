@@ -1,8 +1,9 @@
 {
   "symbol": "MATV",
-  "name": "MATV Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:35:42.102Z",
-  "source": "Alpha Vantage API"
+  "name": "Mativ Holdings Inc.",
+  "sector": "BASIC MATERIALS",
+  "industry": "SPECIALTY CHEMICALS",
+  "officialSite": "https://www.mativ.com",
+  "cachedAt": "2025-10-19T05:48:57.280Z",
+  "source": "Alpha Vantage API (fixed)"
 }

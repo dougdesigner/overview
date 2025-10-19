@@ -1,8 +1,9 @@
 {
   "symbol": "FLR",
-  "name": "FLR Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:31:04.510Z",
-  "source": "Alpha Vantage API"
+  "name": "Fluor Corporation",
+  "sector": "INDUSTRIALS",
+  "industry": "ENGINEERING & CONSTRUCTION",
+  "officialSite": "https://www.fluor.com",
+  "cachedAt": "2025-10-19T05:31:12.445Z",
+  "source": "Alpha Vantage API (fixed)"
 }

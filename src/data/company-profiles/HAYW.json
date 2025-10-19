@@ -1,8 +1,9 @@
 {
   "symbol": "HAYW",
-  "name": "HAYW Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:31:18.627Z",
-  "source": "Alpha Vantage API"
+  "name": "Hayward Holdings Inc",
+  "sector": "INDUSTRIALS",
+  "industry": "ELECTRICAL EQUIPMENT & PARTS",
+  "officialSite": "https://hayward.com",
+  "cachedAt": "2025-10-19T05:37:19.001Z",
+  "source": "Alpha Vantage API (fixed)"
 }

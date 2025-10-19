@@ -1,8 +1,9 @@
 {
   "symbol": "NOC",
-  "name": "NOC Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:29:39.937Z",
-  "source": "Alpha Vantage API"
+  "name": "Northrop Grumman Corporation",
+  "sector": "INDUSTRIALS",
+  "industry": "AEROSPACE & DEFENSE",
+  "officialSite": "https://www.northropgrumman.com",
+  "cachedAt": "2025-10-19T05:54:07.184Z",
+  "source": "Alpha Vantage API (fixed)"
 }

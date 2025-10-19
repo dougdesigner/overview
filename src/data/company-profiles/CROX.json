@@ -1,8 +1,9 @@
 {
   "symbol": "CROX",
-  "name": "CROX Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:31:41.840Z",
-  "source": "Alpha Vantage API"
+  "name": "Crocs Inc",
+  "sector": "CONSUMER CYCLICAL",
+  "industry": "FOOTWEAR & ACCESSORIES",
+  "officialSite": "https://www.crocs.com",
+  "cachedAt": "2025-10-19T05:25:47.489Z",
+  "source": "Alpha Vantage API (fixed)"
 }

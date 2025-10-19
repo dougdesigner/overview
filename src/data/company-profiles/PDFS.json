@@ -1,8 +1,9 @@
 {
   "symbol": "PDFS",
-  "name": "PDFS Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:32:18.265Z",
-  "source": "Alpha Vantage API"
+  "name": "PDF Solutions Inc",
+  "sector": "TECHNOLOGY",
+  "industry": "SOFTWARE - APPLICATION",
+  "officialSite": "https://www.pdf.com",
+  "cachedAt": "2025-10-19T05:59:53.407Z",
+  "source": "Alpha Vantage API (fixed)"
 }

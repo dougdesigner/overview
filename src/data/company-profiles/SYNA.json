@@ -1,8 +1,9 @@
 {
   "symbol": "SYNA",
-  "name": "SYNA Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:41.407Z",
-  "source": "Alpha Vantage API"
+  "name": "Synaptics Incorporated",
+  "sector": "TECHNOLOGY",
+  "industry": "SEMICONDUCTORS",
+  "officialSite": "https://www.synaptics.com",
+  "cachedAt": "2025-10-19T06:07:24.617Z",
+  "source": "Alpha Vantage API (fixed)"
 }

@@ -1,8 +1,9 @@
 {
   "symbol": "SCYX",
-  "name": "SCYX Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:31.365Z",
-  "source": "Alpha Vantage API"
+  "name": "Scynexis Inc",
+  "sector": "HEALTHCARE",
+  "industry": "DRUG MANUFACTURERS - SPECIALTY & GENERIC",
+  "officialSite": "https://www.scynexis.com",
+  "cachedAt": "2025-10-19T06:03:27.385Z",
+  "source": "Alpha Vantage API (fixed)"
 }

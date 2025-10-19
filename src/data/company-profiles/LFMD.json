@@ -1,8 +1,9 @@
 {
   "symbol": "LFMD",
-  "name": "LFMD Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:36:32.939Z",
-  "source": "Alpha Vantage API"
+  "name": "LifeMD Inc",
+  "sector": "HEALTHCARE",
+  "industry": "HEALTH INFORMATION SERVICES",
+  "officialSite": "https://lifemd.com",
+  "cachedAt": "2025-10-19T05:45:06.560Z",
+  "source": "Alpha Vantage API (fixed)"
 }

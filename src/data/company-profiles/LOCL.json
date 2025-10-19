@@ -1,8 +1,9 @@
 {
   "symbol": "LOCL",
-  "name": "LOCL Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:35:39.024Z",
-  "source": "Alpha Vantage API"
+  "name": "Local Bounti Corp",
+  "sector": "CONSUMER DEFENSIVE",
+  "industry": "FARM PRODUCTS",
+  "officialSite": "https://localbounti.com",
+  "cachedAt": "2025-10-19T05:48:23.149Z",
+  "source": "Alpha Vantage API (fixed)"
 }

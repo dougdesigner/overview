@@ -1,8 +1,9 @@
 {
   "symbol": "GIC",
-  "name": "GIC Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:36:19.011Z",
-  "source": "Alpha Vantage API"
+  "name": "Global Industrial Co",
+  "sector": "INDUSTRIALS",
+  "industry": "INDUSTRIAL DISTRIBUTION",
+  "officialSite": "https://www.globalindustrial.com",
+  "cachedAt": "2025-10-19T05:36:40.463Z",
+  "source": "Alpha Vantage API (fixed)"
 }

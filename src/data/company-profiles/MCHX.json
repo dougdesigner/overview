@@ -1,8 +1,9 @@
 {
   "symbol": "MCHX",
-  "name": "MCHX Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:35:41.674Z",
-  "source": "Alpha Vantage API"
+  "name": "Marchex Inc",
+  "sector": "COMMUNICATION SERVICES",
+  "industry": "ADVERTISING AGENCIES",
+  "officialSite": "https://www.marchex.com",
+  "cachedAt": "2025-10-19T05:49:12.910Z",
+  "source": "Alpha Vantage API (fixed)"
 }

@@ -1,8 +1,9 @@
 {
   "symbol": "EP",
-  "name": "EP Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:36:15.551Z",
-  "source": "Alpha Vantage API"
+  "name": "Empire Petroleum Corp",
+  "sector": "ENERGY",
+  "industry": "OIL & GAS E&P",
+  "officialSite": "https://empirepetroleumcorp.com",
+  "cachedAt": "2025-10-19T05:30:00.348Z",
+  "source": "Alpha Vantage API (fixed)"
 }

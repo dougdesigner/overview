@@ -1,8 +1,9 @@
 {
   "symbol": "WST",
-  "name": "WST Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:35.396Z",
-  "source": "Alpha Vantage API"
+  "name": "West Pharmaceutical Services Inc",
+  "sector": "HEALTHCARE",
+  "industry": "MEDICAL INSTRUMENTS & SUPPLIES",
+  "officialSite": "https://www.westpharma.com",
+  "cachedAt": "2025-10-19T06:12:28.967Z",
+  "source": "Alpha Vantage API (fixed)"
 }

@@ -1,8 +1,9 @@
 {
   "symbol": "KNTK",
-  "name": "KNTK Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:36:27.899Z",
-  "source": "Alpha Vantage API"
+  "name": "Kinetik Holdings Inc",
+  "sector": "ENERGY",
+  "industry": "OIL & GAS MIDSTREAM",
+  "officialSite": "https://www.kinetik.com",
+  "cachedAt": "2025-10-19T05:44:24.382Z",
+  "source": "Alpha Vantage API (fixed)"
 }

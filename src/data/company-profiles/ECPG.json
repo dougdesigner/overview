@@ -1,8 +1,9 @@
 {
   "symbol": "ECPG",
-  "name": "ECPG Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:36:14.694Z",
-  "source": "Alpha Vantage API"
+  "name": "Encore Capital Group Inc",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "CREDIT SERVICES",
+  "officialSite": "https://www.encorecapital.com",
+  "cachedAt": "2025-10-19T05:29:32.085Z",
+  "source": "Alpha Vantage API (fixed)"
 }

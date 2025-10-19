@@ -1,8 +1,9 @@
 {
   "symbol": "PTC",
-  "name": "PTC Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:34.475Z",
-  "source": "Alpha Vantage API"
+  "name": "PTC Inc",
+  "sector": "TECHNOLOGY",
+  "industry": "SOFTWARE - APPLICATION",
+  "officialSite": "https://www.ptc.com",
+  "cachedAt": "2025-10-19T06:00:56.365Z",
+  "source": "Alpha Vantage API (fixed)"
 }

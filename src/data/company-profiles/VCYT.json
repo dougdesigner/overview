@@ -1,8 +1,9 @@
 {
   "symbol": "VCYT",
-  "name": "VCYT Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:16.225Z",
-  "source": "Alpha Vantage API"
+  "name": "Veracyte Inc",
+  "sector": "HEALTHCARE",
+  "industry": "DIAGNOSTICS & RESEARCH",
+  "officialSite": "https://www.veracyte.com",
+  "cachedAt": "2025-10-19T06:09:28.401Z",
+  "source": "Alpha Vantage API (fixed)"
 }

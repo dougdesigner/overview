@@ -1,8 +1,9 @@
 {
   "symbol": "HLMN",
-  "name": "HLMN Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:36:11.980Z",
-  "source": "Alpha Vantage API"
+  "name": "Hillman Solutions Corp",
+  "sector": "INDUSTRIALS",
+  "industry": "TOOLS & ACCESSORIES",
+  "officialSite": "https://www.hillmangroup.com",
+  "cachedAt": "2025-10-19T05:37:43.366Z",
+  "source": "Alpha Vantage API (fixed)"
 }

@@ -1,8 +1,9 @@
 {
   "symbol": "WAL",
-  "name": "WAL Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:31:32.786Z",
-  "source": "Alpha Vantage API"
+  "name": "Western Alliance Bancorporation",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "BANKS - REGIONAL",
+  "officialSite": "https://www.westernalliancebancorporation.com",
+  "cachedAt": "2025-10-19T06:10:02.547Z",
+  "source": "Alpha Vantage API (fixed)"
 }

@@ -1,8 +1,9 @@
 {
   "symbol": "LTC",
-  "name": "LTC Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:35:38.564Z",
-  "source": "Alpha Vantage API"
+  "name": "LTC Properties Inc",
+  "sector": "REAL ESTATE",
+  "industry": "REIT - HEALTHCARE FACILITIES",
+  "officialSite": "https://www.LTCreit.com",
+  "cachedAt": "2025-10-19T05:48:39.696Z",
+  "source": "Alpha Vantage API (fixed)"
 }

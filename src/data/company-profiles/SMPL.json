@@ -1,8 +1,9 @@
 {
   "symbol": "SMPL",
-  "name": "SMPL Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:31:40.898Z",
-  "source": "Alpha Vantage API"
+  "name": "Simply Good Foods Co",
+  "sector": "CONSUMER DEFENSIVE",
+  "industry": "PACKAGED FOODS",
+  "officialSite": "https://www.thesimplygoodfoodscompany.com",
+  "cachedAt": "2025-10-19T06:05:06.392Z",
+  "source": "Alpha Vantage API (fixed)"
 }

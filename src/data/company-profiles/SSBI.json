@@ -1,8 +1,9 @@
 {
   "symbol": "SSBI",
-  "name": "SSBI Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:38.362Z",
-  "source": "Alpha Vantage API"
+  "name": "Summit State Bank",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "BANKS - REGIONAL",
+  "officialSite": "https://summitstatebank.com",
+  "cachedAt": "2025-10-19T06:05:40.080Z",
+  "source": "Alpha Vantage API (fixed)"
 }

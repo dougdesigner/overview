@@ -1,8 +1,9 @@
 {
   "symbol": "SVRA",
-  "name": "SVRA Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:32.827Z",
-  "source": "Alpha Vantage API"
+  "name": "Savara Inc",
+  "sector": "HEALTHCARE",
+  "industry": "BIOTECHNOLOGY",
+  "officialSite": "https://www.savarapharma.com",
+  "cachedAt": "2025-10-19T06:07:12.949Z",
+  "source": "Alpha Vantage API (fixed)"
 }

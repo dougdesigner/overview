@@ -1,8 +1,9 @@
 {
   "symbol": "RNST",
-  "name": "RNST Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:31:20.195Z",
-  "source": "Alpha Vantage API"
+  "name": "Renasant Corporation",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "BANKS - REGIONAL",
+  "officialSite": "https://investors.renasant.com",
+  "cachedAt": "2025-10-19T06:02:36.450Z",
+  "source": "Alpha Vantage API (fixed)"
 }

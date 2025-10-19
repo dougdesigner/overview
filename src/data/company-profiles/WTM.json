@@ -1,8 +1,9 @@
 {
   "symbol": "WTM",
-  "name": "WTM Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:32:05.744Z",
-  "source": "Alpha Vantage API"
+  "name": "White Mountains Insurance Group Ltd",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "INSURANCE - PROPERTY & CASUALTY",
+  "officialSite": "https://www.whitemountains.com",
+  "cachedAt": "2025-10-19T06:12:30.880Z",
+  "source": "Alpha Vantage API (fixed)"
 }

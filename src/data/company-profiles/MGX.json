@@ -1,8 +1,9 @@
 {
   "symbol": "MGX",
-  "name": "MGX Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:35:28.007Z",
-  "source": "Alpha Vantage API"
+  "name": "Metagenomi, Inc. Common Stock",
+  "sector": "HEALTHCARE",
+  "industry": "BIOTECHNOLOGY",
+  "officialSite": "https://metagenomi.co",
+  "cachedAt": "2025-10-19T05:52:41.374Z",
+  "source": "Alpha Vantage API (fixed)"
 }

@@ -1,8 +1,9 @@
 {
   "symbol": "EGAN",
-  "name": "EGAN Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:36:17.727Z",
-  "source": "Alpha Vantage API"
+  "name": "eGain Corporation",
+  "sector": "TECHNOLOGY",
+  "industry": "SOFTWARE - APPLICATION",
+  "officialSite": "https://www.egain.com",
+  "cachedAt": "2025-10-19T05:29:39.868Z",
+  "source": "Alpha Vantage API (fixed)"
 }

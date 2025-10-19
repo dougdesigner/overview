@@ -1,8 +1,9 @@
 {
   "symbol": "CWD",
-  "name": "CWD Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:34:01.867Z",
-  "source": "Alpha Vantage API"
+  "name": "CaliberCos Inc. Class A Common Stock",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "ASSET MANAGEMENT",
+  "officialSite": "https://www.caliberco.com",
+  "cachedAt": "2025-10-19T05:26:21.669Z",
+  "source": "Alpha Vantage API (fixed)"
 }

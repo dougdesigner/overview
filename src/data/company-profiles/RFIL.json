@@ -1,8 +1,9 @@
 {
   "symbol": "RFIL",
-  "name": "RFIL Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:32:13.565Z",
-  "source": "Alpha Vantage API"
+  "name": "RF Industries Ltd",
+  "sector": "INDUSTRIALS",
+  "industry": "ELECTRICAL EQUIPMENT & PARTS",
+  "officialSite": "https://rfindustries.com",
+  "cachedAt": "2025-10-19T06:02:03.796Z",
+  "source": "Alpha Vantage API (fixed)"
 }

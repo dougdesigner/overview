@@ -1,8 +1,9 @@
 {
   "symbol": "HRI",
-  "name": "HRI Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:31:25.417Z",
-  "source": "Alpha Vantage API"
+  "name": "Herc Holdings Inc",
+  "sector": "INDUSTRIALS",
+  "industry": "RENTAL & LEASING SERVICES",
+  "officialSite": "https://ir.hercrentals.com",
+  "cachedAt": "2025-10-19T05:41:44.479Z",
+  "source": "Alpha Vantage API (fixed)"
 }

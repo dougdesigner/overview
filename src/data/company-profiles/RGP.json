@@ -1,8 +1,9 @@
 {
   "symbol": "RGP",
-  "name": "RGP Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:32:28.369Z",
-  "source": "Alpha Vantage API"
+  "name": "Resources Connection Inc",
+  "sector": "INDUSTRIALS",
+  "industry": "CONSULTING SERVICES",
+  "officialSite": "https://rgp.com",
+  "cachedAt": "2025-10-19T06:02:07.663Z",
+  "source": "Alpha Vantage API (fixed)"
 }

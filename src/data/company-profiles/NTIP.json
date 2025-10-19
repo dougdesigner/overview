@@ -1,8 +1,9 @@
 {
   "symbol": "NTIP",
-  "name": "NTIP Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:36:01.302Z",
-  "source": "Alpha Vantage API"
+  "name": "Network-1 Technologies Inc",
+  "sector": "INDUSTRIALS",
+  "industry": "SPECIALTY BUSINESS SERVICES",
+  "officialSite": "https://www.network-1.com",
+  "cachedAt": "2025-10-19T05:54:41.346Z",
+  "source": "Alpha Vantage API (fixed)"
 }

@@ -1,8 +1,9 @@
 {
   "symbol": "TOL",
-  "name": "TOL Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:20.950Z",
-  "source": "Alpha Vantage API"
+  "name": "Toll Brothers Inc",
+  "sector": "CONSUMER CYCLICAL",
+  "industry": "RESIDENTIAL CONSTRUCTION",
+  "officialSite": "https://www.tollbrothers.com",
+  "cachedAt": "2025-10-19T06:07:58.512Z",
+  "source": "Alpha Vantage API (fixed)"
 }

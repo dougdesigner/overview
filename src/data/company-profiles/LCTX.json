@@ -1,8 +1,9 @@
 {
   "symbol": "LCTX",
-  "name": "LCTX Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:36:30.091Z",
-  "source": "Alpha Vantage API"
+  "name": "Lineage Cell Therapeutics Inc",
+  "sector": "HEALTHCARE",
+  "industry": "BIOTECHNOLOGY",
+  "officialSite": "https://www.lineagecell.com",
+  "cachedAt": "2025-10-19T05:44:57.500Z",
+  "source": "Alpha Vantage API (fixed)"
 }

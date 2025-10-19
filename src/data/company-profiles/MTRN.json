@@ -1,8 +1,9 @@
 {
   "symbol": "MTRN",
-  "name": "MTRN Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:35:42.280Z",
-  "source": "Alpha Vantage API"
+  "name": "Materion Corporation",
+  "sector": "BASIC MATERIALS",
+  "industry": "OTHER INDUSTRIAL METALS & MINING",
+  "officialSite": "https://materion.com",
+  "cachedAt": "2025-10-19T05:53:31.205Z",
+  "source": "Alpha Vantage API (fixed)"
 }

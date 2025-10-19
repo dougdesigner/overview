@@ -1,8 +1,9 @@
 {
   "symbol": "IRT",
-  "name": "IRT Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:31:32.477Z",
-  "source": "Alpha Vantage API"
+  "name": "Independence Realty Trust Inc",
+  "sector": "REAL ESTATE",
+  "industry": "REIT - RESIDENTIAL",
+  "officialSite": "https://www.irtliving.com",
+  "cachedAt": "2025-10-19T05:42:44.986Z",
+  "source": "Alpha Vantage API (fixed)"
 }

@@ -1,8 +1,9 @@
 {
   "symbol": "J",
-  "name": "J Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:05.877Z",
-  "source": "Alpha Vantage API"
+  "name": "Jacobs Solutions Inc.",
+  "sector": "INDUSTRIALS",
+  "industry": "ENGINEERING & CONSTRUCTION",
+  "officialSite": "https://www.jacobs.com",
+  "cachedAt": "2025-10-19T05:44:06.866Z",
+  "source": "Alpha Vantage API (fixed)"
 }

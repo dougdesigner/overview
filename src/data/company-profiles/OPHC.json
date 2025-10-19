@@ -1,8 +1,9 @@
 {
   "symbol": "OPHC",
-  "name": "OPHC Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:32:09.926Z",
-  "source": "Alpha Vantage API"
+  "name": "OptimumBank Holdings, Inc.",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "BANKS - REGIONAL",
+  "officialSite": "https://www.optimumbank.com",
+  "cachedAt": "2025-10-19T05:55:29.083Z",
+  "source": "Alpha Vantage API (fixed)"
 }

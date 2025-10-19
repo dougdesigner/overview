@@ -1,8 +1,9 @@
 {
   "symbol": "SMMT",
-  "name": "SMMT Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:36.163Z",
-  "source": "Alpha Vantage API"
+  "name": "Summit Therapeutics PLC",
+  "sector": "HEALTHCARE",
+  "industry": "BIOTECHNOLOGY",
+  "officialSite": "https://www.smmttx.com",
+  "cachedAt": "2025-10-19T06:05:05.418Z",
+  "source": "Alpha Vantage API (fixed)"
 }

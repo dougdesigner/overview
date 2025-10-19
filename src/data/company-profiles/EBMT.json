@@ -1,8 +1,9 @@
 {
   "symbol": "EBMT",
-  "name": "EBMT Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:34:19.491Z",
-  "source": "Alpha Vantage API"
+  "name": "Eagle Bancorp Montana Inc",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "BANKS - REGIONAL",
+  "officialSite": "https://www.opportunitybank.com",
+  "cachedAt": "2025-10-19T05:29:27.224Z",
+  "source": "Alpha Vantage API (fixed)"
 }

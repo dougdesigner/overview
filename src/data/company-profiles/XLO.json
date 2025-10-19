@@ -1,8 +1,9 @@
 {
   "symbol": "XLO",
-  "name": "XLO Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:01.756Z",
-  "source": "Alpha Vantage API"
+  "name": "Xilio Development Inc",
+  "sector": "HEALTHCARE",
+  "industry": "BIOTECHNOLOGY",
+  "officialSite": "https://xiliotx.com",
+  "cachedAt": "2025-10-19T06:12:35.698Z",
+  "source": "Alpha Vantage API (fixed)"
 }

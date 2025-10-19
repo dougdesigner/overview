@@ -1,8 +1,9 @@
 {
   "symbol": "UPLD",
-  "name": "UPLD Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:10.614Z",
-  "source": "Alpha Vantage API"
+  "name": "Upland Software Inc",
+  "sector": "TECHNOLOGY",
+  "industry": "SOFTWARE - APPLICATION",
+  "officialSite": "https://uplandsoftware.com",
+  "cachedAt": "2025-10-19T06:09:04.354Z",
+  "source": "Alpha Vantage API (fixed)"
 }

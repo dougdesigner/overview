@@ -1,8 +1,9 @@
 {
   "symbol": "FLG",
-  "name": "FLG Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:41.581Z",
-  "source": "Alpha Vantage API"
+  "name": "Flagstar Financial, Inc.",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "BANKS - REGIONAL",
+  "officialSite": "https://www.flagstar.com",
+  "cachedAt": "2025-10-19T05:31:10.510Z",
+  "source": "Alpha Vantage API (fixed)"
 }

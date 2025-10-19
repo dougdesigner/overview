@@ -1,8 +1,9 @@
 {
   "symbol": "MDXG",
-  "name": "MDXG Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:35:34.191Z",
-  "source": "Alpha Vantage API"
+  "name": "MiMedx Group Inc",
+  "sector": "HEALTHCARE",
+  "industry": "BIOTECHNOLOGY",
+  "officialSite": "https://www.mimedx.com",
+  "cachedAt": "2025-10-19T05:49:20.682Z",
+  "source": "Alpha Vantage API (fixed)"
 }

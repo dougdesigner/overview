@@ -1,8 +1,9 @@
 {
   "symbol": "QTRX",
-  "name": "QTRX Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:32:15.669Z",
-  "source": "Alpha Vantage API"
+  "name": "Quanterix Corp",
+  "sector": "HEALTHCARE",
+  "industry": "MEDICAL DEVICES",
+  "officialSite": "https://www.quanterix.com",
+  "cachedAt": "2025-10-19T06:01:16.634Z",
+  "source": "Alpha Vantage API (fixed)"
 }

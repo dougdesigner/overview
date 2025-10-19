@@ -1,8 +1,9 @@
 {
   "symbol": "CWK",
-  "name": "CWK Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:34:17.621Z",
-  "source": "Alpha Vantage API"
+  "name": "Cushman & Wakefield plc",
+  "sector": "REAL ESTATE",
+  "industry": "REAL ESTATE SERVICES",
+  "officialSite": "https://www.cushmanwakefield.com",
+  "cachedAt": "2025-10-19T05:26:23.613Z",
+  "source": "Alpha Vantage API (fixed)"
 }

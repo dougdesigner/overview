@@ -1,8 +1,9 @@
 {
   "symbol": "XPEL",
-  "name": "XPEL Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:01.346Z",
-  "source": "Alpha Vantage API"
+  "name": "Xpel Inc",
+  "sector": "CONSUMER CYCLICAL",
+  "industry": "AUTO PARTS",
+  "officialSite": "https://www.xpel.com",
+  "cachedAt": "2025-10-19T06:12:39.725Z",
+  "source": "Alpha Vantage API (fixed)"
 }

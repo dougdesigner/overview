@@ -1,8 +1,9 @@
 {
   "symbol": "SMC",
-  "name": "SMC Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:36.476Z",
-  "source": "Alpha Vantage API"
+  "name": "Summit Midstream Corporation",
+  "sector": "ENERGY",
+  "industry": "OIL & GAS MIDSTREAM",
+  "officialSite": "https://www.summitmidstream.com",
+  "cachedAt": "2025-10-19T06:05:03.465Z",
+  "source": "Alpha Vantage API (fixed)"
 }

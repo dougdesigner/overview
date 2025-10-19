@@ -1,8 +1,9 @@
 {
   "symbol": "OWL",
-  "name": "OWL Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:22.371Z",
-  "source": "Alpha Vantage API"
+  "name": "Blue Owl Capital Inc",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "ASSET MANAGEMENT",
+  "officialSite": "https://www.blueowl.com",
+  "cachedAt": "2025-10-19T05:55:54.366Z",
+  "source": "Alpha Vantage API (fixed)"
 }

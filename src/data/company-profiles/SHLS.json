@@ -1,8 +1,9 @@
 {
   "symbol": "SHLS",
-  "name": "SHLS Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:17.480Z",
-  "source": "Alpha Vantage API"
+  "name": "Shoals Technologies Group Inc",
+  "sector": "TECHNOLOGY",
+  "industry": "SOLAR",
+  "officialSite": "https://www.shoals.com",
+  "cachedAt": "2025-10-19T06:04:33.909Z",
+  "source": "Alpha Vantage API (fixed)"
 }

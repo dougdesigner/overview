@@ -1,8 +1,9 @@
 {
   "symbol": "CPRI",
-  "name": "CPRI Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:34:10.907Z",
-  "source": "Alpha Vantage API"
+  "name": "Capri Holdings Ltd",
+  "sector": "CONSUMER CYCLICAL",
+  "industry": "LUXURY GOODS",
+  "officialSite": "https://www.capriholdings.com",
+  "cachedAt": "2025-10-19T05:25:32.861Z",
+  "source": "Alpha Vantage API (fixed)"
 }

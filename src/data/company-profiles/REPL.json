@@ -1,8 +1,9 @@
 {
   "symbol": "REPL",
-  "name": "REPL Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:32:25.865Z",
-  "source": "Alpha Vantage API"
+  "name": "Replimune Group Inc",
+  "sector": "HEALTHCARE",
+  "industry": "BIOTECHNOLOGY",
+  "officialSite": "https://www.replimune.com",
+  "cachedAt": "2025-10-19T06:01:55.273Z",
+  "source": "Alpha Vantage API (fixed)"
 }

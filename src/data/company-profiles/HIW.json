@@ -1,8 +1,9 @@
 {
   "symbol": "HIW",
-  "name": "HIW Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:31:26.502Z",
-  "source": "Alpha Vantage API"
+  "name": "Highwoods Properties Inc",
+  "sector": "REAL ESTATE",
+  "industry": "REIT - OFFICE",
+  "officialSite": "https://www.highwoods.com",
+  "cachedAt": "2025-10-19T05:37:37.536Z",
+  "source": "Alpha Vantage API (fixed)"
 }

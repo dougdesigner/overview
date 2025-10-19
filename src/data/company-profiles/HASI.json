@@ -1,8 +1,9 @@
 {
   "symbol": "HASI",
-  "name": "HASI Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:31:21.460Z",
-  "source": "Alpha Vantage API"
+  "name": "Hannon Armstrong Sustainable Infrastructure Capital Inc",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "ASSET MANAGEMENT",
+  "officialSite": "https://www.hasi.com",
+  "cachedAt": "2025-10-19T05:37:18.026Z",
+  "source": "Alpha Vantage API (fixed)"
 }

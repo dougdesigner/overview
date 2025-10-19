@@ -1,8 +1,9 @@
 {
   "symbol": "KEY",
-  "name": "KEY Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:02.903Z",
-  "source": "Alpha Vantage API"
+  "name": "KeyCorp",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "BANKS - REGIONAL",
+  "officialSite": "https://www.key.com",
+  "cachedAt": "2025-10-19T05:44:14.662Z",
+  "source": "Alpha Vantage API (fixed)"
 }

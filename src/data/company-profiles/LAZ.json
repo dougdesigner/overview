@@ -1,8 +1,9 @@
 {
   "symbol": "LAZ",
-  "name": "LAZ Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:31:23.864Z",
-  "source": "Alpha Vantage API"
+  "name": "Lazard Ltd",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "CAPITAL MARKETS",
+  "officialSite": "https://www.lazard.com",
+  "cachedAt": "2025-10-19T05:44:51.645Z",
+  "source": "Alpha Vantage API (fixed)"
 }

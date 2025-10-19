@@ -1,8 +1,9 @@
 {
   "symbol": "MOFG",
-  "name": "MOFG Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:35:25.297Z",
-  "source": "Alpha Vantage API"
+  "name": "MidWestOne Financial Group Inc",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "BANKS - REGIONAL",
+  "officialSite": "https://www.midwestone.bank",
+  "cachedAt": "2025-10-19T05:53:05.690Z",
+  "source": "Alpha Vantage API (fixed)"
 }

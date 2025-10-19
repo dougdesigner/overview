@@ -1,8 +1,9 @@
 {
   "symbol": "ESRT",
-  "name": "ESRT Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:36:15.319Z",
-  "source": "Alpha Vantage API"
+  "name": "Empire State Realty Trust Inc",
+  "sector": "REAL ESTATE",
+  "industry": "REIT - DIVERSIFIED",
+  "officialSite": "https://www.esrtreit.com",
+  "cachedAt": "2025-10-19T05:30:36.963Z",
+  "source": "Alpha Vantage API (fixed)"
 }

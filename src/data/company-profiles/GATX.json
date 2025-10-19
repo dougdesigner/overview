@@ -1,8 +1,9 @@
 {
   "symbol": "GATX",
-  "name": "GATX Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:31:27.771Z",
-  "source": "Alpha Vantage API"
+  "name": "GATX Corporation",
+  "sector": "INDUSTRIALS",
+  "industry": "RENTAL & LEASING SERVICES",
+  "officialSite": "https://www.gatx.com",
+  "cachedAt": "2025-10-19T05:31:44.760Z",
+  "source": "Alpha Vantage API (fixed)"
 }

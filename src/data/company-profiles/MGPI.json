@@ -1,8 +1,9 @@
 {
   "symbol": "MGPI",
-  "name": "MGPI Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:35:26.560Z",
-  "source": "Alpha Vantage API"
+  "name": "MGP Ingredients Inc",
+  "sector": "CONSUMER DEFENSIVE",
+  "industry": "BEVERAGES - WINERIES & DISTILLERIES",
+  "officialSite": "https://www.mgpingredients.com",
+  "cachedAt": "2025-10-19T05:52:38.472Z",
+  "source": "Alpha Vantage API (fixed)"
 }

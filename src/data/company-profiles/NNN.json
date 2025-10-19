@@ -1,8 +1,9 @@
 {
   "symbol": "NNN",
-  "name": "NNN Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:31:24.173Z",
-  "source": "Alpha Vantage API"
+  "name": "National Retail Properties Inc",
+  "sector": "REAL ESTATE",
+  "industry": "REIT - RETAIL",
+  "officialSite": "https://www.nnnreit.com",
+  "cachedAt": "2025-10-19T05:54:06.220Z",
+  "source": "Alpha Vantage API (fixed)"
 }

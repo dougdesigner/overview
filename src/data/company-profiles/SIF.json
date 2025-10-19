@@ -1,8 +1,9 @@
 {
   "symbol": "SIF",
-  "name": "SIF Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:24.565Z",
-  "source": "Alpha Vantage API"
+  "name": "SIFCO Industries Inc",
+  "sector": "INDUSTRIALS",
+  "industry": "AEROSPACE & DEFENSE",
+  "officialSite": "https://sifco.com",
+  "cachedAt": "2025-10-19T06:04:39.819Z",
+  "source": "Alpha Vantage API (fixed)"
 }

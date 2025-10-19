@@ -1,8 +1,9 @@
 {
   "symbol": "DPZ",
-  "name": "DPZ Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:36.184Z",
-  "source": "Alpha Vantage API"
+  "name": "Domino's Pizza Inc Common Stock",
+  "sector": "CONSUMER CYCLICAL",
+  "industry": "RESTAURANTS",
+  "officialSite": "https://ir.dominos.com",
+  "cachedAt": "2025-10-19T05:29:06.775Z",
+  "source": "Alpha Vantage API (fixed)"
 }

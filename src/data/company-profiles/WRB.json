@@ -1,8 +1,9 @@
 {
   "symbol": "WRB",
-  "name": "WRB Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:19.834Z",
-  "source": "Alpha Vantage API"
+  "name": "W. R. Berkley Corp",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "INSURANCE - PROPERTY & CASUALTY",
+  "officialSite": "https://www.berkley.com",
+  "cachedAt": "2025-10-19T06:12:22.744Z",
+  "source": "Alpha Vantage API (fixed)"
 }

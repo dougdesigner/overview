@@ -1,8 +1,9 @@
 {
   "symbol": "EOG",
-  "name": "EOG Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:29:41.008Z",
-  "source": "Alpha Vantage API"
+  "name": "EOG Resources Inc",
+  "sector": "ENERGY",
+  "industry": "OIL & GAS E&P",
+  "officialSite": "https://www.eogresources.com",
+  "cachedAt": "2025-10-19T05:29:59.369Z",
+  "source": "Alpha Vantage API (fixed)"
 }

@@ -1,8 +1,9 @@
 {
   "symbol": "RYAM",
-  "name": "RYAM Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:32:26.477Z",
-  "source": "Alpha Vantage API"
+  "name": "Rayonier Advanced Materials",
+  "sector": "BASIC MATERIALS",
+  "industry": "CHEMICALS",
+  "officialSite": "https://ryam.com",
+  "cachedAt": "2025-10-19T06:03:02.933Z",
+  "source": "Alpha Vantage API (fixed)"
 }

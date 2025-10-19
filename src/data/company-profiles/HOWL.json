@@ -1,8 +1,9 @@
 {
   "symbol": "HOWL",
-  "name": "HOWL Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:03.219Z",
-  "source": "Alpha Vantage API"
+  "name": "Werewolf Therapeutics Inc",
+  "sector": "HEALTHCARE",
+  "industry": "BIOTECHNOLOGY",
+  "officialSite": "https://werewolftx.com",
+  "cachedAt": "2025-10-19T05:41:36.661Z",
+  "source": "Alpha Vantage API (fixed)"
 }

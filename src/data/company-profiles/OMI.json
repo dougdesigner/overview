@@ -1,8 +1,9 @@
 {
   "symbol": "OMI",
-  "name": "OMI Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:32:34.320Z",
-  "source": "Alpha Vantage API"
+  "name": "Owens & Minor Inc",
+  "sector": "HEALTHCARE",
+  "industry": "MEDICAL DISTRIBUTION",
+  "officialSite": "https://www.owens-minor.com",
+  "cachedAt": "2025-10-19T05:55:15.394Z",
+  "source": "Alpha Vantage API (fixed)"
 }

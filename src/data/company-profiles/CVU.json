@@ -1,8 +1,9 @@
 {
   "symbol": "CVU",
-  "name": "CVU Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:34:31.481Z",
-  "source": "Alpha Vantage API"
+  "name": "CPI Aerostructures Inc",
+  "sector": "INDUSTRIALS",
+  "industry": "AEROSPACE & DEFENSE",
+  "officialSite": "https://www.cpiaero.com",
+  "cachedAt": "2025-10-19T05:26:18.747Z",
+  "source": "Alpha Vantage API (fixed)"
 }

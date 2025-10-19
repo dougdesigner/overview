@@ -1,8 +1,9 @@
 {
   "symbol": "THC",
-  "name": "THC Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:29.869Z",
-  "source": "Alpha Vantage API"
+  "name": "Tenet Healthcare Corporation",
+  "sector": "HEALTHCARE",
+  "industry": "MEDICAL CARE FACILITIES",
+  "officialSite": "https://www.tenethealth.com",
+  "cachedAt": "2025-10-19T06:07:43.795Z",
+  "source": "Alpha Vantage API (fixed)"
 }

@@ -1,8 +1,9 @@
 {
   "symbol": "IQV",
-  "name": "IQV Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:11.132Z",
-  "source": "Alpha Vantage API"
+  "name": "IQVIA Holdings Inc",
+  "sector": "HEALTHCARE",
+  "industry": "DIAGNOSTICS & RESEARCH",
+  "officialSite": "https://www.iqvia.com",
+  "cachedAt": "2025-10-19T05:42:42.082Z",
+  "source": "Alpha Vantage API (fixed)"
 }

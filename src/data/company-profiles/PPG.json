@@ -1,8 +1,9 @@
 {
   "symbol": "PPG",
-  "name": "PPG Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:12.252Z",
-  "source": "Alpha Vantage API"
+  "name": "PPG Industries Inc",
+  "sector": "BASIC MATERIALS",
+  "industry": "SPECIALTY CHEMICALS",
+  "officialSite": "https://www.ppg.com",
+  "cachedAt": "2025-10-19T06:00:33.932Z",
+  "source": "Alpha Vantage API (fixed)"
 }

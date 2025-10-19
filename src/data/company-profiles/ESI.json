@@ -1,8 +1,9 @@
 {
   "symbol": "ESI",
-  "name": "ESI Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:31:20.505Z",
-  "source": "Alpha Vantage API"
+  "name": "Element Solutions Inc",
+  "sector": "BASIC MATERIALS",
+  "industry": "SPECIALTY CHEMICALS",
+  "officialSite": "https://elementsolutionsinc.com",
+  "cachedAt": "2025-10-19T05:30:35.017Z",
+  "source": "Alpha Vantage API (fixed)"
 }

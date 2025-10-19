@@ -1,8 +1,9 @@
 {
   "symbol": "OLLI",
-  "name": "OLLI Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:31:01.460Z",
-  "source": "Alpha Vantage API"
+  "name": "Ollie's Bargain Outlet Hldg",
+  "sector": "CONSUMER DEFENSIVE",
+  "industry": "DISCOUNT STORES",
+  "officialSite": "https://www.ollies.com",
+  "cachedAt": "2025-10-19T05:55:09.589Z",
+  "source": "Alpha Vantage API (fixed)"
 }

@@ -1,8 +1,9 @@
 {
   "symbol": "HL",
-  "name": "HL Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:31:26.192Z",
-  "source": "Alpha Vantage API"
+  "name": "Hecla Mining Company",
+  "sector": "BASIC MATERIALS",
+  "industry": "OTHER PRECIOUS METALS & MINING",
+  "officialSite": "https://www.hecla.com",
+  "cachedAt": "2025-10-19T05:37:38.505Z",
+  "source": "Alpha Vantage API (fixed)"
 }

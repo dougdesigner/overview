@@ -1,8 +1,9 @@
 {
   "symbol": "OKTA",
-  "name": "OKTA Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:31.320Z",
-  "source": "Alpha Vantage API"
+  "name": "Okta Inc",
+  "sector": "TECHNOLOGY",
+  "industry": "SOFTWARE - INFRASTRUCTURE",
+  "officialSite": "https://www.okta.com",
+  "cachedAt": "2025-10-19T05:55:06.654Z",
+  "source": "Alpha Vantage API (fixed)"
 }

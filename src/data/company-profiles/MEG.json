@@ -1,8 +1,9 @@
 {
   "symbol": "MEG",
-  "name": "MEG Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:35:31.000Z",
-  "source": "Alpha Vantage API"
+  "name": "Montrose Environmental Grp",
+  "sector": "INDUSTRIALS",
+  "industry": "WASTE MANAGEMENT",
+  "officialSite": "https://www.montrose-env.com",
+  "cachedAt": "2025-10-19T05:49:24.601Z",
+  "source": "Alpha Vantage API (fixed)"
 }

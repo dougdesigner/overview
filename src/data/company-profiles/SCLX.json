@@ -1,8 +1,9 @@
 {
   "symbol": "SCLX",
-  "name": "SCLX Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:31.671Z",
-  "source": "Alpha Vantage API"
+  "name": "Scilex Holding Company",
+  "sector": "HEALTHCARE",
+  "industry": "DRUG MANUFACTURERS - GENERAL",
+  "officialSite": "https://www.scilexholding.com",
+  "cachedAt": "2025-10-19T06:03:22.569Z",
+  "source": "Alpha Vantage API (fixed)"
 }

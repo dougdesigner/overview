@@ -1,8 +1,9 @@
 {
   "symbol": "ZUMZ",
-  "name": "ZUMZ Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:07.244Z",
-  "source": "Alpha Vantage API"
+  "name": "Zumiez Inc",
+  "sector": "CONSUMER CYCLICAL",
+  "industry": "APPAREL RETAIL",
+  "officialSite": "https://www.zumiez.com",
+  "cachedAt": "2025-10-19T06:12:52.425Z",
+  "source": "Alpha Vantage API (fixed)"
 }

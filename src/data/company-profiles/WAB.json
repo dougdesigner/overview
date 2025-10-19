@@ -1,8 +1,9 @@
 {
   "symbol": "WAB",
-  "name": "WAB Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:04.775Z",
-  "source": "Alpha Vantage API"
+  "name": "Westinghouse Air Brake Technologies Corp",
+  "sector": "INDUSTRIALS",
+  "industry": "RAILROADS",
+  "officialSite": "https://www.wabteccorp.com",
+  "cachedAt": "2025-10-19T06:09:59.004Z",
+  "source": "Alpha Vantage API (fixed)"
 }

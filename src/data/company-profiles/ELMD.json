@@ -1,8 +1,9 @@
 {
   "symbol": "ELMD",
-  "name": "ELMD Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:36:16.883Z",
-  "source": "Alpha Vantage API"
+  "name": "Electromed Inc",
+  "sector": "HEALTHCARE",
+  "industry": "MEDICAL DEVICES",
+  "officialSite": "https://smartvest.com",
+  "cachedAt": "2025-10-19T05:29:47.672Z",
+  "source": "Alpha Vantage API (fixed)"
 }

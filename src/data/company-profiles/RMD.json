@@ -1,8 +1,9 @@
 {
   "symbol": "RMD",
-  "name": "RMD Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:00.437Z",
-  "source": "Alpha Vantage API"
+  "name": "ResMed Inc",
+  "sector": "HEALTHCARE",
+  "industry": "MEDICAL INSTRUMENTS & SUPPLIES",
+  "officialSite": "https://www.resmed.co.in",
+  "cachedAt": "2025-10-19T06:02:31.567Z",
+  "source": "Alpha Vantage API (fixed)"
 }

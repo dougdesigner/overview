@@ -1,8 +1,9 @@
 {
   "symbol": "LEN",
-  "name": "LEN Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:24.677Z",
-  "source": "Alpha Vantage API"
+  "name": "Lennar Corporation",
+  "sector": "CONSUMER CYCLICAL",
+  "industry": "RESIDENTIAL CONSTRUCTION",
+  "officialSite": "https://www.lennar.com",
+  "cachedAt": "2025-10-19T05:45:04.606Z",
+  "source": "Alpha Vantage API (fixed)"
 }

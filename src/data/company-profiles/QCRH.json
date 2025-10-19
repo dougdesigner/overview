@@ -1,8 +1,9 @@
 {
   "symbol": "QCRH",
-  "name": "QCRH Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:32:14.780Z",
-  "source": "Alpha Vantage API"
+  "name": "QCR Holdings Inc",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "BANKS - REGIONAL",
+  "officialSite": "https://www.qcrh.com",
+  "cachedAt": "2025-10-19T06:01:09.225Z",
+  "source": "Alpha Vantage API (fixed)"
 }

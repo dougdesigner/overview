@@ -1,8 +1,9 @@
 {
   "symbol": "HUBG",
-  "name": "HUBG Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:36:09.150Z",
-  "source": "Alpha Vantage API"
+  "name": "Hub Group Inc",
+  "sector": "INDUSTRIALS",
+  "industry": "INTEGRATED FREIGHT & LOGISTICS",
+  "officialSite": "https://www.hubgroup.com",
+  "cachedAt": "2025-10-19T05:41:58.099Z",
+  "source": "Alpha Vantage API (fixed)"
 }

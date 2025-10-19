@@ -1,8 +1,9 @@
 {
   "symbol": "VYNE",
-  "name": "VYNE Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:13.567Z",
-  "source": "Alpha Vantage API"
+  "name": "Vyne Therapeutics Inc",
+  "sector": "HEALTHCARE",
+  "industry": "BIOTECHNOLOGY",
+  "officialSite": "https://vynetherapeutics.com",
+  "cachedAt": "2025-10-19T06:09:57.071Z",
+  "source": "Alpha Vantage API (fixed)"
 }

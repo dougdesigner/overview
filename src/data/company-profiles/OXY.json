@@ -1,8 +1,9 @@
 {
   "symbol": "OXY",
-  "name": "OXY Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:12.925Z",
-  "source": "Alpha Vantage API"
+  "name": "Occidental Petroleum Corporation",
+  "sector": "ENERGY",
+  "industry": "OIL & GAS E&P",
+  "officialSite": "https://www.oxy.com",
+  "cachedAt": "2025-10-19T05:55:57.264Z",
+  "source": "Alpha Vantage API (fixed)"
 }

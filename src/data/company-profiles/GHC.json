@@ -1,8 +1,9 @@
 {
   "symbol": "GHC",
-  "name": "GHC Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:31:30.734Z",
-  "source": "Alpha Vantage API"
+  "name": "Graham Holdings Co",
+  "sector": "CONSUMER DEFENSIVE",
+  "industry": "EDUCATION & TRAINING SERVICES",
+  "officialSite": "https://www.ghco.com",
+  "cachedAt": "2025-10-19T05:36:39.425Z",
+  "source": "Alpha Vantage API (fixed)"
 }

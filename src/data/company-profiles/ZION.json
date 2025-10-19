@@ -1,8 +1,9 @@
 {
   "symbol": "ZION",
-  "name": "ZION Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:31:12.671Z",
-  "source": "Alpha Vantage API"
+  "name": "Zions Bancorporation",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "BANKS - REGIONAL",
+  "officialSite": "https://www.zionsbancorporation.com",
+  "cachedAt": "2025-10-19T06:12:48.513Z",
+  "source": "Alpha Vantage API (fixed)"
 }

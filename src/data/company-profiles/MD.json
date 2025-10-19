@@ -1,8 +1,9 @@
 {
   "symbol": "MD",
-  "name": "MD Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:32:15.407Z",
-  "source": "Alpha Vantage API"
+  "name": "Mednax Inc",
+  "sector": "HEALTHCARE",
+  "industry": "MEDICAL CARE FACILITIES",
+  "officialSite": "https://www.pediatrix.com",
+  "cachedAt": "2025-10-19T05:49:18.715Z",
+  "source": "Alpha Vantage API (fixed)"
 }

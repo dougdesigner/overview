@@ -1,8 +1,9 @@
 {
   "symbol": "HCSG",
-  "name": "HCSG Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:36:05.379Z",
-  "source": "Alpha Vantage API"
+  "name": "Healthcare Services Group Inc",
+  "sector": "HEALTHCARE",
+  "industry": "MEDICAL CARE FACILITIES",
+  "officialSite": "https://www.hcsgcorp.com",
+  "cachedAt": "2025-10-19T05:37:24.869Z",
+  "source": "Alpha Vantage API (fixed)"
 }

@@ -1,8 +1,9 @@
 {
   "symbol": "KOP",
-  "name": "KOP Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:36:27.361Z",
-  "source": "Alpha Vantage API"
+  "name": "Koppers Holdings Inc",
+  "sector": "BASIC MATERIALS",
+  "industry": "SPECIALTY CHEMICALS",
+  "officialSite": "https://www.koppers.com",
+  "cachedAt": "2025-10-19T05:44:26.334Z",
+  "source": "Alpha Vantage API (fixed)"
 }

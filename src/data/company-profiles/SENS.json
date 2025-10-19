@@ -1,8 +1,9 @@
 {
   "symbol": "SENS",
-  "name": "SENS Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:20.147Z",
-  "source": "Alpha Vantage API"
+  "name": "Senseonics Holdings Inc",
+  "sector": "HEALTHCARE",
+  "industry": "MEDICAL DEVICES",
+  "officialSite": "https://www.senseonics.com",
+  "cachedAt": "2025-10-19T06:04:11.902Z",
+  "source": "Alpha Vantage API (fixed)"
 }

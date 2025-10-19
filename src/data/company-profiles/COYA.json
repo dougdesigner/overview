@@ -1,8 +1,9 @@
 {
   "symbol": "COYA",
-  "name": "COYA Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:34:31.717Z",
-  "source": "Alpha Vantage API"
+  "name": "Coya Therapeutics, Inc. Common Stock",
+  "sector": "HEALTHCARE",
+  "industry": "BIOTECHNOLOGY",
+  "officialSite": "https://coyatherapeutics.com",
+  "cachedAt": "2025-10-19T05:25:29.006Z",
+  "source": "Alpha Vantage API (fixed)"
 }

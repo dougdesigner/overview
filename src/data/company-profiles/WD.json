@@ -1,8 +1,9 @@
 {
   "symbol": "WD",
-  "name": "WD Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:12.954Z",
-  "source": "Alpha Vantage API"
+  "name": "Walker & Dunlop Inc",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "MORTGAGE FINANCE",
+  "officialSite": "https://www.walkerdunlop.com",
+  "cachedAt": "2025-10-19T06:10:05.458Z",
+  "source": "Alpha Vantage API (fixed)"
 }

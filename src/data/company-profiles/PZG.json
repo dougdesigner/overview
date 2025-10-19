@@ -1,8 +1,9 @@
 {
   "symbol": "PZG",
-  "name": "PZG Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:32:31.501Z",
-  "source": "Alpha Vantage API"
+  "name": "Paramount Gold Nevada Corp",
+  "sector": "BASIC MATERIALS",
+  "industry": "GOLD",
+  "officialSite": "https://paramountnevada.com",
+  "cachedAt": "2025-10-19T06:01:05.318Z",
+  "source": "Alpha Vantage API (fixed)"
 }

@@ -1,8 +1,9 @@
 {
   "symbol": "TPL",
-  "name": "TPL Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:09.993Z",
-  "source": "Alpha Vantage API"
+  "name": "Texas Pacific Land Trust",
+  "sector": "ENERGY",
+  "industry": "OIL & GAS E&P",
+  "officialSite": "https://www.texaspacific.com",
+  "cachedAt": "2025-10-19T06:08:06.992Z",
+  "source": "Alpha Vantage API (fixed)"
 }

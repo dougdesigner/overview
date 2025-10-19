@@ -1,8 +1,9 @@
 {
   "symbol": "DCTH",
-  "name": "DCTH Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:34:13.591Z",
-  "source": "Alpha Vantage API"
+  "name": "Delcath Systems Inc",
+  "sector": "HEALTHCARE",
+  "industry": "MEDICAL DEVICES",
+  "officialSite": "https://www.delcath.com",
+  "cachedAt": "2025-10-19T05:26:44.107Z",
+  "source": "Alpha Vantage API (fixed)"
 }

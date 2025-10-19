@@ -1,8 +1,9 @@
 {
   "symbol": "DARE",
-  "name": "DARE Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:34:14.978Z",
-  "source": "Alpha Vantage API"
+  "name": "Dare Bioscience Inc",
+  "sector": "HEALTHCARE",
+  "industry": "BIOTECHNOLOGY",
+  "officialSite": "https://darebioscience.com",
+  "cachedAt": "2025-10-19T05:26:38.196Z",
+  "source": "Alpha Vantage API (fixed)"
 }

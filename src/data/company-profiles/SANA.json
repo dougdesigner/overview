@@ -1,8 +1,9 @@
 {
   "symbol": "SANA",
-  "name": "SANA Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:33.227Z",
-  "source": "Alpha Vantage API"
+  "name": "Sana Biotechnology Inc",
+  "sector": "HEALTHCARE",
+  "industry": "BIOTECHNOLOGY",
+  "officialSite": "https://www.sana.com",
+  "cachedAt": "2025-10-19T06:03:14.672Z",
+  "source": "Alpha Vantage API (fixed)"
 }

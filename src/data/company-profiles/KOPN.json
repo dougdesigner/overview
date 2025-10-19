@@ -1,8 +1,9 @@
 {
   "symbol": "KOPN",
-  "name": "KOPN Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:36:27.590Z",
-  "source": "Alpha Vantage API"
+  "name": "Kopin Corporation",
+  "sector": "TECHNOLOGY",
+  "industry": "ELECTRONIC COMPONENTS",
+  "officialSite": "https://www.kopin.com",
+  "cachedAt": "2025-10-19T05:44:27.318Z",
+  "source": "Alpha Vantage API (fixed)"
 }

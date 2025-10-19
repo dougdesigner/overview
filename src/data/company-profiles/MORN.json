@@ -1,8 +1,9 @@
 {
   "symbol": "MORN",
-  "name": "MORN Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:32:03.942Z",
-  "source": "Alpha Vantage API"
+  "name": "Morningstar Inc",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "FINANCIAL DATA & STOCK EXCHANGES",
+  "officialSite": "https://www.morningstar.com",
+  "cachedAt": "2025-10-19T05:53:08.611Z",
+  "source": "Alpha Vantage API (fixed)"
 }

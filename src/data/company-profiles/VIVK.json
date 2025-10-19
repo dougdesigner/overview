@@ -1,8 +1,9 @@
 {
   "symbol": "VIVK",
-  "name": "VIVK Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:14.684Z",
-  "source": "Alpha Vantage API"
+  "name": "Vivakor Inc",
+  "sector": "ENERGY",
+  "industry": "OIL & GAS INTEGRATED",
+  "officialSite": "https://www.vivakor.com",
+  "cachedAt": "2025-10-19T06:09:37.276Z",
+  "source": "Alpha Vantage API (fixed)"
 }

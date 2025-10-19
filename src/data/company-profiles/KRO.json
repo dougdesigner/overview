@@ -1,8 +1,9 @@
 {
   "symbol": "KRO",
-  "name": "KRO Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:36:26.083Z",
-  "source": "Alpha Vantage API"
+  "name": "Kronos Worldwide Inc",
+  "sector": "BASIC MATERIALS",
+  "industry": "SPECIALTY CHEMICALS",
+  "officialSite": "https://www.kronosww.com",
+  "cachedAt": "2025-10-19T05:44:34.166Z",
+  "source": "Alpha Vantage API (fixed)"
 }

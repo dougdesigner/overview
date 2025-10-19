@@ -1,8 +1,9 @@
 {
   "symbol": "PIII",
-  "name": "PIII Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:32:35.129Z",
-  "source": "Alpha Vantage API"
+  "name": "P3 Health Partners Inc",
+  "sector": "HEALTHCARE",
+  "industry": "MEDICAL CARE FACILITIES",
+  "officialSite": "https://p3hp.org",
+  "cachedAt": "2025-10-19T06:00:12.038Z",
+  "source": "Alpha Vantage API (fixed)"
 }

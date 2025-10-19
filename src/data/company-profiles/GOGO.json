@@ -1,8 +1,9 @@
 {
   "symbol": "GOGO",
-  "name": "GOGO Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:36:08.031Z",
-  "source": "Alpha Vantage API"
+  "name": "Gogo Inc",
+  "sector": "COMMUNICATION SERVICES",
+  "industry": "TELECOM SERVICES",
+  "officialSite": "https://www.gogoair.com",
+  "cachedAt": "2025-10-19T05:36:56.010Z",
+  "source": "Alpha Vantage API (fixed)"
 }

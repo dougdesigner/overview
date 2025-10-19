@@ -1,8 +1,9 @@
 {
   "symbol": "ISSC",
-  "name": "ISSC Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:36:36.261Z",
-  "source": "Alpha Vantage API"
+  "name": "Innovative Solutions and Support",
+  "sector": "INDUSTRIALS",
+  "industry": "AEROSPACE & DEFENSE",
+  "officialSite": "https://www.iascorp.com",
+  "cachedAt": "2025-10-19T05:42:45.958Z",
+  "source": "Alpha Vantage API (fixed)"
 }

@@ -1,8 +1,9 @@
 {
   "symbol": "TKO",
-  "name": "TKO Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:20.624Z",
-  "source": "Alpha Vantage API"
+  "name": "TKO Group Holdings, Inc.",
+  "sector": "COMMUNICATION SERVICES",
+  "industry": "ENTERTAINMENT",
+  "officialSite": "https://tkogrp.com",
+  "cachedAt": "2025-10-19T06:07:48.654Z",
+  "source": "Alpha Vantage API (fixed)"
 }

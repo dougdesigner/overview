@@ -1,8 +1,9 @@
 {
   "symbol": "EIG",
-  "name": "EIG Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:36:15.238Z",
-  "source": "Alpha Vantage API"
+  "name": "Employers Holdings Inc",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "INSURANCE - SPECIALTY",
+  "officialSite": "https://www.employers.com",
+  "cachedAt": "2025-10-19T05:29:44.775Z",
+  "source": "Alpha Vantage API (fixed)"
 }

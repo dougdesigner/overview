@@ -1,8 +1,9 @@
 {
   "symbol": "RGCO",
-  "name": "RGCO Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:32:07.606Z",
-  "source": "Alpha Vantage API"
+  "name": "RGC Resources Inc",
+  "sector": "UTILITIES",
+  "industry": "UTILITIES - REGULATED GAS",
+  "officialSite": "https://www.rgcresources.com",
+  "cachedAt": "2025-10-19T06:02:04.761Z",
+  "source": "Alpha Vantage API (fixed)"
 }

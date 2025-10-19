@@ -1,8 +1,9 @@
 {
   "symbol": "MAA",
-  "name": "MAA Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:29.098Z",
-  "source": "Alpha Vantage API"
+  "name": "Mid-America Apartment Communities Inc",
+  "sector": "REAL ESTATE",
+  "industry": "REIT - RESIDENTIAL",
+  "officialSite": "https://www.maac.com",
+  "cachedAt": "2025-10-19T05:48:52.388Z",
+  "source": "Alpha Vantage API (fixed)"
 }

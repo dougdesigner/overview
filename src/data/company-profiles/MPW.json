@@ -1,8 +1,9 @@
 {
   "symbol": "MPW",
-  "name": "MPW Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:35:39.811Z",
-  "source": "Alpha Vantage API"
+  "name": "Medical Properties Trust Inc",
+  "sector": "REAL ESTATE",
+  "industry": "REIT - HEALTHCARE FACILITIES",
+  "officialSite": "https://www.medicalpropertiestrust.com",
+  "cachedAt": "2025-10-19T05:53:15.444Z",
+  "source": "Alpha Vantage API (fixed)"
 }

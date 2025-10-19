@@ -1,8 +1,9 @@
 {
   "symbol": "ONTF",
-  "name": "ONTF Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:32:07.093Z",
-  "source": "Alpha Vantage API"
+  "name": "ON24 Inc",
+  "sector": "TECHNOLOGY",
+  "industry": "SOFTWARE - APPLICATION",
+  "officialSite": "https://www.on24.com",
+  "cachedAt": "2025-10-19T05:55:22.249Z",
+  "source": "Alpha Vantage API (fixed)"
 }

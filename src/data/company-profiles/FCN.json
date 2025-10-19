@@ -1,8 +1,9 @@
 {
   "symbol": "FCN",
-  "name": "FCN Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:31:30.298Z",
-  "source": "Alpha Vantage API"
+  "name": "FTI Consulting Inc",
+  "sector": "INDUSTRIALS",
+  "industry": "CONSULTING SERVICES",
+  "officialSite": "https://www.fticonsulting.com",
+  "cachedAt": "2025-10-19T05:30:54.534Z",
+  "source": "Alpha Vantage API (fixed)"
 }

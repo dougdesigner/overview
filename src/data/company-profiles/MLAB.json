@@ -1,8 +1,9 @@
 {
   "symbol": "MLAB",
-  "name": "MLAB Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:35:28.236Z",
-  "source": "Alpha Vantage API"
+  "name": "Mesa Laboratories Inc",
+  "sector": "TECHNOLOGY",
+  "industry": "SCIENTIFIC & TECHNICAL INSTRUMENTS",
+  "officialSite": "https://www.mesalabs.com",
+  "cachedAt": "2025-10-19T05:52:49.148Z",
+  "source": "Alpha Vantage API (fixed)"
 }

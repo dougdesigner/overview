@@ -1,8 +1,9 @@
 {
   "symbol": "DNLI",
-  "name": "DNLI Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:34:24.656Z",
-  "source": "Alpha Vantage API"
+  "name": "Denali Therapeutics Inc",
+  "sector": "HEALTHCARE",
+  "industry": "BIOTECHNOLOGY",
+  "officialSite": "https://www.denalitherapeutics.com",
+  "cachedAt": "2025-10-19T05:29:00.952Z",
+  "source": "Alpha Vantage API (fixed)"
 }

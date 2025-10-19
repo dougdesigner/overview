@@ -1,8 +1,9 @@
 {
   "symbol": "WFRD",
-  "name": "WFRD Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:31:18.001Z",
-  "source": "Alpha Vantage API"
+  "name": "Weatherford International PLC",
+  "sector": "ENERGY",
+  "industry": "OIL & GAS EQUIPMENT & SERVICES",
+  "officialSite": "https://www.weatherford.com",
+  "cachedAt": "2025-10-19T06:10:10.328Z",
+  "source": "Alpha Vantage API (fixed)"
 }

@@ -1,8 +1,9 @@
 {
   "symbol": "LPSN",
-  "name": "LPSN Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:36:28.515Z",
-  "source": "Alpha Vantage API"
+  "name": "LivePerson Inc",
+  "sector": "TECHNOLOGY",
+  "industry": "SOFTWARE - APPLICATION",
+  "officialSite": "https://www.liveperson.com",
+  "cachedAt": "2025-10-19T05:48:29.940Z",
+  "source": "Alpha Vantage API (fixed)"
 }

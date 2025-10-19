@@ -1,8 +1,9 @@
 {
   "symbol": "RMCF",
-  "name": "RMCF Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:28.107Z",
-  "source": "Alpha Vantage API"
+  "name": "Rocky Mountain Chocolate Factory",
+  "sector": "CONSUMER DEFENSIVE",
+  "industry": "CONFECTIONERS",
+  "officialSite": "https://www.rmcf.com",
+  "cachedAt": "2025-10-19T06:02:30.595Z",
+  "source": "Alpha Vantage API (fixed)"
 }

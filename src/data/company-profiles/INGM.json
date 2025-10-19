@@ -1,8 +1,9 @@
 {
   "symbol": "INGM",
-  "name": "INGM Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:36:39.153Z",
-  "source": "Alpha Vantage API"
+  "name": "Ingram Micro Holding Corporation",
+  "sector": "TECHNOLOGY",
+  "industry": "INFORMATION TECHNOLOGY SERVICES",
+  "officialSite": "https://www.ingrammicro.com",
+  "cachedAt": "2025-10-19T05:42:27.427Z",
+  "source": "Alpha Vantage API (fixed)"
 }

@@ -1,8 +1,9 @@
 {
   "symbol": "TFIN",
-  "name": "TFIN Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:32:40.076Z",
-  "source": "Alpha Vantage API"
+  "name": "Triumph Financial, Inc.",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "BANKS - REGIONAL",
+  "officialSite": "https://www.tfin.com",
+  "cachedAt": "2025-10-19T06:07:40.696Z",
+  "source": "Alpha Vantage API (fixed)"
 }

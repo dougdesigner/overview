@@ -1,8 +1,9 @@
 {
   "symbol": "COO",
-  "name": "COO Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:33.015Z",
-  "source": "Alpha Vantage API"
+  "name": "The Cooper Companies, Inc",
+  "sector": "HEALTHCARE",
+  "industry": "MEDICAL INSTRUMENTS & SUPPLIES",
+  "officialSite": "https://www.coopercos.com",
+  "cachedAt": "2025-10-19T05:25:26.125Z",
+  "source": "Alpha Vantage API (fixed)"
 }

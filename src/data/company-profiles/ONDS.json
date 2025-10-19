@@ -1,8 +1,9 @@
 {
   "symbol": "ONDS",
-  "name": "ONDS Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:32:13.824Z",
-  "source": "Alpha Vantage API"
+  "name": "Ondas Holdings Inc.",
+  "sector": "TECHNOLOGY",
+  "industry": "COMMUNICATION EQUIPMENT",
+  "officialSite": "https://www.ondas.com",
+  "cachedAt": "2025-10-19T05:55:16.365Z",
+  "source": "Alpha Vantage API (fixed)"
 }

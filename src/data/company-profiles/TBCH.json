@@ -1,8 +1,9 @@
 {
   "symbol": "TBCH",
-  "name": "TBCH Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:32:37.089Z",
-  "source": "Alpha Vantage API"
+  "name": "Turtle Beach Corporation",
+  "sector": "TECHNOLOGY",
+  "industry": "CONSUMER ELECTRONICS",
+  "officialSite": "https://corp.turtlebeach.com",
+  "cachedAt": "2025-10-19T06:07:31.417Z",
+  "source": "Alpha Vantage API (fixed)"
 }

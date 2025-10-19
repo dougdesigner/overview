@@ -1,8 +1,9 @@
 {
   "symbol": "FFIN",
-  "name": "FFIN Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:31:07.701Z",
-  "source": "Alpha Vantage API"
+  "name": "First Financial Bankshares Inc",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "BANKS - REGIONAL",
+  "officialSite": "https://www.ffin.com",
+  "cachedAt": "2025-10-19T05:31:02.719Z",
+  "source": "Alpha Vantage API (fixed)"
 }

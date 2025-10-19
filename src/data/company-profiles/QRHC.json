@@ -1,8 +1,9 @@
 {
   "symbol": "QRHC",
-  "name": "QRHC Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:32:18.693Z",
-  "source": "Alpha Vantage API"
+  "name": "Quest Resource Holding Corp",
+  "sector": "INDUSTRIALS",
+  "industry": "WASTE MANAGEMENT",
+  "officialSite": "https://investors.qrhc.com",
+  "cachedAt": "2025-10-19T06:01:12.226Z",
+  "source": "Alpha Vantage API (fixed)"
 }

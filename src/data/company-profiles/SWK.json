@@ -1,8 +1,9 @@
 {
   "symbol": "SWK",
-  "name": "SWK Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:17.309Z",
-  "source": "Alpha Vantage API"
+  "name": "Stanley Black & Decker Inc",
+  "sector": "INDUSTRIALS",
+  "industry": "TOOLS & ACCESSORIES",
+  "officialSite": "https://www.stanleyblackanddecker.com",
+  "cachedAt": "2025-10-19T06:07:17.789Z",
+  "source": "Alpha Vantage API (fixed)"
 }

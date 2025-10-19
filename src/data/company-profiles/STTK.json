@@ -1,8 +1,9 @@
 {
   "symbol": "STTK",
-  "name": "STTK Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:17.974Z",
-  "source": "Alpha Vantage API"
+  "name": "Shattuck Labs Inc",
+  "sector": "HEALTHCARE",
+  "industry": "BIOTECHNOLOGY",
+  "officialSite": "https://www.shattucklabs.com",
+  "cachedAt": "2025-10-19T06:07:03.223Z",
+  "source": "Alpha Vantage API (fixed)"
 }

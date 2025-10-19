@@ -1,8 +1,9 @@
 {
   "symbol": "HWC",
-  "name": "HWC Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:31:22.719Z",
-  "source": "Alpha Vantage API"
+  "name": "Hancock Whitney Corp",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "BANKS - REGIONAL",
+  "officialSite": "https://www.hancockwhitney.com",
+  "cachedAt": "2025-10-19T05:42:07.913Z",
+  "source": "Alpha Vantage API (fixed)"
 }

@@ -1,8 +1,9 @@
 {
   "symbol": "PTCT",
-  "name": "PTCT Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:31:40.070Z",
-  "source": "Alpha Vantage API"
+  "name": "PTC Therapeutics Inc",
+  "sector": "HEALTHCARE",
+  "industry": "BIOTECHNOLOGY",
+  "officialSite": "https://www.ptcbio.com",
+  "cachedAt": "2025-10-19T06:00:57.346Z",
+  "source": "Alpha Vantage API (fixed)"
 }

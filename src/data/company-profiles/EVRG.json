@@ -1,8 +1,9 @@
 {
   "symbol": "EVRG",
-  "name": "EVRG Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:31.739Z",
-  "source": "Alpha Vantage API"
+  "name": "Evergy, Inc.",
+  "sector": "UTILITIES",
+  "industry": "UTILITIES - REGULATED ELECTRIC",
+  "officialSite": "https://investors.evergy.com",
+  "cachedAt": "2025-10-19T05:30:42.834Z",
+  "source": "Alpha Vantage API (fixed)"
 }

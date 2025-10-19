@@ -1,8 +1,9 @@
 {
   "symbol": "FNWB",
-  "name": "FNWB Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:36:13.855Z",
-  "source": "Alpha Vantage API"
+  "name": "First Northwest Bancorp",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "BANKS - REGIONAL",
+  "officialSite": "https://www.ourfirstfed.com",
+  "cachedAt": "2025-10-19T05:31:20.238Z",
+  "source": "Alpha Vantage API (fixed)"
 }

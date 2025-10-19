@@ -1,8 +1,9 @@
 {
   "symbol": "KRG",
-  "name": "KRG Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:32:04.266Z",
-  "source": "Alpha Vantage API"
+  "name": "Kite Realty Group Trust",
+  "sector": "REAL ESTATE",
+  "industry": "REIT - RETAIL",
+  "officialSite": "https://www.kiterealty.com",
+  "cachedAt": "2025-10-19T05:44:32.205Z",
+  "source": "Alpha Vantage API (fixed)"
 }

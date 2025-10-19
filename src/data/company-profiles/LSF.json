@@ -1,8 +1,9 @@
 {
   "symbol": "LSF",
-  "name": "LSF Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:36:24.699Z",
-  "source": "Alpha Vantage API"
+  "name": "Laird Superfood Inc",
+  "sector": "CONSUMER DEFENSIVE",
+  "industry": "PACKAGED FOODS",
+  "officialSite": "https://www.lairdsuperfood.com",
+  "cachedAt": "2025-10-19T05:48:35.790Z",
+  "source": "Alpha Vantage API (fixed)"
 }

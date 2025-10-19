@@ -1,8 +1,9 @@
 {
   "symbol": "HRTX",
-  "name": "HRTX Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:36:12.914Z",
-  "source": "Alpha Vantage API"
+  "name": "Heron Therapeuti",
+  "sector": "HEALTHCARE",
+  "industry": "BIOTECHNOLOGY",
+  "officialSite": "https://www.herontx.com",
+  "cachedAt": "2025-10-19T05:41:48.351Z",
+  "source": "Alpha Vantage API (fixed)"
 }

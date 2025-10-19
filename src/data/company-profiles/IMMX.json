@@ -1,8 +1,9 @@
 {
   "symbol": "IMMX",
-  "name": "IMMX Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:36:41.953Z",
-  "source": "Alpha Vantage API"
+  "name": "Immix Biopharma Inc",
+  "sector": "HEALTHCARE",
+  "industry": "BIOTECHNOLOGY",
+  "officialSite": "https://www.immixbio.com",
+  "cachedAt": "2025-10-19T05:42:21.575Z",
+  "source": "Alpha Vantage API (fixed)"
 }

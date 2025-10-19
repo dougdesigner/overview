@@ -1,8 +1,9 @@
 {
   "symbol": "TWIN",
-  "name": "TWIN Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:32:36.472Z",
-  "source": "Alpha Vantage API"
+  "name": "Twin Disc Incorporated",
+  "sector": "INDUSTRIALS",
+  "industry": "SPECIALTY INDUSTRIAL MACHINERY",
+  "officialSite": "https://www.twindisc.com",
+  "cachedAt": "2025-10-19T06:08:37.916Z",
+  "source": "Alpha Vantage API (fixed)"
 }

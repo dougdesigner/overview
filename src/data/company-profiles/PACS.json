@@ -1,8 +1,9 @@
 {
   "symbol": "PACS",
-  "name": "PACS Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:32:34.519Z",
-  "source": "Alpha Vantage API"
+  "name": "PACS Group, Inc.",
+  "sector": "HEALTHCARE",
+  "industry": "MEDICAL CARE FACILITIES",
+  "officialSite": "https://pacs.com",
+  "cachedAt": "2025-10-19T05:56:00.183Z",
+  "source": "Alpha Vantage API (fixed)"
 }

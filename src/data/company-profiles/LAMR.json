@@ -1,8 +1,9 @@
 {
   "symbol": "LAMR",
-  "name": "LAMR Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:39.751Z",
-  "source": "Alpha Vantage API"
+  "name": "Lamar Advertising Company",
+  "sector": "REAL ESTATE",
+  "industry": "REIT - SPECIALTY",
+  "officialSite": "https://www.lamar.com",
+  "cachedAt": "2025-10-19T05:44:47.789Z",
+  "source": "Alpha Vantage API (fixed)"
 }

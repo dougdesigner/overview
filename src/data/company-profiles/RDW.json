@@ -1,8 +1,9 @@
 {
   "symbol": "RDW",
-  "name": "RDW Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:32:33.681Z",
-  "source": "Alpha Vantage API"
+  "name": "Redwire Corp",
+  "sector": "INDUSTRIALS",
+  "industry": "AEROSPACE & DEFENSE",
+  "officialSite": "https://redwirespace.com",
+  "cachedAt": "2025-10-19T06:01:49.437Z",
+  "source": "Alpha Vantage API (fixed)"
 }

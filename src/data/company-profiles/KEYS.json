@@ -1,8 +1,9 @@
 {
   "symbol": "KEYS",
-  "name": "KEYS Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:10.431Z",
-  "source": "Alpha Vantage API"
+  "name": "Keysight Technologies Inc",
+  "sector": "TECHNOLOGY",
+  "industry": "SCIENTIFIC & TECHNICAL INSTRUMENTS",
+  "officialSite": "https://www.keysight.com",
+  "cachedAt": "2025-10-19T05:44:15.646Z",
+  "source": "Alpha Vantage API (fixed)"
 }

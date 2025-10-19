@@ -1,8 +1,9 @@
 {
   "symbol": "OPEN",
-  "name": "OPEN Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:32:09.293Z",
-  "source": "Alpha Vantage API"
+  "name": "Opendoor Technologies Inc",
+  "sector": "REAL ESTATE",
+  "industry": "REAL ESTATE SERVICES",
+  "officialSite": "https://www.opendoor.com",
+  "cachedAt": "2025-10-19T05:55:27.153Z",
+  "source": "Alpha Vantage API (fixed)"
 }

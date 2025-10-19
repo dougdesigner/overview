@@ -1,8 +1,9 @@
 {
   "symbol": "GMS",
-  "name": "GMS Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:31:31.674Z",
-  "source": "Alpha Vantage API"
+  "name": "GMS Inc",
+  "sector": "INDUSTRIALS",
+  "industry": "BUILDING PRODUCTS & EQUIPMENT",
+  "officialSite": "https://www.gms.com",
+  "cachedAt": "2025-10-19T05:36:49.230Z",
+  "source": "Alpha Vantage API (fixed)"
 }

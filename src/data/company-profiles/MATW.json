@@ -1,8 +1,9 @@
 {
   "symbol": "MATW",
-  "name": "MATW Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:35:41.660Z",
-  "source": "Alpha Vantage API"
+  "name": "Matthews International Corporation",
+  "sector": "INDUSTRIALS",
+  "industry": "CONGLOMERATES",
+  "officialSite": "https://www.matw.com",
+  "cachedAt": "2025-10-19T05:48:58.251Z",
+  "source": "Alpha Vantage API (fixed)"
 }

@@ -1,8 +1,9 @@
 {
   "symbol": "RM",
-  "name": "RM Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:32:27.641Z",
-  "source": "Alpha Vantage API"
+  "name": "Regional Management Corp",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "CREDIT SERVICES",
+  "officialSite": "https://www.regionalmanagement.com",
+  "cachedAt": "2025-10-19T06:02:27.679Z",
+  "source": "Alpha Vantage API (fixed)"
 }

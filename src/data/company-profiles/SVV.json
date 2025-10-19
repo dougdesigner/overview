@@ -1,8 +1,9 @@
 {
   "symbol": "SVV",
-  "name": "SVV Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:32.608Z",
-  "source": "Alpha Vantage API"
+  "name": "Savers Value Village, Inc.",
+  "sector": "CONSUMER CYCLICAL",
+  "industry": "SPECIALTY RETAIL",
+  "officialSite": "https://www.savers.com",
+  "cachedAt": "2025-10-19T06:07:14.892Z",
+  "source": "Alpha Vantage API (fixed)"
 }

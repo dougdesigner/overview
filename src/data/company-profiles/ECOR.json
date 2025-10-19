@@ -1,8 +1,9 @@
 {
   "symbol": "ECOR",
-  "name": "ECOR Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:36:17.113Z",
-  "source": "Alpha Vantage API"
+  "name": "Electrocore LLC",
+  "sector": "HEALTHCARE",
+  "industry": "MEDICAL DEVICES",
+  "officialSite": "https://www.electrocore.com",
+  "cachedAt": "2025-10-19T05:29:31.109Z",
+  "source": "Alpha Vantage API (fixed)"
 }

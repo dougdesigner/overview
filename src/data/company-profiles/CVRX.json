@@ -1,8 +1,9 @@
 {
   "symbol": "CVRX",
-  "name": "CVRX Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:34:16.690Z",
-  "source": "Alpha Vantage API"
+  "name": "CVRx Inc",
+  "sector": "HEALTHCARE",
+  "industry": "MEDICAL DEVICES",
+  "officialSite": "https://www.cvrx.com",
+  "cachedAt": "2025-10-19T05:26:17.778Z",
+  "source": "Alpha Vantage API (fixed)"
 }

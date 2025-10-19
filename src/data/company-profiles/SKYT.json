@@ -1,8 +1,9 @@
 {
   "symbol": "SKYT",
-  "name": "SKYT Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:21.588Z",
-  "source": "Alpha Vantage API"
+  "name": "Skywater Technology Inc",
+  "sector": "TECHNOLOGY",
+  "industry": "SEMICONDUCTORS",
+  "officialSite": "https://www.skywatertechnology.com",
+  "cachedAt": "2025-10-19T06:04:54.470Z",
+  "source": "Alpha Vantage API (fixed)"
 }

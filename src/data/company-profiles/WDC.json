@@ -1,8 +1,9 @@
 {
   "symbol": "WDC",
-  "name": "WDC Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:35.219Z",
-  "source": "Alpha Vantage API"
+  "name": "Western Digital Corporation",
+  "sector": "TECHNOLOGY",
+  "industry": "COMPUTER HARDWARE",
+  "officialSite": "https://www.westerndigital.com",
+  "cachedAt": "2025-10-19T06:10:06.427Z",
+  "source": "Alpha Vantage API (fixed)"
 }

@@ -1,8 +1,9 @@
 {
   "symbol": "DLTR",
-  "name": "DLTR Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:35.868Z",
-  "source": "Alpha Vantage API"
+  "name": "Dollar Tree Inc",
+  "sector": "CONSUMER DEFENSIVE",
+  "industry": "DISCOUNT STORES",
+  "officialSite": "https://www.dollartree.com",
+  "cachedAt": "2025-10-19T05:28:56.100Z",
+  "source": "Alpha Vantage API (fixed)"
 }

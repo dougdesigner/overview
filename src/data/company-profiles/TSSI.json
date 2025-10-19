@@ -1,8 +1,9 @@
 {
   "symbol": "TSSI",
-  "name": "TSSI Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:32:38.248Z",
-  "source": "Alpha Vantage API"
+  "name": "TSS, Inc. Common Stock",
+  "sector": "TECHNOLOGY",
+  "industry": "INFORMATION TECHNOLOGY SERVICES",
+  "officialSite": "https://tssiusa.com",
+  "cachedAt": "2025-10-19T06:08:19.707Z",
+  "source": "Alpha Vantage API (fixed)"
 }

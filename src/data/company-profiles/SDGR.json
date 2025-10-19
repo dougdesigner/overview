@@ -1,8 +1,9 @@
 {
   "symbol": "SDGR",
-  "name": "SDGR Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:31.907Z",
-  "source": "Alpha Vantage API"
+  "name": "Schrodinger Inc",
+  "sector": "HEALTHCARE",
+  "industry": "HEALTH INFORMATION SERVICES",
+  "officialSite": "https://www.schrodinger.com",
+  "cachedAt": "2025-10-19T06:03:28.397Z",
+  "source": "Alpha Vantage API (fixed)"
 }

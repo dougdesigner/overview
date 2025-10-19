@@ -1,8 +1,9 @@
 {
   "symbol": "STAG",
-  "name": "STAG Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:32:02.689Z",
-  "source": "Alpha Vantage API"
+  "name": "STAG Industrial Inc",
+  "sector": "REAL ESTATE",
+  "industry": "REIT - INDUSTRIAL",
+  "officialSite": "https://www.stagindustrial.com",
+  "cachedAt": "2025-10-19T06:06:48.512Z",
+  "source": "Alpha Vantage API (fixed)"
 }

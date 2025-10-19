@@ -1,8 +1,9 @@
 {
   "symbol": "WGS",
-  "name": "WGS Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:36:22.185Z",
-  "source": "Alpha Vantage API"
+  "name": "GeneDx Holdings Corp.",
+  "sector": "HEALTHCARE",
+  "industry": "DIAGNOSTICS & RESEARCH",
+  "officialSite": "https://www.genedx.com",
+  "cachedAt": "2025-10-19T06:12:12.727Z",
+  "source": "Alpha Vantage API (fixed)"
 }

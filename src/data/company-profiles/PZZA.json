@@ -1,8 +1,9 @@
 {
   "symbol": "PZZA",
-  "name": "PZZA Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:32:31.113Z",
-  "source": "Alpha Vantage API"
+  "name": "Papa John's International Inc",
+  "sector": "CONSUMER CYCLICAL",
+  "industry": "RESTAURANTS",
+  "officialSite": "https://www.papajohns.com",
+  "cachedAt": "2025-10-19T06:01:07.278Z",
+  "source": "Alpha Vantage API (fixed)"
 }

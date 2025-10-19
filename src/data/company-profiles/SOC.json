@@ -1,8 +1,9 @@
 {
   "symbol": "SOC",
-  "name": "SOC Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:25.738Z",
-  "source": "Alpha Vantage API"
+  "name": "Sable Offshore Corp.",
+  "sector": "ENERGY",
+  "industry": "OIL & GAS DRILLING",
+  "officialSite": "https://www.sableoffshore.com",
+  "cachedAt": "2025-10-19T06:05:22.053Z",
+  "source": "Alpha Vantage API (fixed)"
 }

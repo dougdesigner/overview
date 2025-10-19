@@ -1,8 +1,9 @@
 {
   "symbol": "NXT",
-  "name": "NXT Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:31:02.109Z",
-  "source": "Alpha Vantage API"
+  "name": "Nextracker Inc. Class A Common Stock",
+  "sector": "TECHNOLOGY",
+  "industry": "SOLAR",
+  "officialSite": "https://www.nextracker.com",
+  "cachedAt": "2025-10-19T05:54:52.014Z",
+  "source": "Alpha Vantage API (fixed)"
 }

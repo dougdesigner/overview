@@ -1,8 +1,9 @@
 {
   "symbol": "HUBB",
-  "name": "HUBB Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:23.705Z",
-  "source": "Alpha Vantage API"
+  "name": "Hubbell Inc",
+  "sector": "INDUSTRIALS",
+  "industry": "ELECTRICAL EQUIPMENT & PARTS",
+  "officialSite": "https://www.hubbell.com",
+  "cachedAt": "2025-10-19T05:41:57.127Z",
+  "source": "Alpha Vantage API (fixed)"
 }

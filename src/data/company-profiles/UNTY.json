@@ -1,8 +1,9 @@
 {
   "symbol": "UNTY",
-  "name": "UNTY Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:32:41.005Z",
-  "source": "Alpha Vantage API"
+  "name": "Unity Bancorp Inc",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "BANKS - REGIONAL",
+  "officialSite": "https://www.unitybank.com",
+  "cachedAt": "2025-10-19T06:09:01.448Z",
+  "source": "Alpha Vantage API (fixed)"
 }

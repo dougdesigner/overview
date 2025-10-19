@@ -1,8 +1,9 @@
 {
   "symbol": "HOOK",
-  "name": "HOOK Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:36:10.095Z",
-  "source": "Alpha Vantage API"
+  "name": "Hookipa Pharma Inc",
+  "sector": "HEALTHCARE",
+  "industry": "BIOTECHNOLOGY",
+  "officialSite": "https://www.hookipapharma.com",
+  "cachedAt": "2025-10-19T05:41:32.696Z",
+  "source": "Alpha Vantage API (fixed)"
 }

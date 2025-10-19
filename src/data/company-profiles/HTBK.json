@@ -1,8 +1,9 @@
 {
   "symbol": "HTBK",
-  "name": "HTBK Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:36:13.220Z",
-  "source": "Alpha Vantage API"
+  "name": "Heritage Commerce Corp",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "BANKS - REGIONAL",
+  "officialSite": "https://www.heritagecommercecorp.com/corporate-pro",
+  "cachedAt": "2025-10-19T05:41:53.225Z",
+  "source": "Alpha Vantage API (fixed)"
 }

@@ -1,8 +1,9 @@
 {
   "symbol": "NTST",
-  "name": "NTST Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:36:01.348Z",
-  "source": "Alpha Vantage API"
+  "name": "Netstreit Corp",
+  "sector": "REAL ESTATE",
+  "industry": "REIT - RETAIL",
+  "officialSite": "https://www.netstreit.com",
+  "cachedAt": "2025-10-19T05:54:44.242Z",
+  "source": "Alpha Vantage API (fixed)"
 }

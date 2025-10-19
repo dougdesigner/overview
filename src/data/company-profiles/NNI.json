@@ -1,8 +1,9 @@
 {
   "symbol": "NNI",
-  "name": "NNI Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:36:03.208Z",
-  "source": "Alpha Vantage API"
+  "name": "Nelnet Inc",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "CREDIT SERVICES",
+  "officialSite": "https://nelnetinc.com",
+  "cachedAt": "2025-10-19T05:54:05.256Z",
+  "source": "Alpha Vantage API (fixed)"
 }

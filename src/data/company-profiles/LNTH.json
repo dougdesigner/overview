@@ -1,8 +1,9 @@
 {
   "symbol": "LNTH",
-  "name": "LNTH Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:31:23.226Z",
-  "source": "Alpha Vantage API"
+  "name": "Lantheus Holdings Inc",
+  "sector": "HEALTHCARE",
+  "industry": "DRUG MANUFACTURERS - SPECIALTY & GENERIC",
+  "officialSite": "https://www.lantheus.com",
+  "cachedAt": "2025-10-19T05:48:20.217Z",
+  "source": "Alpha Vantage API (fixed)"
 }

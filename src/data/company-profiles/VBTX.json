@@ -1,8 +1,9 @@
 {
   "symbol": "VBTX",
-  "name": "VBTX Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:15.307Z",
-  "source": "Alpha Vantage API"
+  "name": "Veritex Holdings Inc",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "BANKS - REGIONAL",
+  "officialSite": "https://veritexbank.com",
+  "cachedAt": "2025-10-19T06:09:26.453Z",
+  "source": "Alpha Vantage API (fixed)"
 }

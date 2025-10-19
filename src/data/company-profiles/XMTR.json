@@ -1,8 +1,9 @@
 {
   "symbol": "XMTR",
-  "name": "XMTR Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:01.655Z",
-  "source": "Alpha Vantage API"
+  "name": "Xometry Inc",
+  "sector": "INDUSTRIALS",
+  "industry": "SPECIALTY INDUSTRIAL MACHINERY",
+  "officialSite": "https://www.xometry.com",
+  "cachedAt": "2025-10-19T06:12:36.679Z",
+  "source": "Alpha Vantage API (fixed)"
 }

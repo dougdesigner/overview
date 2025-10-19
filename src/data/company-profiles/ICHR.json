@@ -1,8 +1,9 @@
 {
   "symbol": "ICHR",
-  "name": "ICHR Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:36:42.561Z",
-  "source": "Alpha Vantage API"
+  "name": "Ichor Holdings Ltd",
+  "sector": "TECHNOLOGY",
+  "industry": "SEMICONDUCTOR EQUIPMENT & MATERIALS",
+  "officialSite": "https://www.ichorsystems.com",
+  "cachedAt": "2025-10-19T05:42:13.778Z",
+  "source": "Alpha Vantage API (fixed)"
 }

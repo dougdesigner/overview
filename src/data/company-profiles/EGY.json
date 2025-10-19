@@ -1,8 +1,9 @@
 {
   "symbol": "EGY",
-  "name": "EGY Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:09.176Z",
-  "source": "Alpha Vantage API"
+  "name": "Vaalco Energy Inc",
+  "sector": "ENERGY",
+  "industry": "OIL & GAS E&P",
+  "officialSite": "https://www.vaalco.com",
+  "cachedAt": "2025-10-19T05:29:41.832Z",
+  "source": "Alpha Vantage API (fixed)"
 }

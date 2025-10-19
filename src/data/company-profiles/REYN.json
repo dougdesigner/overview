@@ -1,8 +1,9 @@
 {
   "symbol": "REYN",
-  "name": "REYN Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:32:11.980Z",
-  "source": "Alpha Vantage API"
+  "name": "Reynolds Consumer Products Inc",
+  "sector": "CONSUMER CYCLICAL",
+  "industry": "PACKAGING & CONTAINERS",
+  "officialSite": "https://www.reynoldsconsumerproducts.com",
+  "cachedAt": "2025-10-19T06:02:00.120Z",
+  "source": "Alpha Vantage API (fixed)"
 }

@@ -1,8 +1,9 @@
 {
   "symbol": "MTB",
-  "name": "MTB Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:13.060Z",
-  "source": "Alpha Vantage API"
+  "name": "M&T Bank Corporation",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "BANKS - REGIONAL",
+  "officialSite": "https://www.mtb.com",
+  "cachedAt": "2025-10-19T05:53:28.261Z",
+  "source": "Alpha Vantage API (fixed)"
 }

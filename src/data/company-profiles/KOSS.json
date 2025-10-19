@@ -1,8 +1,9 @@
 {
   "symbol": "KOSS",
-  "name": "KOSS Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:36:26.455Z",
-  "source": "Alpha Vantage API"
+  "name": "Koss Corporation",
+  "sector": "TECHNOLOGY",
+  "industry": "CONSUMER ELECTRONICS",
+  "officialSite": "https://www.koss.com",
+  "cachedAt": "2025-10-19T05:44:30.260Z",
+  "source": "Alpha Vantage API (fixed)"
 }

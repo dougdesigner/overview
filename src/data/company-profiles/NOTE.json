@@ -1,8 +1,9 @@
 {
   "symbol": "NOTE",
-  "name": "NOTE Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:36:22.504Z",
-  "source": "Alpha Vantage API"
+  "name": "FiscalNote Holdings Inc.",
+  "sector": "TECHNOLOGY",
+  "industry": "INFORMATION TECHNOLOGY SERVICES",
+  "officialSite": "https://fiscalnote.com",
+  "cachedAt": "2025-10-19T05:54:08.153Z",
+  "source": "Alpha Vantage API (fixed)"
 }

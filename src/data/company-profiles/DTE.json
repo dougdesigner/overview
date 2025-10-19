@@ -1,8 +1,9 @@
 {
   "symbol": "DTE",
-  "name": "DTE Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:22.782Z",
-  "source": "Alpha Vantage API"
+  "name": "DTE Energy Company",
+  "sector": "UTILITIES",
+  "industry": "UTILITIES - REGULATED ELECTRIC",
+  "officialSite": "https://www.dteenergy.com",
+  "cachedAt": "2025-10-19T05:29:12.613Z",
+  "source": "Alpha Vantage API (fixed)"
 }

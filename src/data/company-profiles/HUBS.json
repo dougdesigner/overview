@@ -1,8 +1,9 @@
 {
   "symbol": "HUBS",
-  "name": "HUBS Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:05.441Z",
-  "source": "Alpha Vantage API"
+  "name": "HubSpot Inc",
+  "sector": "TECHNOLOGY",
+  "industry": "SOFTWARE - APPLICATION",
+  "officialSite": "https://www.hubspot.com",
+  "cachedAt": "2025-10-19T05:42:00.071Z",
+  "source": "Alpha Vantage API (fixed)"
 }

@@ -1,8 +1,9 @@
 {
   "symbol": "TSHA",
-  "name": "TSHA Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:39.102Z",
-  "source": "Alpha Vantage API"
+  "name": "Taysha Gene Therapies Inc",
+  "sector": "HEALTHCARE",
+  "industry": "BIOTECHNOLOGY",
+  "officialSite": "https://www.tayshagtx.com",
+  "cachedAt": "2025-10-19T06:08:17.768Z",
+  "source": "Alpha Vantage API (fixed)"
 }

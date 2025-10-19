@@ -1,8 +1,9 @@
 {
   "symbol": "ORC",
-  "name": "ORC Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:32:07.940Z",
-  "source": "Alpha Vantage API"
+  "name": "Orchid Island Capital Inc.",
+  "sector": "REAL ESTATE",
+  "industry": "REIT - MORTGAGE",
+  "officialSite": "https://www.orchidislandcapital.com",
+  "cachedAt": "2025-10-19T05:55:35.886Z",
+  "source": "Alpha Vantage API (fixed)"
 }

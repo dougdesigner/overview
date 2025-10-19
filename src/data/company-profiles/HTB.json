@@ -1,8 +1,9 @@
 {
   "symbol": "HTB",
-  "name": "HTB Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:36:10.398Z",
-  "source": "Alpha Vantage API"
+  "name": "HomeTrust Bancshares, Inc.",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "BANKS - REGIONAL",
+  "officialSite": "https://www.htb.com",
+  "cachedAt": "2025-10-19T05:41:52.250Z",
+  "source": "Alpha Vantage API (fixed)"
 }

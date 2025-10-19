@@ -1,8 +1,9 @@
 {
   "symbol": "XRAY",
-  "name": "XRAY Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:32:04.500Z",
-  "source": "Alpha Vantage API"
+  "name": "Dentsply Sirona Inc",
+  "sector": "HEALTHCARE",
+  "industry": "MEDICAL INSTRUMENTS & SUPPLIES",
+  "officialSite": "https://www.dentsplysirona.com",
+  "cachedAt": "2025-10-19T06:12:41.661Z",
+  "source": "Alpha Vantage API (fixed)"
 }

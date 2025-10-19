@@ -1,8 +1,9 @@
 {
   "symbol": "HTH",
-  "name": "HTH Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:36:11.674Z",
-  "source": "Alpha Vantage API"
+  "name": "Hilltop Holdings Inc",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "FINANCIAL CONGLOMERATES",
+  "officialSite": "https://www.hilltop.com",
+  "cachedAt": "2025-10-19T05:41:54.198Z",
+  "source": "Alpha Vantage API (fixed)"
 }

@@ -1,8 +1,9 @@
 {
   "symbol": "TLN",
-  "name": "TLN Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:16.539Z",
-  "source": "Alpha Vantage API"
+  "name": "Talen Energy Corporation",
+  "sector": "UTILITIES",
+  "industry": "UTILITIES - INDEPENDENT POWER PRODUCERS",
+  "officialSite": "https://www.talenenergy.com",
+  "cachedAt": "2025-10-19T06:07:51.668Z",
+  "source": "Alpha Vantage API (fixed)"
 }

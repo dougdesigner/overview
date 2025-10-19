@@ -1,8 +1,9 @@
 {
   "symbol": "WERN",
-  "name": "WERN Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:03.007Z",
-  "source": "Alpha Vantage API"
+  "name": "Werner Enterprises Inc",
+  "sector": "INDUSTRIALS",
+  "industry": "TRUCKING",
+  "officialSite": "https://www.werner.com",
+  "cachedAt": "2025-10-19T06:10:08.367Z",
+  "source": "Alpha Vantage API (fixed)"
 }

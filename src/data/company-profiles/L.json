@@ -1,8 +1,9 @@
 {
   "symbol": "L",
-  "name": "L Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:28.612Z",
-  "source": "Alpha Vantage API"
+  "name": "Loews Corp",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "INSURANCE - PROPERTY & CASUALTY",
+  "officialSite": "https://www.loews.com",
+  "cachedAt": "2025-10-19T05:44:44.885Z",
+  "source": "Alpha Vantage API (fixed)"
 }

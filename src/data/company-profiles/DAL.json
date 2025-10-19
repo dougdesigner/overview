@@ -1,8 +1,9 @@
 {
   "symbol": "DAL",
-  "name": "DAL Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:08.692Z",
-  "source": "Alpha Vantage API"
+  "name": "Delta Air Lines Inc",
+  "sector": "INDUSTRIALS",
+  "industry": "AIRLINES",
+  "officialSite": "https://www.delta.com",
+  "cachedAt": "2025-10-19T05:26:34.328Z",
+  "source": "Alpha Vantage API (fixed)"
 }

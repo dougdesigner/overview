@@ -1,8 +1,9 @@
 {
   "symbol": "MSS",
-  "name": "MSS Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:35:36.191Z",
-  "source": "Alpha Vantage API"
+  "name": "Maison Solutions Inc",
+  "sector": "CONSUMER DEFENSIVE",
+  "industry": "GROCERY STORES",
+  "officialSite": "https://maisonsolutionsinc.com",
+  "cachedAt": "2025-10-19T05:53:27.289Z",
+  "source": "Alpha Vantage API (fixed)"
 }

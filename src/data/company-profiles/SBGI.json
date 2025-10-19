@@ -1,8 +1,9 @@
 {
   "symbol": "SBGI",
-  "name": "SBGI Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:25.434Z",
-  "source": "Alpha Vantage API"
+  "name": "Sinclair Broadcast Group Inc",
+  "sector": "COMMUNICATION SERVICES",
+  "industry": "BROADCASTING",
+  "officialSite": "https://sbgi.net",
+  "cachedAt": "2025-10-19T06:03:19.541Z",
+  "source": "Alpha Vantage API (fixed)"
 }

@@ -1,8 +1,9 @@
 {
   "symbol": "HHH",
-  "name": "HHH Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:36:09.151Z",
-  "source": "Alpha Vantage API"
+  "name": "Howard Hughes Holdings Inc.",
+  "sector": "REAL ESTATE",
+  "industry": "REAL ESTATE - DIVERSIFIED",
+  "officialSite": "https://www.howardhughes.com",
+  "cachedAt": "2025-10-19T05:37:31.705Z",
+  "source": "Alpha Vantage API (fixed)"
 }

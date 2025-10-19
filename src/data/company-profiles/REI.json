@@ -1,8 +1,9 @@
 {
   "symbol": "REI",
-  "name": "REI Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:29.567Z",
-  "source": "Alpha Vantage API"
+  "name": "Ring Energy Inc",
+  "sector": "ENERGY",
+  "industry": "OIL & GAS E&P",
+  "officialSite": "https://www.ringenergy.com",
+  "cachedAt": "2025-10-19T06:01:51.362Z",
+  "source": "Alpha Vantage API (fixed)"
 }

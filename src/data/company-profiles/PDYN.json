@@ -1,8 +1,9 @@
 {
   "symbol": "PDYN",
-  "name": "PDYN Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:32:30.797Z",
-  "source": "Alpha Vantage API"
+  "name": "Palladyne AI Corp",
+  "sector": "TECHNOLOGY",
+  "industry": "SOFTWARE - INFRASTRUCTURE",
+  "officialSite": "https://www.palladyneai.com",
+  "cachedAt": "2025-10-19T05:59:55.354Z",
+  "source": "Alpha Vantage API (fixed)"
 }

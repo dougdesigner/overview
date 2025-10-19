@@ -1,8 +1,9 @@
 {
   "symbol": "SLQT",
-  "name": "SLQT Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:30.105Z",
-  "source": "Alpha Vantage API"
+  "name": "Selectquote Inc",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "INSURANCE BROKERS",
+  "officialSite": "https://www.selectquote.com",
+  "cachedAt": "2025-10-19T06:04:59.442Z",
+  "source": "Alpha Vantage API (fixed)"
 }

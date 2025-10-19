@@ -1,8 +1,9 @@
 {
   "symbol": "MODD",
-  "name": "MODD Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:35:34.341Z",
-  "source": "Alpha Vantage API"
+  "name": "Modular Medical Inc",
+  "sector": "HEALTHCARE",
+  "industry": "MEDICAL DEVICES",
+  "officialSite": "https://www.modularmedical.com",
+  "cachedAt": "2025-10-19T05:53:03.738Z",
+  "source": "Alpha Vantage API (fixed)"
 }

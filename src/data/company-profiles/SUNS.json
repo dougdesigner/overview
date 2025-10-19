@@ -1,8 +1,9 @@
 {
   "symbol": "SUNS",
-  "name": "SUNS Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:35.539Z",
-  "source": "Alpha Vantage API"
+  "name": "Sunrise Realty Trust, Inc.",
+  "sector": "REAL ESTATE",
+  "industry": "REIT - MORTGAGE",
+  "officialSite": "https://sunriserealtytrust.com",
+  "cachedAt": "2025-10-19T06:07:07.129Z",
+  "source": "Alpha Vantage API (fixed)"
 }

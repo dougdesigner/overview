@@ -1,8 +1,9 @@
 {
   "symbol": "REX",
-  "name": "REX Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:32:11.049Z",
-  "source": "Alpha Vantage API"
+  "name": "REX American Resources Corporation",
+  "sector": "BASIC MATERIALS",
+  "industry": "CHEMICALS",
+  "officialSite": "https://www.rexamerican.com",
+  "cachedAt": "2025-10-19T06:01:59.159Z",
+  "source": "Alpha Vantage API (fixed)"
 }

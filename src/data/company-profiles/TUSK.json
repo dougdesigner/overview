@@ -1,8 +1,9 @@
 {
   "symbol": "TUSK",
-  "name": "TUSK Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:35:35.652Z",
-  "source": "Alpha Vantage API"
+  "name": "Mammoth Energy Services Inc",
+  "sector": "INDUSTRIALS",
+  "industry": "CONGLOMERATES",
+  "officialSite": "https://www.mammothenergy.com",
+  "cachedAt": "2025-10-19T06:08:34.018Z",
+  "source": "Alpha Vantage API (fixed)"
 }

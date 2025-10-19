@@ -1,8 +1,9 @@
 {
   "symbol": "CWT",
-  "name": "CWT Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:32:05.207Z",
-  "source": "Alpha Vantage API"
+  "name": "California Water Service Group",
+  "sector": "UTILITIES",
+  "industry": "UTILITIES - REGULATED WATER",
+  "officialSite": "https://www.calwatergroup.com",
+  "cachedAt": "2025-10-19T05:26:26.550Z",
+  "source": "Alpha Vantage API (fixed)"
 }

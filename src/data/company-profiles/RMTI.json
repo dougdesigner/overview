@@ -1,8 +1,9 @@
 {
   "symbol": "RMTI",
-  "name": "RMTI Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:28.419Z",
-  "source": "Alpha Vantage API"
+  "name": "Rockwell Medical Inc",
+  "sector": "HEALTHCARE",
+  "industry": "DRUG MANUFACTURERS - SPECIALTY & GENERIC",
+  "officialSite": "https://www.rockwellmed.com",
+  "cachedAt": "2025-10-19T06:02:33.540Z",
+  "source": "Alpha Vantage API (fixed)"
 }

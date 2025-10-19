@@ -1,8 +1,9 @@
 {
   "symbol": "WMB",
-  "name": "WMB Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:29:40.380Z",
-  "source": "Alpha Vantage API"
+  "name": "Williams Companies Inc",
+  "sector": "ENERGY",
+  "industry": "OIL & GAS MIDSTREAM",
+  "officialSite": "https://www.williams.com",
+  "cachedAt": "2025-10-19T06:12:16.965Z",
+  "source": "Alpha Vantage API (fixed)"
 }

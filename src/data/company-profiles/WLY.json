@@ -1,8 +1,9 @@
 {
   "symbol": "WLY",
-  "name": "WLY Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:36:38.193Z",
-  "source": "Alpha Vantage API"
+  "name": "John Wiley & Sons",
+  "sector": "COMMUNICATION SERVICES",
+  "industry": "PUBLISHING",
+  "officialSite": "https://www.wiley.com",
+  "cachedAt": "2025-10-19T06:12:16.004Z",
+  "source": "Alpha Vantage API (fixed)"
 }

@@ -1,8 +1,9 @@
 {
   "symbol": "USEG",
-  "name": "USEG Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:10.284Z",
-  "source": "Alpha Vantage API"
+  "name": "US Energy Corp",
+  "sector": "ENERGY",
+  "industry": "OIL & GAS E&P",
+  "officialSite": "https://www.usnrg.com",
+  "cachedAt": "2025-10-19T06:09:10.691Z",
+  "source": "Alpha Vantage API (fixed)"
 }

@@ -1,8 +1,9 @@
 {
   "symbol": "PRI",
-  "name": "PRI Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:41.271Z",
-  "source": "Alpha Vantage API"
+  "name": "Primerica Inc",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "INSURANCE - LIFE",
+  "officialSite": "https://www.primerica.com",
+  "cachedAt": "2025-10-19T06:00:39.770Z",
+  "source": "Alpha Vantage API (fixed)"
 }

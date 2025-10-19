@@ -1,8 +1,9 @@
 {
   "symbol": "EPC",
-  "name": "EPC Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:34:18.542Z",
-  "source": "Alpha Vantage API"
+  "name": "Edgewell Personal Care Co",
+  "sector": "CONSUMER DEFENSIVE",
+  "industry": "HOUSEHOLD & PERSONAL PRODUCTS",
+  "officialSite": "https://edgewell.com",
+  "cachedAt": "2025-10-19T05:30:01.716Z",
+  "source": "Alpha Vantage API (fixed)"
 }

@@ -1,8 +1,9 @@
 {
   "symbol": "PNC",
-  "name": "PNC Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:29:41.316Z",
-  "source": "Alpha Vantage API"
+  "name": "PNC Financial Services Group Inc",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "BANKS - REGIONAL",
+  "officialSite": "https://www.pnc.com",
+  "cachedAt": "2025-10-19T06:00:28.066Z",
+  "source": "Alpha Vantage API (fixed)"
 }

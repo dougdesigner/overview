@@ -1,8 +1,9 @@
 {
   "symbol": "MAIA",
-  "name": "MAIA Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:35:36.500Z",
-  "source": "Alpha Vantage API"
+  "name": "MAIA Biotechnology Inc.",
+  "sector": "HEALTHCARE",
+  "industry": "BIOTECHNOLOGY",
+  "officialSite": "https://maiabiotech.com",
+  "cachedAt": "2025-10-19T05:48:54.341Z",
+  "source": "Alpha Vantage API (fixed)"
 }

@@ -1,8 +1,9 @@
 {
   "symbol": "MRBK",
-  "name": "MRBK Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:35:28.866Z",
-  "source": "Alpha Vantage API"
+  "name": "Meridian Bank",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "BANKS - REGIONAL",
+  "officialSite": "https://www.meridianbanker.com",
+  "cachedAt": "2025-10-19T05:53:17.382Z",
+  "source": "Alpha Vantage API (fixed)"
 }

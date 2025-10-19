@@ -1,8 +1,9 @@
 {
   "symbol": "WEX",
-  "name": "WEX Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:31:37.794Z",
-  "source": "Alpha Vantage API"
+  "name": "Wex Inc",
+  "sector": "TECHNOLOGY",
+  "industry": "SOFTWARE - INFRASTRUCTURE",
+  "officialSite": "https://www.wexinc.com",
+  "cachedAt": "2025-10-19T06:10:09.371Z",
+  "source": "Alpha Vantage API (fixed)"
 }

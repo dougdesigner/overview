@@ -1,8 +1,9 @@
 {
   "symbol": "LOPE",
-  "name": "LOPE Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:31:30.612Z",
-  "source": "Alpha Vantage API"
+  "name": "Grand Canyon Education Inc",
+  "sector": "CONSUMER DEFENSIVE",
+  "industry": "EDUCATION & TRAINING SERVICES",
+  "officialSite": "https://www.gce.com",
+  "cachedAt": "2025-10-19T05:48:26.045Z",
+  "source": "Alpha Vantage API (fixed)"
 }

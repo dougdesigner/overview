@@ -1,8 +1,9 @@
 {
   "symbol": "RXT",
-  "name": "RXT Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:32:19.218Z",
-  "source": "Alpha Vantage API"
+  "name": "Rackspace Technology Inc",
+  "sector": "TECHNOLOGY",
+  "industry": "SOFTWARE - INFRASTRUCTURE",
+  "officialSite": "https://www.rackspace.com",
+  "cachedAt": "2025-10-19T06:03:01.918Z",
+  "source": "Alpha Vantage API (fixed)"
 }

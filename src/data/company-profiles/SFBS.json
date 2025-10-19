@@ -1,8 +1,9 @@
 {
   "symbol": "SFBS",
-  "name": "SFBS Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:31:19.875Z",
-  "source": "Alpha Vantage API"
+  "name": "ServisFirst Bancshares Inc",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "BANKS - REGIONAL",
+  "officialSite": "https://www.servisfirstbank.com",
+  "cachedAt": "2025-10-19T06:04:19.713Z",
+  "source": "Alpha Vantage API (fixed)"
 }

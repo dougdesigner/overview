@@ -1,8 +1,9 @@
 {
   "symbol": "OLED",
-  "name": "OLED Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:31:29.194Z",
-  "source": "Alpha Vantage API"
+  "name": "Universal Display",
+  "sector": "TECHNOLOGY",
+  "industry": "ELECTRONIC COMPONENTS",
+  "officialSite": "https://oled.com",
+  "cachedAt": "2025-10-19T05:55:08.610Z",
+  "source": "Alpha Vantage API (fixed)"
 }

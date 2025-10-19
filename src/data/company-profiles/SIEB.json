@@ -1,8 +1,9 @@
 {
   "symbol": "SIEB",
-  "name": "SIEB Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:24.887Z",
-  "source": "Alpha Vantage API"
+  "name": "Siebert Financial Corp",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "CAPITAL MARKETS",
+  "officialSite": "https://www.siebert.com",
+  "cachedAt": "2025-10-19T06:04:38.839Z",
+  "source": "Alpha Vantage API (fixed)"
 }

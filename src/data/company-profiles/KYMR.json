@@ -1,8 +1,9 @@
 {
   "symbol": "KYMR",
-  "name": "KYMR Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:36:25.447Z",
-  "source": "Alpha Vantage API"
+  "name": "Kymera Therapeutics Inc",
+  "sector": "HEALTHCARE",
+  "industry": "BIOTECHNOLOGY",
+  "officialSite": "https://www.kymeratx.com",
+  "cachedAt": "2025-10-19T05:44:42.935Z",
+  "source": "Alpha Vantage API (fixed)"
 }

@@ -1,8 +1,9 @@
 {
   "symbol": "SGC",
-  "name": "SGC Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:35.026Z",
-  "source": "Alpha Vantage API"
+  "name": "Superior Uniform Group Inc",
+  "sector": "CONSUMER CYCLICAL",
+  "industry": "APPAREL MANUFACTURING",
+  "officialSite": "https://www.superiorgroupofcompanies.com",
+  "cachedAt": "2025-10-19T06:04:23.602Z",
+  "source": "Alpha Vantage API (fixed)"
 }

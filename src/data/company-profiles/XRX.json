@@ -1,8 +1,9 @@
 {
   "symbol": "XRX",
-  "name": "XRX Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:01.986Z",
-  "source": "Alpha Vantage API"
+  "name": "Xerox Corp",
+  "sector": "TECHNOLOGY",
+  "industry": "INFORMATION TECHNOLOGY SERVICES",
+  "officialSite": "https://www.xerox.com",
+  "cachedAt": "2025-10-19T06:12:42.621Z",
+  "source": "Alpha Vantage API (fixed)"
 }

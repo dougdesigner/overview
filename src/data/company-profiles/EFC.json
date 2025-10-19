@@ -1,8 +1,9 @@
 {
   "symbol": "EFC",
-  "name": "EFC Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:36:16.263Z",
-  "source": "Alpha Vantage API"
+  "name": "Ellington Financial Inc.",
+  "sector": "REAL ESTATE",
+  "industry": "REIT - MORTGAGE",
+  "officialSite": "https://www.ellingtonfinancial.com",
+  "cachedAt": "2025-10-19T05:29:36.932Z",
+  "source": "Alpha Vantage API (fixed)"
 }

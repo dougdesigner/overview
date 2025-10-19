@@ -1,8 +1,9 @@
 {
   "symbol": "COLM",
-  "name": "COLM Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:34:26.546Z",
-  "source": "Alpha Vantage API"
+  "name": "Columbia Sportswear Company",
+  "sector": "CONSUMER CYCLICAL",
+  "industry": "APPAREL MANUFACTURING",
+  "officialSite": "https://www.columbia.com",
+  "cachedAt": "2025-10-19T05:25:23.234Z",
+  "source": "Alpha Vantage API (fixed)"
 }

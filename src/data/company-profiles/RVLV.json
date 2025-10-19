@@ -1,8 +1,9 @@
 {
   "symbol": "RVLV",
-  "name": "RVLV Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:32:12.293Z",
-  "source": "Alpha Vantage API"
+  "name": "Revolve Group LLC",
+  "sector": "CONSUMER CYCLICAL",
+  "industry": "INTERNET RETAIL",
+  "officialSite": "https://www.revolve.com",
+  "cachedAt": "2025-10-19T06:02:54.070Z",
+  "source": "Alpha Vantage API (fixed)"
 }

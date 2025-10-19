@@ -1,8 +1,9 @@
 {
   "symbol": "WAFD",
-  "name": "WAFD Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:13.260Z",
-  "source": "Alpha Vantage API"
+  "name": "Washington Federal Inc",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "BANKS - REGIONAL",
+  "officialSite": "https://www.wafdbank.com",
+  "cachedAt": "2025-10-19T06:10:01.584Z",
+  "source": "Alpha Vantage API (fixed)"
 }

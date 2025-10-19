@@ -1,8 +1,9 @@
 {
   "symbol": "SION",
-  "name": "SION Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:22.832Z",
-  "source": "Alpha Vantage API"
+  "name": "Sionna Therapeutics, Inc. Common Stock",
+  "sector": "HEALTHCARE",
+  "industry": "BIOTECHNOLOGY",
+  "officialSite": "https://www.sionnatx.com",
+  "cachedAt": "2025-10-19T06:04:42.718Z",
+  "source": "Alpha Vantage API (fixed)"
 }

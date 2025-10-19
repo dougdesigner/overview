@@ -1,8 +1,9 @@
 {
   "symbol": "NJR",
-  "name": "NJR Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:31:27.123Z",
-  "source": "Alpha Vantage API"
+  "name": "NewJersey Resources Corporation",
+  "sector": "UTILITIES",
+  "industry": "UTILITIES - REGULATED GAS",
+  "officialSite": "https://www.njresources.com",
+  "cachedAt": "2025-10-19T05:54:00.434Z",
+  "source": "Alpha Vantage API (fixed)"
 }

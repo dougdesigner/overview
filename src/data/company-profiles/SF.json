@@ -1,8 +1,9 @@
 {
   "symbol": "SF",
-  "name": "SF Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:19.212Z",
-  "source": "Alpha Vantage API"
+  "name": "Stifel Financial Corporation",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "CAPITAL MARKETS",
+  "officialSite": "https://www.stifel.com",
+  "cachedAt": "2025-10-19T06:04:18.731Z",
+  "source": "Alpha Vantage API (fixed)"
 }

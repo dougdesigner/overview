@@ -1,8 +1,9 @@
 {
   "symbol": "HE",
-  "name": "HE Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:36:06.003Z",
-  "source": "Alpha Vantage API"
+  "name": "Hawaiian Electric Industries Inc",
+  "sector": "UTILITIES",
+  "industry": "UTILITIES - REGULATED ELECTRIC",
+  "officialSite": "https://www.hei.com",
+  "cachedAt": "2025-10-19T05:37:25.835Z",
+  "source": "Alpha Vantage API (fixed)"
 }

@@ -1,8 +1,9 @@
 {
   "symbol": "MBWM",
-  "name": "MBWM Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:35:36.812Z",
-  "source": "Alpha Vantage API"
+  "name": "Mercantile Bank Corporation",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "BANKS - REGIONAL",
+  "officialSite": "https://www.mercbank.com",
+  "cachedAt": "2025-10-19T05:49:08.051Z",
+  "source": "Alpha Vantage API (fixed)"
 }

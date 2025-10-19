@@ -1,8 +1,9 @@
 {
   "symbol": "OPCH",
-  "name": "OPCH Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:31:02.743Z",
-  "source": "Alpha Vantage API"
+  "name": "Option Care Health Inc",
+  "sector": "HEALTHCARE",
+  "industry": "MEDICAL CARE FACILITIES",
+  "officialSite": "https://www.optioncarehealth.com",
+  "cachedAt": "2025-10-19T05:55:26.145Z",
+  "source": "Alpha Vantage API (fixed)"
 }

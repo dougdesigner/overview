@@ -1,8 +1,9 @@
 {
   "symbol": "SIGA",
-  "name": "SIGA Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:24.488Z",
-  "source": "Alpha Vantage API"
+  "name": "SIGA Technologies Inc",
+  "sector": "HEALTHCARE",
+  "industry": "DRUG MANUFACTURERS - SPECIALTY & GENERIC",
+  "officialSite": "https://www.siga.com",
+  "cachedAt": "2025-10-19T06:04:40.789Z",
+  "source": "Alpha Vantage API (fixed)"
 }

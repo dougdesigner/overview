@@ -1,8 +1,9 @@
 {
   "symbol": "MTX",
-  "name": "MTX Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:35:34.000Z",
-  "source": "Alpha Vantage API"
+  "name": "Minerals Technologies Inc",
+  "sector": "BASIC MATERIALS",
+  "industry": "SPECIALTY CHEMICALS",
+  "officialSite": "https://www.mineralstech.com",
+  "cachedAt": "2025-10-19T05:53:36.161Z",
+  "source": "Alpha Vantage API (fixed)"
 }

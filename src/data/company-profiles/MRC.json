@@ -1,8 +1,9 @@
 {
   "symbol": "MRC",
-  "name": "MRC Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:35:30.348Z",
-  "source": "Alpha Vantage API"
+  "name": "MRC Global Inc",
+  "sector": "ENERGY",
+  "industry": "OIL & GAS EQUIPMENT & SERVICES",
+  "officialSite": "https://www.mrcglobal.com",
+  "cachedAt": "2025-10-19T05:53:18.350Z",
+  "source": "Alpha Vantage API (fixed)"
 }

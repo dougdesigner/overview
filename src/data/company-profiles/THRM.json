@@ -1,8 +1,9 @@
 {
   "symbol": "THRM",
-  "name": "THRM Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:36:21.561Z",
-  "source": "Alpha Vantage API"
+  "name": "Gentherm Inc",
+  "sector": "CONSUMER CYCLICAL",
+  "industry": "AUTO PARTS",
+  "officialSite": "https://gentherm.com",
+  "cachedAt": "2025-10-19T06:07:46.698Z",
+  "source": "Alpha Vantage API (fixed)"
 }

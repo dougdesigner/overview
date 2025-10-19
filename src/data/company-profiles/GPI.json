@@ -1,8 +1,9 @@
 {
   "symbol": "GPI",
-  "name": "GPI Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:31:22.287Z",
-  "source": "Alpha Vantage API"
+  "name": "Group 1 Automotive Inc",
+  "sector": "CONSUMER CYCLICAL",
+  "industry": "AUTO & TRUCK DEALERSHIPS",
+  "officialSite": "https://www.group1auto.com",
+  "cachedAt": "2025-10-19T05:36:59.899Z",
+  "source": "Alpha Vantage API (fixed)"
 }

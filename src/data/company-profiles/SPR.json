@@ -1,8 +1,9 @@
 {
   "symbol": "SPR",
-  "name": "SPR Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:32:04.808Z",
-  "source": "Alpha Vantage API"
+  "name": "Spirit Aerosystems Holdings Inc",
+  "sector": "INDUSTRIALS",
+  "industry": "AEROSPACE & DEFENSE",
+  "officialSite": "https://www.spiritaero.com",
+  "cachedAt": "2025-10-19T06:05:25.944Z",
+  "source": "Alpha Vantage API (fixed)"
 }

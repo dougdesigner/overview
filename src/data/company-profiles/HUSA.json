@@ -1,8 +1,9 @@
 {
   "symbol": "HUSA",
-  "name": "HUSA Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:36:09.464Z",
-  "source": "Alpha Vantage API"
+  "name": "Houston American Energy Corporation",
+  "sector": "ENERGY",
+  "industry": "OIL & GAS E&P",
+  "officialSite": "https://houstonamerican.com",
+  "cachedAt": "2025-10-19T05:42:05.015Z",
+  "source": "Alpha Vantage API (fixed)"
 }

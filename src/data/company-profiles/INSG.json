@@ -1,8 +1,9 @@
 {
   "symbol": "INSG",
-  "name": "INSG Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:36:34.178Z",
-  "source": "Alpha Vantage API"
+  "name": "Inseego Corp",
+  "sector": "TECHNOLOGY",
+  "industry": "COMMUNICATION EQUIPMENT",
+  "officialSite": "https://www.inseego.com",
+  "cachedAt": "2025-10-19T05:42:35.230Z",
+  "source": "Alpha Vantage API (fixed)"
 }

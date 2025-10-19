@@ -1,8 +1,9 @@
 {
   "symbol": "WPC",
-  "name": "WPC Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:34.596Z",
-  "source": "Alpha Vantage API"
+  "name": "W P Carey Inc",
+  "sector": "REAL ESTATE",
+  "industry": "REIT - DIVERSIFIED",
+  "officialSite": "https://www.wpcarey.com",
+  "cachedAt": "2025-10-19T06:12:21.789Z",
+  "source": "Alpha Vantage API (fixed)"
 }

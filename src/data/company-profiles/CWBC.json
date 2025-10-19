@@ -1,8 +1,9 @@
 {
   "symbol": "CWBC",
-  "name": "CWBC Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:34:25.433Z",
-  "source": "Alpha Vantage API"
+  "name": "Community West Bancshares",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "BANKS - REGIONAL",
+  "officialSite": "https://www.communitywestbank.com",
+  "cachedAt": "2025-10-19T05:26:20.702Z",
+  "source": "Alpha Vantage API (fixed)"
 }

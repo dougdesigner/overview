@@ -1,8 +1,9 @@
 {
   "symbol": "ENOV",
-  "name": "ENOV Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:36:14.491Z",
-  "source": "Alpha Vantage API"
+  "name": "Enovis Corp",
+  "sector": "HEALTHCARE",
+  "industry": "MEDICAL DEVICES",
+  "officialSite": "https://www.enovis.com",
+  "cachedAt": "2025-10-19T05:29:54.516Z",
+  "source": "Alpha Vantage API (fixed)"
 }

@@ -1,8 +1,9 @@
 {
   "symbol": "CRI",
-  "name": "CRI Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:34:06.837Z",
-  "source": "Alpha Vantage API"
+  "name": "Carter’s Inc",
+  "sector": "CONSUMER CYCLICAL",
+  "industry": "APPAREL RETAIL",
+  "officialSite": "https://www.carters.com",
+  "cachedAt": "2025-10-19T05:25:43.609Z",
+  "source": "Alpha Vantage API (fixed)"
 }

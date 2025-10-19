@@ -1,8 +1,9 @@
 {
   "symbol": "HLF",
-  "name": "HLF Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:36:13.435Z",
-  "source": "Alpha Vantage API"
+  "name": "Herbalife Nutrition Ltd",
+  "sector": "CONSUMER DEFENSIVE",
+  "industry": "PACKAGED FOODS",
+  "officialSite": "https://www.herbalife.com",
+  "cachedAt": "2025-10-19T05:37:39.474Z",
+  "source": "Alpha Vantage API (fixed)"
 }

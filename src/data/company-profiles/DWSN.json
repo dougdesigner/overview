@@ -1,8 +1,9 @@
 {
   "symbol": "DWSN",
-  "name": "DWSN Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:34:14.210Z",
-  "source": "Alpha Vantage API"
+  "name": "Dawson Geophysical Company",
+  "sector": "ENERGY",
+  "industry": "OIL & GAS EQUIPMENT & SERVICES",
+  "officialSite": "https://www.dawson3d.com",
+  "cachedAt": "2025-10-19T05:29:19.461Z",
+  "source": "Alpha Vantage API (fixed)"
 }

@@ -1,8 +1,9 @@
 {
   "symbol": "TCMD",
-  "name": "TCMD Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:40.340Z",
-  "source": "Alpha Vantage API"
+  "name": "Tactile Systems Technology Inc",
+  "sector": "HEALTHCARE",
+  "industry": "MEDICAL DEVICES",
+  "officialSite": "https://tactilemedical.com",
+  "cachedAt": "2025-10-19T06:07:34.340Z",
+  "source": "Alpha Vantage API (fixed)"
 }

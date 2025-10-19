@@ -1,8 +1,9 @@
 {
   "symbol": "SKYW",
-  "name": "SKYW Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:31:10.434Z",
-  "source": "Alpha Vantage API"
+  "name": "SkyWest Inc",
+  "sector": "INDUSTRIALS",
+  "industry": "AIRLINES",
+  "officialSite": "https://inc.skywest.com",
+  "cachedAt": "2025-10-19T06:04:55.460Z",
+  "source": "Alpha Vantage API (fixed)"
 }

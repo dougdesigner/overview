@@ -1,8 +1,9 @@
 {
   "symbol": "DRS",
-  "name": "DRS Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:31:25.562Z",
-  "source": "Alpha Vantage API"
+  "name": "Leonardo DRS, Inc. Common Stock",
+  "sector": "INDUSTRIALS",
+  "industry": "AEROSPACE & DEFENSE",
+  "officialSite": "https://www.leonardodrs.com",
+  "cachedAt": "2025-10-19T05:29:10.672Z",
+  "source": "Alpha Vantage API (fixed)"
 }

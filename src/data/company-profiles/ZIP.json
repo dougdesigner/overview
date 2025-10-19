@@ -1,8 +1,9 @@
 {
   "symbol": "ZIP",
-  "name": "ZIP Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:07.555Z",
-  "source": "Alpha Vantage API"
+  "name": "Ziprecruiter Inc",
+  "sector": "COMMUNICATION SERVICES",
+  "industry": "INTERNET CONTENT & INFORMATION",
+  "officialSite": "https://www.ziprecruiter.com",
+  "cachedAt": "2025-10-19T06:12:49.546Z",
+  "source": "Alpha Vantage API (fixed)"
 }

@@ -1,8 +1,9 @@
 {
   "symbol": "SIDU",
-  "name": "SIDU Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:25.205Z",
-  "source": "Alpha Vantage API"
+  "name": "Sidus Space Inc",
+  "sector": "INDUSTRIALS",
+  "industry": "AEROSPACE & DEFENSE",
+  "officialSite": "https://www.sidusspace.com",
+  "cachedAt": "2025-10-19T06:04:37.839Z",
+  "source": "Alpha Vantage API (fixed)"
 }

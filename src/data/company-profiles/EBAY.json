@@ -1,8 +1,9 @@
 {
   "symbol": "EBAY",
-  "name": "EBAY Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:00.829Z",
-  "source": "Alpha Vantage API"
+  "name": "eBay Inc",
+  "sector": "CONSUMER CYCLICAL",
+  "industry": "INTERNET RETAIL",
+  "officialSite": "https://www.ebayinc.com",
+  "cachedAt": "2025-10-19T05:29:26.252Z",
+  "source": "Alpha Vantage API (fixed)"
 }

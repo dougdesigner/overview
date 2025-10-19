@@ -1,8 +1,9 @@
 {
   "symbol": "WSO",
-  "name": "WSO Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:34.290Z",
-  "source": "Alpha Vantage API"
+  "name": "Watsco Inc",
+  "sector": "INDUSTRIALS",
+  "industry": "INDUSTRIAL DISTRIBUTION",
+  "officialSite": "https://www.watsco.com",
+  "cachedAt": "2025-10-19T06:12:27.997Z",
+  "source": "Alpha Vantage API (fixed)"
 }

@@ -1,8 +1,9 @@
 {
   "symbol": "OM",
-  "name": "OM Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:32:33.373Z",
-  "source": "Alpha Vantage API"
+  "name": "Outset Medical Inc",
+  "sector": "HEALTHCARE",
+  "industry": "MEDICAL DEVICES",
+  "officialSite": "https://www.outsetmedical.com",
+  "cachedAt": "2025-10-19T05:55:11.517Z",
+  "source": "Alpha Vantage API (fixed)"
 }

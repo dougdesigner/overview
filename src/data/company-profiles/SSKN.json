@@ -1,8 +1,9 @@
 {
   "symbol": "SSKN",
-  "name": "SSKN Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:37.738Z",
-  "source": "Alpha Vantage API"
+  "name": "STRATA Skin Sciences Inc",
+  "sector": "HEALTHCARE",
+  "industry": "MEDICAL DEVICES",
+  "officialSite": "https://www.strataskinsciences.com",
+  "cachedAt": "2025-10-19T06:05:42.983Z",
+  "source": "Alpha Vantage API (fixed)"
 }

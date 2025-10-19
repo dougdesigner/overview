@@ -1,8 +1,9 @@
 {
   "symbol": "EWTX",
-  "name": "EWTX Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:35:27.071Z",
-  "source": "Alpha Vantage API"
+  "name": "Edgewise Therapeutics Inc",
+  "sector": "HEALTHCARE",
+  "industry": "BIOTECHNOLOGY",
+  "officialSite": "https://edgewisetx.com",
+  "cachedAt": "2025-10-19T05:30:43.799Z",
+  "source": "Alpha Vantage API (fixed)"
 }

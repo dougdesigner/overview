@@ -1,8 +1,9 @@
 {
   "symbol": "LSTR",
-  "name": "LSTR Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:31:22.897Z",
-  "source": "Alpha Vantage API"
+  "name": "Landstar System Inc",
+  "sector": "INDUSTRIALS",
+  "industry": "INTEGRATED FREIGHT & LOGISTICS",
+  "officialSite": "https://www.landstar.com",
+  "cachedAt": "2025-10-19T05:48:37.752Z",
+  "source": "Alpha Vantage API (fixed)"
 }

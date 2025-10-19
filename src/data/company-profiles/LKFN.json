@@ -1,8 +1,9 @@
 {
   "symbol": "LKFN",
-  "name": "LKFN Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:36:24.570Z",
-  "source": "Alpha Vantage API"
+  "name": "Lakeland Financial Corporation",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "BANKS - REGIONAL",
+  "officialSite": "https://www.lakecitybank.com",
+  "cachedAt": "2025-10-19T05:45:18.263Z",
+  "source": "Alpha Vantage API (fixed)"
 }

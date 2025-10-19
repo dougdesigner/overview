@@ -1,8 +1,9 @@
 {
   "symbol": "WU",
-  "name": "WU Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:31:39.443Z",
-  "source": "Alpha Vantage API"
+  "name": "Western Union Co",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "CREDIT SERVICES",
+  "officialSite": "https://www.westernunion.com",
+  "cachedAt": "2025-10-19T06:12:32.796Z",
+  "source": "Alpha Vantage API (fixed)"
 }

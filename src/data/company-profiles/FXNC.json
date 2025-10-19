@@ -1,8 +1,9 @@
 {
   "symbol": "FXNC",
-  "name": "FXNC Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:36:14.059Z",
-  "source": "Alpha Vantage API"
+  "name": "First National Corp",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "BANKS - REGIONAL",
+  "officialSite": "https://www.fbvirginia.com",
+  "cachedAt": "2025-10-19T05:31:41.830Z",
+  "source": "Alpha Vantage API (fixed)"
 }

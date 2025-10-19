@@ -1,8 +1,9 @@
 {
   "symbol": "RBB",
-  "name": "RBB Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:32:35.780Z",
-  "source": "Alpha Vantage API"
+  "name": "RBB Bancorp",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "BANKS - REGIONAL",
+  "officialSite": "https://www.royalbusinessbankusa.com",
+  "cachedAt": "2025-10-19T06:01:22.443Z",
+  "source": "Alpha Vantage API (fixed)"
 }

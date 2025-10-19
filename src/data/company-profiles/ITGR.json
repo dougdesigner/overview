@@ -1,8 +1,9 @@
 {
   "symbol": "ITGR",
-  "name": "ITGR Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:31:09.793Z",
-  "source": "Alpha Vantage API"
+  "name": "Integer Holdings Corp",
+  "sector": "HEALTHCARE",
+  "industry": "MEDICAL DEVICES",
+  "officialSite": "https://www.integer.net",
+  "cachedAt": "2025-10-19T05:42:47.902Z",
+  "source": "Alpha Vantage API (fixed)"
 }

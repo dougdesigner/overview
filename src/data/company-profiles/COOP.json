@@ -1,8 +1,9 @@
 {
   "symbol": "COOP",
-  "name": "COOP Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:32:04.578Z",
-  "source": "Alpha Vantage API"
+  "name": "Mr. Cooper Group Inc",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "MORTGAGE FINANCE",
+  "officialSite": "https://www.mrcoopergroup.com",
+  "cachedAt": "2025-10-19T05:25:27.093Z",
+  "source": "Alpha Vantage API (fixed)"
 }

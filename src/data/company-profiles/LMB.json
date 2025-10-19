@@ -1,8 +1,9 @@
 {
   "symbol": "LMB",
-  "name": "LMB Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:36:33.865Z",
-  "source": "Alpha Vantage API"
+  "name": "Limbach Holdings Inc",
+  "sector": "INDUSTRIALS",
+  "industry": "BUILDING PRODUCTS & EQUIPMENT",
+  "officialSite": "https://www.limbachinc.com",
+  "cachedAt": "2025-10-19T05:48:15.362Z",
+  "source": "Alpha Vantage API (fixed)"
 }

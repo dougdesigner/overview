@@ -1,8 +1,9 @@
 {
   "symbol": "RXST",
-  "name": "RXST Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:26.891Z",
-  "source": "Alpha Vantage API"
+  "name": "Rxsight Inc",
+  "sector": "HEALTHCARE",
+  "industry": "MEDICAL DEVICES",
+  "officialSite": "https://www.rxsight.com",
+  "cachedAt": "2025-10-19T06:03:00.898Z",
+  "source": "Alpha Vantage API (fixed)"
 }

@@ -1,8 +1,9 @@
 {
   "symbol": "RZLT",
-  "name": "RZLT Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:32:12.573Z",
-  "source": "Alpha Vantage API"
+  "name": "Rezolute Inc",
+  "sector": "HEALTHCARE",
+  "industry": "BIOTECHNOLOGY",
+  "officialSite": "https://www.rezolutebio.com",
+  "cachedAt": "2025-10-19T06:03:05.874Z",
+  "source": "Alpha Vantage API (fixed)"
 }

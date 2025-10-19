@@ -1,8 +1,9 @@
 {
   "symbol": "SDOT",
-  "name": "SDOT Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:34.219Z",
-  "source": "Alpha Vantage API"
+  "name": "Sadot Group Inc.",
+  "sector": "CONSUMER DEFENSIVE",
+  "industry": "FARM PRODUCTS",
+  "officialSite": "https://www.sadotgroupinc.com",
+  "cachedAt": "2025-10-19T06:03:29.381Z",
+  "source": "Alpha Vantage API (fixed)"
 }

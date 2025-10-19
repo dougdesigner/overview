@@ -1,8 +1,9 @@
 {
   "symbol": "TRMK",
-  "name": "TRMK Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:32:38.733Z",
-  "source": "Alpha Vantage API"
+  "name": "Trustmark Corporation",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "BANKS - REGIONAL",
+  "officialSite": "https://www.trustmark.com",
+  "cachedAt": "2025-10-19T06:08:09.950Z",
+  "source": "Alpha Vantage API (fixed)"
 }

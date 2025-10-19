@@ -1,8 +1,9 @@
 {
   "symbol": "CRBU",
-  "name": "CRBU Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:34:08.695Z",
-  "source": "Alpha Vantage API"
+  "name": "Caribou Biosciences Inc",
+  "sector": "HEALTHCARE",
+  "industry": "BIOTECHNOLOGY",
+  "officialSite": "https://cariboubio.com",
+  "cachedAt": "2025-10-19T05:25:40.715Z",
+  "source": "Alpha Vantage API (fixed)"
 }

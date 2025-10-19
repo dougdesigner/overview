@@ -1,8 +1,9 @@
 {
   "symbol": "LUCD",
-  "name": "LUCD Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:35:38.372Z",
-  "source": "Alpha Vantage API"
+  "name": "Lucid Diagnostics Inc",
+  "sector": "HEALTHCARE",
+  "industry": "MEDICAL DEVICES",
+  "officialSite": "https://www.luciddx.com",
+  "cachedAt": "2025-10-19T05:48:40.688Z",
+  "source": "Alpha Vantage API (fixed)"
 }

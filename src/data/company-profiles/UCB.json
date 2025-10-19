@@ -1,8 +1,9 @@
 {
   "symbol": "UCB",
-  "name": "UCB Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:31:15.197Z",
-  "source": "Alpha Vantage API"
+  "name": "United Community Banks, Inc.",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "BANKS - REGIONAL",
+  "officialSite": "https://www.ucbi.com",
+  "cachedAt": "2025-10-19T06:08:50.628Z",
+  "source": "Alpha Vantage API (fixed)"
 }

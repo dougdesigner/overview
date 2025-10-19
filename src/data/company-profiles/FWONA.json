@@ -1,8 +1,9 @@
 {
   "symbol": "FWONA",
-  "name": "FWONA Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:36:33.240Z",
-  "source": "Alpha Vantage API"
+  "name": "Liberty Media Corporation Series A Liberty Formula One Common Stock",
+  "sector": "COMMUNICATION SERVICES",
+  "industry": "ENTERTAINMENT",
+  "officialSite": "https://www.libertymedia.com/tracking-stocks/formu",
+  "cachedAt": "2025-10-19T05:31:38.906Z",
+  "source": "Alpha Vantage API (fixed)"
 }

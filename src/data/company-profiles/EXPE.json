@@ -1,8 +1,9 @@
 {
   "symbol": "EXPE",
-  "name": "EXPE Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:22.173Z",
-  "source": "Alpha Vantage API"
+  "name": "Expedia Group Inc.",
+  "sector": "CONSUMER CYCLICAL",
+  "industry": "TRAVEL SERVICES",
+  "officialSite": "https://www.expediagroup.com",
+  "cachedAt": "2025-10-19T05:30:47.711Z",
+  "source": "Alpha Vantage API (fixed)"
 }

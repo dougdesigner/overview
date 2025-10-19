@@ -1,8 +1,9 @@
 {
   "symbol": "MLR",
-  "name": "MLR Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:35:24.984Z",
-  "source": "Alpha Vantage API"
+  "name": "Miller Industries Inc",
+  "sector": "CONSUMER CYCLICAL",
+  "industry": "AUTO PARTS",
+  "officialSite": "https://www.millerind.com",
+  "cachedAt": "2025-10-19T05:52:53.986Z",
+  "source": "Alpha Vantage API (fixed)"
 }

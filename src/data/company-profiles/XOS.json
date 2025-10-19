@@ -1,8 +1,9 @@
 {
   "symbol": "XOS",
-  "name": "XOS Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:03.843Z",
-  "source": "Alpha Vantage API"
+  "name": "Xos Inc",
+  "sector": "INDUSTRIALS",
+  "industry": "FARM & HEAVY CONSTRUCTION MACHINERY",
+  "officialSite": "https://www.xostrucks.com",
+  "cachedAt": "2025-10-19T06:12:38.747Z",
+  "source": "Alpha Vantage API (fixed)"
 }

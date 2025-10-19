@@ -1,8 +1,9 @@
 {
   "symbol": "MXL",
-  "name": "MXL Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:35:41.057Z",
-  "source": "Alpha Vantage API"
+  "name": "MaxLinear Inc",
+  "sector": "TECHNOLOGY",
+  "industry": "SEMICONDUCTORS",
+  "officialSite": "https://www.maxlinear.com",
+  "cachedAt": "2025-10-19T05:53:42.892Z",
+  "source": "Alpha Vantage API (fixed)"
 }

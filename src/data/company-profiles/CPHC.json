@@ -1,8 +1,9 @@
 {
   "symbol": "CPHC",
-  "name": "CPHC Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:34:11.526Z",
-  "source": "Alpha Vantage API"
+  "name": "Canterbury Park Holding Corporation",
+  "sector": "CONSUMER CYCLICAL",
+  "industry": "RESORTS & CASINOS",
+  "officialSite": "https://www.canterburypark.com",
+  "cachedAt": "2025-10-19T05:25:30.941Z",
+  "source": "Alpha Vantage API (fixed)"
 }

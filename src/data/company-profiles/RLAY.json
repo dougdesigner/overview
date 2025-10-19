@@ -1,8 +1,9 @@
 {
   "symbol": "RLAY",
-  "name": "RLAY Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:32:27.983Z",
-  "source": "Alpha Vantage API"
+  "name": "Relay Therapeutics Inc",
+  "sector": "HEALTHCARE",
+  "industry": "BIOTECHNOLOGY",
+  "officialSite": "https://www.relaytx.com",
+  "cachedAt": "2025-10-19T06:02:23.775Z",
+  "source": "Alpha Vantage API (fixed)"
 }

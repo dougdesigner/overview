@@ -1,8 +1,9 @@
 {
   "symbol": "TCX",
-  "name": "TCX Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:32:37.709Z",
-  "source": "Alpha Vantage API"
+  "name": "Tucows Inc.",
+  "sector": "TECHNOLOGY",
+  "industry": "SOFTWARE - INFRASTRUCTURE",
+  "officialSite": "https://www.tucows.com",
+  "cachedAt": "2025-10-19T06:07:36.280Z",
+  "source": "Alpha Vantage API (fixed)"
 }

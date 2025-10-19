@@ -1,8 +1,9 @@
 {
   "symbol": "KRC",
-  "name": "KRC Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:31:01.484Z",
-  "source": "Alpha Vantage API"
+  "name": "Kilroy Realty Corp",
+  "sector": "REAL ESTATE",
+  "industry": "REIT - OFFICE",
+  "officialSite": "https://www.kilroyrealty.com",
+  "cachedAt": "2025-10-19T05:44:31.233Z",
+  "source": "Alpha Vantage API (fixed)"
 }

@@ -1,8 +1,9 @@
 {
   "symbol": "LADR",
-  "name": "LADR Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:36:24.868Z",
-  "source": "Alpha Vantage API"
+  "name": "Ladder Capital Corp Class A",
+  "sector": "REAL ESTATE",
+  "industry": "REIT - MORTGAGE",
+  "officialSite": "https://www.laddercapital.com",
+  "cachedAt": "2025-10-19T05:44:45.856Z",
+  "source": "Alpha Vantage API (fixed)"
 }

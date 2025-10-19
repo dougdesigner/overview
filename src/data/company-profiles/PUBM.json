@@ -1,8 +1,9 @@
 {
   "symbol": "PUBM",
-  "name": "PUBM Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:32:23.095Z",
-  "source": "Alpha Vantage API"
+  "name": "Pubmatic Inc",
+  "sector": "TECHNOLOGY",
+  "industry": "SOFTWARE - APPLICATION",
+  "officialSite": "https://www.pubmatic.com",
+  "cachedAt": "2025-10-19T06:00:59.287Z",
+  "source": "Alpha Vantage API (fixed)"
 }

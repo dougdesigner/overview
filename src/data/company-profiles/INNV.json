@@ -1,8 +1,9 @@
 {
   "symbol": "INNV",
-  "name": "INNV Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:36:37.185Z",
-  "source": "Alpha Vantage API"
+  "name": "InnovAge Holding Corp",
+  "sector": "HEALTHCARE",
+  "industry": "MEDICAL CARE FACILITIES",
+  "officialSite": "https://www.innovage.com",
+  "cachedAt": "2025-10-19T05:42:31.326Z",
+  "source": "Alpha Vantage API (fixed)"
 }

@@ -1,8 +1,9 @@
 {
   "symbol": "SGI",
-  "name": "SGI Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:24.832Z",
-  "source": "Alpha Vantage API"
+  "name": "Somnigroup International Inc.",
+  "sector": "CONSUMER CYCLICAL",
+  "industry": "FURNISHINGS, FIXTURES & APPLIANCES",
+  "officialSite": "https://somnigroup.com",
+  "cachedAt": "2025-10-19T06:04:25.538Z",
+  "source": "Alpha Vantage API (fixed)"
 }

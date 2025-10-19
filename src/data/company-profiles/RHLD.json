@@ -1,8 +1,9 @@
 {
   "symbol": "RHLD",
-  "name": "RHLD Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:32:28.601Z",
-  "source": "Alpha Vantage API"
+  "name": "Resolute Holdings Management, Inc.",
+  "sector": "INDUSTRIALS",
+  "industry": "SPECIALTY BUSINESS SERVICES",
+  "officialSite": "https://resoluteholdings.com",
+  "cachedAt": "2025-10-19T06:02:13.540Z",
+  "source": "Alpha Vantage API (fixed)"
 }

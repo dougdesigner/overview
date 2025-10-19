@@ -1,8 +1,9 @@
 {
   "symbol": "PAYO",
-  "name": "PAYO Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:32:16.684Z",
-  "source": "Alpha Vantage API"
+  "name": "Payoneer Global Inc",
+  "sector": "TECHNOLOGY",
+  "industry": "SOFTWARE - INFRASTRUCTURE",
+  "officialSite": "https://www.payoneer.com",
+  "cachedAt": "2025-10-19T05:56:07.000Z",
+  "source": "Alpha Vantage API (fixed)"
 }

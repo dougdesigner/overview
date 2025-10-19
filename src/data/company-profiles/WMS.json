@@ -1,8 +1,9 @@
 {
   "symbol": "WMS",
-  "name": "WMS Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:15.630Z",
-  "source": "Alpha Vantage API"
+  "name": "Advanced Drainage Systems Inc",
+  "sector": "INDUSTRIALS",
+  "industry": "BUILDING PRODUCTS & EQUIPMENT",
+  "officialSite": "https://www.adspipe.com",
+  "cachedAt": "2025-10-19T06:12:18.883Z",
+  "source": "Alpha Vantage API (fixed)"
 }

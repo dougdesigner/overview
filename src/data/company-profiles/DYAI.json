@@ -1,8 +1,9 @@
 {
   "symbol": "DYAI",
-  "name": "DYAI Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:34:20.414Z",
-  "source": "Alpha Vantage API"
+  "name": "Dyadic International Inc",
+  "sector": "HEALTHCARE",
+  "industry": "BIOTECHNOLOGY",
+  "officialSite": "https://www.dyadic.com",
+  "cachedAt": "2025-10-19T05:29:24.293Z",
+  "source": "Alpha Vantage API (fixed)"
 }

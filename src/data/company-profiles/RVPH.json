@@ -1,8 +1,9 @@
 {
   "symbol": "RVPH",
-  "name": "RVPH Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:32:13.205Z",
-  "source": "Alpha Vantage API"
+  "name": "Reviva Pharmaceuticals Holdings Inc.",
+  "sector": "HEALTHCARE",
+  "industry": "BIOTECHNOLOGY",
+  "officialSite": "https://www.revivapharma.com",
+  "cachedAt": "2025-10-19T06:02:56.981Z",
+  "source": "Alpha Vantage API (fixed)"
 }

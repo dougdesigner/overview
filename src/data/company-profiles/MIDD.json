@@ -1,8 +1,9 @@
 {
   "symbol": "MIDD",
-  "name": "MIDD Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:31:34.150Z",
-  "source": "Alpha Vantage API"
+  "name": "Middleby Corp",
+  "sector": "INDUSTRIALS",
+  "industry": "SPECIALTY INDUSTRIAL MACHINERY",
+  "officialSite": "https://www.middleby.com",
+  "cachedAt": "2025-10-19T05:52:43.319Z",
+  "source": "Alpha Vantage API (fixed)"
 }

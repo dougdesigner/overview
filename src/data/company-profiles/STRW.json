@@ -1,8 +1,9 @@
 {
   "symbol": "STRW",
-  "name": "STRW Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:37.099Z",
-  "source": "Alpha Vantage API"
+  "name": "Strawberry Fields REIT LLC",
+  "sector": "REAL ESTATE",
+  "industry": "REIT - HEALTHCARE FACILITIES",
+  "officialSite": "https://www.strawberryfieldsreit.com",
+  "cachedAt": "2025-10-19T06:07:01.253Z",
+  "source": "Alpha Vantage API (fixed)"
 }

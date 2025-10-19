@@ -1,8 +1,9 @@
 {
   "symbol": "SMLR",
-  "name": "SMLR Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:20.755Z",
-  "source": "Alpha Vantage API"
+  "name": "Semler Scientific Inc",
+  "sector": "HEALTHCARE",
+  "industry": "MEDICAL DEVICES",
+  "officialSite": "https://www.semlerscientific.com",
+  "cachedAt": "2025-10-19T06:05:04.437Z",
+  "source": "Alpha Vantage API (fixed)"
 }

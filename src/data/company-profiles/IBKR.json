@@ -1,8 +1,9 @@
 {
   "symbol": "IBKR",
-  "name": "IBKR Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:01.636Z",
-  "source": "Alpha Vantage API"
+  "name": "Interactive Brokers Group Inc",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "CAPITAL MARKETS",
+  "officialSite": "https://www.interactivebrokers.com",
+  "cachedAt": "2025-10-19T05:42:10.867Z",
+  "source": "Alpha Vantage API (fixed)"
 }

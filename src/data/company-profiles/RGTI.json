@@ -1,8 +1,9 @@
 {
   "symbol": "RGTI",
-  "name": "RGTI Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:32:09.810Z",
-  "source": "Alpha Vantage API"
+  "name": "Rigetti Computing Inc",
+  "sector": "TECHNOLOGY",
+  "industry": "COMPUTER HARDWARE",
+  "officialSite": "https://www.rigetti.com",
+  "cachedAt": "2025-10-19T06:02:09.613Z",
+  "source": "Alpha Vantage API (fixed)"
 }

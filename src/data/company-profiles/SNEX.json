@@ -1,8 +1,9 @@
 {
   "symbol": "SNEX",
-  "name": "SNEX Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:31:40.731Z",
-  "source": "Alpha Vantage API"
+  "name": "Stonex Group Inc",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "CAPITAL MARKETS",
+  "officialSite": "https://www.stonex.com",
+  "cachedAt": "2025-10-19T06:05:16.162Z",
+  "source": "Alpha Vantage API (fixed)"
 }

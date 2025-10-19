@@ -1,8 +1,9 @@
 {
   "symbol": "WSBF",
-  "name": "WSBF Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:03.696Z",
-  "source": "Alpha Vantage API"
+  "name": "Waterstone Financial Inc",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "BANKS - REGIONAL",
+  "officialSite": "https://www.wsbonline.com",
+  "cachedAt": "2025-10-19T06:12:26.035Z",
+  "source": "Alpha Vantage API (fixed)"
 }

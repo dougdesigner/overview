@@ -1,8 +1,9 @@
 {
   "symbol": "GROW",
-  "name": "GROW Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:12.508Z",
-  "source": "Alpha Vantage API"
+  "name": "US Global Investors Inc",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "ASSET MANAGEMENT",
+  "officialSite": "https://www.usfunds.com",
+  "cachedAt": "2025-10-19T05:37:05.397Z",
+  "source": "Alpha Vantage API (fixed)"
 }

@@ -1,8 +1,9 @@
 {
   "symbol": "DAKT",
-  "name": "DAKT Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:34:18.351Z",
-  "source": "Alpha Vantage API"
+  "name": "Daktronics Inc",
+  "sector": "TECHNOLOGY",
+  "industry": "ELECTRONIC COMPONENTS",
+  "officialSite": "https://www.daktronics.com",
+  "cachedAt": "2025-10-19T05:26:33.365Z",
+  "source": "Alpha Vantage API (fixed)"
 }

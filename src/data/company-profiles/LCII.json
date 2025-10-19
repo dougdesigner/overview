@@ -1,8 +1,9 @@
 {
   "symbol": "LCII",
-  "name": "LCII Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:36:23.947Z",
-  "source": "Alpha Vantage API"
+  "name": "LCI Industries",
+  "sector": "CONSUMER CYCLICAL",
+  "industry": "RECREATIONAL VEHICLES",
+  "officialSite": "https://corporate.lippert.com",
+  "cachedAt": "2025-10-19T05:44:55.575Z",
+  "source": "Alpha Vantage API (fixed)"
 }

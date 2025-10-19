@@ -1,8 +1,9 @@
 {
   "symbol": "TNDM",
-  "name": "TNDM Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:39.723Z",
-  "source": "Alpha Vantage API"
+  "name": "Tandem Diabetes Care Inc",
+  "sector": "HEALTHCARE",
+  "industry": "MEDICAL DEVICES",
+  "officialSite": "https://www.tandemdiabetes.com",
+  "cachedAt": "2025-10-19T06:07:55.565Z",
+  "source": "Alpha Vantage API (fixed)"
 }

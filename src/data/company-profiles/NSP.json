@@ -1,8 +1,9 @@
 {
   "symbol": "NSP",
-  "name": "NSP Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:36:34.014Z",
-  "source": "Alpha Vantage API"
+  "name": "Insperity Inc",
+  "sector": "INDUSTRIALS",
+  "industry": "STAFFING & EMPLOYMENT SERVICES",
+  "officialSite": "https://www.insperity.com",
+  "cachedAt": "2025-10-19T05:54:38.465Z",
+  "source": "Alpha Vantage API (fixed)"
 }

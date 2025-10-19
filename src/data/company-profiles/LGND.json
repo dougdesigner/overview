@@ -1,8 +1,9 @@
 {
   "symbol": "LGND",
-  "name": "LGND Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:36:32.158Z",
-  "source": "Alpha Vantage API"
+  "name": "Ligand Pharmaceuticals Incorporated",
+  "sector": "HEALTHCARE",
+  "industry": "BIOTECHNOLOGY",
+  "officialSite": "https://www.ligand.com",
+  "cachedAt": "2025-10-19T05:45:13.389Z",
+  "source": "Alpha Vantage API (fixed)"
 }

@@ -1,8 +1,9 @@
 {
   "symbol": "HPQ",
-  "name": "HPQ Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:07.757Z",
-  "source": "Alpha Vantage API"
+  "name": "HP Inc",
+  "sector": "TECHNOLOGY",
+  "industry": "COMPUTER HARDWARE",
+  "officialSite": "https://www.hp.com",
+  "cachedAt": "2025-10-19T05:41:39.620Z",
+  "source": "Alpha Vantage API (fixed)"
 }

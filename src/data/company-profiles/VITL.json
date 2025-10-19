@@ -1,8 +1,9 @@
 {
   "symbol": "VITL",
-  "name": "VITL Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:14.992Z",
-  "source": "Alpha Vantage API"
+  "name": "Vital Farms Inc",
+  "sector": "CONSUMER DEFENSIVE",
+  "industry": "FARM PRODUCTS",
+  "officialSite": "https://vitalfarms.com",
+  "cachedAt": "2025-10-19T06:09:36.306Z",
+  "source": "Alpha Vantage API (fixed)"
 }

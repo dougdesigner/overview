@@ -1,8 +1,9 @@
 {
   "symbol": "LPLA",
-  "name": "LPLA Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:11.989Z",
-  "source": "Alpha Vantage API"
+  "name": "LPL Financial Holdings Inc",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "CAPITAL MARKETS",
+  "officialSite": "https://www.lpl.com",
+  "cachedAt": "2025-10-19T05:48:28.008Z",
+  "source": "Alpha Vantage API (fixed)"
 }

@@ -1,8 +1,9 @@
 {
   "symbol": "DTST",
-  "name": "DTST Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:34:14.669Z",
-  "source": "Alpha Vantage API"
+  "name": "Data Storage Corp",
+  "sector": "TECHNOLOGY",
+  "industry": "INFORMATION TECHNOLOGY SERVICES",
+  "officialSite": "https://www.dtst.com",
+  "cachedAt": "2025-10-19T05:29:13.573Z",
+  "source": "Alpha Vantage API (fixed)"
 }

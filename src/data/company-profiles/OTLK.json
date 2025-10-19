@@ -1,8 +1,9 @@
 {
   "symbol": "OTLK",
-  "name": "OTLK Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:32:31.809Z",
-  "source": "Alpha Vantage API"
+  "name": "OUTLOOK THERAPEUTICS INC",
+  "sector": "HEALTHCARE",
+  "industry": "BIOTECHNOLOGY",
+  "officialSite": "https://www.outlooktherapeutics.com",
+  "cachedAt": "2025-10-19T05:55:49.524Z",
+  "source": "Alpha Vantage API (fixed)"
 }

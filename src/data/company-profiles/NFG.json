@@ -1,8 +1,9 @@
 {
   "symbol": "NFG",
-  "name": "NFG Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:31:13.403Z",
-  "source": "Alpha Vantage API"
+  "name": "National Fuel Gas Company",
+  "sector": "ENERGY",
+  "industry": "OIL & GAS INTEGRATED",
+  "officialSite": "https://www.nationalfuel.com",
+  "cachedAt": "2025-10-19T05:53:57.468Z",
+  "source": "Alpha Vantage API (fixed)"
 }

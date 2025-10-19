@@ -1,8 +1,9 @@
 {
   "symbol": "TCRX",
-  "name": "TCRX Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:32:38.333Z",
-  "source": "Alpha Vantage API"
+  "name": "Tscan Therapeutics Inc",
+  "sector": "HEALTHCARE",
+  "industry": "BIOTECHNOLOGY",
+  "officialSite": "https://www.tscan.com",
+  "cachedAt": "2025-10-19T06:07:35.308Z",
+  "source": "Alpha Vantage API (fixed)"
 }

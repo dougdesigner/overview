@@ -1,8 +1,9 @@
 {
   "symbol": "LZB",
-  "name": "LZB Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:36:25.013Z",
-  "source": "Alpha Vantage API"
+  "name": "La-Z-Boy Incorporated",
+  "sector": "CONSUMER CYCLICAL",
+  "industry": "FURNISHINGS, FIXTURES & APPLIANCES",
+  "officialSite": "https://www.la-z-boy.com",
+  "cachedAt": "2025-10-19T05:48:51.428Z",
+  "source": "Alpha Vantage API (fixed)"
 }

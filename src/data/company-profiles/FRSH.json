@@ -1,8 +1,9 @@
 {
   "symbol": "FRSH",
-  "name": "FRSH Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:31:28.843Z",
-  "source": "Alpha Vantage API"
+  "name": "Freshworks Inc",
+  "sector": "TECHNOLOGY",
+  "industry": "SOFTWARE - APPLICATION",
+  "officialSite": "https://www.freshworks.com",
+  "cachedAt": "2025-10-19T05:31:25.250Z",
+  "source": "Alpha Vantage API (fixed)"
 }

@@ -1,8 +1,9 @@
 {
   "symbol": "VLTO",
-  "name": "VLTO Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:25.617Z",
-  "source": "Alpha Vantage API"
+  "name": "Veralto Corporation",
+  "sector": "INDUSTRIALS",
+  "industry": "POLLUTION & TREATMENT CONTROLS",
+  "officialSite": "https://www.veralto.com",
+  "cachedAt": "2025-10-19T06:09:38.244Z",
+  "source": "Alpha Vantage API (fixed)"
 }

@@ -1,8 +1,9 @@
 {
   "symbol": "DVAX",
-  "name": "DVAX Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:34:20.106Z",
-  "source": "Alpha Vantage API"
+  "name": "Dynavax Technologies Corporation",
+  "sector": "HEALTHCARE",
+  "industry": "DRUG MANUFACTURERS - SPECIALTY & GENERIC",
+  "officialSite": "https://www.dynavax.com",
+  "cachedAt": "2025-10-19T05:29:16.492Z",
+  "source": "Alpha Vantage API (fixed)"
 }

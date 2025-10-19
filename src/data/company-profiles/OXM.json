@@ -1,8 +1,9 @@
 {
   "symbol": "OXM",
-  "name": "OXM Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:32:34.823Z",
-  "source": "Alpha Vantage API"
+  "name": "Oxford Industries Inc",
+  "sector": "CONSUMER CYCLICAL",
+  "industry": "APPAREL MANUFACTURING",
+  "officialSite": "https://www.oxfordinc.com",
+  "cachedAt": "2025-10-19T05:55:56.308Z",
+  "source": "Alpha Vantage API (fixed)"
 }

@@ -1,8 +1,9 @@
 {
   "symbol": "PSTL",
-  "name": "PSTL Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:32:24.552Z",
-  "source": "Alpha Vantage API"
+  "name": "Postal Realty Trust Inc",
+  "sector": "REAL ESTATE",
+  "industry": "REIT - OFFICE",
+  "officialSite": "https://www.postalrealtytrust.com",
+  "cachedAt": "2025-10-19T06:00:55.394Z",
+  "source": "Alpha Vantage API (fixed)"
 }

@@ -1,8 +1,9 @@
 {
   "symbol": "TRUP",
-  "name": "TRUP Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:32:39.041Z",
-  "source": "Alpha Vantage API"
+  "name": "Trupanion Inc",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "INSURANCE - PROPERTY & CASUALTY",
+  "officialSite": "https://www.trupanion.com",
+  "cachedAt": "2025-10-19T06:08:14.850Z",
+  "source": "Alpha Vantage API (fixed)"
 }

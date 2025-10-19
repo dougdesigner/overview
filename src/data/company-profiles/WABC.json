@@ -1,8 +1,9 @@
 {
   "symbol": "WABC",
-  "name": "WABC Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:02.692Z",
-  "source": "Alpha Vantage API"
+  "name": "Westamerica Bancorporation",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "BANKS - REGIONAL",
+  "officialSite": "https://www.westamerica.com",
+  "cachedAt": "2025-10-19T06:10:00.047Z",
+  "source": "Alpha Vantage API (fixed)"
 }

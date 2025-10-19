@@ -1,8 +1,9 @@
 {
   "symbol": "PCRX",
-  "name": "PCRX Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:32:35.557Z",
-  "source": "Alpha Vantage API"
+  "name": "Pacira BioSciences, Inc.",
+  "sector": "HEALTHCARE",
+  "industry": "DRUG MANUFACTURERS - SPECIALTY & GENERIC",
+  "officialSite": "https://www.pacira.com",
+  "cachedAt": "2025-10-19T05:59:48.518Z",
+  "source": "Alpha Vantage API (fixed)"
 }

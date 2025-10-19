@@ -1,8 +1,9 @@
 {
   "symbol": "MRCY",
-  "name": "MRCY Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:35:28.956Z",
-  "source": "Alpha Vantage API"
+  "name": "Mercury Systems Inc",
+  "sector": "INDUSTRIALS",
+  "industry": "AEROSPACE & DEFENSE",
+  "officialSite": "https://www.mrcy.com",
+  "cachedAt": "2025-10-19T05:53:19.310Z",
+  "source": "Alpha Vantage API (fixed)"
 }

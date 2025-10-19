@@ -1,8 +1,9 @@
 {
   "symbol": "PI",
-  "name": "PI Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:36:40.725Z",
-  "source": "Alpha Vantage API"
+  "name": "Impinj Inc",
+  "sector": "TECHNOLOGY",
+  "industry": "SEMICONDUCTORS",
+  "officialSite": "https://www.impinj.com",
+  "cachedAt": "2025-10-19T06:00:11.071Z",
+  "source": "Alpha Vantage API (fixed)"
 }

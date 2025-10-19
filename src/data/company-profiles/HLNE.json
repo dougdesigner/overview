@@ -1,8 +1,9 @@
 {
   "symbol": "HLNE",
-  "name": "HLNE Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:31:20.818Z",
-  "source": "Alpha Vantage API"
+  "name": "Hamilton Lane Inc",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "ASSET MANAGEMENT",
+  "officialSite": "https://www.hamiltonlane.com",
+  "cachedAt": "2025-10-19T05:37:44.369Z",
+  "source": "Alpha Vantage API (fixed)"
 }

@@ -1,8 +1,9 @@
 {
   "symbol": "PK",
-  "name": "PK Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:32:32.041Z",
-  "source": "Alpha Vantage API"
+  "name": "Park Hotels & Resorts Inc",
+  "sector": "REAL ESTATE",
+  "industry": "REIT - HOTEL & MOTEL",
+  "officialSite": "https://www.pkhotelsandresorts.com",
+  "cachedAt": "2025-10-19T06:00:17.330Z",
+  "source": "Alpha Vantage API (fixed)"
 }

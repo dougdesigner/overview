@@ -1,8 +1,9 @@
 {
   "symbol": "XPOF",
-  "name": "XPOF Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:00.982Z",
-  "source": "Alpha Vantage API"
+  "name": "Xponential Fitness Inc",
+  "sector": "CONSUMER CYCLICAL",
+  "industry": "LEISURE",
+  "officialSite": "https://www.xponential.com",
+  "cachedAt": "2025-10-19T06:12:40.702Z",
+  "source": "Alpha Vantage API (fixed)"
 }

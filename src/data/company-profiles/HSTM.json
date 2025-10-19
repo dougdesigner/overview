@@ -1,8 +1,9 @@
 {
   "symbol": "HSTM",
-  "name": "HSTM Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:36:05.149Z",
-  "source": "Alpha Vantage API"
+  "name": "HealthStream Inc",
+  "sector": "HEALTHCARE",
+  "industry": "HEALTH INFORMATION SERVICES",
+  "officialSite": "https://www.healthstream.com",
+  "cachedAt": "2025-10-19T05:41:50.287Z",
+  "source": "Alpha Vantage API (fixed)"
 }

@@ -1,8 +1,9 @@
 {
   "symbol": "PX",
-  "name": "PX Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:32:34.937Z",
-  "source": "Alpha Vantage API"
+  "name": "P10 Inc",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "ASSET MANAGEMENT",
+  "officialSite": "https://www.p10alts.com",
+  "cachedAt": "2025-10-19T06:01:03.369Z",
+  "source": "Alpha Vantage API (fixed)"
 }

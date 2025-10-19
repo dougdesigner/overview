@@ -1,8 +1,9 @@
 {
   "symbol": "IRM",
-  "name": "IRM Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:10.925Z",
-  "source": "Alpha Vantage API"
+  "name": "Iron Mountain Incorporated",
+  "sector": "REAL ESTATE",
+  "industry": "REIT - SPECIALTY",
+  "officialSite": "https://www.ironmountain.com",
+  "cachedAt": "2025-10-19T05:42:44.018Z",
+  "source": "Alpha Vantage API (fixed)"
 }

@@ -1,8 +1,9 @@
 {
   "symbol": "MTD",
-  "name": "MTD Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:13.232Z",
-  "source": "Alpha Vantage API"
+  "name": "Mettler-Toledo International Inc",
+  "sector": "HEALTHCARE",
+  "industry": "DIAGNOSTICS & RESEARCH",
+  "officialSite": "https://www.mt.com",
+  "cachedAt": "2025-10-19T05:53:29.257Z",
+  "source": "Alpha Vantage API (fixed)"
 }

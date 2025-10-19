@@ -1,8 +1,9 @@
 {
   "symbol": "LLYVA",
-  "name": "LLYVA Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:36:33.395Z",
-  "source": "Alpha Vantage API"
+  "name": "Liberty Media Corporation Series A Liberty Live Common Stock",
+  "sector": "COMMUNICATION SERVICES",
+  "industry": "ENTERTAINMENT",
+  "officialSite": "https://www.libertymedia.com/tracking-stocks/liber",
+  "cachedAt": "2025-10-19T05:48:14.374Z",
+  "source": "Alpha Vantage API (fixed)"
 }

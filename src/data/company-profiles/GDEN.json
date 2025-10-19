@@ -1,8 +1,9 @@
 {
   "symbol": "GDEN",
-  "name": "GDEN Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:36:07.550Z",
-  "source": "Alpha Vantage API"
+  "name": "Golden Entertainment Inc",
+  "sector": "CONSUMER CYCLICAL",
+  "industry": "RESORTS & CASINOS",
+  "officialSite": "https://www.goldenent.com",
+  "cachedAt": "2025-10-19T05:31:51.569Z",
+  "source": "Alpha Vantage API (fixed)"
 }

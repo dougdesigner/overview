@@ -1,8 +1,9 @@
 {
   "symbol": "KTOS",
-  "name": "KTOS Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:31:04.322Z",
-  "source": "Alpha Vantage API"
+  "name": "Kratos Defense & Security Solutions",
+  "sector": "INDUSTRIALS",
+  "industry": "AEROSPACE & DEFENSE",
+  "officialSite": "https://www.kratosdefense.com",
+  "cachedAt": "2025-10-19T05:44:39.049Z",
+  "source": "Alpha Vantage API (fixed)"
 }

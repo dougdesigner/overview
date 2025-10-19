@@ -1,8 +1,9 @@
 {
   "symbol": "HBNC",
-  "name": "HBNC Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:36:09.607Z",
-  "source": "Alpha Vantage API"
+  "name": "Horizon Bancorp",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "BANKS - REGIONAL",
+  "officialSite": "https://www.horizonbank.com",
+  "cachedAt": "2025-10-19T05:37:21.909Z",
+  "source": "Alpha Vantage API (fixed)"
 }

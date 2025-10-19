@@ -1,8 +1,9 @@
 {
   "symbol": "GEO",
-  "name": "GEO Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:31:37.242Z",
-  "source": "Alpha Vantage API"
+  "name": "Geo Group Inc",
+  "sector": "INDUSTRIALS",
+  "industry": "SECURITY & PROTECTION SERVICES",
+  "officialSite": "https://www.geogroup.com",
+  "cachedAt": "2025-10-19T05:31:52.534Z",
+  "source": "Alpha Vantage API (fixed)"
 }

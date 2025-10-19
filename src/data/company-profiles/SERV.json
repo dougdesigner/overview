@@ -1,8 +1,9 @@
 {
   "symbol": "SERV",
-  "name": "SERV Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:20.947Z",
-  "source": "Alpha Vantage API"
+  "name": "Serve Robotics Inc. Common Stock",
+  "sector": "INDUSTRIALS",
+  "industry": "SPECIALTY INDUSTRIAL MACHINERY",
+  "officialSite": "https://www.serverobotics.com",
+  "cachedAt": "2025-10-19T06:04:15.789Z",
+  "source": "Alpha Vantage API (fixed)"
 }

@@ -1,8 +1,9 @@
 {
   "symbol": "SER",
-  "name": "SER Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:19.212Z",
-  "source": "Alpha Vantage API"
+  "name": "Serina Therapeutics Inc",
+  "sector": "HEALTHCARE",
+  "industry": "BIOTECHNOLOGY",
+  "officialSite": "https://serinatherapeutics.com",
+  "cachedAt": "2025-10-19T06:04:13.826Z",
+  "source": "Alpha Vantage API (fixed)"
 }

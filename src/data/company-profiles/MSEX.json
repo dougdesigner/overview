@@ -1,8 +1,9 @@
 {
   "symbol": "MSEX",
-  "name": "MSEX Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:35:25.612Z",
-  "source": "Alpha Vantage API"
+  "name": "Middlesex Water Company",
+  "sector": "UTILITIES",
+  "industry": "UTILITIES - REGULATED WATER",
+  "officialSite": "https://www.middlesexwater.com",
+  "cachedAt": "2025-10-19T05:53:25.350Z",
+  "source": "Alpha Vantage API (fixed)"
 }

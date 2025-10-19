@@ -1,8 +1,9 @@
 {
   "symbol": "OS",
-  "name": "OS Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:32:06.779Z",
-  "source": "Alpha Vantage API"
+  "name": "OneStream, Inc. Class A Common Stock",
+  "sector": "TECHNOLOGY",
+  "industry": "SOFTWARE - INFRASTRUCTURE",
+  "officialSite": "https://www.onestream.com",
+  "cachedAt": "2025-10-19T05:55:42.731Z",
+  "source": "Alpha Vantage API (fixed)"
 }

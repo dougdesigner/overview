@@ -1,8 +1,9 @@
 {
   "symbol": "MED",
-  "name": "MED Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:35:39.661Z",
-  "source": "Alpha Vantage API"
+  "name": "MEDIFAST INC",
+  "sector": "CONSUMER CYCLICAL",
+  "industry": "PERSONAL SERVICES",
+  "officialSite": "https://medifastinc.com",
+  "cachedAt": "2025-10-19T05:49:22.622Z",
+  "source": "Alpha Vantage API (fixed)"
 }

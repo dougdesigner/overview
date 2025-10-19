@@ -1,8 +1,9 @@
 {
   "symbol": "IDA",
-  "name": "IDA Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:31:19.252Z",
-  "source": "Alpha Vantage API"
+  "name": "IDACORP Inc",
+  "sector": "UTILITIES",
+  "industry": "UTILITIES - REGULATED ELECTRIC",
+  "officialSite": "https://www.idacorpinc.com",
+  "cachedAt": "2025-10-19T05:42:15.719Z",
+  "source": "Alpha Vantage API (fixed)"
 }

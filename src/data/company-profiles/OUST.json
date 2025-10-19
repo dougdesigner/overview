@@ -1,8 +1,9 @@
 {
   "symbol": "OUST",
-  "name": "OUST Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:32:26.789Z",
-  "source": "Alpha Vantage API"
+  "name": "Ouster, Inc. Common Stock",
+  "sector": "TECHNOLOGY",
+  "industry": "ELECTRONIC COMPONENTS",
+  "officialSite": "https://ouster.com",
+  "cachedAt": "2025-10-19T05:55:51.448Z",
+  "source": "Alpha Vantage API (fixed)"
 }

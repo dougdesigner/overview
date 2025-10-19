@@ -1,8 +1,9 @@
 {
   "symbol": "HUMA",
-  "name": "HUMA Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:36:08.783Z",
-  "source": "Alpha Vantage API"
+  "name": "Humacyte Inc",
+  "sector": "HEALTHCARE",
+  "industry": "BIOTECHNOLOGY",
+  "officialSite": "https://humacyte.com",
+  "cachedAt": "2025-10-19T05:42:02.083Z",
+  "source": "Alpha Vantage API (fixed)"
 }

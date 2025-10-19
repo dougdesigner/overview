@@ -1,8 +1,9 @@
 {
   "symbol": "MLP",
-  "name": "MLP Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:35:41.366Z",
-  "source": "Alpha Vantage API"
+  "name": "Maui Land & Pineapple Company Inc",
+  "sector": "REAL ESTATE",
+  "industry": "REAL ESTATE SERVICES",
+  "officialSite": "https://www.mauiland.com",
+  "cachedAt": "2025-10-19T05:52:53.019Z",
+  "source": "Alpha Vantage API (fixed)"
 }

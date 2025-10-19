@@ -1,8 +1,9 @@
 {
   "symbol": "HLLY",
-  "name": "HLLY Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:36:13.539Z",
-  "source": "Alpha Vantage API"
+  "name": "Holley Inc",
+  "sector": "CONSUMER CYCLICAL",
+  "industry": "AUTO PARTS",
+  "officialSite": "https://www.holley.com",
+  "cachedAt": "2025-10-19T05:37:42.393Z",
+  "source": "Alpha Vantage API (fixed)"
 }

@@ -1,8 +1,9 @@
 {
   "symbol": "RLI",
-  "name": "RLI Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:31:39.034Z",
-  "source": "Alpha Vantage API"
+  "name": "RLI Corp",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "INSURANCE - PROPERTY & CASUALTY",
+  "officialSite": "https://www.rlicorp.com",
+  "cachedAt": "2025-10-19T06:02:25.719Z",
+  "source": "Alpha Vantage API (fixed)"
 }

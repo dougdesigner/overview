@@ -1,8 +1,9 @@
 {
   "symbol": "MNTK",
-  "name": "MNTK Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:35:31.316Z",
-  "source": "Alpha Vantage API"
+  "name": "Montauk Renewables Inc",
+  "sector": "BASIC MATERIALS",
+  "industry": "SPECIALTY CHEMICALS",
+  "officialSite": "https://www.montaukenergy.com",
+  "cachedAt": "2025-10-19T05:53:01.798Z",
+  "source": "Alpha Vantage API (fixed)"
 }

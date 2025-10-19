@@ -1,8 +1,9 @@
 {
   "symbol": "LCUT",
-  "name": "LCUT Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:36:32.627Z",
-  "source": "Alpha Vantage API"
+  "name": "Lifetime Brands Inc",
+  "sector": "CONSUMER CYCLICAL",
+  "industry": "FURNISHINGS, FIXTURES & APPLIANCES",
+  "officialSite": "https://www.lifetimebrands.com",
+  "cachedAt": "2025-10-19T05:44:58.480Z",
+  "source": "Alpha Vantage API (fixed)"
 }

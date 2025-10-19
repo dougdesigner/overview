@@ -1,8 +1,9 @@
 {
   "symbol": "ORA",
-  "name": "ORA Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:31:02.608Z",
-  "source": "Alpha Vantage API"
+  "name": "Ormat Technologies Inc",
+  "sector": "UTILITIES",
+  "industry": "UTILITIES - RENEWABLE",
+  "officialSite": "https://www.ormat.com",
+  "cachedAt": "2025-10-19T05:55:34.928Z",
+  "source": "Alpha Vantage API (fixed)"
 }

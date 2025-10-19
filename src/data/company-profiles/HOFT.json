@@ -1,8 +1,9 @@
 {
   "symbol": "HOFT",
-  "name": "HOFT Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:36:10.253Z",
-  "source": "Alpha Vantage API"
+  "name": "Hooker Furniture Corporation",
+  "sector": "CONSUMER CYCLICAL",
+  "industry": "FURNISHINGS, FIXTURES & APPLIANCES",
+  "officialSite": "https://www.hookerfurniture.com",
+  "cachedAt": "2025-10-19T05:37:50.197Z",
+  "source": "Alpha Vantage API (fixed)"
 }

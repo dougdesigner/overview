@@ -1,8 +1,9 @@
 {
   "symbol": "SIRI",
-  "name": "SIRI Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:31:29.154Z",
-  "source": "Alpha Vantage API"
+  "name": "Sirius XM Holding Inc",
+  "sector": "COMMUNICATION SERVICES",
+  "industry": "ENTERTAINMENT",
+  "officialSite": "https://www.siriusxm.com",
+  "cachedAt": "2025-10-19T06:04:43.693Z",
+  "source": "Alpha Vantage API (fixed)"
 }

@@ -1,8 +1,9 @@
 {
   "symbol": "MCY",
-  "name": "MCY Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:35:29.180Z",
-  "source": "Alpha Vantage API"
+  "name": "Mercury General Corporation",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "INSURANCE - PROPERTY & CASUALTY",
+  "officialSite": "https://www.mercuryinsurance.com",
+  "cachedAt": "2025-10-19T05:49:17.739Z",
+  "source": "Alpha Vantage API (fixed)"
 }

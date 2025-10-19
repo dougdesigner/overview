@@ -1,8 +1,9 @@
 {
   "symbol": "LQDA",
-  "name": "LQDA Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:36:29.455Z",
-  "source": "Alpha Vantage API"
+  "name": "Liquidia Technologies Inc",
+  "sector": "HEALTHCARE",
+  "industry": "BIOTECHNOLOGY",
+  "officialSite": "https://www.liquidia.com",
+  "cachedAt": "2025-10-19T05:48:31.872Z",
+  "source": "Alpha Vantage API (fixed)"
 }

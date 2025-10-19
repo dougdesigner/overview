@@ -1,8 +1,9 @@
 {
   "symbol": "MIRM",
-  "name": "MIRM Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:35:33.381Z",
-  "source": "Alpha Vantage API"
+  "name": "Mirum Pharmaceuticals Inc",
+  "sector": "HEALTHCARE",
+  "industry": "BIOTECHNOLOGY",
+  "officialSite": "https://www.mirumpharma.com",
+  "cachedAt": "2025-10-19T05:52:45.260Z",
+  "source": "Alpha Vantage API (fixed)"
 }

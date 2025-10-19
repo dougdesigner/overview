@@ -1,8 +1,9 @@
 {
   "symbol": "DEA",
-  "name": "DEA Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:34:19.180Z",
-  "source": "Alpha Vantage API"
+  "name": "Eerly Govt Ppty Inc",
+  "sector": "REAL ESTATE",
+  "industry": "REIT - OFFICE",
+  "officialSite": "https://www.easterlyreit.com",
+  "cachedAt": "2025-10-19T05:26:47.056Z",
+  "source": "Alpha Vantage API (fixed)"
 }

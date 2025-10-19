@@ -1,8 +1,9 @@
 {
   "symbol": "QUAD",
-  "name": "QUAD Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:32:15.038Z",
-  "source": "Alpha Vantage API"
+  "name": "Quad Graphics Inc",
+  "sector": "INDUSTRIALS",
+  "industry": "SPECIALTY BUSINESS SERVICES",
+  "officialSite": "https://www.quad.com",
+  "cachedAt": "2025-10-19T06:01:18.561Z",
+  "source": "Alpha Vantage API (fixed)"
 }

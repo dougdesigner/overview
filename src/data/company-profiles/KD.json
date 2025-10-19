@@ -1,8 +1,9 @@
 {
   "symbol": "KD",
-  "name": "KD Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:31:33.406Z",
-  "source": "Alpha Vantage API"
+  "name": "Kyndryl Holdings Inc",
+  "sector": "TECHNOLOGY",
+  "industry": "INFORMATION TECHNOLOGY SERVICES",
+  "officialSite": "https://www.kyndryl.com",
+  "cachedAt": "2025-10-19T05:44:12.730Z",
+  "source": "Alpha Vantage API (fixed)"
 }

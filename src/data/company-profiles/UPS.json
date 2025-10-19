@@ -1,8 +1,9 @@
 {
   "symbol": "UPS",
-  "name": "UPS Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:29:40.547Z",
-  "source": "Alpha Vantage API"
+  "name": "United Parcel Service Inc",
+  "sector": "INDUSTRIALS",
+  "industry": "INTEGRATED FREIGHT & LOGISTICS",
+  "officialSite": "https://www.ups.com",
+  "cachedAt": "2025-10-19T06:09:05.333Z",
+  "source": "Alpha Vantage API (fixed)"
 }

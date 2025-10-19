@@ -1,8 +1,9 @@
 {
   "symbol": "ZBH",
-  "name": "ZBH Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:18.092Z",
-  "source": "Alpha Vantage API"
+  "name": "Zimmer Biomet Holdings Inc",
+  "sector": "HEALTHCARE",
+  "industry": "MEDICAL DEVICES",
+  "officialSite": "https://www.zimmerbiomet.com",
+  "cachedAt": "2025-10-19T06:12:46.456Z",
+  "source": "Alpha Vantage API (fixed)"
 }

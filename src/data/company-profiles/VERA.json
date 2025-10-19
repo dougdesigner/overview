@@ -1,8 +1,9 @@
 {
   "symbol": "VERA",
-  "name": "VERA Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:16.684Z",
-  "source": "Alpha Vantage API"
+  "name": "Vera Therapeutics Inc",
+  "sector": "HEALTHCARE",
+  "industry": "BIOTECHNOLOGY",
+  "officialSite": "https://veratx.com",
+  "cachedAt": "2025-10-19T06:09:31.473Z",
+  "source": "Alpha Vantage API (fixed)"
 }

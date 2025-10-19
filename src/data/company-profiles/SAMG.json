@@ -1,8 +1,9 @@
 {
   "symbol": "SAMG",
-  "name": "SAMG Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:23.644Z",
-  "source": "Alpha Vantage API"
+  "name": "Silvercrest Asset Management Group Inc",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "ASSET MANAGEMENT",
+  "officialSite": "https://www.silvercrestgroup.com",
+  "cachedAt": "2025-10-19T06:03:13.706Z",
+  "source": "Alpha Vantage API (fixed)"
 }

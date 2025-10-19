@@ -1,8 +1,9 @@
 {
   "symbol": "TTGT",
-  "name": "TTGT Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:38.671Z",
-  "source": "Alpha Vantage API"
+  "name": "TechTarget, Inc. Common Stock",
+  "sector": "TECHNOLOGY",
+  "industry": "INFORMATION TECHNOLOGY SERVICES",
+  "officialSite": "https://www.techtarget.com",
+  "cachedAt": "2025-10-19T06:08:32.066Z",
+  "source": "Alpha Vantage API (fixed)"
 }

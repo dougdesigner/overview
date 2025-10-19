@@ -1,8 +1,9 @@
 {
   "symbol": "ENTA",
-  "name": "ENTA Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:36:14.807Z",
-  "source": "Alpha Vantage API"
+  "name": "Enanta Pharmaceuticals Inc",
+  "sector": "HEALTHCARE",
+  "industry": "BIOTECHNOLOGY",
+  "officialSite": "https://www.enanta.com",
+  "cachedAt": "2025-10-19T05:29:58.410Z",
+  "source": "Alpha Vantage API (fixed)"
 }

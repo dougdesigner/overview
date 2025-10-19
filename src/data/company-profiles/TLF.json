@@ -1,8 +1,9 @@
 {
   "symbol": "TLF",
-  "name": "TLF Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:39.519Z",
-  "source": "Alpha Vantage API"
+  "name": "Tandy Leather Factory Inc",
+  "sector": "CONSUMER CYCLICAL",
+  "industry": "SPECIALTY RETAIL",
+  "officialSite": "https://www.tandyleather.com",
+  "cachedAt": "2025-10-19T06:07:50.596Z",
+  "source": "Alpha Vantage API (fixed)"
 }

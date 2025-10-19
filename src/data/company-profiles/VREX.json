@@ -1,8 +1,9 @@
 {
   "symbol": "VREX",
-  "name": "VREX Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:08.864Z",
-  "source": "Alpha Vantage API"
+  "name": "Varex Imaging Corp",
+  "sector": "HEALTHCARE",
+  "industry": "MEDICAL DEVICES",
+  "officialSite": "https://www.vareximaging.com",
+  "cachedAt": "2025-10-19T06:09:43.076Z",
+  "source": "Alpha Vantage API (fixed)"
 }

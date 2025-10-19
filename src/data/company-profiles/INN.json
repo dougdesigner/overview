@@ -1,8 +1,9 @@
 {
   "symbol": "INN",
-  "name": "INN Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:36.592Z",
-  "source": "Alpha Vantage API"
+  "name": "Summit Hotel Properties Inc",
+  "sector": "REAL ESTATE",
+  "industry": "REIT - HOTEL & MOTEL",
+  "officialSite": "https://www.shpreit.com",
+  "cachedAt": "2025-10-19T05:42:30.362Z",
+  "source": "Alpha Vantage API (fixed)"
 }

@@ -1,8 +1,9 @@
 {
   "symbol": "OPRX",
-  "name": "OPRX Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:32:10.122Z",
-  "source": "Alpha Vantage API"
+  "name": "OPTIMIZERx Corp",
+  "sector": "HEALTHCARE",
+  "industry": "HEALTH INFORMATION SERVICES",
+  "officialSite": "https://www.optimizerx.com",
+  "cachedAt": "2025-10-19T05:55:31.997Z",
+  "source": "Alpha Vantage API (fixed)"
 }

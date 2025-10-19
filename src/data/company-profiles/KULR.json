@@ -1,8 +1,9 @@
 {
   "symbol": "KULR",
-  "name": "KULR Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:36:25.816Z",
-  "source": "Alpha Vantage API"
+  "name": "KULR Technology Group Inc",
+  "sector": "TECHNOLOGY",
+  "industry": "ELECTRONIC COMPONENTS",
+  "officialSite": "https://kulr.ai",
+  "cachedAt": "2025-10-19T05:44:40.027Z",
+  "source": "Alpha Vantage API (fixed)"
 }

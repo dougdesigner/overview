@@ -1,8 +1,9 @@
 {
   "symbol": "MMS",
-  "name": "MMS Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:31:39.970Z",
-  "source": "Alpha Vantage API"
+  "name": "Maximus Inc",
+  "sector": "INDUSTRIALS",
+  "industry": "SPECIALTY BUSINESS SERVICES",
+  "officialSite": "https://www.maximus.com",
+  "cachedAt": "2025-10-19T05:52:57.916Z",
+  "source": "Alpha Vantage API (fixed)"
 }

@@ -1,8 +1,9 @@
 {
   "symbol": "MXC",
-  "name": "MXC Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:35:26.869Z",
-  "source": "Alpha Vantage API"
+  "name": "Mexco Energy Corporation",
+  "sector": "ENERGY",
+  "industry": "OIL & GAS E&P",
+  "officialSite": "https://www.mexcoenergy.com",
+  "cachedAt": "2025-10-19T05:53:40.968Z",
+  "source": "Alpha Vantage API (fixed)"
 }

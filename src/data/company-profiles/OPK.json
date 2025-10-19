@@ -1,8 +1,9 @@
 {
   "symbol": "OPK",
-  "name": "OPK Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:32:11.511Z",
-  "source": "Alpha Vantage API"
+  "name": "Opko Health Inc",
+  "sector": "HEALTHCARE",
+  "industry": "DIAGNOSTICS & RESEARCH",
+  "officialSite": "https://www.opko.com",
+  "cachedAt": "2025-10-19T05:55:30.073Z",
+  "source": "Alpha Vantage API (fixed)"
 }

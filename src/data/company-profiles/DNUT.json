@@ -1,8 +1,9 @@
 {
   "symbol": "DNUT",
-  "name": "DNUT Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:36:26.405Z",
-  "source": "Alpha Vantage API"
+  "name": "Krispy Kreme Inc",
+  "sector": "CONSUMER DEFENSIVE",
+  "industry": "GROCERY STORES",
+  "officialSite": "https://www.krispykreme.com",
+  "cachedAt": "2025-10-19T05:29:03.853Z",
+  "source": "Alpha Vantage API (fixed)"
 }

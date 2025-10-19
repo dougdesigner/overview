@@ -1,8 +1,9 @@
 {
   "symbol": "PAR",
-  "name": "PAR Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:32:31.419Z",
-  "source": "Alpha Vantage API"
+  "name": "PAR Technology Corporation",
+  "sector": "TECHNOLOGY",
+  "industry": "SOFTWARE - APPLICATION",
+  "officialSite": "https://www.partech.com",
+  "cachedAt": "2025-10-19T05:56:03.118Z",
+  "source": "Alpha Vantage API (fixed)"
 }

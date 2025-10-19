@@ -1,8 +1,9 @@
 {
   "symbol": "EQH",
-  "name": "EQH Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:32.361Z",
-  "source": "Alpha Vantage API"
+  "name": "Axa Equitable Holdings Inc",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "ASSET MANAGEMENT",
+  "officialSite": "https://www.equitableholdings.com",
+  "cachedAt": "2025-10-19T05:30:04.784Z",
+  "source": "Alpha Vantage API (fixed)"
 }

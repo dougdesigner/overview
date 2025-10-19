@@ -1,8 +1,9 @@
 {
   "symbol": "PSTG",
-  "name": "PSTG Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:06.393Z",
-  "source": "Alpha Vantage API"
+  "name": "Pure Storage Inc",
+  "sector": "TECHNOLOGY",
+  "industry": "COMPUTER HARDWARE",
+  "officialSite": "https://www.purestorage.com",
+  "cachedAt": "2025-10-19T06:00:54.421Z",
+  "source": "Alpha Vantage API (fixed)"
 }

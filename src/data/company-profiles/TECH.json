@@ -1,8 +1,9 @@
 {
   "symbol": "TECH",
-  "name": "TECH Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:31:13.090Z",
-  "source": "Alpha Vantage API"
+  "name": "Bio-Techne Corp",
+  "sector": "HEALTHCARE",
+  "industry": "BIOTECHNOLOGY",
+  "officialSite": "https://www.bio-techne.com",
+  "cachedAt": "2025-10-19T06:07:38.296Z",
+  "source": "Alpha Vantage API (fixed)"
 }

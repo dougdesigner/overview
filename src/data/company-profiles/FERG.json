@@ -1,8 +1,9 @@
 {
   "symbol": "FERG",
-  "name": "FERG Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:04.901Z",
-  "source": "Alpha Vantage API"
+  "name": "Ferguson Plc",
+  "sector": "INDUSTRIALS",
+  "industry": "INDUSTRIAL DISTRIBUTION",
+  "officialSite": "https://www.corporate.ferguson.com",
+  "cachedAt": "2025-10-19T05:31:01.750Z",
+  "source": "Alpha Vantage API (fixed)"
 }

@@ -1,8 +1,9 @@
 {
   "symbol": "SRPT",
-  "name": "SRPT Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:42.224Z",
-  "source": "Alpha Vantage API"
+  "name": "Sarepta Therapeutics Inc",
+  "sector": "HEALTHCARE",
+  "industry": "BIOTECHNOLOGY",
+  "officialSite": "https://www.sarepta.com",
+  "cachedAt": "2025-10-19T06:05:35.157Z",
+  "source": "Alpha Vantage API (fixed)"
 }

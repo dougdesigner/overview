@@ -1,8 +1,9 @@
 {
   "symbol": "DUOL",
-  "name": "DUOL Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:33.648Z",
-  "source": "Alpha Vantage API"
+  "name": "Duolingo Inc",
+  "sector": "TECHNOLOGY",
+  "industry": "SOFTWARE - APPLICATION",
+  "officialSite": "https://www.duolingo.com",
+  "cachedAt": "2025-10-19T05:29:14.552Z",
+  "source": "Alpha Vantage API (fixed)"
 }

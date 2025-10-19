@@ -1,8 +1,9 @@
 {
   "symbol": "ZTS",
-  "name": "ZTS Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:29:40.852Z",
-  "source": "Alpha Vantage API"
+  "name": "Zoetis Inc",
+  "sector": "HEALTHCARE",
+  "industry": "DRUG MANUFACTURERS - SPECIALTY & GENERIC",
+  "officialSite": "https://www.zoetis.com",
+  "cachedAt": "2025-10-19T06:12:51.456Z",
+  "source": "Alpha Vantage API (fixed)"
 }

@@ -1,8 +1,9 @@
 {
   "symbol": "TTMI",
-  "name": "TTMI Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:32:40.704Z",
-  "source": "Alpha Vantage API"
+  "name": "TTM Technologies Inc",
+  "sector": "TECHNOLOGY",
+  "industry": "ELECTRONIC COMPONENTS",
+  "officialSite": "https://www.ttm.com",
+  "cachedAt": "2025-10-19T06:08:33.045Z",
+  "source": "Alpha Vantage API (fixed)"
 }

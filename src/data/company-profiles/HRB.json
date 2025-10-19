@@ -1,8 +1,9 @@
 {
   "symbol": "HRB",
-  "name": "HRB Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:22.483Z",
-  "source": "Alpha Vantage API"
+  "name": "H&R Block Inc",
+  "sector": "CONSUMER CYCLICAL",
+  "industry": "PERSONAL SERVICES",
+  "officialSite": "https://www.hrblock.com",
+  "cachedAt": "2025-10-19T05:41:43.513Z",
+  "source": "Alpha Vantage API (fixed)"
 }

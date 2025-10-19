@@ -1,8 +1,9 @@
 {
   "symbol": "RITM",
-  "name": "RITM Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:31:34.454Z",
-  "source": "Alpha Vantage API"
+  "name": "Rithm Capital Corp.",
+  "sector": "REAL ESTATE",
+  "industry": "REIT - MORTGAGE",
+  "officialSite": "https://www.rithmcap.com",
+  "cachedAt": "2025-10-19T06:02:19.899Z",
+  "source": "Alpha Vantage API (fixed)"
 }

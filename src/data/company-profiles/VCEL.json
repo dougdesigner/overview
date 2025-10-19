@@ -1,8 +1,9 @@
 {
   "symbol": "VCEL",
-  "name": "VCEL Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:15.792Z",
-  "source": "Alpha Vantage API"
+  "name": "Vericel Corp Ord",
+  "sector": "HEALTHCARE",
+  "industry": "BIOTECHNOLOGY",
+  "officialSite": "https://www.vcel.com",
+  "cachedAt": "2025-10-19T06:09:27.426Z",
+  "source": "Alpha Vantage API (fixed)"
 }

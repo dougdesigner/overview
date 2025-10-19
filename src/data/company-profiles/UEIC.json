@@ -1,8 +1,9 @@
 {
   "symbol": "UEIC",
-  "name": "UEIC Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:12.192Z",
-  "source": "Alpha Vantage API"
+  "name": "Universal Electronics Inc",
+  "sector": "TECHNOLOGY",
+  "industry": "CONSUMER ELECTRONICS",
+  "officialSite": "https://www.uei.com",
+  "cachedAt": "2025-10-19T06:08:52.550Z",
+  "source": "Alpha Vantage API (fixed)"
 }

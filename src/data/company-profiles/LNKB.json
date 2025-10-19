@@ -1,8 +1,9 @@
 {
   "symbol": "LNKB",
-  "name": "LNKB Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:36:29.767Z",
-  "source": "Alpha Vantage API"
+  "name": "LINKBANCORP Inc",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "BANKS - REGIONAL",
+  "officialSite": "https://www.linkbank.com",
+  "cachedAt": "2025-10-19T05:48:17.291Z",
+  "source": "Alpha Vantage API (fixed)"
 }

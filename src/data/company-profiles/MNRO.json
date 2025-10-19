@@ -1,8 +1,9 @@
 {
   "symbol": "MNRO",
-  "name": "MNRO Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:35:31.476Z",
-  "source": "Alpha Vantage API"
+  "name": "Monro Muffler Brake Inc",
+  "sector": "CONSUMER CYCLICAL",
+  "industry": "AUTO PARTS",
+  "officialSite": "https://www.monro.com",
+  "cachedAt": "2025-10-19T05:52:59.859Z",
+  "source": "Alpha Vantage API (fixed)"
 }

@@ -1,8 +1,9 @@
 {
   "symbol": "TALK",
-  "name": "TALK Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:40.032Z",
-  "source": "Alpha Vantage API"
+  "name": "Talkspace Inc",
+  "sector": "HEALTHCARE",
+  "industry": "HEALTH INFORMATION SERVICES",
+  "officialSite": "https://www.talkspace.com",
+  "cachedAt": "2025-10-19T06:07:27.518Z",
+  "source": "Alpha Vantage API (fixed)"
 }

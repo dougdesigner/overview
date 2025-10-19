@@ -1,8 +1,9 @@
 {
   "symbol": "MBC",
-  "name": "MBC Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:35:42.606Z",
-  "source": "Alpha Vantage API"
+  "name": "MasterBrand Inc.",
+  "sector": "CONSUMER CYCLICAL",
+  "industry": "FURNISHINGS, FIXTURES & APPLIANCES",
+  "officialSite": "https://www.masterbrand.com",
+  "cachedAt": "2025-10-19T05:49:02.204Z",
+  "source": "Alpha Vantage API (fixed)"
 }

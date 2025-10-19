@@ -1,8 +1,9 @@
 {
   "symbol": "GABC",
-  "name": "GABC Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:36:21.239Z",
-  "source": "Alpha Vantage API"
+  "name": "German American Bancorp Inc",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "BANKS - REGIONAL",
+  "officialSite": "https://www.germanamerican.com",
+  "cachedAt": "2025-10-19T05:31:42.810Z",
+  "source": "Alpha Vantage API (fixed)"
 }

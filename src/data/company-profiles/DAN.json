@@ -1,8 +1,9 @@
 {
   "symbol": "DAN",
-  "name": "DAN Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:34:15.134Z",
-  "source": "Alpha Vantage API"
+  "name": "Dana Inc",
+  "sector": "CONSUMER CYCLICAL",
+  "industry": "AUTO PARTS",
+  "officialSite": "https://www.dana.com",
+  "cachedAt": "2025-10-19T05:26:36.273Z",
+  "source": "Alpha Vantage API (fixed)"
 }

@@ -1,8 +1,9 @@
 {
   "symbol": "CUZ",
-  "name": "CUZ Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:31:35.372Z",
-  "source": "Alpha Vantage API"
+  "name": "Cousins Properties Incorporated",
+  "sector": "REAL ESTATE",
+  "industry": "REIT - OFFICE",
+  "officialSite": "https://www.cousins.com",
+  "cachedAt": "2025-10-19T05:26:09.982Z",
+  "source": "Alpha Vantage API (fixed)"
 }

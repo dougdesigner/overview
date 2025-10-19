@@ -1,8 +1,9 @@
 {
   "symbol": "SEMR",
-  "name": "SEMR Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:20.640Z",
-  "source": "Alpha Vantage API"
+  "name": "Semrush Holdings Inc",
+  "sector": "TECHNOLOGY",
+  "industry": "SOFTWARE - APPLICATION",
+  "officialSite": "https://www.semrush.com",
+  "cachedAt": "2025-10-19T06:04:09.952Z",
+  "source": "Alpha Vantage API (fixed)"
 }

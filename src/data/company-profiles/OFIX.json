@@ -1,8 +1,9 @@
 {
   "symbol": "OFIX",
-  "name": "OFIX Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:32:30.249Z",
-  "source": "Alpha Vantage API"
+  "name": "Orthofix Medical Inc",
+  "sector": "HEALTHCARE",
+  "industry": "MEDICAL DEVICES",
+  "officialSite": "https://orthofix.com",
+  "cachedAt": "2025-10-19T05:55:03.738Z",
+  "source": "Alpha Vantage API (fixed)"
 }

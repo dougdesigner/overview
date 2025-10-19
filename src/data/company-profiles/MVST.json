@@ -1,8 +1,9 @@
 {
   "symbol": "MVST",
-  "name": "MVST Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:35:26.233Z",
-  "source": "Alpha Vantage API"
+  "name": "Microvast Holdings Inc",
+  "sector": "CONSUMER CYCLICAL",
+  "industry": "AUTO PARTS",
+  "officialSite": "https://www.microvast.com",
+  "cachedAt": "2025-10-19T05:53:39.997Z",
+  "source": "Alpha Vantage API (fixed)"
 }

@@ -1,8 +1,9 @@
 {
   "symbol": "TAIT",
-  "name": "TAIT Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:40.145Z",
-  "source": "Alpha Vantage API"
+  "name": "Taitron Components Incorporated",
+  "sector": "TECHNOLOGY",
+  "industry": "ELECTRONICS & COMPUTER DISTRIBUTION",
+  "officialSite": "https://www.taitroncomponents.com",
+  "cachedAt": "2025-10-19T06:07:26.550Z",
+  "source": "Alpha Vantage API (fixed)"
 }

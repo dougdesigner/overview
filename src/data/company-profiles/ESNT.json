@@ -1,8 +1,9 @@
 {
   "symbol": "ESNT",
-  "name": "ESNT Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:31:17.233Z",
-  "source": "Alpha Vantage API"
+  "name": "Essent Group Ltd",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "INSURANCE - SPECIALTY",
+  "officialSite": "https://www.essentgroup.com",
+  "cachedAt": "2025-10-19T05:30:35.987Z",
+  "source": "Alpha Vantage API (fixed)"
 }

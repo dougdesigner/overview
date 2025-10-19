@@ -1,8 +1,9 @@
 {
   "symbol": "PRO",
-  "name": "PRO Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:32:24.679Z",
-  "source": "Alpha Vantage API"
+  "name": "PROS Holdings Inc",
+  "sector": "TECHNOLOGY",
+  "industry": "SOFTWARE - APPLICATION",
+  "officialSite": "https://www.pros.com",
+  "cachedAt": "2025-10-19T06:00:45.682Z",
+  "source": "Alpha Vantage API (fixed)"
 }

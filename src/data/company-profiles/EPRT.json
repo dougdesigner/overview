@@ -1,8 +1,9 @@
 {
   "symbol": "EPRT",
-  "name": "EPRT Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:31:17.056Z",
-  "source": "Alpha Vantage API"
+  "name": "Essential Properties Realty Trust Inc",
+  "sector": "REAL ESTATE",
+  "industry": "REIT - RETAIL",
+  "officialSite": "https://essentialproperties.com",
+  "cachedAt": "2025-10-19T05:30:03.763Z",
+  "source": "Alpha Vantage API (fixed)"
 }

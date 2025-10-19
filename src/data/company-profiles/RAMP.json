@@ -1,8 +1,9 @@
 {
   "symbol": "RAMP",
-  "name": "RAMP Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:36:06.108Z",
-  "source": "Alpha Vantage API"
+  "name": "Liveramp Holdings Inc",
+  "sector": "TECHNOLOGY",
+  "industry": "SOFTWARE - INFRASTRUCTURE",
+  "officialSite": "https://liveramp.com",
+  "cachedAt": "2025-10-19T06:01:21.474Z",
+  "source": "Alpha Vantage API (fixed)"
 }

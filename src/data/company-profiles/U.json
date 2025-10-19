@@ -1,8 +1,9 @@
 {
   "symbol": "U",
-  "name": "U Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:31:06.478Z",
-  "source": "Alpha Vantage API"
+  "name": "Unity Software Inc",
+  "sector": "TECHNOLOGY",
+  "industry": "SOFTWARE - APPLICATION",
+  "officialSite": "https://unity.com",
+  "cachedAt": "2025-10-19T06:08:46.718Z",
+  "source": "Alpha Vantage API (fixed)"
 }

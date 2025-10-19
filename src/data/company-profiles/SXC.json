@@ -1,8 +1,9 @@
 {
   "symbol": "SXC",
-  "name": "SXC Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:35.851Z",
-  "source": "Alpha Vantage API"
+  "name": "SunCoke Energy Inc",
+  "sector": "BASIC MATERIALS",
+  "industry": "COKING COAL",
+  "officialSite": "https://www.suncoke.com",
+  "cachedAt": "2025-10-19T06:07:20.681Z",
+  "source": "Alpha Vantage API (fixed)"
 }

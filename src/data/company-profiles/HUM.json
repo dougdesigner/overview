@@ -1,8 +1,9 @@
 {
   "symbol": "HUM",
-  "name": "HUM Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:04.593Z",
-  "source": "Alpha Vantage API"
+  "name": "Humana Inc",
+  "sector": "HEALTHCARE",
+  "industry": "HEALTHCARE PLANS",
+  "officialSite": "https://www.humana.com",
+  "cachedAt": "2025-10-19T05:42:01.036Z",
+  "source": "Alpha Vantage API (fixed)"
 }

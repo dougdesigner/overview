@@ -1,8 +1,9 @@
 {
   "symbol": "ROAD",
-  "name": "ROAD Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:31:37.163Z",
-  "source": "Alpha Vantage API"
+  "name": "Construction Partners Inc",
+  "sector": "INDUSTRIALS",
+  "industry": "ENGINEERING & CONSTRUCTION",
+  "officialSite": "https://www.constructionpartners.net",
+  "cachedAt": "2025-10-19T06:02:40.386Z",
+  "source": "Alpha Vantage API (fixed)"
 }

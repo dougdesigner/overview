@@ -1,8 +1,9 @@
 {
   "symbol": "CR",
-  "name": "CR Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:31:40.418Z",
-  "source": "Alpha Vantage API"
+  "name": "Crane Company",
+  "sector": "INDUSTRIALS",
+  "industry": "SPECIALTY INDUSTRIAL MACHINERY",
+  "officialSite": "https://www.craneco.com",
+  "cachedAt": "2025-10-19T05:25:37.810Z",
+  "source": "Alpha Vantage API (fixed)"
 }

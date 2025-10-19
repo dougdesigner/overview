@@ -1,8 +1,9 @@
 {
   "symbol": "HALO",
-  "name": "HALO Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:31:21.135Z",
-  "source": "Alpha Vantage API"
+  "name": "Halozyme Therapeutics Inc",
+  "sector": "HEALTHCARE",
+  "industry": "BIOTECHNOLOGY",
+  "officialSite": "https://halozyme.com",
+  "cachedAt": "2025-10-19T05:37:17.062Z",
+  "source": "Alpha Vantage API (fixed)"
 }

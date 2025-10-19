@@ -1,8 +1,9 @@
 {
   "symbol": "IDR",
-  "name": "IDR Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:36:42.261Z",
-  "source": "Alpha Vantage API"
+  "name": "Idaho Strategic Resources Inc",
+  "sector": "BASIC MATERIALS",
+  "industry": "GOLD",
+  "officialSite": "https://www.idahostrategic.com",
+  "cachedAt": "2025-10-19T05:42:16.691Z",
+  "source": "Alpha Vantage API (fixed)"
 }

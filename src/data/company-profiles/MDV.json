@@ -1,8 +1,9 @@
 {
   "symbol": "MDV",
-  "name": "MDV Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:35:32.269Z",
-  "source": "Alpha Vantage API"
+  "name": "Modiv Inc",
+  "sector": "REAL ESTATE",
+  "industry": "REIT - INDUSTRIAL",
+  "officialSite": "https://www.modiv.com",
+  "cachedAt": "2025-10-19T05:49:19.709Z",
+  "source": "Alpha Vantage API (fixed)"
 }

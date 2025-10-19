@@ -1,8 +1,9 @@
 {
   "symbol": "ROG",
-  "name": "ROG Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:28.006Z",
-  "source": "Alpha Vantage API"
+  "name": "Rogers Corporation",
+  "sector": "TECHNOLOGY",
+  "industry": "ELECTRONIC COMPONENTS",
+  "officialSite": "https://www.rogerscorp.com",
+  "cachedAt": "2025-10-19T06:02:42.350Z",
+  "source": "Alpha Vantage API (fixed)"
 }

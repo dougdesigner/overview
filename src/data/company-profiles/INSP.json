@@ -1,8 +1,9 @@
 {
   "symbol": "INSP",
-  "name": "INSP Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:31:16.112Z",
-  "source": "Alpha Vantage API"
+  "name": "Inspire Medical Systems Inc",
+  "sector": "HEALTHCARE",
+  "industry": "MEDICAL DEVICES",
+  "officialSite": "https://www.inspiresleep.com",
+  "cachedAt": "2025-10-19T05:42:36.194Z",
+  "source": "Alpha Vantage API (fixed)"
 }

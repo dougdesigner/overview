@@ -1,8 +1,9 @@
 {
   "symbol": "SEM",
-  "name": "SEM Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:30.411Z",
-  "source": "Alpha Vantage API"
+  "name": "Select Medical Holdings",
+  "sector": "HEALTHCARE",
+  "industry": "MEDICAL CARE FACILITIES",
+  "officialSite": "https://www.selectmedical.com",
+  "cachedAt": "2025-10-19T06:04:08.982Z",
+  "source": "Alpha Vantage API (fixed)"
 }

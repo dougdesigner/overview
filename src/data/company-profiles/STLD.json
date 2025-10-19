@@ -1,8 +1,9 @@
 {
   "symbol": "STLD",
-  "name": "STLD Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:20.495Z",
-  "source": "Alpha Vantage API"
+  "name": "Steel Dynamics Inc",
+  "sector": "BASIC MATERIALS",
+  "industry": "STEEL",
+  "officialSite": "https://www.steeldynamics.com",
+  "cachedAt": "2025-10-19T06:06:51.440Z",
+  "source": "Alpha Vantage API (fixed)"
 }

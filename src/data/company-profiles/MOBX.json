@@ -1,8 +1,9 @@
 {
   "symbol": "MOBX",
-  "name": "MOBX Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:35:32.480Z",
-  "source": "Alpha Vantage API"
+  "name": "Mobix Labs Inc",
+  "sector": "TECHNOLOGY",
+  "industry": "SEMICONDUCTORS",
+  "officialSite": "https://www.mobixlabs.com",
+  "cachedAt": "2025-10-19T05:53:02.759Z",
+  "source": "Alpha Vantage API (fixed)"
 }

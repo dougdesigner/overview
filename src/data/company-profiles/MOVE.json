@@ -1,8 +1,9 @@
 {
   "symbol": "MOVE",
-  "name": "MOVE Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:35:30.675Z",
-  "source": "Alpha Vantage API"
+  "name": "Movano Inc",
+  "sector": "HEALTHCARE",
+  "industry": "MEDICAL DEVICES",
+  "officialSite": "https://movano.com",
+  "cachedAt": "2025-10-19T05:53:10.546Z",
+  "source": "Alpha Vantage API (fixed)"
 }

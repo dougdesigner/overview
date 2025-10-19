@@ -1,8 +1,9 @@
 {
   "symbol": "HLIO",
-  "name": "HLIO Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:36:04.443Z",
-  "source": "Alpha Vantage API"
+  "name": "Helios Technologies Inc",
+  "sector": "INDUSTRIALS",
+  "industry": "SPECIALTY INDUSTRIAL MACHINERY",
+  "officialSite": "https://www.heliostechnologies.com",
+  "cachedAt": "2025-10-19T05:37:40.458Z",
+  "source": "Alpha Vantage API (fixed)"
 }

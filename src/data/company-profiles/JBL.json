@@ -1,8 +1,9 @@
 {
   "symbol": "JBL",
-  "name": "JBL Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:06.509Z",
-  "source": "Alpha Vantage API"
+  "name": "Jabil Circuit Inc",
+  "sector": "TECHNOLOGY",
+  "industry": "ELECTRONIC COMPONENTS",
+  "officialSite": "https://www.jabil.com",
+  "cachedAt": "2025-10-19T05:44:08.858Z",
+  "source": "Alpha Vantage API (fixed)"
 }

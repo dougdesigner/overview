@@ -1,8 +1,9 @@
 {
   "symbol": "RNTX",
-  "name": "RNTX Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:32:27.025Z",
-  "source": "Alpha Vantage API"
+  "name": "Rein Therapeutics Inc",
+  "sector": "HEALTHCARE",
+  "industry": "BIOTECHNOLOGY",
+  "officialSite": "https://www.reintx.com",
+  "cachedAt": "2025-10-19T06:02:37.442Z",
+  "source": "Alpha Vantage API (fixed)"
 }

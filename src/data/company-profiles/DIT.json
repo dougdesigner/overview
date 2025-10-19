@@ -1,8 +1,9 @@
 {
   "symbol": "DIT",
-  "name": "DIT Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:34:37.722Z",
-  "source": "Alpha Vantage API"
+  "name": "AMCON Distributing Company",
+  "sector": "CONSUMER DEFENSIVE",
+  "industry": "FOOD DISTRIBUTION",
+  "officialSite": "https://www.amcon.com",
+  "cachedAt": "2025-10-19T05:28:49.239Z",
+  "source": "Alpha Vantage API (fixed)"
 }

@@ -1,8 +1,9 @@
 {
   "symbol": "ITW",
-  "name": "ITW Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:29:41.921Z",
-  "source": "Alpha Vantage API"
+  "name": "Illinois Tool Works Inc",
+  "sector": "INDUSTRIALS",
+  "industry": "SPECIALTY INDUSTRIAL MACHINERY",
+  "officialSite": "https://www.itw.com",
+  "cachedAt": "2025-10-19T05:44:05.899Z",
+  "source": "Alpha Vantage API (fixed)"
 }

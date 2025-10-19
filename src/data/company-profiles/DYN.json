@@ -1,8 +1,9 @@
 {
   "symbol": "DYN",
-  "name": "DYN Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:34:19.801Z",
-  "source": "Alpha Vantage API"
+  "name": "Dyne Therapeutics Inc",
+  "sector": "HEALTHCARE",
+  "industry": "BIOTECHNOLOGY",
+  "officialSite": "https://www.dyne-tx.com",
+  "cachedAt": "2025-10-19T05:29:25.257Z",
+  "source": "Alpha Vantage API (fixed)"
 }

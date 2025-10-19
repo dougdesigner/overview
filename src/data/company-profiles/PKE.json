@@ -1,8 +1,9 @@
 {
   "symbol": "PKE",
-  "name": "PKE Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:32:33.281Z",
-  "source": "Alpha Vantage API"
+  "name": "Park Electrochemical Corporation",
+  "sector": "INDUSTRIALS",
+  "industry": "AEROSPACE & DEFENSE",
+  "officialSite": "https://www.parkaerospace.com",
+  "cachedAt": "2025-10-19T06:00:19.281Z",
+  "source": "Alpha Vantage API (fixed)"
 }

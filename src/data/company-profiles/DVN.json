@@ -1,8 +1,9 @@
 {
   "symbol": "DVN",
-  "name": "DVN Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:26.397Z",
-  "source": "Alpha Vantage API"
+  "name": "Devon Energy Corporation",
+  "sector": "ENERGY",
+  "industry": "OIL & GAS E&P",
+  "officialSite": "https://www.devonenergy.com",
+  "cachedAt": "2025-10-19T05:29:18.476Z",
+  "source": "Alpha Vantage API (fixed)"
 }

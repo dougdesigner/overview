@@ -1,8 +1,9 @@
 {
   "symbol": "LGIH",
-  "name": "LGIH Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:36:23.639Z",
-  "source": "Alpha Vantage API"
+  "name": "LGI Homes",
+  "sector": "CONSUMER CYCLICAL",
+  "industry": "RESIDENTIAL CONSTRUCTION",
+  "officialSite": "https://www.lgihomes.com",
+  "cachedAt": "2025-10-19T05:45:10.476Z",
+  "source": "Alpha Vantage API (fixed)"
 }

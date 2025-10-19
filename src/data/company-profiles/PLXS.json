@@ -1,8 +1,9 @@
 {
   "symbol": "PLXS",
-  "name": "PLXS Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:31:41.790Z",
-  "source": "Alpha Vantage API"
+  "name": "Plexus Corp",
+  "sector": "TECHNOLOGY",
+  "industry": "ELECTRONIC COMPONENTS",
+  "officialSite": "https://www.plexus.com",
+  "cachedAt": "2025-10-19T06:00:26.115Z",
+  "source": "Alpha Vantage API (fixed)"
 }

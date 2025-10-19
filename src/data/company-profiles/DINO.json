@@ -1,8 +1,9 @@
 {
   "symbol": "DINO",
-  "name": "DINO Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:31:24.816Z",
-  "source": "Alpha Vantage API"
+  "name": "HF Sinclair Corp",
+  "sector": "ENERGY",
+  "industry": "OIL & GAS REFINING & MARKETING",
+  "officialSite": "https://www.hfsinclair.com",
+  "cachedAt": "2025-10-19T05:28:48.262Z",
+  "source": "Alpha Vantage API (fixed)"
 }

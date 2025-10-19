@@ -1,8 +1,9 @@
 {
   "symbol": "CURB",
-  "name": "CURB Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:34:29.599Z",
-  "source": "Alpha Vantage API"
+  "name": "Curbline Properties Corp.",
+  "sector": "REAL ESTATE",
+  "industry": "REIT - RETAIL",
+  "officialSite": "https://curbline.com",
+  "cachedAt": "2025-10-19T05:26:08.045Z",
+  "source": "Alpha Vantage API (fixed)"
 }

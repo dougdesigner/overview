@@ -1,8 +1,9 @@
 {
   "symbol": "NRDS",
-  "name": "NRDS Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:36:02.551Z",
-  "source": "Alpha Vantage API"
+  "name": "Nerdwallet Inc",
+  "sector": "COMMUNICATION SERVICES",
+  "industry": "INTERNET CONTENT & INFORMATION",
+  "officialSite": "https://www.nerdwallet.com",
+  "cachedAt": "2025-10-19T05:54:34.574Z",
+  "source": "Alpha Vantage API (fixed)"
 }

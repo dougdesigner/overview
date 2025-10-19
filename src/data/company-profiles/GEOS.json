@@ -1,8 +1,9 @@
 {
   "symbol": "GEOS",
-  "name": "GEOS Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:36:21.459Z",
-  "source": "Alpha Vantage API"
+  "name": "Geospace Technologies Corporation",
+  "sector": "ENERGY",
+  "industry": "OIL & GAS EQUIPMENT & SERVICES",
+  "officialSite": "https://www.geospace.com",
+  "cachedAt": "2025-10-19T05:31:53.529Z",
+  "source": "Alpha Vantage API (fixed)"
 }

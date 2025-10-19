@@ -1,8 +1,9 @@
 {
   "symbol": "GIS",
-  "name": "GIS Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:03.588Z",
-  "source": "Alpha Vantage API"
+  "name": "General Mills Inc",
+  "sector": "CONSUMER DEFENSIVE",
+  "industry": "PACKAGED FOODS",
+  "officialSite": "https://www.generalmills.com",
+  "cachedAt": "2025-10-19T05:36:42.404Z",
+  "source": "Alpha Vantage API (fixed)"
 }

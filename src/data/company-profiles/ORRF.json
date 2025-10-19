@@ -1,8 +1,9 @@
 {
   "symbol": "ORRF",
-  "name": "ORRF Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:32:30.169Z",
-  "source": "Alpha Vantage API"
+  "name": "Orrstown Financial Services Inc",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "BANKS - REGIONAL",
+  "officialSite": "https://www.orrstown.com",
+  "cachedAt": "2025-10-19T05:55:41.772Z",
+  "source": "Alpha Vantage API (fixed)"
 }

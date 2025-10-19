@@ -1,8 +1,9 @@
 {
   "symbol": "ONL",
-  "name": "ONL Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:32:29.541Z",
-  "source": "Alpha Vantage API"
+  "name": "Orion Office Reit Inc",
+  "sector": "REAL ESTATE",
+  "industry": "REIT - OFFICE",
+  "officialSite": "https://www.onlreit.com",
+  "cachedAt": "2025-10-19T05:55:19.262Z",
+  "source": "Alpha Vantage API (fixed)"
 }

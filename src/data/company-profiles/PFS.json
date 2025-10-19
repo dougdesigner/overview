@@ -1,8 +1,9 @@
 {
   "symbol": "PFS",
-  "name": "PFS Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:32:24.989Z",
-  "source": "Alpha Vantage API"
+  "name": "Provident Financial Services Inc",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "BANKS - REGIONAL",
+  "officialSite": "https://www.provident.bank",
+  "cachedAt": "2025-10-19T06:00:01.982Z",
+  "source": "Alpha Vantage API (fixed)"
 }

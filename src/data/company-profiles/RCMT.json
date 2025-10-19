@@ -1,8 +1,9 @@
 {
   "symbol": "RCMT",
-  "name": "RCMT Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:32:34.216Z",
-  "source": "Alpha Vantage API"
+  "name": "RCM Technologies Inc",
+  "sector": "INDUSTRIALS",
+  "industry": "CONGLOMERATES",
+  "officialSite": "https://www.rcmt.com",
+  "cachedAt": "2025-10-19T06:01:29.254Z",
+  "source": "Alpha Vantage API (fixed)"
 }

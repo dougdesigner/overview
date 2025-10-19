@@ -1,8 +1,9 @@
 {
   "symbol": "CTSO",
-  "name": "CTSO Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:34:15.946Z",
-  "source": "Alpha Vantage API"
+  "name": "Cytosorbents Crp",
+  "sector": "HEALTHCARE",
+  "industry": "MEDICAL DEVICES",
+  "officialSite": "https://www.cytosorbents.com",
+  "cachedAt": "2025-10-19T05:26:04.128Z",
+  "source": "Alpha Vantage API (fixed)"
 }

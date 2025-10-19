@@ -1,8 +1,9 @@
 {
   "symbol": "FLO",
-  "name": "FLO Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:31:05.559Z",
-  "source": "Alpha Vantage API"
+  "name": "Flowers Foods Inc",
+  "sector": "CONSUMER DEFENSIVE",
+  "industry": "PACKAGED FOODS",
+  "officialSite": "https://www.flowersfoods.com",
+  "cachedAt": "2025-10-19T05:31:11.483Z",
+  "source": "Alpha Vantage API (fixed)"
 }

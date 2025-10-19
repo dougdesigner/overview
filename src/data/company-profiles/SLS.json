@@ -1,8 +1,9 @@
 {
   "symbol": "SLS",
-  "name": "SLS Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:27.805Z",
-  "source": "Alpha Vantage API"
+  "name": "Sellas Life Sciences Group Inc",
+  "sector": "HEALTHCARE",
+  "industry": "BIOTECHNOLOGY",
+  "officialSite": "https://www.sellaslifesciences.com",
+  "cachedAt": "2025-10-19T06:05:00.438Z",
+  "source": "Alpha Vantage API (fixed)"
 }

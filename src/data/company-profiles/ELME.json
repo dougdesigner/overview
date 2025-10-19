@@ -1,8 +1,9 @@
 {
   "symbol": "ELME",
-  "name": "ELME Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:36:16.179Z",
-  "source": "Alpha Vantage API"
+  "name": "Elme Communities",
+  "sector": "REAL ESTATE",
+  "industry": "REIT - RESIDENTIAL",
+  "officialSite": "https://www.elmecommunities.com",
+  "cachedAt": "2025-10-19T05:29:48.640Z",
+  "source": "Alpha Vantage API (fixed)"
 }

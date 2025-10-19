@@ -1,8 +1,9 @@
 {
   "symbol": "SARO",
-  "name": "SARO Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:32:00.904Z",
-  "source": "Alpha Vantage API"
+  "name": "StandardAero, Inc.",
+  "sector": "INDUSTRIALS",
+  "industry": "AEROSPACE & DEFENSE",
+  "officialSite": "https://www.standardaero.com",
+  "cachedAt": "2025-10-19T06:03:15.645Z",
+  "source": "Alpha Vantage API (fixed)"
 }

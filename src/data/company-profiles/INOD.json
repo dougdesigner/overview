@@ -1,8 +1,9 @@
 {
   "symbol": "INOD",
-  "name": "INOD Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:36:37.882Z",
-  "source": "Alpha Vantage API"
+  "name": "Innodata Inc",
+  "sector": "TECHNOLOGY",
+  "industry": "INFORMATION TECHNOLOGY SERVICES",
+  "officialSite": "https://www.innodata.com",
+  "cachedAt": "2025-10-19T05:42:33.279Z",
+  "source": "Alpha Vantage API (fixed)"
 }

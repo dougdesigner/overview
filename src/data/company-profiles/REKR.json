@@ -1,8 +1,9 @@
 {
   "symbol": "REKR",
-  "name": "REKR Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:32:26.713Z",
-  "source": "Alpha Vantage API"
+  "name": "Rekor Systems Inc",
+  "sector": "TECHNOLOGY",
+  "industry": "SOFTWARE - INFRASTRUCTURE",
+  "officialSite": "https://www.rekor.ai",
+  "cachedAt": "2025-10-19T06:01:52.352Z",
+  "source": "Alpha Vantage API (fixed)"
 }

@@ -1,8 +1,9 @@
 {
   "symbol": "MVBF",
-  "name": "MVBF Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:35:29.851Z",
-  "source": "Alpha Vantage API"
+  "name": "MVB Financial Corp",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "BANKS - REGIONAL",
+  "officialSite": "https://www.mvbbanking.com",
+  "cachedAt": "2025-10-19T05:53:38.075Z",
+  "source": "Alpha Vantage API (fixed)"
 }

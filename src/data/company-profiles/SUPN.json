@@ -1,8 +1,9 @@
 {
   "symbol": "SUPN",
-  "name": "SUPN Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:34.707Z",
-  "source": "Alpha Vantage API"
+  "name": "Supernus Pharmaceuticals Inc",
+  "sector": "HEALTHCARE",
+  "industry": "DRUG MANUFACTURERS - SPECIALTY & GENERIC",
+  "officialSite": "https://www.supernus.com",
+  "cachedAt": "2025-10-19T06:07:09.055Z",
+  "source": "Alpha Vantage API (fixed)"
 }

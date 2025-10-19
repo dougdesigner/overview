@@ -1,8 +1,9 @@
 {
   "symbol": "PLSE",
-  "name": "PLSE Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:32:22.785Z",
-  "source": "Alpha Vantage API"
+  "name": "Pulse Biosciences Inc",
+  "sector": "HEALTHCARE",
+  "industry": "MEDICAL INSTRUMENTS & SUPPLIES",
+  "officialSite": "https://www.pulsebiosciences.com",
+  "cachedAt": "2025-10-19T06:00:25.139Z",
+  "source": "Alpha Vantage API (fixed)"
 }

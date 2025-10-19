@@ -1,8 +1,9 @@
 {
   "symbol": "TXNM",
-  "name": "TXNM Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:31:11.739Z",
-  "source": "Alpha Vantage API"
+  "name": "TXNM Energy, Inc.",
+  "sector": "UTILITIES",
+  "industry": "UTILITIES - REGULATED ELECTRIC",
+  "officialSite": "https://www.txnmenergy.com",
+  "cachedAt": "2025-10-19T06:08:40.806Z",
+  "source": "Alpha Vantage API (fixed)"
 }

@@ -1,8 +1,9 @@
 {
   "symbol": "NERV",
-  "name": "NERV Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:35:33.692Z",
-  "source": "Alpha Vantage API"
+  "name": "Minerva Neurosciences Inc",
+  "sector": "HEALTHCARE",
+  "industry": "BIOTECHNOLOGY",
+  "officialSite": "https://www.minervaneurosciences.com",
+  "cachedAt": "2025-10-19T05:53:56.493Z",
+  "source": "Alpha Vantage API (fixed)"
 }

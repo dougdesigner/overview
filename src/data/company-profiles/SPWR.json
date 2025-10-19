@@ -1,8 +1,9 @@
 {
   "symbol": "SPWR",
-  "name": "SPWR Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:34:31.797Z",
-  "source": "Alpha Vantage API"
+  "name": "Complete Solaria, Inc",
+  "sector": "TECHNOLOGY",
+  "industry": "SOLAR",
+  "officialSite": "https://us.sunpower.com",
+  "cachedAt": "2025-10-19T06:05:27.937Z",
+  "source": "Alpha Vantage API (fixed)"
 }

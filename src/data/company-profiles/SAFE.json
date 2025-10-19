@@ -1,8 +1,9 @@
 {
   "symbol": "SAFE",
-  "name": "SAFE Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:33.983Z",
-  "source": "Alpha Vantage API"
+  "name": "Safehold Inc",
+  "sector": "REAL ESTATE",
+  "industry": "REIT - DIVERSIFIED",
+  "officialSite": "https://www.safeholdinc.com",
+  "cachedAt": "2025-10-19T06:03:09.782Z",
+  "source": "Alpha Vantage API (fixed)"
 }

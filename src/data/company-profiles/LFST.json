@@ -1,8 +1,9 @@
 {
   "symbol": "LFST",
-  "name": "LFST Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:36:32.770Z",
-  "source": "Alpha Vantage API"
+  "name": "Lifestance Health Group Inc",
+  "sector": "HEALTHCARE",
+  "industry": "MEDICAL CARE FACILITIES",
+  "officialSite": "https://lifestance.com",
+  "cachedAt": "2025-10-19T05:45:07.531Z",
+  "source": "Alpha Vantage API (fixed)"
 }

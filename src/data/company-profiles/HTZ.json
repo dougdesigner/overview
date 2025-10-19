@@ -1,8 +1,9 @@
 {
   "symbol": "HTZ",
-  "name": "HTZ Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:36:12.695Z",
-  "source": "Alpha Vantage API"
+  "name": "Hertz Global Holdings Inc",
+  "sector": "INDUSTRIALS",
+  "industry": "RENTAL & LEASING SERVICES",
+  "officialSite": "https://www.hertz.com",
+  "cachedAt": "2025-10-19T05:41:56.152Z",
+  "source": "Alpha Vantage API (fixed)"
 }

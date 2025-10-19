@@ -1,8 +1,9 @@
 {
   "symbol": "KEX",
-  "name": "KEX Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:31:38.725Z",
-  "source": "Alpha Vantage API"
+  "name": "Kirby Corporation",
+  "sector": "INDUSTRIALS",
+  "industry": "MARINE SHIPPING",
+  "officialSite": "https://kirbycorp.com",
+  "cachedAt": "2025-10-19T05:44:13.694Z",
+  "source": "Alpha Vantage API (fixed)"
 }

@@ -1,8 +1,9 @@
 {
   "symbol": "SSD",
-  "name": "SSD Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:31:26.987Z",
-  "source": "Alpha Vantage API"
+  "name": "Simpson Manufacturing Company Inc",
+  "sector": "BASIC MATERIALS",
+  "industry": "LUMBER & WOOD PRODUCTION",
+  "officialSite": "https://www.simpsonmfg.com",
+  "cachedAt": "2025-10-19T06:05:42.012Z",
+  "source": "Alpha Vantage API (fixed)"
 }

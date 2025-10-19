@@ -1,8 +1,9 @@
 {
   "symbol": "DAIO",
-  "name": "DAIO Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:34:14.827Z",
-  "source": "Alpha Vantage API"
+  "name": "Data I/O Corporation",
+  "sector": "TECHNOLOGY",
+  "industry": "ELECTRONIC COMPONENTS",
+  "officialSite": "https://www.dataio.com",
+  "cachedAt": "2025-10-19T05:26:32.377Z",
+  "source": "Alpha Vantage API (fixed)"
 }

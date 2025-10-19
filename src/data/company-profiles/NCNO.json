@@ -1,8 +1,9 @@
 {
   "symbol": "NCNO",
-  "name": "NCNO Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:36:01.611Z",
-  "source": "Alpha Vantage API"
+  "name": "nCino Inc",
+  "sector": "TECHNOLOGY",
+  "industry": "SOFTWARE - APPLICATION",
+  "officialSite": "https://www.ncino.com",
+  "cachedAt": "2025-10-19T05:53:49.704Z",
+  "source": "Alpha Vantage API (fixed)"
 }

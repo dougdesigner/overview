@@ -1,8 +1,9 @@
 {
   "symbol": "HAE",
-  "name": "HAE Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:31:21.361Z",
-  "source": "Alpha Vantage API"
+  "name": "Haemonetics Corporation",
+  "sector": "HEALTHCARE",
+  "industry": "MEDICAL DEVICES",
+  "officialSite": "https://www.haemonetics.com",
+  "cachedAt": "2025-10-19T05:37:16.074Z",
+  "source": "Alpha Vantage API (fixed)"
 }

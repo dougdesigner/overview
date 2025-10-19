@@ -1,8 +1,9 @@
 {
   "symbol": "USNA",
-  "name": "USNA Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:09.879Z",
-  "source": "Alpha Vantage API"
+  "name": "USANA Health Sciences Inc",
+  "sector": "CONSUMER DEFENSIVE",
+  "industry": "PACKAGED FOODS",
+  "officialSite": "https://www.usana.com",
+  "cachedAt": "2025-10-19T06:09:14.588Z",
+  "source": "Alpha Vantage API (fixed)"
 }

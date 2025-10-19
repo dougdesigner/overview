@@ -1,8 +1,9 @@
 {
   "symbol": "CPT",
-  "name": "CPT Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:20.920Z",
-  "source": "Alpha Vantage API"
+  "name": "Camden Property Trust",
+  "sector": "REAL ESTATE",
+  "industry": "REIT - RESIDENTIAL",
+  "officialSite": "https://www.camdenliving.com",
+  "cachedAt": "2025-10-19T05:25:36.842Z",
+  "source": "Alpha Vantage API (fixed)"
 }

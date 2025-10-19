@@ -1,8 +1,9 @@
 {
   "symbol": "LOAN",
-  "name": "LOAN Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:35:35.575Z",
-  "source": "Alpha Vantage API"
+  "name": "Manhattan Bridge Capital Inc",
+  "sector": "REAL ESTATE",
+  "industry": "REIT - MORTGAGE",
+  "officialSite": "https://www.manhattanbridgecapital.com",
+  "cachedAt": "2025-10-19T05:48:21.201Z",
+  "source": "Alpha Vantage API (fixed)"
 }

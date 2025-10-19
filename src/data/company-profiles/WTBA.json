@@ -1,8 +1,9 @@
 {
   "symbol": "WTBA",
-  "name": "WTBA Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:02.915Z",
-  "source": "Alpha Vantage API"
+  "name": "West Bancorporation",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "BANKS - REGIONAL",
+  "officialSite": "https://www.westbankstrong.com",
+  "cachedAt": "2025-10-19T06:12:29.929Z",
+  "source": "Alpha Vantage API (fixed)"
 }

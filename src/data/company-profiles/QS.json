@@ -1,8 +1,9 @@
 {
   "symbol": "QS",
-  "name": "QS Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:32:17.760Z",
-  "source": "Alpha Vantage API"
+  "name": "Quantumscape Corp",
+  "sector": "CONSUMER CYCLICAL",
+  "industry": "AUTO PARTS",
+  "officialSite": "https://www.quantumscape.com",
+  "cachedAt": "2025-10-19T06:01:14.686Z",
+  "source": "Alpha Vantage API (fixed)"
 }

@@ -1,8 +1,9 @@
 {
   "symbol": "TTAN",
-  "name": "TTAN Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:18.591Z",
-  "source": "Alpha Vantage API"
+  "name": "ServiceTitan, Inc. Class A Common Stock",
+  "sector": "TECHNOLOGY",
+  "industry": "SOFTWARE - APPLICATION",
+  "officialSite": "https://www.servicetitan.com",
+  "cachedAt": "2025-10-19T06:08:20.675Z",
+  "source": "Alpha Vantage API (fixed)"
 }

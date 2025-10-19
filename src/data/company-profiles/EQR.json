@@ -1,8 +1,9 @@
 {
   "symbol": "EQR",
-  "name": "EQR Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:10.814Z",
-  "source": "Alpha Vantage API"
+  "name": "Equity Residential",
+  "sector": "REAL ESTATE",
+  "industry": "REIT - RESIDENTIAL",
+  "officialSite": "https://www.equityapartments.com",
+  "cachedAt": "2025-10-19T05:30:05.756Z",
+  "source": "Alpha Vantage API (fixed)"
 }

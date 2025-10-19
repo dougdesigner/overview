@@ -1,8 +1,9 @@
 {
   "symbol": "HQY",
-  "name": "HQY Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:31:17.977Z",
-  "source": "Alpha Vantage API"
+  "name": "HealthEquity Inc",
+  "sector": "HEALTHCARE",
+  "industry": "HEALTH INFORMATION SERVICES",
+  "officialSite": "https://www.healthequity.com",
+  "cachedAt": "2025-10-19T05:41:41.567Z",
+  "source": "Alpha Vantage API (fixed)"
 }

@@ -1,8 +1,9 @@
 {
   "symbol": "SRZN",
-  "name": "SRZN Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:42.143Z",
-  "source": "Alpha Vantage API"
+  "name": "Surrozen Inc",
+  "sector": "HEALTHCARE",
+  "industry": "BIOTECHNOLOGY",
+  "officialSite": "https://www.surrozen.com",
+  "cachedAt": "2025-10-19T06:05:38.115Z",
+  "source": "Alpha Vantage API (fixed)"
 }

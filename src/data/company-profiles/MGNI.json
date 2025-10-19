@@ -1,8 +1,9 @@
 {
   "symbol": "MGNI",
-  "name": "MGNI Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:35:36.619Z",
-  "source": "Alpha Vantage API"
+  "name": "Magnite Inc",
+  "sector": "COMMUNICATION SERVICES",
+  "industry": "ADVERTISING AGENCIES",
+  "officialSite": "https://www.magnite.com",
+  "cachedAt": "2025-10-19T05:52:36.488Z",
+  "source": "Alpha Vantage API (fixed)"
 }

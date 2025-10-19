@@ -1,8 +1,9 @@
 {
   "symbol": "SNBR",
-  "name": "SNBR Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:21.416Z",
-  "source": "Alpha Vantage API"
+  "name": "Sleep Number Corp",
+  "sector": "CONSUMER CYCLICAL",
+  "industry": "FURNISHINGS, FIXTURES & APPLIANCES",
+  "officialSite": "https://www.sleepnumber.com",
+  "cachedAt": "2025-10-19T06:05:10.309Z",
+  "source": "Alpha Vantage API (fixed)"
 }

@@ -1,8 +1,9 @@
 {
   "symbol": "LNN",
-  "name": "LNN Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:36:30.403Z",
-  "source": "Alpha Vantage API"
+  "name": "Lindsay Corporation",
+  "sector": "INDUSTRIALS",
+  "industry": "FARM & HEAVY CONSTRUCTION MACHINERY",
+  "officialSite": "https://www.lindsay.com",
+  "cachedAt": "2025-10-19T05:48:18.261Z",
+  "source": "Alpha Vantage API (fixed)"
 }

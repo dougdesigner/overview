@@ -1,8 +1,9 @@
 {
   "symbol": "PLNT",
-  "name": "PLNT Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:31:41.527Z",
-  "source": "Alpha Vantage API"
+  "name": "Planet Fitness Inc",
+  "sector": "CONSUMER CYCLICAL",
+  "industry": "LEISURE",
+  "officialSite": "https://www.planetfitness.com",
+  "cachedAt": "2025-10-19T06:00:24.159Z",
+  "source": "Alpha Vantage API (fixed)"
 }

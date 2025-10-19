@@ -1,8 +1,9 @@
 {
   "symbol": "RSSS",
-  "name": "RSSS Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:32:29.853Z",
-  "source": "Alpha Vantage API"
+  "name": "Research Solutions Inc",
+  "sector": "TECHNOLOGY",
+  "industry": "SOFTWARE - APPLICATION",
+  "officialSite": "https://www.researchsolutions.com",
+  "cachedAt": "2025-10-19T06:02:50.222Z",
+  "source": "Alpha Vantage API (fixed)"
 }

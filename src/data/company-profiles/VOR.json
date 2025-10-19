@@ -1,8 +1,9 @@
 {
   "symbol": "VOR",
-  "name": "VOR Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:14.183Z",
-  "source": "Alpha Vantage API"
+  "name": "Vor Biopharma Inc",
+  "sector": "HEALTHCARE",
+  "industry": "BIOTECHNOLOGY",
+  "officialSite": "https://www.vorbio.com",
+  "cachedAt": "2025-10-19T06:09:40.181Z",
+  "source": "Alpha Vantage API (fixed)"
 }

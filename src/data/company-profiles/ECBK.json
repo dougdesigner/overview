@@ -1,8 +1,9 @@
 {
   "symbol": "ECBK",
-  "name": "ECBK Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:34:18.845Z",
-  "source": "Alpha Vantage API"
+  "name": "ECB Bancorp Inc.",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "BANKS - REGIONAL",
+  "officialSite": "https://www.everettbank.com",
+  "cachedAt": "2025-10-19T05:29:29.168Z",
+  "source": "Alpha Vantage API (fixed)"
 }

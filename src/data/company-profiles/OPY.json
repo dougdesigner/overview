@@ -1,8 +1,9 @@
 {
   "symbol": "OPY",
-  "name": "OPY Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:32:08.665Z",
-  "source": "Alpha Vantage API"
+  "name": "Oppenheimer Holdings Inc",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "CAPITAL MARKETS",
+  "officialSite": "https://www.oppenheimer.com",
+  "cachedAt": "2025-10-19T05:55:33.934Z",
+  "source": "Alpha Vantage API (fixed)"
 }

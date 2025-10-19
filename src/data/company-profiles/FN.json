@@ -1,8 +1,9 @@
 {
   "symbol": "FN",
-  "name": "FN Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:31:14.689Z",
-  "source": "Alpha Vantage API"
+  "name": "Fabrinet",
+  "sector": "TECHNOLOGY",
+  "industry": "ELECTRONIC COMPONENTS",
+  "officialSite": "https://www.fabrinet.com",
+  "cachedAt": "2025-10-19T05:31:16.342Z",
+  "source": "Alpha Vantage API (fixed)"
 }

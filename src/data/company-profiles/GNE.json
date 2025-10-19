@@ -1,8 +1,9 @@
 {
   "symbol": "GNE",
-  "name": "GNE Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:36:21.766Z",
-  "source": "Alpha Vantage API"
+  "name": "Genie Energy Ltd",
+  "sector": "UTILITIES",
+  "industry": "UTILITIES - REGULATED ELECTRIC",
+  "officialSite": "https://genie.com",
+  "cachedAt": "2025-10-19T05:36:50.194Z",
+  "source": "Alpha Vantage API (fixed)"
 }

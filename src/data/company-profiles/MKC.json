@@ -1,8 +1,9 @@
 {
   "symbol": "MKC",
-  "name": "MKC Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:18.580Z",
-  "source": "Alpha Vantage API"
+  "name": "McCormick & Company Incorporated",
+  "sector": "CONSUMER DEFENSIVE",
+  "industry": "PACKAGED FOODS",
+  "officialSite": "https://www.mccormickcorporation.com",
+  "cachedAt": "2025-10-19T05:52:47.211Z",
+  "source": "Alpha Vantage API (fixed)"
 }

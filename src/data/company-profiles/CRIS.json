@@ -1,8 +1,9 @@
 {
   "symbol": "CRIS",
-  "name": "CRIS Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:34:17.985Z",
-  "source": "Alpha Vantage API"
+  "name": "Curis Inc",
+  "sector": "HEALTHCARE",
+  "industry": "BIOTECHNOLOGY",
+  "officialSite": "https://www.curis.com",
+  "cachedAt": "2025-10-19T05:25:44.589Z",
+  "source": "Alpha Vantage API (fixed)"
 }

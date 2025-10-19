@@ -1,8 +1,9 @@
 {
   "symbol": "TOST",
-  "name": "TOST Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:35.705Z",
-  "source": "Alpha Vantage API"
+  "name": "Toast Inc",
+  "sector": "TECHNOLOGY",
+  "industry": "SOFTWARE - INFRASTRUCTURE",
+  "officialSite": "https://www.pos.toasttab.com",
+  "cachedAt": "2025-10-19T06:08:00.514Z",
+  "source": "Alpha Vantage API (fixed)"
 }

@@ -1,8 +1,9 @@
 {
   "symbol": "CPIX",
-  "name": "CPIX Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:34:29.712Z",
-  "source": "Alpha Vantage API"
+  "name": "Cumberland Pharmaceuticals Inc",
+  "sector": "HEALTHCARE",
+  "industry": "DRUG MANUFACTURERS - SPECIALTY & GENERIC",
+  "officialSite": "https://www.cumberlandpharma.com",
+  "cachedAt": "2025-10-19T05:25:31.897Z",
+  "source": "Alpha Vantage API (fixed)"
 }

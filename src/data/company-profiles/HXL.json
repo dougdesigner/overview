@@ -1,8 +1,9 @@
 {
   "symbol": "HXL",
-  "name": "HXL Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:31:24.947Z",
-  "source": "Alpha Vantage API"
+  "name": "Hexcel Corporation",
+  "sector": "INDUSTRIALS",
+  "industry": "AEROSPACE & DEFENSE",
+  "officialSite": "https://www.hexcel.com",
+  "cachedAt": "2025-10-19T05:42:09.895Z",
+  "source": "Alpha Vantage API (fixed)"
 }

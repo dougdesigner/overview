@@ -1,8 +1,9 @@
 {
   "symbol": "STN",
-  "name": "STN Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:37:02.002Z",
-  "source": "Alpha Vantage API"
+  "name": "Stantec Inc",
+  "sector": "INDUSTRIALS",
+  "industry": "ENGINEERING & CONSTRUCTION",
+  "officialSite": "https://www.stantec.com",
+  "cachedAt": "2025-10-19T06:06:52.414Z",
+  "source": "Alpha Vantage API (fixed)"
 }

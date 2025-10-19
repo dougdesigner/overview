@@ -1,8 +1,9 @@
 {
   "symbol": "LMNR",
-  "name": "LMNR Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:36:31.346Z",
-  "source": "Alpha Vantage API"
+  "name": "Limoneira Co",
+  "sector": "CONSUMER DEFENSIVE",
+  "industry": "FARM PRODUCTS",
+  "officialSite": "https://www.limoneira.com",
+  "cachedAt": "2025-10-19T05:48:16.334Z",
+  "source": "Alpha Vantage API (fixed)"
 }

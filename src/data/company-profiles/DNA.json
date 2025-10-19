@@ -1,8 +1,9 @@
 {
   "symbol": "DNA",
-  "name": "DNA Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:36:19.974Z",
-  "source": "Alpha Vantage API"
+  "name": "Ginkgo Bioworks Holdings",
+  "sector": "HEALTHCARE",
+  "industry": "BIOTECHNOLOGY",
+  "officialSite": "https://www.ginkgo.bio",
+  "cachedAt": "2025-10-19T05:28:59.017Z",
+  "source": "Alpha Vantage API (fixed)"
 }

@@ -1,8 +1,9 @@
 {
   "symbol": "HOPE",
-  "name": "HOPE Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:36:09.924Z",
-  "source": "Alpha Vantage API"
+  "name": "Hope Bancorp Inc",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "BANKS - REGIONAL",
+  "officialSite": "https://www.bankofhope.com",
+  "cachedAt": "2025-10-19T05:41:34.684Z",
+  "source": "Alpha Vantage API (fixed)"
 }

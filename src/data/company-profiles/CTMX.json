@@ -1,8 +1,9 @@
 {
   "symbol": "CTMX",
-  "name": "CTMX Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:34:16.054Z",
-  "source": "Alpha Vantage API"
+  "name": "CytomX Therapeutics Inc",
+  "sector": "HEALTHCARE",
+  "industry": "BIOTECHNOLOGY",
+  "officialSite": "https://www.cytomx.com",
+  "cachedAt": "2025-10-19T05:25:57.244Z",
+  "source": "Alpha Vantage API (fixed)"
 }

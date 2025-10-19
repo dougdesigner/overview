@@ -1,8 +1,9 @@
 {
   "symbol": "GBTG",
-  "name": "GBTG Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:36:19.137Z",
-  "source": "Alpha Vantage API"
+  "name": "Global Business Travel Group Inc",
+  "sector": "CONSUMER CYCLICAL",
+  "industry": "TRAVEL SERVICES",
+  "officialSite": "https://www.amexglobalbusinesstravel.com",
+  "cachedAt": "2025-10-19T05:31:47.669Z",
+  "source": "Alpha Vantage API (fixed)"
 }

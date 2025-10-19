@@ -1,8 +1,9 @@
 {
   "symbol": "SAFT",
-  "name": "SAFT Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:33.775Z",
-  "source": "Alpha Vantage API"
+  "name": "Safety Insurance Group Inc",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "INSURANCE - PROPERTY & CASUALTY",
+  "officialSite": "https://www.safetyinsurance.com",
+  "cachedAt": "2025-10-19T06:03:10.765Z",
+  "source": "Alpha Vantage API (fixed)"
 }

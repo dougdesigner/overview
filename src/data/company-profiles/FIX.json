@@ -1,8 +1,9 @@
 {
   "symbol": "FIX",
-  "name": "FIX Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:32.056Z",
-  "source": "Alpha Vantage API"
+  "name": "Comfort Systems USA Inc",
+  "sector": "INDUSTRIALS",
+  "industry": "ENGINEERING & CONSTRUCTION",
+  "officialSite": "https://comfortsystemsusa.com",
+  "cachedAt": "2025-10-19T05:31:09.541Z",
+  "source": "Alpha Vantage API (fixed)"
 }

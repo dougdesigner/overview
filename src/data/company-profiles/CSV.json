@@ -1,8 +1,9 @@
 {
   "symbol": "CSV",
-  "name": "CSV Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:34:07.772Z",
-  "source": "Alpha Vantage API"
+  "name": "Carriage Services Inc",
+  "sector": "CONSUMER CYCLICAL",
+  "industry": "PERSONAL SERVICES",
+  "officialSite": "https://www.carriageservices.com",
+  "cachedAt": "2025-10-19T05:25:52.378Z",
+  "source": "Alpha Vantage API (fixed)"
 }

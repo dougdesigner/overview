@@ -1,8 +1,9 @@
 {
   "symbol": "SR",
-  "name": "SR Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:32:05.521Z",
-  "source": "Alpha Vantage API"
+  "name": "Spire Inc",
+  "sector": "UTILITIES",
+  "industry": "UTILITIES - REGULATED GAS",
+  "officialSite": "https://www.spireenergy.com",
+  "cachedAt": "2025-10-19T06:05:30.277Z",
+  "source": "Alpha Vantage API (fixed)"
 }

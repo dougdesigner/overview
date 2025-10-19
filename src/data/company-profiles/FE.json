@@ -1,8 +1,9 @@
 {
   "symbol": "FE",
-  "name": "FE Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:26.872Z",
-  "source": "Alpha Vantage API"
+  "name": "FirstEnergy Corporation",
+  "sector": "UTILITIES",
+  "industry": "UTILITIES - REGULATED ELECTRIC",
+  "officialSite": "https://www.firstenergycorp.com",
+  "cachedAt": "2025-10-19T05:30:59.446Z",
+  "source": "Alpha Vantage API (fixed)"
 }

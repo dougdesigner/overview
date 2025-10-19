@@ -1,8 +1,9 @@
 {
   "symbol": "SGRY",
-  "name": "SGRY Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:40.462Z",
-  "source": "Alpha Vantage API"
+  "name": "Surgery Partners Inc",
+  "sector": "HEALTHCARE",
+  "industry": "MEDICAL CARE FACILITIES",
+  "officialSite": "https://www.surgerypartners.com",
+  "cachedAt": "2025-10-19T06:04:29.003Z",
+  "source": "Alpha Vantage API (fixed)"
 }

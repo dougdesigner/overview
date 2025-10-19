@@ -1,8 +1,9 @@
 {
   "symbol": "FBIN",
-  "name": "FBIN Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:31:29.994Z",
-  "source": "Alpha Vantage API"
+  "name": "Fortune Brands Innovations Inc.",
+  "sector": "INDUSTRIALS",
+  "industry": "BUILDING PRODUCTS & EQUIPMENT",
+  "officialSite": "https://www.fbin.com",
+  "cachedAt": "2025-10-19T05:30:51.598Z",
+  "source": "Alpha Vantage API (fixed)"
 }

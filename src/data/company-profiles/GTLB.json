@@ -1,8 +1,9 @@
 {
   "symbol": "GTLB",
-  "name": "GTLB Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:31:33.093Z",
-  "source": "Alpha Vantage API"
+  "name": "Gitlab Inc",
+  "sector": "TECHNOLOGY",
+  "industry": "SOFTWARE - INFRASTRUCTURE",
+  "officialSite": "https://about.gitlab.com",
+  "cachedAt": "2025-10-19T05:37:09.281Z",
+  "source": "Alpha Vantage API (fixed)"
 }

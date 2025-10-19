@@ -1,8 +1,9 @@
 {
   "symbol": "TNGX",
-  "name": "TNGX Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:39.319Z",
-  "source": "Alpha Vantage API"
+  "name": "Tango Therapeutics Inc",
+  "sector": "HEALTHCARE",
+  "industry": "BIOTECHNOLOGY",
+  "officialSite": "https://www.tangotx.com",
+  "cachedAt": "2025-10-19T06:07:57.541Z",
+  "source": "Alpha Vantage API (fixed)"
 }

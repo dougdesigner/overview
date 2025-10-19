@@ -1,8 +1,9 @@
 {
   "symbol": "CRK",
-  "name": "CRK Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:34:33.303Z",
-  "source": "Alpha Vantage API"
+  "name": "Comstock Resources Inc",
+  "sector": "ENERGY",
+  "industry": "OIL & GAS E&P",
+  "officialSite": "https://www.comstockresources.com",
+  "cachedAt": "2025-10-19T05:25:45.557Z",
+  "source": "Alpha Vantage API (fixed)"
 }

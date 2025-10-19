@@ -1,8 +1,9 @@
 {
   "symbol": "TGNA",
-  "name": "TGNA Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:18.900Z",
-  "source": "Alpha Vantage API"
+  "name": "Tegna Inc",
+  "sector": "COMMUNICATION SERVICES",
+  "industry": "BROADCASTING",
+  "officialSite": "https://www.tegna.com",
+  "cachedAt": "2025-10-19T06:07:42.740Z",
+  "source": "Alpha Vantage API (fixed)"
 }

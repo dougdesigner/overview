@@ -1,8 +1,9 @@
 {
   "symbol": "WSBC",
-  "name": "WSBC Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:31:31.982Z",
-  "source": "Alpha Vantage API"
+  "name": "WesBanco Inc",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "BANKS - REGIONAL",
+  "officialSite": "https://www.wesbanco.com",
+  "cachedAt": "2025-10-19T06:12:24.665Z",
+  "source": "Alpha Vantage API (fixed)"
 }

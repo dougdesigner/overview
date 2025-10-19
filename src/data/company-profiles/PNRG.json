@@ -1,8 +1,9 @@
 {
   "symbol": "PNRG",
-  "name": "PNRG Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:32:21.852Z",
-  "source": "Alpha Vantage API"
+  "name": "PrimeEnergy Corporation",
+  "sector": "ENERGY",
+  "industry": "OIL & GAS E&P",
+  "officialSite": "https://primeenergy-resources-corporation.ir.rdgfi",
+  "cachedAt": "2025-10-19T06:00:30.018Z",
+  "source": "Alpha Vantage API (fixed)"
 }

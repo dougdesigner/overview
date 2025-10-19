@@ -1,8 +1,9 @@
 {
   "symbol": "TRU",
-  "name": "TRU Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:34.908Z",
-  "source": "Alpha Vantage API"
+  "name": "TransUnion",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "FINANCIAL DATA & STOCK EXCHANGES",
+  "officialSite": "https://www.transunion.com",
+  "cachedAt": "2025-10-19T06:08:12.855Z",
+  "source": "Alpha Vantage API (fixed)"
 }

@@ -1,8 +1,9 @@
 {
   "symbol": "ENS",
-  "name": "ENS Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:31:13.600Z",
-  "source": "Alpha Vantage API"
+  "name": "Enersys",
+  "sector": "INDUSTRIALS",
+  "industry": "ELECTRICAL EQUIPMENT & PARTS",
+  "officialSite": "https://www.enersys.com",
+  "cachedAt": "2025-10-19T05:29:56.444Z",
+  "source": "Alpha Vantage API (fixed)"
 }

@@ -1,8 +1,9 @@
 {
   "symbol": "ECVT",
-  "name": "ECVT Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:34:18.662Z",
-  "source": "Alpha Vantage API"
+  "name": "Ecovyst Inc",
+  "sector": "BASIC MATERIALS",
+  "industry": "SPECIALTY CHEMICALS",
+  "officialSite": "https://www.ecovyst.com",
+  "cachedAt": "2025-10-19T05:29:33.053Z",
+  "source": "Alpha Vantage API (fixed)"
 }

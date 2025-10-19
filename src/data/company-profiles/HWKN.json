@@ -1,8 +1,9 @@
 {
   "symbol": "HWKN",
-  "name": "HWKN Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:36:05.791Z",
-  "source": "Alpha Vantage API"
+  "name": "Hawkins Inc",
+  "sector": "BASIC MATERIALS",
+  "industry": "SPECIALTY CHEMICALS",
+  "officialSite": "https://www.hawkinsinc.com",
+  "cachedAt": "2025-10-19T05:42:08.887Z",
+  "source": "Alpha Vantage API (fixed)"
 }

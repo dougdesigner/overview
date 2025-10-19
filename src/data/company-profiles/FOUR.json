@@ -1,8 +1,9 @@
 {
   "symbol": "FOUR",
-  "name": "FOUR Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:31:31.851Z",
-  "source": "Alpha Vantage API"
+  "name": "Shift4 Payments Inc",
+  "sector": "TECHNOLOGY",
+  "industry": "SOFTWARE - INFRASTRUCTURE",
+  "officialSite": "https://www.shift4.com",
+  "cachedAt": "2025-10-19T05:31:21.212Z",
+  "source": "Alpha Vantage API (fixed)"
 }

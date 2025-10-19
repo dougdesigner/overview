@@ -1,8 +1,9 @@
 {
   "symbol": "PRG",
-  "name": "PRG Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:32:19.745Z",
-  "source": "Alpha Vantage API"
+  "name": "PROG Holdings Inc",
+  "sector": "INDUSTRIALS",
+  "industry": "RENTAL & LEASING SERVICES",
+  "officialSite": "https://progholdings.com",
+  "cachedAt": "2025-10-19T06:00:37.830Z",
+  "source": "Alpha Vantage API (fixed)"
 }

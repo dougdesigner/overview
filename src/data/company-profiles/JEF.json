@@ -1,8 +1,9 @@
 {
   "symbol": "JEF",
-  "name": "JEF Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:39.443Z",
-  "source": "Alpha Vantage API"
+  "name": "Jefferies Financial Group Inc",
+  "sector": "FINANCIAL SERVICES",
+  "industry": "CAPITAL MARKETS",
+  "officialSite": "https://www.jefferies.com",
+  "cachedAt": "2025-10-19T05:44:10.786Z",
+  "source": "Alpha Vantage API (fixed)"
 }

@@ -1,8 +1,9 @@
 {
   "symbol": "PASG",
-  "name": "PASG Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:32:32.660Z",
-  "source": "Alpha Vantage API"
+  "name": "Passage Bio Inc",
+  "sector": "HEALTHCARE",
+  "industry": "BIOTECHNOLOGY",
+  "officialSite": "https://www.passagebio.com",
+  "cachedAt": "2025-10-19T05:56:05.043Z",
+  "source": "Alpha Vantage API (fixed)"
 }

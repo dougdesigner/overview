@@ -1,8 +1,9 @@
 {
   "symbol": "DRRX",
-  "name": "DRRX Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:34:21.029Z",
-  "source": "Alpha Vantage API"
+  "name": "Durect Corporation",
+  "sector": "HEALTHCARE",
+  "industry": "DRUG MANUFACTURERS - SPECIALTY & GENERIC",
+  "officialSite": "https://www.durect.com",
+  "cachedAt": "2025-10-19T05:29:09.697Z",
+  "source": "Alpha Vantage API (fixed)"
 }

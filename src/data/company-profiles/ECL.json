@@ -1,8 +1,9 @@
 {
   "symbol": "ECL",
-  "name": "ECL Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:29:41.766Z",
-  "source": "Alpha Vantage API"
+  "name": "Ecolab Inc",
+  "sector": "BASIC MATERIALS",
+  "industry": "SPECIALTY CHEMICALS",
+  "officialSite": "https://www.ecolab.com",
+  "cachedAt": "2025-10-19T05:29:30.150Z",
+  "source": "Alpha Vantage API (fixed)"
 }

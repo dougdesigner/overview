@@ -1,8 +1,9 @@
 {
   "symbol": "EME",
-  "name": "EME Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:30:28.287Z",
-  "source": "Alpha Vantage API"
+  "name": "EMCOR Group Inc",
+  "sector": "INDUSTRIALS",
+  "industry": "ENGINEERING & CONSTRUCTION",
+  "officialSite": "https://www.emcorgroup.com",
+  "cachedAt": "2025-10-19T05:29:53.537Z",
+  "source": "Alpha Vantage API (fixed)"
 }

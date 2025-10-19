@@ -1,8 +1,9 @@
 {
   "symbol": "GTY",
-  "name": "GTY Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:36:20.724Z",
-  "source": "Alpha Vantage API"
+  "name": "Getty Realty Corporation",
+  "sector": "REAL ESTATE",
+  "industry": "REIT - RETAIL",
+  "officialSite": "https://www.gettyrealty.com",
+  "cachedAt": "2025-10-19T05:37:11.217Z",
+  "source": "Alpha Vantage API (fixed)"
 }

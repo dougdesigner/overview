@@ -1,8 +1,9 @@
 {
   "symbol": "SIBN",
-  "name": "SIBN Company",
-  "sector": "Unknown",
-  "industry": "Unknown",
-  "cachedAt": "2025-10-19T04:33:22.952Z",
-  "source": "Alpha Vantage API"
+  "name": "Si-Bone Inc",
+  "sector": "HEALTHCARE",
+  "industry": "MEDICAL DEVICES",
+  "officialSite": "https://si-bone.com",
+  "cachedAt": "2025-10-19T06:04:36.840Z",
+  "source": "Alpha Vantage API (fixed)"
 }
