@@ -71,13 +71,14 @@ export async function POST(request: NextRequest) {
     // If no API key, try to load from file cache only
     if (!apiKey) {
       console.warn("ALPHA_VANTAGE_API_KEY not configured, using cached data only...")
-      const results: Record<string, { sector: string; industry: string; officialSite?: string }> = {}
+      const results: Record<string, { name: string; sector: string; industry: string; officialSite?: string }> = {}
 
       for (const symbol of symbols) {
         const upperSymbol = symbol.toUpperCase()
         const fileCached = await readCachedProfile(upperSymbol)
         if (fileCached) {
           results[upperSymbol] = {
+            name: fileCached.name,
             sector: fileCached.sector,
             industry: fileCached.industry,
             officialSite: fileCached.officialSite
@@ -90,7 +91,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json(results)
     }
 
-    const results: Record<string, { sector: string; industry: string; officialSite?: string }> = {}
+    const results: Record<string, { name: string; sector: string; industry: string; officialSite?: string }> = {}
 
     for (const symbol of symbols) {
       const upperSymbol = symbol.toUpperCase()
@@ -99,6 +100,7 @@ export async function POST(request: NextRequest) {
       const fileCached = await readCachedProfile(upperSymbol)
       if (fileCached) {
         results[upperSymbol] = {
+          name: fileCached.name,
           sector: fileCached.sector,
           industry: fileCached.industry,
           officialSite: fileCached.officialSite
@@ -116,6 +118,7 @@ export async function POST(request: NextRequest) {
       if (cached && Date.now() - cached.timestamp < COMPANY_CACHE_DURATION) {
         console.log(`Using memory cached data for ${upperSymbol}`)
         results[upperSymbol] = {
+          name: cached.data.name,
           sector: cached.data.sector,
           industry: cached.data.industry,
           officialSite: cached.data.officialSite
@@ -134,6 +137,7 @@ export async function POST(request: NextRequest) {
           if (cachedData) {
             console.log(`Using cached data for ${upperSymbol} due to API failure`)
             results[upperSymbol] = {
+              name: cachedData.name,
               sector: cachedData.sector,
               industry: cachedData.industry,
               officialSite: cachedData.officialSite
@@ -160,6 +164,7 @@ export async function POST(request: NextRequest) {
         await writeCachedProfile(upperSymbol, profile)
 
         results[upperSymbol] = {
+          name: profile.name,
           sector: profile.sector,
           industry: profile.industry,
           officialSite: profile.officialSite
@@ -177,6 +182,7 @@ export async function POST(request: NextRequest) {
         if (cachedData) {
           console.log(`Using cached data for ${upperSymbol} due to error`)
           results[upperSymbol] = {
+            name: cachedData.name,
             sector: cachedData.sector,
             industry: cachedData.industry,
             officialSite: cachedData.officialSite

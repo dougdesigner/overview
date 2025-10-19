@@ -1,0 +1,9 @@
+{
+  "symbol": "USAU",
+  "name": "US Gold Corp",
+  "sector": "BASIC MATERIALS",
+  "industry": "GOLD",
+  "officialSite": "https://www.usgoldcorp.gold",
+  "cachedAt": "2025-10-19T04:32:46.093Z",
+  "source": "Alpha Vantage API"
+}

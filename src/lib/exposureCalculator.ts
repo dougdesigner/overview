@@ -10,8 +10,10 @@ import { getETFHoldings } from "@/data/etf-holdings/etfHoldingsData"
 export class ExposureCalculator {
   private etfProfiles: Map<string, ETFProfile> = new Map()
   private stockPrices: Map<string, number> = new Map()
-  private companyOverviews: Map<string, { sector: string; industry: string }> =
-    new Map()
+  private companyOverviews: Map<
+    string,
+    { name: string; sector: string; industry: string }
+  > = new Map()
 
   async calculateExposures(
     holdings: PortfolioHolding[],
@@ -175,7 +177,7 @@ export class ExposureCalculator {
       for (const [symbol, overview] of Object.entries(overviews)) {
         this.companyOverviews.set(
           symbol,
-          overview as { sector: string; industry: string },
+          overview as { name: string; sector: string; industry: string },
         )
       }
     } catch (error) {
@@ -201,11 +203,15 @@ export class ExposureCalculator {
           existing.directValue += holding.marketValue
           existing.totalShares = existing.directShares + existing.etfExposure
           existing.totalValue = existing.directValue + existing.etfValue
+          // Update name if we have a better one from company overview
+          if (overview?.name && !existing.name) {
+            existing.name = overview.name
+          }
         } else {
           exposureMap.set(ticker, {
             id: `stock-${ticker}`,
             ticker,
-            name: holding.name,
+            name: overview?.name || holding.name,
             sector: overview?.sector,
             industry: overview?.industry,
             directShares: holding.quantity,
@@ -290,6 +296,10 @@ export class ExposureCalculator {
           if (!existing.sector && sector) {
             existing.sector = sector
           }
+          // Update name if we have a better one from company overview
+          if (overview?.name && !existing.name) {
+            existing.name = overview.name
+          }
         } else {
           console.log(
             `Creating new exposure for ${stockSymbol}: ${sharesViaETF} shares via ${etfSymbol}`,
@@ -297,7 +307,7 @@ export class ExposureCalculator {
           exposureMap.set(stockSymbol, {
             id: `stock-${stockSymbol}`,
             ticker: stockSymbol,
-            name: stockInETF.name,
+            name: overview?.name || stockInETF.name,
             sector: sector,
             industry: overview?.industry,
             directShares: 0,

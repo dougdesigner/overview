@@ -82,22 +82,22 @@
     "mappings": [
       {
         "etf": "VTI",
-        "percentage": 54,
+        "percentage": 54.07,
         "notes": "US Total Market portion"
       },
       {
         "etf": "VXUS",
-        "percentage": 36,
+        "percentage": 36.83,
         "notes": "International stocks portion"
       },
       {
         "etf": "BND",
-        "percentage": 7,
+        "percentage": 5.51,
         "notes": "US Bonds portion"
       },
       {
         "etf": "BNDX",
-        "percentage": 3,
+        "percentage": 2.42,
         "notes": "International bonds portion"
       }
     ]
