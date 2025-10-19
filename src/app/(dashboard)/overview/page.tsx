@@ -238,40 +238,49 @@ export default function OverviewPage() {
           data={[
             {
               name: "Holdings",
-              data: holdings
-                .sort((a, b) => b.marketValue - a.marketValue)
-                .slice(0, 5)
-                .concat({
-                  id: 'others',
-                  accountId: '',
-                  accountName: '',
-                  name: 'Others',
-                  quantity: 0,
-                  lastPrice: 0,
-                  marketValue: holdings
-                    .slice(5)
-                    .reduce((sum, h) => sum + h.marketValue, 0),
-                  allocation: 0,
-                  type: 'stock',
-                } as any)
-                .filter(h => h.marketValue > 0)
-                .map((h, index) => ({
-                  name: h.ticker || h.name,
-                  ticker: h.ticker,
-                  type: h.type || "other",
-                  amount: h.marketValue,
-                  share: totalPortfolioValue > 0
-                    ? `${((h.marketValue / totalPortfolioValue) * 100).toFixed(1)}%`
-                    : '0%',
-                  borderColor: [
-                    "border-blue-500 dark:border-blue-500",
-                    "border-gray-500 dark:border-gray-500",
-                    "border-cyan-500 dark:border-cyan-500",
-                    "border-amber-500 dark:border-amber-500",
-                    "border-emerald-500 dark:border-emerald-500",
-                    "border-violet-500 dark:border-violet-500",
-                  ][index] || "border-gray-500 dark:border-gray-500",
-                })),
+              data: (() => {
+                const sortedHoldings = holdings
+                  .sort((a, b) => b.marketValue - a.marketValue)
+                const top6 = sortedHoldings.slice(0, 6)
+                const others = sortedHoldings.slice(6)
+                const othersValue = others.reduce((sum, h) => sum + h.marketValue, 0)
+
+                const displayHoldings = othersValue > 0
+                  ? [...top6, {
+                      id: 'others',
+                      accountId: '',
+                      accountName: '',
+                      ticker: 'Others',
+                      name: 'Others',
+                      quantity: 0,
+                      lastPrice: 0,
+                      marketValue: othersValue,
+                      allocation: 0,
+                      type: 'other' as const,
+                    }]
+                  : top6
+
+                return displayHoldings
+                  .filter(h => h.marketValue > 0)
+                  .map((h, index) => ({
+                    name: h.ticker || h.name,
+                    ticker: h.ticker,
+                    type: h.type || "other",
+                    amount: h.marketValue,
+                    share: totalPortfolioValue > 0
+                      ? `${((h.marketValue / totalPortfolioValue) * 100).toFixed(1)}%`
+                      : '0%',
+                    borderColor: [
+                      "border-blue-500 dark:border-blue-500",
+                      "border-gray-500 dark:border-gray-500",
+                      "border-cyan-500 dark:border-cyan-500",
+                      "border-amber-500 dark:border-amber-500",
+                      "border-emerald-500 dark:border-emerald-500",
+                      "border-violet-500 dark:border-violet-500",
+                      "border-rose-500 dark:border-rose-500",
+                    ][index] || "border-gray-500 dark:border-gray-500",
+                  }))
+              })(),
               colors: ["blue", "gray", "cyan", "amber", "emerald", "violet"] as any,
             },
             {
