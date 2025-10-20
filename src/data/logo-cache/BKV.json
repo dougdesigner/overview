@@ -1,5 +1,8 @@
 {
   "ticker": "BKV",
-  "logoUrl": null,
-  "cachedAt": "2025-10-20T06:03:51.714Z"
+  "logoUrl": "https://img.logo.dev/bkv.com?token=pk_ARDallYvRuqePZO2jZF9Cw&retina=true&fallback=monogram&format=webp&size=400",
+  "domain": "bkv.com",
+  "companyName": "BKV Corporation",
+  "source": "officialSite",
+  "cachedAt": "2025-10-20T06:46:28.427Z"
 }

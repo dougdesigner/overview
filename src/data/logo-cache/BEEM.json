@@ -1,5 +1,8 @@
 {
   "ticker": "BEEM",
-  "logoUrl": null,
-  "cachedAt": "2025-10-20T06:03:51.708Z"
+  "logoUrl": "https://img.logo.dev/beamforall.com?token=pk_ARDallYvRuqePZO2jZF9Cw&retina=true&fallback=monogram&format=webp&size=400",
+  "domain": "beamforall.com",
+  "companyName": "Beam Global",
+  "source": "officialSite",
+  "cachedAt": "2025-10-20T06:46:28.419Z"
 }

@@ -1,5 +1,8 @@
 {
   "ticker": "DNB",
-  "logoUrl": null,
-  "cachedAt": "2025-10-20T06:04:02.760Z"
+  "logoUrl": "https://img.logo.dev/dnb.com?token=pk_ARDallYvRuqePZO2jZF9Cw&retina=true&fallback=monogram&format=webp&size=400",
+  "domain": "dnb.com",
+  "companyName": "DNB Company",
+  "source": "companyName",
+  "cachedAt": "2025-10-20T06:46:28.154Z"
 }

@@ -1,5 +1,8 @@
 {
   "ticker": "OSK",
-  "logoUrl": null,
-  "cachedAt": "2025-10-20T06:04:02.729Z"
+  "logoUrl": "https://img.logo.dev/oshkoshcorp.com?token=pk_ARDallYvRuqePZO2jZF9Cw&retina=true&fallback=monogram&format=webp&size=400",
+  "domain": "oshkoshcorp.com",
+  "companyName": "Oshkosh Corporation",
+  "source": "officialSite",
+  "cachedAt": "2025-10-20T06:46:28.066Z"
 }

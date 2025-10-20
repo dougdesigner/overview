@@ -1,5 +1,8 @@
 {
   "ticker": "CNC",
-  "logoUrl": null,
-  "cachedAt": "2025-10-20T06:04:02.621Z"
+  "logoUrl": "https://img.logo.dev/centene.com?token=pk_ARDallYvRuqePZO2jZF9Cw&retina=true&fallback=monogram&format=webp&size=400",
+  "domain": "centene.com",
+  "companyName": "Centene Corp",
+  "source": "officialSite",
+  "cachedAt": "2025-10-20T06:46:27.799Z"
 }

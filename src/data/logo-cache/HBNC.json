@@ -1,5 +1,8 @@
 {
   "ticker": "HBNC",
-  "logoUrl": null,
-  "cachedAt": "2025-10-20T06:03:51.781Z"
+  "logoUrl": "https://img.logo.dev/horizonbank.com?token=pk_ARDallYvRuqePZO2jZF9Cw&retina=true&fallback=monogram&format=webp&size=400",
+  "domain": "horizonbank.com",
+  "companyName": "Horizon Bancorp",
+  "source": "officialSite",
+  "cachedAt": "2025-10-20T06:46:28.508Z"
 }

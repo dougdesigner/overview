@@ -1,5 +1,8 @@
 {
   "ticker": "AFBI",
-  "logoUrl": null,
-  "cachedAt": "2025-10-20T06:03:51.577Z"
+  "logoUrl": "https://img.logo.dev/myaffinitybank.com?token=pk_ARDallYvRuqePZO2jZF9Cw&retina=true&fallback=monogram&format=webp&size=400",
+  "domain": "myaffinitybank.com",
+  "companyName": "Affinity Bancshares Inc",
+  "source": "officialSite",
+  "cachedAt": "2025-10-20T06:46:28.259Z"
 }

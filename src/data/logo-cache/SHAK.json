@@ -1,5 +1,8 @@
 {
   "ticker": "SHAK",
-  "logoUrl": null,
-  "cachedAt": "2025-10-20T06:04:02.739Z"
+  "logoUrl": "https://img.logo.dev/shakeshack.com?token=pk_ARDallYvRuqePZO2jZF9Cw&retina=true&fallback=monogram&format=webp&size=400",
+  "domain": "shakeshack.com",
+  "companyName": "Shake Shack Inc",
+  "source": "officialSite",
+  "cachedAt": "2025-10-20T06:46:28.088Z"
 }

@@ -1,5 +1,8 @@
 {
   "ticker": "BBGI",
-  "logoUrl": null,
-  "cachedAt": "2025-10-20T06:03:51.708Z"
+  "logoUrl": "https://img.logo.dev/bbgi.com?token=pk_ARDallYvRuqePZO2jZF9Cw&retina=true&fallback=monogram&format=webp&size=400",
+  "domain": "bbgi.com",
+  "companyName": "Beasley Broadcast Group Inc",
+  "source": "officialSite",
+  "cachedAt": "2025-10-20T06:46:28.418Z"
 }

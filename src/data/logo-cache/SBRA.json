@@ -1,5 +1,8 @@
 {
   "ticker": "SBRA",
-  "logoUrl": null,
-  "cachedAt": "2025-10-20T06:04:02.671Z"
+  "logoUrl": "https://img.logo.dev/sabrahealth.com?token=pk_ARDallYvRuqePZO2jZF9Cw&retina=true&fallback=monogram&format=webp&size=400",
+  "domain": "sabrahealth.com",
+  "companyName": "Sabra Healthcare REIT Inc",
+  "source": "officialSite",
+  "cachedAt": "2025-10-20T06:46:27.905Z"
 }

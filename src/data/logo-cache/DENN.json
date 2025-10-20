@@ -1,5 +1,8 @@
 {
   "ticker": "DENN",
-  "logoUrl": null,
-  "cachedAt": "2025-10-20T06:03:51.674Z"
+  "logoUrl": "https://img.logo.dev/investor.dennys.com?token=pk_ARDallYvRuqePZO2jZF9Cw&retina=true&fallback=monogram&format=webp&size=400",
+  "domain": "investor.dennys.com",
+  "companyName": "Denny’s Corp",
+  "source": "officialSite",
+  "cachedAt": "2025-10-20T06:46:28.377Z"
 }

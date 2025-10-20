@@ -1,5 +1,8 @@
 {
   "ticker": "UWMC",
-  "logoUrl": null,
-  "cachedAt": "2025-10-20T06:03:51.583Z"
+  "logoUrl": "https://img.logo.dev/uwm.com?token=pk_ARDallYvRuqePZO2jZF9Cw&retina=true&fallback=monogram&format=webp&size=400",
+  "domain": "uwm.com",
+  "companyName": "UWM Holdings Corp",
+  "source": "officialSite",
+  "cachedAt": "2025-10-20T06:46:28.267Z"
 }

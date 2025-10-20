@@ -1,5 +1,8 @@
 {
   "ticker": "FNB",
-  "logoUrl": null,
-  "cachedAt": "2025-10-20T06:04:02.725Z"
+  "logoUrl": "https://img.logo.dev/fnb-online.com?token=pk_ARDallYvRuqePZO2jZF9Cw&retina=true&fallback=monogram&format=webp&size=400",
+  "domain": "fnb-online.com",
+  "companyName": "F.N.B. Corp",
+  "source": "officialSite",
+  "cachedAt": "2025-10-20T06:46:28.058Z"
 }

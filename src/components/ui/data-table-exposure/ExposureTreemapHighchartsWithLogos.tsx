@@ -6,6 +6,7 @@ import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
   DropdownMenuContent,
+  DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuRadioGroup,
   DropdownMenuRadioItem,
@@ -17,7 +18,7 @@ import {
 } from "@/components/DropdownMenu"
 import { getCachedLogoUrls } from "@/lib/logoUtils"
 import { toProperCase } from "@/lib/utils"
-import { RiExpandUpDownLine, RiSettings3Line } from "@remixicon/react"
+import { RiDownloadLine, RiExpandUpDownLine, RiFullscreenLine, RiSettings3Line } from "@remixicon/react"
 import Highcharts from "highcharts"
 import HighchartsReact from "highcharts-react-official"
 import HighchartsTreemap from "highcharts/modules/treemap"
@@ -25,7 +26,7 @@ import HighchartsExporting from "highcharts/modules/exporting"
 import HighchartsExportData from "highcharts/modules/export-data"
 import { useTheme } from "next-themes"
 import { useEffect, useRef, useState } from "react"
-import { AccountSelector } from "@/components/ui/AccountSelector"
+import { InstitutionLogo } from "@/components/ui/InstitutionLogo"
 import { StockExposure, Account } from "./types"
 
 // Track if modules are initialized globally to prevent duplicate initialization
@@ -148,6 +149,20 @@ export function ExposureTreemapHighchartsWithLogos({
     if (value >= 1000000) return `$${(value / 1000000).toFixed(1)}M`
     if (value >= 1000) return `$${(value / 1000).toFixed(0)}K`
     return `$${value.toFixed(0)}`
+  }
+
+  // Format legend values based on display value setting
+  const getLegendDisplayValue = (value: number): string => {
+    if (displayValue === "market-value") {
+      return formatValue(value)
+    } else if (displayValue === "pct-stocks") {
+      const percentage = stocksOnlyValue > 0 ? (value / stocksOnlyValue) * 100 : 0
+      return `${percentage.toFixed(1)}%`
+    } else {
+      // "pct-portfolio"
+      const percentage = (value / totalValue) * 100
+      return `${percentage.toFixed(1)}%`
+    }
   }
 
   // Calculate logo size based on cell dimensions
@@ -491,18 +506,7 @@ export function ExposureTreemapHighchartsWithLogos({
     exporting: {
       buttons: {
         contextButton: {
-          menuItems: [
-            "viewFullscreen",
-            "printChart",
-            "separator",
-            "downloadPNG",
-            "downloadJPEG",
-            "downloadPDF",
-            "downloadSVG",
-            "separator",
-            "downloadCSV",
-            "downloadXLS",
-          ],
+          enabled: false, // Disable default button - using custom export button instead
         },
       },
     },
@@ -650,8 +654,8 @@ export function ExposureTreemapHighchartsWithLogos({
         return `<div style="padding: 2px;">
                   <div style="font-weight: 600; margin-bottom: 4px;">${ticker}</div>
                   <div>Market Value: <b>${formatValue(value)}</b></div>
-                  <div>% of Portfolio: <b>${pctPortfolio}%</b></div>
-                  <div>% of Stocks: <b>${pctStocks}%</b></div>
+                  <div>Portfolio %: <b>${pctPortfolio}%</b></div>
+                  <div>Stock %: <b>${pctStocks}%</b></div>
                 </div>`
       },
     },
@@ -689,6 +693,39 @@ export function ExposureTreemapHighchartsWithLogos({
     }
   })()
 
+  // Export handlers
+  const handleExport = (type: string) => {
+    const chart = chartRef.current?.chart
+    if (!chart) return
+
+    switch (type) {
+      case "fullscreen":
+        chart.fullscreen?.open()
+        break
+      case "print":
+        chart.print()
+        break
+      case "png":
+        chart.exportChart({ type: "image/png" })
+        break
+      case "jpeg":
+        chart.exportChart({ type: "image/jpeg" })
+        break
+      case "pdf":
+        chart.exportChart({ type: "application/pdf" })
+        break
+      case "svg":
+        chart.exportChart({ type: "image/svg+xml" })
+        break
+      case "csv":
+        chart.downloadCSV()
+        break
+      case "xls":
+        chart.downloadXLS()
+        break
+    }
+  }
+
   if (!modulesLoaded) {
     return (
       <Card className="pb-4 pt-6">
@@ -707,13 +744,51 @@ export function ExposureTreemapHighchartsWithLogos({
         </h3>
 
         <div className="flex items-center gap-2">
-          <AccountSelector
-            accounts={accounts}
-            value={selectedAccount}
-            onValueChange={onAccountChange}
-            showAllOption={true}
-            className="w-[200px]"
-          />
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="secondary" className="h-9 w-[200px] justify-between">
+                <span className="flex items-center gap-2">
+                  {selectedAccount === "all" ? (
+                    "All Accounts"
+                  ) : (
+                    <>
+                      <InstitutionLogo
+                        institution={accounts.find(a => a.id === selectedAccount)?.institution || ""}
+                        size="xs"
+                      />
+                      <span className="truncate">
+                        {accounts.find(a => a.id === selectedAccount)?.name || "Select account"}
+                      </span>
+                    </>
+                  )}
+                </span>
+                <RiExpandUpDownLine className="size-4 text-gray-400 dark:text-gray-600" aria-hidden="true" />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="start" className="w-[200px]">
+              <DropdownMenuLabel>ACCOUNT</DropdownMenuLabel>
+              <DropdownMenuSeparator />
+              <DropdownMenuRadioGroup
+                value={selectedAccount}
+                onValueChange={onAccountChange}
+              >
+                <DropdownMenuRadioItem value="all" iconType="check">
+                  All Accounts
+                </DropdownMenuRadioItem>
+                {accounts.map((account) => (
+                  <DropdownMenuRadioItem key={account.id} value={account.id} iconType="check">
+                    <div className="flex items-center gap-2">
+                      <InstitutionLogo
+                        institution={account.institution}
+                        size="xs"
+                      />
+                      <span className="truncate">{account.name}</span>
+                    </div>
+                  </DropdownMenuRadioItem>
+                ))}
+              </DropdownMenuRadioGroup>
+            </DropdownMenuContent>
+          </DropdownMenu>
 
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
@@ -742,6 +817,41 @@ export function ExposureTreemapHighchartsWithLogos({
                   Industry
                 </DropdownMenuRadioItem>
               </DropdownMenuRadioGroup>
+            </DropdownMenuContent>
+          </DropdownMenu>
+
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="secondary" className="h-9">
+                <RiDownloadLine className="size-4" aria-hidden="true" />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end" className="w-56">
+              <DropdownMenuLabel>EXPORT OPTIONS</DropdownMenuLabel>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem onClick={() => handleExport("print")}>
+                Print chart
+              </DropdownMenuItem>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem onClick={() => handleExport("png")}>
+                Download PNG image
+              </DropdownMenuItem>
+              <DropdownMenuItem onClick={() => handleExport("jpeg")}>
+                Download JPEG image
+              </DropdownMenuItem>
+              <DropdownMenuItem onClick={() => handleExport("pdf")}>
+                Download PDF document
+              </DropdownMenuItem>
+              <DropdownMenuItem onClick={() => handleExport("svg")}>
+                Download SVG vector
+              </DropdownMenuItem>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem onClick={() => handleExport("csv")}>
+                Download CSV
+              </DropdownMenuItem>
+              <DropdownMenuItem onClick={() => handleExport("xls")}>
+                Download XLS
+              </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
 
@@ -793,8 +903,8 @@ export function ExposureTreemapHighchartsWithLogos({
                   <span>Display value</span>
                   <span className="ml-auto text-xs text-gray-500">
                     {displayValue === "market-value" ? "Market value" :
-                     displayValue === "pct-stocks" ? "% stocks" :
-                     "% portfolio"}
+                     displayValue === "pct-stocks" ? "Stock %" :
+                     "Portfolio %"}
                   </span>
                 </DropdownMenuSubMenuTrigger>
                 <DropdownMenuSubMenuContent>
@@ -806,16 +916,24 @@ export function ExposureTreemapHighchartsWithLogos({
                       Market value
                     </DropdownMenuRadioItem>
                     <DropdownMenuRadioItem value="pct-stocks" iconType="check">
-                      % of stocks
+                      Stock %
                     </DropdownMenuRadioItem>
                     <DropdownMenuRadioItem value="pct-portfolio" iconType="check">
-                      % of portfolio
+                      Portfolio %
                     </DropdownMenuRadioItem>
                   </DropdownMenuRadioGroup>
                 </DropdownMenuSubMenuContent>
               </DropdownMenuSubMenu>
             </DropdownMenuContent>
           </DropdownMenu>
+
+          <Button
+            variant="secondary"
+            className="h-9"
+            onClick={() => handleExport("fullscreen")}
+          >
+            <RiFullscreenLine className="size-4" aria-hidden="true" />
+          </Button>
         </div>
       </div>
 
@@ -840,7 +958,7 @@ export function ExposureTreemapHighchartsWithLogos({
           {topGroups.map(([name, value], index) => (
             <li key={name}>
               <span className="text-base font-semibold text-gray-900 dark:text-gray-50">
-                {((value / totalValue) * 100).toFixed(1)}%
+                {getLegendDisplayValue(value)}
               </span>
               <div className="flex items-center gap-2">
                 <span

@@ -1,5 +1,8 @@
 {
   "ticker": "KMI",
-  "logoUrl": null,
-  "cachedAt": "2025-10-20T06:04:02.603Z"
+  "logoUrl": "https://img.logo.dev/kindermorgan.com?token=pk_ARDallYvRuqePZO2jZF9Cw&retina=true&fallback=monogram&format=webp&size=400",
+  "domain": "kindermorgan.com",
+  "companyName": "Kinder Morgan Inc",
+  "source": "officialSite",
+  "cachedAt": "2025-10-20T06:46:27.762Z"
 }

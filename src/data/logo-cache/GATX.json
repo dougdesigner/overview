@@ -1,5 +1,8 @@
 {
   "ticker": "GATX",
-  "logoUrl": null,
-  "cachedAt": "2025-10-20T06:04:02.736Z"
+  "logoUrl": "https://img.logo.dev/gatx.com?token=pk_ARDallYvRuqePZO2jZF9Cw&retina=true&fallback=monogram&format=webp&size=400",
+  "domain": "gatx.com",
+  "companyName": "GATX Corporation",
+  "source": "officialSite",
+  "cachedAt": "2025-10-20T06:46:28.082Z"
 }

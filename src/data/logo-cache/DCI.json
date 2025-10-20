@@ -1,5 +1,8 @@
 {
   "ticker": "DCI",
-  "logoUrl": null,
-  "cachedAt": "2025-10-20T06:04:02.761Z"
+  "logoUrl": "https://img.logo.dev/donaldson.com?token=pk_ARDallYvRuqePZO2jZF9Cw&retina=true&fallback=monogram&format=webp&size=400",
+  "domain": "donaldson.com",
+  "companyName": "Donaldson Company Inc",
+  "source": "officialSite",
+  "cachedAt": "2025-10-20T06:46:28.156Z"
 }

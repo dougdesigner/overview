@@ -1,5 +1,8 @@
 {
   "ticker": "PACB",
-  "logoUrl": null,
-  "cachedAt": "2025-10-20T06:03:51.551Z"
+  "logoUrl": "https://img.logo.dev/pacb.com?token=pk_ARDallYvRuqePZO2jZF9Cw&retina=true&fallback=monogram&format=webp&size=400",
+  "domain": "pacb.com",
+  "companyName": "Pacific Biosciences of California",
+  "source": "officialSite",
+  "cachedAt": "2025-10-20T06:46:28.224Z"
 }

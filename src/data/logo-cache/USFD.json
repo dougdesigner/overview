@@ -1,5 +1,8 @@
 {
   "ticker": "USFD",
-  "logoUrl": null,
-  "cachedAt": "2025-10-20T06:04:02.652Z"
+  "logoUrl": "https://img.logo.dev/usfoods.com?token=pk_ARDallYvRuqePZO2jZF9Cw&retina=true&fallback=monogram&format=webp&size=400",
+  "domain": "usfoods.com",
+  "companyName": "US Foods Holding Corp",
+  "source": "officialSite",
+  "cachedAt": "2025-10-20T06:46:27.864Z"
 }

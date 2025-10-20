@@ -1,5 +1,8 @@
 {
   "ticker": "CYH",
-  "logoUrl": null,
-  "cachedAt": "2025-10-20T06:03:51.676Z"
+  "logoUrl": "https://img.logo.dev/chs.net?token=pk_ARDallYvRuqePZO2jZF9Cw&retina=true&fallback=monogram&format=webp&size=400",
+  "domain": "chs.net",
+  "companyName": "Community Health Systems Inc",
+  "source": "officialSite",
+  "cachedAt": "2025-10-20T06:46:28.379Z"
 }

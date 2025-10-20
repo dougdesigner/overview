@@ -1,5 +1,8 @@
 {
   "ticker": "FBP",
-  "logoUrl": null,
-  "cachedAt": "2025-10-20T06:04:02.715Z"
+  "logoUrl": "https://img.logo.dev/1firstbank.com?token=pk_ARDallYvRuqePZO2jZF9Cw&retina=true&fallback=monogram&format=webp&size=400",
+  "domain": "1firstbank.com",
+  "companyName": "First Bancorp",
+  "source": "officialSite",
+  "cachedAt": "2025-10-20T06:46:28.042Z"
 }

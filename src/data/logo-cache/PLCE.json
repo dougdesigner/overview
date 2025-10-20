@@ -1,5 +1,8 @@
 {
   "ticker": "PLCE",
-  "logoUrl": null,
-  "cachedAt": "2025-10-20T06:03:51.645Z"
+  "logoUrl": "https://img.logo.dev/childrensplace.com?token=pk_ARDallYvRuqePZO2jZF9Cw&retina=true&fallback=monogram&format=webp&size=400",
+  "domain": "childrensplace.com",
+  "companyName": "Children’s Place Inc",
+  "source": "officialSite",
+  "cachedAt": "2025-10-20T06:46:28.345Z"
 }

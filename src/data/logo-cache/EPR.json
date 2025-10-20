@@ -1,5 +1,8 @@
 {
   "ticker": "EPR",
-  "logoUrl": null,
-  "cachedAt": "2025-10-20T06:04:02.717Z"
+  "logoUrl": "https://img.logo.dev/eprkc.com?token=pk_ARDallYvRuqePZO2jZF9Cw&retina=true&fallback=monogram&format=webp&size=400",
+  "domain": "eprkc.com",
+  "companyName": "EPR Properties",
+  "source": "officialSite",
+  "cachedAt": "2025-10-20T06:46:28.047Z"
 }

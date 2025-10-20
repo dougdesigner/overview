@@ -1,5 +1,8 @@
 {
   "ticker": "UNF",
-  "logoUrl": null,
-  "cachedAt": "2025-10-20T06:03:51.560Z"
+  "logoUrl": "https://img.logo.dev/unifirst.com?token=pk_ARDallYvRuqePZO2jZF9Cw&retina=true&fallback=monogram&format=webp&size=400",
+  "domain": "unifirst.com",
+  "companyName": "Unifirst Corporation",
+  "source": "officialSite",
+  "cachedAt": "2025-10-20T06:46:28.235Z"
 }

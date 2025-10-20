@@ -1,5 +1,8 @@
 {
   "ticker": "AVB",
-  "logoUrl": null,
-  "cachedAt": "2025-10-20T06:04:02.622Z"
+  "logoUrl": "https://img.logo.dev/avalonbay.com?token=pk_ARDallYvRuqePZO2jZF9Cw&retina=true&fallback=monogram&format=webp&size=400",
+  "domain": "avalonbay.com",
+  "companyName": "AvalonBay Communities Inc",
+  "source": "officialSite",
+  "cachedAt": "2025-10-20T06:46:27.801Z"
 }

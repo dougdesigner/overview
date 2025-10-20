@@ -1,5 +1,8 @@
 {
   "ticker": "WLFC",
-  "logoUrl": null,
-  "cachedAt": "2025-10-20T06:03:51.698Z"
+  "logoUrl": "https://img.logo.dev/wlfc.global?token=pk_ARDallYvRuqePZO2jZF9Cw&retina=true&fallback=monogram&format=webp&size=400",
+  "domain": "wlfc.global",
+  "companyName": "Willis Lease Finance Corporation",
+  "source": "officialSite",
+  "cachedAt": "2025-10-20T06:46:28.405Z"
 }

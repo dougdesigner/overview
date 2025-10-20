@@ -1,5 +1,8 @@
 {
   "ticker": "ARM",
-  "logoUrl": null,
-  "cachedAt": "2025-10-20T06:04:02.713Z"
+  "logoUrl": "https://img.logo.dev/arm.com?token=pk_ARDallYvRuqePZO2jZF9Cw&retina=true&fallback=monogram&format=webp&size=400",
+  "domain": "arm.com",
+  "companyName": "Arm Holdings plc American Depositary Shares",
+  "source": "officialSite",
+  "cachedAt": "2025-10-20T06:46:28.038Z"
 }

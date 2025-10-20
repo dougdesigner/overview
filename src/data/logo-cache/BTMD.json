@@ -1,5 +1,8 @@
 {
   "ticker": "BTMD",
-  "logoUrl": null,
-  "cachedAt": "2025-10-20T06:03:51.715Z"
+  "logoUrl": "https://img.logo.dev/biote.com?token=pk_ARDallYvRuqePZO2jZF9Cw&retina=true&fallback=monogram&format=webp&size=400",
+  "domain": "biote.com",
+  "companyName": "biote Corp",
+  "source": "officialSite",
+  "cachedAt": "2025-10-20T06:46:28.428Z"
 }

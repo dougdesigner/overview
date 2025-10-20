@@ -1,5 +1,8 @@
 {
   "ticker": "ORA",
-  "logoUrl": null,
-  "cachedAt": "2025-10-20T06:04:02.682Z"
+  "logoUrl": "https://img.logo.dev/ormat.com?token=pk_ARDallYvRuqePZO2jZF9Cw&retina=true&fallback=monogram&format=webp&size=400",
+  "domain": "ormat.com",
+  "companyName": "Ormat Technologies Inc",
+  "source": "officialSite",
+  "cachedAt": "2025-10-20T06:46:27.929Z"
 }

@@ -1,5 +1,8 @@
 {
   "ticker": "SWBI",
-  "logoUrl": null,
-  "cachedAt": "2025-10-20T06:03:51.626Z"
+  "logoUrl": "https://img.logo.dev/smith-wesson.com?token=pk_ARDallYvRuqePZO2jZF9Cw&retina=true&fallback=monogram&format=webp&size=400",
+  "domain": "smith-wesson.com",
+  "companyName": "Smith & Wesson Brands Inc",
+  "source": "officialSite",
+  "cachedAt": "2025-10-20T06:46:28.323Z"
 }

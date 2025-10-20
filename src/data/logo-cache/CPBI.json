@@ -1,5 +1,8 @@
 {
   "ticker": "CPBI",
-  "logoUrl": null,
-  "cachedAt": "2025-10-20T06:03:51.637Z"
+  "logoUrl": "https://img.logo.dev/homefederalne.bank?token=pk_ARDallYvRuqePZO2jZF9Cw&retina=true&fallback=monogram&format=webp&size=400",
+  "domain": "homefederalne.bank",
+  "companyName": "Central Plains Bancshares, Inc. Common Stock",
+  "source": "officialSite",
+  "cachedAt": "2025-10-20T06:46:28.336Z"
 }

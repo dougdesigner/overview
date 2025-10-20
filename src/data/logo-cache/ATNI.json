@@ -1,5 +1,8 @@
 {
   "ticker": "ATNI",
-  "logoUrl": null,
-  "cachedAt": "2025-10-20T06:03:51.728Z"
+  "logoUrl": "https://img.logo.dev/atni.com?token=pk_ARDallYvRuqePZO2jZF9Cw&retina=true&fallback=monogram&format=webp&size=400",
+  "domain": "atni.com",
+  "companyName": "ATN International Inc",
+  "source": "officialSite",
+  "cachedAt": "2025-10-20T06:46:28.444Z"
 }

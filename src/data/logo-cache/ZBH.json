@@ -1,5 +1,8 @@
 {
   "ticker": "ZBH",
-  "logoUrl": null,
-  "cachedAt": "2025-10-20T06:04:02.638Z"
+  "logoUrl": "https://img.logo.dev/zimmerbiomet.com?token=pk_ARDallYvRuqePZO2jZF9Cw&retina=true&fallback=monogram&format=webp&size=400",
+  "domain": "zimmerbiomet.com",
+  "companyName": "Zimmer Biomet Holdings Inc",
+  "source": "officialSite",
+  "cachedAt": "2025-10-20T06:46:27.833Z"
 }

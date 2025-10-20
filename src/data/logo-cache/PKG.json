@@ -1,5 +1,8 @@
 {
   "ticker": "PKG",
-  "logoUrl": null,
-  "cachedAt": "2025-10-20T06:04:02.623Z"
+  "logoUrl": "https://img.logo.dev/packagingcorp.com?token=pk_ARDallYvRuqePZO2jZF9Cw&retina=true&fallback=monogram&format=webp&size=400",
+  "domain": "packagingcorp.com",
+  "companyName": "Packaging Corp of America",
+  "source": "officialSite",
+  "cachedAt": "2025-10-20T06:46:27.803Z"
 }

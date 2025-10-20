@@ -1,5 +1,8 @@
 {
   "ticker": "CSWI",
-  "logoUrl": null,
-  "cachedAt": "2025-10-20T06:04:02.667Z"
+  "logoUrl": "https://img.logo.dev/cswi.com?token=pk_ARDallYvRuqePZO2jZF9Cw&retina=true&fallback=monogram&format=webp&size=400",
+  "domain": "cswi.com",
+  "companyName": "CSWI Company",
+  "source": "companyName",
+  "cachedAt": "2025-10-20T06:46:27.897Z"
 }

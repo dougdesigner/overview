@@ -1,5 +1,8 @@
 {
   "ticker": "NWE",
-  "logoUrl": null,
-  "cachedAt": "2025-10-20T06:04:02.674Z"
+  "logoUrl": "https://img.logo.dev/northwesternenergy.com?token=pk_ARDallYvRuqePZO2jZF9Cw&retina=true&fallback=monogram&format=webp&size=400",
+  "domain": "northwesternenergy.com",
+  "companyName": "NorthWestern Corporation",
+  "source": "officialSite",
+  "cachedAt": "2025-10-20T06:46:27.912Z"
 }

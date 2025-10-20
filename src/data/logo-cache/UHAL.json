@@ -1,5 +1,8 @@
 {
   "ticker": "UHAL",
-  "logoUrl": null,
-  "cachedAt": "2025-10-20T06:03:51.559Z"
+  "logoUrl": "https://img.logo.dev/uhaul.com?token=pk_ARDallYvRuqePZO2jZF9Cw&retina=true&fallback=monogram&format=webp&size=400",
+  "domain": "uhaul.com",
+  "companyName": "U-Haul Holding Company",
+  "source": "officialSite",
+  "cachedAt": "2025-10-20T06:46:28.234Z"
 }

@@ -1,5 +1,89 @@
 // Logo utility functions for fetching institution and ticker logos
 
+/**
+ * Extract a potential domain from a company name
+ * Tries multiple strategies to find a working domain
+ * @param companyName - Company name (e.g., "Apple Inc", "American Express Company")
+ * @returns Array of potential domains to try (e.g., ["apple.com", "americanexpress.com"])
+ */
+export function extractDomainsFromCompanyName(companyName: string): string[] {
+  if (!companyName) return []
+
+  const domains: string[] = []
+
+  // Common suffixes to remove
+  const suffixes = [
+    "Inc",
+    "Incorporated",
+    "Corp",
+    "Corporation",
+    "Ltd",
+    "Limited",
+    "LLC",
+    "L.L.C.",
+    "LP",
+    "L.P.",
+    "Co",
+    "Company",
+    "Group",
+    "Holding",
+    "Holdings",
+    "International",
+    "Technologies",
+    "Systems",
+    "Solutions",
+    "Services",
+    "Enterprises",
+  ]
+
+  // Remove common suffixes and clean the name
+  let cleanName = companyName.trim()
+
+  // Remove suffixes (case-insensitive)
+  for (const suffix of suffixes) {
+    const regex = new RegExp(`\\b${suffix}\\b\\.?$`, "i")
+    cleanName = cleanName.replace(regex, "").trim()
+  }
+
+  // Remove any remaining trailing periods or commas
+  cleanName = cleanName.replace(/[.,]+$/, "").trim()
+
+  // Strategy 1: Try first word only (e.g., "Apple" → "apple.com")
+  const firstWord = cleanName.split(/\s+/)[0]
+  if (firstWord) {
+    const firstWordDomain = firstWord.toLowerCase().replace(/[^a-z0-9]/g, "")
+    if (firstWordDomain) {
+      domains.push(`${firstWordDomain}.com`)
+    }
+  }
+
+  // Strategy 2: Try first two words (e.g., "American Express" → "americanexpress.com")
+  const words = cleanName.split(/\s+/)
+  if (words.length >= 2) {
+    const twoWords = words.slice(0, 2).join("")
+    const twoWordsDomain = twoWords.toLowerCase().replace(/[^a-z0-9]/g, "")
+    if (twoWordsDomain && twoWordsDomain !== domains[0]?.replace(".com", "")) {
+      domains.push(`${twoWordsDomain}.com`)
+    }
+  }
+
+  // Strategy 3: Try full name without spaces (e.g., "Bank of America" → "bankofamerica.com")
+  if (words.length >= 2) {
+    const fullName = words.join("")
+    const fullNameDomain = fullName.toLowerCase().replace(/[^a-z0-9]/g, "")
+    if (
+      fullNameDomain &&
+      fullNameDomain !== domains[0]?.replace(".com", "") &&
+      fullNameDomain !== domains[1]?.replace(".com", "") &&
+      fullNameDomain.length <= 30 // Avoid extremely long domains
+    ) {
+      domains.push(`${fullNameDomain}.com`)
+    }
+  }
+
+  return domains
+}
+
 // Stock ticker overrides for better logo matching
 // These take precedence over Alpha Vantage's OfficialSite to avoid API limits
 const stockDomainOverrides: Record<string, string> = {

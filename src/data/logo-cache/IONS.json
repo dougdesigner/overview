@@ -1,5 +1,8 @@
 {
   "ticker": "IONS",
-  "logoUrl": null,
-  "cachedAt": "2025-10-20T06:04:02.671Z"
+  "logoUrl": "https://img.logo.dev/ionis.com?token=pk_ARDallYvRuqePZO2jZF9Cw&retina=true&fallback=monogram&format=webp&size=400",
+  "domain": "ionis.com",
+  "companyName": "Ionis Pharmaceuticals Inc",
+  "source": "officialSite",
+  "cachedAt": "2025-10-20T06:46:27.903Z"
 }

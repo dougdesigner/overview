@@ -1,5 +1,8 @@
 {
   "ticker": "SF",
-  "logoUrl": null,
-  "cachedAt": "2025-10-20T06:04:02.639Z"
+  "logoUrl": "https://img.logo.dev/stifel.com?token=pk_ARDallYvRuqePZO2jZF9Cw&retina=true&fallback=monogram&format=webp&size=400",
+  "domain": "stifel.com",
+  "companyName": "Stifel Financial Corporation",
+  "source": "officialSite",
+  "cachedAt": "2025-10-20T06:46:27.836Z"
 }

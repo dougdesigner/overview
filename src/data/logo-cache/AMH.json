@@ -1,5 +1,8 @@
 {
   "ticker": "AMH",
-  "logoUrl": null,
-  "cachedAt": "2025-10-20T06:04:02.634Z"
+  "logoUrl": "https://img.logo.dev/amh.com?token=pk_ARDallYvRuqePZO2jZF9Cw&retina=true&fallback=monogram&format=webp&size=400",
+  "domain": "amh.com",
+  "companyName": "American Homes 4 Rent",
+  "source": "officialSite",
+  "cachedAt": "2025-10-20T06:46:27.825Z"
 }

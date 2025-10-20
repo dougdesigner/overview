@@ -1,5 +1,8 @@
 {
   "ticker": "KYTX",
-  "logoUrl": null,
-  "cachedAt": "2025-10-20T06:03:51.802Z"
+  "logoUrl": "https://img.logo.dev/kyvernatx.com?token=pk_ARDallYvRuqePZO2jZF9Cw&retina=true&fallback=monogram&format=webp&size=400",
+  "domain": "kyvernatx.com",
+  "companyName": "Kyverna Therapeutics, Inc. Common Stock",
+  "source": "officialSite",
+  "cachedAt": "2025-10-20T06:46:28.530Z"
 }

@@ -1,5 +1,8 @@
 {
   "ticker": "CNS",
-  "logoUrl": null,
-  "cachedAt": "2025-10-20T06:03:51.678Z"
+  "logoUrl": "https://img.logo.dev/cohenandsteers.com?token=pk_ARDallYvRuqePZO2jZF9Cw&retina=true&fallback=monogram&format=webp&size=400",
+  "domain": "cohenandsteers.com",
+  "companyName": "Cohen & Steers Inc",
+  "source": "officialSite",
+  "cachedAt": "2025-10-20T06:46:28.381Z"
 }

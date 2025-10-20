@@ -1,5 +1,8 @@
 {
   "ticker": "NLOP",
-  "logoUrl": null,
-  "cachedAt": "2025-10-20T06:03:51.771Z"
+  "logoUrl": "https://img.logo.dev/nloproperties.com?token=pk_ARDallYvRuqePZO2jZF9Cw&retina=true&fallback=monogram&format=webp&size=400",
+  "domain": "nloproperties.com",
+  "companyName": "Net Lease Office Properties",
+  "source": "officialSite",
+  "cachedAt": "2025-10-20T06:46:28.496Z"
 }

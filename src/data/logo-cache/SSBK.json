@@ -1,5 +1,8 @@
 {
   "ticker": "SSBK",
-  "logoUrl": null,
-  "cachedAt": "2025-10-20T06:03:51.621Z"
+  "logoUrl": "https://img.logo.dev/ssbk.com?token=pk_ARDallYvRuqePZO2jZF9Cw&retina=true&fallback=monogram&format=webp&size=400",
+  "domain": "ssbk.com",
+  "companyName": "SSBK Company",
+  "source": "companyName",
+  "cachedAt": "2025-10-20T06:46:28.317Z"
 }

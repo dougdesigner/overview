@@ -1,5 +1,8 @@
 {
   "ticker": "KORE",
-  "logoUrl": null,
-  "cachedAt": "2025-10-20T06:03:51.805Z"
+  "logoUrl": "https://img.logo.dev/korewireless.com?token=pk_ARDallYvRuqePZO2jZF9Cw&retina=true&fallback=monogram&format=webp&size=400",
+  "domain": "korewireless.com",
+  "companyName": "KORE Group Holdings Inc",
+  "source": "officialSite",
+  "cachedAt": "2025-10-20T06:46:28.532Z"
 }

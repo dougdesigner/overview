@@ -1,5 +1,8 @@
 {
   "ticker": "ITW",
-  "logoUrl": null,
-  "cachedAt": "2025-10-20T06:04:02.594Z"
+  "logoUrl": "https://img.logo.dev/itw.com?token=pk_ARDallYvRuqePZO2jZF9Cw&retina=true&fallback=monogram&format=webp&size=400",
+  "domain": "itw.com",
+  "companyName": "Illinois Tool Works Inc",
+  "source": "officialSite",
+  "cachedAt": "2025-10-20T06:46:27.742Z"
 }

@@ -1,5 +1,8 @@
 {
   "ticker": "WRB",
-  "logoUrl": null,
-  "cachedAt": "2025-10-20T06:04:02.640Z"
+  "logoUrl": "https://img.logo.dev/berkley.com?token=pk_ARDallYvRuqePZO2jZF9Cw&retina=true&fallback=monogram&format=webp&size=400",
+  "domain": "berkley.com",
+  "companyName": "W. R. Berkley Corp",
+  "source": "officialSite",
+  "cachedAt": "2025-10-20T06:46:27.838Z"
 }

@@ -1,5 +1,8 @@
 {
   "ticker": "LDOS",
-  "logoUrl": null,
-  "cachedAt": "2025-10-20T06:04:02.644Z"
+  "logoUrl": "https://img.logo.dev/leidos.com?token=pk_ARDallYvRuqePZO2jZF9Cw&retina=true&fallback=monogram&format=webp&size=400",
+  "domain": "leidos.com",
+  "companyName": "Leidos Holdings Inc",
+  "source": "officialSite",
+  "cachedAt": "2025-10-20T06:46:27.845Z"
 }

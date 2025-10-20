@@ -1,5 +1,8 @@
 {
   "ticker": "TWST",
-  "logoUrl": null,
-  "cachedAt": "2025-10-20T06:03:51.553Z"
+  "logoUrl": "https://img.logo.dev/twistbioscience.com?token=pk_ARDallYvRuqePZO2jZF9Cw&retina=true&fallback=monogram&format=webp&size=400",
+  "domain": "twistbioscience.com",
+  "companyName": "Twist Bioscience Corp",
+  "source": "officialSite",
+  "cachedAt": "2025-10-20T06:46:28.226Z"
 }

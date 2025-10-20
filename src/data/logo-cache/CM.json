@@ -1,5 +1,8 @@
 {
   "ticker": "CM",
-  "logoUrl": null,
-  "cachedAt": "2025-10-20T06:04:02.592Z"
+  "logoUrl": "https://img.logo.dev/cibc.com?token=pk_ARDallYvRuqePZO2jZF9Cw&retina=true&fallback=monogram&format=webp&size=400",
+  "domain": "cibc.com",
+  "companyName": "Canadian Imperial Bank Of Commerce",
+  "source": "officialSite",
+  "cachedAt": "2025-10-20T06:46:27.737Z"
 }

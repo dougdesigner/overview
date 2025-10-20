@@ -1,5 +1,8 @@
 {
   "ticker": "LODE",
-  "logoUrl": null,
-  "cachedAt": "2025-10-20T06:03:51.685Z"
+  "logoUrl": "https://img.logo.dev/comstock.inc?token=pk_ARDallYvRuqePZO2jZF9Cw&retina=true&fallback=monogram&format=webp&size=400",
+  "domain": "comstock.inc",
+  "companyName": "Comstock Mining Inc",
+  "source": "officialSite",
+  "cachedAt": "2025-10-20T06:46:28.390Z"
 }

@@ -1,5 +1,8 @@
 {
   "ticker": "QTWO",
-  "logoUrl": null,
-  "cachedAt": "2025-10-20T06:04:02.662Z"
+  "logoUrl": "https://img.logo.dev/q2.com?token=pk_ARDallYvRuqePZO2jZF9Cw&retina=true&fallback=monogram&format=webp&size=400",
+  "domain": "q2.com",
+  "companyName": "Q2 Holdings",
+  "source": "officialSite",
+  "cachedAt": "2025-10-20T06:46:27.888Z"
 }

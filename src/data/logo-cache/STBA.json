@@ -1,5 +1,8 @@
 {
   "ticker": "STBA",
-  "logoUrl": null,
-  "cachedAt": "2025-10-20T06:03:51.602Z"
+  "logoUrl": "https://img.logo.dev/stbancorp.com?token=pk_ARDallYvRuqePZO2jZF9Cw&retina=true&fallback=monogram&format=webp&size=400",
+  "domain": "stbancorp.com",
+  "companyName": "S&T Bancorp Inc",
+  "source": "officialSite",
+  "cachedAt": "2025-10-20T06:46:28.289Z"
 }

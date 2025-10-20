@@ -1,5 +1,8 @@
 {
   "ticker": "STC",
-  "logoUrl": null,
-  "cachedAt": "2025-10-20T06:03:51.628Z"
+  "logoUrl": "https://img.logo.dev/stewart.com?token=pk_ARDallYvRuqePZO2jZF9Cw&retina=true&fallback=monogram&format=webp&size=400",
+  "domain": "stewart.com",
+  "companyName": "Stewart Information Services Corp",
+  "source": "officialSite",
+  "cachedAt": "2025-10-20T06:46:28.324Z"
 }

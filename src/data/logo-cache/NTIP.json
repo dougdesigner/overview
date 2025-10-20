@@ -1,5 +1,8 @@
 {
   "ticker": "NTIP",
-  "logoUrl": null,
-  "cachedAt": "2025-10-20T06:03:51.770Z"
+  "logoUrl": "https://img.logo.dev/network-1.com?token=pk_ARDallYvRuqePZO2jZF9Cw&retina=true&fallback=monogram&format=webp&size=400",
+  "domain": "network-1.com",
+  "companyName": "Network-1 Technologies Inc",
+  "source": "officialSite",
+  "cachedAt": "2025-10-20T06:46:28.495Z"
 }

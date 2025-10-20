@@ -1,5 +1,8 @@
 {
   "ticker": "HIFS",
-  "logoUrl": null,
-  "cachedAt": "2025-10-20T06:03:51.783Z"
+  "logoUrl": "https://img.logo.dev/hinghamsavings.com?token=pk_ARDallYvRuqePZO2jZF9Cw&retina=true&fallback=monogram&format=webp&size=400",
+  "domain": "hinghamsavings.com",
+  "companyName": "Hingham Institution for Savings",
+  "source": "officialSite",
+  "cachedAt": "2025-10-20T06:46:28.510Z"
 }

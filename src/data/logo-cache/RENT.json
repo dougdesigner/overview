@@ -1,5 +1,8 @@
 {
   "ticker": "RENT",
-  "logoUrl": null,
-  "cachedAt": "2025-10-20T06:03:51.541Z"
+  "logoUrl": "https://img.logo.dev/renttherunway.com?token=pk_ARDallYvRuqePZO2jZF9Cw&retina=true&fallback=monogram&format=webp&size=400",
+  "domain": "renttherunway.com",
+  "companyName": "Rent the Runway Inc",
+  "source": "officialSite",
+  "cachedAt": "2025-10-20T06:46:28.211Z"
 }

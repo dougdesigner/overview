@@ -1,5 +1,8 @@
 {
   "ticker": "FRPT",
-  "logoUrl": null,
-  "cachedAt": "2025-10-20T06:04:02.737Z"
+  "logoUrl": "https://img.logo.dev/freshpet.com?token=pk_ARDallYvRuqePZO2jZF9Cw&retina=true&fallback=monogram&format=webp&size=400",
+  "domain": "freshpet.com",
+  "companyName": "Freshpet Inc",
+  "source": "officialSite",
+  "cachedAt": "2025-10-20T06:46:28.084Z"
 }

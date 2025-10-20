@@ -1,5 +1,8 @@
 {
   "ticker": "HES",
-  "logoUrl": null,
-  "cachedAt": "2025-10-20T06:04:02.615Z"
+  "logoUrl": "https://img.logo.dev/hes.com?token=pk_ARDallYvRuqePZO2jZF9Cw&retina=true&fallback=monogram&format=webp&size=400",
+  "domain": "hes.com",
+  "companyName": "HES Company",
+  "source": "companyName",
+  "cachedAt": "2025-10-20T06:46:27.785Z"
 }

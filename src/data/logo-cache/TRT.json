@@ -1,5 +1,8 @@
 {
   "ticker": "TRT",
-  "logoUrl": null,
-  "cachedAt": "2025-10-20T06:03:51.567Z"
+  "logoUrl": "https://img.logo.dev/triotech.com?token=pk_ARDallYvRuqePZO2jZF9Cw&retina=true&fallback=monogram&format=webp&size=400",
+  "domain": "triotech.com",
+  "companyName": "Trio-Tech International",
+  "source": "officialSite",
+  "cachedAt": "2025-10-20T06:46:28.243Z"
 }

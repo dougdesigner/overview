@@ -1,5 +1,8 @@
 {
   "ticker": "ACCO",
-  "logoUrl": null,
-  "cachedAt": "2025-10-20T06:03:51.701Z"
+  "logoUrl": "https://img.logo.dev/accobrands.com?token=pk_ARDallYvRuqePZO2jZF9Cw&retina=true&fallback=monogram&format=webp&size=400",
+  "domain": "accobrands.com",
+  "companyName": "Acco Brands Corporation",
+  "source": "officialSite",
+  "cachedAt": "2025-10-20T06:46:28.410Z"
 }

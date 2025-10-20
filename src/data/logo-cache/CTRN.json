@@ -1,5 +1,8 @@
 {
   "ticker": "CTRN",
-  "logoUrl": null,
-  "cachedAt": "2025-10-20T06:03:51.643Z"
+  "logoUrl": "https://img.logo.dev/cititrends.com?token=pk_ARDallYvRuqePZO2jZF9Cw&retina=true&fallback=monogram&format=webp&size=400",
+  "domain": "cititrends.com",
+  "companyName": "Citi Trends Inc",
+  "source": "officialSite",
+  "cachedAt": "2025-10-20T06:46:28.343Z"
 }

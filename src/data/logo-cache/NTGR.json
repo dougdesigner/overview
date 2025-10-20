@@ -1,5 +1,8 @@
 {
   "ticker": "NTGR",
-  "logoUrl": null,
-  "cachedAt": "2025-10-20T06:03:51.770Z"
+  "logoUrl": "https://img.logo.dev/netgear.com?token=pk_ARDallYvRuqePZO2jZF9Cw&retina=true&fallback=monogram&format=webp&size=400",
+  "domain": "netgear.com",
+  "companyName": "NETGEAR Inc",
+  "source": "officialSite",
+  "cachedAt": "2025-10-20T06:46:28.496Z"
 }

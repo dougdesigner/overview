@@ -1,5 +1,8 @@
 {
   "ticker": "NHI",
-  "logoUrl": null,
-  "cachedAt": "2025-10-20T06:04:02.721Z"
+  "logoUrl": "https://img.logo.dev/nhireit.com?token=pk_ARDallYvRuqePZO2jZF9Cw&retina=true&fallback=monogram&format=webp&size=400",
+  "domain": "nhireit.com",
+  "companyName": "National Health Investors Inc",
+  "source": "officialSite",
+  "cachedAt": "2025-10-20T06:46:28.053Z"
 }

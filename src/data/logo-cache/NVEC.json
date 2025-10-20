@@ -1,5 +1,8 @@
 {
   "ticker": "NVEC",
-  "logoUrl": null,
-  "cachedAt": "2025-10-20T06:03:51.760Z"
+  "logoUrl": "https://img.logo.dev/nve.com?token=pk_ARDallYvRuqePZO2jZF9Cw&retina=true&fallback=monogram&format=webp&size=400",
+  "domain": "nve.com",
+  "companyName": "NVE Corporation",
+  "source": "officialSite",
+  "cachedAt": "2025-10-20T06:46:28.483Z"
 }

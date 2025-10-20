@@ -1,5 +1,8 @@
 {
   "ticker": "TRI",
-  "logoUrl": null,
-  "cachedAt": "2025-10-20T06:04:02.604Z"
+  "logoUrl": "https://img.logo.dev/thomsonreuters.com?token=pk_ARDallYvRuqePZO2jZF9Cw&retina=true&fallback=monogram&format=webp&size=400",
+  "domain": "thomsonreuters.com",
+  "companyName": "Thomson Reuters Corporation Common Shares",
+  "source": "officialSite",
+  "cachedAt": "2025-10-20T06:46:27.765Z"
 }

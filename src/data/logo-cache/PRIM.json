@@ -1,5 +1,8 @@
 {
   "ticker": "PRIM",
-  "logoUrl": null,
-  "cachedAt": "2025-10-20T06:04:02.659Z"
+  "logoUrl": "https://img.logo.dev/prim.com?token=pk_ARDallYvRuqePZO2jZF9Cw&retina=true&fallback=monogram&format=webp&size=400",
+  "domain": "prim.com",
+  "companyName": "Primoris Services Corporation",
+  "source": "officialSite",
+  "cachedAt": "2025-10-20T06:46:27.883Z"
 }

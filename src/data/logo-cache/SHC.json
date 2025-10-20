@@ -1,5 +1,8 @@
 {
   "ticker": "SHC",
-  "logoUrl": null,
-  "cachedAt": "2025-10-20T06:03:51.622Z"
+  "logoUrl": "https://img.logo.dev/soterahealth.com?token=pk_ARDallYvRuqePZO2jZF9Cw&retina=true&fallback=monogram&format=webp&size=400",
+  "domain": "soterahealth.com",
+  "companyName": "Sotera Health Co",
+  "source": "officialSite",
+  "cachedAt": "2025-10-20T06:46:28.319Z"
 }

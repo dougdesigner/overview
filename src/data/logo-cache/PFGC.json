@@ -1,5 +1,8 @@
 {
   "ticker": "PFGC",
-  "logoUrl": null,
-  "cachedAt": "2025-10-20T06:04:02.677Z"
+  "logoUrl": "https://img.logo.dev/pfgc.com?token=pk_ARDallYvRuqePZO2jZF9Cw&retina=true&fallback=monogram&format=webp&size=400",
+  "domain": "pfgc.com",
+  "companyName": "Performance Food Group Co",
+  "source": "officialSite",
+  "cachedAt": "2025-10-20T06:46:27.919Z"
 }

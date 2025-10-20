@@ -1,5 +1,8 @@
 {
   "ticker": "PZZA",
-  "logoUrl": null,
-  "cachedAt": "2025-10-20T06:03:51.547Z"
+  "logoUrl": "https://img.logo.dev/papajohns.com?token=pk_ARDallYvRuqePZO2jZF9Cw&retina=true&fallback=monogram&format=webp&size=400",
+  "domain": "papajohns.com",
+  "companyName": "Papa John's International Inc",
+  "source": "officialSite",
+  "cachedAt": "2025-10-20T06:46:28.217Z"
 }

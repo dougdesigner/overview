@@ -1,5 +1,8 @@
 {
   "ticker": "VERI",
-  "logoUrl": null,
-  "cachedAt": "2025-10-20T06:03:51.589Z"
+  "logoUrl": "https://img.logo.dev/veritone.com?token=pk_ARDallYvRuqePZO2jZF9Cw&retina=true&fallback=monogram&format=webp&size=400",
+  "domain": "veritone.com",
+  "companyName": "Veritone Inc",
+  "source": "officialSite",
+  "cachedAt": "2025-10-20T06:46:28.274Z"
 }

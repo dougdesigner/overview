@@ -1,5 +1,8 @@
 {
   "ticker": "MAPS",
-  "logoUrl": null,
-  "cachedAt": "2025-10-20T06:03:51.698Z"
+  "logoUrl": "https://img.logo.dev/weedmaps.com?token=pk_ARDallYvRuqePZO2jZF9Cw&retina=true&fallback=monogram&format=webp&size=400",
+  "domain": "weedmaps.com",
+  "companyName": "WM Technology Inc",
+  "source": "officialSite",
+  "cachedAt": "2025-10-20T06:46:28.404Z"
 }

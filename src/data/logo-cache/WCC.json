@@ -1,5 +1,8 @@
 {
   "ticker": "WCC",
-  "logoUrl": null,
-  "cachedAt": "2025-10-20T06:04:02.742Z"
+  "logoUrl": "https://img.logo.dev/wesco.com?token=pk_ARDallYvRuqePZO2jZF9Cw&retina=true&fallback=monogram&format=webp&size=400",
+  "domain": "wesco.com",
+  "companyName": "WESCO International Inc",
+  "source": "officialSite",
+  "cachedAt": "2025-10-20T06:46:28.099Z"
 }

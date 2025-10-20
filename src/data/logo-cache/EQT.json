@@ -1,5 +1,8 @@
 {
   "ticker": "EQT",
-  "logoUrl": null,
-  "cachedAt": "2025-10-20T06:04:02.620Z"
+  "logoUrl": "https://img.logo.dev/eqt.com?token=pk_ARDallYvRuqePZO2jZF9Cw&retina=true&fallback=monogram&format=webp&size=400",
+  "domain": "eqt.com",
+  "companyName": "EQT Corporation",
+  "source": "officialSite",
+  "cachedAt": "2025-10-20T06:46:27.795Z"
 }

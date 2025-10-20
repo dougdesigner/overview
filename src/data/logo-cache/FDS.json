@@ -1,5 +1,8 @@
 {
   "ticker": "FDS",
-  "logoUrl": null,
-  "cachedAt": "2025-10-20T06:04:02.650Z"
+  "logoUrl": "https://img.logo.dev/factset.com?token=pk_ARDallYvRuqePZO2jZF9Cw&retina=true&fallback=monogram&format=webp&size=400",
+  "domain": "factset.com",
+  "companyName": "FactSet Research Systems Inc",
+  "source": "officialSite",
+  "cachedAt": "2025-10-20T06:46:27.861Z"
 }

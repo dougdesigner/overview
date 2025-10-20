@@ -1,5 +1,8 @@
 {
   "ticker": "TTMI",
-  "logoUrl": null,
-  "cachedAt": "2025-10-20T06:03:51.557Z"
+  "logoUrl": "https://img.logo.dev/ttm.com?token=pk_ARDallYvRuqePZO2jZF9Cw&retina=true&fallback=monogram&format=webp&size=400",
+  "domain": "ttm.com",
+  "companyName": "TTM Technologies Inc",
+  "source": "officialSite",
+  "cachedAt": "2025-10-20T06:46:28.232Z"
 }

@@ -1,5 +1,8 @@
 {
   "ticker": "REFR",
-  "logoUrl": null,
-  "cachedAt": "2025-10-20T06:03:51.545Z"
+  "logoUrl": "https://img.logo.dev/smartglass.com?token=pk_ARDallYvRuqePZO2jZF9Cw&retina=true&fallback=monogram&format=webp&size=400",
+  "domain": "smartglass.com",
+  "companyName": "Research Frontiers Incorporated",
+  "source": "officialSite",
+  "cachedAt": "2025-10-20T06:46:28.216Z"
 }

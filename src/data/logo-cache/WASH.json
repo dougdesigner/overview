@@ -1,5 +1,8 @@
 {
   "ticker": "WASH",
-  "logoUrl": null,
-  "cachedAt": "2025-10-20T06:03:51.584Z"
+  "logoUrl": "https://img.logo.dev/washtrust.com?token=pk_ARDallYvRuqePZO2jZF9Cw&retina=true&fallback=monogram&format=webp&size=400",
+  "domain": "washtrust.com",
+  "companyName": "Washington Trust Bancorp Inc",
+  "source": "officialSite",
+  "cachedAt": "2025-10-20T06:46:28.268Z"
 }

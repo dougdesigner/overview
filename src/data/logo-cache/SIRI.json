@@ -1,5 +1,8 @@
 {
   "ticker": "SIRI",
-  "logoUrl": null,
-  "cachedAt": "2025-10-20T06:04:02.737Z"
+  "logoUrl": "https://img.logo.dev/siriusxm.com?token=pk_ARDallYvRuqePZO2jZF9Cw&retina=true&fallback=monogram&format=webp&size=400",
+  "domain": "siriusxm.com",
+  "companyName": "Sirius XM Holding Inc",
+  "source": "officialSite",
+  "cachedAt": "2025-10-20T06:46:28.084Z"
 }

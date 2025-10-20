@@ -1,5 +1,8 @@
 {
   "ticker": "SXT",
-  "logoUrl": null,
-  "cachedAt": "2025-10-20T06:04:02.666Z"
+  "logoUrl": "https://img.logo.dev/sensient.com?token=pk_ARDallYvRuqePZO2jZF9Cw&retina=true&fallback=monogram&format=webp&size=400",
+  "domain": "sensient.com",
+  "companyName": "Sensient Technologies Corporation",
+  "source": "officialSite",
+  "cachedAt": "2025-10-20T06:46:27.895Z"
 }

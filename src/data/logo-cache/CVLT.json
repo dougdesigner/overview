@@ -1,5 +1,8 @@
 {
   "ticker": "CVLT",
-  "logoUrl": null,
-  "cachedAt": "2025-10-20T06:04:02.757Z"
+  "logoUrl": "https://img.logo.dev/commvault.com?token=pk_ARDallYvRuqePZO2jZF9Cw&retina=true&fallback=monogram&format=webp&size=400",
+  "domain": "commvault.com",
+  "companyName": "CommVault Systems Inc",
+  "source": "officialSite",
+  "cachedAt": "2025-10-20T06:46:28.145Z"
 }

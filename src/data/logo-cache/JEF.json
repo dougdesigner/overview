@@ -1,5 +1,8 @@
 {
   "ticker": "JEF",
-  "logoUrl": null,
-  "cachedAt": "2025-10-20T06:04:02.659Z"
+  "logoUrl": "https://img.logo.dev/jefferies.com?token=pk_ARDallYvRuqePZO2jZF9Cw&retina=true&fallback=monogram&format=webp&size=400",
+  "domain": "jefferies.com",
+  "companyName": "Jefferies Financial Group Inc",
+  "source": "officialSite",
+  "cachedAt": "2025-10-20T06:46:27.882Z"
 }

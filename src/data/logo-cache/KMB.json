@@ -1,5 +1,8 @@
 {
   "ticker": "KMB",
-  "logoUrl": null,
-  "cachedAt": "2025-10-20T06:04:02.605Z"
+  "logoUrl": "https://img.logo.dev/kimberly-clark.com?token=pk_ARDallYvRuqePZO2jZF9Cw&retina=true&fallback=monogram&format=webp&size=400",
+  "domain": "kimberly-clark.com",
+  "companyName": "Kimberly-Clark Corporation",
+  "source": "officialSite",
+  "cachedAt": "2025-10-20T06:46:27.767Z"
 }

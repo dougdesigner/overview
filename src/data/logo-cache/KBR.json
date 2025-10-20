@@ -1,5 +1,8 @@
 {
   "ticker": "KBR",
-  "logoUrl": null,
-  "cachedAt": "2025-10-20T06:04:02.661Z"
+  "logoUrl": "https://img.logo.dev/kbr.com?token=pk_ARDallYvRuqePZO2jZF9Cw&retina=true&fallback=monogram&format=webp&size=400",
+  "domain": "kbr.com",
+  "companyName": "KBR Inc",
+  "source": "officialSite",
+  "cachedAt": "2025-10-20T06:46:27.886Z"
 }

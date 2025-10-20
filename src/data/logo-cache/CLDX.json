@@ -1,5 +1,8 @@
 {
   "ticker": "CLDX",
-  "logoUrl": null,
-  "cachedAt": "2025-10-20T06:03:51.639Z"
+  "logoUrl": "https://img.logo.dev/celldex.com?token=pk_ARDallYvRuqePZO2jZF9Cw&retina=true&fallback=monogram&format=webp&size=400",
+  "domain": "celldex.com",
+  "companyName": "Celldex Therapeutics Inc",
+  "source": "officialSite",
+  "cachedAt": "2025-10-20T06:46:28.338Z"
 }

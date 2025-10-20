@@ -1,5 +1,8 @@
 {
   "ticker": "ELDN",
-  "logoUrl": null,
-  "cachedAt": "2025-10-20T06:03:51.790Z"
+  "logoUrl": "https://img.logo.dev/eledon.com?token=pk_ARDallYvRuqePZO2jZF9Cw&retina=true&fallback=monogram&format=webp&size=400",
+  "domain": "eledon.com",
+  "companyName": "Eledon Pharmaceuticals Inc",
+  "source": "officialSite",
+  "cachedAt": "2025-10-20T06:46:28.517Z"
 }

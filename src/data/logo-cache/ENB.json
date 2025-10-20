@@ -1,5 +1,8 @@
 {
   "ticker": "ENB",
-  "logoUrl": null,
-  "cachedAt": "2025-10-20T06:04:02.581Z"
+  "logoUrl": "https://img.logo.dev/enbridge.com?token=pk_ARDallYvRuqePZO2jZF9Cw&retina=true&fallback=monogram&format=webp&size=400",
+  "domain": "enbridge.com",
+  "companyName": "Enbridge Inc",
+  "source": "officialSite",
+  "cachedAt": "2025-10-20T06:46:27.712Z"
 }

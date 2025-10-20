@@ -1,5 +1,8 @@
 {
   "ticker": "ELUT",
-  "logoUrl": null,
-  "cachedAt": "2025-10-20T06:03:51.789Z"
+  "logoUrl": "https://img.logo.dev/elutia.com?token=pk_ARDallYvRuqePZO2jZF9Cw&retina=true&fallback=monogram&format=webp&size=400",
+  "domain": "elutia.com",
+  "companyName": "Elutia Inc.",
+  "source": "officialSite",
+  "cachedAt": "2025-10-20T06:46:28.516Z"
 }

@@ -1,5 +1,8 @@
 {
   "ticker": "NPCE",
-  "logoUrl": null,
-  "cachedAt": "2025-10-20T06:03:51.769Z"
+  "logoUrl": "https://img.logo.dev/neuropace.com?token=pk_ARDallYvRuqePZO2jZF9Cw&retina=true&fallback=monogram&format=webp&size=400",
+  "domain": "neuropace.com",
+  "companyName": "Neuropace Inc",
+  "source": "officialSite",
+  "cachedAt": "2025-10-20T06:46:28.494Z"
 }

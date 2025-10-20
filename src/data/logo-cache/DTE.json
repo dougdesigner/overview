@@ -1,5 +1,8 @@
 {
   "ticker": "DTE",
-  "logoUrl": null,
-  "cachedAt": "2025-10-20T06:04:02.643Z"
+  "logoUrl": "https://img.logo.dev/dteenergy.com?token=pk_ARDallYvRuqePZO2jZF9Cw&retina=true&fallback=monogram&format=webp&size=400",
+  "domain": "dteenergy.com",
+  "companyName": "DTE Energy Company",
+  "source": "officialSite",
+  "cachedAt": "2025-10-20T06:46:27.844Z"
 }

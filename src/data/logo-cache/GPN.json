@@ -1,5 +1,8 @@
 {
   "ticker": "GPN",
-  "logoUrl": null,
-  "cachedAt": "2025-10-20T06:04:02.650Z"
+  "logoUrl": "https://img.logo.dev/globalpayments.com?token=pk_ARDallYvRuqePZO2jZF9Cw&retina=true&fallback=monogram&format=webp&size=400",
+  "domain": "globalpayments.com",
+  "companyName": "Global Payments Inc",
+  "source": "officialSite",
+  "cachedAt": "2025-10-20T06:46:27.861Z"
 }

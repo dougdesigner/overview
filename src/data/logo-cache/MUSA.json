@@ -1,5 +1,8 @@
 {
   "ticker": "MUSA",
-  "logoUrl": null,
-  "cachedAt": "2025-10-20T06:04:02.678Z"
+  "logoUrl": "https://img.logo.dev/murphyusa.com?token=pk_ARDallYvRuqePZO2jZF9Cw&retina=true&fallback=monogram&format=webp&size=400",
+  "domain": "murphyusa.com",
+  "companyName": "Murphy USA Inc",
+  "source": "officialSite",
+  "cachedAt": "2025-10-20T06:46:27.919Z"
 }

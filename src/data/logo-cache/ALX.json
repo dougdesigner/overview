@@ -1,5 +1,8 @@
 {
   "ticker": "ALX",
-  "logoUrl": null,
-  "cachedAt": "2025-10-20T06:03:51.704Z"
+  "logoUrl": "https://img.logo.dev/alx-inc.com?token=pk_ARDallYvRuqePZO2jZF9Cw&retina=true&fallback=monogram&format=webp&size=400",
+  "domain": "alx-inc.com",
+  "companyName": "Alexanders Inc",
+  "source": "officialSite",
+  "cachedAt": "2025-10-20T06:46:28.414Z"
 }

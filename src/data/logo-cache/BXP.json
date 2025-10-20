@@ -1,5 +1,8 @@
 {
   "ticker": "BXP",
-  "logoUrl": null,
-  "cachedAt": "2025-10-20T06:04:02.634Z"
+  "logoUrl": "https://img.logo.dev/bxp.com?token=pk_ARDallYvRuqePZO2jZF9Cw&retina=true&fallback=monogram&format=webp&size=400",
+  "domain": "bxp.com",
+  "companyName": "Boston Properties Inc",
+  "source": "officialSite",
+  "cachedAt": "2025-10-20T06:46:27.825Z"
 }

@@ -1,5 +1,8 @@
 {
   "ticker": "RAMP",
-  "logoUrl": null,
-  "cachedAt": "2025-10-20T06:03:51.775Z"
+  "logoUrl": "https://img.logo.dev/liveramp.com?token=pk_ARDallYvRuqePZO2jZF9Cw&retina=true&fallback=monogram&format=webp&size=400",
+  "domain": "liveramp.com",
+  "companyName": "Liveramp Holdings Inc",
+  "source": "officialSite",
+  "cachedAt": "2025-10-20T06:46:28.503Z"
 }

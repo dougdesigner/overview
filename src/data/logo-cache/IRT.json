@@ -1,5 +1,8 @@
 {
   "ticker": "IRT",
-  "logoUrl": null,
-  "cachedAt": "2025-10-20T06:04:02.741Z"
+  "logoUrl": "https://img.logo.dev/irtliving.com?token=pk_ARDallYvRuqePZO2jZF9Cw&retina=true&fallback=monogram&format=webp&size=400",
+  "domain": "irtliving.com",
+  "companyName": "Independence Realty Trust Inc",
+  "source": "officialSite",
+  "cachedAt": "2025-10-20T06:46:28.092Z"
 }

@@ -1,5 +1,8 @@
 {
   "ticker": "AEP",
-  "logoUrl": null,
-  "cachedAt": "2025-10-20T06:04:02.589Z"
+  "logoUrl": "https://img.logo.dev/aep.com?token=pk_ARDallYvRuqePZO2jZF9Cw&retina=true&fallback=monogram&format=webp&size=400",
+  "domain": "aep.com",
+  "companyName": "American Electric Power Co Inc",
+  "source": "officialSite",
+  "cachedAt": "2025-10-20T06:46:27.730Z"
 }

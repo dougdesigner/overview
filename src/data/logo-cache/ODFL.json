@@ -1,5 +1,8 @@
 {
   "ticker": "ODFL",
-  "logoUrl": null,
-  "cachedAt": "2025-10-20T06:04:02.615Z"
+  "logoUrl": "https://img.logo.dev/odfl.com?token=pk_ARDallYvRuqePZO2jZF9Cw&retina=true&fallback=monogram&format=webp&size=400",
+  "domain": "odfl.com",
+  "companyName": "Old Dominion Freight Line Inc",
+  "source": "officialSite",
+  "cachedAt": "2025-10-20T06:46:27.786Z"
 }

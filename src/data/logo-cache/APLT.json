@@ -1,5 +1,8 @@
 {
   "ticker": "APLT",
-  "logoUrl": null,
-  "cachedAt": "2025-10-20T06:03:51.697Z"
+  "logoUrl": "https://img.logo.dev/appliedtherapeutics.com?token=pk_ARDallYvRuqePZO2jZF9Cw&retina=true&fallback=monogram&format=webp&size=400",
+  "domain": "appliedtherapeutics.com",
+  "companyName": "Applied Therapeutics Inc",
+  "source": "officialSite",
+  "cachedAt": "2025-10-20T06:46:28.403Z"
 }

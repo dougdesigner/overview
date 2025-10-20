@@ -1,5 +1,8 @@
 {
   "ticker": "SMID",
-  "logoUrl": null,
-  "cachedAt": "2025-10-20T06:03:51.626Z"
+  "logoUrl": "https://img.logo.dev/smithmidland.com?token=pk_ARDallYvRuqePZO2jZF9Cw&retina=true&fallback=monogram&format=webp&size=400",
+  "domain": "smithmidland.com",
+  "companyName": "Smith-Midland Corp",
+  "source": "officialSite",
+  "cachedAt": "2025-10-20T06:46:28.323Z"
 }

@@ -1,5 +1,8 @@
 {
   "ticker": "IRM",
-  "logoUrl": null,
-  "cachedAt": "2025-10-20T06:04:02.630Z"
+  "logoUrl": "https://img.logo.dev/ironmountain.com?token=pk_ARDallYvRuqePZO2jZF9Cw&retina=true&fallback=monogram&format=webp&size=400",
+  "domain": "ironmountain.com",
+  "companyName": "Iron Mountain Incorporated",
+  "source": "officialSite",
+  "cachedAt": "2025-10-20T06:46:27.817Z"
 }

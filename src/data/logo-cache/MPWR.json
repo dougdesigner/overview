@@ -1,5 +1,8 @@
 {
   "ticker": "MPWR",
-  "logoUrl": null,
-  "cachedAt": "2025-10-20T06:04:02.626Z"
+  "logoUrl": "https://img.logo.dev/monolithicpower.com?token=pk_ARDallYvRuqePZO2jZF9Cw&retina=true&fallback=monogram&format=webp&size=400",
+  "domain": "monolithicpower.com",
+  "companyName": "Monolithic Power Systems Inc",
+  "source": "officialSite",
+  "cachedAt": "2025-10-20T06:46:27.809Z"
 }

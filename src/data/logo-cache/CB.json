@@ -1,5 +1,8 @@
 {
   "ticker": "CB",
-  "logoUrl": null,
-  "cachedAt": "2025-10-20T06:04:02.582Z"
+  "logoUrl": "https://img.logo.dev/chubb.com?token=pk_ARDallYvRuqePZO2jZF9Cw&retina=true&fallback=monogram&format=webp&size=400",
+  "domain": "chubb.com",
+  "companyName": "Chubb Ltd",
+  "source": "officialSite",
+  "cachedAt": "2025-10-20T06:46:27.713Z"
 }

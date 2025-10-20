@@ -1,5 +1,8 @@
 {
   "ticker": "MO",
-  "logoUrl": null,
-  "cachedAt": "2025-10-20T06:04:02.583Z"
+  "logoUrl": "https://img.logo.dev/altria.com?token=pk_ARDallYvRuqePZO2jZF9Cw&retina=true&fallback=monogram&format=webp&size=400",
+  "domain": "altria.com",
+  "companyName": "Altria Group",
+  "source": "officialSite",
+  "cachedAt": "2025-10-20T06:46:27.714Z"
 }

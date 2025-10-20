@@ -1,5 +1,8 @@
 {
   "ticker": "MFC",
-  "logoUrl": null,
-  "cachedAt": "2025-10-20T06:04:02.595Z"
+  "logoUrl": "https://img.logo.dev/manulife.com?token=pk_ARDallYvRuqePZO2jZF9Cw&retina=true&fallback=monogram&format=webp&size=400",
+  "domain": "manulife.com",
+  "companyName": "Manulife Financial Corp",
+  "source": "officialSite",
+  "cachedAt": "2025-10-20T06:46:27.745Z"
 }

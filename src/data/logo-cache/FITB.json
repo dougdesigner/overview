@@ -1,5 +1,8 @@
 {
   "ticker": "FITB",
-  "logoUrl": null,
-  "cachedAt": "2025-10-20T06:04:02.646Z"
+  "logoUrl": "https://img.logo.dev/53.com?token=pk_ARDallYvRuqePZO2jZF9Cw&retina=true&fallback=monogram&format=webp&size=400",
+  "domain": "53.com",
+  "companyName": "Fifth Third Bancorp",
+  "source": "officialSite",
+  "cachedAt": "2025-10-20T06:46:27.850Z"
 }

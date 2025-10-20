@@ -1,5 +1,8 @@
 {
   "ticker": "BWIN",
-  "logoUrl": null,
-  "cachedAt": "2025-10-20T06:04:02.757Z"
+  "logoUrl": "https://img.logo.dev/baldwin.com?token=pk_ARDallYvRuqePZO2jZF9Cw&retina=true&fallback=monogram&format=webp&size=400",
+  "domain": "baldwin.com",
+  "companyName": "The Baldwin Insurance Group, Inc.",
+  "source": "officialSite",
+  "cachedAt": "2025-10-20T06:46:28.146Z"
 }

@@ -1,5 +1,8 @@
 {
   "ticker": "SEIC",
-  "logoUrl": null,
-  "cachedAt": "2025-10-20T06:04:02.617Z"
+  "logoUrl": "https://img.logo.dev/seic.com?token=pk_ARDallYvRuqePZO2jZF9Cw&retina=true&fallback=monogram&format=webp&size=400",
+  "domain": "seic.com",
+  "companyName": "SEI Investments Company",
+  "source": "officialSite",
+  "cachedAt": "2025-10-20T06:46:27.789Z"
 }

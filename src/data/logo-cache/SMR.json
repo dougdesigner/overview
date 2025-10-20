@@ -1,5 +1,8 @@
 {
   "ticker": "SMR",
-  "logoUrl": null,
-  "cachedAt": "2025-10-20T06:03:51.761Z"
+  "logoUrl": "https://img.logo.dev/nuscalepower.com?token=pk_ARDallYvRuqePZO2jZF9Cw&retina=true&fallback=monogram&format=webp&size=400",
+  "domain": "nuscalepower.com",
+  "companyName": "Nuscale Power Corp",
+  "source": "officialSite",
+  "cachedAt": "2025-10-20T06:46:28.485Z"
 }

@@ -1,5 +1,8 @@
 {
   "ticker": "PKBK",
-  "logoUrl": null,
-  "cachedAt": "2025-10-20T06:03:51.548Z"
+  "logoUrl": "https://img.logo.dev/parkebank.com?token=pk_ARDallYvRuqePZO2jZF9Cw&retina=true&fallback=monogram&format=webp&size=400",
+  "domain": "parkebank.com",
+  "companyName": "Parke Bancorp Inc",
+  "source": "officialSite",
+  "cachedAt": "2025-10-20T06:46:28.220Z"
 }

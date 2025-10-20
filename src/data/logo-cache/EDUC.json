@@ -1,5 +1,8 @@
 {
   "ticker": "EDUC",
-  "logoUrl": null,
-  "cachedAt": "2025-10-20T06:03:51.792Z"
+  "logoUrl": "https://img.logo.dev/edcpub.com?token=pk_ARDallYvRuqePZO2jZF9Cw&retina=true&fallback=monogram&format=webp&size=400",
+  "domain": "edcpub.com",
+  "companyName": "Educational Development Corporation",
+  "source": "officialSite",
+  "cachedAt": "2025-10-20T06:46:28.519Z"
 }

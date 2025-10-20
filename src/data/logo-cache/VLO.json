@@ -1,5 +1,8 @@
 {
   "ticker": "VLO",
-  "logoUrl": null,
-  "cachedAt": "2025-10-20T06:04:02.614Z"
+  "logoUrl": "https://img.logo.dev/valero.com?token=pk_ARDallYvRuqePZO2jZF9Cw&retina=true&fallback=monogram&format=webp&size=400",
+  "domain": "valero.com",
+  "companyName": "Valero Energy Corporation",
+  "source": "officialSite",
+  "cachedAt": "2025-10-20T06:46:27.783Z"
 }

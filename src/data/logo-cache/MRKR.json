@@ -1,5 +1,8 @@
 {
   "ticker": "MRKR",
-  "logoUrl": null,
-  "cachedAt": "2025-10-20T06:03:51.751Z"
+  "logoUrl": "https://img.logo.dev/markertherapeutics.com?token=pk_ARDallYvRuqePZO2jZF9Cw&retina=true&fallback=monogram&format=webp&size=400",
+  "domain": "markertherapeutics.com",
+  "companyName": "Marker Therapeutics Inc",
+  "source": "officialSite",
+  "cachedAt": "2025-10-20T06:46:28.471Z"
 }

@@ -1,5 +1,8 @@
 {
   "ticker": "NXDT",
-  "logoUrl": null,
-  "cachedAt": "2025-10-20T06:03:51.756Z"
+  "logoUrl": "https://img.logo.dev/nxdt.nexpoint.com?token=pk_ARDallYvRuqePZO2jZF9Cw&retina=true&fallback=monogram&format=webp&size=400",
+  "domain": "nxdt.nexpoint.com",
+  "companyName": "NexPoint Strategic Opportunities Fund",
+  "source": "officialSite",
+  "cachedAt": "2025-10-20T06:46:28.479Z"
 }

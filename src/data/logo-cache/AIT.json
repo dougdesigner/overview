@@ -1,5 +1,8 @@
 {
   "ticker": "AIT",
-  "logoUrl": null,
-  "cachedAt": "2025-10-20T06:04:02.683Z"
+  "logoUrl": "https://img.logo.dev/applied.com?token=pk_ARDallYvRuqePZO2jZF9Cw&retina=true&fallback=monogram&format=webp&size=400",
+  "domain": "applied.com",
+  "companyName": "Applied Industrial Technologies",
+  "source": "officialSite",
+  "cachedAt": "2025-10-20T06:46:27.932Z"
 }

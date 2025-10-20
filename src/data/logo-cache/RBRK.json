@@ -1,5 +1,8 @@
 {
   "ticker": "RBRK",
-  "logoUrl": null,
-  "cachedAt": "2025-10-20T06:04:02.668Z"
+  "logoUrl": "https://img.logo.dev/rubrik.com?token=pk_ARDallYvRuqePZO2jZF9Cw&retina=true&fallback=monogram&format=webp&size=400",
+  "domain": "rubrik.com",
+  "companyName": "Rubrik, Inc.",
+  "source": "officialSite",
+  "cachedAt": "2025-10-20T06:46:27.899Z"
 }

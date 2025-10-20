@@ -1,5 +1,8 @@
 {
   "ticker": "MODD",
-  "logoUrl": null,
-  "cachedAt": "2025-10-20T06:03:51.740Z"
+  "logoUrl": "https://img.logo.dev/modularmedical.com?token=pk_ARDallYvRuqePZO2jZF9Cw&retina=true&fallback=monogram&format=webp&size=400",
+  "domain": "modularmedical.com",
+  "companyName": "Modular Medical Inc",
+  "source": "officialSite",
+  "cachedAt": "2025-10-20T06:46:28.459Z"
 }

@@ -1,5 +1,8 @@
 {
   "ticker": "MBWM",
-  "logoUrl": null,
-  "cachedAt": "2025-10-20T06:03:51.743Z"
+  "logoUrl": "https://img.logo.dev/mercbank.com?token=pk_ARDallYvRuqePZO2jZF9Cw&retina=true&fallback=monogram&format=webp&size=400",
+  "domain": "mercbank.com",
+  "companyName": "Mercantile Bank Corporation",
+  "source": "officialSite",
+  "cachedAt": "2025-10-20T06:46:28.462Z"
 }

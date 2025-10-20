@@ -1,5 +1,8 @@
 {
   "ticker": "TMCI",
-  "logoUrl": null,
-  "cachedAt": "2025-10-20T06:03:51.569Z"
+  "logoUrl": "https://img.logo.dev/treace.com?token=pk_ARDallYvRuqePZO2jZF9Cw&retina=true&fallback=monogram&format=webp&size=400",
+  "domain": "treace.com",
+  "companyName": "Treace Medical Concepts Inc",
+  "source": "officialSite",
+  "cachedAt": "2025-10-20T06:46:28.245Z"
 }

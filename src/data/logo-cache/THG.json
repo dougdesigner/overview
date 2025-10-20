@@ -1,5 +1,8 @@
 {
   "ticker": "THG",
-  "logoUrl": null,
-  "cachedAt": "2025-10-20T06:04:02.744Z"
+  "logoUrl": "https://img.logo.dev/hanover.com?token=pk_ARDallYvRuqePZO2jZF9Cw&retina=true&fallback=monogram&format=webp&size=400",
+  "domain": "hanover.com",
+  "companyName": "The Hanover Insurance Group Inc",
+  "source": "officialSite",
+  "cachedAt": "2025-10-20T06:46:28.105Z"
 }

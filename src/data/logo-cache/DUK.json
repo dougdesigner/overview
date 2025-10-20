@@ -1,5 +1,8 @@
 {
   "ticker": "DUK",
-  "logoUrl": null,
-  "cachedAt": "2025-10-20T06:04:02.585Z"
+  "logoUrl": "https://img.logo.dev/duke-energy.com?token=pk_ARDallYvRuqePZO2jZF9Cw&retina=true&fallback=monogram&format=webp&size=400",
+  "domain": "duke-energy.com",
+  "companyName": "Duke Energy Corporation",
+  "source": "officialSite",
+  "cachedAt": "2025-10-20T06:46:27.724Z"
 }

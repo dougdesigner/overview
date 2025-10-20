@@ -1,5 +1,8 @@
 {
   "ticker": "AMT",
-  "logoUrl": null,
-  "cachedAt": "2025-10-20T06:04:02.583Z"
+  "logoUrl": "https://img.logo.dev/americantower.com?token=pk_ARDallYvRuqePZO2jZF9Cw&retina=true&fallback=monogram&format=webp&size=400",
+  "domain": "americantower.com",
+  "companyName": "American Tower Corp",
+  "source": "officialSite",
+  "cachedAt": "2025-10-20T06:46:27.713Z"
 }

@@ -1,5 +1,8 @@
 {
   "ticker": "ELAN",
-  "logoUrl": null,
-  "cachedAt": "2025-10-20T06:04:02.763Z"
+  "logoUrl": "https://img.logo.dev/elanco.com?token=pk_ARDallYvRuqePZO2jZF9Cw&retina=true&fallback=monogram&format=webp&size=400",
+  "domain": "elanco.com",
+  "companyName": "Elanco Animal Health",
+  "source": "officialSite",
+  "cachedAt": "2025-10-20T06:46:28.161Z"
 }

@@ -1,5 +1,8 @@
 {
   "ticker": "ELTX",
-  "logoUrl": null,
-  "cachedAt": "2025-10-20T06:03:51.790Z"
+  "logoUrl": "https://img.logo.dev/elicio.com?token=pk_ARDallYvRuqePZO2jZF9Cw&retina=true&fallback=monogram&format=webp&size=400",
+  "domain": "elicio.com",
+  "companyName": "Elicio Therapeutics Inc.",
+  "source": "officialSite",
+  "cachedAt": "2025-10-20T06:46:28.517Z"
 }

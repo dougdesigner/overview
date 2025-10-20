@@ -1,5 +1,8 @@
 {
   "ticker": "BCC",
-  "logoUrl": null,
-  "cachedAt": "2025-10-20T06:04:02.762Z"
+  "logoUrl": "https://img.logo.dev/bc.com?token=pk_ARDallYvRuqePZO2jZF9Cw&retina=true&fallback=monogram&format=webp&size=400",
+  "domain": "bc.com",
+  "companyName": "Boise Cascad Llc",
+  "source": "officialSite",
+  "cachedAt": "2025-10-20T06:46:28.158Z"
 }

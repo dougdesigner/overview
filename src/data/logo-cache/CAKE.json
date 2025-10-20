@@ -1,5 +1,8 @@
 {
   "ticker": "CAKE",
-  "logoUrl": null,
-  "cachedAt": "2025-10-20T06:03:51.646Z"
+  "logoUrl": "https://img.logo.dev/thecheesecakefactory.com?token=pk_ARDallYvRuqePZO2jZF9Cw&retina=true&fallback=monogram&format=webp&size=400",
+  "domain": "thecheesecakefactory.com",
+  "companyName": "The Cheesecake Factory",
+  "source": "officialSite",
+  "cachedAt": "2025-10-20T06:46:28.347Z"
 }

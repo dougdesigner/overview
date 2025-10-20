@@ -1,5 +1,8 @@
 {
   "ticker": "HRTX",
-  "logoUrl": null,
-  "cachedAt": "2025-10-20T06:03:51.784Z"
+  "logoUrl": "https://img.logo.dev/herontx.com?token=pk_ARDallYvRuqePZO2jZF9Cw&retina=true&fallback=monogram&format=webp&size=400",
+  "domain": "herontx.com",
+  "companyName": "Heron Therapeuti",
+  "source": "officialSite",
+  "cachedAt": "2025-10-20T06:46:28.512Z"
 }

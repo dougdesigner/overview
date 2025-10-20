@@ -1,5 +1,8 @@
 {
   "ticker": "MCB",
-  "logoUrl": null,
-  "cachedAt": "2025-10-20T06:03:51.732Z"
+  "logoUrl": "https://img.logo.dev/mcbankny.com?token=pk_ARDallYvRuqePZO2jZF9Cw&retina=true&fallback=monogram&format=webp&size=400",
+  "domain": "mcbankny.com",
+  "companyName": "Metropolitan Bank Holding",
+  "source": "officialSite",
+  "cachedAt": "2025-10-20T06:46:28.448Z"
 }

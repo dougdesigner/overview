@@ -1,5 +1,8 @@
 {
   "ticker": "PCOR",
-  "logoUrl": null,
-  "cachedAt": "2025-10-20T06:04:02.670Z"
+  "logoUrl": "https://img.logo.dev/procore.com?token=pk_ARDallYvRuqePZO2jZF9Cw&retina=true&fallback=monogram&format=webp&size=400",
+  "domain": "procore.com",
+  "companyName": "Procore Technologies Inc",
+  "source": "officialSite",
+  "cachedAt": "2025-10-20T06:46:27.901Z"
 }

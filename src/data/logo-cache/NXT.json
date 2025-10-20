@@ -1,5 +1,8 @@
 {
   "ticker": "NXT",
-  "logoUrl": null,
-  "cachedAt": "2025-10-20T06:04:02.682Z"
+  "logoUrl": "https://img.logo.dev/nextracker.com?token=pk_ARDallYvRuqePZO2jZF9Cw&retina=true&fallback=monogram&format=webp&size=400",
+  "domain": "nextracker.com",
+  "companyName": "Nextracker Inc. Class A Common Stock",
+  "source": "officialSite",
+  "cachedAt": "2025-10-20T06:46:27.928Z"
 }

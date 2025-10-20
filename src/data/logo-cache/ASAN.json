@@ -1,5 +1,8 @@
 {
   "ticker": "ASAN",
-  "logoUrl": null,
-  "cachedAt": "2025-10-20T06:03:51.722Z"
+  "logoUrl": "https://img.logo.dev/asana.com?token=pk_ARDallYvRuqePZO2jZF9Cw&retina=true&fallback=monogram&format=webp&size=400",
+  "domain": "asana.com",
+  "companyName": "Asana Inc",
+  "source": "officialSite",
+  "cachedAt": "2025-10-20T06:46:28.436Z"
 }

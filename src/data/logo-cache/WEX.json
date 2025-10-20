@@ -1,5 +1,8 @@
 {
   "ticker": "WEX",
-  "logoUrl": null,
-  "cachedAt": "2025-10-20T06:04:02.746Z"
+  "logoUrl": "https://img.logo.dev/wexinc.com?token=pk_ARDallYvRuqePZO2jZF9Cw&retina=true&fallback=monogram&format=webp&size=400",
+  "domain": "wexinc.com",
+  "companyName": "Wex Inc",
+  "source": "officialSite",
+  "cachedAt": "2025-10-20T06:46:28.113Z"
 }

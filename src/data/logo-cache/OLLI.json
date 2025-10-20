@@ -1,5 +1,8 @@
 {
   "ticker": "OLLI",
-  "logoUrl": null,
-  "cachedAt": "2025-10-20T06:04:02.681Z"
+  "logoUrl": "https://img.logo.dev/ollies.com?token=pk_ARDallYvRuqePZO2jZF9Cw&retina=true&fallback=monogram&format=webp&size=400",
+  "domain": "ollies.com",
+  "companyName": "Ollie's Bargain Outlet Hldg",
+  "source": "officialSite",
+  "cachedAt": "2025-10-20T06:46:27.926Z"
 }

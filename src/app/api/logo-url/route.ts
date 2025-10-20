@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server"
-import { getTickerLogoUrl } from "@/lib/logoUtils"
+import { getTickerLogoUrl, extractDomainsFromCompanyName } from "@/lib/logoUtils"
+import { getCompanyProfile, extractDomainFromUrl } from "@/lib/companyProfileService"
 import fs from "fs/promises"
 import path from "path"
 
@@ -10,6 +11,8 @@ interface LogoCache {
   ticker: string
   logoUrl: string | null
   domain?: string
+  companyName?: string
+  source?: 'override' | 'providedDomain' | 'officialSite' | 'companyName' | 'etf' | 'mutualFund'
   cachedAt: string
 }
 
@@ -27,7 +30,13 @@ async function readCachedLogo(ticker: string): Promise<LogoCache | null> {
 }
 
 // Helper function to write logo URL to cache file
-async function writeCachedLogo(ticker: string, logoUrl: string | null, domain?: string): Promise<void> {
+async function writeCachedLogo(
+  ticker: string,
+  logoUrl: string | null,
+  domain?: string,
+  companyName?: string,
+  source?: LogoCache['source']
+): Promise<void> {
   try {
     // Ensure directory exists
     await fs.mkdir(CACHE_DIR, { recursive: true })
@@ -37,6 +46,8 @@ async function writeCachedLogo(ticker: string, logoUrl: string | null, domain?: 
       ticker,
       logoUrl,
       domain,
+      companyName,
+      source,
       cachedAt: new Date().toISOString()
     }
 
@@ -59,11 +70,12 @@ export async function POST(request: NextRequest) {
     }
 
     const results: Record<string, string | null> = {}
+    const token = process.env.NEXT_PUBLIC_LOGO_DEV_TOKEN
 
     for (let i = 0; i < tickers.length; i++) {
       const ticker = tickers[i]
       const upperTicker = ticker.toUpperCase()
-      const domain = domains?.[i]
+      const providedDomain = domains?.[i]
 
       // Check file-based cache first
       const fileCached = await readCachedLogo(upperTicker)
@@ -72,11 +84,51 @@ export async function POST(request: NextRequest) {
         continue
       }
 
-      // Generate logo URL using existing logic
-      const logoUrl = getTickerLogoUrl(upperTicker, domain)
+      let logoUrl: string | null = null
+      let usedDomain: string | undefined
+      let companyName: string | undefined
+      let source: LogoCache['source'] | undefined
+
+      // Try existing logic first (checks overrides, provided domain, ETF/mutual fund domains)
+      logoUrl = getTickerLogoUrl(upperTicker, providedDomain)
+
+      if (logoUrl) {
+        // We got a logo from overrides or provided domain
+        source = providedDomain ? 'providedDomain' : 'override'
+        usedDomain = providedDomain
+      } else if (token) {
+        // No logo yet - try company profile data
+        const profile = await getCompanyProfile(upperTicker)
+
+        if (profile) {
+          companyName = profile.name
+
+          // Strategy 1: Try officialSite from Alpha Vantage
+          if (profile.officialSite) {
+            const officialDomain = extractDomainFromUrl(profile.officialSite)
+            if (officialDomain) {
+              logoUrl = `https://img.logo.dev/${officialDomain}?token=${token}&retina=true&fallback=monogram&format=webp&size=400`
+              usedDomain = officialDomain
+              source = 'officialSite'
+            }
+          }
+
+          // Strategy 2: Try extracting domain from company name
+          if (!logoUrl && profile.name) {
+            const potentialDomains = extractDomainsFromCompanyName(profile.name)
+            if (potentialDomains.length > 0) {
+              // Try the first potential domain (most likely to work)
+              const firstDomain = potentialDomains[0]
+              logoUrl = `https://img.logo.dev/${firstDomain}?token=${token}&retina=true&fallback=monogram&format=webp&size=400`
+              usedDomain = firstDomain
+              source = 'companyName'
+            }
+          }
+        }
+      }
 
       // Cache the result (even if null)
-      await writeCachedLogo(upperTicker, logoUrl, domain)
+      await writeCachedLogo(upperTicker, logoUrl, usedDomain, companyName, source)
 
       results[upperTicker] = logoUrl
     }

@@ -1,5 +1,8 @@
 {
   "ticker": "DPZ",
-  "logoUrl": null,
-  "cachedAt": "2025-10-20T06:04:02.656Z"
+  "logoUrl": "https://img.logo.dev/ir.dominos.com?token=pk_ARDallYvRuqePZO2jZF9Cw&retina=true&fallback=monogram&format=webp&size=400",
+  "domain": "ir.dominos.com",
+  "companyName": "Domino's Pizza Inc Common Stock",
+  "source": "officialSite",
+  "cachedAt": "2025-10-20T06:46:27.875Z"
 }

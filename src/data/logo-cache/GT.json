@@ -1,5 +1,8 @@
 {
   "ticker": "GT",
-  "logoUrl": null,
-  "cachedAt": "2025-10-20T06:04:02.739Z"
+  "logoUrl": "https://img.logo.dev/goodyear.com?token=pk_ARDallYvRuqePZO2jZF9Cw&retina=true&fallback=monogram&format=webp&size=400",
+  "domain": "goodyear.com",
+  "companyName": "Goodyear Tire & Rubber Co",
+  "source": "officialSite",
+  "cachedAt": "2025-10-20T06:46:28.088Z"
 }

@@ -1,5 +1,8 @@
 {
   "ticker": "VEEV",
-  "logoUrl": null,
-  "cachedAt": "2025-10-20T06:04:02.619Z"
+  "logoUrl": "https://img.logo.dev/veeva.com?token=pk_ARDallYvRuqePZO2jZF9Cw&retina=true&fallback=monogram&format=webp&size=400",
+  "domain": "veeva.com",
+  "companyName": "Veeva Systems Inc Class A",
+  "source": "officialSite",
+  "cachedAt": "2025-10-20T06:46:27.793Z"
 }

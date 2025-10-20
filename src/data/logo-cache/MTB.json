@@ -1,5 +1,8 @@
 {
   "ticker": "MTB",
-  "logoUrl": null,
-  "cachedAt": "2025-10-20T06:04:02.632Z"
+  "logoUrl": "https://img.logo.dev/mtb.com?token=pk_ARDallYvRuqePZO2jZF9Cw&retina=true&fallback=monogram&format=webp&size=400",
+  "domain": "mtb.com",
+  "companyName": "M&T Bank Corporation",
+  "source": "officialSite",
+  "cachedAt": "2025-10-20T06:46:27.822Z"
 }

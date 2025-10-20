@@ -1,5 +1,8 @@
 {
   "ticker": "ELEV",
-  "logoUrl": null,
-  "cachedAt": "2025-10-20T06:03:51.790Z"
+  "logoUrl": "https://img.logo.dev/elev.com?token=pk_ARDallYvRuqePZO2jZF9Cw&retina=true&fallback=monogram&format=webp&size=400",
+  "domain": "elev.com",
+  "companyName": "ELEV Company",
+  "source": "companyName",
+  "cachedAt": "2025-10-20T06:46:28.517Z"
 }

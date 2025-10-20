@@ -1,5 +1,8 @@
 {
   "ticker": "XPEL",
-  "logoUrl": null,
-  "cachedAt": "2025-10-20T06:03:51.574Z"
+  "logoUrl": "https://img.logo.dev/xpel.com?token=pk_ARDallYvRuqePZO2jZF9Cw&retina=true&fallback=monogram&format=webp&size=400",
+  "domain": "xpel.com",
+  "companyName": "Xpel Inc",
+  "source": "officialSite",
+  "cachedAt": "2025-10-20T06:46:28.256Z"
 }

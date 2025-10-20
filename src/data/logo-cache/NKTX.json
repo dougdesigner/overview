@@ -1,5 +1,8 @@
 {
   "ticker": "NKTX",
-  "logoUrl": null,
-  "cachedAt": "2025-10-20T06:03:51.754Z"
+  "logoUrl": "https://img.logo.dev/nkartatx.com?token=pk_ARDallYvRuqePZO2jZF9Cw&retina=true&fallback=monogram&format=webp&size=400",
+  "domain": "nkartatx.com",
+  "companyName": "Nkarta Inc",
+  "source": "officialSite",
+  "cachedAt": "2025-10-20T06:46:28.476Z"
 }

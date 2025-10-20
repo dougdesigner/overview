@@ -1,5 +1,8 @@
 {
   "ticker": "SDOT",
-  "logoUrl": null,
-  "cachedAt": "2025-10-20T06:03:51.611Z"
+  "logoUrl": "https://img.logo.dev/sadotgroupinc.com?token=pk_ARDallYvRuqePZO2jZF9Cw&retina=true&fallback=monogram&format=webp&size=400",
+  "domain": "sadotgroupinc.com",
+  "companyName": "Sadot Group Inc.",
+  "source": "officialSite",
+  "cachedAt": "2025-10-20T06:46:28.302Z"
 }

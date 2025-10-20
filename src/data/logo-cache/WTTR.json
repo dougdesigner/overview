@@ -1,5 +1,8 @@
 {
   "ticker": "WTTR",
-  "logoUrl": null,
-  "cachedAt": "2025-10-20T06:03:51.606Z"
+  "logoUrl": "https://img.logo.dev/selectwater.com?token=pk_ARDallYvRuqePZO2jZF9Cw&retina=true&fallback=monogram&format=webp&size=400",
+  "domain": "selectwater.com",
+  "companyName": "Select Energy Services Inc",
+  "source": "officialSite",
+  "cachedAt": "2025-10-20T06:46:28.295Z"
 }

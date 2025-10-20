@@ -1,5 +1,8 @@
 {
   "ticker": "RIVN",
-  "logoUrl": null,
-  "cachedAt": "2025-10-20T06:04:02.634Z"
+  "logoUrl": "https://img.logo.dev/rivian.com?token=pk_ARDallYvRuqePZO2jZF9Cw&retina=true&fallback=monogram&format=webp&size=400",
+  "domain": "rivian.com",
+  "companyName": "Rivian Automotive Inc",
+  "source": "officialSite",
+  "cachedAt": "2025-10-20T06:46:27.826Z"
 }

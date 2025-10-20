@@ -1,5 +1,8 @@
 {
   "ticker": "WNEB",
-  "logoUrl": null,
-  "cachedAt": "2025-10-20T06:03:51.575Z"
+  "logoUrl": "https://img.logo.dev/westfieldbank.com?token=pk_ARDallYvRuqePZO2jZF9Cw&retina=true&fallback=monogram&format=webp&size=400",
+  "domain": "westfieldbank.com",
+  "companyName": "Western New England Bancorp Inc",
+  "source": "officialSite",
+  "cachedAt": "2025-10-20T06:46:28.257Z"
 }

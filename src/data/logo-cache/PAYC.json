@@ -1,5 +1,8 @@
 {
   "ticker": "PAYC",
-  "logoUrl": null,
-  "cachedAt": "2025-10-20T06:04:02.680Z"
+  "logoUrl": "https://img.logo.dev/paycom.com?token=pk_ARDallYvRuqePZO2jZF9Cw&retina=true&fallback=monogram&format=webp&size=400",
+  "domain": "paycom.com",
+  "companyName": "Paycom Soft",
+  "source": "officialSite",
+  "cachedAt": "2025-10-20T06:46:27.924Z"
 }

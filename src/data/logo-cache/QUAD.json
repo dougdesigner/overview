@@ -1,5 +1,8 @@
 {
   "ticker": "QUAD",
-  "logoUrl": null,
-  "cachedAt": "2025-10-20T06:03:51.528Z"
+  "logoUrl": "https://img.logo.dev/quad.com?token=pk_ARDallYvRuqePZO2jZF9Cw&retina=true&fallback=monogram&format=webp&size=400",
+  "domain": "quad.com",
+  "companyName": "Quad Graphics Inc",
+  "source": "officialSite",
+  "cachedAt": "2025-10-20T06:46:28.195Z"
 }

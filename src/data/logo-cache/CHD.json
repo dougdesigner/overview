@@ -1,5 +1,8 @@
 {
   "ticker": "CHD",
-  "logoUrl": null,
-  "cachedAt": "2025-10-20T06:04:02.630Z"
+  "logoUrl": "https://img.logo.dev/churchdwight.com?token=pk_ARDallYvRuqePZO2jZF9Cw&retina=true&fallback=monogram&format=webp&size=400",
+  "domain": "churchdwight.com",
+  "companyName": "Church & Dwight Company Inc",
+  "source": "officialSite",
+  "cachedAt": "2025-10-20T06:46:27.818Z"
 }

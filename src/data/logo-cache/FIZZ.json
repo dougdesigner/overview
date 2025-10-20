@@ -1,5 +1,8 @@
 {
   "ticker": "FIZZ",
-  "logoUrl": null,
-  "cachedAt": "2025-10-20T06:03:51.765Z"
+  "logoUrl": "https://img.logo.dev/nationalbeverage.com?token=pk_ARDallYvRuqePZO2jZF9Cw&retina=true&fallback=monogram&format=webp&size=400",
+  "domain": "nationalbeverage.com",
+  "companyName": "National Beverage Corp",
+  "source": "officialSite",
+  "cachedAt": "2025-10-20T06:46:28.489Z"
 }

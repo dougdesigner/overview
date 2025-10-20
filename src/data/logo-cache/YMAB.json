@@ -1,5 +1,8 @@
 {
   "ticker": "YMAB",
-  "logoUrl": null,
-  "cachedAt": "2025-10-20T06:03:51.574Z"
+  "logoUrl": "https://img.logo.dev/ymabs.com?token=pk_ARDallYvRuqePZO2jZF9Cw&retina=true&fallback=monogram&format=webp&size=400",
+  "domain": "ymabs.com",
+  "companyName": "Y mAbs Therapeutics",
+  "source": "officialSite",
+  "cachedAt": "2025-10-20T06:46:28.254Z"
 }

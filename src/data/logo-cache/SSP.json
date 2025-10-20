@@ -1,5 +1,8 @@
 {
   "ticker": "SSP",
-  "logoUrl": null,
-  "cachedAt": "2025-10-20T06:03:51.564Z"
+  "logoUrl": "https://img.logo.dev/scripps.com?token=pk_ARDallYvRuqePZO2jZF9Cw&retina=true&fallback=monogram&format=webp&size=400",
+  "domain": "scripps.com",
+  "companyName": "E. W. Scripps Co Class A",
+  "source": "officialSite",
+  "cachedAt": "2025-10-20T06:46:28.240Z"
 }
