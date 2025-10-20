@@ -1,15 +1,23 @@
 "use client"
 
+import { Button } from "@/components/Button"
 import { Card } from "@/components/Card"
 import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/Select"
-import { getTickerLogoUrl } from "@/lib/logoUtils"
+  DropdownMenu,
+  DropdownMenuCheckboxItem,
+  DropdownMenuContent,
+  DropdownMenuLabel,
+  DropdownMenuRadioGroup,
+  DropdownMenuRadioItem,
+  DropdownMenuSeparator,
+  DropdownMenuSubMenu,
+  DropdownMenuSubMenuContent,
+  DropdownMenuSubMenuTrigger,
+  DropdownMenuTrigger,
+} from "@/components/DropdownMenu"
+import { getCachedLogoUrls } from "@/lib/logoUtils"
 import { toProperCase } from "@/lib/utils"
+import { RiExpandUpDownLine, RiSettings3Line } from "@remixicon/react"
 import Highcharts from "highcharts"
 import HighchartsReact from "highcharts-react-official"
 import HighchartsTreemap from "highcharts/modules/treemap"
@@ -17,7 +25,8 @@ import HighchartsExporting from "highcharts/modules/exporting"
 import HighchartsExportData from "highcharts/modules/export-data"
 import { useTheme } from "next-themes"
 import { useEffect, useRef, useState } from "react"
-import { StockExposure } from "./types"
+import { AccountSelector } from "@/components/ui/AccountSelector"
+import { StockExposure, Account } from "./types"
 
 // Track if modules are initialized globally to prevent duplicate initialization
 let treemapLogoModulesInitialized = false
@@ -28,16 +37,23 @@ type HighchartsModule = (H: typeof Highcharts) => void
 interface ExposureTreemapHighchartsProps {
   exposures: StockExposure[]
   totalValue: number
-  percentageMode?: "total" | "stocks"
+  accounts: Account[]
+  selectedAccount: string
+  onAccountChange: (accountId: string) => void
 }
 
 type GroupingMode = "none" | "sector" | "industry"
+type SizingMode = "proportional" | "monosize"
+type TitleMode = "symbol" | "name" | "none"
+type DisplayValue = "market-value" | "pct-stocks" | "pct-portfolio"
 
 // Extended data point type to include custom properties
 interface ExtendedTreemapPoint extends Highcharts.PointOptionsObject {
   logoUrl?: string | null
   percentage?: number
   ticker?: string
+  companyName?: string
+  actualValue?: number
 }
 
 // Type for point with graphic element
@@ -52,10 +68,17 @@ interface PointWithGraphic {
 export function ExposureTreemapHighchartsWithLogos({
   exposures,
   totalValue,
-  percentageMode = "total",
+  accounts,
+  selectedAccount,
+  onAccountChange,
 }: ExposureTreemapHighchartsProps) {
   const [groupingMode, setGroupingMode] = useState<GroupingMode>("sector")
+  const [sizingMode] = useState<SizingMode>("proportional")
+  const [showLogo, setShowLogo] = useState(true)
+  const [titleMode, setTitleMode] = useState<TitleMode>("symbol")
+  const [displayValue, setDisplayValue] = useState<DisplayValue>("pct-portfolio")
   const [modulesLoaded, setModulesLoaded] = useState(false)
+  const [logoUrls, setLogoUrls] = useState<Record<string, string | null>>({})
   const { theme } = useTheme()
   const isDark = theme === "dark"
   const chartRef = useRef<HighchartsReact.RefObject>(null)
@@ -67,7 +90,8 @@ export function ExposureTreemapHighchartsWithLogos({
         // Cast modules to callable functions
         const treemapInit = HighchartsTreemap as unknown as HighchartsModule
         const exportingInit = HighchartsExporting as unknown as HighchartsModule
-        const exportDataInit = HighchartsExportData as unknown as HighchartsModule
+        const exportDataInit =
+          HighchartsExportData as unknown as HighchartsModule
 
         if (typeof treemapInit === "function") {
           treemapInit(Highcharts)
@@ -86,6 +110,26 @@ export function ExposureTreemapHighchartsWithLogos({
     }
     setModulesLoaded(true)
   }, [])
+
+  // Batch fetch logo URLs when exposures change
+  useEffect(() => {
+    const fetchLogos = async () => {
+      const validExposures = exposures.filter(
+        (exp) => !exp.isETFBreakdown && exp.totalValue > 0,
+      )
+
+      if (validExposures.length === 0) return
+
+      // Extract unique tickers
+      const tickers = validExposures.map((exp) => exp.ticker)
+
+      // Batch fetch logos
+      const logos = await getCachedLogoUrls(tickers)
+      setLogoUrls(logos)
+    }
+
+    fetchLogos()
+  }, [exposures])
 
   // Simple color palette
   const colors = [
@@ -193,6 +237,159 @@ export function ExposureTreemapHighchartsWithLogos({
     }
   }
 
+  // Calculate stocks-only total value (for pct-stocks display mode)
+  const stocksOnlyValue = exposures
+    .filter((exp) => !exp.isETFBreakdown && exp.totalValue > 0)
+    .reduce((sum, exp) => sum + exp.totalValue, 0)
+
+  // Helper function to get the display value text based on display settings
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const getDisplayValueText = (point: any): string => {
+    const value = point.actualValue !== undefined
+      ? point.actualValue
+      : (typeof point.value === "number" ? point.value : 0)
+
+    if (displayValue === "market-value") {
+      return formatValue(value)
+    } else if (displayValue === "pct-stocks") {
+      const percentage = stocksOnlyValue > 0 ? (value / stocksOnlyValue) * 100 : 0
+      return `${percentage.toFixed(1)}%`
+    } else {
+      // "pct-portfolio"
+      const percentage = (value / totalValue) * 100
+      return `${percentage.toFixed(1)}%`
+    }
+  }
+
+  // Helper function to render cell content based on display settings
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const renderCellContent = (point: any, strategy: "full" | "logo-ticker" | "logo-only"): string => {
+    const ticker = point.ticker || point.name
+    const companyName = point.companyName || ticker
+    const displayText = titleMode === "name" ? companyName : ticker
+    const logoUrl = point.logoUrl
+    const logoSize = calculateLogoSize(point)
+    const { tickerSize, weightSize } = calculateTextSizes(point)
+    const displayValueText = getDisplayValueText(point)
+
+    // Strategy: logo-only
+    if (strategy === "logo-only") {
+      if (showLogo && logoUrl) {
+        return `<div style="text-align: center; display: flex; align-items: center; justify-content: center; height: 100%; overflow: hidden;">
+          <div style="width: ${logoSize}px; height: ${logoSize}px; border-radius: 50%; background: #f1f3fa; overflow: hidden; display: flex; align-items: center; justify-content: center;">
+            <img src="${logoUrl}"
+                 alt="${ticker}"
+                 style="width: 100%; height: 100%; object-fit: contain;"
+                 onerror="this.style.display='none'"
+            />
+          </div>
+        </div>`
+      } else {
+        return ""
+      }
+    }
+
+    // Strategy: logo-ticker
+    if (strategy === "logo-ticker") {
+      const hasLogo = showLogo && logoUrl
+      const hasTitle = titleMode === "symbol" || titleMode === "name"
+
+      if (hasLogo && hasTitle) {
+        // Logo + ticker/name
+        return `<div style="text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; overflow: hidden;">
+          <div style="width: ${logoSize}px; height: ${logoSize}px; border-radius: 50%; background: #f1f3fa; overflow: hidden; display: flex; align-items: center; justify-content: center; margin-bottom: 2px;">
+            <img src="${logoUrl}"
+                 alt="${ticker}"
+                 style="width: 100%; height: 100%; object-fit: contain;"
+                 onerror="this.style.display='none'"
+            />
+          </div>
+          <span style="color: ${isDark ? "#f3f4f6" : "#f3f4f6"}; font-size: ${tickerSize}px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+            ${displayText}
+          </span>
+        </div>`
+      } else if (hasLogo) {
+        // Logo only
+        return `<div style="text-align: center; display: flex; align-items: center; justify-content: center; height: 100%; overflow: hidden;">
+          <div style="width: ${logoSize}px; height: ${logoSize}px; border-radius: 50%; background: #f1f3fa; overflow: hidden; display: flex; align-items: center; justify-content: center;">
+            <img src="${logoUrl}"
+                 alt="${ticker}"
+                 style="width: 100%; height: 100%; object-fit: contain;"
+                 onerror="this.style.display='none'"
+            />
+          </div>
+        </div>`
+      } else if (hasTitle) {
+        // Ticker/name only
+        return `<div style="text-align: center; overflow: hidden; height: 100%; display: flex; align-items: center; justify-content: center;">
+          <span style="color: ${isDark ? "#f3f4f6" : "#f3f4f6"}; font-size: ${tickerSize}px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+            ${displayText}
+          </span>
+        </div>`
+      } else {
+        return ""
+      }
+    }
+
+    // Strategy: full
+    if (strategy === "full") {
+      const hasLogo = showLogo && logoUrl
+      const hasTitle = titleMode === "symbol" || titleMode === "name"
+
+      if (hasLogo && hasTitle) {
+        // Logo + ticker/name + value
+        return `<div style="text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; overflow: hidden;">
+          <div style="width: ${logoSize}px; height: ${logoSize}px; border-radius: 50%; background: #f1f3fa; overflow: hidden; display: flex; align-items: center; justify-content: center; margin-bottom: 2px;">
+            <img src="${logoUrl}"
+                 alt="${ticker}"
+                 style="width: 100%; height: 100%; object-fit: contain;"
+                 onerror="this.style.display='none'"
+            />
+          </div>
+          <span style="color: ${isDark ? "#f3f4f6" : "#f3f4f6"}; font-size: ${tickerSize}px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+            ${displayText}
+          </span>
+          <span style="color: ${isDark ? "#f3f4f6" : "#f3f4f6"}; font-size: ${weightSize}px; font-weight: 500; white-space: nowrap; margin-top: 1px;">
+            ${displayValueText}
+          </span>
+        </div>`
+      } else if (hasLogo) {
+        // Logo + value only
+        return `<div style="text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; overflow: hidden;">
+          <div style="width: ${logoSize}px; height: ${logoSize}px; border-radius: 50%; background: #f1f3fa; overflow: hidden; display: flex; align-items: center; justify-content: center; margin-bottom: 2px;">
+            <img src="${logoUrl}"
+                 alt="${ticker}"
+                 style="width: 100%; height: 100%; object-fit: contain;"
+                 onerror="this.style.display='none'"
+            />
+          </div>
+          <span style="color: ${isDark ? "#f3f4f6" : "#f3f4f6"}; font-size: ${weightSize}px; font-weight: 500; white-space: nowrap;">
+            ${displayValueText}
+          </span>
+        </div>`
+      } else if (hasTitle) {
+        // Ticker/name + value only
+        return `<div style="text-align: center; overflow: hidden; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+          <span style="color: ${isDark ? "#f3f4f6" : "#f3f4f6"}; font-size: ${tickerSize}px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+            ${displayText}
+          </span>
+          <span style="color: ${isDark ? "#f3f4f6" : "#f3f4f6"}; font-size: ${weightSize}px; font-weight: 500; white-space: nowrap; margin-top: 1px;">
+            ${displayValueText}
+          </span>
+        </div>`
+      } else {
+        // Value only
+        return `<div style="text-align: center; overflow: hidden; height: 100%; display: flex; align-items: center; justify-content: center;">
+          <span style="color: ${isDark ? "#f3f4f6" : "#f3f4f6"}; font-size: ${weightSize}px; font-weight: 500;">
+            ${displayValueText}
+          </span>
+        </div>`
+      }
+    }
+
+    return ""
+  }
+
   // Transform data for treemap
   const getTreemapData = (): ExtendedTreemapPoint[] => {
     const validExposures = exposures.filter(
@@ -204,20 +401,24 @@ export function ExposureTreemapHighchartsWithLogos({
     // Handle "none" mode - flat structure without grouping
     if (groupingMode === "none") {
       // Sort by value descending to show largest holdings first
-      const sortedExposures = [...validExposures].sort((a, b) => b.totalValue - a.totalValue)
+      const sortedExposures = [...validExposures].sort(
+        (a, b) => b.totalValue - a.totalValue,
+      )
 
       sortedExposures.forEach((stock) => {
         const percentage = (stock.totalValue / totalValue) * 100
-        const logoUrl = getTickerLogoUrl(stock.ticker)
+        const logoUrl = logoUrls[stock.ticker.toUpperCase()] ?? null
 
         data.push({
           id: stock.ticker,
           name: stock.ticker,
-          value: stock.totalValue,
+          value: sizingMode === "monosize" ? 1 : stock.totalValue,
+          actualValue: stock.totalValue,
           color: colors[0], // Use first color (blue) for all stocks in no-group mode
           logoUrl: logoUrl,
           percentage: percentage,
           ticker: stock.ticker,
+          companyName: stock.name,
         } as ExtendedTreemapPoint)
       })
 
@@ -255,15 +456,17 @@ export function ExposureTreemapHighchartsWithLogos({
       // Child nodes (stocks) with logo URLs
       stocks.forEach((stock) => {
         const percentage = (stock.totalValue / totalValue) * 100
-        const logoUrl = getTickerLogoUrl(stock.ticker)
+        const logoUrl = logoUrls[stock.ticker.toUpperCase()] ?? null
 
         data.push({
           name: stock.ticker,
           parent: groupName,
-          value: stock.totalValue,
+          value: sizingMode === "monosize" ? 1 : stock.totalValue,
+          actualValue: stock.totalValue,
           logoUrl: logoUrl,
           percentage: percentage,
           ticker: stock.ticker,
+          companyName: stock.name,
         } as ExtendedTreemapPoint)
       })
     })
@@ -308,7 +511,7 @@ export function ExposureTreemapHighchartsWithLogos({
         type: "treemap",
         name: "All",
         allowTraversingTree: groupingMode !== "none", // Disable tree traversing for flat structure
-        layoutAlgorithm: "squarified",
+        layoutAlgorithm: "strip",
         alternateStartingDirection: true,
         data: getTreemapData(),
         borderRadius: 3,
@@ -355,115 +558,34 @@ export function ExposureTreemapHighchartsWithLogos({
             layoutAlgorithm: "squarified",
             dataLabels: {
               enabled: true,
-              ...(groupingMode === "none" ? {
-                // For "none" mode, use the same formatter as level 2 to show logos
-                useHTML: true,
-                inside: true,
-                verticalAlign: "middle",
-                align: "center",
-                formatter: function () {
-                  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                  const point = (this as any).point as any
-                  const ticker = point.ticker || point.name
-                  const logoUrl = point.logoUrl
-                  const contentStrategy = getContentStrategy(point)
+              ...(groupingMode === "none"
+                ? {
+                    // For "none" mode, use the same formatter as level 2 to show logos
+                    useHTML: true,
+                    inside: true,
+                    verticalAlign: "middle",
+                    align: "center",
+                    formatter: function () {
+                      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                      const point = (this as any).point as any
+                      const contentStrategy = getContentStrategy(point)
 
-                  // Return empty for very small cells
-                  if (contentStrategy === "none") {
-                    return ""
+                      // Return empty for very small cells
+                      if (contentStrategy === "none") {
+                        return ""
+                      }
+
+                      return renderCellContent(point, contentStrategy)
+                    },
                   }
-
-                  // Logo only for small cells
-                  if (contentStrategy === "logo-only") {
-                    const logoSize = calculateLogoSize(point)
-                    if (logoUrl) {
-                      return `<div style="text-align: center; display: flex; align-items: center; justify-content: center; height: 100%; overflow: hidden;">
-                        <div style="width: ${logoSize}px; height: ${logoSize}px; border-radius: 50%; background: #f1f3fa; overflow: hidden; display: flex; align-items: center; justify-content: center;">
-                          <img src="${logoUrl}"
-                               alt="${ticker}"
-                               style="width: 100%; height: 100%; object-fit: contain;"
-                               onerror="this.style.display='none'"
-                          />
-                        </div>
-                      </div>`
-                    } else {
-                      // Fallback to empty if no logo available
-                      return ""
-                    }
-                  }
-
-                  // Logo + ticker for medium-large cells
-                  if (contentStrategy === "logo-ticker") {
-                    const logoSize = calculateLogoSize(point)
-                    const { tickerSize } = calculateTextSizes(point)
-                    if (logoUrl) {
-                      return `<div style="text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; overflow: hidden;">
-                      <div style="width: ${logoSize}px; height: ${logoSize}px; border-radius: 50%; background: #f1f3fa; overflow: hidden; display: flex; align-items: center; justify-content: center; margin-bottom: 2px;">
-                        <img src="${logoUrl}"
-                             alt="${ticker}"
-                             style="width: 100%; height: 100%; object-fit: contain;"
-                             onerror="this.style.display='none'"
-                        />
-                      </div>
-                      <span style="color: ${isDark ? "#f3f4f6" : "#f3f4f6"}; font-size: ${tickerSize}px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
-                        ${ticker}
-                      </span>
-                    </div>`
-                    } else {
-                      // Fallback to text only if no logo available
-                      return `<div style="text-align: center; overflow: hidden; height: 100%; display: flex; align-items: center; justify-content: center;">
-                        <span style="color: ${isDark ? "#f3f4f6" : "#f3f4f6"}; font-size: ${tickerSize}px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
-                          ${ticker}
-                        </span>
-                      </div>`
-                    }
-                  }
-
-                  // Full content (logo + ticker + weight) for largest cells
-                  if (contentStrategy === "full") {
-                    const logoSize = calculateLogoSize(point)
-                    const { tickerSize, weightSize } = calculateTextSizes(point)
-                    const percentage = point.percentage?.toFixed(1) || "0.0"
-                    if (logoUrl) {
-                      return `<div style="text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; overflow: hidden;">
-                      <div style="width: ${logoSize}px; height: ${logoSize}px; border-radius: 50%; background: #f1f3fa; overflow: hidden; display: flex; align-items: center; justify-content: center; margin-bottom: 2px;">
-                        <img src="${logoUrl}"
-                             alt="${ticker}"
-                             style="width: 100%; height: 100%; object-fit: contain;"
-                             onerror="this.style.display='none'"
-                        />
-                      </div>
-                      <span style="color: ${isDark ? "#f3f4f6" : "#f3f4f6"}; font-size: ${tickerSize}px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
-                        ${ticker}
-                      </span>
-                      <span style="color: ${isDark ? "#f3f4f6" : "#f3f4f6"}; font-size: ${weightSize}px; font-weight: 500; white-space: nowrap; margin-top: 1px;">
-                        ${percentage}%
-                      </span>
-                    </div>`
-                    } else {
-                      // Fallback to text only if no logo available for full display
-                      return `<div style="text-align: center; overflow: hidden; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center;">
-                        <span style="color: ${isDark ? "#f3f4f6" : "#f3f4f6"}; font-size: ${tickerSize}px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
-                          ${ticker}
-                        </span>
-                        <span style="color: ${isDark ? "#f3f4f6" : "#f3f4f6"}; font-size: ${weightSize}px; font-weight: 500; white-space: nowrap; margin-top: 1px;">
-                          ${percentage}%
-                        </span>
-                      </div>`
-                    }
-                  }
-
-                  // Should not reach here, but return empty as fallback
-                  return ""
-                },
-              } : {
-                // For grouped modes, use simple headers
-                headers: true,
-                style: {
-                  textOutline: "none",
-                  color: isDark ? "#f3f4f6" : "#111827",
-                },
-              }),
+                : {
+                    // For grouped modes, use simple headers
+                    headers: true,
+                    style: {
+                      textOutline: "none",
+                      color: isDark ? "#f3f4f6" : "#111827",
+                    },
+                  }),
             },
             borderWidth: 3,
             borderRadius: 3,
@@ -480,8 +602,6 @@ export function ExposureTreemapHighchartsWithLogos({
               formatter: function () {
                 // eslint-disable-next-line @typescript-eslint/no-explicit-any
                 const point = (this as any).point as any
-                const ticker = point.ticker || point.name
-                const logoUrl = point.logoUrl
                 const contentStrategy = getContentStrategy(point)
 
                 // Return empty for very small cells
@@ -489,88 +609,7 @@ export function ExposureTreemapHighchartsWithLogos({
                   return ""
                 }
 
-                // Logo only for small cells
-                if (contentStrategy === "logo-only") {
-                  const logoSize = calculateLogoSize(point)
-                  if (logoUrl) {
-                    return `<div style="text-align: center; display: flex; align-items: center; justify-content: center; height: 100%; overflow: hidden;">
-                      <div style="width: ${logoSize}px; height: ${logoSize}px; border-radius: 50%; background: #f1f3fa; overflow: hidden; display: flex; align-items: center; justify-content: center;">
-                        <img src="${logoUrl}"
-                             alt="${ticker}"
-                             style="width: 100%; height: 100%; object-fit: contain;"
-                             onerror="this.style.display='none'"
-                        />
-                      </div>
-                    </div>`
-                  } else {
-                    // Fallback to empty if no logo available
-                    return ""
-                  }
-                }
-
-                // Logo + ticker for medium-large cells
-                if (contentStrategy === "logo-ticker") {
-                  const logoSize = calculateLogoSize(point)
-                  const { tickerSize } = calculateTextSizes(point)
-                  if (logoUrl) {
-                    return `<div style="text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; overflow: hidden;">
-                    <div style="width: ${logoSize}px; height: ${logoSize}px; border-radius: 50%; background: #f1f3fa; overflow: hidden; display: flex; align-items: center; justify-content: center; margin-bottom: 2px;">
-                      <img src="${logoUrl}"
-                           alt="${ticker}"
-                           style="width: 100%; height: 100%; object-fit: contain;"
-                           onerror="this.style.display='none'"
-                      />
-                    </div>
-                    <span style="color: ${isDark ? "#f3f4f6" : "#f3f4f6"}; font-size: ${tickerSize}px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
-                      ${ticker}
-                    </span>
-                  </div>`
-                  } else {
-                    // Fallback to text only if no logo available
-                    return `<div style="text-align: center; overflow: hidden; height: 100%; display: flex; align-items: center; justify-content: center;">
-                      <span style="color: ${isDark ? "#f3f4f6" : "#f3f4f6"}; font-size: ${tickerSize}px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
-                        ${ticker}
-                      </span>
-                    </div>`
-                  }
-                }
-
-                // Full content (logo + ticker + weight) for largest cells
-                if (contentStrategy === "full") {
-                  const logoSize = calculateLogoSize(point)
-                  const { tickerSize, weightSize } = calculateTextSizes(point)
-                  const percentage = point.percentage?.toFixed(1) || "0.0"
-                  if (logoUrl) {
-                    return `<div style="text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; overflow: hidden;">
-                    <div style="width: ${logoSize}px; height: ${logoSize}px; border-radius: 50%; background: #f1f3fa; overflow: hidden; display: flex; align-items: center; justify-content: center; margin-bottom: 2px;">
-                      <img src="${logoUrl}"
-                           alt="${ticker}"
-                           style="width: 100%; height: 100%; object-fit: contain;"
-                           onerror="this.style.display='none'"
-                      />
-                    </div>
-                    <span style="color: ${isDark ? "#f3f4f6" : "#f3f4f6"}; font-size: ${tickerSize}px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
-                      ${ticker}
-                    </span>
-                    <span style="color: ${isDark ? "#f3f4f6" : "#f3f4f6"}; font-size: ${weightSize}px; font-weight: 500; white-space: nowrap; margin-top: 1px;">
-                      ${percentage}%
-                    </span>
-                  </div>`
-                  } else {
-                    // Fallback to text only if no logo available for full display
-                    return `<div style="text-align: center; overflow: hidden; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center;">
-                      <span style="color: ${isDark ? "#f3f4f6" : "#f3f4f6"}; font-size: ${tickerSize}px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
-                        ${ticker}
-                      </span>
-                      <span style="color: ${isDark ? "#f3f4f6" : "#f3f4f6"}; font-size: ${weightSize}px; font-weight: 500; white-space: nowrap; margin-top: 1px;">
-                        ${percentage}%
-                      </span>
-                    </div>`
-                  }
-                }
-
-                // Should not reach here, but return empty as fallback
-                return ""
+                return renderCellContent(point, contentStrategy)
               },
             },
             borderWidth: 3,
@@ -603,13 +642,16 @@ export function ExposureTreemapHighchartsWithLogos({
       pointFormatter: function () {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const point = this as any
-        const value = typeof point.value === "number" ? point.value : 0
-        const percentage = ((value / totalValue) * 100).toFixed(1)
+        // Use actualValue if available (for monosize mode), otherwise use value
+        const value = point.actualValue !== undefined ? point.actualValue : (typeof point.value === "number" ? point.value : 0)
+        const pctPortfolio = ((value / totalValue) * 100).toFixed(1)
+        const pctStocks = stocksOnlyValue > 0 ? ((value / stocksOnlyValue) * 100).toFixed(1) : "0.0"
         const ticker = point.ticker || point.name
         return `<div style="padding: 2px;">
                   <div style="font-weight: 600; margin-bottom: 4px;">${ticker}</div>
-                  <div>Value: <b>${formatValue(value)}</b></div>
-                  <div>Portfolio: <b>${percentage}%</b></div>
+                  <div>Market Value: <b>${formatValue(value)}</b></div>
+                  <div>% of Portfolio: <b>${pctPortfolio}%</b></div>
+                  <div>% of Stocks: <b>${pctStocks}%</b></div>
                 </div>`
       },
     },
@@ -622,13 +664,13 @@ export function ExposureTreemapHighchartsWithLogos({
     )
 
     if (groupingMode === "none") {
-      // For "none" mode, show top holdings
+      // For "none" mode, show top 10 holdings
       return validExposures
         .sort((a, b) => b.totalValue - a.totalValue)
-        .slice(0, 6)
+        .slice(0, 10)
         .map((exp) => [exp.ticker, exp.totalValue] as [string, number])
     } else {
-      // For grouped modes, show top sectors/industries
+      // For grouped modes, show top 6 sectors/industries
       return Object.entries(
         validExposures.reduce(
           (acc, exp) => {
@@ -661,19 +703,120 @@ export function ExposureTreemapHighchartsWithLogos({
     <Card className="pb-4 pt-6">
       <div className="flex items-center justify-between">
         <h3 className="text-base font-medium text-gray-900 dark:text-gray-50">
-          Exposure map {percentageMode === "stocks" && <span className="text-sm font-normal text-gray-600 dark:text-gray-400">(Stocks Only)</span>}
+          Exposure map
         </h3>
 
-        <Select value={groupingMode} onValueChange={(value) => setGroupingMode(value as GroupingMode)}>
-          <SelectTrigger className="w-[180px]">
-            <SelectValue />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="none">No group</SelectItem>
-            <SelectItem value="sector">Sector</SelectItem>
-            <SelectItem value="industry">Industry</SelectItem>
-          </SelectContent>
-        </Select>
+        <div className="flex items-center gap-2">
+          <AccountSelector
+            accounts={accounts}
+            value={selectedAccount}
+            onValueChange={onAccountChange}
+            showAllOption={true}
+            className="w-[200px]"
+          />
+
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="secondary" className="h-9 w-[180px] justify-between">
+                <span>
+                  {groupingMode === "none" ? "No group" :
+                   groupingMode === "sector" ? "Sector" : "Industry"}
+                </span>
+                <RiExpandUpDownLine className="size-4 text-gray-400 dark:text-gray-600" aria-hidden="true" />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="start" className="w-[180px]">
+              <DropdownMenuLabel>GROUP BY</DropdownMenuLabel>
+              <DropdownMenuSeparator />
+              <DropdownMenuRadioGroup
+                value={groupingMode}
+                onValueChange={(value) => setGroupingMode(value as GroupingMode)}
+              >
+                <DropdownMenuRadioItem value="none" iconType="check">
+                  No group
+                </DropdownMenuRadioItem>
+                <DropdownMenuRadioItem value="sector" iconType="check">
+                  Sector
+                </DropdownMenuRadioItem>
+                <DropdownMenuRadioItem value="industry" iconType="check">
+                  Industry
+                </DropdownMenuRadioItem>
+              </DropdownMenuRadioGroup>
+            </DropdownMenuContent>
+          </DropdownMenu>
+
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="secondary" className="h-9">
+                <RiSettings3Line className="size-4" aria-hidden="true" />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end" className="w-56">
+              <DropdownMenuLabel>DISPLAY SETTINGS</DropdownMenuLabel>
+              <DropdownMenuSeparator />
+
+              <DropdownMenuCheckboxItem
+                checked={showLogo}
+                onCheckedChange={setShowLogo}
+              >
+                Logo
+              </DropdownMenuCheckboxItem>
+
+              <DropdownMenuSubMenu>
+                <DropdownMenuSubMenuTrigger>
+                  <span>Title</span>
+                  <span className="ml-auto text-xs text-gray-500">
+                    {titleMode === "symbol" ? "Symbol" :
+                     titleMode === "name" ? "Name" : "None"}
+                  </span>
+                </DropdownMenuSubMenuTrigger>
+                <DropdownMenuSubMenuContent>
+                  <DropdownMenuRadioGroup
+                    value={titleMode}
+                    onValueChange={(value) => setTitleMode(value as TitleMode)}
+                  >
+                    <DropdownMenuRadioItem value="symbol" iconType="check">
+                      Symbol
+                    </DropdownMenuRadioItem>
+                    <DropdownMenuRadioItem value="name" iconType="check">
+                      Name
+                    </DropdownMenuRadioItem>
+                    <DropdownMenuRadioItem value="none" iconType="check">
+                      None
+                    </DropdownMenuRadioItem>
+                  </DropdownMenuRadioGroup>
+                </DropdownMenuSubMenuContent>
+              </DropdownMenuSubMenu>
+
+              <DropdownMenuSubMenu>
+                <DropdownMenuSubMenuTrigger>
+                  <span>Display value</span>
+                  <span className="ml-auto text-xs text-gray-500">
+                    {displayValue === "market-value" ? "Market value" :
+                     displayValue === "pct-stocks" ? "% stocks" :
+                     "% portfolio"}
+                  </span>
+                </DropdownMenuSubMenuTrigger>
+                <DropdownMenuSubMenuContent>
+                  <DropdownMenuRadioGroup
+                    value={displayValue}
+                    onValueChange={(value) => setDisplayValue(value as DisplayValue)}
+                  >
+                    <DropdownMenuRadioItem value="market-value" iconType="check">
+                      Market value
+                    </DropdownMenuRadioItem>
+                    <DropdownMenuRadioItem value="pct-stocks" iconType="check">
+                      % of stocks
+                    </DropdownMenuRadioItem>
+                    <DropdownMenuRadioItem value="pct-portfolio" iconType="check">
+                      % of portfolio
+                    </DropdownMenuRadioItem>
+                  </DropdownMenuRadioGroup>
+                </DropdownMenuSubMenuContent>
+              </DropdownMenuSubMenu>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        </div>
       </div>
 
       <div className="mt-4">
@@ -687,7 +830,11 @@ export function ExposureTreemapHighchartsWithLogos({
       {/* Legend */}
       <div className="mt-4">
         <p className="mb-1 text-sm font-medium text-gray-700 dark:text-gray-300">
-          {groupingMode === "none" ? "Top Holdings" : groupingMode === "sector" ? "Top Sectors" : "Top Industries"}
+          {groupingMode === "none"
+            ? "Top Holdings"
+            : groupingMode === "sector"
+              ? "Top Sectors"
+              : "Top Industries"}
         </p>
         <ul className="flex flex-wrap gap-x-10 gap-y-4 text-sm">
           {topGroups.map(([name, value], index) => (
@@ -698,7 +845,12 @@ export function ExposureTreemapHighchartsWithLogos({
               <div className="flex items-center gap-2">
                 <span
                   className="size-2.5 shrink-0 rounded-sm"
-                  style={{ backgroundColor: groupingMode === "none" ? colors[0] : colors[index % colors.length] }}
+                  style={{
+                    backgroundColor:
+                      groupingMode === "none"
+                        ? colors[0]
+                        : colors[index % colors.length],
+                  }}
                   aria-hidden="true"
                 />
                 <span className="text-sm">{name}</span>

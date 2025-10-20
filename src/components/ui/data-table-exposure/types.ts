@@ -52,8 +52,15 @@ export interface PortfolioHolding {
   type: "stock" | "fund" | "cash"
 }
 
+export interface Account {
+  id: string
+  name: string
+  institution: string
+}
+
 export interface ExposureTableProps {
   holdings: PortfolioHolding[]
+  accounts: Account[]
   onRefresh?: () => void
   lastUpdated?: Date
 }

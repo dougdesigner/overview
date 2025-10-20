@@ -36,6 +36,18 @@ const stockDomainOverrides: Record<string, string> = {
   DOCU: "docusign.com",
   PLTR: "palantir.com",
   APP: "applovin.com",
+  INTU: "intuit.com",
+  NOW: "service-now.com",
+  ACN: "accenture.com",
+  PANW: "paloaltonetworks.com",
+  CRWD: "crowdstrike.com",
+  AMAT: "appliedmaterials.com",
+  LRCX: "lamresearch.com",
+  MU: "micron.com",
+  KLAC: "kla.com",
+  ADI: "analog.com",
+  CDNS: "cadence.com",
+  MSTR: "microstrategy.com",
 
   // Financial
   JPM: "jpmorganchase.com",
@@ -52,6 +64,10 @@ const stockDomainOverrides: Record<string, string> = {
   SPGI: "spglobal.com",
   BX: "blackstone.com",
   COF: "capitalone.com",
+  RY: "royalbank.com",
+  PGR: "progressive.com",
+  ADP: "adp.com",
+  MMC: "marshmclennan.com",
 
   // Consumer
   WMT: "walmart.com",
@@ -70,6 +86,11 @@ const stockDomainOverrides: Record<string, string> = {
   CVX: "chevron.com",
   XOM: "exxonmobil.com",
   LIN: "linde.com",
+  BKNG: "booking.com",
+  PM: "pmi.com",
+  PMI: "pmi.com",
+  MDLZ: "mondelez-professional.de",
+  COP: "conocophillips.com",
 
   // Healthcare
   JNJ: "jnj.com",
@@ -84,6 +105,12 @@ const stockDomainOverrides: Record<string, string> = {
   DHR: "danaher.com",
   LLY: "lilly.com",
   BMY: "bms.com",
+  ISRG: "intuitive.com",
+  AMGN: "amgen.com",
+  GILD: "gilead.com",
+  VRTX: "vertexpharmaceuticals.com",
+  BSX: "bostonscientific.com",
+  SYK: "stryker.com",
 
   // Industrial
   BA: "boeing.com",
@@ -95,6 +122,10 @@ const stockDomainOverrides: Record<string, string> = {
   LMT: "lockheedmartin.com",
   RTX: "rtx.com",
   MMM: "3m.com",
+  CRH: "crh.com",
+  UNP: "up.com",
+  ETN: "eaton.com",
+  DE: "deere.com",
 
   // Telecom/Media
   T: "att.com",
@@ -102,12 +133,14 @@ const stockDomainOverrides: Record<string, string> = {
   CMCSA: "comcast.com",
   TMUS: "t-mobile.com",
 
+  // Utilities/Energy
+  NEE: "nexteraenergy.com",
+
   // Berkshire variants
-  // Note: BRK.B and BRK-B use custom text logo in components
   "BRK.A": "berkshirehathaway.com",
-  // "BRK.B": "berkshirehathaway.com",  // Using custom BH text logo
+  "BRK.B": "berkshirehathaway.com",
   "BRK-A": "berkshirehathaway.com",
-  // "BRK-B": "berkshirehathaway.com",  // Using custom BH text logo
+  "BRK-B": "berkshirehathaway.com",
 }
 
 // Export for use in other components
@@ -362,4 +395,49 @@ export function getTickerLogoUrl(
 
   // 5. Return null for unknown (will trigger API lookup or use fallback)
   return null
+}
+
+/**
+ * Batch fetch logo URLs with caching support (client-side only)
+ * @param tickers - Array of ticker symbols
+ * @param domains - Optional array of company domains (parallel to tickers)
+ * @returns Promise resolving to map of ticker -> logo URL
+ */
+export async function getCachedLogoUrls(
+  tickers: string[],
+  domains?: (string | undefined)[]
+): Promise<Record<string, string | null>> {
+  try {
+    const response = await fetch("/api/logo-url", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ tickers, domains }),
+    })
+
+    if (!response.ok) {
+      console.error("Failed to fetch logo URLs from cache")
+      // Fallback to direct URL generation
+      const fallbackResults: Record<string, string | null> = {}
+      tickers.forEach((ticker, index) => {
+        fallbackResults[ticker.toUpperCase()] = getTickerLogoUrl(
+          ticker,
+          domains?.[index]
+        )
+      })
+      return fallbackResults
+    }
+
+    return await response.json()
+  } catch (error) {
+    console.error("Error fetching cached logo URLs:", error)
+    // Fallback to direct URL generation
+    const fallbackResults: Record<string, string | null> = {}
+    tickers.forEach((ticker, index) => {
+      fallbackResults[ticker.toUpperCase()] = getTickerLogoUrl(
+        ticker,
+        domains?.[index]
+      )
+    })
+    return fallbackResults
+  }
 }

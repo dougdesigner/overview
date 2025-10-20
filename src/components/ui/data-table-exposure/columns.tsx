@@ -1,7 +1,7 @@
 "use client"
 
 import { Badge } from "@/components/Badge"
-import { getTickerLogoUrl, stockDomainOverrides } from "@/lib/logoUtils"
+import { stockDomainOverrides } from "@/lib/logoUtils"
 import { getTickerColor } from "@/lib/tickerColors"
 import { cx, toProperCase } from "@/lib/utils"
 import {
@@ -42,10 +42,12 @@ function TickerCell({
   ticker,
   isETFBreakdown,
   isDirectHolding,
+  logoUrls,
 }: {
   ticker: string
   isETFBreakdown?: boolean
   isDirectHolding?: boolean
+  logoUrls?: Record<string, string | null>
 }) {
   const [logoError, setLogoError] = useState(false)
   const [companyDomain, setCompanyDomain] = useState<string | undefined>(
@@ -61,8 +63,10 @@ function TickerCell({
   // ETF contribution breakdowns should be treated as ETFs
   const treatAsStock = !isETFBreakdown || isDirectHolding
 
-  // Try to get logo URL with domain if available (skip for Berkshire)
-  const logoUrl = isBerkshire ? null : getTickerLogoUrl(ticker, companyDomain)
+  // Try to get logo URL from cached logoUrls first (skip for Berkshire)
+  const logoUrl = isBerkshire
+    ? null
+    : logoUrls?.[ticker.toUpperCase()] ?? null
   const color =
     isETFBreakdown && !isDirectHolding
       ? "bg-gray-200 dark:bg-gray-700"
@@ -150,13 +154,13 @@ function TickerCell({
 interface ColumnsProps {
   toggleExpandAll: () => void
   areAllExpanded: () => boolean
-  percentageMode?: "total" | "stocks"
+  logoUrls?: Record<string, string | null>
 }
 
 export const createColumns = ({
   toggleExpandAll,
   areAllExpanded,
-  percentageMode = "total",
+  logoUrls,
 }: ColumnsProps): ColumnDef<StockExposure>[] => [
   {
     id: "expander",
@@ -236,6 +240,7 @@ export const createColumns = ({
           ticker={ticker}
           isETFBreakdown={isETFBreakdown}
           isDirectHolding={isDirectHolding}
+          logoUrls={logoUrls}
         />
       )
     },
@@ -402,7 +407,7 @@ export const createColumns = ({
           className="flex w-full items-center justify-end gap-1 font-medium hover:text-gray-900 dark:hover:text-gray-50"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
-          {percentageMode === "stocks" ? "% of Stocks" : "Allocation (%)"}
+          Allocation (%)
           {column.getIsSorted() === "asc" && (
             <RiArrowUpSLine className="h-4 w-4" />
           )}

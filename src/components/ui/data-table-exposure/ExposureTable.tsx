@@ -13,6 +13,7 @@ import {
   enhancedExposureCalculator,
   type EnhancedExposureResult,
 } from "@/lib/enhancedExposureCalculator"
+import { getCachedLogoUrls } from "@/lib/logoUtils"
 import { cx } from "@/lib/utils"
 import { RiRefreshLine } from "@remixicon/react"
 import {
@@ -33,13 +34,11 @@ import { createColumns } from "./columns"
 // import { ExposureTreemapHighcharts } from "./ExposureTreemapHighcharts"  // Original version
 // import { ExposureTreemapHighcharts } from "./ExposureTreemapHighchartsSimplified"  // Simplified version
 import { ExposureTreemapHighchartsWithLogos as ExposureTreemapHighcharts } from "./ExposureTreemapHighchartsWrapper" // Version with logos
+import { AccountSelector } from "@/components/ui/AccountSelector"
 import { ExposureTableProps, StockExposure } from "./types"
 
-type PercentageMode = "total" | "stocks"
-
-export function ExposureTable({ holdings }: ExposureTableProps) {
+export function ExposureTable({ holdings, accounts }: ExposureTableProps) {
   const [data, setData] = React.useState<StockExposure[]>([])
-  const [rawData, setRawData] = React.useState<StockExposure[]>([])
   const [sorting, setSorting] = React.useState<SortingState>([
     { id: "percentOfPortfolio", desc: true },
   ])
@@ -47,17 +46,50 @@ export function ExposureTable({ holdings }: ExposureTableProps) {
   const [expanded, setExpanded] = React.useState<ExpandedState>({})
   const [isLoading, setIsLoading] = React.useState(false)
   const [totalPortfolioValue, setTotalPortfolioValue] = React.useState(0)
-  const [percentageMode, setPercentageMode] =
-    React.useState<PercentageMode>("total")
+  const [selectedAccount, setSelectedAccount] = React.useState<string>("all")
+  const [logoUrls, setLogoUrls] = React.useState<Record<string, string | null>>(
+    {},
+  )
 
-  // Calculate exposures on mount and when holdings change
+  // Filter holdings by selected account for treemap visualization
+  const filteredHoldings = React.useMemo(() => {
+    if (selectedAccount === "all") {
+      return holdings
+    }
+    return holdings.filter((h) => h.accountId === selectedAccount)
+  }, [holdings, selectedAccount])
+
+  // Calculate filtered exposures for treemap
+  const [filteredData, setFilteredData] = React.useState<StockExposure[]>([])
+  const [filteredTotalValue, setFilteredTotalValue] = React.useState(0)
+
+  React.useEffect(() => {
+    const calculateFilteredExposures = async () => {
+      if (filteredHoldings.length === 0) {
+        setFilteredData([])
+        setFilteredTotalValue(0)
+        return
+      }
+
+      try {
+        const result: EnhancedExposureResult =
+          await enhancedExposureCalculator.calculateExposures(filteredHoldings)
+        setFilteredData(result.exposures)
+        setFilteredTotalValue(result.totalPortfolioValue)
+      } catch (error) {
+        console.error("Error calculating filtered exposures:", error)
+      }
+    }
+    calculateFilteredExposures()
+  }, [filteredHoldings])
+
+  // Calculate exposures on mount and when holdings change (for table display)
   React.useEffect(() => {
     const calculateExposuresAsync = async () => {
       setIsLoading(true)
       try {
         const result: EnhancedExposureResult =
           await enhancedExposureCalculator.calculateExposures(holdings)
-        setRawData(result.exposures)
         setData(result.exposures)
         setTotalPortfolioValue(result.totalPortfolioValue)
 
@@ -73,33 +105,29 @@ export function ExposureTable({ holdings }: ExposureTableProps) {
     calculateExposuresAsync()
   }, [holdings])
 
-  // Recalculate percentages when mode changes
+  // Batch fetch logo URLs when data changes
   React.useEffect(() => {
-    if (rawData.length === 0) return
+    const fetchLogos = async () => {
+      if (data.length === 0) return
 
-    if (percentageMode === "total") {
-      // Use original percentages based on total portfolio
-      setData(rawData)
-    } else {
-      // Recalculate percentages based on stocks only
-      const stocksOnlyValue = rawData
-        .filter((exp) => !exp.isETFBreakdown)
-        .reduce((sum, exp) => sum + exp.totalValue, 0)
+      // Extract unique tickers from data and subRows
+      const tickers = new Set<string>()
+      data.forEach((exp) => {
+        if (exp.ticker) tickers.add(exp.ticker)
+        exp.subRows?.forEach((sub) => {
+          if (sub.ticker) tickers.add(sub.ticker)
+        })
+      })
 
-      const recalculatedData = rawData.map((exp) => ({
-        ...exp,
-        percentOfPortfolio:
-          stocksOnlyValue > 0 ? (exp.totalValue / stocksOnlyValue) * 100 : 0,
-        subRows: exp.subRows?.map((sub) => ({
-          ...sub,
-          percentOfPortfolio:
-            stocksOnlyValue > 0 ? (sub.totalValue / stocksOnlyValue) * 100 : 0,
-        })),
-      }))
+      if (tickers.size === 0) return
 
-      setData(recalculatedData)
+      // Batch fetch logos
+      const logos = await getCachedLogoUrls(Array.from(tickers))
+      setLogoUrls(logos)
     }
-  }, [percentageMode, rawData])
+
+    fetchLogos()
+  }, [data])
 
   const areAllExpanded = React.useCallback(() => {
     const expandableRows = data.filter(
@@ -132,9 +160,9 @@ export function ExposureTable({ holdings }: ExposureTableProps) {
       createColumns({
         toggleExpandAll,
         areAllExpanded,
-        percentageMode,
+        logoUrls,
       }),
-    [toggleExpandAll, areAllExpanded, percentageMode],
+    [toggleExpandAll, areAllExpanded, logoUrls],
   )
 
   const table = useReactTable({
@@ -220,51 +248,15 @@ export function ExposureTable({ holdings }: ExposureTableProps) {
         )}
       </div> */}
 
-      {/* Percentage Mode Toggle and Treemap Visualization */}
+      {/* Treemap Visualization */}
       {data.length > 0 && (
-        <>
-          {/* Percentage Mode Toggle */}
-          <div className="mb-4 flex justify-end">
-            <div className="flex items-center rounded-lg bg-gray-100 p-1 dark:bg-gray-800">
-              <button
-                onClick={() => setPercentageMode("total")}
-                className={`rounded-md px-3 py-1 text-sm font-medium transition-colors ${
-                  percentageMode === "total"
-                    ? "bg-white text-gray-900 shadow-sm dark:bg-gray-700 dark:text-gray-50"
-                    : "text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-50"
-                }`}
-              >
-                Total Portfolio
-              </button>
-              <button
-                onClick={() => setPercentageMode("stocks")}
-                className={`rounded-md px-3 py-1 text-sm font-medium transition-colors ${
-                  percentageMode === "stocks"
-                    ? "bg-white text-gray-900 shadow-sm dark:bg-gray-700 dark:text-gray-50"
-                    : "text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-50"
-                }`}
-              >
-                Stocks Only
-              </button>
-            </div>
-          </div>
-
-          {/* Option 1: Nivo Treemap (original) */}
-          {/* <ExposureTreemap exposures={data} totalValue={totalPortfolioValue} /> */}
-
-          {/* Option 2: Highcharts Treemap (now active - better margin control) */}
-          <ExposureTreemapHighcharts
-            exposures={data}
-            totalValue={
-              percentageMode === "total"
-                ? totalPortfolioValue
-                : data
-                    .filter((exp) => !exp.isETFBreakdown)
-                    .reduce((sum, exp) => sum + exp.totalValue, 0)
-            }
-            percentageMode={percentageMode}
-          />
-        </>
+        <ExposureTreemapHighcharts
+          exposures={selectedAccount === "all" ? data : filteredData}
+          totalValue={selectedAccount === "all" ? totalPortfolioValue : filteredTotalValue}
+          accounts={accounts}
+          selectedAccount={selectedAccount}
+          onAccountChange={setSelectedAccount}
+        />
       )}
 
       {/* Table Controls */}
