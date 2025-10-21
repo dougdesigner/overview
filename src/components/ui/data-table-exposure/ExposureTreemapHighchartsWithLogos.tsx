@@ -18,7 +18,7 @@ import {
 } from "@/components/DropdownMenu"
 import { getCachedLogoUrls } from "@/lib/logoUtils"
 import { toProperCase } from "@/lib/utils"
-import { RiDownloadLine, RiExpandUpDownLine, RiFullscreenLine, RiSettings3Line } from "@remixicon/react"
+import { RiDownloadLine, RiExpandUpDownLine, RiFullscreenLine, RiLayout4Line, RiPieChartLine, RiSettings3Line } from "@remixicon/react"
 import Highcharts from "highcharts"
 import HighchartsReact from "highcharts-react-official"
 import HighchartsTreemap from "highcharts/modules/treemap"
@@ -43,6 +43,7 @@ interface ExposureTreemapHighchartsProps {
   onAccountChange: (accountId: string) => void
 }
 
+type ChartType = "treemap" | "pie"
 type GroupingMode = "none" | "sector" | "industry"
 type SizingMode = "proportional" | "monosize"
 type TitleMode = "symbol" | "name" | "none"
@@ -73,6 +74,7 @@ export function ExposureTreemapHighchartsWithLogos({
   selectedAccount,
   onAccountChange,
 }: ExposureTreemapHighchartsProps) {
+  const [chartType, setChartType] = useState<ChartType>("treemap")
   const [groupingMode, setGroupingMode] = useState<GroupingMode>("sector")
   const [sizingMode] = useState<SizingMode>("proportional")
   const [showLogo, setShowLogo] = useState(true)
@@ -489,6 +491,76 @@ export function ExposureTreemapHighchartsWithLogos({
     return data
   }
 
+  // Transform data for pie chart
+  interface PieChartPoint extends Highcharts.PointOptionsObject {
+    name: string
+    y: number
+    actualValue: number
+    color?: string
+    logoUrl?: string | null
+    ticker?: string
+    companyName?: string
+  }
+
+  const getPieChartData = (): PieChartPoint[] => {
+    const validExposures = exposures.filter(
+      (exp) => !exp.isETFBreakdown && exp.totalValue > 0,
+    )
+
+    const data: PieChartPoint[] = []
+
+    // Handle "none" mode - show individual stocks with single color
+    if (groupingMode === "none") {
+      const sortedExposures = [...validExposures].sort(
+        (a, b) => b.totalValue - a.totalValue,
+      )
+
+      sortedExposures.forEach((stock) => {
+        const logoUrl = logoUrls[stock.ticker.toUpperCase()] ?? null
+        data.push({
+          name: stock.ticker,
+          y: stock.totalValue,
+          actualValue: stock.totalValue,
+          color: colors[0], // Use blue for all stocks in no-group mode
+          logoUrl: logoUrl,
+          ticker: stock.ticker,
+          companyName: stock.name,
+        })
+      })
+
+      return data
+    }
+
+    // Handle grouped modes (sector or industry) - show aggregated groups
+    const groupKey =
+      groupingMode === "sector" ? "sector" : ("industry" as keyof StockExposure)
+
+    // Group stocks by sector or industry and aggregate values
+    const groups = new Map<string, number>()
+    validExposures.forEach((exposure) => {
+      const groupValue = exposure[groupKey] as string | undefined
+      const group = toProperCase(
+        groupValue || `Unknown ${toProperCase(groupKey)}`,
+      )
+      groups.set(group, (groups.get(group) || 0) + exposure.totalValue)
+    })
+
+    // Convert to array and sort by value
+    const sortedGroups = Array.from(groups.entries()).sort((a, b) => b[1] - a[1])
+
+    // Add each group with appropriate color
+    sortedGroups.forEach(([groupName, value], index) => {
+      data.push({
+        name: groupName,
+        y: value,
+        actualValue: value,
+        color: colors[index % colors.length],
+      })
+    })
+
+    return data
+  }
+
   // Chart options
   const options: Highcharts.Options = {
     chart: {
@@ -661,6 +733,98 @@ export function ExposureTreemapHighchartsWithLogos({
     },
   }
 
+  // Pie chart options
+  const pieOptions: Highcharts.Options = {
+    chart: {
+      type: "pie",
+      backgroundColor: "transparent",
+      height: 300,
+    },
+    title: {
+      text: undefined,
+    },
+    credits: {
+      enabled: false,
+    },
+    xAxis: {
+      gridLineWidth: 0,
+      lineWidth: 0,
+      visible: false,
+    },
+    yAxis: {
+      gridLineWidth: 0,
+      lineWidth: 0,
+      visible: false,
+    },
+    exporting: {
+      buttons: {
+        contextButton: {
+          enabled: false,
+        },
+      },
+    },
+    plotOptions: {
+      pie: {
+        allowPointSelect: true,
+        cursor: "pointer",
+        dataLabels: {
+          enabled: true,
+          format: "<b>{point.name}</b>",
+          style: {
+            color: isDark ? "#f3f4f6" : "#111827",
+            fontSize: "11px",
+            fontWeight: "500",
+            textOutline: "none",
+          },
+          distance: 10,
+        },
+        showInLegend: false,
+        borderWidth: 2,
+        borderColor: isDark ? "#1f2937" : "#f3f4f6",
+      },
+    },
+    series: [
+      {
+        type: "pie",
+        name: groupingMode === "none" ? "Holdings" : groupingMode === "sector" ? "Sectors" : "Industries",
+        data: getPieChartData(),
+      },
+    ],
+    tooltip: {
+      useHTML: true,
+      outside: true,
+      backgroundColor: isDark ? "#1f2937" : "#ffffff",
+      borderColor: isDark ? "#4b5563" : "#e5e7eb",
+      borderRadius: 6,
+      borderWidth: 1,
+      shadow: {
+        color: "rgba(0, 0, 0, 0.1)",
+        offsetX: 0,
+        offsetY: 2,
+        opacity: 0.1,
+        width: 3,
+      },
+      style: {
+        color: isDark ? "#f3f4f6" : "#111827",
+        fontSize: "12px",
+      },
+      pointFormatter: function () {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const point = this as any
+        const value = point.actualValue !== undefined ? point.actualValue : (typeof point.y === "number" ? point.y : 0)
+        const pctPortfolio = ((value / totalValue) * 100).toFixed(1)
+        const pctStocks = stocksOnlyValue > 0 ? ((value / stocksOnlyValue) * 100).toFixed(1) : "0.0"
+        const name = point.ticker || point.name
+        return `<div style="padding: 2px;">
+                  <div style="font-weight: 600; margin-bottom: 4px;">${name}</div>
+                  <div>Market Value: <b>${formatValue(value)}</b></div>
+                  <div>Portfolio %: <b>${pctPortfolio}%</b></div>
+                  <div>Stock %: <b>${pctStocks}%</b></div>
+                </div>`
+      },
+    },
+  }
+
   // Calculate top groups or holdings for legend
   const topGroups = (() => {
     const validExposures = exposures.filter(
@@ -726,6 +890,11 @@ export function ExposureTreemapHighchartsWithLogos({
     }
   }
 
+  // Calculate valid exposures early to determine if we need to show empty state
+  const validExposures = exposures.filter(
+    (exp) => !exp.isETFBreakdown && exp.totalValue > 0,
+  )
+
   if (!modulesLoaded) {
     return (
       <Card className="pb-4 pt-6">
@@ -746,7 +915,7 @@ export function ExposureTreemapHighchartsWithLogos({
         <div className="flex items-center gap-2">
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="secondary" className="h-9 w-[200px] justify-between">
+              <Button variant="secondary" className="h-9 w-[280px] justify-between">
                 <span className="flex items-center gap-2">
                   {selectedAccount === "all" ? (
                     "All Accounts"
@@ -765,7 +934,7 @@ export function ExposureTreemapHighchartsWithLogos({
                 <RiExpandUpDownLine className="size-4 text-gray-400 dark:text-gray-600" aria-hidden="true" />
               </Button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent align="start" className="w-[200px]">
+            <DropdownMenuContent align="start" className="w-[280px]">
               <DropdownMenuLabel>ACCOUNT</DropdownMenuLabel>
               <DropdownMenuSeparator />
               <DropdownMenuRadioGroup
@@ -820,6 +989,18 @@ export function ExposureTreemapHighchartsWithLogos({
             </DropdownMenuContent>
           </DropdownMenu>
 
+          <Button
+            variant="secondary"
+            className="h-9"
+            onClick={() => setChartType(chartType === "treemap" ? "pie" : "treemap")}
+          >
+            {chartType === "treemap" ? (
+              <RiPieChartLine className="size-4" aria-hidden="true" />
+            ) : (
+              <RiLayout4Line className="size-4" aria-hidden="true" />
+            )}
+          </Button>
+
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="secondary" className="h-9">
@@ -865,38 +1046,42 @@ export function ExposureTreemapHighchartsWithLogos({
               <DropdownMenuLabel>DISPLAY SETTINGS</DropdownMenuLabel>
               <DropdownMenuSeparator />
 
-              <DropdownMenuCheckboxItem
-                checked={showLogo}
-                onCheckedChange={setShowLogo}
-              >
-                Logo
-              </DropdownMenuCheckboxItem>
-
-              <DropdownMenuSubMenu>
-                <DropdownMenuSubMenuTrigger>
-                  <span>Title</span>
-                  <span className="ml-auto text-xs text-gray-500">
-                    {titleMode === "symbol" ? "Symbol" :
-                     titleMode === "name" ? "Name" : "None"}
-                  </span>
-                </DropdownMenuSubMenuTrigger>
-                <DropdownMenuSubMenuContent>
-                  <DropdownMenuRadioGroup
-                    value={titleMode}
-                    onValueChange={(value) => setTitleMode(value as TitleMode)}
+              {chartType === "treemap" && (
+                <>
+                  <DropdownMenuCheckboxItem
+                    checked={showLogo}
+                    onCheckedChange={setShowLogo}
                   >
-                    <DropdownMenuRadioItem value="symbol" iconType="check">
-                      Symbol
-                    </DropdownMenuRadioItem>
-                    <DropdownMenuRadioItem value="name" iconType="check">
-                      Name
-                    </DropdownMenuRadioItem>
-                    <DropdownMenuRadioItem value="none" iconType="check">
-                      None
-                    </DropdownMenuRadioItem>
-                  </DropdownMenuRadioGroup>
-                </DropdownMenuSubMenuContent>
-              </DropdownMenuSubMenu>
+                    Logo
+                  </DropdownMenuCheckboxItem>
+
+                  <DropdownMenuSubMenu>
+                    <DropdownMenuSubMenuTrigger>
+                      <span>Title</span>
+                      <span className="ml-auto text-xs text-gray-500">
+                        {titleMode === "symbol" ? "Symbol" :
+                         titleMode === "name" ? "Name" : "None"}
+                      </span>
+                    </DropdownMenuSubMenuTrigger>
+                    <DropdownMenuSubMenuContent>
+                      <DropdownMenuRadioGroup
+                        value={titleMode}
+                        onValueChange={(value) => setTitleMode(value as TitleMode)}
+                      >
+                        <DropdownMenuRadioItem value="symbol" iconType="check">
+                          Symbol
+                        </DropdownMenuRadioItem>
+                        <DropdownMenuRadioItem value="name" iconType="check">
+                          Name
+                        </DropdownMenuRadioItem>
+                        <DropdownMenuRadioItem value="none" iconType="check">
+                          None
+                        </DropdownMenuRadioItem>
+                      </DropdownMenuRadioGroup>
+                    </DropdownMenuSubMenuContent>
+                  </DropdownMenuSubMenu>
+                </>
+              )}
 
               <DropdownMenuSubMenu>
                 <DropdownMenuSubMenuTrigger>
@@ -937,46 +1122,64 @@ export function ExposureTreemapHighchartsWithLogos({
         </div>
       </div>
 
-      <div className="mt-4">
-        <HighchartsReact
-          highcharts={Highcharts}
-          options={options}
-          ref={chartRef}
-        />
-      </div>
+      {validExposures.length === 0 ? (
+        // Empty state when no stocks exist
+        <div className="mt-4 flex h-[300px] flex-col items-center justify-center">
+          <RiPieChartLine
+            className="size-12 text-gray-300 dark:text-gray-600 mb-3"
+            aria-hidden="true"
+          />
+          <h4 className="text-base font-medium text-gray-900 dark:text-gray-50 mb-1">
+            No stock holdings found
+          </h4>
+          <p className="text-sm text-gray-500 dark:text-gray-400">
+            The selected account contains no individual stock positions
+          </p>
+        </div>
+      ) : (
+        <>
+          <div className="mt-4">
+            <HighchartsReact
+              highcharts={Highcharts}
+              options={chartType === "treemap" ? options : pieOptions}
+              ref={chartRef}
+            />
+          </div>
 
-      {/* Legend */}
-      <div className="mt-4">
-        <p className="mb-1 text-sm font-medium text-gray-700 dark:text-gray-300">
-          {groupingMode === "none"
-            ? "Top Holdings"
-            : groupingMode === "sector"
-              ? "Top Sectors"
-              : "Top Industries"}
-        </p>
-        <ul className="flex flex-wrap gap-x-10 gap-y-4 text-sm">
-          {topGroups.map(([name, value], index) => (
-            <li key={name}>
-              <span className="text-base font-semibold text-gray-900 dark:text-gray-50">
-                {getLegendDisplayValue(value)}
-              </span>
-              <div className="flex items-center gap-2">
-                <span
-                  className="size-2.5 shrink-0 rounded-sm"
-                  style={{
-                    backgroundColor:
-                      groupingMode === "none"
-                        ? colors[0]
-                        : colors[index % colors.length],
-                  }}
-                  aria-hidden="true"
-                />
-                <span className="text-sm">{name}</span>
-              </div>
-            </li>
-          ))}
-        </ul>
-      </div>
+          {/* Legend */}
+          <div className="mt-4">
+            <p className="mb-1 text-sm font-medium text-gray-700 dark:text-gray-300">
+              {groupingMode === "none"
+                ? "Top Holdings"
+                : groupingMode === "sector"
+                  ? "Top Sectors"
+                  : "Top Industries"}
+            </p>
+            <ul className="flex flex-wrap gap-x-10 gap-y-4 text-sm">
+              {topGroups.map(([name, value], index) => (
+                <li key={name}>
+                  <span className="text-base font-semibold text-gray-900 dark:text-gray-50">
+                    {getLegendDisplayValue(value)}
+                  </span>
+                  <div className="flex items-center gap-2">
+                    <span
+                      className="size-2.5 shrink-0 rounded-sm"
+                      style={{
+                        backgroundColor:
+                          groupingMode === "none"
+                            ? colors[0]
+                            : colors[index % colors.length],
+                      }}
+                      aria-hidden="true"
+                    />
+                    <span className="text-sm">{name}</span>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </>
+      )}
     </Card>
   )
 }
