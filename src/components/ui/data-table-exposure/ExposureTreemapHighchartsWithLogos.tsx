@@ -167,6 +167,40 @@ export function ExposureTreemapHighchartsWithLogos({
     }
   }
 
+  // Get consistent color for a sector/industry group across both chart types
+  const getGroupColor = (groupName: string, mode: GroupingMode): string => {
+    if (mode === "none") {
+      return colors[0] // All stocks use the same color in no-group mode
+    }
+
+    // Get all valid exposures
+    const validExposures = exposures.filter(
+      (exp) => !exp.isETFBreakdown && exp.totalValue > 0,
+    )
+
+    // Determine the grouping key
+    const groupKey = mode === "sector" ? "sector" : ("industry" as keyof StockExposure)
+
+    // Group by sector/industry and calculate total values
+    const groupValues = new Map<string, number>()
+    validExposures.forEach((exp) => {
+      const groupValue = exp[groupKey] as string | undefined
+      const group = toProperCase(
+        groupValue || `Unknown ${toProperCase(groupKey)}`,
+      )
+      groupValues.set(group, (groupValues.get(group) || 0) + exp.totalValue)
+    })
+
+    // Sort groups by value (largest first) for consistent color assignment
+    const sortedGroups = Array.from(groupValues.entries())
+      .sort((a, b) => b[1] - a[1])
+      .map(([name]) => name)
+
+    // Find the index of this group name in the value-sorted list
+    const index = sortedGroups.indexOf(groupName)
+    return colors[index % colors.length]
+  }
+
   // Calculate logo size based on cell dimensions
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const calculateLogoSize = (point: any): number => {
@@ -460,15 +494,13 @@ export function ExposureTreemapHighchartsWithLogos({
     })
 
     // Create parent nodes and child nodes
-    let colorIndex = 0
     groups.forEach((stocks, groupName) => {
-      // Parent node
+      // Parent node - use consistent color mapping
       data.push({
         id: groupName,
         name: groupName,
-        color: colors[colorIndex % colors.length],
+        color: getGroupColor(groupName, groupingMode),
       })
-      colorIndex++
 
       // Child nodes (stocks) with logo URLs
       stocks.forEach((stock) => {
@@ -548,13 +580,13 @@ export function ExposureTreemapHighchartsWithLogos({
     // Convert to array and sort by value
     const sortedGroups = Array.from(groups.entries()).sort((a, b) => b[1] - a[1])
 
-    // Add each group with appropriate color
-    sortedGroups.forEach(([groupName, value], index) => {
+    // Add each group with consistent color mapping
+    sortedGroups.forEach(([groupName, value]) => {
       data.push({
         name: groupName,
         y: value,
         actualValue: value,
-        color: colors[index % colors.length],
+        color: getGroupColor(groupName, groupingMode),
       })
     })
 
