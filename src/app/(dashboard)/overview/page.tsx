@@ -5,6 +5,7 @@ import { Button } from "@/components/Button"
 import { Divider } from "@/components/Divider"
 import KPICard from "@/components/KPICard"
 import PortfolioValueCard from "@/components/PortfolioValueCard"
+import { OnboardingFlow } from "@/components/OnboardingFlow"
 import { usePortfolioStore } from "@/hooks/usePortfolioStore"
 import { useExposureCalculations } from "@/hooks/useExposureCalculations"
 import { getAssetClassColor, getAssetClassBgColor, getAssetClassBorderColor } from "@/lib/assetClassColors"
@@ -67,20 +68,9 @@ export default function OverviewPage() {
           </div>
         </div>
       ) : accounts.length === 0 ? (
-        // Empty state
-        <div className="mt-8 py-12 text-center">
-          <h3 className="text-lg font-medium text-gray-900 dark:text-gray-50 mb-2">
-            Welcome to your portfolio dashboard
-          </h3>
-          <p className="text-gray-500 dark:text-gray-400 mb-4">
-            Start by adding your first account to see your portfolio overview.
-          </p>
-          <Button
-            onClick={() => window.location.href = '/accounts'}
-            className="inline-flex items-center gap-2"
-          >
-            Add Your First Account
-          </Button>
+        // Empty state with onboarding flow
+        <div className="mt-8">
+          <OnboardingFlow />
         </div>
       ) : (
         <>
