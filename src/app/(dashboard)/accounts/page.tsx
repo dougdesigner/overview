@@ -109,31 +109,8 @@ export default function AccountsPage() {
     }
   }
 
-  // Show loading state while data is being fetched
-  if (isLoading) {
-    return (
-      <main>
-        <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-          <div>
-            <h1 className="text-2xl font-semibold text-gray-900 dark:text-gray-50">
-              Accounts
-            </h1>
-            <p className="text-gray-500 dark:text-gray-400 sm:text-sm/6">
-              Loading your portfolio data...
-            </p>
-          </div>
-        </div>
-        <Divider />
-        <div className="animate-pulse py-8">
-          <div className="mb-4 h-48 rounded-lg bg-gray-100 dark:bg-gray-800"></div>
-          <div className="space-y-4">
-            <div className="h-24 rounded-lg bg-gray-100 dark:bg-gray-800"></div>
-            <div className="h-24 rounded-lg bg-gray-100 dark:bg-gray-800"></div>
-          </div>
-        </div>
-      </main>
-    )
-  }
+  // Remove loading state check to prevent stuck loading screen
+  // The empty state will show immediately for new users
 
   // Show error state if there's an error (but continue to show data if available)
   const errorMessage =

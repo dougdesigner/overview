@@ -1,0 +1,9 @@
+{
+  "symbol": "DOW",
+  "name": "Dow Inc",
+  "sector": "BASIC MATERIALS",
+  "industry": "CHEMICALS",
+  "officialSite": "https://www.dow.com",
+  "cachedAt": "2025-10-28T18:28:53.979Z",
+  "source": "Alpha Vantage API"
+}

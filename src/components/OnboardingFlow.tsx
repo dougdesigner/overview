@@ -14,46 +14,60 @@ import { AccountDrawer } from "@/components/ui/AccountDrawer"
 
 // Import screenshot placeholders
 import { OverviewScreenshot } from "./screenshots/OverviewScreenshot"
-import { AssetAllocationScreenshot } from "./screenshots/AssetAllocationScreenshot"
+import { AccountsScreenshot } from "./screenshots/AccountsScreenshot"
+import { HoldingsScreenshot } from "./screenshots/HoldingsScreenshot"
 import { ExposureAnalysisScreenshot } from "./screenshots/ExposureAnalysisScreenshot"
 
 const onboardingSteps = [
   {
-    id: "welcome",
-    title: "Welcome to Your Portfolio Command Center",
+    id: "overview",
+    title: "Your Portfolio at a Glance",
     description:
-      "Get a complete view of your investment portfolio in one place. Track performance, monitor trends, and make informed decisions with real-time insights.",
+      "Get a comprehensive view of your entire investment portfolio. Monitor total value, asset allocation, and understand your overall financial position for long-term wealth building.",
     highlights: [
-      "Consolidated view across all your accounts",
-      "Real-time portfolio valuation and performance metrics",
-      "Interactive charts and visualizations",
+      "Total portfolio value across all accounts",
+      "Asset class distribution visualization",
+      "Consolidated view for holistic understanding",
       "Dark mode support for comfortable viewing",
     ],
     screenshot: <OverviewScreenshot />,
   },
   {
-    id: "asset-allocation",
-    title: "Master Your Asset Allocation",
+    id: "accounts",
+    title: "Organize Your Investment Accounts",
     description:
-      "Visualize your portfolio composition across asset classes. Understand your diversification at a glance and identify rebalancing opportunities.",
+      "Manage all your investment accounts in one place. Track different account types from retirement to taxable accounts, understanding how each contributes to your long-term goals.",
     highlights: [
-      "Dynamic donut charts showing asset class distribution",
-      "Drill down into individual holdings and accounts",
-      "Track allocation changes over time",
-      "Identify concentration risks and opportunities",
+      "Support for 401(k), IRA, and taxable accounts",
+      "Individual account balances and allocations",
+      "Account-level asset class breakdowns",
+      "Easy account management and updates",
     ],
-    screenshot: <AssetAllocationScreenshot />,
+    screenshot: <AccountsScreenshot />,
   },
   {
-    id: "exposure-analysis",
-    title: "Deep Dive with Exposure Analysis",
+    id: "holdings",
+    title: "Track Your Individual Investments",
     description:
-      "See beyond the surface with ETF look-through analysis. Understand your true underlying exposure across sectors and individual securities.",
+      "View all your holdings across accounts. Monitor diversification at the security level and ensure your portfolio aligns with your long-term investment strategy.",
     highlights: [
-      "ETF holdings expansion for complete transparency",
-      "Interactive treemap visualization of exposures",
-      "Filter by account to analyze specific portfolios",
-      "Export detailed exposure reports",
+      "Complete list of all positions",
+      "Position sizes and portfolio weights",
+      "Diversification analysis by security",
+      "Cross-account holding aggregation",
+    ],
+    screenshot: <HoldingsScreenshot />,
+  },
+  {
+    id: "exposure",
+    title: "Understand Your True Exposure",
+    description:
+      "See beyond fund names with ETF look-through analysis. Discover your actual underlying exposure to individual securities and sectors for better risk management.",
+    highlights: [
+      "ETF holdings expansion and transparency",
+      "Interactive treemap visualization",
+      "Concentration risk identification",
+      "True underlying exposure analysis",
     ],
     screenshot: <ExposureAnalysisScreenshot />,
   },

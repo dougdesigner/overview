@@ -200,27 +200,8 @@ function HoldingsContent() {
   }
 
   // Show loading state
-  if (isLoading) {
-    return (
-      <main>
-        <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-          <div>
-            <h1 className="text-2xl font-semibold text-gray-900 dark:text-gray-50">
-              Holdings
-            </h1>
-            <p className="text-gray-500 sm:text-sm/6 dark:text-gray-500">
-              Loading your portfolio holdings...
-            </p>
-          </div>
-        </div>
-        <Divider />
-        <div className="animate-pulse py-8">
-          <div className="h-96 bg-gray-100 dark:bg-gray-800 rounded-lg mb-4"></div>
-          <div className="h-48 bg-gray-100 dark:bg-gray-800 rounded-lg"></div>
-        </div>
-      </main>
-    )
-  }
+  // Remove loading state check to prevent stuck loading screen
+  // The empty state will show immediately for new users
 
   return (
     <main>
@@ -233,13 +214,15 @@ function HoldingsContent() {
             See all your investments in one place, across every account
           </p>
         </div>
-        <Button
-          onClick={() => setIsOpen(true)}
-          className="flex items-center gap-2 text-base sm:text-sm"
-        >
-          Add Holdings
-          <RiAddLine className="-mr-0.5 size-5 shrink-0" aria-hidden="true" />
-        </Button>
+        {accounts.length > 0 && (
+          <Button
+            onClick={() => setIsOpen(true)}
+            className="flex items-center gap-2 text-base sm:text-sm"
+          >
+            Add Holdings
+            <RiAddLine className="-mr-0.5 size-5 shrink-0" aria-hidden="true" />
+          </Button>
+        )}
         <HoldingsDrawer
           open={isOpen}
           onOpenChange={(open) => {

@@ -70,27 +70,8 @@ export default function ExposurePage() {
   // Show loading state
   const isLoading = holdingsLoading || isCalculating
 
-  if (isLoading) {
-    return (
-      <main>
-        <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-          <div>
-            <h1 className="text-2xl font-semibold text-gray-900 dark:text-gray-50">
-              Exposure
-            </h1>
-            <p className="text-gray-500 dark:text-gray-500 sm:text-sm/6">
-              Calculating your exposure analysis...
-            </p>
-          </div>
-        </div>
-        <Divider />
-        <div className="animate-pulse py-8">
-          <div className="mb-4 h-64 rounded-lg bg-gray-100 dark:bg-gray-800"></div>
-          <div className="h-96 rounded-lg bg-gray-100 dark:bg-gray-800"></div>
-        </div>
-      </main>
-    )
-  }
+  // Remove loading state check to prevent stuck loading screen
+  // The empty state will show immediately for new users
 
   // Show error if there's one
   if (error && !holdings.length) {

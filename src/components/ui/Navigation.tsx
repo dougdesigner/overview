@@ -12,7 +12,7 @@ function Navigation() {
     <div className="shadow-s sticky top-0 z-20 bg-white dark:bg-gray-950">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 pt-3 sm:px-6">
         <div>
-          <span className="text-lg font-semibold">Portfolio</span>
+          <span className="text-lg font-semibold">ETF Exposure</span>
           {/* <Logo className="h-6" /> */}
         </div>
         <div className="flex h-[42px] flex-nowrap gap-1">

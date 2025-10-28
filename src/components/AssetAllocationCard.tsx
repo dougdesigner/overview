@@ -289,7 +289,7 @@ const AssetAllocationCard = React.forwardRef<
           <div className="px-6 pb-6">
             {allocationData.map((category) => (
               <TabsContent key={category.name} value={category.name}>
-                <div className="mx-auto mt-8">
+                <div className="mx-auto mt-8" style={{ height: 280 }}>
                   {/* HighchartsDonutChart */}
                   <HighchartsDonutChart
                     data={category.data}

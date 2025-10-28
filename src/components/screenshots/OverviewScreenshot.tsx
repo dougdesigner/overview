@@ -30,14 +30,11 @@ export function OverviewScreenshot() {
                 Total Portfolio Value
               </p>
               <p className="text-3xl font-bold text-gray-900 dark:text-gray-50 mt-1">
-                $2,847,392
+                $2,121,302
               </p>
               <div className="flex items-center gap-4 mt-3">
-                <span className="text-sm text-green-600 dark:text-green-400">
-                  ↑ 12.4%
-                </span>
                 <span className="text-sm text-gray-500 dark:text-gray-400">
-                  +$314,892 YTD
+                  4 accounts • 32 holdings
                 </span>
               </div>
             </div>
@@ -48,10 +45,10 @@ export function OverviewScreenshot() {
         {/* Asset class cards */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           {[
-            { label: "U.S. Stocks", value: "$1,423,696", color: "bg-blue-500" },
-            { label: "Int'l Stocks", value: "$854,218", color: "bg-emerald-500" },
-            { label: "Fixed Income", value: "$427,109", color: "bg-amber-500" },
-            { label: "Cash", value: "$142,369", color: "bg-gray-500" },
+            { label: "U.S. Stocks", value: "$1,272,781", color: "bg-blue-500" },
+            { label: "Int'l Stocks", value: "$424,260", color: "bg-emerald-500" },
+            { label: "Fixed Income", value: "$318,195", color: "bg-amber-500" },
+            { label: "Cash", value: "$106,066", color: "bg-gray-500" },
           ].map((item, index) => (
             <div
               key={index}
@@ -70,23 +67,82 @@ export function OverviewScreenshot() {
           ))}
         </div>
 
-        {/* Chart placeholder */}
+        {/* Asset Allocation visualization */}
         <div className="bg-white dark:bg-gray-900 rounded-lg p-6 shadow-sm">
           <p className="text-sm font-medium text-gray-900 dark:text-gray-50 mb-4">
-            Performance
+            Asset Allocation
           </p>
-          <div className="h-48 bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-blue-950 dark:to-indigo-950 rounded-lg flex items-end p-4">
-            {Array.from({ length: 12 }).map((_, i) => (
-              <div
-                key={i}
-                className="flex-1 mx-0.5"
-                style={{
-                  height: `${30 + Math.random() * 70}%`,
-                }}
-              >
-                <div className="h-full bg-blue-500 dark:bg-blue-600 rounded-t opacity-80" />
+          <div className="flex items-center justify-between">
+            {/* Donut chart placeholder */}
+            <div className="relative size-40">
+              <svg className="size-full -rotate-90" viewBox="0 0 100 100">
+                <circle
+                  cx="50"
+                  cy="50"
+                  r="35"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="20"
+                  className="text-blue-500"
+                  strokeDasharray="131.95 88"
+                />
+                <circle
+                  cx="50"
+                  cy="50"
+                  r="35"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="20"
+                  className="text-emerald-500"
+                  strokeDasharray="79.17 140.78"
+                  strokeDashoffset="-131.95"
+                />
+                <circle
+                  cx="50"
+                  cy="50"
+                  r="35"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="20"
+                  className="text-amber-500"
+                  strokeDasharray="43.98 175.97"
+                  strokeDashoffset="-211.12"
+                />
+                <circle
+                  cx="50"
+                  cy="50"
+                  r="35"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="20"
+                  className="text-gray-500"
+                  strokeDasharray="8.8 211.15"
+                  strokeDashoffset="-255.1"
+                />
+              </svg>
+              <div className="absolute inset-0 flex flex-col items-center justify-center">
+                <p className="text-xs text-gray-500 dark:text-gray-400">Total</p>
+                <p className="text-lg font-bold text-gray-900 dark:text-gray-50">$2.1M</p>
               </div>
-            ))}
+            </div>
+
+            {/* Legend */}
+            <div className="space-y-2">
+              {[
+                { label: "U.S. Stocks", value: "60%", color: "bg-blue-500" },
+                { label: "Int'l Stocks", value: "20%", color: "bg-emerald-500" },
+                { label: "Fixed Income", value: "15%", color: "bg-amber-500" },
+                { label: "Cash", value: "5%", color: "bg-gray-500" },
+              ].map((item, index) => (
+                <div key={index} className="flex items-center gap-2">
+                  <div className={cx("size-3 rounded-full", item.color)} />
+                  <span className="text-sm text-gray-700 dark:text-gray-300">{item.label}</span>
+                  <span className="text-sm font-medium text-gray-900 dark:text-gray-50 ml-auto">
+                    {item.value}
+                  </span>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>
