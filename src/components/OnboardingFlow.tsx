@@ -9,8 +9,7 @@ import {
   RiArrowRightLine,
   RiAddLine,
 } from "@remixicon/react"
-import { usePortfolioStore } from "@/hooks/usePortfolioStore"
-import { AccountDrawer } from "@/components/ui/AccountDrawer"
+import { useRouter } from "next/navigation"
 
 // Import screenshot placeholders
 import { OverviewScreenshot } from "./screenshots/OverviewScreenshot"
@@ -75,8 +74,7 @@ const onboardingSteps = [
 
 export function OnboardingFlow() {
   const [currentStep, setCurrentStep] = useState(0)
-  const [isAccountDrawerOpen, setIsAccountDrawerOpen] = useState(false)
-  const { createAccount } = usePortfolioStore()
+  const router = useRouter()
 
   const step = onboardingSteps[currentStep]
   const isFirstStep = currentStep === 0
@@ -84,7 +82,7 @@ export function OnboardingFlow() {
 
   const handleNext = () => {
     if (isLastStep) {
-      setIsAccountDrawerOpen(true)
+      router.push('/accounts')
     } else {
       setCurrentStep((prev) => Math.min(prev + 1, onboardingSteps.length - 1))
     }
@@ -179,16 +177,6 @@ export function OnboardingFlow() {
           </Button>
         </div>
       </div>
-
-      {/* Account Drawer */}
-      <AccountDrawer
-        open={isAccountDrawerOpen}
-        onOpenChange={setIsAccountDrawerOpen}
-        onSave={(account) => {
-          createAccount(account)
-          setIsAccountDrawerOpen(false)
-        }}
-      />
     </>
   )
 }
