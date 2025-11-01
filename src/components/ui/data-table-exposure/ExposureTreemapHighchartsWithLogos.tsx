@@ -47,7 +47,7 @@ type ChartType = "treemap" | "pie"
 type GroupingMode = "none" | "sector" | "industry"
 type SizingMode = "proportional" | "monosize"
 type TitleMode = "symbol" | "name" | "none"
-type DisplayValue = "market-value" | "pct-stocks" | "pct-portfolio"
+type DisplayValue = "market-value" | "pct-stocks" | "pct-portfolio" | "none"
 
 // Extended data point type to include custom properties
 interface ExtendedTreemapPoint extends Highcharts.PointOptionsObject {
@@ -114,6 +114,89 @@ export function ExposureTreemapHighchartsWithLogos({
     setModulesLoaded(true)
   }, [])
 
+  // Update chart when theme changes
+  useEffect(() => {
+    if (chartRef.current && chartRef.current.chart) {
+      const chart = chartRef.current.chart
+
+      // Update chart with new theme colors
+      chart.update({
+        chart: {
+          backgroundColor: "transparent",
+        },
+        navigation: {
+          breadcrumbs: {
+            style: {
+              color: isDark ? "#f3f4f6" : "#111827",
+            },
+            states: {
+              hover: {
+                fill: isDark ? "#1f2937" : "#f3f4f6",
+                style: {
+                  color: isDark ? "#f3f4f6" : "#111827",
+                },
+              },
+            },
+          },
+        },
+        plotOptions: {
+          treemap: {
+            borderColor: isDark ? "#1f2937" : "#f3f4f6",
+            dataLabels: {
+              style: {
+                color: isDark ? "#f3f4f6" : "#111827",
+                fontSize: "11px",
+                fontWeight: "500",
+                textOutline: "none",
+              },
+            },
+            levels: [
+              {
+                level: 1,
+                borderColor: isDark ? "#1f2937" : "#f3f4f6",
+                dataLabels: {
+                  style: {
+                    fontSize: "16px",
+                    fontWeight: "600",
+                    color: isDark ? "#f3f4f6" : "#111827",
+                  },
+                },
+              },
+              {
+                level: 2,
+                borderColor: isDark ? "#374151" : "#e5e7eb",
+                dataLabels: {
+                  style: {
+                    fontSize: "12px",
+                    fontWeight: "500",
+                    color: isDark ? "#f3f4f6" : "#111827",
+                  },
+                },
+              },
+            ],
+          },
+          pie: {
+            borderColor: isDark ? "#1f2937" : "#f3f4f6",
+            dataLabels: {
+              style: {
+                color: isDark ? "#f3f4f6" : "#111827",
+                fontSize: "12px",
+                fontWeight: "500",
+              },
+            },
+          },
+        },
+        tooltip: {
+          backgroundColor: isDark ? "#1f2937" : "#ffffff",
+          borderColor: isDark ? "#4b5563" : "#e5e7eb",
+          style: {
+            color: isDark ? "#f3f4f6" : "#111827",
+          },
+        },
+      })
+    }
+  }, [isDark, chartType])
+
   // Simple color palette
   const colors = [
     "#3b82f6",
@@ -135,7 +218,9 @@ export function ExposureTreemapHighchartsWithLogos({
 
   // Format legend values based on display value setting
   const getLegendDisplayValue = (value: number): string => {
-    if (displayValue === "market-value") {
+    if (displayValue === "none") {
+      return ""
+    } else if (displayValue === "market-value") {
       return formatValue(value)
     } else if (displayValue === "pct-stocks") {
       const percentage = stocksOnlyValue > 0 ? (value / stocksOnlyValue) * 100 : 0
@@ -276,6 +361,10 @@ export function ExposureTreemapHighchartsWithLogos({
   // Helper function to get the display value text based on display settings
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const getDisplayValueText = (point: any): string => {
+    if (displayValue === "none") {
+      return ""
+    }
+
     const value = point.actualValue !== undefined
       ? point.actualValue
       : (typeof point.value === "number" ? point.value : 0)
@@ -380,9 +469,9 @@ export function ExposureTreemapHighchartsWithLogos({
           <span style="color: ${isDark ? "#f3f4f6" : "#f3f4f6"}; font-size: ${tickerSize}px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
             ${displayText}
           </span>
-          <span style="color: ${isDark ? "#f3f4f6" : "#f3f4f6"}; font-size: ${weightSize}px; font-weight: 500; white-space: nowrap; margin-top: 1px;">
+          ${displayValueText ? `<span style="color: ${isDark ? "#f3f4f6" : "#f3f4f6"}; font-size: ${weightSize}px; font-weight: 500; white-space: nowrap; margin-top: 1px;">
             ${displayValueText}
-          </span>
+          </span>` : ""}
         </div>`
       } else if (hasLogo) {
         // Logo + value only
@@ -394,9 +483,9 @@ export function ExposureTreemapHighchartsWithLogos({
                  onerror="this.style.display='none'"
             />
           </div>
-          <span style="color: ${isDark ? "#f3f4f6" : "#f3f4f6"}; font-size: ${weightSize}px; font-weight: 500; white-space: nowrap;">
+          ${displayValueText ? `<span style="color: ${isDark ? "#f3f4f6" : "#f3f4f6"}; font-size: ${weightSize}px; font-weight: 500; white-space: nowrap;">
             ${displayValueText}
-          </span>
+          </span>` : ""}
         </div>`
       } else if (hasTitle) {
         // Ticker/name + value only
@@ -404,17 +493,17 @@ export function ExposureTreemapHighchartsWithLogos({
           <span style="color: ${isDark ? "#f3f4f6" : "#f3f4f6"}; font-size: ${tickerSize}px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
             ${displayText}
           </span>
-          <span style="color: ${isDark ? "#f3f4f6" : "#f3f4f6"}; font-size: ${weightSize}px; font-weight: 500; white-space: nowrap; margin-top: 1px;">
+          ${displayValueText ? `<span style="color: ${isDark ? "#f3f4f6" : "#f3f4f6"}; font-size: ${weightSize}px; font-weight: 500; white-space: nowrap; margin-top: 1px;">
             ${displayValueText}
-          </span>
+          </span>` : ""}
         </div>`
       } else {
         // Value only
-        return `<div style="text-align: center; overflow: hidden; height: 100%; display: flex; align-items: center; justify-content: center;">
+        return displayValueText ? `<div style="text-align: center; overflow: hidden; height: 100%; display: flex; align-items: center; justify-content: center;">
           <span style="color: ${isDark ? "#f3f4f6" : "#f3f4f6"}; font-size: ${weightSize}px; font-weight: 500;">
             ${displayValueText}
           </span>
-        </div>`
+        </div>` : ""
       }
     }
 
@@ -580,6 +669,21 @@ export function ExposureTreemapHighchartsWithLogos({
       backgroundColor: "transparent",
       height: 300,
       margin: [0, 0, 0, 0],
+      events: {
+        fullscreenOpen: function() {
+          // Get current theme from DOM
+          const currentIsDark = document.documentElement.classList.contains('dark')
+          // Update chart background for fullscreen
+          this.update({
+            chart: {
+              backgroundColor: currentIsDark ? "#111827" : "#ffffff"
+            }
+          }, false)
+        },
+        fullscreenClose: function() {
+          // No need to update - chart returns to normal state automatically
+        }
+      }
     },
     title: {
       text: undefined,
@@ -751,6 +855,21 @@ export function ExposureTreemapHighchartsWithLogos({
       type: "pie",
       backgroundColor: "transparent",
       height: 300,
+      events: {
+        fullscreenOpen: function() {
+          // Get current theme from DOM
+          const currentIsDark = document.documentElement.classList.contains('dark')
+          // Update chart background for fullscreen
+          this.update({
+            chart: {
+              backgroundColor: currentIsDark ? "#111827" : "#ffffff"
+            }
+          }, false)
+        },
+        fullscreenClose: function() {
+          // No need to update - chart returns to normal state automatically
+        }
+      }
     },
     title: {
       text: undefined,
@@ -1101,7 +1220,8 @@ export function ExposureTreemapHighchartsWithLogos({
                   <span className="ml-auto text-xs text-gray-500">
                     {displayValue === "market-value" ? "Market value" :
                      displayValue === "pct-stocks" ? "Stock %" :
-                     "Portfolio %"}
+                     displayValue === "pct-portfolio" ? "Portfolio %" :
+                     "None"}
                   </span>
                 </DropdownMenuSubMenuTrigger>
                 <DropdownMenuSubMenuContent>
@@ -1117,6 +1237,9 @@ export function ExposureTreemapHighchartsWithLogos({
                     </DropdownMenuRadioItem>
                     <DropdownMenuRadioItem value="pct-portfolio" iconType="check">
                       Portfolio %
+                    </DropdownMenuRadioItem>
+                    <DropdownMenuRadioItem value="none" iconType="check">
+                      None
                     </DropdownMenuRadioItem>
                   </DropdownMenuRadioGroup>
                 </DropdownMenuSubMenuContent>
