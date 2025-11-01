@@ -256,6 +256,7 @@ export function ExposureTable({ holdings, accounts }: ExposureTableProps) {
           accounts={accounts}
           selectedAccount={selectedAccount}
           onAccountChange={setSelectedAccount}
+          logoUrls={logoUrls}
         />
       )}
 

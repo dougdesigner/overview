@@ -16,7 +16,6 @@ import {
   DropdownMenuSubMenuTrigger,
   DropdownMenuTrigger,
 } from "@/components/DropdownMenu"
-import { getCachedLogoUrls } from "@/lib/logoUtils"
 import { toProperCase } from "@/lib/utils"
 import { RiDownloadLine, RiExpandUpDownLine, RiFullscreenLine, RiLayout4Line, RiPieChartLine, RiSettings3Line } from "@remixicon/react"
 import Highcharts from "highcharts"
@@ -41,6 +40,7 @@ interface ExposureTreemapHighchartsProps {
   accounts: Account[]
   selectedAccount: string
   onAccountChange: (accountId: string) => void
+  logoUrls: Record<string, string | null>
 }
 
 type ChartType = "treemap" | "pie"
@@ -73,6 +73,7 @@ export function ExposureTreemapHighchartsWithLogos({
   accounts,
   selectedAccount,
   onAccountChange,
+  logoUrls,
 }: ExposureTreemapHighchartsProps) {
   const [chartType, setChartType] = useState<ChartType>("treemap")
   const [groupingMode, setGroupingMode] = useState<GroupingMode>("sector")
@@ -81,7 +82,6 @@ export function ExposureTreemapHighchartsWithLogos({
   const [titleMode, setTitleMode] = useState<TitleMode>("symbol")
   const [displayValue, setDisplayValue] = useState<DisplayValue>("pct-portfolio")
   const [modulesLoaded, setModulesLoaded] = useState(false)
-  const [logoUrls, setLogoUrls] = useState<Record<string, string | null>>({})
   const { theme } = useTheme()
   const isDark = theme === "dark"
   const chartRef = useRef<HighchartsReact.RefObject>(null)
@@ -113,26 +113,6 @@ export function ExposureTreemapHighchartsWithLogos({
     }
     setModulesLoaded(true)
   }, [])
-
-  // Batch fetch logo URLs when exposures change
-  useEffect(() => {
-    const fetchLogos = async () => {
-      const validExposures = exposures.filter(
-        (exp) => !exp.isETFBreakdown && exp.totalValue > 0,
-      )
-
-      if (validExposures.length === 0) return
-
-      // Extract unique tickers
-      const tickers = validExposures.map((exp) => exp.ticker)
-
-      // Batch fetch logos
-      const logos = await getCachedLogoUrls(tickers)
-      setLogoUrls(logos)
-    }
-
-    fetchLogos()
-  }, [exposures])
 
   // Simple color palette
   const colors = [
