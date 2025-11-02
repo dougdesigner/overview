@@ -2,6 +2,7 @@
 
 import { Button } from "@/components/Button"
 import { Card } from "@/components/Card"
+import { Tooltip } from "@/components/Tooltip"
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
@@ -1045,8 +1046,9 @@ export function ExposureTreemapHighchartsWithLogos({
 
         <div className="flex items-center gap-2">
           <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant="secondary" className="h-9 w-[280px] justify-between">
+            <Tooltip triggerAsChild content="Select account to view exposure breakdown">
+              <DropdownMenuTrigger asChild>
+                <Button variant="secondary" className="h-9 w-[280px] justify-between">
                 <span className="flex items-center gap-2">
                   {selectedAccount === "all" ? (
                     "All Accounts"
@@ -1064,7 +1066,8 @@ export function ExposureTreemapHighchartsWithLogos({
                 </span>
                 <RiExpandUpDownLine className="size-4 text-gray-400 dark:text-gray-600" aria-hidden="true" />
               </Button>
-            </DropdownMenuTrigger>
+              </DropdownMenuTrigger>
+            </Tooltip>
             <DropdownMenuContent align="start" className="w-[280px]">
               <DropdownMenuLabel>ACCOUNT</DropdownMenuLabel>
               <DropdownMenuSeparator />
@@ -1091,15 +1094,17 @@ export function ExposureTreemapHighchartsWithLogos({
           </DropdownMenu>
 
           <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant="secondary" className="h-9 w-[180px] justify-between">
-                <span>
-                  {groupingMode === "none" ? "No group" :
-                   groupingMode === "sector" ? "Sector" : "Industry"}
-                </span>
-                <RiExpandUpDownLine className="size-4 text-gray-400 dark:text-gray-600" aria-hidden="true" />
-              </Button>
-            </DropdownMenuTrigger>
+            <Tooltip triggerAsChild content="Group holdings by sector, industry, or show all stocks">
+              <DropdownMenuTrigger asChild>
+                <Button variant="secondary" className="h-9 w-[180px] justify-between">
+                  <span>
+                    {groupingMode === "none" ? "No group" :
+                     groupingMode === "sector" ? "Sector" : "Industry"}
+                  </span>
+                  <RiExpandUpDownLine className="size-4 text-gray-400 dark:text-gray-600" aria-hidden="true" />
+                </Button>
+              </DropdownMenuTrigger>
+            </Tooltip>
             <DropdownMenuContent align="start" className="w-[180px]">
               <DropdownMenuLabel>GROUP BY</DropdownMenuLabel>
               <DropdownMenuSeparator />
@@ -1120,24 +1125,28 @@ export function ExposureTreemapHighchartsWithLogos({
             </DropdownMenuContent>
           </DropdownMenu>
 
-          <Button
-            variant="secondary"
-            className="h-9"
-            onClick={() => setChartType(chartType === "treemap" ? "pie" : "treemap")}
-          >
-            {chartType === "treemap" ? (
-              <RiPieChartLine className="size-4" aria-hidden="true" />
-            ) : (
-              <RiLayout4Line className="size-4" aria-hidden="true" />
-            )}
-          </Button>
+          <Tooltip triggerAsChild content="Switch between treemap and pie chart views">
+            <Button
+              variant="secondary"
+              className="h-9"
+              onClick={() => setChartType(chartType === "treemap" ? "pie" : "treemap")}
+            >
+              {chartType === "treemap" ? (
+                <RiPieChartLine className="size-4" aria-hidden="true" />
+              ) : (
+                <RiLayout4Line className="size-4" aria-hidden="true" />
+              )}
+            </Button>
+          </Tooltip>
 
           <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant="secondary" className="h-9">
-                <RiDownloadLine className="size-4" aria-hidden="true" />
-              </Button>
-            </DropdownMenuTrigger>
+            <Tooltip triggerAsChild content="Export chart as image or data file">
+              <DropdownMenuTrigger asChild>
+                <Button variant="secondary" className="h-9">
+                  <RiDownloadLine className="size-4" aria-hidden="true" />
+                </Button>
+              </DropdownMenuTrigger>
+            </Tooltip>
             <DropdownMenuContent align="end" className="w-56">
               <DropdownMenuLabel>EXPORT OPTIONS</DropdownMenuLabel>
               <DropdownMenuSeparator />
@@ -1168,11 +1177,13 @@ export function ExposureTreemapHighchartsWithLogos({
           </DropdownMenu>
 
           <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant="secondary" className="h-9">
-                <RiSettings3Line className="size-4" aria-hidden="true" />
-              </Button>
-            </DropdownMenuTrigger>
+            <Tooltip triggerAsChild content="Configure chart display options">
+              <DropdownMenuTrigger asChild>
+                <Button variant="secondary" className="h-9">
+                  <RiSettings3Line className="size-4" aria-hidden="true" />
+                </Button>
+              </DropdownMenuTrigger>
+            </Tooltip>
             <DropdownMenuContent align="end" className="w-56">
               <DropdownMenuLabel>DISPLAY SETTINGS</DropdownMenuLabel>
               <DropdownMenuSeparator />
@@ -1247,13 +1258,15 @@ export function ExposureTreemapHighchartsWithLogos({
             </DropdownMenuContent>
           </DropdownMenu>
 
-          <Button
-            variant="secondary"
-            className="h-9"
-            onClick={() => handleExport("fullscreen")}
-          >
-            <RiFullscreenLine className="size-4" aria-hidden="true" />
-          </Button>
+          <Tooltip triggerAsChild content="View chart in fullscreen mode">
+            <Button
+              variant="secondary"
+              className="h-9"
+              onClick={() => handleExport("fullscreen")}
+            >
+              <RiFullscreenLine className="size-4" aria-hidden="true" />
+            </Button>
+          </Tooltip>
         </div>
       </div>
 

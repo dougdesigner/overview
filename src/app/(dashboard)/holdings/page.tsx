@@ -248,7 +248,12 @@ function HoldingsContent() {
       {/* Hero Visualization - Sunburst Chart - Only show when there are holdings */}
       {holdings.length > 0 && (
         <div className="mt-8">
-          <HoldingsSunburst holdings={holdingsWithAllocations} />
+          <HoldingsSunburst
+            holdings={holdingsWithAllocations}
+            accounts={accounts}
+            selectedAccountId={currentAccountFilter}
+            onAccountChange={setCurrentAccountFilter}
+          />
         </div>
       )}
 

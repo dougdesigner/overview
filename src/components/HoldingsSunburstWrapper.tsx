@@ -1,7 +1,7 @@
 import dynamic from "next/dynamic"
 
 export const HoldingsSunburst = dynamic(
-  () => import("./HoldingsSunburst").then(mod => ({ default: mod.HoldingsSunburst })),
+  () => import("./HoldingsSunburstEnhanced").then(mod => ({ default: mod.HoldingsSunburstEnhanced })),
   {
     ssr: false,
     loading: () => (
