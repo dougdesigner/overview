@@ -9,6 +9,12 @@ export interface Holding {
   marketValue: number
   allocation: number // Percentage
   type: "stock" | "fund" | "cash"
+  // Price change data
+  previousClose?: number
+  changePercent?: number // Day change percentage
+  changeAmount?: number // Day change in dollars
+  marketValueChange?: number // Position value change in dollars
+  priceUpdatedAt?: string // ISO timestamp of last price update
   // For nested rows
   subRows?: Holding[]
   isGroup?: boolean // True for parent rows that aggregate multiple holdings

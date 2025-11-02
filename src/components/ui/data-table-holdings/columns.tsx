@@ -360,6 +360,52 @@ export const createColumns = ({
           className="flex w-full items-center justify-end gap-1 font-medium hover:text-gray-900 dark:hover:text-gray-50"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
+          Day Change (%)
+          {column.getIsSorted() === "asc" && (
+            <RiArrowUpSLine className="h-4 w-4" />
+          )}
+          {column.getIsSorted() === "desc" && (
+            <RiArrowDownSLine className="h-4 w-4" />
+          )}
+        </button>
+      )
+    },
+    accessorKey: "changePercent",
+    cell: ({ row }) => {
+      const changePercent = row.original.changePercent
+      if (row.original.type === "cash" || changePercent === undefined) {
+        return <span className="text-gray-400">—</span>
+      }
+
+      const isPositive = changePercent >= 0
+      return (
+        <span className={cx(
+          "font-medium",
+          isPositive ? "text-green-600 dark:text-green-500" : "text-red-600 dark:text-red-500"
+        )}>
+          {isPositive && "+"}
+          {formatPercentage(changePercent)}
+        </span>
+      )
+    },
+    sortingFn: (rowA, rowB) => {
+      const changeA = rowA.original.changePercent || 0
+      const changeB = rowB.original.changePercent || 0
+      return changeA - changeB
+    },
+    enableSorting: true,
+    meta: {
+      className: "text-right",
+      displayName: "Day Change (%)",
+    },
+  },
+  {
+    header: ({ column }) => {
+      return (
+        <button
+          className="flex w-full items-center justify-end gap-1 font-medium hover:text-gray-900 dark:hover:text-gray-50"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
           Market Value
           {column.getIsSorted() === "asc" && (
             <RiArrowUpSLine className="h-4 w-4" />
@@ -379,6 +425,57 @@ export const createColumns = ({
     meta: {
       className: "text-right",
       displayName: "Market Value",
+    },
+  },
+  {
+    header: ({ column }) => {
+      return (
+        <button
+          className="flex w-full items-center justify-end gap-1 font-medium hover:text-gray-900 dark:hover:text-gray-50"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          MV Day Change
+          {column.getIsSorted() === "asc" && (
+            <RiArrowUpSLine className="h-4 w-4" />
+          )}
+          {column.getIsSorted() === "desc" && (
+            <RiArrowDownSLine className="h-4 w-4" />
+          )}
+        </button>
+      )
+    },
+    accessorKey: "marketValueChange",
+    cell: ({ row }) => {
+      // Calculate market value change based on quantity and price change
+      const quantity = row.original.quantity
+      const changeAmount = row.original.changeAmount
+
+      if (row.original.type === "cash" || changeAmount === undefined || quantity === undefined) {
+        return <span className="text-gray-400">—</span>
+      }
+
+      const marketValueChange = quantity * changeAmount
+      const isPositive = marketValueChange >= 0
+
+      return (
+        <span className={cx(
+          "font-medium",
+          isPositive ? "text-green-600 dark:text-green-500" : "text-red-600 dark:text-red-500"
+        )}>
+          {isPositive && "+"}
+          {formatCurrency(Math.abs(marketValueChange))}
+        </span>
+      )
+    },
+    sortingFn: (rowA, rowB) => {
+      const changeA = (rowA.original.quantity || 0) * (rowA.original.changeAmount || 0)
+      const changeB = (rowB.original.quantity || 0) * (rowB.original.changeAmount || 0)
+      return changeA - changeB
+    },
+    enableSorting: true,
+    meta: {
+      className: "text-right",
+      displayName: "Market Value Day Change",
     },
   },
   {

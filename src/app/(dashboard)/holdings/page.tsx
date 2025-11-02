@@ -9,7 +9,7 @@ import {
 } from "@/components/ui/HoldingsDrawer"
 import { HoldingsTable } from "@/components/ui/data-table-holdings/HoldingsTable"
 import { Holding } from "@/components/ui/data-table-holdings/types"
-import { RiAddLine } from "@remixicon/react"
+import { RiAddLine, RiRefreshLine } from "@remixicon/react"
 import { useSearchParams } from "next/navigation"
 import React, { Suspense, useMemo } from "react"
 import { usePortfolioStore } from "@/hooks/usePortfolioStore"
@@ -25,6 +25,7 @@ function HoldingsContent() {
   const [currentAccountFilter, setCurrentAccountFilter] = React.useState<string>(
     searchParams.get("account") || "all"
   )
+  const [isRefreshing, setIsRefreshing] = React.useState(false)
 
   // Use portfolio store for accounts and holdings data
   const {
@@ -35,7 +36,8 @@ function HoldingsContent() {
     addHolding,
     updateHolding,
     deleteHolding,
-    refreshETFNames
+    refreshETFNames,
+    updatePrices
   } = usePortfolioStore()
 
   // Convert accounts to the format expected by components
@@ -199,6 +201,15 @@ function HoldingsContent() {
     deleteHolding(holdingId)
   }
 
+  const handleRefreshPrices = async () => {
+    setIsRefreshing(true)
+    try {
+      await updatePrices()
+    } finally {
+      setIsRefreshing(false)
+    }
+  }
+
   // Show loading state
   // Remove loading state check to prevent stuck loading screen
   // The empty state will show immediately for new users
@@ -215,13 +226,26 @@ function HoldingsContent() {
           </p>
         </div>
         {accounts.length > 0 && (
-          <Button
-            onClick={() => setIsOpen(true)}
-            className="flex items-center gap-2 text-base sm:text-sm"
-          >
-            Add Holdings
-            <RiAddLine className="-mr-0.5 size-5 shrink-0" aria-hidden="true" />
-          </Button>
+          <div className="flex gap-2">
+            {holdings.length > 0 && (
+              <Button
+                onClick={handleRefreshPrices}
+                variant="secondary"
+                disabled={isRefreshing}
+                className="flex items-center gap-2 text-base sm:text-sm"
+              >
+                {isRefreshing ? "Refreshing..." : "Refresh Prices"}
+                <RiRefreshLine className={`-mr-0.5 size-5 shrink-0 ${isRefreshing ? 'animate-spin' : ''}`} aria-hidden="true" />
+              </Button>
+            )}
+            <Button
+              onClick={() => setIsOpen(true)}
+              className="flex items-center gap-2 text-base sm:text-sm"
+            >
+              Add Holdings
+              <RiAddLine className="-mr-0.5 size-5 shrink-0" aria-hidden="true" />
+            </Button>
+          </div>
         )}
         <HoldingsDrawer
           open={isOpen}

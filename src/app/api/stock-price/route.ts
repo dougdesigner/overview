@@ -1,8 +1,14 @@
 import { NextRequest, NextResponse } from "next/server"
+import { promises as fs } from "fs"
+import path from "path"
 
-// Cache for 15 minutes
+// Memory cache for 15 minutes
 const PRICE_CACHE_DURATION = 15 * 60 * 1000
 const priceCache = new Map<string, { data: any; timestamp: number }>()
+
+// File cache for 24 hours
+const FILE_CACHE_DURATION = 24 * 60 * 60 * 1000 // 24 hours
+const CACHE_DIR = path.join(process.cwd(), "src", "data", "stock-prices")
 
 // Mock prices for development/fallback
 const MOCK_PRICES: Record<string, any> = {
@@ -47,6 +53,64 @@ interface AlphaVantageTimeSeriesResponse {
   }
 }
 
+interface CachedPriceData {
+  lastPrice: number
+  previousClose: number
+  changePercent: number
+  changeAmount: number
+  marketValueChange?: number
+  volume: number
+  open?: number
+  high?: number
+  low?: number
+  close?: number
+  dividendAmount?: number
+  lastUpdated: string
+  cachedAt: string
+  source: string
+}
+
+// Helper function to read cached price data
+async function readCachedPrice(symbol: string): Promise<CachedPriceData | null> {
+  try {
+    const filePath = path.join(CACHE_DIR, `${symbol}.json`)
+    const fileContent = await fs.readFile(filePath, "utf-8")
+    const data = JSON.parse(fileContent)
+
+    // Check if cache is still valid (24 hours)
+    const cachedAt = new Date(data.cachedAt).getTime()
+    if (Date.now() - cachedAt > FILE_CACHE_DURATION) {
+      return null // Cache expired
+    }
+
+    return data
+  } catch (error) {
+    // File doesn't exist or can't be read
+    return null
+  }
+}
+
+// Helper function to write price data to cache
+async function writeCachedPrice(symbol: string, data: any): Promise<void> {
+  try {
+    // Ensure directory exists
+    await fs.mkdir(CACHE_DIR, { recursive: true })
+
+    const filePath = path.join(CACHE_DIR, `${symbol}.json`)
+    const dataToCache: CachedPriceData = {
+      ...data,
+      changeAmount: data.lastPrice - data.previousClose,
+      cachedAt: new Date().toISOString(),
+      source: "Alpha Vantage API"
+    }
+
+    await fs.writeFile(filePath, JSON.stringify(dataToCache, null, 2))
+    console.log(`Cached price data for ${symbol}`)
+  } catch (error) {
+    console.error(`Failed to cache price for ${symbol}:`, error)
+  }
+}
+
 export async function POST(request: NextRequest) {
   try {
     const { symbols } = await request.json()
@@ -64,10 +128,23 @@ export async function POST(request: NextRequest) {
     for (const symbol of symbols) {
       const upperSymbol = symbol.toUpperCase()
 
-      // Check cache first
+      // Check memory cache first
       const cached = priceCache.get(upperSymbol)
       if (cached && Date.now() - cached.timestamp < PRICE_CACHE_DURATION) {
         results[upperSymbol] = cached.data
+        continue
+      }
+
+      // Check file cache
+      const fileCached = await readCachedPrice(upperSymbol)
+      if (fileCached) {
+        console.log(`Using file cached price for ${upperSymbol}`)
+        results[upperSymbol] = fileCached
+        // Also update memory cache
+        priceCache.set(upperSymbol, {
+          data: fileCached,
+          timestamp: Date.now()
+        })
         continue
       }
 
@@ -77,8 +154,11 @@ export async function POST(request: NextRequest) {
           lastPrice: 100 + Math.random() * 100,
           previousClose: 100,
           changePercent: (Math.random() - 0.5) * 5,
+          changeAmount: 0,
           volume: Math.floor(Math.random() * 10000000)
         }
+        // Calculate changeAmount for mock data
+        mockPrice.changeAmount = mockPrice.lastPrice - mockPrice.previousClose
         results[upperSymbol] = mockPrice
         continue
       }
@@ -117,11 +197,13 @@ export async function POST(request: NextRequest) {
               const lastPrice = parseFloat(todayData["5. adjusted close"])
               const previousClose = parseFloat(yesterdayData["5. adjusted close"])
               const changePercent = ((lastPrice - previousClose) / previousClose) * 100
+              const changeAmount = lastPrice - previousClose
 
               const priceData = {
                 lastPrice,
                 previousClose,
                 changePercent,
+                changeAmount,
                 volume: parseInt(todayData["6. volume"]),
                 open: parseFloat(todayData["1. open"]),
                 high: parseFloat(todayData["2. high"]),
@@ -131,11 +213,14 @@ export async function POST(request: NextRequest) {
                 lastUpdated: dates[0]
               }
 
-              // Cache the result
+              // Cache the result in memory
               priceCache.set(upperSymbol, {
                 data: priceData,
                 timestamp: Date.now()
               })
+
+              // Save to file cache
+              await writeCachedPrice(upperSymbol, priceData)
 
               results[upperSymbol] = priceData
             }

@@ -712,48 +712,80 @@ export function usePortfolioStore() {
 
   // Update prices for all holdings
   const updatePrices = useCallback(async () => {
-    const tickersToUpdate = holdings
-      .filter(h => h.ticker && h.type !== "cash")
-      .map(h => h.ticker!)
+    // Use functional update to get current holdings without dependency
+    setHoldingsState(prevHoldings => {
+      const tickersToUpdate = prevHoldings
+        .filter(h => h.ticker && h.type !== "cash")
+        .map(h => h.ticker!)
 
-    if (tickersToUpdate.length === 0) return
+      if (tickersToUpdate.length === 0) return prevHoldings
 
-    try {
-      const prices = await stockPriceService.getPrices(tickersToUpdate)
+      // Fetch prices asynchronously
+      stockPriceService.getPrices(tickersToUpdate).then(prices => {
+        setHoldingsState(currentHoldings => {
+          let hasChanges = false
 
-      // Update holdings with new prices
-      const updatedHoldings = holdings.map(holding => {
-        if (holding.ticker && prices.has(holding.ticker)) {
-          const priceData = prices.get(holding.ticker)!
-          const newMarketValue = holding.quantity * priceData.lastPrice
-          return {
-            ...holding,
-            lastPrice: priceData.lastPrice,
-            marketValue: newMarketValue
+          // Update holdings with new prices and price change data
+          const updatedHoldings = currentHoldings.map(holding => {
+            if (holding.ticker && prices.has(holding.ticker.toUpperCase())) {
+              const priceData = prices.get(holding.ticker.toUpperCase())!
+
+              // Check if price actually changed
+              if (holding.lastPrice !== priceData.lastPrice) {
+                hasChanges = true
+                const newMarketValue = holding.quantity * priceData.lastPrice
+                const changeAmount = priceData.lastPrice - priceData.previousClose
+                const marketValueChange = holding.quantity * changeAmount
+
+                return {
+                  ...holding,
+                  lastPrice: priceData.lastPrice,
+                  previousClose: priceData.previousClose,
+                  changePercent: priceData.changePercent,
+                  changeAmount: changeAmount,
+                  marketValue: newMarketValue,
+                  marketValueChange: marketValueChange,
+                  priceUpdatedAt: new Date().toISOString()
+                }
+              }
+            }
+            return holding
+          })
+
+          // Only update if prices actually changed
+          if (hasChanges) {
+            // Save to localStorage
+            setToStorage(STORAGE_KEYS.holdings, updatedHoldings)
+            return updatedHoldings
           }
-        }
-        return holding
+
+          return currentHoldings
+        })
+      }).catch(error => {
+        console.error("Error updating prices:", error)
       })
 
-      // Only update if prices actually changed
-      if (JSON.stringify(updatedHoldings) !== JSON.stringify(holdings)) {
-        setHoldingsState(updatedHoldings)
-      }
-    } catch (error) {
-      console.error("Error updating prices:", error)
-    }
-  }, [holdings])
+      return prevHoldings
+    })
+  }, [])
 
   // Force refresh ETF names
   const refreshETFNames = useCallback(async () => {
     console.log("Refreshing ETF names...")
-    const migratedHoldings = await migrateETFNames(holdings)
-    if (JSON.stringify(migratedHoldings) !== JSON.stringify(holdings)) {
-      setHoldingsState(migratedHoldings)
-      setToStorage(STORAGE_KEYS.holdings, migratedHoldings)
-      console.log("ETF names refreshed and saved")
-    }
-  }, [holdings])
+    // Get current holdings from state without creating dependency
+    setHoldingsState(prevHoldings => {
+      migrateETFNames(prevHoldings).then(migratedHoldings => {
+        if (JSON.stringify(migratedHoldings) !== JSON.stringify(prevHoldings)) {
+          setHoldingsState(migratedHoldings)
+          setToStorage(STORAGE_KEYS.holdings, migratedHoldings)
+          console.log("ETF names refreshed and saved")
+        }
+      }).catch(error => {
+        console.error("Error refreshing ETF names:", error)
+      })
+      return prevHoldings
+    })
+  }, [])
 
   // Auto-update prices on mount and periodically
   useEffect(() => {

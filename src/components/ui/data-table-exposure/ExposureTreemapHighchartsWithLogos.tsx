@@ -1056,7 +1056,7 @@ export function ExposureTreemapHighchartsWithLogos({
                     <>
                       <InstitutionLogo
                         institution={accounts.find(a => a.id === selectedAccount)?.institution || ""}
-                        size="xs"
+                        className="size-4"
                       />
                       <span className="truncate">
                         {accounts.find(a => a.id === selectedAccount)?.name || "Select account"}
@@ -1083,7 +1083,7 @@ export function ExposureTreemapHighchartsWithLogos({
                     <div className="flex items-center gap-2">
                       <InstitutionLogo
                         institution={account.institution}
-                        size="xs"
+                        className="size-4"
                       />
                       <span className="truncate">{account.name}</span>
                     </div>
