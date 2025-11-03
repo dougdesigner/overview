@@ -5,6 +5,7 @@ import { Button } from "@/components/Button"
 import { Card } from "@/components/Card"
 import { Divider } from "@/components/Divider"
 import { SankeyChartHighcharts } from "@/components/SankeyChartHighchartsWrapper"
+import { AccountTreemap } from "@/components/AccountTreemapWrapper"
 import {
   AccountDrawer,
   type AccountFormData,
@@ -14,9 +15,29 @@ import {
   institutionLabels,
   usePortfolioStore,
 } from "@/hooks/usePortfolioStore"
-import { RiAddLine } from "@remixicon/react"
+import {
+  RiAddLine,
+  RiArrowUpDownLine,
+  RiPercentLine,
+  RiEyeOffLine,
+  RiFlowChart,
+  RiNodeTree
+} from "@remixicon/react"
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+  DropdownMenuCheckboxItem,
+  DropdownMenuRadioGroup,
+  DropdownMenuRadioItem,
+  DropdownMenuSeparator,
+} from "@/components/DropdownMenu"
+import { Tooltip } from "@/components/Tooltip"
+import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@/components/Select"
 import { useRouter } from "next/navigation"
 import React from "react"
+import type { AccountGrouping, AccountDisplayValue } from "@/components/AccountTreemap"
 
 export default function AccountsPage() {
   const router = useRouter()
@@ -27,6 +48,12 @@ export default function AccountsPage() {
   const [editingAccount, setEditingAccount] = React.useState<
     ReturnType<typeof usePortfolioStore>["accounts"][0] | null
   >(null)
+
+  // Chart view state
+  const [chartType, setChartType] = React.useState<"sankey" | "treemap">("sankey")
+  const [selectedAccounts, setSelectedAccounts] = React.useState<string[]>([])
+  const [groupBy, setGroupBy] = React.useState<AccountGrouping>("institution")
+  const [displayValue, setDisplayValue] = React.useState<AccountDisplayValue>("value")
 
   // Use the portfolio store for accounts data
   const {
@@ -163,78 +190,226 @@ export default function AccountsPage() {
       </div>
       <Divider />
 
-      {/* Account Flow Sankey Chart - only show when there are holdings */}
+      {/* Account Flow Chart - only show when there are holdings */}
       {accounts.length > 0 && holdings.length > 0 && (
         <Card className="mt-8">
-          <p className="py-1.5 text-base font-medium text-gray-900 dark:text-gray-50">
-            Account flow
-          </p>
-          <SankeyChartHighcharts
-            data={{
-              nodes: [
-                // Account nodes (left side) - dynamically generated from accounts
-                ...accounts.map((account) => ({ id: account.name })),
-                // Portfolio Total (center)
-                { id: "Portfolio Total" },
-                // Asset type nodes (right side)
-                { id: "U.S. Stocks" },
-                { id: "Non-U.S. Stocks" },
-                { id: "Fixed Income" },
-                { id: "Cash" },
-              ],
-              links: [
-                // Accounts to Portfolio Total
-                ...accounts.map((account) => ({
-                  source: account.name,
-                  target: "Portfolio Total",
-                  value: account.totalValue,
-                })),
-                // Portfolio Total to Asset Types - calculate from account allocations
-                {
-                  source: "Portfolio Total",
-                  target: "U.S. Stocks",
-                  value: accounts.reduce(
-                    (sum, acc) =>
-                      sum +
-                      (acc.totalValue * acc.assetAllocation.usStocks) / 100,
-                    0,
-                  ),
-                },
-                {
-                  source: "Portfolio Total",
-                  target: "Non-U.S. Stocks",
-                  value: accounts.reduce(
-                    (sum, acc) =>
-                      sum +
-                      (acc.totalValue * acc.assetAllocation.nonUsStocks) / 100,
-                    0,
-                  ),
-                },
-                {
-                  source: "Portfolio Total",
-                  target: "Fixed Income",
-                  value: accounts.reduce(
-                    (sum, acc) =>
-                      sum +
-                      (acc.totalValue * acc.assetAllocation.fixedIncome) / 100,
-                    0,
-                  ),
-                },
-                {
-                  source: "Portfolio Total",
-                  target: "Cash",
-                  value: accounts.reduce(
-                    (sum, acc) =>
-                      sum + (acc.totalValue * acc.assetAllocation.cash) / 100,
-                    0,
-                  ),
-                },
-              ],
-            }}
-            colors={["blue", "cyan", "amber", "emerald"]}
-            accountColors={["violet", "fuchsia", "pink", "sky", "lime"]}
-            height={350}
-          />
+          <div className="flex flex-col gap-4">
+            {/* Title and Controls Row */}
+            <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+              <p className="text-base font-medium text-gray-900 dark:text-gray-50">
+                Account Flow
+              </p>
+              <div className="flex flex-wrap items-center gap-2">
+                {/* Chart Type Toggle */}
+                <DropdownMenu>
+                  <Tooltip content="Switch chart type" triggerAsChild>
+                    <DropdownMenuTrigger asChild>
+                      <Button
+                        variant="secondary"
+                        className="flex h-9 items-center gap-2 px-3 text-sm"
+                      >
+                        {chartType === "sankey" ? (
+                          <>
+                            <RiFlowChart className="size-4 shrink-0" />
+                            Sankey
+                          </>
+                        ) : (
+                          <>
+                            <RiNodeTree className="size-4 shrink-0" />
+                            Treemap
+                          </>
+                        )}
+                      </Button>
+                    </DropdownMenuTrigger>
+                  </Tooltip>
+                  <DropdownMenuContent align="end" className="w-40">
+                    <DropdownMenuRadioGroup
+                      value={chartType}
+                      onValueChange={(value) => setChartType(value as "sankey" | "treemap")}
+                    >
+                      <DropdownMenuRadioItem value="sankey">
+                        <RiFlowChart className="mr-2 size-4" />
+                        Sankey
+                      </DropdownMenuRadioItem>
+                      <DropdownMenuRadioItem value="treemap">
+                        <RiNodeTree className="mr-2 size-4" />
+                        Treemap
+                      </DropdownMenuRadioItem>
+                    </DropdownMenuRadioGroup>
+                  </DropdownMenuContent>
+                </DropdownMenu>
+
+                {/* Account Filter (for Treemap) */}
+                {chartType === "treemap" && (
+                  <Select
+                    value={selectedAccounts.length === 0 ? "all" : selectedAccounts.join(",")}
+                    onValueChange={(value) => {
+                      if (value === "all") {
+                        setSelectedAccounts([])
+                      } else {
+                        setSelectedAccounts(value.split(","))
+                      }
+                    }}
+                  >
+                    <SelectTrigger className="h-9 w-[180px] text-sm">
+                      <SelectValue placeholder="Filter accounts">
+                        {selectedAccounts.length === 0
+                          ? "All accounts"
+                          : selectedAccounts.length === 1
+                            ? accounts.find(a => a.id === selectedAccounts[0])?.name || "1 account"
+                            : `${selectedAccounts.length} accounts`}
+                      </SelectValue>
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectGroup>
+                        <SelectItem value="all">All accounts</SelectItem>
+                        {accounts.map((account) => (
+                          <SelectItem key={account.id} value={account.id}>
+                            {account.name}
+                          </SelectItem>
+                        ))}
+                      </SelectGroup>
+                    </SelectContent>
+                  </Select>
+                )}
+
+                {/* Group By (for Treemap) */}
+                {chartType === "treemap" && (
+                  <Select value={groupBy} onValueChange={(value) => setGroupBy(value as AccountGrouping)}>
+                    <SelectTrigger className="h-9 w-[180px] text-sm">
+                      <SelectValue placeholder="Group by" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectGroup>
+                        <SelectItem value="institution">Institution</SelectItem>
+                        <SelectItem value="type">Account Type</SelectItem>
+                        <SelectItem value="institution-type">Institution & Type</SelectItem>
+                      </SelectGroup>
+                    </SelectContent>
+                  </Select>
+                )}
+
+                {/* Display Settings (for Treemap) */}
+                {chartType === "treemap" && (
+                  <DropdownMenu>
+                    <Tooltip content="Display value settings" triggerAsChild>
+                      <DropdownMenuTrigger asChild>
+                        <Button
+                          variant="secondary"
+                          className="flex h-9 items-center gap-2 px-3 text-sm"
+                        >
+                          {displayValue === "value" ? (
+                            <RiArrowUpDownLine className="size-4 shrink-0" />
+                          ) : displayValue === "allocation" ? (
+                            <RiPercentLine className="size-4 shrink-0" />
+                          ) : (
+                            <RiEyeOffLine className="size-4 shrink-0" />
+                          )}
+                          <span className="hidden sm:inline">Display</span>
+                        </Button>
+                      </DropdownMenuTrigger>
+                    </Tooltip>
+                    <DropdownMenuContent align="end" className="w-48">
+                      <DropdownMenuRadioGroup value={displayValue} onValueChange={(value) => setDisplayValue(value as AccountDisplayValue)}>
+                        <DropdownMenuRadioItem value="value">
+                          <RiArrowUpDownLine className="mr-2 size-4" />
+                          Market Value
+                        </DropdownMenuRadioItem>
+                        <DropdownMenuRadioItem value="allocation">
+                          <RiPercentLine className="mr-2 size-4" />
+                          Allocation %
+                        </DropdownMenuRadioItem>
+                        <DropdownMenuRadioItem value="none">
+                          <RiEyeOffLine className="mr-2 size-4" />
+                          None
+                        </DropdownMenuRadioItem>
+                      </DropdownMenuRadioGroup>
+                    </DropdownMenuContent>
+                  </DropdownMenu>
+                )}
+              </div>
+            </div>
+
+            {/* Chart */}
+            <div>
+              {chartType === "sankey" ? (
+                <SankeyChartHighcharts
+                  data={{
+                    nodes: [
+                      // Account nodes (left side) - dynamically generated from accounts
+                      ...accounts.map((account) => ({ id: account.name })),
+                      // Portfolio Total (center)
+                      { id: "Portfolio Total" },
+                      // Asset type nodes (right side)
+                      { id: "U.S. Stocks" },
+                      { id: "Non-U.S. Stocks" },
+                      { id: "Fixed Income" },
+                      { id: "Cash" },
+                    ],
+                    links: [
+                      // Accounts to Portfolio Total
+                      ...accounts.map((account) => ({
+                        source: account.name,
+                        target: "Portfolio Total",
+                        value: account.totalValue,
+                      })),
+                      // Portfolio Total to Asset Types - calculate from account allocations
+                      {
+                        source: "Portfolio Total",
+                        target: "U.S. Stocks",
+                        value: accounts.reduce(
+                          (sum, acc) =>
+                            sum +
+                            (acc.totalValue * acc.assetAllocation.usStocks) / 100,
+                          0,
+                        ),
+                      },
+                      {
+                        source: "Portfolio Total",
+                        target: "Non-U.S. Stocks",
+                        value: accounts.reduce(
+                          (sum, acc) =>
+                            sum +
+                            (acc.totalValue * acc.assetAllocation.nonUsStocks) / 100,
+                          0,
+                        ),
+                      },
+                      {
+                        source: "Portfolio Total",
+                        target: "Fixed Income",
+                        value: accounts.reduce(
+                          (sum, acc) =>
+                            sum +
+                            (acc.totalValue * acc.assetAllocation.fixedIncome) / 100,
+                          0,
+                        ),
+                      },
+                      {
+                        source: "Portfolio Total",
+                        target: "Cash",
+                        value: accounts.reduce(
+                          (sum, acc) =>
+                            sum + (acc.totalValue * acc.assetAllocation.cash) / 100,
+                          0,
+                        ),
+                      },
+                    ],
+                  }}
+                  colors={["blue", "cyan", "amber", "emerald"]}
+                  accountColors={["violet", "fuchsia", "pink", "sky", "lime"]}
+                  height={350}
+                />
+              ) : (
+                <AccountTreemap
+                  accounts={accounts}
+                  selectedAccounts={selectedAccounts}
+                  groupBy={groupBy}
+                  displayValue={displayValue}
+                  height={350}
+                />
+              )}
+            </div>
+          </div>
         </Card>
       )}
 

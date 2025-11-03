@@ -610,6 +610,7 @@ export function ExposureTreemapHighchartsWithLogos({
     )
 
     const data: PieChartPoint[] = []
+    const THRESHOLD_PERCENTAGE = 1.0 // 1% threshold
 
     // Handle "none" mode - show individual stocks with single color
     if (groupingMode === "none") {
@@ -617,7 +618,24 @@ export function ExposureTreemapHighchartsWithLogos({
         (a, b) => b.totalValue - a.totalValue,
       )
 
+      // Calculate total value for percentage calculation
+      const totalValue = sortedExposures.reduce((sum, exp) => sum + exp.totalValue, 0)
+
+      // Separate main and small segments
+      const mainSegments: typeof sortedExposures = []
+      const smallSegments: typeof sortedExposures = []
+
       sortedExposures.forEach((stock) => {
+        const percentage = (stock.totalValue / totalValue) * 100
+        if (percentage >= THRESHOLD_PERCENTAGE) {
+          mainSegments.push(stock)
+        } else {
+          smallSegments.push(stock)
+        }
+      })
+
+      // Add main segments
+      mainSegments.forEach((stock) => {
         const logoUrl = logoUrls[stock.ticker.toUpperCase()] ?? null
         data.push({
           name: stock.ticker,
@@ -629,6 +647,22 @@ export function ExposureTreemapHighchartsWithLogos({
           companyName: stock.name,
         })
       })
+
+      // Add "Others" segment if there are small segments
+      if (smallSegments.length > 0) {
+        const othersTotal = smallSegments.reduce((sum, stock) => sum + stock.totalValue, 0)
+        const othersPercentage = (othersTotal / totalValue) * 100
+
+        data.push({
+          name: `Others (${smallSegments.length} stocks)`,
+          y: othersTotal,
+          actualValue: othersTotal,
+          color: '#9ca3af', // Gray color for others
+          custom: {
+            description: `${smallSegments.length} stocks < 1% each (${othersPercentage.toFixed(1)}% total)`
+          }
+        })
+      }
 
       return data
     }
@@ -650,8 +684,24 @@ export function ExposureTreemapHighchartsWithLogos({
     // Convert to array and sort by value
     const sortedGroups = Array.from(groups.entries()).sort((a, b) => b[1] - a[1])
 
-    // Add each group with consistent color mapping
+    // Calculate total value for percentage calculation
+    const totalValue = sortedGroups.reduce((sum, [, value]) => sum + value, 0)
+
+    // Separate main and small segments
+    const mainGroups: typeof sortedGroups = []
+    const smallGroups: typeof sortedGroups = []
+
     sortedGroups.forEach(([groupName, value]) => {
+      const percentage = (value / totalValue) * 100
+      if (percentage >= THRESHOLD_PERCENTAGE) {
+        mainGroups.push([groupName, value])
+      } else {
+        smallGroups.push([groupName, value])
+      }
+    })
+
+    // Add main groups with consistent color mapping
+    mainGroups.forEach(([groupName, value]) => {
       data.push({
         name: groupName,
         y: value,
@@ -659,6 +709,23 @@ export function ExposureTreemapHighchartsWithLogos({
         color: getGroupColor(groupName, groupingMode),
       })
     })
+
+    // Add "Others" segment if there are small groups
+    if (smallGroups.length > 0) {
+      const othersTotal = smallGroups.reduce((sum, [, value]) => sum + value, 0)
+      const othersPercentage = (othersTotal / totalValue) * 100
+      const itemType = groupingMode === "sector" ? "sectors" : "industries"
+
+      data.push({
+        name: `Others (${smallGroups.length} ${itemType})`,
+        y: othersTotal,
+        actualValue: othersTotal,
+        color: '#9ca3af', // Gray color for others
+        custom: {
+          description: `${smallGroups.length} ${itemType} < 1% each (${othersPercentage.toFixed(1)}% total)`
+        }
+      })
+    }
 
     return data
   }

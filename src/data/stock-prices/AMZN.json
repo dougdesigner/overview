@@ -1,0 +1,15 @@
+{
+  "lastPrice": 244.22,
+  "previousClose": 222.86,
+  "changePercent": 9.58449250650632,
+  "changeAmount": 21.359999999999985,
+  "volume": 166340808,
+  "open": 250.1,
+  "high": 250.5,
+  "low": 243.98,
+  "close": 244.22,
+  "dividendAmount": 0,
+  "lastUpdated": "2025-10-31",
+  "cachedAt": "2025-11-02T09:18:47.324Z",
+  "source": "Alpha Vantage API"
+}
