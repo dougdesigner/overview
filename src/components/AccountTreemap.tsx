@@ -319,20 +319,18 @@ export default function AccountTreemap({
         levels: [
           {
             level: 1,
+            layoutAlgorithm: "squarified",
             dataLabels: {
               enabled: true,
               headers: true,  // Use headers mode for clean parent labels
-              align: "left",
-              verticalAlign: "top",
               style: {
-                fontSize: "16px",
-                fontWeight: "600",
-                color: "#f3f4f6",  // White text on colored backgrounds
                 textOutline: "none",
+                color: isDark ? "#f3f4f6" : "#111827",
               },
             },
-            borderColor: isDark ? "#1f2937" : "#f3f4f6",
             borderWidth: 3,
+            borderRadius: 3,
+            borderColor: isDark ? "#1f2937" : "#f3f4f6",
           },
           {
             level: 2,
