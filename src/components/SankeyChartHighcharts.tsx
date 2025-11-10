@@ -7,7 +7,7 @@ import HighchartsSankey from "highcharts/modules/sankey"
 import HighchartsExporting from "highcharts/modules/exporting"
 import HighchartsExportData from "highcharts/modules/export-data"
 import { useTheme } from "next-themes"
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useRef, useState, RefObject } from "react"
 
 // Track if modules are initialized globally to prevent duplicate initialization
 let sankeyModulesInitialized = false
@@ -34,6 +34,7 @@ interface SankeyChartHighchartsProps {
   colors?: AvailableChartColorsKeys[]
   accountColors?: AvailableChartColorsKeys[]
   height?: number
+  chartRef?: RefObject<HighchartsReact.RefObject>
 }
 
 // Since Highcharts requires actual color values (not classes), we define them here
@@ -61,10 +62,12 @@ export default function SankeyChartHighcharts({
   colors = ["blue", "cyan", "amber", "emerald"],
   accountColors = ["violet", "fuchsia", "pink", "sky", "lime"],
   height = 500,
+  chartRef: externalChartRef,
 }: SankeyChartHighchartsProps) {
   const { theme } = useTheme()
   const isDark = theme === "dark"
-  const chartRef = useRef<HighchartsReact.RefObject>(null)
+  const internalChartRef = useRef<HighchartsReact.RefObject>(null)
+  const chartRef = externalChartRef || internalChartRef
   const [isClient, setIsClient] = useState(false)
   const [modulesLoaded, setModulesLoaded] = useState(false)
 
@@ -173,6 +176,22 @@ export default function SankeyChartHighcharts({
       type: undefined, // Required for sankey
       backgroundColor: "transparent",
       height: height,
+      events: {
+        fullscreenOpen: function() {
+          // Read theme from DOM to get current theme state
+          const currentIsDark = document.documentElement.classList.contains('dark')
+
+          // Update chart background for fullscreen
+          this.update({
+            chart: {
+              backgroundColor: currentIsDark ? "#111827" : "#ffffff"
+            }
+          }, false)
+        },
+        fullscreenClose: function() {
+          // No need to update - chart returns to normal state automatically
+        }
+      },
       style: {
         fontFamily: "inherit",
       },
@@ -186,18 +205,7 @@ export default function SankeyChartHighcharts({
     exporting: {
       buttons: {
         contextButton: {
-          menuItems: [
-            "viewFullscreen",
-            "printChart",
-            "separator",
-            "downloadPNG",
-            "downloadJPEG",
-            "downloadPDF",
-            "downloadSVG",
-            "separator",
-            "downloadCSV",
-            "downloadXLS",
-          ],
+          enabled: false, // Disable default button - using custom export button instead
         },
       },
     },

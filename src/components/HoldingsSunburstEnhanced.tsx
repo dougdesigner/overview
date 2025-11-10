@@ -2,38 +2,26 @@
 
 import { Button } from "@/components/Button"
 import { Card } from "@/components/Card"
-import { Tooltip } from "@/components/Tooltip"
-import type { Account, Holding } from "@/components/ui/data-table-holdings/types"
-import { InstitutionLogo } from "@/components/ui/InstitutionLogo"
-import { getCachedLogoUrls } from "@/lib/logoUtils"
-import { getInstitutionBrandColor, getInstitutionLabel } from "@/lib/institutionUtils"
 import {
   DropdownMenu,
-  DropdownMenuCheckboxItem,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuLabel,
-  DropdownMenuRadioGroup,
-  DropdownMenuRadioItem,
   DropdownMenuSeparator,
-  DropdownMenuSubMenu,
-  DropdownMenuSubMenuContent,
-  DropdownMenuSubMenuTrigger,
   DropdownMenuTrigger,
 } from "@/components/DropdownMenu"
-import {
-  RiDownloadLine,
-  RiExpandUpDownLine,
-  RiFullscreenLine,
-  RiLayout4Line,
-  RiPieChart2Line,
-  RiSunLine,
-} from "@remixicon/react"
+import { Tooltip } from "@/components/Tooltip"
+import type {
+  Account,
+  Holding,
+} from "@/components/ui/data-table-holdings/types"
+import { getCachedLogoUrls } from "@/lib/logoUtils"
+import { RiDownloadLine, RiFullscreenLine } from "@remixicon/react"
 import Highcharts from "highcharts"
 import HighchartsReact from "highcharts-react-official"
-import HighchartsSunburst from "highcharts/modules/sunburst"
-import HighchartsExporting from "highcharts/modules/exporting"
 import HighchartsExportData from "highcharts/modules/export-data"
+import HighchartsExporting from "highcharts/modules/exporting"
+import HighchartsSunburst from "highcharts/modules/sunburst"
 import { useTheme } from "next-themes"
 import { useEffect, useMemo, useRef, useState } from "react"
 
@@ -70,9 +58,11 @@ export function HoldingsSunburstEnhanced({
 
   // Control states
   const [chartType, setChartType] = useState<ChartType>("sunburst")
-  const [sunburstGrouping, setSunburstGrouping] = useState<GroupingMode>("account")
+  const [sunburstGrouping, setSunburstGrouping] =
+    useState<GroupingMode>("account")
   const [pieGrouping, setPieGrouping] = useState<GroupingMode>("account")
-  const [selectedAccount, setSelectedAccount] = useState<string>(selectedAccountId)
+  const [selectedAccount, setSelectedAccount] =
+    useState<string>(selectedAccountId)
   const [logoUrls, setLogoUrls] = useState<Record<string, string | null>>({})
 
   // Active grouping mode based on chart type
@@ -88,7 +78,8 @@ export function HoldingsSunburstEnhanced({
         // Cast modules to callable functions
         const sunburstInit = HighchartsSunburst as unknown as HighchartsModule
         const exportingInit = HighchartsExporting as unknown as HighchartsModule
-        const exportDataInit = HighchartsExportData as unknown as HighchartsModule
+        const exportDataInit =
+          HighchartsExportData as unknown as HighchartsModule
 
         if (typeof sunburstInit === "function") {
           sunburstInit(Highcharts)
@@ -128,7 +119,10 @@ export function HoldingsSunburstEnhanced({
   useEffect(() => {
     // If a single account is selected and grouping includes account, adjust it
     if (selectedAccount !== "all") {
-      if (sunburstGrouping === "account" || sunburstGrouping === "account-type") {
+      if (
+        sunburstGrouping === "account" ||
+        sunburstGrouping === "account-type"
+      ) {
         setSunburstGrouping("type")
       }
       if (pieGrouping === "account") {
@@ -200,9 +194,10 @@ export function HoldingsSunburstEnhanced({
   }
 
   // Filter holdings by selected account
-  const filteredHoldings = selectedAccount === "all"
-    ? holdings
-    : holdings.filter((h) => h.accountId === selectedAccount)
+  const filteredHoldings =
+    selectedAccount === "all"
+      ? holdings
+      : holdings.filter((h) => h.accountId === selectedAccount)
 
   // Calculate total portfolio value
   const totalValue = filteredHoldings.reduce((sum, h) => sum + h.marketValue, 0)
@@ -230,14 +225,14 @@ export function HoldingsSunburstEnhanced({
     if (groupingMode === "none") {
       // Show top 10 individual holdings
       return filteredHoldings
-        .filter(h => h.marketValue > 0)
+        .filter((h) => h.marketValue > 0)
         .sort((a, b) => b.marketValue - a.marketValue)
         .slice(0, 10)
-        .map(h => [h.ticker || h.name, h.marketValue] as [string, number])
+        .map((h) => [h.ticker || h.name, h.marketValue] as [string, number])
     } else if (groupingMode === "type") {
       // Group by type and show all types
       const typeGroups = new Map<string, number>()
-      filteredHoldings.forEach(h => {
+      filteredHoldings.forEach((h) => {
         const current = typeGroups.get(h.type) || 0
         typeGroups.set(h.type, current + h.marketValue)
       })
@@ -245,18 +240,21 @@ export function HoldingsSunburstEnhanced({
       return Array.from(typeGroups.entries())
         .filter(([_, value]) => value > 0)
         .sort((a, b) => b[1] - a[1])
-        .map(([type, value]) => [
-          type.charAt(0).toUpperCase() + type.slice(1),
-          value
-        ] as [string, number])
+        .map(
+          ([type, value]) =>
+            [type.charAt(0).toUpperCase() + type.slice(1), value] as [
+              string,
+              number,
+            ],
+        )
     } else {
       // Group by account and show all accounts
       const accountGroups = new Map<string, { name: string; value: number }>()
-      filteredHoldings.forEach(h => {
+      filteredHoldings.forEach((h) => {
         if (!accountGroups.has(h.accountId)) {
           accountGroups.set(h.accountId, {
             name: h.accountName,
-            value: 0
+            value: 0,
           })
         }
         const group = accountGroups.get(h.accountId)!
@@ -295,9 +293,10 @@ export function HoldingsSunburstEnhanced({
     }> = []
 
     // Root node (center) - dynamic based on selected account
-    const rootName = selectedAccount === "all"
-      ? "Portfolio"
-      : accounts.find(a => a.id === selectedAccount)?.name || "Account"
+    const rootName =
+      selectedAccount === "all"
+        ? "Portfolio"
+        : accounts.find((a) => a.id === selectedAccount)?.name || "Account"
 
     data.push({
       id: "portfolio",
@@ -323,7 +322,7 @@ export function HoldingsSunburstEnhanced({
         .map(([type, holdings]) => ({
           type,
           holdings,
-          total: holdings.reduce((sum, h) => sum + h.marketValue, 0)
+          total: holdings.reduce((sum, h) => sum + h.marketValue, 0),
         }))
         .sort((a, b) => b.total - a.total)
 
@@ -353,9 +352,15 @@ export function HoldingsSunburstEnhanced({
           })
         })
       })
-    } else if (sunburstGrouping === "account" || sunburstGrouping === "account-type") {
+    } else if (
+      sunburstGrouping === "account" ||
+      sunburstGrouping === "account-type"
+    ) {
       // Group by account (with optional type grouping)
-      const accountMap = new Map<string, { holdings: Holding[]; total: number }>()
+      const accountMap = new Map<
+        string,
+        { holdings: Holding[]; total: number }
+      >()
 
       filteredHoldings.forEach((holding) => {
         if (!accountMap.has(holding.accountId)) {
@@ -371,55 +376,71 @@ export function HoldingsSunburstEnhanced({
         .map(([accountId, data]) => ({
           accountId,
           accountName: data.holdings[0]?.accountName || `Account ${accountId}`,
-          ...data
+          ...data,
         }))
         .sort((a, b) => b.total - a.total)
 
       // Add account nodes and their children
-      sortedAccounts.forEach(({ accountId, accountName, holdings, total }, index) => {
-        const accountNodeId = `account-${accountId}`
-        const accountColor = colors[index % colors.length]
+      sortedAccounts.forEach(
+        ({ accountId, accountName, holdings, total }, index) => {
+          const accountNodeId = `account-${accountId}`
+          const accountColor = colors[index % colors.length]
 
-        // Add account node
-        data.push({
-          id: accountNodeId,
-          parent: "portfolio",
-          name: accountName,
-          value: total,
-          color: accountColor,
-        })
-
-        if (sunburstGrouping === "account-type") {
-          // Group holdings by type within this account
-          const typeMap = new Map<string, Holding[]>()
-          holdings.forEach((holding) => {
-            if (!typeMap.has(holding.type)) {
-              typeMap.set(holding.type, [])
-            }
-            typeMap.get(holding.type)!.push(holding)
+          // Add account node
+          data.push({
+            id: accountNodeId,
+            parent: "portfolio",
+            name: accountName,
+            value: total,
+            color: accountColor,
           })
 
-          // Add type nodes and individual holdings
-          typeMap.forEach((typeHoldings, type) => {
-            const typeNodeId = `${accountNodeId}-${type}`
-            const typeTotal = typeHoldings.reduce(
-              (sum, h) => sum + h.marketValue,
-              0,
-            )
-
-            // Add type node
-            data.push({
-              id: typeNodeId,
-              parent: accountNodeId,
-              name: type.charAt(0).toUpperCase() + type.slice(1),
-              value: typeTotal,
+          if (sunburstGrouping === "account-type") {
+            // Group holdings by type within this account
+            const typeMap = new Map<string, Holding[]>()
+            holdings.forEach((holding) => {
+              if (!typeMap.has(holding.type)) {
+                typeMap.set(holding.type, [])
+              }
+              typeMap.get(holding.type)!.push(holding)
             })
 
-            // Add individual holdings
-            typeHoldings.forEach((holding) => {
+            // Add type nodes and individual holdings
+            typeMap.forEach((typeHoldings, type) => {
+              const typeNodeId = `${accountNodeId}-${type}`
+              const typeTotal = typeHoldings.reduce(
+                (sum, h) => sum + h.marketValue,
+                0,
+              )
+
+              // Add type node
               data.push({
-                id: `${typeNodeId}-${holding.id}`,
-                parent: typeNodeId,
+                id: typeNodeId,
+                parent: accountNodeId,
+                name: type.charAt(0).toUpperCase() + type.slice(1),
+                value: typeTotal,
+              })
+
+              // Add individual holdings
+              typeHoldings.forEach((holding) => {
+                data.push({
+                  id: `${typeNodeId}-${holding.id}`,
+                  parent: typeNodeId,
+                  name: getDisplayText(holding),
+                  value: holding.marketValue,
+                  ticker: holding.ticker,
+                  fullName: holding.name,
+                  quantity: holding.quantity,
+                  lastPrice: holding.lastPrice,
+                })
+              })
+            })
+          } else {
+            // Just account grouping - add holdings directly under account
+            holdings.forEach((holding) => {
+              data.push({
+                id: `${accountNodeId}-${holding.id}`,
+                parent: accountNodeId,
                 name: getDisplayText(holding),
                 value: holding.marketValue,
                 ticker: holding.ticker,
@@ -428,23 +449,9 @@ export function HoldingsSunburstEnhanced({
                 lastPrice: holding.lastPrice,
               })
             })
-          })
-        } else {
-          // Just account grouping - add holdings directly under account
-          holdings.forEach((holding) => {
-            data.push({
-              id: `${accountNodeId}-${holding.id}`,
-              parent: accountNodeId,
-              name: getDisplayText(holding),
-              value: holding.marketValue,
-              ticker: holding.ticker,
-              fullName: holding.name,
-              quantity: holding.quantity,
-              lastPrice: holding.lastPrice,
-            })
-          })
-        }
-      })
+          }
+        },
+      )
     }
 
     return data
@@ -456,8 +463,9 @@ export function HoldingsSunburstEnhanced({
 
     if (groupingMode === "none") {
       // Show individual holdings - sort by value and limit to top N
-      const sortedHoldings = [...filteredHoldings]
-        .sort((a, b) => b.marketValue - a.marketValue)
+      const sortedHoldings = [...filteredHoldings].sort(
+        (a, b) => b.marketValue - a.marketValue,
+      )
 
       const maxSlices = 20
       const topHoldings = sortedHoldings.slice(0, maxSlices)
@@ -475,7 +483,10 @@ export function HoldingsSunburstEnhanced({
 
       // Add "Others" slice if there are more holdings
       if (otherHoldings.length > 0) {
-        const othersTotal = otherHoldings.reduce((sum, h) => sum + h.marketValue, 0)
+        const othersTotal = otherHoldings.reduce(
+          (sum, h) => sum + h.marketValue,
+          0,
+        )
         data.push({
           name: `Others (${otherHoldings.length})`,
           y: othersTotal,
@@ -492,8 +503,9 @@ export function HoldingsSunburstEnhanced({
       })
 
       // Sort by value descending for consistent color assignment
-      const sortedTypes = Array.from(typeGroups.entries())
-        .sort((a, b) => b[1] - a[1])
+      const sortedTypes = Array.from(typeGroups.entries()).sort(
+        (a, b) => b[1] - a[1],
+      )
 
       sortedTypes.forEach(([type, value], index) => {
         data.push({
@@ -574,18 +586,22 @@ export function HoldingsSunburstEnhanced({
       backgroundColor: "transparent",
       height: height,
       events: {
-        fullscreenOpen: function() {
-          const currentIsDark = document.documentElement.classList.contains('dark')
-          this.update({
-            chart: {
-              backgroundColor: currentIsDark ? "#111827" : "#ffffff"
-            }
-          }, false)
+        fullscreenOpen: function () {
+          const currentIsDark =
+            document.documentElement.classList.contains("dark")
+          this.update(
+            {
+              chart: {
+                backgroundColor: currentIsDark ? "#111827" : "#ffffff",
+              },
+            },
+            false,
+          )
         },
-        fullscreenClose: function() {
+        fullscreenClose: function () {
           // No need to update - chart returns to normal state automatically
-        }
-      }
+        },
+      },
     },
     title: {
       text: undefined,
@@ -709,7 +725,7 @@ export function HoldingsSunburstEnhanced({
         color: isDark ? "#f3f4f6" : "#111827",
         fontSize: "12px",
       },
-      pointFormatter: function() {
+      pointFormatter: function () {
         const point = this as any
         const value = point.value || 0
         const percentage = ((value / totalValue) * 100).toFixed(1)
@@ -718,7 +734,7 @@ export function HoldingsSunburstEnhanced({
 
         return `<div style="padding: 2px;">
                   <div style="font-weight: 600; margin-bottom: 4px;">${ticker}</div>
-                  ${fullName ? `<div style="font-size: 11px; color: ${isDark ? '#9ca3af' : '#6b7280'}">${fullName}</div>` : ''}
+                  ${fullName ? `<div style="font-size: 11px; color: ${isDark ? "#9ca3af" : "#6b7280"}">${fullName}</div>` : ""}
                   <div>Value: <b>${formatValue(value)}</b></div>
                   <div>Portfolio: <b>${percentage}%</b></div>
                 </div>`
@@ -733,18 +749,22 @@ export function HoldingsSunburstEnhanced({
       backgroundColor: "transparent",
       height: height,
       events: {
-        fullscreenOpen: function() {
-          const currentIsDark = document.documentElement.classList.contains('dark')
-          this.update({
-            chart: {
-              backgroundColor: currentIsDark ? "#111827" : "#ffffff"
-            }
-          }, false)
+        fullscreenOpen: function () {
+          const currentIsDark =
+            document.documentElement.classList.contains("dark")
+          this.update(
+            {
+              chart: {
+                backgroundColor: currentIsDark ? "#111827" : "#ffffff",
+              },
+            },
+            false,
+          )
         },
-        fullscreenClose: function() {
+        fullscreenClose: function () {
           // No need to update - chart returns to normal state automatically
-        }
-      }
+        },
+      },
     },
     title: {
       text: undefined,
@@ -795,7 +815,7 @@ export function HoldingsSunburstEnhanced({
         color: isDark ? "#f3f4f6" : "#111827",
         fontSize: "12px",
       },
-      pointFormatter: function() {
+      pointFormatter: function () {
         const point = this as any
         const value = point.y || 0
         const percentage = ((value / totalValue) * 100).toFixed(1)
@@ -805,7 +825,7 @@ export function HoldingsSunburstEnhanced({
 
         return `<div style="padding: 2px;">
                   <div style="font-weight: 600; margin-bottom: 4px;">${name}</div>
-                  ${fullName && name !== fullName ? `<div style="font-size: 11px; color: ${isDark ? '#9ca3af' : '#6b7280'}">${fullName}</div>` : ''}
+                  ${fullName && name !== fullName ? `<div style="font-size: 11px; color: ${isDark ? "#9ca3af" : "#6b7280"}">${fullName}</div>` : ""}
                   <div>Value: <b>${formatValue(value)}</b></div>
                   <div>Portfolio: <b>${percentage}%</b></div>
                 </div>`
@@ -825,7 +845,14 @@ export function HoldingsSunburstEnhanced({
 
   const options = useMemo(() => {
     return getChartOptions()
-  }, [chartType, isDark, height, selectedAccount, groupingMode, filteredHoldings])
+  }, [
+    chartType,
+    isDark,
+    height,
+    selectedAccount,
+    groupingMode,
+    filteredHoldings,
+  ])
 
   if (!isClient || !modulesLoaded) {
     return (
@@ -844,64 +871,66 @@ export function HoldingsSunburstEnhanced({
           Holdings hierarchy
         </h3>
         <div className="flex items-center gap-2">
-            {/* Account Selector */}
-            <DropdownMenu>
-              <Tooltip triggerAsChild content="Select account to view holdings">
-                <DropdownMenuTrigger asChild>
-                  <Button
-                    variant="secondary"
-                    className="h-9 w-[280px] justify-between"
+          {/* Account Selector */}
+          {/* <DropdownMenu>
+            <Tooltip triggerAsChild content="Select account to view holdings">
+              <DropdownMenuTrigger asChild>
+                <Button
+                  variant="secondary"
+                  className="h-9 w-[280px] justify-between"
+                >
+                  <span className="flex items-center gap-2">
+                    {selectedAccount === "all" ? (
+                      <>All Accounts</>
+                    ) : (
+                      <>
+                        {(() => {
+                          const account = accounts.find(
+                            (a) => a.id === selectedAccount,
+                          )
+                          return account ? account.name : "Select Account"
+                        })()}
+                      </>
+                    )}
+                  </span>
+                  <RiExpandUpDownLine className="size-4" aria-hidden="true" />
+                </Button>
+              </DropdownMenuTrigger>
+            </Tooltip>
+            <DropdownMenuContent className="w-[280px]">
+              <DropdownMenuLabel>ACCOUNT</DropdownMenuLabel>
+              <DropdownMenuSeparator />
+              <DropdownMenuRadioGroup
+                value={selectedAccount}
+                onValueChange={(value) => {
+                  setSelectedAccount(value)
+                  onAccountChange?.(value)
+                }}
+              >
+                <DropdownMenuRadioItem value="all" iconType="check">
+                  All Accounts
+                </DropdownMenuRadioItem>
+                {accounts.map((account) => (
+                  <DropdownMenuRadioItem
+                    key={account.id}
+                    value={account.id}
+                    iconType="check"
                   >
                     <span className="flex items-center gap-2">
-                      {selectedAccount === "all" ? (
-                        <>All Accounts</>
-                      ) : (
-                        <>
-                          {(() => {
-                            const account = accounts.find(a => a.id === selectedAccount)
-                            return account ? account.name : "Select Account"
-                          })()}
-                        </>
-                      )}
+                      <InstitutionLogo
+                        institution={account.institution}
+                        className="h-5 w-5"
+                      />
+                      {account.name}
                     </span>
-                    <RiExpandUpDownLine className="size-4" aria-hidden="true" />
-                  </Button>
-                </DropdownMenuTrigger>
-              </Tooltip>
-              <DropdownMenuContent className="w-[280px]">
-                <DropdownMenuLabel>ACCOUNT</DropdownMenuLabel>
-                <DropdownMenuSeparator />
-                <DropdownMenuRadioGroup
-                  value={selectedAccount}
-                  onValueChange={(value) => {
-                    setSelectedAccount(value)
-                    onAccountChange?.(value)
-                  }}
-                >
-                  <DropdownMenuRadioItem value="all" iconType="check">
-                    All Accounts
                   </DropdownMenuRadioItem>
-                  {accounts.map((account) => (
-                    <DropdownMenuRadioItem
-                      key={account.id}
-                      value={account.id}
-                      iconType="check"
-                    >
-                      <span className="flex items-center gap-2">
-                        <InstitutionLogo
-                          institution={account.institution}
-                          className="h-5 w-5"
-                        />
-                        {account.name}
-                      </span>
-                    </DropdownMenuRadioItem>
-                  ))}
-                </DropdownMenuRadioGroup>
-              </DropdownMenuContent>
-            </DropdownMenu>
+                ))}
+              </DropdownMenuRadioGroup>
+            </DropdownMenuContent>
+          </DropdownMenu> */}
 
-            {/* Group By Dropdown */}
-            <DropdownMenu>
+          {/* Group By Dropdown */}
+          {/* <DropdownMenu>
               <Tooltip triggerAsChild content="Group holdings by account, type, or show all">
                 <DropdownMenuTrigger asChild>
                   <Button
@@ -991,72 +1020,80 @@ export function HoldingsSunburstEnhanced({
                   </DropdownMenuRadioGroup>
                 )}
               </DropdownMenuContent>
-            </DropdownMenu>
+            </DropdownMenu> */}
 
-            {/* Chart Type Toggle */}
-            <Tooltip triggerAsChild content="Switch between sunburst and pie chart">
-              <Button
-                variant="secondary"
-                onClick={() => setChartType(chartType === "sunburst" ? "pie" : "sunburst")}
-                className="h-9"
-              >
-                {chartType === "sunburst" ? (
-                  <RiPieChart2Line className="size-4" aria-hidden="true" />
-                ) : (
-                  <RiSunLine className="size-4" aria-hidden="true" />
-                )}
-              </Button>
+          {/* Chart Type Toggle */}
+          {/* <Tooltip
+            triggerAsChild
+            content="Switch between sunburst and pie chart"
+          >
+            <Button
+              variant="secondary"
+              onClick={() =>
+                setChartType(chartType === "sunburst" ? "pie" : "sunburst")
+              }
+              className="h-9"
+            >
+              {chartType === "sunburst" ? (
+                <RiPieChart2Line className="size-4" aria-hidden="true" />
+              ) : (
+                <RiSunLine className="size-4" aria-hidden="true" />
+              )}
+            </Button>
+          </Tooltip> */}
+
+          {/* Export Menu */}
+          <DropdownMenu>
+            <Tooltip
+              triggerAsChild
+              content="Export chart as image or data file"
+            >
+              <DropdownMenuTrigger asChild>
+                <Button variant="secondary" className="h-9">
+                  <RiDownloadLine className="size-4" aria-hidden="true" />
+                </Button>
+              </DropdownMenuTrigger>
             </Tooltip>
+            <DropdownMenuContent align="end" className="w-56">
+              <DropdownMenuLabel>EXPORT OPTIONS</DropdownMenuLabel>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem onClick={() => handleExport("print")}>
+                Print chart
+              </DropdownMenuItem>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem onClick={() => handleExport("png")}>
+                Download PNG image
+              </DropdownMenuItem>
+              <DropdownMenuItem onClick={() => handleExport("jpeg")}>
+                Download JPEG image
+              </DropdownMenuItem>
+              <DropdownMenuItem onClick={() => handleExport("pdf")}>
+                Download PDF document
+              </DropdownMenuItem>
+              <DropdownMenuItem onClick={() => handleExport("svg")}>
+                Download SVG vector
+              </DropdownMenuItem>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem onClick={() => handleExport("csv")}>
+                Download CSV
+              </DropdownMenuItem>
+              <DropdownMenuItem onClick={() => handleExport("xls")}>
+                Download XLS
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
 
-            {/* Export Menu */}
-            <DropdownMenu>
-              <Tooltip triggerAsChild content="Export chart as image or data file">
-                <DropdownMenuTrigger asChild>
-                  <Button variant="secondary" className="h-9">
-                    <RiDownloadLine className="size-4" aria-hidden="true" />
-                  </Button>
-                </DropdownMenuTrigger>
-              </Tooltip>
-              <DropdownMenuContent align="end" className="w-56">
-                <DropdownMenuLabel>EXPORT OPTIONS</DropdownMenuLabel>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem onClick={() => handleExport("print")}>
-                  Print chart
-                </DropdownMenuItem>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem onClick={() => handleExport("png")}>
-                  Download PNG image
-                </DropdownMenuItem>
-                <DropdownMenuItem onClick={() => handleExport("jpeg")}>
-                  Download JPEG image
-                </DropdownMenuItem>
-                <DropdownMenuItem onClick={() => handleExport("pdf")}>
-                  Download PDF document
-                </DropdownMenuItem>
-                <DropdownMenuItem onClick={() => handleExport("svg")}>
-                  Download SVG vector
-                </DropdownMenuItem>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem onClick={() => handleExport("csv")}>
-                  Download CSV
-                </DropdownMenuItem>
-                <DropdownMenuItem onClick={() => handleExport("xls")}>
-                  Download XLS
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
-
-            {/* Fullscreen Button */}
-            <Tooltip triggerAsChild content="View chart in fullscreen mode">
-              <Button
-                variant="secondary"
-                onClick={() => handleExport("fullscreen")}
-                className="h-9"
-              >
-                <RiFullscreenLine className="size-4" aria-hidden="true" />
-              </Button>
-            </Tooltip>
-          </div>
+          {/* Fullscreen Button */}
+          <Tooltip triggerAsChild content="View chart in fullscreen mode">
+            <Button
+              variant="secondary"
+              onClick={() => handleExport("fullscreen")}
+              className="h-9"
+            >
+              <RiFullscreenLine className="size-4" aria-hidden="true" />
+            </Button>
+          </Tooltip>
+        </div>
       </div>
 
       <div className="mt-4">
@@ -1089,12 +1126,12 @@ export function HoldingsSunburstEnhanced({
             {groupingMode === "none"
               ? "Top Holdings"
               : groupingMode === "type"
-              ? "Asset Types"
-              : groupingMode === "account-type"
-              ? "Accounts"
-              : selectedAccount === "all"
-              ? "Accounts"
-              : "Account"}
+                ? "Asset Types"
+                : groupingMode === "account-type"
+                  ? "Accounts"
+                  : selectedAccount === "all"
+                    ? "Accounts"
+                    : "Account"}
           </p>
           <ul className="flex flex-wrap gap-x-10 gap-y-4 text-sm">
             {topGroups.map(([name, value], index) => (
@@ -1106,7 +1143,7 @@ export function HoldingsSunburstEnhanced({
                   <span
                     className="size-2.5 shrink-0 rounded-sm"
                     style={{
-                      backgroundColor: getGroupColor(name, index)
+                      backgroundColor: getGroupColor(name, index),
                     }}
                   />
                   <span className="text-sm">{name}</span>

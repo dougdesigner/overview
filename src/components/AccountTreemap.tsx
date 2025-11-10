@@ -6,7 +6,7 @@ import HighchartsTreemap from "highcharts/modules/treemap"
 import HighchartsExporting from "highcharts/modules/exporting"
 import HighchartsExportData from "highcharts/modules/export-data"
 import { useTheme } from "next-themes"
-import { useEffect, useRef, useState, useMemo, useCallback } from "react"
+import { useEffect, useRef, useState, useMemo, useCallback, RefObject } from "react"
 // Format large numbers with K/M suffixes
 const formatSI = (value: number) => {
   if (value >= 1000000) return `$${(value / 1000000).toFixed(1)}M`
@@ -51,6 +51,7 @@ interface AccountTreemapProps {
   groupBy?: AccountGrouping
   displayValue?: AccountDisplayValue
   height?: number
+  chartRef?: RefObject<HighchartsReact.RefObject>
 }
 
 // Bright color palette matching exposure treemap
@@ -71,10 +72,12 @@ export default function AccountTreemap({
   groupBy = "institution",
   displayValue = "value",
   height = 400,
+  chartRef: externalChartRef,
 }: AccountTreemapProps) {
   const { theme } = useTheme()
   const isDark = theme === "dark"
-  const chartRef = useRef<HighchartsReact.RefObject>(null)
+  const internalChartRef = useRef<HighchartsReact.RefObject>(null)
+  const chartRef = externalChartRef || internalChartRef
   const [isClient, setIsClient] = useState(false)
 
   useEffect(() => {
@@ -150,7 +153,6 @@ export default function AccountTreemap({
           parent: undefined,
           value: institutionTotal,
           color: getGroupColor(institution, 'institution'),
-          drillUpButton: false,
         })
 
         // Add accounts as children
@@ -191,7 +193,6 @@ export default function AccountTreemap({
           parent: undefined,
           value: typeTotal,
           color: getGroupColor(accountType, 'type'),
-          drillUpButton: false,
         })
 
         // Add accounts as children
@@ -280,6 +281,22 @@ export default function AccountTreemap({
       backgroundColor: "transparent",
       height: height,
       margin: [0, 0, 0, 0],
+      events: {
+        fullscreenOpen: function() {
+          // Read theme from DOM to get current theme state
+          const currentIsDark = document.documentElement.classList.contains('dark')
+
+          // Update chart background for fullscreen
+          this.update({
+            chart: {
+              backgroundColor: currentIsDark ? "#111827" : "#ffffff"
+            }
+          }, false)
+        },
+        fullscreenClose: function() {
+          // No need to update - chart returns to normal state automatically
+        }
+      },
       style: {
         fontFamily: "inherit",
       },
@@ -293,27 +310,17 @@ export default function AccountTreemap({
     exporting: {
       buttons: {
         contextButton: {
-          menuItems: [
-            "viewFullscreen",
-            "printChart",
-            "separator",
-            "downloadPNG",
-            "downloadJPEG",
-            "downloadPDF",
-            "downloadSVG",
-            "separator",
-            "downloadCSV",
-            "downloadXLS",
-          ],
+          enabled: false, // Disable default button - using custom export button instead
         },
       },
     },
     series: [
       {
         type: "treemap",
+        name: "Portfolio",
         layoutAlgorithm: "strip",
         alternateStartingDirection: true,
-        allowDrillToNode: true,
+        allowTraversingTree: true,
         animationLimit: 1000,
         borderRadius: 3,
         levels: [
@@ -368,6 +375,41 @@ export default function AccountTreemap({
             borderWidth: 3,
           },
         ],
+        breadcrumbs: {
+          floating: false,
+          position: {
+            align: "left",
+            verticalAlign: "top",
+          },
+          format: "{level.name}",
+          buttonTheme: {
+            fill: "transparent",
+            style: {
+              color: isDark ? "#f3f4f6" : "#111827",
+            },
+            states: {
+              hover: {
+                fill: isDark ? "#1f2937" : "#f3f4f6",
+                style: {
+                  color: isDark ? "#f9fafb" : "#111827",
+                },
+              },
+              select: {
+                style: {
+                  color: isDark ? "#f3f4f6" : "#111827",
+                },
+              },
+            },
+          },
+          separator: {
+            style: {
+              color: isDark ? "#9ca3af" : "#6b7280",
+            },
+          },
+          style: {
+            color: isDark ? "#f3f4f6" : "#111827",
+          },
+        },
         data: treemapData,
         tooltip: {
           useHTML: true,

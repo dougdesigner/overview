@@ -1,15 +1,39 @@
 "use client"
 
 import AccountCard from "@/components/AccountCard"
+import type {
+  AccountDisplayValue,
+  AccountGrouping,
+} from "@/components/AccountTreemap"
+import { AccountTreemap } from "@/components/AccountTreemapWrapper"
 import { Button } from "@/components/Button"
 import { Card } from "@/components/Card"
 import { Divider } from "@/components/Divider"
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuRadioGroup,
+  DropdownMenuRadioItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/DropdownMenu"
 import { SankeyChartHighcharts } from "@/components/SankeyChartHighchartsWrapper"
-import { AccountTreemap } from "@/components/AccountTreemapWrapper"
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/Select"
+import { Tooltip } from "@/components/Tooltip"
 import {
   AccountDrawer,
   type AccountFormData,
 } from "@/components/ui/AccountDrawer"
+import { InstitutionLogo } from "@/components/ui/InstitutionLogo"
 import {
   accountTypeLabels,
   institutionLabels,
@@ -18,26 +42,15 @@ import {
 import {
   RiAddLine,
   RiArrowUpDownLine,
-  RiPercentLine,
+  RiDownloadLine,
+  RiExpandUpDownLine,
   RiEyeOffLine,
-  RiFlowChart,
-  RiNodeTree
+  RiFullscreenLine,
+  RiPercentLine,
 } from "@remixicon/react"
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-  DropdownMenuCheckboxItem,
-  DropdownMenuRadioGroup,
-  DropdownMenuRadioItem,
-  DropdownMenuSeparator,
-} from "@/components/DropdownMenu"
-import { Tooltip } from "@/components/Tooltip"
-import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@/components/Select"
+import HighchartsReact from "highcharts-react-official"
 import { useRouter } from "next/navigation"
 import React from "react"
-import type { AccountGrouping, AccountDisplayValue } from "@/components/AccountTreemap"
 
 export default function AccountsPage() {
   const router = useRouter()
@@ -50,10 +63,18 @@ export default function AccountsPage() {
   >(null)
 
   // Chart view state
-  const [chartType, setChartType] = React.useState<"sankey" | "treemap">("sankey")
-  const [selectedAccounts, setSelectedAccounts] = React.useState<string[]>([])
+  const [chartType, setChartType] = React.useState<"sankey" | "treemap">(
+    "sankey",
+  )
+  const [selectedAccountFilter, setSelectedAccountFilter] =
+    React.useState<string>("all")
   const [groupBy, setGroupBy] = React.useState<AccountGrouping>("institution")
-  const [displayValue, setDisplayValue] = React.useState<AccountDisplayValue>("value")
+  const [displayValue, setDisplayValue] =
+    React.useState<AccountDisplayValue>("value")
+
+  // Chart refs for export functionality
+  const sankeyChartRef = React.useRef<HighchartsReact.RefObject>(null)
+  const treemapChartRef = React.useRef<HighchartsReact.RefObject>(null)
 
   // Use the portfolio store for accounts data
   const {
@@ -124,6 +145,40 @@ export default function AccountsPage() {
 
   const handleAccountClick = (accountId: string) => {
     router.push(`/holdings?account=${accountId}`)
+  }
+
+  // Export handlers for chart
+  const handleExport = (type: string) => {
+    const chartRef = chartType === "sankey" ? sankeyChartRef : treemapChartRef
+    const chart = chartRef.current?.chart
+    if (!chart) return
+
+    switch (type) {
+      case "fullscreen":
+        chart.fullscreen?.open()
+        break
+      case "print":
+        chart.print()
+        break
+      case "png":
+        chart.exportChart({ type: "image/png" })
+        break
+      case "jpeg":
+        chart.exportChart({ type: "image/jpeg" })
+        break
+      case "pdf":
+        chart.exportChart({ type: "application/pdf" })
+        break
+      case "svg":
+        chart.exportChart({ type: "image/svg+xml" })
+        break
+      case "csv":
+        chart.downloadCSV()
+        break
+      case "xls":
+        chart.downloadXLS()
+        break
+    }
   }
 
   // Handle drawer close
@@ -201,7 +256,7 @@ export default function AccountsPage() {
               </p>
               <div className="flex flex-wrap items-center gap-2">
                 {/* Chart Type Toggle */}
-                <DropdownMenu>
+                {/* <DropdownMenu>
                   <Tooltip content="Switch chart type" triggerAsChild>
                     <DropdownMenuTrigger asChild>
                       <Button
@@ -237,45 +292,83 @@ export default function AccountsPage() {
                       </DropdownMenuRadioItem>
                     </DropdownMenuRadioGroup>
                   </DropdownMenuContent>
-                </DropdownMenu>
+                </DropdownMenu> */}
 
                 {/* Account Filter (for Treemap) */}
                 {chartType === "treemap" && (
-                  <Select
-                    value={selectedAccounts.length === 0 ? "all" : selectedAccounts.join(",")}
-                    onValueChange={(value) => {
-                      if (value === "all") {
-                        setSelectedAccounts([])
-                      } else {
-                        setSelectedAccounts(value.split(","))
-                      }
-                    }}
-                  >
-                    <SelectTrigger className="h-9 w-[180px] text-sm">
-                      <SelectValue placeholder="Filter accounts">
-                        {selectedAccounts.length === 0
-                          ? "All accounts"
-                          : selectedAccounts.length === 1
-                            ? accounts.find(a => a.id === selectedAccounts[0])?.name || "1 account"
-                            : `${selectedAccounts.length} accounts`}
-                      </SelectValue>
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectGroup>
-                        <SelectItem value="all">All accounts</SelectItem>
+                  <DropdownMenu>
+                    <Tooltip triggerAsChild content="Select account to view">
+                      <DropdownMenuTrigger asChild>
+                        <Button
+                          variant="secondary"
+                          className="h-9 w-[280px] justify-between"
+                        >
+                          <span className="flex items-center gap-2">
+                            {selectedAccountFilter === "all" ? (
+                              "All Accounts"
+                            ) : (
+                              <>
+                                <InstitutionLogo
+                                  institution={
+                                    accounts.find(
+                                      (a) => a.id === selectedAccountFilter,
+                                    )?.institution || ""
+                                  }
+                                  className="size-4"
+                                />
+                                <span className="truncate">
+                                  {accounts.find(
+                                    (a) => a.id === selectedAccountFilter,
+                                  )?.name || "Select account"}
+                                </span>
+                              </>
+                            )}
+                          </span>
+                          <RiExpandUpDownLine
+                            className="size-4 text-gray-400 dark:text-gray-600"
+                            aria-hidden="true"
+                          />
+                        </Button>
+                      </DropdownMenuTrigger>
+                    </Tooltip>
+                    <DropdownMenuContent align="start" className="w-[280px]">
+                      <DropdownMenuLabel>ACCOUNT</DropdownMenuLabel>
+                      <DropdownMenuSeparator />
+                      <DropdownMenuRadioGroup
+                        value={selectedAccountFilter}
+                        onValueChange={setSelectedAccountFilter}
+                      >
+                        <DropdownMenuRadioItem value="all" iconType="check">
+                          All Accounts
+                        </DropdownMenuRadioItem>
                         {accounts.map((account) => (
-                          <SelectItem key={account.id} value={account.id}>
-                            {account.name}
-                          </SelectItem>
+                          <DropdownMenuRadioItem
+                            key={account.id}
+                            value={account.id}
+                            iconType="check"
+                          >
+                            <div className="flex items-center gap-2">
+                              <InstitutionLogo
+                                institution={account.institution}
+                                className="size-4"
+                              />
+                              <span className="truncate">{account.name}</span>
+                            </div>
+                          </DropdownMenuRadioItem>
                         ))}
-                      </SelectGroup>
-                    </SelectContent>
-                  </Select>
+                      </DropdownMenuRadioGroup>
+                    </DropdownMenuContent>
+                  </DropdownMenu>
                 )}
 
                 {/* Group By (for Treemap) */}
                 {chartType === "treemap" && (
-                  <Select value={groupBy} onValueChange={(value) => setGroupBy(value as AccountGrouping)}>
+                  <Select
+                    value={groupBy}
+                    onValueChange={(value) =>
+                      setGroupBy(value as AccountGrouping)
+                    }
+                  >
                     <SelectTrigger className="h-9 w-[180px] text-sm">
                       <SelectValue placeholder="Group by" />
                     </SelectTrigger>
@@ -283,7 +376,9 @@ export default function AccountsPage() {
                       <SelectGroup>
                         <SelectItem value="institution">Institution</SelectItem>
                         <SelectItem value="type">Account Type</SelectItem>
-                        <SelectItem value="institution-type">Institution & Type</SelectItem>
+                        <SelectItem value="institution-type">
+                          Institution & Type
+                        </SelectItem>
                       </SelectGroup>
                     </SelectContent>
                   </Select>
@@ -310,7 +405,12 @@ export default function AccountsPage() {
                       </DropdownMenuTrigger>
                     </Tooltip>
                     <DropdownMenuContent align="end" className="w-48">
-                      <DropdownMenuRadioGroup value={displayValue} onValueChange={(value) => setDisplayValue(value as AccountDisplayValue)}>
+                      <DropdownMenuRadioGroup
+                        value={displayValue}
+                        onValueChange={(value) =>
+                          setDisplayValue(value as AccountDisplayValue)
+                        }
+                      >
                         <DropdownMenuRadioItem value="value">
                           <RiArrowUpDownLine className="mr-2 size-4" />
                           Market Value
@@ -327,6 +427,58 @@ export default function AccountsPage() {
                     </DropdownMenuContent>
                   </DropdownMenu>
                 )}
+
+                {/* Export Button */}
+                <DropdownMenu>
+                  <Tooltip
+                    triggerAsChild
+                    content="Export chart as image or data file"
+                  >
+                    <DropdownMenuTrigger asChild>
+                      <Button variant="secondary" className="h-9">
+                        <RiDownloadLine className="size-4" aria-hidden="true" />
+                      </Button>
+                    </DropdownMenuTrigger>
+                  </Tooltip>
+                  <DropdownMenuContent align="end" className="w-56">
+                    <DropdownMenuLabel>EXPORT OPTIONS</DropdownMenuLabel>
+                    <DropdownMenuSeparator />
+                    <DropdownMenuItem onClick={() => handleExport("print")}>
+                      Print chart
+                    </DropdownMenuItem>
+                    <DropdownMenuSeparator />
+                    <DropdownMenuItem onClick={() => handleExport("png")}>
+                      Download PNG image
+                    </DropdownMenuItem>
+                    <DropdownMenuItem onClick={() => handleExport("jpeg")}>
+                      Download JPEG image
+                    </DropdownMenuItem>
+                    <DropdownMenuItem onClick={() => handleExport("pdf")}>
+                      Download PDF document
+                    </DropdownMenuItem>
+                    <DropdownMenuItem onClick={() => handleExport("svg")}>
+                      Download SVG vector
+                    </DropdownMenuItem>
+                    <DropdownMenuSeparator />
+                    <DropdownMenuItem onClick={() => handleExport("csv")}>
+                      Download CSV
+                    </DropdownMenuItem>
+                    <DropdownMenuItem onClick={() => handleExport("xls")}>
+                      Download XLS
+                    </DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
+
+                {/* Fullscreen Button */}
+                <Tooltip triggerAsChild content="View chart in fullscreen mode">
+                  <Button
+                    variant="secondary"
+                    className="h-9"
+                    onClick={() => handleExport("fullscreen")}
+                  >
+                    <RiFullscreenLine className="size-4" aria-hidden="true" />
+                  </Button>
+                </Tooltip>
               </div>
             </div>
 
@@ -360,7 +512,8 @@ export default function AccountsPage() {
                         value: accounts.reduce(
                           (sum, acc) =>
                             sum +
-                            (acc.totalValue * acc.assetAllocation.usStocks) / 100,
+                            (acc.totalValue * acc.assetAllocation.usStocks) /
+                              100,
                           0,
                         ),
                       },
@@ -370,7 +523,8 @@ export default function AccountsPage() {
                         value: accounts.reduce(
                           (sum, acc) =>
                             sum +
-                            (acc.totalValue * acc.assetAllocation.nonUsStocks) / 100,
+                            (acc.totalValue * acc.assetAllocation.nonUsStocks) /
+                              100,
                           0,
                         ),
                       },
@@ -380,7 +534,8 @@ export default function AccountsPage() {
                         value: accounts.reduce(
                           (sum, acc) =>
                             sum +
-                            (acc.totalValue * acc.assetAllocation.fixedIncome) / 100,
+                            (acc.totalValue * acc.assetAllocation.fixedIncome) /
+                              100,
                           0,
                         ),
                       },
@@ -389,7 +544,8 @@ export default function AccountsPage() {
                         target: "Cash",
                         value: accounts.reduce(
                           (sum, acc) =>
-                            sum + (acc.totalValue * acc.assetAllocation.cash) / 100,
+                            sum +
+                            (acc.totalValue * acc.assetAllocation.cash) / 100,
                           0,
                         ),
                       },
@@ -398,14 +554,20 @@ export default function AccountsPage() {
                   colors={["blue", "cyan", "amber", "emerald"]}
                   accountColors={["violet", "fuchsia", "pink", "sky", "lime"]}
                   height={350}
+                  chartRef={sankeyChartRef}
                 />
               ) : (
                 <AccountTreemap
                   accounts={accounts}
-                  selectedAccounts={selectedAccounts}
+                  selectedAccounts={
+                    selectedAccountFilter === "all"
+                      ? []
+                      : [selectedAccountFilter]
+                  }
                   groupBy={groupBy}
                   displayValue={displayValue}
                   height={350}
+                  chartRef={treemapChartRef}
                 />
               )}
             </div>
