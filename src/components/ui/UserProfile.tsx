@@ -15,7 +15,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/DropdownMenu"
 import { cx, focusRing } from "@/lib/utils"
-import { RiComputerLine, RiMoonLine, RiSunLine, RiDownloadLine, RiUploadLine } from "@remixicon/react"
+import { RiComputerLine, RiMoonLine, RiSunLine, RiDownloadLine, RiUploadLine, RiSettings3Line } from "@remixicon/react"
 import { useTheme } from "next-themes"
 import { usePortfolioStore } from "@/hooks/usePortfolioStore"
 import { clearETFCache } from "@/lib/etfCacheUtils"
@@ -111,7 +111,7 @@ function DropdownUserProfile() {
               className="flex size-8 shrink-0 items-center justify-center rounded-full border border-gray-300 bg-white text-xs font-medium text-gray-700 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300"
               aria-hidden="true"
             >
-              DS
+              <RiSettings3Line className="size-5" aria-hidden="true" />
             </span>
           </button>
         </DropdownMenuTrigger>
@@ -119,7 +119,7 @@ function DropdownUserProfile() {
           align="end"
           className="!min-w-[calc(var(--radix-dropdown-menu-trigger-width))]"
         >
-          <DropdownMenuLabel>douglas.sanchez@me.com</DropdownMenuLabel>
+          <DropdownMenuLabel>Settings</DropdownMenuLabel>
 
           {/* Portfolio Data Management */}
           <DropdownMenuSeparator />

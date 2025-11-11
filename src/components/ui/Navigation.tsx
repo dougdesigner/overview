@@ -2,7 +2,7 @@
 
 import { TabNavigation, TabNavigationLink } from "@/components/TabNavigation"
 import Link from "next/link"
-
+import { RiDonutChartFill, RiLayout2Fill } from "@remixicon/react"
 import { usePathname } from "next/navigation"
 import { DropdownUserProfile } from "./UserProfile"
 
@@ -11,7 +11,16 @@ function Navigation() {
   return (
     <div className="shadow-s sticky top-0 z-20 bg-white dark:bg-gray-950">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 pt-3 sm:px-6">
-        <div>
+        <div className="flex items-center gap-2">
+          {/* Alternative icon options - easily switch between them: */}
+          {/* <RiDonutChartFill
+            className="size-6 text-blue-600 dark:text-blue-400"
+            aria-hidden="true"
+          /> */}
+          <RiLayout2Fill
+            className="size-6 text-blue-600 dark:text-blue-400"
+            aria-hidden="true"
+          />
           <span className="text-lg font-semibold">ETF Exposure</span>
           {/* <Logo className="h-6" /> */}
         </div>
