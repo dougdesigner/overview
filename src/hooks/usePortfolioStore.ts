@@ -1,11 +1,17 @@
 "use client"
 
 import { useCallback, useEffect, useMemo, useState } from "react"
-import { getFromStorage, setToStorage, STORAGE_KEYS, isStorageAvailable } from "@/lib/localStorage"
+import { getFromStorage, setToStorage, STORAGE_KEYS, isStorageAvailable, exportPortfolioData as exportData } from "@/lib/localStorage"
 import { etfMetadataService } from "@/lib/etfMetadataService"
 import { stockPriceService } from "@/lib/stockPriceService"
 import { isKnownETF, getKnownETFName } from "@/lib/knownETFNames"
 import { enhancedExposureCalculator } from "@/lib/enhancedExposureCalculator"
+import {
+  saveBackupToIndexedDB,
+  getLatestBackupFromIndexedDB,
+  getBackupAge
+} from "@/lib/indexedDBBackup"
+import { clearETFCache } from "@/lib/etfCacheUtils"
 
 // Account type definitions
 export interface Account {
@@ -308,6 +314,7 @@ export function usePortfolioStore() {
   const [isLoading, setIsLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
   const [hasInitialized, setHasInitialized] = useState(false)
+  const [dataVersion, setDataVersion] = useState(0)
 
   // Load data from localStorage on mount
   useEffect(() => {
@@ -333,9 +340,33 @@ export function usePortfolioStore() {
           // User has saved data (even if empty)
           setAccountsState(storedAccounts)
         } else {
-          // First time user or cleared storage - start with empty data
-          setAccountsState([])
-          setToStorage(STORAGE_KEYS.accounts, [])
+          // First time user or cleared storage - try to recover from IndexedDB
+          try {
+            const backup = await getLatestBackupFromIndexedDB()
+            if (backup && backup.accounts.length > 0) {
+              // Restore from IndexedDB backup
+              console.log(`📦 Restoring from IndexedDB backup (${getBackupAge(backup.timestamp)})`)
+              setAccountsState(backup.accounts)
+              setToStorage(STORAGE_KEYS.accounts, backup.accounts)
+
+              // Clear ETF cache to ensure fresh data after recovery
+              clearETFCache()
+
+              // Increment data version to invalidate component caches
+              setDataVersion(prev => prev + 1)
+
+              // Show recovery message in console
+              console.log(`✅ Recovered ${backup.accounts.length} accounts from backup`)
+            } else {
+              // No backup available - start with empty data
+              setAccountsState([])
+              setToStorage(STORAGE_KEYS.accounts, [])
+            }
+          } catch (err) {
+            console.error("Failed to recover from IndexedDB:", err)
+            setAccountsState([])
+            setToStorage(STORAGE_KEYS.accounts, [])
+          }
           localStorage.setItem('portfolio_initialized', 'true')
         }
 
@@ -352,9 +383,26 @@ export function usePortfolioStore() {
             setToStorage(STORAGE_KEYS.holdings, migratedHoldings)
           }
         } else {
-          // First time user or cleared storage - start with empty data
-          setHoldingsState([])
-          setToStorage(STORAGE_KEYS.holdings, [])
+          // First time user or cleared storage - try to recover from IndexedDB
+          try {
+            const backup = await getLatestBackupFromIndexedDB()
+            if (backup && backup.holdings.length > 0) {
+              // Restore from IndexedDB backup
+              const migratedHoldings = await migrateETFNames(backup.holdings)
+              setHoldingsState(migratedHoldings)
+              setToStorage(STORAGE_KEYS.holdings, migratedHoldings)
+              // Show recovery message in console
+              console.log(`✅ Recovered ${backup.holdings.length} holdings from backup`)
+            } else {
+              // No backup available - start with empty data
+              setHoldingsState([])
+              setToStorage(STORAGE_KEYS.holdings, [])
+            }
+          } catch (err) {
+            console.error("Failed to recover from IndexedDB:", err)
+            setHoldingsState([])
+            setToStorage(STORAGE_KEYS.holdings, [])
+          }
         }
 
         setError(null)
@@ -482,6 +530,86 @@ export function usePortfolioStore() {
 
     saveHoldings()
   }, [holdings, hasInitialized, isLoading])
+
+  // Auto-backup to IndexedDB whenever accounts or holdings change
+  useEffect(() => {
+    if (!hasInitialized || isLoading) return
+
+    const backupToIndexedDB = async () => {
+      try {
+        await saveBackupToIndexedDB(accounts, holdings, "1.0.0")
+      } catch (err) {
+        console.error("Error backing up to IndexedDB:", err)
+        // Don't set error state - this is a silent backup
+      }
+    }
+
+    backupToIndexedDB()
+  }, [accounts, holdings, hasInitialized, isLoading])
+
+  // Storage event listener - detect when localStorage is cleared from other tabs/windows
+  useEffect(() => {
+    if (typeof window === "undefined") return
+
+    const handleStorageChange = async (e: StorageEvent) => {
+      // Check if portfolio data was cleared
+      if (
+        e.key === STORAGE_KEYS.accounts ||
+        e.key === STORAGE_KEYS.holdings ||
+        e.key === null // null means localStorage.clear() was called
+      ) {
+        // Check if data was actually cleared (newValue is null)
+        if (e.newValue === null) {
+          console.warn("⚠️ Portfolio data was cleared externally")
+
+          // Try to recover from IndexedDB
+          try {
+            const backup = await getLatestBackupFromIndexedDB()
+            if (backup) {
+              const shouldRestore = confirm(
+                `Portfolio data was cleared. Restore from backup?\n\n` +
+                `Backup from: ${getBackupAge(backup.timestamp)}\n` +
+                `${backup.accounts.length} accounts, ${backup.holdings.length} holdings`
+              )
+
+              if (shouldRestore) {
+                // Restore accounts
+                setAccountsState(backup.accounts)
+                setToStorage(STORAGE_KEYS.accounts, backup.accounts)
+
+                // Restore holdings
+                setHoldingsState(backup.holdings)
+                setToStorage(STORAGE_KEYS.holdings, backup.holdings)
+
+                // Clear ETF cache to ensure fresh data
+                clearETFCache()
+
+                // Increment data version to invalidate component caches
+                setDataVersion(prev => prev + 1)
+
+                console.log("✅ Portfolio restored from IndexedDB backup")
+                alert("Portfolio data has been restored successfully!")
+              }
+            } else {
+              console.error("No backup available to restore from")
+              alert("Portfolio data was cleared and no backup is available.")
+            }
+          } catch (err) {
+            console.error("Failed to restore from backup:", err)
+            alert("Failed to restore portfolio data from backup.")
+          }
+        }
+      }
+    }
+
+    // Add storage event listener
+    window.addEventListener("storage", handleStorageChange)
+
+    // Cleanup
+    return () => {
+      window.removeEventListener("storage", handleStorageChange)
+    }
+  }, [setAccountsState, setHoldingsState])
 
   // Recalculate account totals when holdings change
   useEffect(() => {
@@ -700,6 +828,10 @@ export function usePortfolioStore() {
     setToStorage(STORAGE_KEYS.holdings, [])
     // Keep the initialized flag so we don't re-add default data
     localStorage.setItem('portfolio_initialized', 'true')
+    // Clear all ETF-related caches (localStorage, memory, and service caches)
+    clearETFCache()
+    // Increment data version to invalidate component caches
+    setDataVersion(prev => prev + 1)
   }, [])
 
   // Reset to default data
@@ -787,6 +919,21 @@ export function usePortfolioStore() {
     })
   }, [])
 
+  // Export portfolio data wrapper
+  const exportPortfolioData = useCallback(() => {
+    exportData()
+  }, [])
+
+  // Import portfolio data wrapper
+  const importPortfolioData = useCallback((data: { accounts: Account[], holdings: Holding[] }) => {
+    setAccountsState(data.accounts)
+    setHoldingsState(data.holdings)
+    setToStorage(STORAGE_KEYS.accounts, data.accounts)
+    setToStorage(STORAGE_KEYS.holdings, data.holdings)
+    // Increment data version to invalidate component caches
+    setDataVersion(prev => prev + 1)
+  }, [])
+
   // Auto-update prices on mount and periodically
   useEffect(() => {
     if (!hasInitialized || isLoading || holdings.length === 0) return
@@ -808,6 +955,7 @@ export function usePortfolioStore() {
     holdings,
     isLoading,
     error,
+    dataVersion,
 
     // Account operations
     addAccount,
@@ -829,5 +977,7 @@ export function usePortfolioStore() {
     resetToDefaults,
     updatePrices,
     refreshETFNames,
+    exportPortfolioData,
+    importPortfolioData,
   }
 }

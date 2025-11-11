@@ -1,21 +1,17 @@
 "use client"
 
-import React, { useState } from "react"
 import { Button } from "@/components/Button"
-import { OnboardingStep } from "./OnboardingStep"
 import { cx } from "@/lib/utils"
-import {
-  RiArrowLeftLine,
-  RiArrowRightLine,
-  RiAddLine,
-} from "@remixicon/react"
+import { RiAddLine, RiArrowLeftLine, RiArrowRightLine } from "@remixicon/react"
 import { useRouter } from "next/navigation"
+import { useState } from "react"
+import { OnboardingStep } from "./OnboardingStep"
 
 // Import screenshot placeholders
-import { OverviewScreenshot } from "./screenshots/OverviewScreenshot"
 import { AccountsScreenshot } from "./screenshots/AccountsScreenshot"
-import { HoldingsScreenshot } from "./screenshots/HoldingsScreenshot"
 import { ExposureAnalysisScreenshot } from "./screenshots/ExposureAnalysisScreenshot"
+import { HoldingsScreenshot } from "./screenshots/HoldingsScreenshot"
+import { OverviewScreenshot } from "./screenshots/OverviewScreenshot"
 
 const onboardingSteps = [
   {
@@ -82,7 +78,7 @@ export function OnboardingFlow() {
 
   const handleNext = () => {
     if (isLastStep) {
-      router.push('/accounts')
+      router.push("/accounts")
     } else {
       setCurrentStep((prev) => Math.min(prev + 1, onboardingSteps.length - 1))
     }
@@ -94,9 +90,9 @@ export function OnboardingFlow() {
 
   return (
     <>
-      <div className="min-h-[600px] flex flex-col justify-between">
+      <div className="flex min-h-[600px] flex-col justify-between">
         {/* Progress Indicator */}
-        <div className="mb-8">
+        {/* <div className="mb-8">
           <div className="flex items-center justify-between mb-2">
             <span className="text-sm text-gray-600 dark:text-gray-400">
               Step {currentStep + 1} of {onboardingSteps.length}
@@ -113,7 +109,7 @@ export function OnboardingFlow() {
               }}
             />
           </div>
-        </div>
+        </div> */}
 
         {/* Step Content */}
         <div className="flex-1">
@@ -132,10 +128,7 @@ export function OnboardingFlow() {
             variant="secondary"
             onClick={handlePrevious}
             disabled={isFirstStep}
-            className={cx(
-              "gap-2",
-              isFirstStep && "invisible"
-            )}
+            className={cx("gap-2", isFirstStep && "invisible")}
           >
             <RiArrowLeftLine className="size-4" />
             Previous
@@ -150,19 +143,15 @@ export function OnboardingFlow() {
                 className={cx(
                   "size-2 rounded-full transition-all duration-200",
                   index === currentStep
-                    ? "bg-blue-500 w-8"
-                    : "bg-gray-300 dark:bg-gray-700 hover:bg-gray-400 dark:hover:bg-gray-600"
+                    ? "w-8 bg-blue-500"
+                    : "bg-gray-300 hover:bg-gray-400 dark:bg-gray-700 dark:hover:bg-gray-600",
                 )}
                 aria-label={`Go to step ${index + 1}`}
               />
             ))}
           </div>
 
-          <Button
-            variant="primary"
-            onClick={handleNext}
-            className="gap-2"
-          >
+          <Button variant="primary" onClick={handleNext} className="gap-2">
             {isLastStep ? (
               <>
                 <RiAddLine className="size-4" />

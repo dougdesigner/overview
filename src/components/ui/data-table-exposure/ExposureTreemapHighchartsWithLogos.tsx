@@ -42,6 +42,7 @@ interface ExposureTreemapHighchartsProps {
   selectedAccount: string
   onAccountChange: (accountId: string) => void
   logoUrls: Record<string, string | null>
+  dataVersion?: number
 }
 
 type ChartType = "treemap" | "pie"
@@ -75,6 +76,7 @@ export function ExposureTreemapHighchartsWithLogos({
   selectedAccount,
   onAccountChange,
   logoUrls,
+  dataVersion,
 }: ExposureTreemapHighchartsProps) {
   const [chartType, setChartType] = useState<ChartType>("treemap")
   const [groupingMode, setGroupingMode] = useState<GroupingMode>("sector")

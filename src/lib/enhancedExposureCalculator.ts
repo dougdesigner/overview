@@ -548,6 +548,16 @@ export class EnhancedExposureCalculator {
     return exposures.sort((a, b) => b.totalValue - a.totalValue)
   }
 
+  /**
+   * Clear all cached data (ETF profiles and company overviews)
+   * Should be called when portfolio data is cleared or reset
+   */
+  clearCache(): void {
+    this.etfProfiles.clear()
+    this.companyOverviews.clear()
+    console.log('🗑️ Cleared EnhancedExposureCalculator cache')
+  }
+
 }
 
 export const enhancedExposureCalculator = new EnhancedExposureCalculator()

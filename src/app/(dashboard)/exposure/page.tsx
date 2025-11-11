@@ -5,28 +5,12 @@ import { Divider } from "@/components/Divider"
 import { ExposureTable } from "@/components/ui/data-table-exposure/ExposureTable"
 import { useExposureCalculations } from "@/hooks/useExposureCalculations"
 import { usePortfolioStore } from "@/hooks/usePortfolioStore"
+import { clearIndexedDBBackups } from "@/lib/indexedDBBackup"
 import { useMemo } from "react"
-
-// Function to clear ETF cache from localStorage
-function clearETFCache() {
-  if (typeof window === "undefined") return
-
-  const keys = Object.keys(localStorage)
-  const etfKeys = keys.filter((k) => k.startsWith("etf_holdings_"))
-
-  etfKeys.forEach((key) => {
-    localStorage.removeItem(key)
-    console.log(`Removed ${key} from localStorage`)
-  })
-
-  console.log(`Cleared ${etfKeys.length} ETF cache entries from localStorage`)
-  // Reload the page to fetch fresh data
-  window.location.reload()
-}
 
 export default function ExposurePage() {
   // Use portfolio store for holdings and accounts data
-  const { holdings, accounts, isLoading: holdingsLoading } = usePortfolioStore()
+  const { holdings, accounts, isLoading: holdingsLoading, dataVersion, clearAllData } = usePortfolioStore()
 
   // Get exposure calculations
   const {
@@ -65,6 +49,34 @@ export default function ExposurePage() {
     // This will trigger recalculation through the hook
     // In a real app, you might also refresh prices from an API
     console.log("Refreshing exposure data...")
+  }
+
+  const handleFullRefresh = async () => {
+    const confirmed = confirm(
+      "This will clear all portfolio data, including:\n\n" +
+      "• All accounts and holdings\n" +
+      "• All ETF cache data\n" +
+      "• All IndexedDB backups\n\n" +
+      "This action cannot be undone. Continue?"
+    )
+
+    if (!confirmed) return
+
+    try {
+      // Clear all portfolio data and ETF caches
+      clearAllData()
+
+      // Clear IndexedDB backups
+      await clearIndexedDBBackups()
+
+      console.log("✅ All data cleared successfully")
+
+      // Reload the page to fetch fresh data
+      window.location.reload()
+    } catch (error) {
+      console.error("Error clearing data:", error)
+      alert("Failed to clear all data. Please try again.")
+    }
   }
 
   // Show loading state
@@ -106,7 +118,7 @@ export default function ExposurePage() {
             See your true stock exposure across all ETFs and direct holdings
           </p>
         </div>
-        <Button onClick={clearETFCache} variant="secondary" className="text-sm">
+        <Button onClick={handleFullRefresh} variant="secondary" className="text-sm">
           Refresh
         </Button>
       </div>
@@ -169,6 +181,7 @@ export default function ExposurePage() {
             holdings={portfolioHoldings}
             accounts={exposureAccounts}
             onRefresh={handleRefresh}
+            dataVersion={dataVersion}
           />
         )}
       </div>

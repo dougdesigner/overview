@@ -45,7 +45,9 @@ import {
   RiDownloadLine,
   RiExpandUpDownLine,
   RiEyeOffLine,
+  RiFlowChart,
   RiFullscreenLine,
+  RiNodeTree,
   RiPercentLine,
 } from "@remixicon/react"
 import HighchartsReact from "highcharts-react-official"
@@ -256,7 +258,7 @@ export default function AccountsPage() {
               </p>
               <div className="flex flex-wrap items-center gap-2">
                 {/* Chart Type Toggle */}
-                {/* <DropdownMenu>
+                <DropdownMenu>
                   <Tooltip content="Switch chart type" triggerAsChild>
                     <DropdownMenuTrigger asChild>
                       <Button
@@ -280,7 +282,9 @@ export default function AccountsPage() {
                   <DropdownMenuContent align="end" className="w-40">
                     <DropdownMenuRadioGroup
                       value={chartType}
-                      onValueChange={(value) => setChartType(value as "sankey" | "treemap")}
+                      onValueChange={(value) =>
+                        setChartType(value as "sankey" | "treemap")
+                      }
                     >
                       <DropdownMenuRadioItem value="sankey">
                         <RiFlowChart className="mr-2 size-4" />
@@ -292,7 +296,7 @@ export default function AccountsPage() {
                       </DropdownMenuRadioItem>
                     </DropdownMenuRadioGroup>
                   </DropdownMenuContent>
-                </DropdownMenu> */}
+                </DropdownMenu>
 
                 {/* Account Filter (for Treemap) */}
                 {chartType === "treemap" && (

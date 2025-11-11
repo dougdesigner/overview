@@ -19,14 +19,11 @@ import { getCachedLogoUrls } from "@/lib/logoUtils"
 import { RiDownloadLine, RiFullscreenLine } from "@remixicon/react"
 import Highcharts from "highcharts"
 import HighchartsReact from "highcharts-react-official"
-import HighchartsExportData from "highcharts/modules/export-data"
-import HighchartsExporting from "highcharts/modules/exporting"
-import HighchartsSunburst from "highcharts/modules/sunburst"
 import { useTheme } from "next-themes"
 import { useEffect, useMemo, useRef, useState } from "react"
 
 // Track if modules are initialized globally to prevent duplicate initialization
-let enhancedModulesInitialized = false
+let modulesInitialized = false
 
 // Type assertion for module initialization functions
 type HighchartsModule = (H: typeof Highcharts) => void
@@ -68,35 +65,39 @@ export function HoldingsSunburstEnhanced({
   // Active grouping mode based on chart type
   const groupingMode = chartType === "sunburst" ? sunburstGrouping : pieGrouping
 
-  // Initialize Highcharts modules
+  // Initialize Highcharts modules on client-side
   useEffect(() => {
-    setIsClient(true)
+    const initModules = async () => {
+      if (!modulesInitialized && typeof window !== "undefined" && typeof Highcharts === "object") {
+        try {
+          // Dynamically import modules only on client
+          const [HighchartsSunburst, HighchartsExporting, HighchartsExportData] = await Promise.all([
+            import("highcharts/modules/sunburst"),
+            import("highcharts/modules/exporting"),
+            import("highcharts/modules/export-data")
+          ])
 
-    // Initialize Highcharts modules only once on client side
-    if (!enhancedModulesInitialized && typeof Highcharts === "object") {
-      try {
-        // Cast modules to callable functions
-        const sunburstInit = HighchartsSunburst as unknown as HighchartsModule
-        const exportingInit = HighchartsExporting as unknown as HighchartsModule
-        const exportDataInit =
-          HighchartsExportData as unknown as HighchartsModule
+          // Initialize each module
+          if (typeof HighchartsSunburst.default === "function") {
+            HighchartsSunburst.default(Highcharts)
+          }
+          if (typeof HighchartsExporting.default === "function") {
+            HighchartsExporting.default(Highcharts)
+          }
+          if (typeof HighchartsExportData.default === "function") {
+            HighchartsExportData.default(Highcharts)
+          }
 
-        if (typeof sunburstInit === "function") {
-          sunburstInit(Highcharts)
+          modulesInitialized = true
+        } catch (error) {
+          console.error("Failed to initialize Highcharts modules:", error)
         }
-        if (typeof exportingInit === "function") {
-          exportingInit(Highcharts)
-        }
-        if (typeof exportDataInit === "function") {
-          exportDataInit(Highcharts)
-        }
-        enhancedModulesInitialized = true
-      } catch (e) {
-        // Modules may already be initialized
-        console.log("Highcharts modules initialization:", e)
       }
+      setIsClient(true)
+      setModulesLoaded(true)
     }
-    setModulesLoaded(true)
+
+    initModules()
   }, [])
 
   // Fetch logos for tickers
