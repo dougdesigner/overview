@@ -575,11 +575,12 @@ export function ExposureTreemapHighchartsWithLogos({
       })
 
       // Child nodes (stocks) with logo URLs
-      stocks.forEach((stock) => {
+      stocks.forEach((stock, stockIndex) => {
         const percentage = (stock.totalValue / totalValue) * 100
         const logoUrl = logoUrls[stock.ticker.toUpperCase()] ?? null
 
         data.push({
+          id: `${groupName}-${stock.ticker}-${stockIndex}`,
           name: stock.ticker,
           parent: groupName,
           value: sizingMode === "monosize" ? 1 : stock.totalValue,
@@ -1374,7 +1375,7 @@ export function ExposureTreemapHighchartsWithLogos({
             </p>
             <ul className="flex flex-wrap gap-x-10 gap-y-4 text-sm">
               {topGroups.map(([name, value], index) => (
-                <li key={name}>
+                <li key={`${name}-${index}`}>
                   <span className="text-base font-semibold text-gray-900 dark:text-gray-50">
                     {getLegendDisplayValue(value)}
                   </span>

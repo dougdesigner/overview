@@ -310,9 +310,9 @@ const AssetAllocationCard = React.forwardRef<
                       role="list"
                       className="mt-2 divide-y divide-gray-200 text-sm text-gray-500 dark:divide-gray-800 dark:text-gray-500"
                     >
-                      {category.data.map((item) => (
+                      {category.data.map((item, index) => (
                     <li
-                      key={item.name}
+                      key={`${item.name}-${index}`}
                       className="flex items-center justify-between space-x-6 py-2"
                     >
                       <div className="flex items-center space-x-2.5 truncate">

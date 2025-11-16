@@ -19,6 +19,9 @@ import { getCachedLogoUrls } from "@/lib/logoUtils"
 import { RiDownloadLine, RiFullscreenLine } from "@remixicon/react"
 import Highcharts from "highcharts"
 import HighchartsReact from "highcharts-react-official"
+import HighchartsSunburst from "highcharts/modules/sunburst"
+import HighchartsExporting from "highcharts/modules/exporting"
+import HighchartsExportData from "highcharts/modules/export-data"
 import { useTheme } from "next-themes"
 import { useEffect, useMemo, useRef, useState } from "react"
 
@@ -67,37 +70,30 @@ export function HoldingsSunburstEnhanced({
 
   // Initialize Highcharts modules on client-side
   useEffect(() => {
-    const initModules = async () => {
-      if (!modulesInitialized && typeof window !== "undefined" && typeof Highcharts === "object") {
-        try {
-          // Dynamically import modules only on client
-          const [HighchartsSunburst, HighchartsExporting, HighchartsExportData] = await Promise.all([
-            import("highcharts/modules/sunburst"),
-            import("highcharts/modules/exporting"),
-            import("highcharts/modules/export-data")
-          ])
+    if (!modulesInitialized && typeof Highcharts === "object") {
+      try {
+        // Cast modules to callable functions
+        const sunburstInit = HighchartsSunburst as unknown as HighchartsModule
+        const exportingInit = HighchartsExporting as unknown as HighchartsModule
+        const exportDataInit = HighchartsExportData as unknown as HighchartsModule
 
-          // Initialize each module
-          if (typeof HighchartsSunburst.default === "function") {
-            HighchartsSunburst.default(Highcharts)
-          }
-          if (typeof HighchartsExporting.default === "function") {
-            HighchartsExporting.default(Highcharts)
-          }
-          if (typeof HighchartsExportData.default === "function") {
-            HighchartsExportData.default(Highcharts)
-          }
-
-          modulesInitialized = true
-        } catch (error) {
-          console.error("Failed to initialize Highcharts modules:", error)
+        if (typeof sunburstInit === "function") {
+          sunburstInit(Highcharts)
         }
+        if (typeof exportingInit === "function") {
+          exportingInit(Highcharts)
+        }
+        if (typeof exportDataInit === "function") {
+          exportDataInit(Highcharts)
+        }
+        modulesInitialized = true
+      } catch (e) {
+        // Modules may already be initialized
+        console.log("Highcharts modules initialization:", e)
       }
-      setIsClient(true)
-      setModulesLoaded(true)
     }
-
-    initModules()
+    setIsClient(true)
+    setModulesLoaded(true)
   }, [])
 
   // Fetch logos for tickers
@@ -1136,7 +1132,7 @@ export function HoldingsSunburstEnhanced({
           </p>
           <ul className="flex flex-wrap gap-x-10 gap-y-4 text-sm">
             {topGroups.map(([name, value], index) => (
-              <li key={name}>
+              <li key={`${name}-${index}`}>
                 <span className="text-base font-semibold text-gray-900 dark:text-gray-50">
                   {getLegendDisplayValue(value)}
                 </span>
