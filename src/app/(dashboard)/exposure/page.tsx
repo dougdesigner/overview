@@ -10,7 +10,13 @@ import { useMemo } from "react"
 
 export default function ExposurePage() {
   // Use portfolio store for holdings and accounts data
-  const { holdings, accounts, isLoading: holdingsLoading, dataVersion, clearAllData } = usePortfolioStore()
+  const {
+    holdings,
+    accounts,
+    isLoading: holdingsLoading,
+    dataVersion,
+    clearAllData,
+  } = usePortfolioStore()
 
   // Get exposure calculations
   const {
@@ -54,10 +60,10 @@ export default function ExposurePage() {
   const handleFullRefresh = async () => {
     const confirmed = confirm(
       "This will clear all portfolio data, including:\n\n" +
-      "• All accounts and holdings\n" +
-      "• All ETF cache data\n" +
-      "• All IndexedDB backups\n\n" +
-      "This action cannot be undone. Continue?"
+        "• All accounts and holdings\n" +
+        "• All ETF cache data\n" +
+        "• All IndexedDB backups\n\n" +
+        "This action cannot be undone. Continue?",
     )
 
     if (!confirmed) return
@@ -118,16 +124,15 @@ export default function ExposurePage() {
             See your true stock exposure across all ETFs and direct holdings
           </p>
         </div>
-        <Button onClick={handleFullRefresh} variant="secondary" className="text-sm">
+        {/* <Button onClick={handleFullRefresh} variant="secondary" className="text-sm">
           Refresh
-        </Button>
+        </Button> */}
       </div>
       <Divider />
 
       {/* Exposure Table */}
       <div className="mt-8">
-        {holdingsLoading ? // Loading state is already handled above
-        null : portfolioHoldings.length === 0 ? (
+        {holdingsLoading ? null : portfolioHoldings.length === 0 ? ( // Loading state is already handled above
           // Empty state
           <div className="py-12 text-center">
             {accounts.length === 0 ? (

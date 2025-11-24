@@ -22,13 +22,12 @@ import {
   getCoreRowModel,
   getExpandedRowModel,
   getFilteredRowModel,
-  getPaginationRowModel,
   getSortedRowModel,
   SortingState,
   useReactTable,
 } from "@tanstack/react-table"
 import React from "react"
-import { DataTablePagination } from "../data-table/DataTablePagination"
+import { ExposureTablePagination } from "./ExposureTablePagination"
 import { createColumns } from "./columns"
 // import { ExposureTreemap } from "./ExposureTreemap"  // Nivo version - commented out
 // import { ExposureTreemapHighcharts } from "./ExposureTreemapHighcharts"  // Original version
@@ -50,6 +49,10 @@ export function ExposureTable({ holdings, accounts, dataVersion }: ExposureTable
   const [logoUrls, setLogoUrls] = React.useState<Record<string, string | null>>(
     {},
   )
+
+  // Manual pagination state for parent-row-only pagination
+  const [currentPage, setCurrentPage] = React.useState(0)
+  const PAGE_SIZE = 20
 
   // Filter holdings by selected account for treemap visualization
   const filteredHoldings = React.useMemo(() => {
@@ -129,6 +132,39 @@ export function ExposureTable({ holdings, accounts, dataVersion }: ExposureTable
     fetchLogos()
   }, [data])
 
+  // Sort data globally before pagination
+  const sortedData = React.useMemo(() => {
+    if (sorting.length === 0) return data
+
+    const [{ id, desc }] = sorting
+    return [...data].sort((a, b) => {
+      const aVal = a[id as keyof StockExposure]
+      const bVal = b[id as keyof StockExposure]
+
+      if (aVal == null) return desc ? -1 : 1
+      if (bVal == null) return desc ? 1 : -1
+
+      if (typeof aVal === "number" && typeof bVal === "number") {
+        return desc ? bVal - aVal : aVal - bVal
+      }
+
+      return desc
+        ? String(bVal).localeCompare(String(aVal))
+        : String(aVal).localeCompare(String(bVal))
+    })
+  }, [data, sorting])
+
+  // Paginate the sorted data (parent rows only)
+  const paginatedData = React.useMemo(() => {
+    const startIndex = currentPage * PAGE_SIZE
+    return sortedData.slice(startIndex, startIndex + PAGE_SIZE)
+  }, [sortedData, currentPage, PAGE_SIZE])
+
+  // Reset to first page when data/filter/sort changes
+  React.useEffect(() => {
+    setCurrentPage(0)
+  }, [data.length, globalFilter, sorting])
+
   const areAllExpanded = React.useCallback(() => {
     const expandableRows = data.filter(
       (row) => row.subRows && row.subRows.length > 0,
@@ -166,7 +202,7 @@ export function ExposureTable({ holdings, accounts, dataVersion }: ExposureTable
   )
 
   const table = useReactTable({
-    data,
+    data: paginatedData,
     columns,
     state: {
       sorting,
@@ -179,14 +215,8 @@ export function ExposureTable({ holdings, accounts, dataVersion }: ExposureTable
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
-    getPaginationRowModel: getPaginationRowModel(),
     getExpandedRowModel: getExpandedRowModel(),
     getSubRows: (row) => row.subRows,
-    initialState: {
-      pagination: {
-        pageSize: 20,
-      },
-    },
   })
 
   return (
@@ -370,7 +400,12 @@ export function ExposureTable({ holdings, accounts, dataVersion }: ExposureTable
           </Card>
 
           {/* Pagination */}
-          <DataTablePagination table={table} pageSize={20} />
+          <ExposureTablePagination
+            totalRows={data.length}
+            currentPage={currentPage}
+            pageSize={PAGE_SIZE}
+            onPageChange={setCurrentPage}
+          />
         </>
       )}
     </div>

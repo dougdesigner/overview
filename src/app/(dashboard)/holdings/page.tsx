@@ -9,22 +9,23 @@ import {
 } from "@/components/ui/HoldingsDrawer"
 import { HoldingsTable } from "@/components/ui/data-table-holdings/HoldingsTable"
 import { Holding } from "@/components/ui/data-table-holdings/types"
-import { RiAddLine, RiRefreshLine } from "@remixicon/react"
-import { useSearchParams } from "next/navigation"
-import React, { Suspense, useMemo } from "react"
+import mutualFundMappings from "@/data/mutual-fund-mappings.json"
 import { usePortfolioStore } from "@/hooks/usePortfolioStore"
 import { getETFName } from "@/lib/etfMetadataService"
+import { getKnownETFName } from "@/lib/knownETFNames"
 import { getStockPrice } from "@/lib/stockPriceService"
-import { isKnownETF, getKnownETFName } from "@/lib/knownETFNames"
-import mutualFundMappings from "@/data/mutual-fund-mappings.json"
+import { RiAddLine } from "@remixicon/react"
+import { useSearchParams } from "next/navigation"
+import React, { Suspense, useMemo } from "react"
 
 function HoldingsContent() {
   const searchParams = useSearchParams()
   const [isOpen, setIsOpen] = React.useState(false)
-  const [editingHolding, setEditingHolding] = React.useState<Holding | null>(null)
-  const [currentAccountFilter, setCurrentAccountFilter] = React.useState<string>(
-    searchParams.get("account") || "all"
+  const [editingHolding, setEditingHolding] = React.useState<Holding | null>(
+    null,
   )
+  const [currentAccountFilter, setCurrentAccountFilter] =
+    React.useState<string>(searchParams.get("account") || "all")
   const [isRefreshing, setIsRefreshing] = React.useState(false)
 
   // Use portfolio store for accounts and holdings data
@@ -37,28 +38,29 @@ function HoldingsContent() {
     updateHolding,
     deleteHolding,
     refreshETFNames,
-    updatePrices
+    updatePrices,
   } = usePortfolioStore()
 
   // Convert accounts to the format expected by components
-  const accounts = useMemo(() =>
-    storeAccounts.map(acc => ({
-      id: acc.id,
-      name: acc.name,
-      institution: acc.institution
-    })),
-    [storeAccounts]
+  const accounts = useMemo(
+    () =>
+      storeAccounts.map((acc) => ({
+        id: acc.id,
+        name: acc.name,
+        institution: acc.institution,
+      })),
+    [storeAccounts],
   )
 
   // Refresh ETF names on mount if needed
   React.useEffect(() => {
     // Check if any holdings have QQQM with non-detailed name
-    const hasQQQMWithBasicName = holdings.some(h =>
-      h.ticker?.toUpperCase() === 'QQQM' && !h.name.includes('Invesco')
+    const hasQQQMWithBasicName = holdings.some(
+      (h) => h.ticker?.toUpperCase() === "QQQM" && !h.name.includes("Invesco"),
     )
 
     if (hasQQQMWithBasicName) {
-      console.log('Detected QQQM with basic name, refreshing ETF names...')
+      console.log("Detected QQQM with basic name, refreshing ETF names...")
       refreshETFNames()
     }
   }, []) // Only run once on mount
@@ -66,9 +68,9 @@ function HoldingsContent() {
   // Calculate allocations for all holdings
   const holdingsWithAllocations = useMemo(() => {
     const totalValue = holdings.reduce((sum, h) => sum + h.marketValue, 0)
-    return holdings.map(h => ({
+    return holdings.map((h) => ({
       ...h,
-      allocation: totalValue > 0 ? (h.marketValue / totalValue) * 100 : 0
+      allocation: totalValue > 0 ? (h.marketValue / totalValue) * 100 : 0,
     }))
   }, [holdings])
 
@@ -83,7 +85,7 @@ function HoldingsContent() {
       })
     } else {
       // Add new holding
-      const account = accounts.find(a => a.id === holding.accountId)
+      const account = accounts.find((a) => a.id === holding.accountId)
       if (!account) {
         console.error("Account not found:", holding.accountId)
         return
@@ -100,7 +102,8 @@ function HoldingsContent() {
         lastPrice = 1
       } else if (holding.ticker) {
         // First, check if it's a mutual fund
-        const mutualFund = mutualFundMappings[holding.ticker as keyof typeof mutualFundMappings]
+        const mutualFund =
+          mutualFundMappings[holding.ticker as keyof typeof mutualFundMappings]
 
         if (mutualFund) {
           // It's a mutual fund
@@ -115,11 +118,15 @@ function HoldingsContent() {
             // We have a known name - use it immediately
             name = knownName
             type = "fund"
-            console.log(`Using known ETF name for ${holding.ticker}: ${knownName}`)
+            console.log(
+              `Using known ETF name for ${holding.ticker}: ${knownName}`,
+            )
           } else {
             // Check if it's likely an ETF based on ticker format
-            const isLikelyETF = holding.ticker.length >= 2 && holding.ticker.length <= 5 &&
-                               holding.ticker === holding.ticker.toUpperCase()
+            const isLikelyETF =
+              holding.ticker.length >= 2 &&
+              holding.ticker.length <= 5 &&
+              holding.ticker === holding.ticker.toUpperCase()
 
             if (isLikelyETF) {
               // Try to fetch from API for unknown ETFs
@@ -127,7 +134,9 @@ function HoldingsContent() {
               if (etfNameResult && etfNameResult !== `${holding.ticker} ETF`) {
                 name = etfNameResult
                 type = "fund"
-                console.log(`Fetched ETF name for ${holding.ticker}: ${etfNameResult}`)
+                console.log(
+                  `Fetched ETF name for ${holding.ticker}: ${etfNameResult}`,
+                )
               } else {
                 // Default name for unknown ETFs
                 name = holding.ticker
@@ -149,7 +158,9 @@ function HoldingsContent() {
             console.log(`Using default price for ${holding.ticker}`)
           }
         } catch (error) {
-          console.log(`Error fetching price for ${holding.ticker}, using default`)
+          console.log(
+            `Error fetching price for ${holding.ticker}, using default`,
+          )
         }
       }
 
@@ -221,13 +232,13 @@ function HoldingsContent() {
           <h1 className="text-2xl font-semibold text-gray-900 dark:text-gray-50">
             Holdings
           </h1>
-          <p className="text-gray-500 sm:text-sm/6 dark:text-gray-500">
+          <p className="text-gray-500 dark:text-gray-500 sm:text-sm/6">
             See all your investments in one place, across every account
           </p>
         </div>
         {accounts.length > 0 && (
           <div className="flex gap-2">
-            {holdings.length > 0 && (
+            {/* {holdings.length > 0 && (
               <Button
                 onClick={handleRefreshPrices}
                 variant="secondary"
@@ -237,13 +248,16 @@ function HoldingsContent() {
                 {isRefreshing ? "Refreshing..." : "Refresh Prices"}
                 <RiRefreshLine className={`-mr-0.5 size-5 shrink-0 ${isRefreshing ? 'animate-spin' : ''}`} aria-hidden="true" />
               </Button>
-            )}
+            )} */}
             <Button
               onClick={() => setIsOpen(true)}
               className="flex items-center gap-2 text-base sm:text-sm"
             >
               Add Holdings
-              <RiAddLine className="-mr-0.5 size-5 shrink-0" aria-hidden="true" />
+              <RiAddLine
+                className="-mr-0.5 size-5 shrink-0"
+                aria-hidden="true"
+              />
             </Button>
           </div>
         )}
@@ -262,7 +276,10 @@ function HoldingsContent() {
             editingHolding
               ? convertHoldingToFormData(editingHolding)
               : currentAccountFilter !== "all"
-                ? { accountId: currentAccountFilter, holdingType: "stocks-funds" }
+                ? {
+                    accountId: currentAccountFilter,
+                    holdingType: "stocks-funds",
+                  }
                 : undefined
           }
         />
@@ -285,14 +302,14 @@ function HoldingsContent() {
       <div className="mt-8">
         {accounts.length === 0 ? (
           <div className="py-12 text-center">
-            <h3 className="text-lg font-medium text-gray-900 dark:text-gray-50 mb-2">
+            <h3 className="mb-2 text-lg font-medium text-gray-900 dark:text-gray-50">
               No accounts yet
             </h3>
-            <p className="text-gray-500 dark:text-gray-400 mb-4">
+            <p className="mb-4 text-gray-500 dark:text-gray-400">
               Please add an account first before adding holdings.
             </p>
             <Button
-              onClick={() => window.location.href = '/accounts'}
+              onClick={() => (window.location.href = "/accounts")}
               className="inline-flex items-center gap-2"
             >
               Go to Accounts
@@ -300,10 +317,10 @@ function HoldingsContent() {
           </div>
         ) : holdings.length === 0 ? (
           <div className="py-12 text-center">
-            <h3 className="text-lg font-medium text-gray-900 dark:text-gray-50 mb-2">
+            <h3 className="mb-2 text-lg font-medium text-gray-900 dark:text-gray-50">
               No holdings yet
             </h3>
-            <p className="text-gray-500 dark:text-gray-400 mb-4">
+            <p className="mb-4 text-gray-500 dark:text-gray-400">
               Add your first holding to start tracking your investments.
             </p>
             <Button
@@ -311,7 +328,10 @@ function HoldingsContent() {
               className="inline-flex items-center gap-2"
             >
               Add Your First Holding
-              <RiAddLine className="-mr-0.5 size-5 shrink-0" aria-hidden="true" />
+              <RiAddLine
+                className="-mr-0.5 size-5 shrink-0"
+                aria-hidden="true"
+              />
             </Button>
           </div>
         ) : (
@@ -331,11 +351,13 @@ function HoldingsContent() {
 
 export default function HoldingsPage() {
   return (
-    <Suspense fallback={
-      <div className="flex h-full items-center justify-center">
-        <div className="text-sm text-gray-500">Loading...</div>
-      </div>
-    }>
+    <Suspense
+      fallback={
+        <div className="flex h-full items-center justify-center">
+          <div className="text-sm text-gray-500">Loading...</div>
+        </div>
+      }
+    >
       <HoldingsContent />
     </Suspense>
   )

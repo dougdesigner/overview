@@ -1,15 +1,18 @@
 "use client"
 
 import AssetAllocationCard from "@/components/AssetAllocationCard"
-import { Button } from "@/components/Button"
 import { Divider } from "@/components/Divider"
 import KPICard from "@/components/KPICard"
-import PortfolioValueCard from "@/components/PortfolioValueCard"
 import { OnboardingFlow } from "@/components/OnboardingFlow"
-import { usePortfolioStore } from "@/hooks/usePortfolioStore"
+import PortfolioValueCard from "@/components/PortfolioValueCard"
 import { useExposureCalculations } from "@/hooks/useExposureCalculations"
-import { getAssetClassColor, getAssetClassBgColor, getAssetClassBorderColor } from "@/lib/assetClassColors"
-import React, { useMemo } from "react"
+import { usePortfolioStore } from "@/hooks/usePortfolioStore"
+import {
+  getAssetClassBgColor,
+  getAssetClassBorderColor,
+  getAssetClassColor,
+} from "@/lib/assetClassColors"
+import { useMemo } from "react"
 
 export default function OverviewPage() {
   // Get data from portfolio store
@@ -18,7 +21,7 @@ export default function OverviewPage() {
     holdings,
     totalPortfolioValue,
     portfolioAllocation,
-    isLoading
+    isLoading,
   } = usePortfolioStore()
 
   // Get exposure calculations for asset breakdown
@@ -28,8 +31,10 @@ export default function OverviewPage() {
   const assetValues = useMemo(() => {
     return {
       usStocks: (totalPortfolioValue * portfolioAllocation.usStocks) / 100,
-      nonUsStocks: (totalPortfolioValue * portfolioAllocation.nonUsStocks) / 100,
-      fixedIncome: (totalPortfolioValue * portfolioAllocation.fixedIncome) / 100,
+      nonUsStocks:
+        (totalPortfolioValue * portfolioAllocation.nonUsStocks) / 100,
+      fixedIncome:
+        (totalPortfolioValue * portfolioAllocation.fixedIncome) / 100,
       cash: (totalPortfolioValue * portfolioAllocation.cash) / 100,
     }
   }, [totalPortfolioValue, portfolioAllocation])
@@ -41,7 +46,7 @@ export default function OverviewPage() {
           <h1 className="text-2xl font-semibold text-gray-900 dark:text-gray-50">
             Overview
           </h1>
-          <p className="text-gray-500 sm:text-sm/6 dark:text-gray-400">
+          <p className="text-gray-500 dark:text-gray-400 sm:text-sm/6">
             Your portfolio value and asset class distribution at a glance
           </p>
         </div>
@@ -59,12 +64,12 @@ export default function OverviewPage() {
       {isLoading ? (
         // Loading state
         <div className="mt-8 animate-pulse">
-          <div className="h-48 bg-gray-100 dark:bg-gray-800 rounded-lg mb-6"></div>
+          <div className="mb-6 h-48 rounded-lg bg-gray-100 dark:bg-gray-800"></div>
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            <div className="h-32 bg-gray-100 dark:bg-gray-800 rounded-lg"></div>
-            <div className="h-32 bg-gray-100 dark:bg-gray-800 rounded-lg"></div>
-            <div className="h-32 bg-gray-100 dark:bg-gray-800 rounded-lg"></div>
-            <div className="h-32 bg-gray-100 dark:bg-gray-800 rounded-lg"></div>
+            <div className="h-32 rounded-lg bg-gray-100 dark:bg-gray-800"></div>
+            <div className="h-32 rounded-lg bg-gray-100 dark:bg-gray-800"></div>
+            <div className="h-32 rounded-lg bg-gray-100 dark:bg-gray-800"></div>
+            <div className="h-32 rounded-lg bg-gray-100 dark:bg-gray-800"></div>
           </div>
         </div>
       ) : accounts.length === 0 ? (
@@ -74,42 +79,42 @@ export default function OverviewPage() {
         </div>
       ) : (
         <>
-      <dl className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-1 lg:grid-cols-1">
-        {/* Portfolio Value Card */}
-        <PortfolioValueCard
-          value={totalPortfolioValue}
-          accountCount={accounts.length}
-          holdingsCount={holdings.length}
-          assetClasses={[
-            {
-              name: "U.S. Stocks",
-              percentage: portfolioAllocation.usStocks,
-              color: getAssetClassColor("U.S. Stocks"),
-              bgColorClass: getAssetClassBgColor("U.S. Stocks"),
-            },
-            {
-              name: "Non-U.S. Stocks",
-              percentage: portfolioAllocation.nonUsStocks,
-              color: getAssetClassColor("Non-U.S. Stocks"),
-              bgColorClass: getAssetClassBgColor("Non-U.S. Stocks"),
-            },
-            {
-              name: "Fixed Income",
-              percentage: portfolioAllocation.fixedIncome,
-              color: getAssetClassColor("Fixed Income"),
-              bgColorClass: getAssetClassBgColor("Fixed Income"),
-            },
-            {
-              name: "Cash",
-              percentage: portfolioAllocation.cash,
-              color: getAssetClassColor("Cash"),
-              bgColorClass: getAssetClassBgColor("Cash"),
-            },
-          ]}
-        />
+          <dl className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-1 lg:grid-cols-1">
+            {/* Portfolio Value Card */}
+            <PortfolioValueCard
+              value={totalPortfolioValue}
+              accountCount={accounts.length}
+              holdingsCount={holdings.length}
+              assetClasses={[
+                {
+                  name: "U.S. Stocks",
+                  percentage: portfolioAllocation.usStocks,
+                  color: getAssetClassColor("U.S. Stocks"),
+                  bgColorClass: getAssetClassBgColor("U.S. Stocks"),
+                },
+                {
+                  name: "Non-U.S. Stocks",
+                  percentage: portfolioAllocation.nonUsStocks,
+                  color: getAssetClassColor("Non-U.S. Stocks"),
+                  bgColorClass: getAssetClassBgColor("Non-U.S. Stocks"),
+                },
+                {
+                  name: "Fixed Income",
+                  percentage: portfolioAllocation.fixedIncome,
+                  color: getAssetClassColor("Fixed Income"),
+                  bgColorClass: getAssetClassBgColor("Fixed Income"),
+                },
+                {
+                  name: "Cash",
+                  percentage: portfolioAllocation.cash,
+                  color: getAssetClassColor("Cash"),
+                  bgColorClass: getAssetClassBgColor("Cash"),
+                },
+              ]}
+            />
 
-        {/* Asset Allocation Donut Chart */}
-        {/* <Card>
+            {/* Asset Allocation Donut Chart */}
+            {/* <Card>
           <dt className="text-sm font-medium text-gray-900 dark:text-gray-50">
             SLA Performance
           </dt>
@@ -192,143 +197,162 @@ export default function OverviewPage() {
             />
           </div>
         </Card> */}
-      </dl>
-      {/* <DataTable data={tickets} columns={columns} /> */}
+          </dl>
+          {/* <DataTable data={tickets} columns={columns} /> */}
 
-      <dl className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-        <KPICard
-          name="U.S. Stocks"
-          stat={`$${assetValues.usStocks.toLocaleString('en-US', { maximumFractionDigits: 0 })}`}
-          change={`${portfolioAllocation.usStocks.toFixed(1)}%`}
-          color={getAssetClassColor("U.S. Stocks")}
-        />
-        <KPICard
-          name="Non-U.S. Stocks"
-          stat={`$${assetValues.nonUsStocks.toLocaleString('en-US', { maximumFractionDigits: 0 })}`}
-          change={`${portfolioAllocation.nonUsStocks.toFixed(1)}%`}
-          color={getAssetClassColor("Non-U.S. Stocks")}
-        />
-        <KPICard
-          name="Fixed Income"
-          stat={`$${assetValues.fixedIncome.toLocaleString('en-US', { maximumFractionDigits: 0 })}`}
-          change={`${portfolioAllocation.fixedIncome.toFixed(1)}%`}
-          color={getAssetClassColor("Fixed Income")}
-        />
-        <KPICard
-          name="Cash"
-          stat={`$${assetValues.cash.toLocaleString('en-US', { maximumFractionDigits: 0 })}`}
-          change={`${portfolioAllocation.cash.toFixed(1)}%`}
-          color={getAssetClassColor("Cash")}
-        />
-      </dl>
+          <dl className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-4 lg:grid-cols-4">
+            <KPICard
+              name="U.S. Stocks"
+              stat={`$${assetValues.usStocks.toLocaleString("en-US", { maximumFractionDigits: 0 })}`}
+              change={`${portfolioAllocation.usStocks.toFixed(1)}%`}
+              color={getAssetClassColor("U.S. Stocks")}
+            />
+            <KPICard
+              name="Non-U.S. Stocks"
+              stat={`$${assetValues.nonUsStocks.toLocaleString("en-US", { maximumFractionDigits: 0 })}`}
+              change={`${portfolioAllocation.nonUsStocks.toFixed(1)}%`}
+              color={getAssetClassColor("Non-U.S. Stocks")}
+            />
+            <KPICard
+              name="Fixed Income"
+              stat={`$${assetValues.fixedIncome.toLocaleString("en-US", { maximumFractionDigits: 0 })}`}
+              change={`${portfolioAllocation.fixedIncome.toFixed(1)}%`}
+              color={getAssetClassColor("Fixed Income")}
+            />
+            <KPICard
+              name="Cash"
+              stat={`$${assetValues.cash.toLocaleString("en-US", { maximumFractionDigits: 0 })}`}
+              change={`${portfolioAllocation.cash.toFixed(1)}%`}
+              color={getAssetClassColor("Cash")}
+            />
+          </dl>
 
-      <dl className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-1 lg:grid-cols-1">
-        <AssetAllocationCard
-          defaultTab={holdings.length === 0 ? "Accounts" : undefined}
-          data={[
-            {
-              name: "Holdings",
-              data: (() => {
-                const sortedHoldings = holdings
-                  .sort((a, b) => b.marketValue - a.marketValue)
-                const top6 = sortedHoldings.slice(0, 6)
-                const others = sortedHoldings.slice(6)
-                const othersValue = others.reduce((sum, h) => sum + h.marketValue, 0)
-
-                const displayHoldings = othersValue > 0
-                  ? [...top6, {
-                      id: 'others',
-                      accountId: '',
-                      accountName: '',
-                      ticker: 'Others',
-                      name: 'Others',
-                      quantity: 0,
-                      lastPrice: 0,
-                      marketValue: othersValue,
-                      allocation: 0,
-                      type: 'other' as const,
-                    }]
-                  : top6
-
-                return displayHoldings
-                  .filter(h => h.marketValue > 0)
-                  .map((h, index) => ({
-                    name: h.ticker || h.name,
-                    ticker: h.ticker,
-                    type: h.type || "other",
-                    amount: h.marketValue,
-                    share: totalPortfolioValue > 0
-                      ? `${((h.marketValue / totalPortfolioValue) * 100).toFixed(1)}%`
-                      : '0%',
-                    borderColor: [
-                      "border-blue-500 dark:border-blue-500",
-                      "border-gray-500 dark:border-gray-500",
-                      "border-cyan-500 dark:border-cyan-500",
-                      "border-amber-500 dark:border-amber-500",
-                      "border-emerald-500 dark:border-emerald-500",
-                      "border-violet-500 dark:border-violet-500",
-                      "border-rose-500 dark:border-rose-500",
-                    ][index] || "border-gray-500 dark:border-gray-500",
-                  }))
-              })(),
-              colors: ["blue", "gray", "cyan", "amber", "emerald", "violet"] as any,
-            },
-            {
-              name: "Asset Classes",
-              data: [
+          <dl className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-1 lg:grid-cols-1">
+            <AssetAllocationCard
+              defaultTab={holdings.length === 0 ? "Accounts" : undefined}
+              data={[
                 {
-                  name: "U.S. Stocks",
-                  amount: assetValues.usStocks,
-                  share: `${portfolioAllocation.usStocks.toFixed(1)}%`,
-                  borderColor: getAssetClassBorderColor("U.S. Stocks"),
+                  name: "Holdings",
+                  data: (() => {
+                    const sortedHoldings = holdings.sort(
+                      (a, b) => b.marketValue - a.marketValue,
+                    )
+                    const top6 = sortedHoldings.slice(0, 6)
+                    const others = sortedHoldings.slice(6)
+                    const othersValue = others.reduce(
+                      (sum, h) => sum + h.marketValue,
+                      0,
+                    )
+
+                    const displayHoldings =
+                      othersValue > 0
+                        ? [
+                            ...top6,
+                            {
+                              id: "others",
+                              accountId: "",
+                              accountName: "",
+                              ticker: "Others",
+                              name: "Others",
+                              quantity: 0,
+                              lastPrice: 0,
+                              marketValue: othersValue,
+                              allocation: 0,
+                              type: "other" as const,
+                            },
+                          ]
+                        : top6
+
+                    return displayHoldings
+                      .filter((h) => h.marketValue > 0)
+                      .map((h, index) => ({
+                        name: h.ticker || h.name,
+                        ticker: h.ticker,
+                        type: h.type || "other",
+                        amount: h.marketValue,
+                        share:
+                          totalPortfolioValue > 0
+                            ? `${((h.marketValue / totalPortfolioValue) * 100).toFixed(1)}%`
+                            : "0%",
+                        borderColor:
+                          [
+                            "border-blue-500 dark:border-blue-500",
+                            "border-gray-500 dark:border-gray-500",
+                            "border-cyan-500 dark:border-cyan-500",
+                            "border-amber-500 dark:border-amber-500",
+                            "border-emerald-500 dark:border-emerald-500",
+                            "border-violet-500 dark:border-violet-500",
+                            "border-rose-500 dark:border-rose-500",
+                          ][index] || "border-gray-500 dark:border-gray-500",
+                      }))
+                  })(),
+                  colors: [
+                    "blue",
+                    "gray",
+                    "cyan",
+                    "amber",
+                    "emerald",
+                    "violet",
+                  ] as any,
                 },
                 {
-                  name: "Non-U.S. Stocks",
-                  amount: assetValues.nonUsStocks,
-                  share: `${portfolioAllocation.nonUsStocks.toFixed(1)}%`,
-                  borderColor: getAssetClassBorderColor("Non-U.S. Stocks"),
+                  name: "Asset Classes",
+                  data: [
+                    {
+                      name: "U.S. Stocks",
+                      amount: assetValues.usStocks,
+                      share: `${portfolioAllocation.usStocks.toFixed(1)}%`,
+                      borderColor: getAssetClassBorderColor("U.S. Stocks"),
+                    },
+                    {
+                      name: "Non-U.S. Stocks",
+                      amount: assetValues.nonUsStocks,
+                      share: `${portfolioAllocation.nonUsStocks.toFixed(1)}%`,
+                      borderColor: getAssetClassBorderColor("Non-U.S. Stocks"),
+                    },
+                    {
+                      name: "Fixed Income",
+                      amount: assetValues.fixedIncome,
+                      share: `${portfolioAllocation.fixedIncome.toFixed(1)}%`,
+                      borderColor: getAssetClassBorderColor("Fixed Income"),
+                    },
+                    {
+                      name: "Cash",
+                      amount: assetValues.cash,
+                      share: `${portfolioAllocation.cash.toFixed(1)}%`,
+                      borderColor: getAssetClassBorderColor("Cash"),
+                    },
+                  ].filter((item) => item.amount > 0),
+                  // These colors are not used when useAssetClassColors is true, but kept for compatibility
+                  colors: ["blue", "cyan", "amber", "emerald"] as any,
                 },
                 {
-                  name: "Fixed Income",
-                  amount: assetValues.fixedIncome,
-                  share: `${portfolioAllocation.fixedIncome.toFixed(1)}%`,
-                  borderColor: getAssetClassBorderColor("Fixed Income"),
+                  name: "Accounts",
+                  data: accounts
+                    .sort((a, b) => b.totalValue - a.totalValue)
+                    .map((account, index) => ({
+                      name: account.name,
+                      amount: account.totalValue,
+                      share:
+                        totalPortfolioValue > 0
+                          ? `${((account.totalValue / totalPortfolioValue) * 100).toFixed(1)}%`
+                          : "0%",
+                      borderColor:
+                        [
+                          "border-violet-500 dark:border-violet-500",
+                          "border-fuchsia-500 dark:border-fuchsia-500",
+                          "border-pink-500 dark:border-pink-500",
+                          "border-sky-500 dark:border-sky-500",
+                          "border-lime-500 dark:border-lime-500",
+                        ][index] || "border-gray-500 dark:border-gray-500",
+                      institution: account.institution,
+                    })),
+                  colors: ["violet", "fuchsia", "pink", "sky", "lime"] as any,
                 },
-                {
-                  name: "Cash",
-                  amount: assetValues.cash,
-                  share: `${portfolioAllocation.cash.toFixed(1)}%`,
-                  borderColor: getAssetClassBorderColor("Cash"),
-                },
-              ].filter(item => item.amount > 0),
-              // These colors are not used when useAssetClassColors is true, but kept for compatibility
-              colors: ["blue", "cyan", "amber", "emerald"] as any,
-            },
-            {
-              name: "Accounts",
-              data: accounts
-                .sort((a, b) => b.totalValue - a.totalValue)
-                .map((account, index) => ({
-                  name: account.name,
-                  amount: account.totalValue,
-                  share: totalPortfolioValue > 0
-                    ? `${((account.totalValue / totalPortfolioValue) * 100).toFixed(1)}%`
-                    : '0%',
-                  borderColor: [
-                    "border-violet-500 dark:border-violet-500",
-                    "border-fuchsia-500 dark:border-fuchsia-500",
-                    "border-pink-500 dark:border-pink-500",
-                    "border-sky-500 dark:border-sky-500",
-                    "border-lime-500 dark:border-lime-500",
-                  ][index] || "border-gray-500 dark:border-gray-500",
-                  institution: account.institution,
-                })),
-              colors: ["violet", "fuchsia", "pink", "sky", "lime"] as any,
-            },
-          ]}
-        />
-      </dl>
-      </>
+              ]}
+            />
+          </dl>
+        </>
       )}
     </main>
   )

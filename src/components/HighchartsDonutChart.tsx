@@ -1,10 +1,26 @@
 "use client"
 
+import { Button } from "@/components/Button"
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/DropdownMenu"
+import { Tooltip } from "@/components/Tooltip"
+import { getAssetClassHexColor } from "@/lib/assetClassColors"
+import { RiDownloadLine, RiFullscreenLine } from "@remixicon/react"
 import Highcharts from "highcharts"
+import HighchartsExporting from "highcharts/modules/exporting"
+import HighchartsExportData from "highcharts/modules/export-data"
 import HighchartsReact from "highcharts-react-official"
 import { useTheme } from "next-themes"
 import { useEffect, useRef, useState } from "react"
-import { getAssetClassHexColor } from "@/lib/assetClassColors"
+
+// Track if modules are initialized globally to prevent duplicate initialization
+let modulesInitialized = false
 
 interface HighchartsDonutChartProps {
   data: {
@@ -38,6 +54,52 @@ export function HighchartsDonutChart({
   useEffect(() => {
     setIsClient(true)
   }, [])
+
+  // Initialize Highcharts modules once
+  useEffect(() => {
+    if (!modulesInitialized && typeof Highcharts === "object") {
+      if (typeof HighchartsExporting === "function") {
+        HighchartsExporting(Highcharts)
+      }
+      if (typeof HighchartsExportData === "function") {
+        HighchartsExportData(Highcharts)
+      }
+      modulesInitialized = true
+    }
+  }, [])
+
+  // Export handler
+  const handleExport = (type: string) => {
+    const chart = chartRef.current?.chart
+    if (!chart) return
+
+    switch (type) {
+      case "fullscreen":
+        chart.fullscreen?.open()
+        break
+      case "print":
+        chart.print()
+        break
+      case "png":
+        chart.exportChart({ type: "image/png" })
+        break
+      case "jpeg":
+        chart.exportChart({ type: "image/jpeg" })
+        break
+      case "pdf":
+        chart.exportChart({ type: "application/pdf" })
+        break
+      case "svg":
+        chart.exportChart({ type: "image/svg+xml" })
+        break
+      case "csv":
+        chart.downloadCSV()
+        break
+      case "xls":
+        chart.downloadXLS()
+        break
+    }
+  }
 
   // Map color names to hex values
   const colorMap: Record<string, string> = {
@@ -87,6 +149,23 @@ export function HighchartsDonutChart({
       style: {
         fontFamily: "inherit",
       },
+      events: {
+        fullscreenOpen: function () {
+          const currentIsDark =
+            document.documentElement.classList.contains("dark")
+          this.update(
+            {
+              chart: {
+                backgroundColor: currentIsDark ? "#111827" : "#ffffff",
+              },
+            },
+            false,
+          )
+        },
+        fullscreenClose: function () {
+          // Chart returns to normal state automatically
+        },
+      },
     },
     title: {
       text: valueFormatter(totalValue),
@@ -128,6 +207,13 @@ export function HighchartsDonutChart({
     legend: {
       enabled: false,
     },
+    exporting: {
+      buttons: {
+        contextButton: {
+          enabled: false, // Using custom export button instead
+        },
+      },
+    },
     plotOptions: {
       pie: {
         allowPointSelect: true,
@@ -137,15 +223,7 @@ export function HighchartsDonutChart({
         borderColor: isDark ? "#1f2937" : "#ffffff",
         borderRadius: 8,
         dataLabels: {
-          enabled: true,
-          distance: -25,
-          format: "{point.percentage:.0f}%",
-          style: {
-            // color: isDark ? "#f3f4f6" : "#111827",
-            fontSize: "14px",
-            fontWeight: "600",
-            // textOutline: "none",
-          },
+          enabled: false,
         },
         states: {
           hover: {
@@ -188,18 +266,6 @@ export function HighchartsDonutChart({
             fontSize: "12px",
           },
         },
-        plotOptions: {
-          pie: {
-            dataLabels: {
-              style: {
-                // color: isDark ? "#f3f4f6" : "#111827",
-                fontSize: "14px",
-                fontWeight: "600",
-                textOutline: "none",
-              },
-            },
-          },
-        },
       })
     }
   }, [isDark, totalValue, valueFormatter])
@@ -209,6 +275,63 @@ export function HighchartsDonutChart({
   }
 
   return (
-    <HighchartsReact highcharts={Highcharts} options={options} ref={chartRef} />
+    <div className="relative">
+      {/* Control buttons - positioned in top right */}
+      <div className="absolute right-0 top-0 z-10 flex items-center gap-2">
+        {/* Export Menu */}
+        <DropdownMenu>
+          <Tooltip
+            triggerAsChild
+            content="Export chart as image or data file"
+          >
+            <DropdownMenuTrigger asChild>
+              <Button variant="secondary" className="h-9">
+                <RiDownloadLine className="size-4" aria-hidden="true" />
+              </Button>
+            </DropdownMenuTrigger>
+          </Tooltip>
+          <DropdownMenuContent align="end" className="w-56">
+            <DropdownMenuLabel>EXPORT OPTIONS</DropdownMenuLabel>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem onClick={() => handleExport("print")}>
+              Print chart
+            </DropdownMenuItem>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem onClick={() => handleExport("png")}>
+              Download PNG image
+            </DropdownMenuItem>
+            <DropdownMenuItem onClick={() => handleExport("jpeg")}>
+              Download JPEG image
+            </DropdownMenuItem>
+            <DropdownMenuItem onClick={() => handleExport("pdf")}>
+              Download PDF document
+            </DropdownMenuItem>
+            <DropdownMenuItem onClick={() => handleExport("svg")}>
+              Download SVG vector
+            </DropdownMenuItem>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem onClick={() => handleExport("csv")}>
+              Download CSV
+            </DropdownMenuItem>
+            <DropdownMenuItem onClick={() => handleExport("xls")}>
+              Download XLS
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
+
+        {/* Fullscreen Button */}
+        <Tooltip triggerAsChild content="View chart in fullscreen mode">
+          <Button
+            variant="secondary"
+            onClick={() => handleExport("fullscreen")}
+            className="h-9"
+          >
+            <RiFullscreenLine className="size-4" aria-hidden="true" />
+          </Button>
+        </Tooltip>
+      </div>
+
+      <HighchartsReact highcharts={Highcharts} options={options} ref={chartRef} />
+    </div>
   )
 }
