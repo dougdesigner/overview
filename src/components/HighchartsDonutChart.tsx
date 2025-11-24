@@ -13,9 +13,9 @@ import { Tooltip } from "@/components/Tooltip"
 import { getAssetClassHexColor } from "@/lib/assetClassColors"
 import { RiDownloadLine, RiFullscreenLine } from "@remixicon/react"
 import Highcharts from "highcharts"
-import HighchartsExporting from "highcharts/modules/exporting"
-import HighchartsExportData from "highcharts/modules/export-data"
 import HighchartsReact from "highcharts-react-official"
+import HighchartsExportData from "highcharts/modules/export-data"
+import HighchartsExporting from "highcharts/modules/exporting"
 import { useTheme } from "next-themes"
 import { useEffect, useRef, useState } from "react"
 
@@ -190,7 +190,7 @@ export function HighchartsDonutChart({
         "</div>",
       backgroundColor: isDark ? "#1f2937" : "#ffffff",
       borderColor: isDark ? "#4b5563" : "#e5e7eb",
-      borderRadius: 6,
+      borderRadius: 2,
       borderWidth: 1,
       shadow: {
         color: "rgba(0, 0, 0, 0.1)",
@@ -221,7 +221,7 @@ export function HighchartsDonutChart({
         innerSize: "60%",
         borderWidth: 2,
         borderColor: isDark ? "#1f2937" : "#ffffff",
-        borderRadius: 8,
+        borderRadius: 4,
         dataLabels: {
           enabled: false,
         },
@@ -280,10 +280,7 @@ export function HighchartsDonutChart({
       <div className="absolute right-0 top-0 z-10 flex items-center gap-2">
         {/* Export Menu */}
         <DropdownMenu>
-          <Tooltip
-            triggerAsChild
-            content="Export chart as image or data file"
-          >
+          <Tooltip triggerAsChild content="Export chart as image or data file">
             <DropdownMenuTrigger asChild>
               <Button variant="secondary" className="h-9">
                 <RiDownloadLine className="size-4" aria-hidden="true" />
@@ -331,7 +328,11 @@ export function HighchartsDonutChart({
         </Tooltip>
       </div>
 
-      <HighchartsReact highcharts={Highcharts} options={options} ref={chartRef} />
+      <HighchartsReact
+        highcharts={Highcharts}
+        options={options}
+        ref={chartRef}
+      />
     </div>
   )
 }

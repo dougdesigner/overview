@@ -15,11 +15,13 @@ import type {
   Account,
   Holding,
 } from "@/components/ui/data-table-holdings/types"
+import { institutionLabels } from "@/lib/institutionUtils"
 import { getCachedLogoUrls } from "@/lib/logoUtils"
 import { RiDownloadLine, RiFullscreenLine } from "@remixicon/react"
 import Highcharts from "highcharts"
 import HighchartsReact from "highcharts-react-official"
 import HighchartsSunburst from "highcharts/modules/sunburst"
+import HighchartsDrilldown from "highcharts/modules/drilldown"
 import HighchartsExporting from "highcharts/modules/exporting"
 import HighchartsExportData from "highcharts/modules/export-data"
 import { useTheme } from "next-themes"
@@ -32,7 +34,7 @@ let modulesInitialized = false
 type HighchartsModule = (H: typeof Highcharts) => void
 
 // Chart and control types
-type ChartType = "sunburst" | "pie"
+type ChartType = "drilldown" | "sunburst" | "pie"
 type GroupingMode = "none" | "account" | "type" | "account-type"
 
 interface HoldingsSunburstEnhancedProps {
@@ -65,6 +67,9 @@ export function HoldingsSunburstEnhanced({
     useState<string>(selectedAccountId)
   const [logoUrls, setLogoUrls] = useState<Record<string, string | null>>({})
 
+  // Track the currently drilled-down node for legend updates
+  const [drilledNodeId, setDrilledNodeId] = useState<string | null>(null)
+
   // Active grouping mode based on chart type
   const groupingMode = chartType === "sunburst" ? sunburstGrouping : pieGrouping
 
@@ -74,11 +79,15 @@ export function HoldingsSunburstEnhanced({
       try {
         // Cast modules to callable functions
         const sunburstInit = HighchartsSunburst as unknown as HighchartsModule
+        const drilldownInit = HighchartsDrilldown as unknown as HighchartsModule
         const exportingInit = HighchartsExporting as unknown as HighchartsModule
         const exportDataInit = HighchartsExportData as unknown as HighchartsModule
 
         if (typeof sunburstInit === "function") {
           sunburstInit(Highcharts)
+        }
+        if (typeof drilldownInit === "function") {
+          drilldownInit(Highcharts)
         }
         if (typeof exportingInit === "function") {
           exportingInit(Highcharts)
@@ -111,6 +120,11 @@ export function HoldingsSunburstEnhanced({
 
     fetchLogos()
   }, [holdings])
+
+  // Reset drilled state when chart type or selected account changes
+  useEffect(() => {
+    setDrilledNodeId(null)
+  }, [chartType, selectedAccount])
 
   // Auto-adjust grouping mode when single account is selected
   useEffect(() => {
@@ -204,6 +218,11 @@ export function HoldingsSunburstEnhanced({
     return holding.ticker || holding.name
   }
 
+  // Get display name for institution (converts internal key to label)
+  const getInstitutionDisplayName = (institutionKey: string): string => {
+    return institutionLabels[institutionKey] || institutionKey
+  }
+
   // Get legend display value - always show market value
   const getLegendDisplayValue = (value: number): string => {
     return formatValue(value)
@@ -218,6 +237,69 @@ export function HoldingsSunburstEnhanced({
   // Calculate top groups for legend
   const topGroups = useMemo(() => {
     if (filteredHoldings.length === 0) return []
+
+    // For sunburst charts, show different items based on drill level
+    if (chartType === "sunburst") {
+      // Determine what level we're at based on drilledNodeId
+      if (!drilledNodeId || drilledNodeId === "portfolio") {
+        // At root - show institutions
+        const institutionGroups = new Map<string, number>()
+        filteredHoldings.forEach((h) => {
+          const account = accounts.find((a) => a.id === h.accountId)
+          const institution = account?.institution || "Unknown"
+          const current = institutionGroups.get(institution) || 0
+          institutionGroups.set(institution, current + h.marketValue)
+        })
+
+        return Array.from(institutionGroups.entries())
+          .filter(([_, value]) => value > 0)
+          .sort((a, b) => b[1] - a[1])
+          .map(([name, value]) => [getInstitutionDisplayName(name), value] as [string, number])
+      } else if (drilledNodeId.startsWith("inst-") && !drilledNodeId.includes("-account-")) {
+        // Drilled into an institution - show accounts for that institution
+        const institutionKey = drilledNodeId.replace("inst-", "")
+        const accountGroups = new Map<string, { name: string; value: number }>()
+
+        filteredHoldings.forEach((h) => {
+          const account = accounts.find((a) => a.id === h.accountId)
+          if (account?.institution === institutionKey) {
+            if (!accountGroups.has(h.accountId)) {
+              accountGroups.set(h.accountId, { name: h.accountName, value: 0 })
+            }
+            accountGroups.get(h.accountId)!.value += h.marketValue
+          }
+        })
+
+        return Array.from(accountGroups.entries())
+          .map(([_, group]) => [group.name, group.value] as [string, number])
+          .filter(([_, value]) => value > 0)
+          .sort((a, b) => b[1] - a[1])
+      } else if (drilledNodeId.includes("-account-")) {
+        // Drilled into an account - show holdings for that account
+        const accountId = drilledNodeId.split("-account-")[1]
+
+        return filteredHoldings
+          .filter((h) => h.accountId === accountId)
+          .sort((a, b) => b.marketValue - a.marketValue)
+          .map((h) => [h.ticker || h.name, h.marketValue] as [string, number])
+      }
+    }
+
+    // For drilldown charts, show institutions
+    if (chartType === "drilldown") {
+      const institutionGroups = new Map<string, number>()
+      filteredHoldings.forEach((h) => {
+        const account = accounts.find((a) => a.id === h.accountId)
+        const institution = account?.institution || "Unknown"
+        const current = institutionGroups.get(institution) || 0
+        institutionGroups.set(institution, current + h.marketValue)
+      })
+
+      return Array.from(institutionGroups.entries())
+        .filter(([_, value]) => value > 0)
+        .sort((a, b) => b[1] - a[1])
+        .map(([name, value]) => [getInstitutionDisplayName(name), value] as [string, number])
+    }
 
     if (groupingMode === "none") {
       // Show top 10 individual holdings
@@ -263,7 +345,7 @@ export function HoldingsSunburstEnhanced({
         .filter(([_, value]) => value > 0)
         .sort((a, b) => b[1] - a[1])
     }
-  }, [filteredHoldings, groupingMode])
+  }, [filteredHoldings, groupingMode, chartType, accounts, drilledNodeId])
 
   // Transform holdings data to sunburst format
   const transformToSunburstData = (): Array<{
@@ -353,102 +435,107 @@ export function HoldingsSunburstEnhanced({
       sunburstGrouping === "account" ||
       sunburstGrouping === "account-type"
     ) {
-      // Group by account (with optional type grouping)
-      const accountMap = new Map<
+      // Group by institution → account → holdings (4-level hierarchy)
+      const institutionMap = new Map<
         string,
-        { holdings: Holding[]; total: number }
+        {
+          name: string
+          totalValue: number
+          accounts: Map<
+            string,
+            {
+              id: string
+              name: string
+              totalValue: number
+              holdings: Holding[]
+            }
+          >
+        }
       >()
 
       filteredHoldings.forEach((holding) => {
-        if (!accountMap.has(holding.accountId)) {
-          accountMap.set(holding.accountId, { holdings: [], total: 0 })
+        const account = accounts.find((a) => a.id === holding.accountId)
+        const institution = account?.institution || "Unknown"
+        const accountId = holding.accountId
+        const accountName = holding.accountName
+
+        // Initialize institution if needed
+        if (!institutionMap.has(institution)) {
+          institutionMap.set(institution, {
+            name: institution,
+            totalValue: 0,
+            accounts: new Map(),
+          })
         }
-        const account = accountMap.get(holding.accountId)!
-        account.holdings.push(holding)
-        account.total += holding.marketValue
+
+        const inst = institutionMap.get(institution)!
+        inst.totalValue += holding.marketValue
+
+        // Initialize account within institution if needed
+        if (!inst.accounts.has(accountId)) {
+          inst.accounts.set(accountId, {
+            id: accountId,
+            name: accountName,
+            totalValue: 0,
+            holdings: [],
+          })
+        }
+
+        const acct = inst.accounts.get(accountId)!
+        acct.totalValue += holding.marketValue
+        acct.holdings.push(holding)
       })
 
-      // Sort accounts by total value for consistent color assignment
-      const sortedAccounts = Array.from(accountMap.entries())
-        .map(([accountId, data]) => ({
-          accountId,
-          accountName: data.holdings[0]?.accountName || `Account ${accountId}`,
-          ...data,
-        }))
-        .sort((a, b) => b.total - a.total)
+      // Build sunburst data: Portfolio → Institution → Account → Holdings
+      // Sort institutions by value
+      const sortedInstitutions = Array.from(institutionMap.entries()).sort(
+        (a, b) => b[1].totalValue - a[1].totalValue,
+      )
 
-      // Add account nodes and their children
-      sortedAccounts.forEach(
-        ({ accountId, accountName, holdings, total }, index) => {
-          const accountNodeId = `account-${accountId}`
-          const accountColor = colors[index % colors.length]
+      sortedInstitutions.forEach(([instKey, inst], instIndex) => {
+        const instNodeId = `inst-${instKey}`
+        const instColor = colors[instIndex % colors.length]
 
-          // Add account node
+        // Add institution node
+        data.push({
+          id: instNodeId,
+          parent: "portfolio",
+          name: getInstitutionDisplayName(inst.name),
+          value: inst.totalValue,
+          color: instColor,
+        })
+
+        // Sort accounts within institution
+        const sortedAccounts = Array.from(inst.accounts.entries()).sort(
+          (a, b) => b[1].totalValue - a[1].totalValue,
+        )
+
+        sortedAccounts.forEach(([acctId, acct]) => {
+          const accountNodeId = `${instNodeId}-account-${acctId}`
+
+          // Add account node under institution
           data.push({
             id: accountNodeId,
-            parent: "portfolio",
-            name: accountName,
-            value: total,
-            color: accountColor,
+            parent: instNodeId,
+            name: acct.name,
+            value: acct.totalValue,
           })
 
-          if (sunburstGrouping === "account-type") {
-            // Group holdings by type within this account
-            const typeMap = new Map<string, Holding[]>()
-            holdings.forEach((holding) => {
-              if (!typeMap.has(holding.type)) {
-                typeMap.set(holding.type, [])
-              }
-              typeMap.get(holding.type)!.push(holding)
+          // Add holdings under account
+          acct.holdings.forEach((holding) => {
+            data.push({
+              id: `${accountNodeId}-${holding.id}`,
+              parent: accountNodeId,
+              name: getDisplayText(holding),
+              value: holding.marketValue,
+              ticker: holding.ticker,
+              fullName: holding.name,
+              quantity: holding.quantity,
+              lastPrice: holding.lastPrice,
             })
-
-            // Add type nodes and individual holdings
-            typeMap.forEach((typeHoldings, type) => {
-              const typeNodeId = `${accountNodeId}-${type}`
-              const typeTotal = typeHoldings.reduce(
-                (sum, h) => sum + h.marketValue,
-                0,
-              )
-
-              // Add type node
-              data.push({
-                id: typeNodeId,
-                parent: accountNodeId,
-                name: type.charAt(0).toUpperCase() + type.slice(1),
-                value: typeTotal,
-              })
-
-              // Add individual holdings
-              typeHoldings.forEach((holding) => {
-                data.push({
-                  id: `${typeNodeId}-${holding.id}`,
-                  parent: typeNodeId,
-                  name: getDisplayText(holding),
-                  value: holding.marketValue,
-                  ticker: holding.ticker,
-                  fullName: holding.name,
-                  quantity: holding.quantity,
-                  lastPrice: holding.lastPrice,
-                })
-              })
-            })
-          } else {
-            // Just account grouping - add holdings directly under account
-            holdings.forEach((holding) => {
-              data.push({
-                id: `${accountNodeId}-${holding.id}`,
-                parent: accountNodeId,
-                name: getDisplayText(holding),
-                value: holding.marketValue,
-                ticker: holding.ticker,
-                fullName: holding.name,
-                quantity: holding.quantity,
-                lastPrice: holding.lastPrice,
-              })
-            })
-          }
-        },
-      )
+          })
+        })
+      })
     }
 
     return data
@@ -543,6 +630,132 @@ export function HoldingsSunburstEnhanced({
     return data
   }
 
+  // Transform holdings data to drilldown format (3 levels: Institution → Account → Holdings)
+  const transformToDrilldownData = () => {
+    // Group accounts by institution, then holdings by account
+    const institutionMap = new Map<
+      string,
+      {
+        name: string
+        totalValue: number
+        accounts: Map<
+          string,
+          {
+            id: string
+            name: string
+            totalValue: number
+            holdings: Holding[]
+          }
+        >
+      }
+    >()
+
+    filteredHoldings.forEach((holding) => {
+      const account = accounts.find((a) => a.id === holding.accountId)
+      const institution = account?.institution || "Unknown"
+      const accountId = holding.accountId
+      const accountName = holding.accountName
+
+      // Initialize institution if needed
+      if (!institutionMap.has(institution)) {
+        institutionMap.set(institution, {
+          name: institution,
+          totalValue: 0,
+          accounts: new Map(),
+        })
+      }
+
+      const inst = institutionMap.get(institution)!
+      inst.totalValue += holding.marketValue
+
+      // Initialize account within institution if needed
+      if (!inst.accounts.has(accountId)) {
+        inst.accounts.set(accountId, {
+          id: accountId,
+          name: accountName,
+          totalValue: 0,
+          holdings: [],
+        })
+      }
+
+      const acct = inst.accounts.get(accountId)!
+      acct.totalValue += holding.marketValue
+      acct.holdings.push(holding)
+    })
+
+    // Create top-level series data (institutions)
+    const seriesData: Array<{
+      name: string
+      y: number
+      drilldown: string
+      color: string
+    }> = []
+
+    // Create drilldown series (accounts per institution + holdings per account)
+    const drilldownSeries: Array<{
+      id: string
+      name: string
+      type?: string
+      data: Array<{ name: string; y: number; drilldown?: string; color?: string }>
+    }> = []
+
+    // Sort institutions by total value for consistent color assignment
+    const sortedInstitutions = Array.from(institutionMap.entries()).sort(
+      (a, b) => b[1].totalValue - a[1].totalValue
+    )
+
+    sortedInstitutions.forEach(([instKey, inst], colorIndex) => {
+      const color = colors[colorIndex % colors.length]
+
+      // Level 1: Institution slice
+      seriesData.push({
+        name: getInstitutionDisplayName(inst.name),
+        y: inst.totalValue,
+        drilldown: `inst-${instKey}`,
+        color: color,
+      })
+
+      // Level 2: Accounts within this institution
+      const accountsData: Array<{ name: string; y: number; drilldown: string }> =
+        []
+
+      // Sort accounts by value
+      const sortedAccounts = Array.from(inst.accounts.entries()).sort(
+        (a, b) => b[1].totalValue - a[1].totalValue
+      )
+
+      sortedAccounts.forEach(([acctId, acct]) => {
+        accountsData.push({
+          name: acct.name,
+          y: acct.totalValue,
+          drilldown: `acct-${acctId}`,
+        })
+
+        // Level 3: Holdings within this account
+        const holdingsData = acct.holdings
+          .sort((a, b) => b.marketValue - a.marketValue)
+          .map((h) => ({
+            name: h.ticker || h.name,
+            y: h.marketValue,
+          }))
+
+        drilldownSeries.push({
+          id: `acct-${acctId}`,
+          name: acct.name,
+          data: holdingsData,
+        })
+      })
+
+      drilldownSeries.push({
+        id: `inst-${instKey}`,
+        name: inst.name,
+        data: accountsData,
+      })
+    })
+
+    return { seriesData, drilldownSeries }
+  }
+
   // Export handlers
   const handleExport = (type: string) => {
     const chart = chartRef.current?.chart
@@ -597,6 +810,21 @@ export function HoldingsSunburstEnhanced({
         },
         fullscreenClose: function () {
           // No need to update - chart returns to normal state automatically
+        },
+        render: function () {
+          // Sync legend with current root node after any chart update
+          // This fires after breadcrumb navigation and all other updates
+          const chart = this as any
+          const series = chart.series?.[0]
+          if (series) {
+            const rootNode = series.rootNode || ""
+            const newDrilledId =
+              rootNode === "" || rootNode === "portfolio" ? null : rootNode
+            // Only update if different to avoid infinite loops
+            setDrilledNodeId((prev: string | null) =>
+              prev !== newDrilledId ? newDrilledId : prev
+            )
+          }
         },
       },
     },
@@ -830,11 +1058,125 @@ export function HoldingsSunburstEnhanced({
     },
   })
 
+  // Chart options for drilldown (3 levels: Institution → Account → Holdings)
+  const getDrilldownOptions = (): Highcharts.Options => {
+    const { seriesData, drilldownSeries } = transformToDrilldownData()
+
+    return {
+      chart: {
+        type: "pie",
+        backgroundColor: "transparent",
+        height: height,
+        events: {
+          fullscreenOpen: function () {
+            const currentIsDark =
+              document.documentElement.classList.contains("dark")
+            this.update(
+              {
+                chart: {
+                  backgroundColor: currentIsDark ? "#111827" : "#ffffff",
+                },
+              },
+              false,
+            )
+          },
+          fullscreenClose: function () {
+            // No need to update - chart returns to normal state automatically
+          },
+        },
+      },
+      title: {
+        text: undefined,
+      },
+      credits: {
+        enabled: false,
+      },
+      accessibility: {
+        announceNewData: { enabled: true },
+        point: { valueSuffix: "%" },
+      },
+      plotOptions: {
+        pie: {
+          allowPointSelect: true,
+          cursor: "pointer",
+          borderRadius: 5,
+          borderWidth: 2,
+          borderColor: isDark ? "#1f2937" : "#ffffff",
+          dataLabels: {
+            enabled: false,
+          },
+          showInLegend: false,
+        },
+        series: {
+          dataLabels: {
+            enabled: false,
+          },
+        },
+      },
+      tooltip: {
+        useHTML: true,
+        headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+        pointFormat:
+          '<span style="color:{point.color}">{point.name}</span>: ' +
+          "<b>${point.y:,.0f}</b> ({point.percentage:.1f}%)<br/>",
+        backgroundColor: isDark ? "#1f2937" : "#ffffff",
+        borderColor: isDark ? "#4b5563" : "#e5e7eb",
+        borderRadius: 6,
+        borderWidth: 1,
+        style: {
+          color: isDark ? "#f3f4f6" : "#111827",
+        },
+      },
+      series: [
+        {
+          type: "pie",
+          name: "Institutions",
+          colorByPoint: true,
+          data: seriesData,
+        } as Highcharts.SeriesPieOptions,
+      ],
+      drilldown: {
+        activeAxisLabelStyle: {
+          textDecoration: "none",
+          color: isDark ? "#f3f4f6" : "#111827",
+        },
+        activeDataLabelStyle: {
+          textDecoration: "none",
+          color: isDark ? "#f3f4f6" : "#111827",
+        },
+        breadcrumbs: {
+          position: { align: "right" },
+          buttonTheme: {
+            fill: isDark ? "#374151" : "#f3f4f6",
+            style: {
+              color: isDark ? "#f3f4f6" : "#111827",
+            },
+            states: {
+              hover: {
+                fill: isDark ? "#4b5563" : "#e5e7eb",
+              },
+            },
+          },
+        },
+        series: drilldownSeries as Highcharts.SeriesPieOptions[],
+      },
+      exporting: {
+        buttons: {
+          contextButton: {
+            enabled: false,
+          },
+        },
+      },
+    }
+  }
+
   // Get the appropriate chart options based on chart type
   const getChartOptions = () => {
     switch (chartType) {
       case "pie":
         return getPieOptions()
+      case "drilldown":
+        return getDrilldownOptions()
       default:
         return getSunburstOptions()
     }
@@ -1120,15 +1462,23 @@ export function HoldingsSunburstEnhanced({
       {topGroups.length > 0 && (
         <div className="mt-4">
           <p className="mb-1 text-sm font-medium text-gray-700 dark:text-gray-300">
-            {groupingMode === "none"
-              ? "Top Holdings"
-              : groupingMode === "type"
-                ? "Asset Types"
-                : groupingMode === "account-type"
-                  ? "Accounts"
-                  : selectedAccount === "all"
-                    ? "Accounts"
-                    : "Account"}
+            {chartType === "sunburst"
+              ? !drilledNodeId || drilledNodeId === "portfolio"
+                ? "Institutions"
+                : drilledNodeId.includes("-account-")
+                  ? "Holdings"
+                  : "Accounts"
+              : chartType === "drilldown"
+                ? "Institutions"
+                : groupingMode === "none"
+                  ? "Top Holdings"
+                  : groupingMode === "type"
+                    ? "Asset Types"
+                    : groupingMode === "account-type"
+                      ? "Accounts"
+                      : selectedAccount === "all"
+                        ? "Accounts"
+                        : "Account"}
           </p>
           <ul className="flex flex-wrap gap-x-10 gap-y-4 text-sm">
             {topGroups.map(([name, value], index) => (

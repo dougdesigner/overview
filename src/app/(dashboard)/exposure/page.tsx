@@ -1,7 +1,6 @@
 "use client"
 
 import { Button } from "@/components/Button"
-import { Divider } from "@/components/Divider"
 import { ExposureTable } from "@/components/ui/data-table-exposure/ExposureTable"
 import { useExposureCalculations } from "@/hooks/useExposureCalculations"
 import { usePortfolioStore } from "@/hooks/usePortfolioStore"
@@ -105,7 +104,7 @@ export default function ExposurePage() {
             </p>
           </div>
         </div>
-        <Divider />
+        {/* <Divider /> */}
         <div className="mt-8 rounded-lg bg-red-50 p-4 dark:bg-red-900/10">
           <p className="text-sm text-red-800 dark:text-red-200">{error}</p>
         </div>
@@ -128,7 +127,7 @@ export default function ExposurePage() {
           Refresh
         </Button> */}
       </div>
-      <Divider />
+      {/* <Divider /> */}
 
       {/* Exposure Table */}
       <div className="mt-8">

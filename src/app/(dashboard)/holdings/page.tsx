@@ -1,7 +1,6 @@
 "use client"
 
 import { Button } from "@/components/Button"
-import { Divider } from "@/components/Divider"
 import { HoldingsSunburst } from "@/components/HoldingsSunburstWrapper"
 import {
   HoldingsDrawer,
@@ -284,7 +283,7 @@ function HoldingsContent() {
           }
         />
       </div>
-      <Divider />
+      {/* <Divider /> */}
 
       {/* Hero Visualization - Sunburst Chart - Only show when there are holdings */}
       {holdings.length > 0 && (

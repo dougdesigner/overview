@@ -1,7 +1,6 @@
 "use client"
 
 import AssetAllocationCard from "@/components/AssetAllocationCard"
-import { Divider } from "@/components/Divider"
 import KPICard from "@/components/KPICard"
 import { OnboardingFlow } from "@/components/OnboardingFlow"
 import PortfolioValueCard from "@/components/PortfolioValueCard"
@@ -59,7 +58,7 @@ export default function OverviewPage() {
         </Button>
         <TicketDrawer open={isOpen} onOpenChange={setIsOpen} /> */}
       </div>
-      <Divider />
+      {/* <Divider /> */}
 
       {isLoading ? (
         // Loading state

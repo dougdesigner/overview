@@ -8,7 +8,6 @@ import type {
 import { AccountTreemap } from "@/components/AccountTreemapWrapper"
 import { Button } from "@/components/Button"
 import { Card } from "@/components/Card"
-import { Divider } from "@/components/Divider"
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -243,7 +242,7 @@ export default function AccountsPage() {
           }
         />
       </div>
-      <Divider />
+      {/* <Divider /> */}
 
       {/* Account Flow Chart - only show when there are holdings */}
       {accounts.length > 0 && holdings.length > 0 && (
