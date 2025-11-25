@@ -28,31 +28,38 @@ import {
 } from "@remixicon/react"
 import Highcharts from "highcharts"
 import HighchartsReact from "highcharts-react-official"
-import HighchartsExportData from "highcharts/modules/export-data"
-import HighchartsExporting from "highcharts/modules/exporting"
 import HighchartsTreemap from "highcharts/modules/treemap"
+// DO NOT import exporting and export-data statically - they have load order dependency
+// export-data depends on exporting's prototype being available
 import { useTheme } from "next-themes"
 import { useEffect, useRef, useState } from "react"
 import { Account, StockExposure } from "./types"
 
-// Type for Highcharts module initializer function
-type HighchartsModuleInit = (H: typeof Highcharts) => void
-
-// Initialize Highcharts modules at module level (before component)
+// Initialize Highcharts modules at module level with correct order
 // This follows the pattern from CLAUDE.md to prevent SSR/hydration issues
 if (typeof Highcharts === "object") {
-  const treemapInit = HighchartsTreemap as unknown as HighchartsModuleInit
-  const exportingInit = HighchartsExporting as unknown as HighchartsModuleInit
-  const exportDataInit = HighchartsExportData as unknown as HighchartsModuleInit
+  // Treemap has no dependencies - can use static import
+  if (typeof HighchartsTreemap === "function") {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    ;(HighchartsTreemap as any)(Highcharts)
+  }
 
-  if (typeof treemapInit === "function") {
-    treemapInit(Highcharts)
+  // Load exporting first, then export-data (which depends on exporting)
+  // Using require() ensures sequential loading - export-data needs exporting's prototype
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
+  const HighchartsExporting = require("highcharts/modules/exporting")
+  if (typeof HighchartsExporting === "function") {
+    HighchartsExporting(Highcharts)
+  } else if (HighchartsExporting?.default) {
+    HighchartsExporting.default(Highcharts)
   }
-  if (typeof exportingInit === "function") {
-    exportingInit(Highcharts)
-  }
-  if (typeof exportDataInit === "function") {
-    exportDataInit(Highcharts)
+
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
+  const HighchartsExportData = require("highcharts/modules/export-data")
+  if (typeof HighchartsExportData === "function") {
+    HighchartsExportData(Highcharts)
+  } else if (HighchartsExportData?.default) {
+    HighchartsExportData.default(Highcharts)
   }
 }
 
