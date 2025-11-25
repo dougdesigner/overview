@@ -174,7 +174,6 @@ export default function SankeyChartHighcharts({
           // Left-side nodes: labels extend LEFT from node's left edge
           // Right-side nodes: labels extend RIGHT from node's right edge
           align: isRightSide ? "left" : "right",
-          verticalAlign: "bottom", // Anchor text bottom to node top (pushes label up)
           // For left-side: small gap from left edge (label extends left)
           // For right-side: small gap from right edge (label extends right)
           x: isRightSide ? 5 : -5,
