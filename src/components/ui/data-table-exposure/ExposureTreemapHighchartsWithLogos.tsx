@@ -73,7 +73,7 @@ interface ExposureTreemapHighchartsProps {
 }
 
 type ChartType = "treemap" | "pie"
-type GroupingMode = "none" | "sector" | "industry"
+type GroupingMode = "none" | "sector" | "sector-industry"
 type SizingMode = "proportional" | "monosize"
 type TitleMode = "symbol" | "name" | "none"
 type DisplayValue = "market-value" | "pct-stocks" | "pct-portfolio" | "none"
@@ -236,7 +236,8 @@ export function ExposureTreemapHighchartsWithLogos({
     }
   }
 
-  // Get consistent color for a sector/industry group across both chart types
+  // Get consistent color for a sector group across both chart types
+  // Both "sector" and "sector-industry" modes use sector-based coloring
   const getGroupColor = (groupName: string, mode: GroupingMode): string => {
     if (mode === "none") {
       return colors[0] // All stocks use the same color in no-group mode
@@ -247,17 +248,10 @@ export function ExposureTreemapHighchartsWithLogos({
       (exp) => !exp.isETFBreakdown && exp.totalValue > 0,
     )
 
-    // Determine the grouping key
-    const groupKey =
-      mode === "sector" ? "sector" : ("industry" as keyof StockExposure)
-
-    // Group by sector/industry and calculate total values
+    // Always group by sector for color consistency (both sector and sector-industry use sectors)
     const groupValues = new Map<string, number>()
     validExposures.forEach((exp) => {
-      const groupValue = exp[groupKey] as string | undefined
-      const group = toProperCase(
-        groupValue || `Unknown ${toProperCase(groupKey)}`,
-      )
+      const group = toProperCase(exp.sector || "Unknown Sector")
       groupValues.set(group, (groupValues.get(group) || 0) + exp.totalValue)
     })
 
@@ -571,17 +565,69 @@ export function ExposureTreemapHighchartsWithLogos({
       return data
     }
 
-    // Handle grouped modes (sector or industry)
-    const groupKey =
-      groupingMode === "sector" ? "sector" : ("industry" as keyof StockExposure)
+    // Handle "sector-industry" mode - 3-level hierarchy: Sector → Industry → Stocks
+    if (groupingMode === "sector-industry") {
+      // Group by sector first, then by industry within each sector
+      const sectorGroups = new Map<string, Map<string, StockExposure[]>>()
 
-    // Group stocks by sector or industry
+      validExposures.forEach((exposure) => {
+        const sector = toProperCase(exposure.sector || "Unknown Sector")
+        const industry = toProperCase(exposure.industry || "Unknown Industry")
+
+        if (!sectorGroups.has(sector)) {
+          sectorGroups.set(sector, new Map())
+        }
+        const industryMap = sectorGroups.get(sector)!
+        if (!industryMap.has(industry)) {
+          industryMap.set(industry, [])
+        }
+        industryMap.get(industry)!.push(exposure)
+      })
+
+      // Create nodes: Sector → Industry → Stocks
+      sectorGroups.forEach((industries, sectorName) => {
+        // Level 1: Sector parent node
+        data.push({
+          id: sectorName,
+          name: sectorName,
+          color: getGroupColor(sectorName, "sector"),
+        })
+
+        industries.forEach((stocks, industryName) => {
+          // Level 2: Industry intermediate node
+          const industryId = `${sectorName}-${industryName}`
+          data.push({
+            id: industryId,
+            name: industryName,
+            parent: sectorName,
+          })
+
+          // Level 3: Stock leaf nodes
+          stocks.forEach((stock, stockIndex) => {
+            const percentage = (stock.totalValue / totalValue) * 100
+            const logoUrl = logoUrls[stock.ticker.toUpperCase()] ?? null
+            data.push({
+              id: `${industryId}-${stock.ticker}-${stockIndex}`,
+              name: stock.ticker,
+              parent: industryId,
+              value: sizingMode === "monosize" ? 1 : stock.totalValue,
+              actualValue: stock.totalValue,
+              logoUrl: logoUrl,
+              percentage: percentage,
+              ticker: stock.ticker,
+              companyName: stock.name,
+            } as ExtendedTreemapPoint)
+          })
+        })
+      })
+
+      return data
+    }
+
+    // Handle "sector" mode - 2-level hierarchy: Sector → Stocks
     const groups = new Map<string, StockExposure[]>()
     validExposures.forEach((exposure) => {
-      const groupValue = exposure[groupKey] as string | undefined
-      const group = toProperCase(
-        groupValue || `Unknown ${toProperCase(groupKey)}`,
-      )
+      const group = toProperCase(exposure.sector || "Unknown Sector")
       if (!groups.has(group)) {
         groups.set(group, [])
       }
@@ -699,17 +745,13 @@ export function ExposureTreemapHighchartsWithLogos({
       return data
     }
 
-    // Handle grouped modes (sector or industry) - show aggregated groups
-    const groupKey =
-      groupingMode === "sector" ? "sector" : ("industry" as keyof StockExposure)
+    // Handle grouped modes (sector and sector-industry) - show aggregated sectors
+    // Both modes show sectors in pie chart since pie doesn't support hierarchy
 
-    // Group stocks by sector or industry and aggregate values
+    // Group stocks by sector and aggregate values
     const groups = new Map<string, number>()
     validExposures.forEach((exposure) => {
-      const groupValue = exposure[groupKey] as string | undefined
-      const group = toProperCase(
-        groupValue || `Unknown ${toProperCase(groupKey)}`,
-      )
+      const group = toProperCase(exposure.sector || "Unknown Sector")
       groups.set(group, (groups.get(group) || 0) + exposure.totalValue)
     })
 
@@ -740,7 +782,7 @@ export function ExposureTreemapHighchartsWithLogos({
         name: groupName,
         y: value,
         actualValue: value,
-        color: getGroupColor(groupName, groupingMode),
+        color: getGroupColor(groupName, "sector"), // Always use sector colors for pie chart
       })
     })
 
@@ -748,15 +790,14 @@ export function ExposureTreemapHighchartsWithLogos({
     if (smallGroups.length > 0) {
       const othersTotal = smallGroups.reduce((sum, [, value]) => sum + value, 0)
       const othersPercentage = (othersTotal / totalValue) * 100
-      const itemType = groupingMode === "sector" ? "sectors" : "industries"
 
       data.push({
-        name: `Others (${smallGroups.length} ${itemType})`,
+        name: `Others (${smallGroups.length} sectors)`,
         y: othersTotal,
         actualValue: othersTotal,
         color: "#9ca3af", // Gray color for others
         custom: {
-          description: `${smallGroups.length} ${itemType} < 1% each (${othersPercentage.toFixed(1)}% total)`,
+          description: `${smallGroups.length} sectors < 1% each (${othersPercentage.toFixed(1)}% total)`,
         },
       })
     }
@@ -893,6 +934,44 @@ export function ExposureTreemapHighchartsWithLogos({
             level: 2,
             dataLabels: {
               enabled: true,
+              ...(groupingMode === "sector-industry"
+                ? {
+                    // For sector-industry mode, level 2 is industry headers
+                    headers: true,
+                    style: {
+                      textOutline: "none",
+                      color: isDark ? "#f3f4f6" : "#111827",
+                      fontSize: "12px",
+                    },
+                  }
+                : {
+                    // For sector mode, level 2 is stocks with logos
+                    useHTML: true,
+                    inside: true,
+                    verticalAlign: "middle",
+                    align: "center",
+                    formatter: function () {
+                      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                      const point = (this as any).point as any
+                      const contentStrategy = getContentStrategy(point)
+
+                      // Return empty for very small cells
+                      if (contentStrategy === "none") {
+                        return ""
+                      }
+
+                      return renderCellContent(point, contentStrategy)
+                    },
+                  }),
+            },
+            borderWidth: 3,
+            borderColor: isDark ? "#1f2937" : "#f3f4f6",
+          },
+          {
+            // Level 3: Stocks with logos (only used in sector-industry mode)
+            level: 3,
+            dataLabels: {
+              enabled: true,
               useHTML: true,
               inside: true,
               verticalAlign: "middle",
@@ -910,8 +989,8 @@ export function ExposureTreemapHighchartsWithLogos({
                 return renderCellContent(point, contentStrategy)
               },
             },
-            borderWidth: 3,
-            borderColor: isDark ? "#1f2937" : "#f3f4f6",
+            borderWidth: 2,
+            borderColor: isDark ? "#374151" : "#e5e7eb",
           },
         ],
         dataLabels: {
@@ -1100,14 +1179,11 @@ export function ExposureTreemapHighchartsWithLogos({
         .slice(0, 10)
         .map((exp) => [exp.ticker, exp.totalValue] as [string, number])
     } else {
-      // For grouped modes, show top 6 sectors/industries
+      // For grouped modes (sector and sector-industry), show top 6 sectors
       return Object.entries(
         validExposures.reduce(
           (acc, exp) => {
-            const key =
-              groupingMode === "sector"
-                ? toProperCase(exp.sector || "Unknown Sector")
-                : toProperCase(exp.industry || "Unknown Industry")
+            const key = toProperCase(exp.sector || "Unknown Sector")
             acc[key] = (acc[key] || 0) + exp.totalValue
             return acc
           },
@@ -1183,14 +1259,14 @@ export function ExposureTreemapHighchartsWithLogos({
               <DropdownMenuTrigger asChild>
                 <Button
                   variant="secondary"
-                  className="h-9 w-[120px] justify-between"
+                  className="h-9 w-[160px] justify-between"
                 >
                   <span>
                     {groupingMode === "none"
                       ? "No group"
                       : groupingMode === "sector"
                         ? "Sector"
-                        : "Industry"}
+                        : "Sector & Industry"}
                   </span>
                   <RiExpandUpDownLine
                     className="size-4 text-gray-400 dark:text-gray-600"
@@ -1199,7 +1275,7 @@ export function ExposureTreemapHighchartsWithLogos({
                 </Button>
               </DropdownMenuTrigger>
             </Tooltip>
-            <DropdownMenuContent align="start" className="w-[120px]">
+            <DropdownMenuContent align="start" className="w-[150px]">
               <DropdownMenuLabel>GROUP BY</DropdownMenuLabel>
               <DropdownMenuSeparator />
               <DropdownMenuRadioGroup
@@ -1214,8 +1290,8 @@ export function ExposureTreemapHighchartsWithLogos({
                 <DropdownMenuRadioItem value="sector" iconType="check">
                   Sector
                 </DropdownMenuRadioItem>
-                <DropdownMenuRadioItem value="industry" iconType="check">
-                  Industry
+                <DropdownMenuRadioItem value="sector-industry" iconType="check">
+                  Sector & Industry
                 </DropdownMenuRadioItem>
               </DropdownMenuRadioGroup>
             </DropdownMenuContent>
@@ -1417,11 +1493,7 @@ export function ExposureTreemapHighchartsWithLogos({
           {/* Legend */}
           <div className="mt-4">
             <p className="mb-1 text-sm font-medium text-gray-700 dark:text-gray-300">
-              {groupingMode === "none"
-                ? "Top Holdings"
-                : groupingMode === "sector"
-                  ? "Top Sectors"
-                  : "Top Industries"}
+              {groupingMode === "none" ? "Top Holdings" : "Top Sectors"}
             </p>
             <ul className="flex flex-wrap gap-x-10 gap-y-4 text-sm">
               {topGroups.map(([name, value], index) => (
