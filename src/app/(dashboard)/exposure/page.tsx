@@ -7,7 +7,7 @@ import { ExposureTable } from "@/components/ui/data-table-exposure/ExposureTable
 import { useExposureCalculations } from "@/hooks/useExposureCalculations"
 import { usePortfolioStore } from "@/hooks/usePortfolioStore"
 import { clearIndexedDBBackups } from "@/lib/indexedDBBackup"
-import React, { useMemo } from "react"
+import React, { useEffect, useMemo, useRef, useState } from "react"
 
 export default function ExposurePage() {
   // Use portfolio store for holdings and accounts data
@@ -54,6 +54,32 @@ export default function ExposurePage() {
 
   // Account filter state
   const [selectedAccount, setSelectedAccount] = React.useState<string>("all")
+
+  // Sticky filter state
+  const [isFilterSticky, setIsFilterSticky] = useState(false)
+  const filterRef = useRef<HTMLDivElement>(null)
+
+  // Intersection Observer for sticky filter
+  useEffect(() => {
+    const filterElement = filterRef.current
+    if (!filterElement) return
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        // When the original filter is not intersecting (scrolled out), show sticky
+        setIsFilterSticky(!entry.isIntersecting)
+      },
+      {
+        root: null,
+        // Trigger when element goes under the sticky nav (~100px from top)
+        rootMargin: "-100px 0px 0px 0px",
+        threshold: 0,
+      },
+    )
+
+    observer.observe(filterElement)
+    return () => observer.disconnect()
+  }, [accounts.length, holdings.length])
 
   // Filter holdings by selected account
   const filteredHoldings = useMemo(() => {
@@ -156,9 +182,44 @@ export default function ExposurePage() {
       </div>
       <Divider />
 
+      {/* Sticky Account Filter - Bottom positioned, narrower */}
+      {accounts.length > 0 && holdings.length > 0 && (
+        <div
+          className={`fixed bottom-6 left-1/2 z-50 w-full max-w-3xl -translate-x-1/2 px-4 transition-all duration-300 ease-out sm:px-6 ${
+            isFilterSticky
+              ? "translate-y-0 opacity-100"
+              : "translate-y-4 pointer-events-none opacity-0"
+          }`}
+        >
+          <div className="flex items-center justify-between rounded-lg border border-gray-200 bg-white/95 px-4 py-3 shadow-lg backdrop-blur-sm dark:border-gray-800 dark:bg-gray-950/95">
+            <div className="flex items-center gap-2">
+              <label className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                Account
+              </label>
+              <AccountSelector
+                accounts={exposureAccounts}
+                value={selectedAccount}
+                onValueChange={setSelectedAccount}
+                showAllOption={true}
+                className="w-[200px]"
+              />
+            </div>
+            <div className="text-right">
+              <div className="text-base font-medium text-gray-900 dark:text-gray-50">
+                {formatCurrency(filteredTotalValue)}
+              </div>
+              <div className="text-sm text-gray-500 dark:text-gray-400">
+                {filteredHoldings.length}{" "}
+                {filteredHoldings.length === 1 ? "holding" : "holdings"}
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Account Filter and Summary - Only show when there are accounts and holdings */}
       {accounts.length > 0 && holdings.length > 0 && (
-        <div className="flex items-center justify-between">
+        <div ref={filterRef} className="flex items-center justify-between">
           <div className="flex flex-col gap-1 sm:flex-row sm:items-center sm:gap-2">
             <label
               htmlFor="account-filter"

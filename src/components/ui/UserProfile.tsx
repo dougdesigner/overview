@@ -14,16 +14,23 @@ import {
   DropdownMenuSubMenuTrigger,
   DropdownMenuTrigger,
 } from "@/components/DropdownMenu"
-import { cx, focusRing } from "@/lib/utils"
-import { RiComputerLine, RiMoonLine, RiSunLine, RiDownloadLine, RiUploadLine, RiSettings3Line } from "@remixicon/react"
-import { useTheme } from "next-themes"
 import { usePortfolioStore } from "@/hooks/usePortfolioStore"
 import { clearETFCache } from "@/lib/etfCacheUtils"
+import { cx, focusRing } from "@/lib/utils"
+import {
+  RiComputerLine,
+  RiDownloadLine,
+  RiMoonLine,
+  RiSettings3Line,
+  RiSunLine,
+  RiUploadLine,
+} from "@remixicon/react"
+import { useTheme } from "next-themes"
 import React from "react"
 
 function DropdownUserProfile() {
   const [mounted, setMounted] = React.useState(false)
-  const { theme, setTheme} = useTheme()
+  const { theme, setTheme } = useTheme()
   const { exportPortfolioData, importPortfolioData } = usePortfolioStore()
   const fileInputRef = React.useRef<HTMLInputElement>(null)
 
@@ -47,7 +54,9 @@ function DropdownUserProfile() {
     fileInputRef.current?.click()
   }
 
-  const handleFileChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileChange = async (
+    event: React.ChangeEvent<HTMLInputElement>,
+  ) => {
     const file = event.target.files?.[0]
     if (!file) return
 
@@ -64,14 +73,22 @@ function DropdownUserProfile() {
       const accountCount = data.accounts.length
       const holdingCount = data.holdings.length
 
-      if (confirm(`Import ${accountCount} accounts and ${holdingCount} holdings?\n\nThis will replace all current data.`)) {
+      if (
+        confirm(
+          `Import ${accountCount} accounts and ${holdingCount} holdings?\n\nThis will replace all current data.`,
+        )
+      ) {
         importPortfolioData(data)
 
         // Clear ETF cache to ensure fresh data
         clearETFCache()
 
-        console.log(`✅ Portfolio imported: ${accountCount} accounts, ${holdingCount} holdings`)
-        alert(`Successfully imported ${accountCount} accounts and ${holdingCount} holdings`)
+        console.log(
+          `✅ Portfolio imported: ${accountCount} accounts, ${holdingCount} holdings`,
+        )
+        alert(
+          `Successfully imported ${accountCount} accounts and ${holdingCount} holdings`,
+        )
       }
     } catch (error) {
       console.error("Failed to import portfolio:", error)
@@ -125,11 +142,17 @@ function DropdownUserProfile() {
           <DropdownMenuSeparator />
           <DropdownMenuGroup>
             <DropdownMenuItem onClick={handleExport}>
-              <RiDownloadLine className="mr-2 size-4 shrink-0" aria-hidden="true" />
+              <RiDownloadLine
+                className="mr-2 size-4 shrink-0"
+                aria-hidden="true"
+              />
               Export Portfolio
             </DropdownMenuItem>
             <DropdownMenuItem onClick={handleImportClick}>
-              <RiUploadLine className="mr-2 size-4 shrink-0" aria-hidden="true" />
+              <RiUploadLine
+                className="mr-2 size-4 shrink-0"
+                aria-hidden="true"
+              />
               Import Portfolio
             </DropdownMenuItem>
           </DropdownMenuGroup>

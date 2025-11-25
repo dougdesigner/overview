@@ -28,6 +28,8 @@ function HoldingsContent() {
   const [currentAccountFilter, setCurrentAccountFilter] =
     React.useState<string>(searchParams.get("account") || "all")
   const [isRefreshing, setIsRefreshing] = React.useState(false)
+  const [isFilterSticky, setIsFilterSticky] = React.useState(false)
+  const filterRef = React.useRef<HTMLDivElement>(null)
 
   // Use portfolio store for accounts and holdings data
   const {
@@ -98,6 +100,26 @@ function HoldingsContent() {
       maximumFractionDigits: 0,
     }).format(value)
   }
+
+  // Intersection Observer for sticky filter
+  React.useEffect(() => {
+    const filterElement = filterRef.current
+    if (!filterElement) return
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsFilterSticky(!entry.isIntersecting)
+      },
+      {
+        root: null,
+        rootMargin: "-100px 0px 0px 0px",
+        threshold: 0,
+      },
+    )
+
+    observer.observe(filterElement)
+    return () => observer.disconnect()
+  }, [accounts.length, holdings.length])
 
   const handleHoldingSubmit = async (holding: HoldingFormData) => {
     if (editingHolding) {
@@ -311,9 +333,44 @@ function HoldingsContent() {
       </div>
       <Divider />
 
+      {/* Sticky Account Filter - Bottom positioned, narrower */}
+      {accounts.length > 0 && holdings.length > 0 && (
+        <div
+          className={`fixed bottom-6 left-1/2 z-50 w-full max-w-3xl -translate-x-1/2 px-4 transition-all duration-300 ease-out sm:px-6 ${
+            isFilterSticky
+              ? "translate-y-0 opacity-100"
+              : "translate-y-4 pointer-events-none opacity-0"
+          }`}
+        >
+          <div className="flex items-center justify-between rounded-lg border border-gray-200 bg-white/95 px-4 py-3 shadow-lg backdrop-blur-sm dark:border-gray-800 dark:bg-gray-950/95">
+            <div className="flex items-center gap-2">
+              <label className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                Account
+              </label>
+              <AccountSelector
+                accounts={accounts}
+                value={currentAccountFilter}
+                onValueChange={setCurrentAccountFilter}
+                showAllOption={true}
+                className="w-[200px]"
+              />
+            </div>
+            <div className="text-right">
+              <div className="text-base font-medium text-gray-900 dark:text-gray-50">
+                {formatCurrency(filteredTotalValue)}
+              </div>
+              <div className="text-sm text-gray-500 dark:text-gray-400">
+                {filteredHoldings.length}{" "}
+                {filteredHoldings.length === 1 ? "holding" : "holdings"}
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Account Filter and Summary - Only show when there are accounts and holdings */}
       {accounts.length > 0 && holdings.length > 0 && (
-        <div className="mt-0 flex items-center justify-between">
+        <div ref={filterRef} className="mt-0 flex items-center justify-between">
           <div className="flex flex-col gap-1 sm:flex-row sm:items-center sm:gap-2">
             <label
               htmlFor="account-filter"
