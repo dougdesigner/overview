@@ -1481,22 +1481,29 @@ export function HoldingsSunburstEnhanced({
                         : "Account"}
           </p>
           <ul className="flex flex-wrap gap-x-10 gap-y-4 text-sm">
-            {topGroups.map(([name, value], index) => (
-              <li key={`${name}-${index}`}>
-                <span className="text-base font-semibold text-gray-900 dark:text-gray-50">
-                  {getLegendDisplayValue(value)}
-                </span>
-                <div className="flex items-center gap-2">
-                  <span
-                    className="size-2.5 shrink-0 rounded-sm"
-                    style={{
-                      backgroundColor: getGroupColor(name, index),
-                    }}
-                  />
-                  <span className="text-sm">{name}</span>
-                </div>
-              </li>
-            ))}
+            {topGroups.map(([name, value], index) => {
+              // Only show color blocks at root level where colors match the chart
+              const isAtRootLevel = !drilledNodeId || drilledNodeId === "portfolio"
+
+              return (
+                <li key={`${name}-${index}`}>
+                  <span className="text-base font-semibold text-gray-900 dark:text-gray-50">
+                    {getLegendDisplayValue(value)}
+                  </span>
+                  <div className="flex items-center gap-2">
+                    {isAtRootLevel && (
+                      <span
+                        className="size-2.5 shrink-0 rounded-sm"
+                        style={{
+                          backgroundColor: getGroupColor(name, index),
+                        }}
+                      />
+                    )}
+                    <span className="text-sm">{name}</span>
+                  </div>
+                </li>
+              )
+            })}
           </ul>
         </div>
       )}
