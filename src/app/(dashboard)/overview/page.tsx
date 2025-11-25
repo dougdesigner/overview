@@ -62,7 +62,7 @@ export default function OverviewPage() {
 
       {isLoading ? (
         // Loading state
-        <div className="mt-8 animate-pulse">
+        <div className="mt-6 animate-pulse">
           <div className="mb-6 h-48 rounded-lg bg-gray-100 dark:bg-gray-800"></div>
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
             <div className="h-32 rounded-lg bg-gray-100 dark:bg-gray-800"></div>
@@ -73,7 +73,7 @@ export default function OverviewPage() {
         </div>
       ) : accounts.length === 0 ? (
         // Empty state with onboarding flow
-        <div className="mt-8">
+        <div className="mt-6">
           <OnboardingFlow />
         </div>
       ) : (
@@ -199,7 +199,7 @@ export default function OverviewPage() {
           </dl>
           {/* <DataTable data={tickets} columns={columns} /> */}
 
-          <dl className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-4 lg:grid-cols-4">
+          <dl className="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-4 lg:grid-cols-4">
             <KPICard
               name="U.S. Stocks"
               stat={`$${assetValues.usStocks.toLocaleString("en-US", { maximumFractionDigits: 0 })}`}
@@ -226,7 +226,7 @@ export default function OverviewPage() {
             />
           </dl>
 
-          <dl className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-1 lg:grid-cols-1">
+          <dl className="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-1 lg:grid-cols-1">
             <AssetAllocationCard
               defaultTab={holdings.length === 0 ? "Accounts" : undefined}
               data={[

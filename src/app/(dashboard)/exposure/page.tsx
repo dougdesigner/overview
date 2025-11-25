@@ -158,7 +158,7 @@ export default function ExposurePage() {
 
       {/* Account Filter and Summary - Only show when there are accounts and holdings */}
       {accounts.length > 0 && holdings.length > 0 && (
-        <div className="mt-0 flex items-center justify-between">
+        <div className="flex items-center justify-between">
           <div className="flex flex-col gap-1 sm:flex-row sm:items-center sm:gap-2">
             <label
               htmlFor="account-filter"
@@ -188,7 +188,7 @@ export default function ExposurePage() {
       )}
 
       {/* Exposure Table */}
-      <div className="mt-4">
+      <div className="mt-6">
         {holdingsLoading ? null : portfolioHoldings.length === 0 ? ( // Loading state is already handled above
           // Empty state
           <div className="py-12 text-center">

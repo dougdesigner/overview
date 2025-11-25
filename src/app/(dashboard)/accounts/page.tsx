@@ -535,7 +535,8 @@ export default function AccountsPage() {
                             value: accounts.reduce(
                               (sum, acc) =>
                                 sum +
-                                (acc.totalValue * acc.assetAllocation.usStocks) /
+                                (acc.totalValue *
+                                  acc.assetAllocation.usStocks) /
                                   100,
                               0,
                             ),
@@ -611,7 +612,7 @@ export default function AccountsPage() {
       )}
 
       {/* Account Cards */}
-      <div className="mt-8">
+      <div className="mt-6">
         <div className="space-y-4">
           {sortedAccounts.map((account) => (
             <AccountCard

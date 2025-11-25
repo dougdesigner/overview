@@ -344,7 +344,7 @@ function HoldingsContent() {
 
       {/* Hero Visualization - Sunburst Chart - Only show when there are holdings */}
       {holdings.length > 0 && (
-        <div className="mt-4">
+        <div className="mt-6">
           <HoldingsSunburst
             holdings={holdingsWithAllocations}
             accounts={accounts}
@@ -355,7 +355,7 @@ function HoldingsContent() {
       )}
 
       {/* Holdings Table */}
-      <div className="mt-8">
+      <div className="mt-6">
         {accounts.length === 0 ? (
           <div className="py-12 text-center">
             <h3 className="mb-2 text-lg font-medium text-gray-900 dark:text-gray-50">
