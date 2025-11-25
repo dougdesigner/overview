@@ -9,7 +9,6 @@ import {
   TableRow,
 } from "@/components/Table"
 import { cx } from "@/lib/utils"
-import { AccountSelector } from "@/components/ui/AccountSelector"
 import {
   ExpandedState,
   flexRender,
@@ -81,15 +80,12 @@ export function HoldingsTable({
   accounts,
   onEdit,
   onDelete,
-  initialAccountFilter = "all",
-  onAccountFilterChange,
+  selectedAccount = "all",
 }: HoldingsTableProps) {
   const [expanded, setExpanded] = React.useState<ExpandedState>({})
   const [sorting, setSorting] = React.useState<SortingState>([
     { id: "allocation", desc: true },
   ])
-  const [selectedAccount, setSelectedAccount] =
-    React.useState<string>(initialAccountFilter)
 
   // Filter holdings by selected account
   const filteredHoldings = React.useMemo(() => {
@@ -99,26 +95,6 @@ export function HoldingsTable({
         : holdings.filter((h) => h.accountId === selectedAccount)
     return groupHoldings(filtered)
   }, [holdings, selectedAccount])
-
-  // Calculate total value of filtered holdings
-  const totalValue = React.useMemo(() => {
-    // Use the original filtered holdings to avoid counting grouped rows
-    const filtered =
-      selectedAccount === "all"
-        ? holdings
-        : holdings.filter((h) => h.accountId === selectedAccount)
-    return filtered.reduce((sum, holding) => sum + holding.marketValue, 0)
-  }, [holdings, selectedAccount])
-
-  // Format currency
-  const formatCurrency = (value: number) => {
-    return new Intl.NumberFormat("en-US", {
-      style: "currency",
-      currency: "USD",
-      minimumFractionDigits: 0,
-      maximumFractionDigits: 0,
-    }).format(value)
-  }
 
   // We need to create the table first before we can use it in toggleExpandAll
   const tableRef = React.useRef<ReturnType<typeof useReactTable<Holding>> | null>(null)
@@ -185,35 +161,6 @@ export function HoldingsTable({
 
   return (
     <div className="space-y-4">
-      {/* Account Filter and Total Value */}
-      <div className="flex items-center justify-between">
-        <div className="flex flex-col gap-1 sm:flex-row sm:items-center sm:gap-2">
-          <label htmlFor="account-filter" className="text-sm font-medium">
-            Account
-          </label>
-          <AccountSelector
-            accounts={accounts}
-            value={selectedAccount}
-            onValueChange={(value) => {
-              setSelectedAccount(value)
-              onAccountFilterChange?.(value)
-            }}
-            showAllOption={true}
-            className="w-full sm:w-[200px]"
-            id="account-filter"
-          />
-        </div>
-        <div className="text-right">
-          <div className="text-base font-medium text-gray-900 dark:text-gray-50">
-            {formatCurrency(totalValue)}
-          </div>
-          <div className="text-sm font-normal text-gray-500 dark:text-gray-400">
-            {filteredHoldings.length}{" "}
-            {filteredHoldings.length === 1 ? "holding" : "holdings"}
-          </div>
-        </div>
-      </div>
-
       {/* Table */}
       <Card className="p-0">
         <div className="overflow-x-auto">

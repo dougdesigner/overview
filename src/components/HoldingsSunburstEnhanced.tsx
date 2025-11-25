@@ -67,6 +67,11 @@ export function HoldingsSunburstEnhanced({
     useState<string>(selectedAccountId)
   const [logoUrls, setLogoUrls] = useState<Record<string, string | null>>({})
 
+  // Sync internal state with prop when it changes from parent
+  useEffect(() => {
+    setSelectedAccount(selectedAccountId)
+  }, [selectedAccountId])
+
   // Track the currently drilled-down node for legend updates
   const [drilledNodeId, setDrilledNodeId] = useState<string | null>(null)
 

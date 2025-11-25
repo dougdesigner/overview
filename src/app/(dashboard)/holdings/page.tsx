@@ -1,7 +1,9 @@
 "use client"
 
 import { Button } from "@/components/Button"
+import { Divider } from "@/components/Divider"
 import { HoldingsSunburst } from "@/components/HoldingsSunburstWrapper"
+import { AccountSelector } from "@/components/ui/AccountSelector"
 import {
   HoldingsDrawer,
   type HoldingFormData,
@@ -72,6 +74,30 @@ function HoldingsContent() {
       allocation: totalValue > 0 ? (h.marketValue / totalValue) * 100 : 0,
     }))
   }, [holdings])
+
+  // Filter holdings by selected account for summary display
+  const filteredHoldings = useMemo(() => {
+    return currentAccountFilter === "all"
+      ? holdingsWithAllocations
+      : holdingsWithAllocations.filter(
+          (h) => h.accountId === currentAccountFilter,
+        )
+  }, [holdingsWithAllocations, currentAccountFilter])
+
+  // Calculate total value of filtered holdings
+  const filteredTotalValue = useMemo(() => {
+    return filteredHoldings.reduce((sum, h) => sum + h.marketValue, 0)
+  }, [filteredHoldings])
+
+  // Format currency
+  const formatCurrency = (value: number) => {
+    return new Intl.NumberFormat("en-US", {
+      style: "currency",
+      currency: "USD",
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 0,
+    }).format(value)
+  }
 
   const handleHoldingSubmit = async (holding: HoldingFormData) => {
     if (editingHolding) {
@@ -283,11 +309,42 @@ function HoldingsContent() {
           }
         />
       </div>
-      {/* <Divider /> */}
+      <Divider />
+
+      {/* Account Filter and Summary - Only show when there are accounts and holdings */}
+      {accounts.length > 0 && holdings.length > 0 && (
+        <div className="mt-0 flex items-center justify-between">
+          <div className="flex flex-col gap-1 sm:flex-row sm:items-center sm:gap-2">
+            <label
+              htmlFor="account-filter"
+              className="text-sm font-medium text-gray-700 dark:text-gray-300"
+            >
+              Account
+            </label>
+            <AccountSelector
+              accounts={accounts}
+              value={currentAccountFilter}
+              onValueChange={setCurrentAccountFilter}
+              showAllOption={true}
+              className="w-full sm:w-[200px]"
+              id="account-filter"
+            />
+          </div>
+          <div className="text-right">
+            <div className="text-base font-medium text-gray-900 dark:text-gray-50">
+              {formatCurrency(filteredTotalValue)}
+            </div>
+            <div className="text-sm font-normal text-gray-500 dark:text-gray-400">
+              {filteredHoldings.length}{" "}
+              {filteredHoldings.length === 1 ? "holding" : "holdings"}
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Hero Visualization - Sunburst Chart - Only show when there are holdings */}
       {holdings.length > 0 && (
-        <div className="mt-8">
+        <div className="mt-4">
           <HoldingsSunburst
             holdings={holdingsWithAllocations}
             accounts={accounts}
@@ -339,8 +396,7 @@ function HoldingsContent() {
             accounts={accounts}
             onEdit={handleEdit}
             onDelete={handleDelete}
-            initialAccountFilter={searchParams.get("account") || "all"}
-            onAccountFilterChange={setCurrentAccountFilter}
+            selectedAccount={currentAccountFilter}
           />
         )}
       </div>

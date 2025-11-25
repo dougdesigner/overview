@@ -26,7 +26,6 @@ import HighchartsExporting from "highcharts/modules/exporting"
 import HighchartsExportData from "highcharts/modules/export-data"
 import { useTheme } from "next-themes"
 import { useEffect, useRef, useState } from "react"
-import { InstitutionLogo } from "@/components/ui/InstitutionLogo"
 import { StockExposure, Account } from "./types"
 
 // Track if modules are initialized globally to prevent duplicate initialization
@@ -40,7 +39,6 @@ interface ExposureTreemapHighchartsProps {
   totalValue: number
   accounts: Account[]
   selectedAccount: string
-  onAccountChange: (accountId: string) => void
   logoUrls: Record<string, string | null>
   dataVersion?: number
 }
@@ -74,7 +72,6 @@ export function ExposureTreemapHighchartsWithLogos({
   totalValue,
   accounts,
   selectedAccount,
-  onAccountChange,
   logoUrls,
   dataVersion,
 }: ExposureTreemapHighchartsProps) {
@@ -1115,54 +1112,6 @@ export function ExposureTreemapHighchartsWithLogos({
         </h3>
 
         <div className="flex items-center gap-2">
-          <DropdownMenu>
-            <Tooltip triggerAsChild content="Select account to view exposure breakdown">
-              <DropdownMenuTrigger asChild>
-                <Button variant="secondary" className="h-9 w-[280px] justify-between">
-                <span className="flex items-center gap-2">
-                  {selectedAccount === "all" ? (
-                    "All Accounts"
-                  ) : (
-                    <>
-                      <InstitutionLogo
-                        institution={accounts.find(a => a.id === selectedAccount)?.institution || ""}
-                        className="size-4"
-                      />
-                      <span className="truncate">
-                        {accounts.find(a => a.id === selectedAccount)?.name || "Select account"}
-                      </span>
-                    </>
-                  )}
-                </span>
-                <RiExpandUpDownLine className="size-4 text-gray-400 dark:text-gray-600" aria-hidden="true" />
-              </Button>
-              </DropdownMenuTrigger>
-            </Tooltip>
-            <DropdownMenuContent align="start" className="w-[280px]">
-              <DropdownMenuLabel>ACCOUNT</DropdownMenuLabel>
-              <DropdownMenuSeparator />
-              <DropdownMenuRadioGroup
-                value={selectedAccount}
-                onValueChange={onAccountChange}
-              >
-                <DropdownMenuRadioItem value="all" iconType="check">
-                  All Accounts
-                </DropdownMenuRadioItem>
-                {accounts.map((account) => (
-                  <DropdownMenuRadioItem key={account.id} value={account.id} iconType="check">
-                    <div className="flex items-center gap-2">
-                      <InstitutionLogo
-                        institution={account.institution}
-                        className="size-4"
-                      />
-                      <span className="truncate">{account.name}</span>
-                    </div>
-                  </DropdownMenuRadioItem>
-                ))}
-              </DropdownMenuRadioGroup>
-            </DropdownMenuContent>
-          </DropdownMenu>
-
           <DropdownMenu>
             <Tooltip triggerAsChild content="Group holdings by sector, industry, or show all stocks">
               <DropdownMenuTrigger asChild>

@@ -33,10 +33,9 @@ import { createColumns } from "./columns"
 // import { ExposureTreemapHighcharts } from "./ExposureTreemapHighcharts"  // Original version
 // import { ExposureTreemapHighcharts } from "./ExposureTreemapHighchartsSimplified"  // Simplified version
 import { ExposureTreemapHighchartsWithLogos as ExposureTreemapHighcharts } from "./ExposureTreemapHighchartsWrapper" // Version with logos
-import { AccountSelector } from "@/components/ui/AccountSelector"
 import { ExposureTableProps, StockExposure } from "./types"
 
-export function ExposureTable({ holdings, accounts, dataVersion }: ExposureTableProps) {
+export function ExposureTable({ holdings, accounts, dataVersion, selectedAccount = "all" }: ExposureTableProps) {
   const [data, setData] = React.useState<StockExposure[]>([])
   const [sorting, setSorting] = React.useState<SortingState>([
     { id: "percentOfPortfolio", desc: true },
@@ -45,7 +44,6 @@ export function ExposureTable({ holdings, accounts, dataVersion }: ExposureTable
   const [expanded, setExpanded] = React.useState<ExpandedState>({})
   const [isLoading, setIsLoading] = React.useState(false)
   const [totalPortfolioValue, setTotalPortfolioValue] = React.useState(0)
-  const [selectedAccount, setSelectedAccount] = React.useState<string>("all")
   const [logoUrls, setLogoUrls] = React.useState<Record<string, string | null>>(
     {},
   )
@@ -132,12 +130,16 @@ export function ExposureTable({ holdings, accounts, dataVersion }: ExposureTable
     fetchLogos()
   }, [data])
 
+  // Get the active data source based on account filter
+  const activeData = selectedAccount === "all" ? data : filteredData
+
   // Sort data globally before pagination
+  // Uses activeData which is already filtered by account when needed
   const sortedData = React.useMemo(() => {
-    if (sorting.length === 0) return data
+    if (sorting.length === 0) return activeData
 
     const [{ id, desc }] = sorting
-    return [...data].sort((a, b) => {
+    return [...activeData].sort((a, b) => {
       const aVal = a[id as keyof StockExposure]
       const bVal = b[id as keyof StockExposure]
 
@@ -152,7 +154,7 @@ export function ExposureTable({ holdings, accounts, dataVersion }: ExposureTable
         ? String(bVal).localeCompare(String(aVal))
         : String(aVal).localeCompare(String(bVal))
     })
-  }, [data, sorting])
+  }, [activeData, sorting])
 
   // Paginate the sorted data (parent rows only)
   const paginatedData = React.useMemo(() => {
@@ -163,18 +165,18 @@ export function ExposureTable({ holdings, accounts, dataVersion }: ExposureTable
   // Reset to first page when data/filter/sort changes
   React.useEffect(() => {
     setCurrentPage(0)
-  }, [data.length, globalFilter, sorting])
+  }, [activeData.length, globalFilter, sorting])
 
   const areAllExpanded = React.useCallback(() => {
-    const expandableRows = data.filter(
+    const expandableRows = activeData.filter(
       (row) => row.subRows && row.subRows.length > 0,
     )
     if (expandableRows.length === 0) return false
     return expandableRows.every((row) => {
-      const index = data.indexOf(row).toString()
+      const index = activeData.indexOf(row).toString()
       return expanded[index as keyof typeof expanded]
     })
-  }, [data, expanded])
+  }, [activeData, expanded])
 
   const toggleExpandAll = React.useCallback(() => {
     const allExpanded = areAllExpanded()
@@ -182,14 +184,14 @@ export function ExposureTable({ holdings, accounts, dataVersion }: ExposureTable
       setExpanded({})
     } else {
       const newExpanded: ExpandedState = {}
-      data.forEach((row, index) => {
+      activeData.forEach((row, index) => {
         if (row.subRows && row.subRows.length > 0) {
           newExpanded[index.toString()] = true
         }
       })
       setExpanded(newExpanded)
     }
-  }, [data, areAllExpanded])
+  }, [activeData, areAllExpanded])
 
   const columns = React.useMemo(
     () =>
@@ -286,7 +288,6 @@ export function ExposureTable({ holdings, accounts, dataVersion }: ExposureTable
           totalValue={selectedAccount === "all" ? totalPortfolioValue : filteredTotalValue}
           accounts={accounts}
           selectedAccount={selectedAccount}
-          onAccountChange={setSelectedAccount}
           logoUrls={logoUrls}
           dataVersion={dataVersion}
         />
@@ -402,7 +403,7 @@ export function ExposureTable({ holdings, accounts, dataVersion }: ExposureTable
 
           {/* Pagination */}
           <ExposureTablePagination
-            totalRows={data.length}
+            totalRows={activeData.length}
             currentPage={currentPage}
             pageSize={PAGE_SIZE}
             onPageChange={setCurrentPage}

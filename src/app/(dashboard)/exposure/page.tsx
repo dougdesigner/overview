@@ -1,11 +1,13 @@
 "use client"
 
 import { Button } from "@/components/Button"
+import { Divider } from "@/components/Divider"
+import { AccountSelector } from "@/components/ui/AccountSelector"
 import { ExposureTable } from "@/components/ui/data-table-exposure/ExposureTable"
 import { useExposureCalculations } from "@/hooks/useExposureCalculations"
 import { usePortfolioStore } from "@/hooks/usePortfolioStore"
 import { clearIndexedDBBackups } from "@/lib/indexedDBBackup"
-import { useMemo } from "react"
+import React, { useMemo } from "react"
 
 export default function ExposurePage() {
   // Use portfolio store for holdings and accounts data
@@ -49,6 +51,31 @@ export default function ExposurePage() {
       institution: acc.institution,
     }))
   }, [accounts])
+
+  // Account filter state
+  const [selectedAccount, setSelectedAccount] = React.useState<string>("all")
+
+  // Filter holdings by selected account
+  const filteredHoldings = useMemo(() => {
+    return selectedAccount === "all"
+      ? portfolioHoldings
+      : portfolioHoldings.filter((h) => h.accountId === selectedAccount)
+  }, [portfolioHoldings, selectedAccount])
+
+  // Calculate total value of filtered holdings
+  const filteredTotalValue = useMemo(() => {
+    return filteredHoldings.reduce((sum, h) => sum + h.marketValue, 0)
+  }, [filteredHoldings])
+
+  // Format currency
+  const formatCurrency = (value: number) => {
+    return new Intl.NumberFormat("en-US", {
+      style: "currency",
+      currency: "USD",
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 0,
+    }).format(value)
+  }
 
   const handleRefresh = () => {
     // This will trigger recalculation through the hook
@@ -127,10 +154,41 @@ export default function ExposurePage() {
           Refresh
         </Button> */}
       </div>
-      {/* <Divider /> */}
+      <Divider />
+
+      {/* Account Filter and Summary - Only show when there are accounts and holdings */}
+      {accounts.length > 0 && holdings.length > 0 && (
+        <div className="mt-0 flex items-center justify-between">
+          <div className="flex flex-col gap-1 sm:flex-row sm:items-center sm:gap-2">
+            <label
+              htmlFor="account-filter"
+              className="text-sm font-medium text-gray-700 dark:text-gray-300"
+            >
+              Account
+            </label>
+            <AccountSelector
+              accounts={exposureAccounts}
+              value={selectedAccount}
+              onValueChange={setSelectedAccount}
+              showAllOption={true}
+              className="w-full sm:w-[200px]"
+              id="account-filter"
+            />
+          </div>
+          <div className="text-right">
+            <div className="text-base font-medium text-gray-900 dark:text-gray-50">
+              {formatCurrency(filteredTotalValue)}
+            </div>
+            <div className="text-sm font-normal text-gray-500 dark:text-gray-400">
+              {filteredHoldings.length}{" "}
+              {filteredHoldings.length === 1 ? "holding" : "holdings"}
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Exposure Table */}
-      <div className="mt-8">
+      <div className="mt-4">
         {holdingsLoading ? null : portfolioHoldings.length === 0 ? ( // Loading state is already handled above
           // Empty state
           <div className="py-12 text-center">
@@ -186,6 +244,7 @@ export default function ExposurePage() {
             accounts={exposureAccounts}
             onRefresh={handleRefresh}
             dataVersion={dataVersion}
+            selectedAccount={selectedAccount}
           />
         )}
       </div>

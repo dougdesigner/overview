@@ -68,6 +68,7 @@ export interface ExposureTableProps {
   onRefresh?: () => void
   lastUpdated?: Date
   dataVersion?: number
+  selectedAccount?: string
 }
 
 export interface ExposureCalculationResult {
