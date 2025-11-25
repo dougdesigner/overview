@@ -33,6 +33,8 @@ interface SankeyChartHighchartsProps {
   }
   colors?: AvailableChartColorsKeys[]
   accountColors?: AvailableChartColorsKeys[]
+  institutionColors?: AvailableChartColorsKeys[]
+  institutions?: string[] // List of institution names to identify institution nodes
   height?: number
   chartRef?: RefObject<HighchartsReact.RefObject>
 }
@@ -55,12 +57,18 @@ const colorValues: Record<
   red: { light: "#dc2626", dark: "#ef4444" }, // red-600 / red-500
   gray: { light: "#4b5563", dark: "#6b7280" }, // gray-600 / gray-500
   lightGray: { light: "#6b7280", dark: "#9ca3af" }, // gray-500 / gray-400
+  rose: { light: "#e11d48", dark: "#f43f5e" }, // rose-600 / rose-500
+  orange: { light: "#ea580c", dark: "#f97316" }, // orange-600 / orange-500
+  teal: { light: "#0d9488", dark: "#14b8a6" }, // teal-600 / teal-500
+  indigo: { light: "#4f46e5", dark: "#6366f1" }, // indigo-600 / indigo-500
 }
 
 export default function SankeyChartHighcharts({
   data,
   colors = ["blue", "cyan", "amber", "emerald"],
   accountColors = ["violet", "fuchsia", "pink", "sky", "lime"],
+  institutionColors = ["rose", "orange", "teal", "indigo"],
+  institutions = [],
   height = 500,
   chartRef: externalChartRef,
 }: SankeyChartHighchartsProps) {
@@ -121,11 +129,22 @@ export default function SankeyChartHighcharts({
       return isDark ? colorValue.dark : colorValue.light
     }
 
-    // Account nodes (left side) - nodes that feed into Portfolio Total
-    const accounts = data.nodes.filter(
-      (n) => n.id !== "Portfolio Total" && !assetTypes.includes(n.id),
+    // Institution nodes (first level) - check if nodeId is in institutions array
+    if (institutions.includes(nodeId)) {
+      const instIndex = institutions.indexOf(nodeId)
+      const colorKey = institutionColors[instIndex % institutionColors.length]
+      const colorValue = colorValues[colorKey] || colorValues.gray
+      return isDark ? colorValue.dark : colorValue.light
+    }
+
+    // Account nodes - nodes that feed into Portfolio Total (not institutions or asset types)
+    const accountNodes = data.nodes.filter(
+      (n) =>
+        n.id !== "Portfolio Total" &&
+        !assetTypes.includes(n.id) &&
+        !institutions.includes(n.id),
     )
-    const accountIndex = accounts.findIndex((n) => n.id === nodeId)
+    const accountIndex = accountNodes.findIndex((n) => n.id === nodeId)
     if (accountIndex >= 0) {
       const colorKey = accountColors[accountIndex % accountColors.length]
       const colorValue = colorValues[colorKey] || colorValues.gray

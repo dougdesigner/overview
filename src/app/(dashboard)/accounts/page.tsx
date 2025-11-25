@@ -486,77 +486,111 @@ export default function AccountsPage() {
             {/* Chart */}
             <div>
               {chartType === "sankey" ? (
-                <SankeyChartHighcharts
-                  data={{
-                    nodes: [
-                      // Account nodes (left side) - dynamically generated from accounts
-                      ...accounts.map((account) => ({ id: account.name })),
-                      // Portfolio Total (center)
-                      { id: "Portfolio Total" },
-                      // Asset type nodes (right side)
-                      { id: "U.S. Stocks" },
-                      { id: "Non-U.S. Stocks" },
-                      { id: "Fixed Income" },
-                      { id: "Cash" },
-                    ],
-                    links: [
-                      // Accounts to Portfolio Total
-                      ...accounts.map((account) => ({
-                        source: account.name,
-                        target: "Portfolio Total",
-                        value: account.totalValue,
-                      })),
-                      // Portfolio Total to Asset Types - calculate from account allocations
-                      {
-                        source: "Portfolio Total",
-                        target: "U.S. Stocks",
-                        value: accounts.reduce(
-                          (sum, acc) =>
-                            sum +
-                            (acc.totalValue * acc.assetAllocation.usStocks) /
-                              100,
-                          0,
-                        ),
-                      },
-                      {
-                        source: "Portfolio Total",
-                        target: "Non-U.S. Stocks",
-                        value: accounts.reduce(
-                          (sum, acc) =>
-                            sum +
-                            (acc.totalValue * acc.assetAllocation.nonUsStocks) /
-                              100,
-                          0,
-                        ),
-                      },
-                      {
-                        source: "Portfolio Total",
-                        target: "Fixed Income",
-                        value: accounts.reduce(
-                          (sum, acc) =>
-                            sum +
-                            (acc.totalValue * acc.assetAllocation.fixedIncome) /
-                              100,
-                          0,
-                        ),
-                      },
-                      {
-                        source: "Portfolio Total",
-                        target: "Cash",
-                        value: accounts.reduce(
-                          (sum, acc) =>
-                            sum +
-                            (acc.totalValue * acc.assetAllocation.cash) / 100,
-                          0,
-                        ),
-                      },
-                    ],
-                  }}
-                  colors={["blue", "cyan", "amber", "emerald"]}
-                  accountColors={["violet", "fuchsia", "pink", "sky", "lime"]}
-                  height={350}
-                  chartRef={sankeyChartRef}
-                />
+                (() => {
+                  // Get unique institutions for the first level
+                  const uniqueInstitutions = [
+                    ...new Set(accounts.map((a) => a.institution)),
+                  ]
+                  // Convert institution IDs to display labels
+                  const institutionDisplayNames = uniqueInstitutions.map(
+                    (inst) => institutionLabels[inst] || inst,
+                  )
+                  return (
+                    <SankeyChartHighcharts
+                      data={{
+                        nodes: [
+                          // Institution nodes (first level) - use display names
+                          ...institutionDisplayNames.map((name) => ({
+                            id: name,
+                          })),
+                          // Account nodes (second level)
+                          ...accounts.map((account) => ({ id: account.name })),
+                          // Portfolio Total (center)
+                          { id: "Portfolio Total" },
+                          // Asset type nodes (right side)
+                          { id: "U.S. Stocks" },
+                          { id: "Non-U.S. Stocks" },
+                          { id: "Fixed Income" },
+                          { id: "Cash" },
+                        ],
+                        links: [
+                          // Institutions to Accounts - use display names for source
+                          ...accounts.map((account) => ({
+                            source:
+                              institutionLabels[account.institution] ||
+                              account.institution,
+                            target: account.name,
+                            value: account.totalValue,
+                          })),
+                          // Accounts to Portfolio Total
+                          ...accounts.map((account) => ({
+                            source: account.name,
+                            target: "Portfolio Total",
+                            value: account.totalValue,
+                          })),
+                          // Portfolio Total to Asset Types - calculate from account allocations
+                          {
+                            source: "Portfolio Total",
+                            target: "U.S. Stocks",
+                            value: accounts.reduce(
+                              (sum, acc) =>
+                                sum +
+                                (acc.totalValue * acc.assetAllocation.usStocks) /
+                                  100,
+                              0,
+                            ),
+                          },
+                          {
+                            source: "Portfolio Total",
+                            target: "Non-U.S. Stocks",
+                            value: accounts.reduce(
+                              (sum, acc) =>
+                                sum +
+                                (acc.totalValue *
+                                  acc.assetAllocation.nonUsStocks) /
+                                  100,
+                              0,
+                            ),
+                          },
+                          {
+                            source: "Portfolio Total",
+                            target: "Fixed Income",
+                            value: accounts.reduce(
+                              (sum, acc) =>
+                                sum +
+                                (acc.totalValue *
+                                  acc.assetAllocation.fixedIncome) /
+                                  100,
+                              0,
+                            ),
+                          },
+                          {
+                            source: "Portfolio Total",
+                            target: "Cash",
+                            value: accounts.reduce(
+                              (sum, acc) =>
+                                sum +
+                                (acc.totalValue * acc.assetAllocation.cash) /
+                                  100,
+                              0,
+                            ),
+                          },
+                        ],
+                      }}
+                      colors={["blue", "cyan", "amber", "emerald"]}
+                      accountColors={[
+                        "violet",
+                        "fuchsia",
+                        "pink",
+                        "sky",
+                        "lime",
+                      ]}
+                      institutions={institutionDisplayNames}
+                      height={350}
+                      chartRef={sankeyChartRef}
+                    />
+                  )
+                })()
               ) : (
                 <AccountTreemap
                   accounts={accounts}

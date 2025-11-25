@@ -46,8 +46,8 @@ export function HighchartsDonutChart({
   colorMapping,
   useAssetClassColors = false,
 }: HighchartsDonutChartProps) {
-  const { theme } = useTheme()
-  const isDark = theme === "dark"
+  const { resolvedTheme } = useTheme()
+  const isDark = resolvedTheme === "dark"
   const chartRef = useRef<HighchartsReact.RefObject>(null)
   const [isClient, setIsClient] = useState(false)
 
