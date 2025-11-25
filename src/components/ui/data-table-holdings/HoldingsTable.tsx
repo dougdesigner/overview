@@ -152,8 +152,8 @@ export function HoldingsTable({
   }, [])
 
   const columns = React.useMemo(
-    () => createColumns({ onEdit, onDelete, toggleExpandAll, areAllExpanded }),
-    [onEdit, onDelete, toggleExpandAll, areAllExpanded],
+    () => createColumns({ onEdit, onDelete, toggleExpandAll, areAllExpanded, accounts }),
+    [onEdit, onDelete, toggleExpandAll, areAllExpanded, accounts],
   )
 
   const table = useReactTable({

@@ -22,7 +22,8 @@ import {
   RiMore2Fill,
 } from "@remixicon/react"
 import { ColumnDef } from "@tanstack/react-table"
-import { Holding } from "./types"
+import { institutionLabels } from "@/lib/institutionUtils"
+import { Account, Holding } from "./types"
 
 // Format currency
 const formatCurrency = (value: number) => {
@@ -143,6 +144,7 @@ interface ColumnsProps {
   onDelete: (holdingId: string) => void
   toggleExpandAll: () => void
   areAllExpanded: () => boolean
+  accounts: Account[]
 }
 
 export const createColumns = ({
@@ -150,6 +152,7 @@ export const createColumns = ({
   onDelete,
   toggleExpandAll,
   areAllExpanded,
+  accounts,
 }: ColumnsProps): ColumnDef<Holding>[] => [
   {
     id: "expander",
@@ -259,11 +262,6 @@ export const createColumns = ({
           )}
         >
           {row.original.name}
-          {isNested && (
-            <span className="ml-2 text-xs text-gray-500">
-              ({row.original.accountName})
-            </span>
-          )}
         </span>
       )
     },
@@ -508,6 +506,78 @@ export const createColumns = ({
     meta: {
       className: "text-right",
       displayName: "Portfolio %",
+    },
+  },
+  {
+    header: ({ column }) => {
+      return (
+        <button
+          className="flex items-center gap-1 font-medium hover:text-gray-900 dark:hover:text-gray-50"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Institution
+          {column.getIsSorted() === "asc" && (
+            <RiArrowUpSLine className="h-4 w-4" />
+          )}
+          {column.getIsSorted() === "desc" && (
+            <RiArrowDownSLine className="h-4 w-4" />
+          )}
+        </button>
+      )
+    },
+    id: "institution",
+    accessorFn: (row) => {
+      const account = accounts.find((a) => a.id === row.accountId)
+      return account?.institution || "Unknown"
+    },
+    cell: ({ row }) => {
+      if (row.original.isGroup) {
+        return <span className="text-gray-400">Multiple</span>
+      }
+      const account = accounts.find((a) => a.id === row.original.accountId)
+      const institution = account?.institution
+      return (
+        <span>
+          {institution
+            ? institutionLabels[institution] || institution
+            : "Unknown"}
+        </span>
+      )
+    },
+    enableSorting: true,
+    meta: {
+      className: "text-left",
+      displayName: "Institution",
+    },
+  },
+  {
+    header: ({ column }) => {
+      return (
+        <button
+          className="flex items-center gap-1 font-medium hover:text-gray-900 dark:hover:text-gray-50"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Account
+          {column.getIsSorted() === "asc" && (
+            <RiArrowUpSLine className="h-4 w-4" />
+          )}
+          {column.getIsSorted() === "desc" && (
+            <RiArrowDownSLine className="h-4 w-4" />
+          )}
+        </button>
+      )
+    },
+    accessorKey: "accountName",
+    cell: ({ row }) => {
+      if (row.original.isGroup) {
+        return <span className="text-gray-400">Multiple</span>
+      }
+      return <span>{row.original.accountName}</span>
+    },
+    enableSorting: true,
+    meta: {
+      className: "text-left",
+      displayName: "Account",
     },
   },
   {

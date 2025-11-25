@@ -197,8 +197,9 @@ export function ExposureTable({ holdings, accounts, dataVersion }: ExposureTable
         toggleExpandAll,
         areAllExpanded,
         logoUrls,
+        accounts,
       }),
-    [toggleExpandAll, areAllExpanded, logoUrls],
+    [toggleExpandAll, areAllExpanded, logoUrls, accounts],
   )
 
   const table = useReactTable({

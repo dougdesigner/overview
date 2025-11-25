@@ -3,6 +3,7 @@
 import { Badge } from "@/components/Badge"
 import { stockDomainOverrides } from "@/lib/logoUtils"
 import { getTickerColor } from "@/lib/tickerColors"
+import { institutionLabels } from "@/lib/institutionUtils"
 import { cx, toProperCase } from "@/lib/utils"
 import {
   RiArrowDownSLine,
@@ -12,7 +13,7 @@ import {
 import { ColumnDef } from "@tanstack/react-table"
 import Image from "next/image"
 import { useEffect, useState } from "react"
-import { StockExposure } from "./types"
+import { Account, StockExposure } from "./types"
 
 const formatCurrency = (value: number) => {
   return new Intl.NumberFormat("en-US", {
@@ -155,12 +156,14 @@ interface ColumnsProps {
   toggleExpandAll: () => void
   areAllExpanded: () => boolean
   logoUrls?: Record<string, string | null>
+  accounts: Account[]
 }
 
 export const createColumns = ({
   toggleExpandAll,
   areAllExpanded,
   logoUrls,
+  accounts,
 }: ColumnsProps): ColumnDef<StockExposure>[] => [
   {
     id: "expander",
@@ -513,6 +516,53 @@ export const createColumns = ({
     meta: {
       className: "text-left min-w-40",
       displayName: "Industry",
+    },
+  },
+  {
+    header: "Institution",
+    id: "institution",
+    cell: ({ row }) => {
+      const isETFBreakdown = row.original.isETFBreakdown
+      // Only show for child rows (breakdown rows)
+      if (!isETFBreakdown) {
+        return <span className="text-gray-400">—</span>
+      }
+      const accountId = row.original.accountId
+      if (!accountId) {
+        return <span className="text-gray-400">—</span>
+      }
+      const account = accounts.find((a) => a.id === accountId)
+      const institution = account?.institution
+      return (
+        <span>
+          {institution
+            ? institutionLabels[institution] || institution
+            : "—"}
+        </span>
+      )
+    },
+    enableSorting: false,
+    meta: {
+      className: "text-left",
+      displayName: "Institution",
+    },
+  },
+  {
+    header: "Account",
+    id: "account",
+    cell: ({ row }) => {
+      const isETFBreakdown = row.original.isETFBreakdown
+      // Only show for child rows (breakdown rows)
+      if (!isETFBreakdown) {
+        return <span className="text-gray-400">—</span>
+      }
+      const accountName = row.original.accountName
+      return <span>{accountName || "—"}</span>
+    },
+    enableSorting: false,
+    meta: {
+      className: "text-left",
+      displayName: "Account",
     },
   },
 ]

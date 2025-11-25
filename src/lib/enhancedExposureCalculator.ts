@@ -34,6 +34,12 @@ interface MutualFundData {
   mappings: MutualFundMapping[]
 }
 
+interface DirectHoldingInfo {
+  accountId: string
+  accountName: string
+  marketValue: number
+}
+
 export class EnhancedExposureCalculator {
   private etfProfiles: Map<string, ETFProfile> = new Map()
   private companyOverviews: Map<
@@ -42,11 +48,16 @@ export class EnhancedExposureCalculator {
   > = new Map()
   private mutualFunds: Record<string, MutualFundData> = mutualFundMappings as Record<string, MutualFundData>
   private assetClasses = assetClassifications
+  // Track direct holdings by ticker -> array of account holdings
+  private directHoldingsByTicker: Map<string, DirectHoldingInfo[]> = new Map()
 
   async calculateExposures(
     holdings: PortfolioHolding[],
   ): Promise<EnhancedExposureResult> {
     console.log("Starting enhanced exposure calculation with holdings:", holdings.length)
+
+    // Clear direct holdings tracking for fresh calculation
+    this.directHoldingsByTicker.clear()
 
     // Step 1: Identify and process mutual funds
     const { etfHoldings, mutualFundHoldings, directStockHoldings } = this.categorizeHoldings(holdings)
@@ -246,6 +257,15 @@ export class EnhancedExposureCalculator {
       const existing = exposureMap.get(ticker)
       const overview = this.companyOverviews.get(ticker)
 
+      // Track direct holding info by account
+      const directHoldings = this.directHoldingsByTicker.get(ticker) || []
+      directHoldings.push({
+        accountId: holding.accountId,
+        accountName: holding.accountName,
+        marketValue: holding.marketValue,
+      })
+      this.directHoldingsByTicker.set(ticker, directHoldings)
+
       if (existing) {
         // Aggregate multiple holdings of the same stock
         existing.directValue += holding.marketValue
@@ -315,6 +335,8 @@ export class EnhancedExposureCalculator {
           sharesViaETF: 0, // Not calculating equivalent shares
           percentOfETF: stockInETF.weight,
           valueViaETF: stockValueViaETF,
+          accountId: etfHolding.accountId,
+          accountName: etfHolding.accountName,
         }
 
         // Update or create exposure
@@ -503,8 +525,14 @@ export class EnhancedExposureCalculator {
       // Calculate percentage of portfolio
       exposure.percentOfPortfolio = (exposure.totalValue / totalPortfolioValue) * 100
 
-      // Create subrows for ETF breakdown if there are ETF sources
-      if (exposure.exposureSources.length > 0) {
+      // Check if we need subRows (ETF sources or direct holdings from multiple accounts)
+      const directHoldings = this.directHoldingsByTicker.get(exposure.ticker) || []
+      const hasMultipleDirectAccounts = directHoldings.length > 1
+      const hasETFSources = exposure.exposureSources.length > 0
+
+      // Create subrows if there are ETF sources or multiple direct holding accounts
+      if (hasETFSources || hasMultipleDirectAccounts) {
+        // Start with ETF source subRows
         exposure.subRows = exposure.exposureSources.map((source, index) => ({
           id: `${exposure.id}-etf-${index}`,
           ticker: source.etfSymbol,
@@ -519,25 +547,32 @@ export class EnhancedExposureCalculator {
           percentOfPortfolio: (source.valueViaETF / totalPortfolioValue) * 100,
           exposureSources: [],
           isETFBreakdown: true,
+          accountId: source.accountId,
+          accountName: source.accountName,
         }))
 
-        // Add direct holding row if applicable
-        if (exposure.directValue > 0) {
-          exposure.subRows.unshift({
-            id: `${exposure.id}-direct`,
+        // Add direct holding rows (one per account that holds this stock directly)
+        if (exposure.directValue > 0 && directHoldings.length > 0) {
+          // Create a subRow for each account that holds this stock directly
+          const directSubRows = directHoldings.map((holding, index) => ({
+            id: `${exposure.id}-direct-${index}`,
             ticker: exposure.ticker,
             name: `Direct holding`,
             directShares: 0,
             etfExposure: 0,
             totalShares: 0,
             lastPrice: 0,
-            directValue: exposure.directValue,
+            directValue: holding.marketValue,
             etfValue: 0,
-            totalValue: exposure.directValue,
-            percentOfPortfolio: (exposure.directValue / totalPortfolioValue) * 100,
+            totalValue: holding.marketValue,
+            percentOfPortfolio: (holding.marketValue / totalPortfolioValue) * 100,
             exposureSources: [],
             isETFBreakdown: true,
-          })
+            accountId: holding.accountId,
+            accountName: holding.accountName,
+          }))
+          // Add direct holdings at the beginning
+          exposure.subRows.unshift(...directSubRows)
         }
       }
 

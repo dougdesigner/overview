@@ -15,6 +15,8 @@ export interface StockExposure {
   exposureSources: ExposureSource[]
   subRows?: StockExposure[] // For grouped display
   isETFBreakdown?: boolean // True for ETF contribution rows
+  accountId?: string // For subRows that come from a single account
+  accountName?: string // For subRows that come from a single account
 }
 
 export interface ExposureSource {
@@ -23,6 +25,8 @@ export interface ExposureSource {
   sharesViaETF: number // How many shares of the stock we own through this ETF
   percentOfETF: number // What % this stock represents in the ETF
   valueViaETF: number
+  accountId: string // Which account holds this ETF
+  accountName: string // Name of the account holding this ETF
 }
 
 export interface ETFHolding {
