@@ -204,7 +204,7 @@ export default function AccountsPage() {
     ) : null
 
   return (
-    <main>
+    <main className="min-h-[calc(100vh-180px)]">
       {errorMessage}
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
