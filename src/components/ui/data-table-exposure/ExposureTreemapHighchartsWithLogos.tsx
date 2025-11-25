@@ -2,7 +2,6 @@
 
 import { Button } from "@/components/Button"
 import { Card } from "@/components/Card"
-import { Tooltip } from "@/components/Tooltip"
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
@@ -17,22 +16,45 @@ import {
   DropdownMenuSubMenuTrigger,
   DropdownMenuTrigger,
 } from "@/components/DropdownMenu"
+import { Tooltip } from "@/components/Tooltip"
 import { toProperCase } from "@/lib/utils"
-import { RiDownloadLine, RiExpandUpDownLine, RiFullscreenLine, RiLayout4Line, RiPieChartLine, RiSettings3Line } from "@remixicon/react"
+import {
+  RiDownloadLine,
+  RiExpandUpDownLine,
+  RiFullscreenLine,
+  RiLayout4Line,
+  RiPieChartLine,
+  RiSettings3Line,
+} from "@remixicon/react"
 import Highcharts from "highcharts"
 import HighchartsReact from "highcharts-react-official"
-import HighchartsTreemap from "highcharts/modules/treemap"
-import HighchartsExporting from "highcharts/modules/exporting"
 import HighchartsExportData from "highcharts/modules/export-data"
+import HighchartsExporting from "highcharts/modules/exporting"
+import HighchartsTreemap from "highcharts/modules/treemap"
 import { useTheme } from "next-themes"
 import { useEffect, useRef, useState } from "react"
-import { StockExposure, Account } from "./types"
+import { Account, StockExposure } from "./types"
 
-// Track if modules are initialized globally to prevent duplicate initialization
-let treemapLogoModulesInitialized = false
+// Type for Highcharts module initializer function
+type HighchartsModuleInit = (H: typeof Highcharts) => void
 
-// Type assertion for module initialization functions
-type HighchartsModule = (H: typeof Highcharts) => void
+// Initialize Highcharts modules at module level (before component)
+// This follows the pattern from CLAUDE.md to prevent SSR/hydration issues
+if (typeof Highcharts === "object") {
+  const treemapInit = HighchartsTreemap as unknown as HighchartsModuleInit
+  const exportingInit = HighchartsExporting as unknown as HighchartsModuleInit
+  const exportDataInit = HighchartsExportData as unknown as HighchartsModuleInit
+
+  if (typeof treemapInit === "function") {
+    treemapInit(Highcharts)
+  }
+  if (typeof exportingInit === "function") {
+    exportingInit(Highcharts)
+  }
+  if (typeof exportDataInit === "function") {
+    exportDataInit(Highcharts)
+  }
+}
 
 interface ExposureTreemapHighchartsProps {
   exposures: StockExposure[]
@@ -80,39 +102,13 @@ export function ExposureTreemapHighchartsWithLogos({
   const [sizingMode] = useState<SizingMode>("proportional")
   const [showLogo, setShowLogo] = useState(true)
   const [titleMode, setTitleMode] = useState<TitleMode>("symbol")
-  const [displayValue, setDisplayValue] = useState<DisplayValue>("pct-portfolio")
-  const [modulesLoaded, setModulesLoaded] = useState(false)
+  const [displayValue, setDisplayValue] =
+    useState<DisplayValue>("pct-portfolio")
+  // Modules are initialized at module level, so we default to true
+  const [modulesLoaded] = useState(true)
   const { theme } = useTheme()
   const isDark = theme === "dark"
   const chartRef = useRef<HighchartsReact.RefObject>(null)
-
-  useEffect(() => {
-    // Initialize Highcharts modules only once on client side
-    if (!treemapLogoModulesInitialized && typeof Highcharts === "object") {
-      try {
-        // Cast modules to callable functions
-        const treemapInit = HighchartsTreemap as unknown as HighchartsModule
-        const exportingInit = HighchartsExporting as unknown as HighchartsModule
-        const exportDataInit =
-          HighchartsExportData as unknown as HighchartsModule
-
-        if (typeof treemapInit === "function") {
-          treemapInit(Highcharts)
-        }
-        if (typeof exportingInit === "function") {
-          exportingInit(Highcharts)
-        }
-        if (typeof exportDataInit === "function") {
-          exportDataInit(Highcharts)
-        }
-        treemapLogoModulesInitialized = true
-      } catch (e) {
-        // Modules may already be initialized
-        console.log("Highcharts modules initialization:", e)
-      }
-    }
-    setModulesLoaded(true)
-  }, [])
 
   // Update chart when theme changes
   useEffect(() => {
@@ -223,7 +219,8 @@ export function ExposureTreemapHighchartsWithLogos({
     } else if (displayValue === "market-value") {
       return formatValue(value)
     } else if (displayValue === "pct-stocks") {
-      const percentage = stocksOnlyValue > 0 ? (value / stocksOnlyValue) * 100 : 0
+      const percentage =
+        stocksOnlyValue > 0 ? (value / stocksOnlyValue) * 100 : 0
       return `${percentage.toFixed(1)}%`
     } else {
       // "pct-portfolio"
@@ -244,7 +241,8 @@ export function ExposureTreemapHighchartsWithLogos({
     )
 
     // Determine the grouping key
-    const groupKey = mode === "sector" ? "sector" : ("industry" as keyof StockExposure)
+    const groupKey =
+      mode === "sector" ? "sector" : ("industry" as keyof StockExposure)
 
     // Group by sector/industry and calculate total values
     const groupValues = new Map<string, number>()
@@ -365,14 +363,18 @@ export function ExposureTreemapHighchartsWithLogos({
       return ""
     }
 
-    const value = point.actualValue !== undefined
-      ? point.actualValue
-      : (typeof point.value === "number" ? point.value : 0)
+    const value =
+      point.actualValue !== undefined
+        ? point.actualValue
+        : typeof point.value === "number"
+          ? point.value
+          : 0
 
     if (displayValue === "market-value") {
       return formatValue(value)
     } else if (displayValue === "pct-stocks") {
-      const percentage = stocksOnlyValue > 0 ? (value / stocksOnlyValue) * 100 : 0
+      const percentage =
+        stocksOnlyValue > 0 ? (value / stocksOnlyValue) * 100 : 0
       return `${percentage.toFixed(1)}%`
     } else {
       // "pct-portfolio"
@@ -383,7 +385,10 @@ export function ExposureTreemapHighchartsWithLogos({
 
   // Helper function to render cell content based on display settings
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const renderCellContent = (point: any, strategy: "full" | "logo-ticker" | "logo-only"): string => {
+  const renderCellContent = (
+    point: any,
+    strategy: "full" | "logo-ticker" | "logo-only",
+  ): string => {
     const ticker = point.ticker || point.name
     const companyName = point.companyName || ticker
     const displayText = titleMode === "name" ? companyName : ticker
@@ -469,9 +474,13 @@ export function ExposureTreemapHighchartsWithLogos({
           <span style="color: ${isDark ? "#f3f4f6" : "#f3f4f6"}; font-size: ${tickerSize}px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
             ${displayText}
           </span>
-          ${displayValueText ? `<span style="color: ${isDark ? "#f3f4f6" : "#f3f4f6"}; font-size: ${weightSize}px; font-weight: 500; white-space: nowrap; margin-top: 1px;">
+          ${
+            displayValueText
+              ? `<span style="color: ${isDark ? "#f3f4f6" : "#f3f4f6"}; font-size: ${weightSize}px; font-weight: 500; white-space: nowrap; margin-top: 1px;">
             ${displayValueText}
-          </span>` : ""}
+          </span>`
+              : ""
+          }
         </div>`
       } else if (hasLogo) {
         // Logo + value only
@@ -483,9 +492,13 @@ export function ExposureTreemapHighchartsWithLogos({
                  onerror="this.style.display='none'"
             />
           </div>
-          ${displayValueText ? `<span style="color: ${isDark ? "#f3f4f6" : "#f3f4f6"}; font-size: ${weightSize}px; font-weight: 500; white-space: nowrap;">
+          ${
+            displayValueText
+              ? `<span style="color: ${isDark ? "#f3f4f6" : "#f3f4f6"}; font-size: ${weightSize}px; font-weight: 500; white-space: nowrap;">
             ${displayValueText}
-          </span>` : ""}
+          </span>`
+              : ""
+          }
         </div>`
       } else if (hasTitle) {
         // Ticker/name + value only
@@ -493,17 +506,23 @@ export function ExposureTreemapHighchartsWithLogos({
           <span style="color: ${isDark ? "#f3f4f6" : "#f3f4f6"}; font-size: ${tickerSize}px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
             ${displayText}
           </span>
-          ${displayValueText ? `<span style="color: ${isDark ? "#f3f4f6" : "#f3f4f6"}; font-size: ${weightSize}px; font-weight: 500; white-space: nowrap; margin-top: 1px;">
+          ${
+            displayValueText
+              ? `<span style="color: ${isDark ? "#f3f4f6" : "#f3f4f6"}; font-size: ${weightSize}px; font-weight: 500; white-space: nowrap; margin-top: 1px;">
             ${displayValueText}
-          </span>` : ""}
+          </span>`
+              : ""
+          }
         </div>`
       } else {
         // Value only
-        return displayValueText ? `<div style="text-align: center; overflow: hidden; height: 100%; display: flex; align-items: center; justify-content: center;">
+        return displayValueText
+          ? `<div style="text-align: center; overflow: hidden; height: 100%; display: flex; align-items: center; justify-content: center;">
           <span style="color: ${isDark ? "#f3f4f6" : "#f3f4f6"}; font-size: ${weightSize}px; font-weight: 500;">
             ${displayValueText}
           </span>
-        </div>` : ""
+        </div>`
+          : ""
       }
     }
 
@@ -619,7 +638,10 @@ export function ExposureTreemapHighchartsWithLogos({
       )
 
       // Calculate total value for percentage calculation
-      const totalValue = sortedExposures.reduce((sum, exp) => sum + exp.totalValue, 0)
+      const totalValue = sortedExposures.reduce(
+        (sum, exp) => sum + exp.totalValue,
+        0,
+      )
 
       // Separate main and small segments
       const mainSegments: typeof sortedExposures = []
@@ -650,17 +672,20 @@ export function ExposureTreemapHighchartsWithLogos({
 
       // Add "Others" segment if there are small segments
       if (smallSegments.length > 0) {
-        const othersTotal = smallSegments.reduce((sum, stock) => sum + stock.totalValue, 0)
+        const othersTotal = smallSegments.reduce(
+          (sum, stock) => sum + stock.totalValue,
+          0,
+        )
         const othersPercentage = (othersTotal / totalValue) * 100
 
         data.push({
           name: `Others (${smallSegments.length} stocks)`,
           y: othersTotal,
           actualValue: othersTotal,
-          color: '#9ca3af', // Gray color for others
+          color: "#9ca3af", // Gray color for others
           custom: {
-            description: `${smallSegments.length} stocks < 1% each (${othersPercentage.toFixed(1)}% total)`
-          }
+            description: `${smallSegments.length} stocks < 1% each (${othersPercentage.toFixed(1)}% total)`,
+          },
         })
       }
 
@@ -682,7 +707,9 @@ export function ExposureTreemapHighchartsWithLogos({
     })
 
     // Convert to array and sort by value
-    const sortedGroups = Array.from(groups.entries()).sort((a, b) => b[1] - a[1])
+    const sortedGroups = Array.from(groups.entries()).sort(
+      (a, b) => b[1] - a[1],
+    )
 
     // Calculate total value for percentage calculation
     const totalValue = sortedGroups.reduce((sum, [, value]) => sum + value, 0)
@@ -720,10 +747,10 @@ export function ExposureTreemapHighchartsWithLogos({
         name: `Others (${smallGroups.length} ${itemType})`,
         y: othersTotal,
         actualValue: othersTotal,
-        color: '#9ca3af', // Gray color for others
+        color: "#9ca3af", // Gray color for others
         custom: {
-          description: `${smallGroups.length} ${itemType} < 1% each (${othersPercentage.toFixed(1)}% total)`
-        }
+          description: `${smallGroups.length} ${itemType} < 1% each (${othersPercentage.toFixed(1)}% total)`,
+        },
       })
     }
 
@@ -738,20 +765,24 @@ export function ExposureTreemapHighchartsWithLogos({
       height: 300,
       margin: [0, 0, 0, 0],
       events: {
-        fullscreenOpen: function() {
+        fullscreenOpen: function () {
           // Get current theme from DOM
-          const currentIsDark = document.documentElement.classList.contains('dark')
+          const currentIsDark =
+            document.documentElement.classList.contains("dark")
           // Update chart background for fullscreen
-          this.update({
-            chart: {
-              backgroundColor: currentIsDark ? "#111827" : "#ffffff"
-            }
-          }, false)
+          this.update(
+            {
+              chart: {
+                backgroundColor: currentIsDark ? "#111827" : "#ffffff",
+              },
+            },
+            false,
+          )
         },
-        fullscreenClose: function() {
+        fullscreenClose: function () {
           // No need to update - chart returns to normal state automatically
-        }
-      }
+        },
+      },
     },
     title: {
       text: undefined,
@@ -903,9 +934,17 @@ export function ExposureTreemapHighchartsWithLogos({
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const point = this as any
         // Use actualValue if available (for monosize mode), otherwise use value
-        const value = point.actualValue !== undefined ? point.actualValue : (typeof point.value === "number" ? point.value : 0)
+        const value =
+          point.actualValue !== undefined
+            ? point.actualValue
+            : typeof point.value === "number"
+              ? point.value
+              : 0
         const pctPortfolio = ((value / totalValue) * 100).toFixed(1)
-        const pctStocks = stocksOnlyValue > 0 ? ((value / stocksOnlyValue) * 100).toFixed(1) : "0.0"
+        const pctStocks =
+          stocksOnlyValue > 0
+            ? ((value / stocksOnlyValue) * 100).toFixed(1)
+            : "0.0"
         const ticker = point.ticker || point.name
         return `<div style="padding: 2px;">
                   <div style="font-weight: 600; margin-bottom: 4px;">${ticker}</div>
@@ -924,20 +963,24 @@ export function ExposureTreemapHighchartsWithLogos({
       backgroundColor: "transparent",
       height: 300,
       events: {
-        fullscreenOpen: function() {
+        fullscreenOpen: function () {
           // Get current theme from DOM
-          const currentIsDark = document.documentElement.classList.contains('dark')
+          const currentIsDark =
+            document.documentElement.classList.contains("dark")
           // Update chart background for fullscreen
-          this.update({
-            chart: {
-              backgroundColor: currentIsDark ? "#111827" : "#ffffff"
-            }
-          }, false)
+          this.update(
+            {
+              chart: {
+                backgroundColor: currentIsDark ? "#111827" : "#ffffff",
+              },
+            },
+            false,
+          )
         },
-        fullscreenClose: function() {
+        fullscreenClose: function () {
           // No need to update - chart returns to normal state automatically
-        }
-      }
+        },
+      },
     },
     title: {
       text: undefined,
@@ -985,7 +1028,12 @@ export function ExposureTreemapHighchartsWithLogos({
     series: [
       {
         type: "pie",
-        name: groupingMode === "none" ? "Holdings" : groupingMode === "sector" ? "Sectors" : "Industries",
+        name:
+          groupingMode === "none"
+            ? "Holdings"
+            : groupingMode === "sector"
+              ? "Sectors"
+              : "Industries",
         data: getPieChartData(),
       },
     ],
@@ -1010,9 +1058,17 @@ export function ExposureTreemapHighchartsWithLogos({
       pointFormatter: function () {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const point = this as any
-        const value = point.actualValue !== undefined ? point.actualValue : (typeof point.y === "number" ? point.y : 0)
+        const value =
+          point.actualValue !== undefined
+            ? point.actualValue
+            : typeof point.y === "number"
+              ? point.y
+              : 0
         const pctPortfolio = ((value / totalValue) * 100).toFixed(1)
-        const pctStocks = stocksOnlyValue > 0 ? ((value / stocksOnlyValue) * 100).toFixed(1) : "0.0"
+        const pctStocks =
+          stocksOnlyValue > 0
+            ? ((value / stocksOnlyValue) * 100).toFixed(1)
+            : "0.0"
         const name = point.ticker || point.name
         return `<div style="padding: 2px;">
                   <div style="font-weight: 600; margin-bottom: 4px;">${name}</div>
@@ -1113,23 +1169,37 @@ export function ExposureTreemapHighchartsWithLogos({
 
         <div className="flex items-center gap-2">
           <DropdownMenu>
-            <Tooltip triggerAsChild content="Group holdings by sector, industry, or show all stocks">
+            <Tooltip
+              triggerAsChild
+              content="Group holdings by sector, industry, or show all stocks"
+            >
               <DropdownMenuTrigger asChild>
-                <Button variant="secondary" className="h-9 w-[180px] justify-between">
+                <Button
+                  variant="secondary"
+                  className="h-9 w-[120px] justify-between"
+                >
                   <span>
-                    {groupingMode === "none" ? "No group" :
-                     groupingMode === "sector" ? "Sector" : "Industry"}
+                    {groupingMode === "none"
+                      ? "No group"
+                      : groupingMode === "sector"
+                        ? "Sector"
+                        : "Industry"}
                   </span>
-                  <RiExpandUpDownLine className="size-4 text-gray-400 dark:text-gray-600" aria-hidden="true" />
+                  <RiExpandUpDownLine
+                    className="size-4 text-gray-400 dark:text-gray-600"
+                    aria-hidden="true"
+                  />
                 </Button>
               </DropdownMenuTrigger>
             </Tooltip>
-            <DropdownMenuContent align="start" className="w-[180px]">
+            <DropdownMenuContent align="start" className="w-[120px]">
               <DropdownMenuLabel>GROUP BY</DropdownMenuLabel>
               <DropdownMenuSeparator />
               <DropdownMenuRadioGroup
                 value={groupingMode}
-                onValueChange={(value) => setGroupingMode(value as GroupingMode)}
+                onValueChange={(value) =>
+                  setGroupingMode(value as GroupingMode)
+                }
               >
                 <DropdownMenuRadioItem value="none" iconType="check">
                   No group
@@ -1144,11 +1214,16 @@ export function ExposureTreemapHighchartsWithLogos({
             </DropdownMenuContent>
           </DropdownMenu>
 
-          <Tooltip triggerAsChild content="Switch between treemap and pie chart views">
+          <Tooltip
+            triggerAsChild
+            content="Switch between treemap and pie chart views"
+          >
             <Button
               variant="secondary"
               className="h-9"
-              onClick={() => setChartType(chartType === "treemap" ? "pie" : "treemap")}
+              onClick={() =>
+                setChartType(chartType === "treemap" ? "pie" : "treemap")
+              }
             >
               {chartType === "treemap" ? (
                 <RiPieChartLine className="size-4" aria-hidden="true" />
@@ -1159,7 +1234,108 @@ export function ExposureTreemapHighchartsWithLogos({
           </Tooltip>
 
           <DropdownMenu>
-            <Tooltip triggerAsChild content="Export chart as image or data file">
+            <Tooltip triggerAsChild content="Configure chart display options">
+              <DropdownMenuTrigger asChild>
+                <Button variant="secondary" className="h-9">
+                  <RiSettings3Line className="size-4" aria-hidden="true" />
+                </Button>
+              </DropdownMenuTrigger>
+            </Tooltip>
+            <DropdownMenuContent align="end" className="w-56">
+              <DropdownMenuLabel>DISPLAY SETTINGS</DropdownMenuLabel>
+              <DropdownMenuSeparator />
+
+              {chartType === "treemap" && (
+                <>
+                  <DropdownMenuCheckboxItem
+                    checked={showLogo}
+                    onCheckedChange={setShowLogo}
+                  >
+                    Logo
+                  </DropdownMenuCheckboxItem>
+
+                  <DropdownMenuSubMenu>
+                    <DropdownMenuSubMenuTrigger>
+                      <span>Title</span>
+                      <span className="ml-auto text-xs text-gray-500">
+                        {titleMode === "symbol"
+                          ? "Symbol"
+                          : titleMode === "name"
+                            ? "Name"
+                            : "None"}
+                      </span>
+                    </DropdownMenuSubMenuTrigger>
+                    <DropdownMenuSubMenuContent>
+                      <DropdownMenuRadioGroup
+                        value={titleMode}
+                        onValueChange={(value) =>
+                          setTitleMode(value as TitleMode)
+                        }
+                      >
+                        <DropdownMenuRadioItem value="symbol" iconType="check">
+                          Symbol
+                        </DropdownMenuRadioItem>
+                        <DropdownMenuRadioItem value="name" iconType="check">
+                          Name
+                        </DropdownMenuRadioItem>
+                        <DropdownMenuRadioItem value="none" iconType="check">
+                          None
+                        </DropdownMenuRadioItem>
+                      </DropdownMenuRadioGroup>
+                    </DropdownMenuSubMenuContent>
+                  </DropdownMenuSubMenu>
+                </>
+              )}
+
+              <DropdownMenuSubMenu>
+                <DropdownMenuSubMenuTrigger>
+                  <span>Display value</span>
+                  <span className="ml-auto text-xs text-gray-500">
+                    {displayValue === "market-value"
+                      ? "Market value"
+                      : displayValue === "pct-stocks"
+                        ? "Stock %"
+                        : displayValue === "pct-portfolio"
+                          ? "Portfolio %"
+                          : "None"}
+                  </span>
+                </DropdownMenuSubMenuTrigger>
+                <DropdownMenuSubMenuContent>
+                  <DropdownMenuRadioGroup
+                    value={displayValue}
+                    onValueChange={(value) =>
+                      setDisplayValue(value as DisplayValue)
+                    }
+                  >
+                    <DropdownMenuRadioItem
+                      value="market-value"
+                      iconType="check"
+                    >
+                      Market value
+                    </DropdownMenuRadioItem>
+                    <DropdownMenuRadioItem value="pct-stocks" iconType="check">
+                      Stock %
+                    </DropdownMenuRadioItem>
+                    <DropdownMenuRadioItem
+                      value="pct-portfolio"
+                      iconType="check"
+                    >
+                      Portfolio %
+                    </DropdownMenuRadioItem>
+                    <DropdownMenuRadioItem value="none" iconType="check">
+                      None
+                    </DropdownMenuRadioItem>
+                  </DropdownMenuRadioGroup>
+                </DropdownMenuSubMenuContent>
+              </DropdownMenuSubMenu>
+            </DropdownMenuContent>
+          </DropdownMenu>
+
+          <DropdownMenu>
+            <Tooltip
+              triggerAsChild
+              content="Export chart as image or data file"
+            >
               <DropdownMenuTrigger asChild>
                 <Button variant="secondary" className="h-9">
                   <RiDownloadLine className="size-4" aria-hidden="true" />
@@ -1195,88 +1371,6 @@ export function ExposureTreemapHighchartsWithLogos({
             </DropdownMenuContent>
           </DropdownMenu>
 
-          <DropdownMenu>
-            <Tooltip triggerAsChild content="Configure chart display options">
-              <DropdownMenuTrigger asChild>
-                <Button variant="secondary" className="h-9">
-                  <RiSettings3Line className="size-4" aria-hidden="true" />
-                </Button>
-              </DropdownMenuTrigger>
-            </Tooltip>
-            <DropdownMenuContent align="end" className="w-56">
-              <DropdownMenuLabel>DISPLAY SETTINGS</DropdownMenuLabel>
-              <DropdownMenuSeparator />
-
-              {chartType === "treemap" && (
-                <>
-                  <DropdownMenuCheckboxItem
-                    checked={showLogo}
-                    onCheckedChange={setShowLogo}
-                  >
-                    Logo
-                  </DropdownMenuCheckboxItem>
-
-                  <DropdownMenuSubMenu>
-                    <DropdownMenuSubMenuTrigger>
-                      <span>Title</span>
-                      <span className="ml-auto text-xs text-gray-500">
-                        {titleMode === "symbol" ? "Symbol" :
-                         titleMode === "name" ? "Name" : "None"}
-                      </span>
-                    </DropdownMenuSubMenuTrigger>
-                    <DropdownMenuSubMenuContent>
-                      <DropdownMenuRadioGroup
-                        value={titleMode}
-                        onValueChange={(value) => setTitleMode(value as TitleMode)}
-                      >
-                        <DropdownMenuRadioItem value="symbol" iconType="check">
-                          Symbol
-                        </DropdownMenuRadioItem>
-                        <DropdownMenuRadioItem value="name" iconType="check">
-                          Name
-                        </DropdownMenuRadioItem>
-                        <DropdownMenuRadioItem value="none" iconType="check">
-                          None
-                        </DropdownMenuRadioItem>
-                      </DropdownMenuRadioGroup>
-                    </DropdownMenuSubMenuContent>
-                  </DropdownMenuSubMenu>
-                </>
-              )}
-
-              <DropdownMenuSubMenu>
-                <DropdownMenuSubMenuTrigger>
-                  <span>Display value</span>
-                  <span className="ml-auto text-xs text-gray-500">
-                    {displayValue === "market-value" ? "Market value" :
-                     displayValue === "pct-stocks" ? "Stock %" :
-                     displayValue === "pct-portfolio" ? "Portfolio %" :
-                     "None"}
-                  </span>
-                </DropdownMenuSubMenuTrigger>
-                <DropdownMenuSubMenuContent>
-                  <DropdownMenuRadioGroup
-                    value={displayValue}
-                    onValueChange={(value) => setDisplayValue(value as DisplayValue)}
-                  >
-                    <DropdownMenuRadioItem value="market-value" iconType="check">
-                      Market value
-                    </DropdownMenuRadioItem>
-                    <DropdownMenuRadioItem value="pct-stocks" iconType="check">
-                      Stock %
-                    </DropdownMenuRadioItem>
-                    <DropdownMenuRadioItem value="pct-portfolio" iconType="check">
-                      Portfolio %
-                    </DropdownMenuRadioItem>
-                    <DropdownMenuRadioItem value="none" iconType="check">
-                      None
-                    </DropdownMenuRadioItem>
-                  </DropdownMenuRadioGroup>
-                </DropdownMenuSubMenuContent>
-              </DropdownMenuSubMenu>
-            </DropdownMenuContent>
-          </DropdownMenu>
-
           <Tooltip triggerAsChild content="View chart in fullscreen mode">
             <Button
               variant="secondary"
@@ -1293,10 +1387,10 @@ export function ExposureTreemapHighchartsWithLogos({
         // Empty state when no stocks exist
         <div className="mt-4 flex h-[300px] flex-col items-center justify-center">
           <RiPieChartLine
-            className="size-12 text-gray-300 dark:text-gray-600 mb-3"
+            className="mb-3 size-12 text-gray-300 dark:text-gray-600"
             aria-hidden="true"
           />
-          <h4 className="text-base font-medium text-gray-900 dark:text-gray-50 mb-1">
+          <h4 className="mb-1 text-base font-medium text-gray-900 dark:text-gray-50">
             No stock holdings found
           </h4>
           <p className="text-sm text-gray-500 dark:text-gray-400">
