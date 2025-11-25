@@ -157,17 +157,36 @@ export default function SankeyChartHighcharts({
 
   // Transform data to Highcharts sankey format
   const transformToHighchartsData = () => {
-    // Create nodes array with colors
-    const nodes = data.nodes.map((node) => ({
-      id: node.id,
-      color: getNodeColor(node.id),
-      dataLabels: {
-        style: {
-          color: isDark ? "#f3f4f6" : "#111827",
-          // textOutline: "none",
+    const assetTypes = ["U.S. Stocks", "Non-U.S. Stocks", "Fixed Income", "Cash"]
+
+    // Create nodes array with colors and label positioning
+    const nodes = data.nodes.map((node) => {
+      // Determine if node is on the right side of the chart
+      // Portfolio Total and Asset Types are on the right side
+      const isRightSide =
+        node.id === "Portfolio Total" || assetTypes.includes(node.id)
+
+      return {
+        id: node.id,
+        color: getNodeColor(node.id),
+        dataLabels: {
+          // Position labels outside the nodes consistently
+          // Left-side nodes: labels extend LEFT from node's left edge
+          // Right-side nodes: labels extend RIGHT from node's right edge
+          align: isRightSide ? "left" : "right",
+          verticalAlign: "bottom", // Anchor text bottom to node top (pushes label up)
+          // For left-side: small gap from left edge (label extends left)
+          // For right-side: small gap from right edge (label extends right)
+          x: isRightSide ? 5 : -5,
+          inside: false,
+          style: {
+            color: isDark ? "#f3f4f6" : "#111827",
+            fontSize: "14px",
+            fontWeight: "600",
+          },
         },
-      },
-    }))
+      }
+    })
 
     // Transform links for Highcharts format
     const sankeyData = data.links.map((link) => ({
@@ -195,6 +214,7 @@ export default function SankeyChartHighcharts({
       type: undefined, // Required for sankey
       backgroundColor: "transparent",
       height: height,
+      spacing: [10, 10, 10, 10], // [top, right, bottom, left]
       events: {
         fullscreenOpen: function() {
           // Read theme from DOM to get current theme state
@@ -237,15 +257,16 @@ export default function SankeyChartHighcharts({
         nodes: highchartsNodes,
         nodeWidth: 20,
         nodePadding: 40,
+        nodeAlignment: "top",
         linkOpacity: 0.33,
         minLinkWidth: 1,
         linkColorMode: "gradient",
         dataLabels: {
           enabled: true,
           nodeFormat: "{point.name}",
+          // Don't set align/x here - let per-node settings control positioning
           style: {
             color: isDark ? "#f3f4f6" : "#111827",
-            // textOutline: "none",
             fontSize: "14px",
             fontWeight: "600",
           },
