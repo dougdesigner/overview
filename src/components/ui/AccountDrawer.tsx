@@ -101,6 +101,7 @@ const institutions = [
   { value: "bofa", label: "Bank of America" },
   { value: "betterment", label: "Betterment" },
   { value: "capital-one", label: "Capital One" },
+  { value: "carta", label: "Carta" },
   { value: "schwab", label: "Charles Schwab" },
   { value: "chase", label: "Chase" },
   { value: "citi", label: "Citibank" },
@@ -136,6 +137,7 @@ const getInstitutionBrandColor = (institution: string): string => {
     pnc: "bg-orange-500",
     "capital-one": "bg-red-500",
     ally: "bg-purple-500",
+    carta: "bg-blue-600",
   }
   return brandColors[institution] || "bg-gray-500"
 }

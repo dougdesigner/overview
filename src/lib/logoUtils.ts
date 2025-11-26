@@ -394,6 +394,7 @@ const institutionDomains: Record<string, string | null> = {
   "Bank of America": "bankofamerica.com",
   Betterment: "betterment.com",
   "Capital One": "capitalone.com",
+  Carta: "carta.com",
   "Charles Schwab": "schwab.com",
   Chase: "chase.com",
   Citibank: "citi.com",

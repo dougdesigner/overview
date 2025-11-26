@@ -17,6 +17,7 @@ export const getInstitutionBrandColor = (institution: string): string => {
     bofa: "bg-red-700",
     "wells-fargo": "bg-red-600",
     citi: "bg-blue-600",
+    carta: "bg-blue-600",
   }
   return brandColors[institution] || "bg-gray-500"
 }
@@ -50,5 +51,6 @@ export const institutionLabels: Record<string, string> = {
   "wells-fargo": "Wells Fargo",
   citi: "Citibank",
   amex: "American Express",
+  carta: "Carta",
   other: "Other",
 }

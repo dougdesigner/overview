@@ -131,6 +131,7 @@ export const institutionLabels: Record<string, string> = {
   "wells-fargo": "Wells Fargo",
   citi: "Citibank",
   amex: "American Express",
+  carta: "Carta",
   other: "Other",
 }
 
