@@ -62,11 +62,15 @@ const Tooltip = React.forwardRef<
               align="center"
               className={cx(
                 // base
-                "max-w-60 select-none rounded-md px-2.5 py-1.5 text-sm leading-5 shadow-md",
-                // text color
-                "text-gray-50 dark:text-gray-900",
-                // background color
-                "bg-gray-900 dark:bg-gray-50",
+                "max-w-60 select-none rounded-md px-2.5 py-1.5 text-xs leading-5",
+                // background color - matches Highcharts
+                "bg-white dark:bg-gray-800",
+                // text color - matches Highcharts
+                "text-gray-900 dark:text-gray-50",
+                // border - matches Highcharts
+                "border border-gray-200 dark:border-gray-600",
+                // shadow - matches Highcharts precise shadow
+                "shadow-[0_2px_3px_rgba(0,0,0,0.1)]",
                 // transition
                 "will-change-[transform,opacity]",
                 "data-[side=bottom]:animate-slideDownAndFade data-[side=left]:animate-slideLeftAndFade data-[side=right]:animate-slideRightAndFade data-[side=top]:animate-slideUpAndFade data-[state=closed]:animate-hide",
@@ -77,7 +81,7 @@ const Tooltip = React.forwardRef<
               {content}
               {showArrow ? (
                 <TooltipPrimitives.Arrow
-                  className="border-none fill-gray-900 dark:fill-gray-50"
+                  className="border-none fill-white dark:fill-gray-800"
                   width={12}
                   height={7}
                   aria-hidden="true"

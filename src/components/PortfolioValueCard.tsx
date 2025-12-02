@@ -74,7 +74,11 @@ const PortfolioValueCard = React.forwardRef<
   ) => {
     const classes = assetClasses || getDefaultAssetClasses()
     const valueFormatter = (number: number) => {
-      return "$" + Intl.NumberFormat("us").format(number).toString()
+      const decimals = number % 1 === 0 ? 0 : 2
+      return "$" + Intl.NumberFormat("us", {
+        minimumFractionDigits: decimals,
+        maximumFractionDigits: decimals,
+      }).format(number).toString()
     }
 
     // Format percentage: show integers without decimals, non-integers with up to 2 decimal places

@@ -249,7 +249,11 @@ const AssetAllocationCard = React.forwardRef<
     const defaultTabValue = defaultTab || firstTabWithData || allocationData[0]?.name
 
     const currencyFormatter = (number: number) => {
-      return "$" + Intl.NumberFormat("us").format(number).toString()
+      const decimals = number % 1 === 0 ? 0 : 2
+      return "$" + Intl.NumberFormat("us", {
+        minimumFractionDigits: decimals,
+        maximumFractionDigits: decimals,
+      }).format(number).toString()
     }
 
     // Calculate total value once (same for all tabs)

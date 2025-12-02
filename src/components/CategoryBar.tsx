@@ -193,7 +193,7 @@ const CategoryBar = React.forwardRef<HTMLDivElement, CategoryBarProps>(
                 <Tooltip
                   key={`item-${index}`}
                   triggerAsChild
-                  content={`${segmentLabels[index]}: ${value}%`}
+                  content={`${segmentLabels[index]}: ${value % 1 === 0 ? value.toFixed(0) : value.toFixed(2)}%`}
                 >
                   {segment}
                 </Tooltip>
