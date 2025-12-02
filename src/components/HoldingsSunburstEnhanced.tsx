@@ -16,7 +16,6 @@ import type {
   Holding,
 } from "@/components/ui/data-table-holdings/types"
 import { institutionLabels } from "@/lib/institutionUtils"
-import { getCachedLogoUrls } from "@/lib/logoUtils"
 import { RiDownloadLine, RiFullscreenLine } from "@remixicon/react"
 import Highcharts from "highcharts"
 import HighchartsReact from "highcharts-react-official"
@@ -108,22 +107,6 @@ export function HoldingsSunburstEnhanced({
     setIsClient(true)
     setModulesLoaded(true)
   }, [])
-
-  // Fetch logos for tickers
-  useEffect(() => {
-    const fetchLogos = async () => {
-      const tickers = holdings
-        .filter((h) => h.ticker)
-        .map((h) => h.ticker as string)
-
-      if (tickers.length > 0) {
-        const urls = await getCachedLogoUrls(tickers)
-        setLogoUrls(urls)
-      }
-    }
-
-    fetchLogos()
-  }, [holdings])
 
   // Reset drilled state when chart type or selected account changes
   useEffect(() => {

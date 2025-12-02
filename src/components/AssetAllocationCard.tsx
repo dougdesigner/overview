@@ -2,7 +2,7 @@
 
 import { Badge } from "@/components/Badge"
 import { Card } from "@/components/Card"
-import { HighchartsDonutChart } from "@/components/HighchartsDonutChart"
+import { HighchartsDonutChart } from "@/components/HighchartsDonutChartWrapper"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/Tabs"
 import { InstitutionLogo } from "@/components/ui/InstitutionLogo"
 import { TickerLogo } from "@/components/ui/TickerLogo"
