@@ -682,7 +682,7 @@ export function ExposureTreemapHighchartsWithLogos({
     )
 
     const data: PieChartPoint[] = []
-    const THRESHOLD_PERCENTAGE = 1.0 // 1% threshold
+    const THRESHOLD_PERCENTAGE = 0.5 // 0.5% threshold - items below this go to "Others"
 
     // Handle "none" mode - show individual stocks with single color
     if (groupingMode === "none") {
@@ -1096,8 +1096,28 @@ export function ExposureTreemapHighchartsWithLogos({
         allowPointSelect: true,
         cursor: "pointer",
         dataLabels: {
-          enabled: true,
-          format: "<b>{point.name}</b>",
+          enabled: showLogo,
+          useHTML: true,
+          formatter: function () {
+            const point = this as any
+            const value = point.actualValue ?? point.y
+            const ticker = point.ticker || point.name
+            const logoUrl = point.logoUrl
+
+            // Calculate percentage of this section relative to stock portfolio
+            const percentage = stocksOnlyValue > 0 ? (value / stocksOnlyValue) * 100 : 0
+
+            // Only show logo if enabled, available, and section is ≥5%
+            if (showLogo && logoUrl && percentage >= 5) {
+              return `<div style="display: flex; justify-content: center;">
+                        <div style="width: 28px; height: 28px; border-radius: 50%; background: ${isDark ? "#1f2937" : "#f3f4f6"}; display: flex; align-items: center; justify-content: center; overflow: hidden;">
+                          <img src="${logoUrl}" alt="${ticker}" style="width: 100%; height: 100%; object-fit: contain;" />
+                        </div>
+                      </div>`
+            }
+
+            return ""
+          },
           style: {
             color: isDark ? "#f3f4f6" : "#111827",
             fontSize: "11px",
@@ -1173,11 +1193,15 @@ export function ExposureTreemapHighchartsWithLogos({
     )
 
     if (groupingMode === "none") {
-      // For "none" mode, show top 10 holdings
+      // For "none" mode, show top 10 holdings with logo URLs
       return validExposures
         .sort((a, b) => b.totalValue - a.totalValue)
         .slice(0, 10)
-        .map((exp) => [exp.ticker, exp.totalValue] as [string, number])
+        .map((exp) => ({
+          name: exp.ticker,
+          value: exp.totalValue,
+          logoUrl: logoUrls[exp.ticker.toUpperCase()] ?? null,
+        }))
     } else {
       // For grouped modes (sector and sector-industry), show top 6 sectors
       return Object.entries(
@@ -1192,6 +1216,11 @@ export function ExposureTreemapHighchartsWithLogos({
       )
         .sort((a, b) => b[1] - a[1])
         .slice(0, 6)
+        .map(([name, value]) => ({
+          name,
+          value,
+          logoUrl: null, // Sectors don't have logos
+        }))
     }
   })()
 
@@ -1328,15 +1357,15 @@ export function ExposureTreemapHighchartsWithLogos({
               <DropdownMenuLabel>DISPLAY SETTINGS</DropdownMenuLabel>
               <DropdownMenuSeparator />
 
+              <DropdownMenuCheckboxItem
+                checked={showLogo}
+                onCheckedChange={setShowLogo}
+              >
+                Logo
+              </DropdownMenuCheckboxItem>
+
               {chartType === "treemap" && (
                 <>
-                  <DropdownMenuCheckboxItem
-                    checked={showLogo}
-                    onCheckedChange={setShowLogo}
-                  >
-                    Logo
-                  </DropdownMenuCheckboxItem>
-
                   <DropdownMenuSubMenu>
                     <DropdownMenuSubMenuTrigger>
                       <span>Title</span>
@@ -1367,10 +1396,8 @@ export function ExposureTreemapHighchartsWithLogos({
                       </DropdownMenuRadioGroup>
                     </DropdownMenuSubMenuContent>
                   </DropdownMenuSubMenu>
-                </>
-              )}
 
-              <DropdownMenuSubMenu>
+                  <DropdownMenuSubMenu>
                 <DropdownMenuSubMenuTrigger>
                   <span>Display value</span>
                   <span className="ml-auto text-xs text-gray-500">
@@ -1411,6 +1438,8 @@ export function ExposureTreemapHighchartsWithLogos({
                   </DropdownMenuRadioGroup>
                 </DropdownMenuSubMenuContent>
               </DropdownMenuSubMenu>
+                </>
+              )}
             </DropdownMenuContent>
           </DropdownMenu>
 
@@ -1496,26 +1525,40 @@ export function ExposureTreemapHighchartsWithLogos({
               {groupingMode === "none" ? "Top Holdings" : "Top Sectors"}
             </p>
             <ul className="flex flex-wrap gap-x-10 gap-y-4 text-sm">
-              {topGroups.map(([name, value], index) => (
-                <li key={`${name}-${index}`}>
-                  <span className="text-base font-semibold text-gray-900 dark:text-gray-50">
-                    {getLegendDisplayValue(value)}
-                  </span>
-                  <div className="flex items-center gap-2">
-                    <span
-                      className="size-2.5 shrink-0 rounded-sm"
-                      style={{
-                        backgroundColor:
-                          groupingMode === "none"
-                            ? colors[0]
-                            : colors[index % colors.length],
-                      }}
-                      aria-hidden="true"
-                    />
-                    <span className="text-sm">{name}</span>
-                  </div>
-                </li>
-              ))}
+              {topGroups.map((item, index) => {
+                const logoUrl = showLogo ? item.logoUrl : null
+
+                return (
+                  <li key={`${item.name}-${index}`}>
+                    <span className="text-base font-semibold text-gray-900 dark:text-gray-50">
+                      {getLegendDisplayValue(item.value)}
+                    </span>
+                    <div className="flex items-center gap-2">
+                      {logoUrl ? (
+                        <div className="flex size-5 shrink-0 items-center justify-center overflow-hidden rounded-full bg-gray-100 dark:bg-gray-800">
+                          <img
+                            src={logoUrl}
+                            alt={item.name}
+                            className="h-full w-full object-contain"
+                          />
+                        </div>
+                      ) : (
+                        <span
+                          className="size-2.5 shrink-0 rounded-sm"
+                          style={{
+                            backgroundColor:
+                              groupingMode === "none"
+                                ? colors[0]
+                                : colors[index % colors.length],
+                          }}
+                          aria-hidden="true"
+                        />
+                      )}
+                      <span className="text-sm">{item.name}</span>
+                    </div>
+                  </li>
+                )
+              })}
             </ul>
           </div>
         </>

@@ -246,7 +246,7 @@ export default function AccountsPage() {
 
       {/* Account Flow Chart - only show when there are holdings */}
       {accounts.length > 0 && holdings.length > 0 && (
-        <Card className="mt-8">
+        <Card className="mt-6">
           <div className="flex flex-col gap-4">
             {/* Title and Controls Row */}
             <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">

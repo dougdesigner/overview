@@ -78,7 +78,7 @@ export default function OverviewPage() {
         </div>
       ) : (
         <>
-          <dl className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-1 lg:grid-cols-1">
+          <dl className="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-1 lg:grid-cols-1">
             {/* Portfolio Value Card */}
             <PortfolioValueCard
               value={totalPortfolioValue}

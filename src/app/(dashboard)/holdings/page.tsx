@@ -339,7 +339,7 @@ function HoldingsContent() {
           className={`fixed bottom-6 left-1/2 z-50 w-full max-w-3xl -translate-x-1/2 px-4 transition-all duration-300 ease-out sm:px-6 ${
             isFilterSticky
               ? "translate-y-0 opacity-100"
-              : "translate-y-4 pointer-events-none opacity-0"
+              : "pointer-events-none translate-y-4 opacity-0"
           }`}
         >
           <div className="flex items-center justify-between rounded-lg border border-gray-200 bg-white/95 px-4 py-3 shadow-lg backdrop-blur-sm dark:border-gray-800 dark:bg-gray-950/95">
