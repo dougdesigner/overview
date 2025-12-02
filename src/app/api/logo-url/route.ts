@@ -23,7 +23,7 @@ async function readCachedLogo(ticker: string): Promise<LogoCache | null> {
     const fileContent = await fs.readFile(filePath, "utf-8")
     const data = JSON.parse(fileContent)
     return data
-  } catch (error) {
+  } catch {
     // File doesn't exist or can't be read
     return null
   }

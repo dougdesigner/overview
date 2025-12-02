@@ -4,14 +4,22 @@ import path from "path"
 
 // Memory cache for 15 minutes
 const PRICE_CACHE_DURATION = 15 * 60 * 1000
-const priceCache = new Map<string, { data: any; timestamp: number }>()
+const priceCache = new Map<string, { data: CachedPriceData; timestamp: number }>()
 
 // File cache for 24 hours
 const FILE_CACHE_DURATION = 24 * 60 * 60 * 1000 // 24 hours
 const CACHE_DIR = path.join(process.cwd(), "src", "data", "stock-prices")
 
+interface MockPrice {
+  lastPrice: number
+  previousClose: number
+  changePercent: number
+  volume: number
+  changeAmount?: number
+}
+
 // Mock prices for development/fallback
-const MOCK_PRICES: Record<string, any> = {
+const MOCK_PRICES: Record<string, MockPrice> = {
   // Popular ETFs with realistic prices
   QQQ: { lastPrice: 512.45, previousClose: 509.32, changePercent: 0.61, volume: 45678900 },
   QQQM: { lastPrice: 247.88, previousClose: 246.21, changePercent: 0.68, volume: 5317494 },
@@ -65,9 +73,9 @@ interface CachedPriceData {
   low?: number
   close?: number
   dividendAmount?: number
-  lastUpdated: string
-  cachedAt: string
-  source: string
+  lastUpdated?: string  // Made optional for Partial usage
+  cachedAt?: string      // Made optional for Partial usage
+  source?: string        // Made optional for Partial usage
 }
 
 // Helper function to read cached price data
@@ -84,22 +92,22 @@ async function readCachedPrice(symbol: string): Promise<CachedPriceData | null> 
     }
 
     return data
-  } catch (error) {
+  } catch {
     // File doesn't exist or can't be read
     return null
   }
 }
 
 // Helper function to write price data to cache
-async function writeCachedPrice(symbol: string, data: any): Promise<void> {
+async function writeCachedPrice(symbol: string, data: Partial<CachedPriceData>): Promise<void> {
   try {
     // Ensure directory exists
     await fs.mkdir(CACHE_DIR, { recursive: true })
 
     const filePath = path.join(CACHE_DIR, `${symbol}.json`)
-    const dataToCache: CachedPriceData = {
+    const dataToCache = {
       ...data,
-      changeAmount: data.lastPrice - data.previousClose,
+      changeAmount: (data.lastPrice || 0) - (data.previousClose || 0),
       cachedAt: new Date().toISOString(),
       source: "Alpha Vantage API"
     }
@@ -123,7 +131,7 @@ export async function POST(request: NextRequest) {
     }
 
     const apiKey = process.env.ALPHA_VANTAGE_API_KEY
-    const results: Record<string, any> = {}
+    const results: Record<string, CachedPriceData | MockPrice> = {}
 
     for (const symbol of symbols) {
       const upperSymbol = symbol.toUpperCase()
@@ -239,8 +247,8 @@ export async function POST(request: NextRequest) {
         // Small delay to avoid rate limiting
         await new Promise(resolve => setTimeout(resolve, 100))
 
-      } catch (error) {
-        console.error(`Error fetching price for ${upperSymbol}:`, error)
+      } catch (_error) {
+        console.error(`Error fetching price for ${upperSymbol}:`, _error)
 
         // Use mock data on error
         const mockPrice = MOCK_PRICES[upperSymbol] || {

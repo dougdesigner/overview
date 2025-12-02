@@ -99,10 +99,7 @@ interface PointWithGraphic {
 export function ExposureTreemapHighchartsWithLogos({
   exposures,
   totalValue,
-  accounts,
-  selectedAccount,
   logoUrls,
-  dataVersion,
 }: ExposureTreemapHighchartsProps) {
   const [chartType, setChartType] = useState<ChartType>("treemap")
   const [groupingMode, setGroupingMode] = useState<GroupingMode>("sector")

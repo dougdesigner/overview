@@ -24,13 +24,6 @@ const formatCurrency = (value: number) => {
   }).format(value)
 }
 
-const formatNumber = (value: number) => {
-  return new Intl.NumberFormat("en-US", {
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 2,
-  }).format(value)
-}
-
 const formatPercentage = (value: number) => {
   return `${value.toFixed(2)}%`
 }

@@ -62,7 +62,7 @@ export default function AccountsPage() {
   >(null)
 
   // Chart view state
-  const [chartType, setChartType] = React.useState<"sankey" | "treemap">(
+  const [chartType] = React.useState<"sankey" | "treemap">(
     "sankey",
   )
   const [selectedAccountFilter, setSelectedAccountFilter] =
@@ -71,15 +71,14 @@ export default function AccountsPage() {
   const [displayValue, setDisplayValue] =
     React.useState<AccountDisplayValue>("value")
 
-  // Chart refs for export functionality
-  const sankeyChartRef = React.useRef<HighchartsReact.RefObject>(null)
-  const treemapChartRef = React.useRef<HighchartsReact.RefObject>(null)
+  // Chart refs for export functionality - proper typing for Highcharts React
+  const sankeyChartRef = React.useRef<HighchartsReact.RefObject>(null!)
+  const treemapChartRef = React.useRef<HighchartsReact.RefObject>(null!)
 
   // Use the portfolio store for accounts data
   const {
     accounts,
     holdings,
-    isLoading,
     error,
     addAccount,
     updateAccount,
@@ -149,7 +148,12 @@ export default function AccountsPage() {
   // Export handlers for chart
   const handleExport = (type: string) => {
     const chartRef = chartType === "sankey" ? sankeyChartRef : treemapChartRef
-    const chart = chartRef.current?.chart
+    const chart = chartRef.current?.chart as Highcharts.Chart & {
+      print?: () => void
+      exportChart?: (options: { type: string }) => void
+      downloadCSV?: () => void
+      downloadXLS?: () => void
+    }
     if (!chart) return
 
     switch (type) {
@@ -157,25 +161,25 @@ export default function AccountsPage() {
         chart.fullscreen?.open()
         break
       case "print":
-        chart.print()
+        chart.print?.()
         break
       case "png":
-        chart.exportChart({ type: "image/png" })
+        chart.exportChart?.({ type: "image/png" })
         break
       case "jpeg":
-        chart.exportChart({ type: "image/jpeg" })
+        chart.exportChart?.({ type: "image/jpeg" })
         break
       case "pdf":
-        chart.exportChart({ type: "application/pdf" })
+        chart.exportChart?.({ type: "application/pdf" })
         break
       case "svg":
-        chart.exportChart({ type: "image/svg+xml" })
+        chart.exportChart?.({ type: "image/svg+xml" })
         break
       case "csv":
-        chart.downloadCSV()
+        chart.downloadCSV?.()
         break
       case "xls":
-        chart.downloadXLS()
+        chart.downloadXLS?.()
         break
     }
   }

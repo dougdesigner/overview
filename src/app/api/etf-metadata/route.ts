@@ -1,9 +1,22 @@
 import { NextRequest, NextResponse } from "next/server"
 import { KNOWN_ETF_NAMES } from "@/lib/knownETFNames"
 
+interface ETFMetadata {
+  symbol: string
+  name: string
+  description: string | null
+  assetClass?: string
+  netExpenseRatio?: string
+  portfolioDate?: string
+  totalNetAssets?: string
+  yearToDateReturn?: string
+  threeYearReturn?: string
+  fiveYearReturn?: string
+}
+
 // Cache ETF metadata for 7 days
 const METADATA_CACHE_DURATION = 7 * 24 * 60 * 60 * 1000 // 7 days
-const metadataCache = new Map<string, { data: any; timestamp: number }>()
+const metadataCache = new Map<string, { data: ETFMetadata; timestamp: number }>()
 
 export async function POST(request: NextRequest) {
   try {
@@ -17,7 +30,7 @@ export async function POST(request: NextRequest) {
     }
 
     const apiKey = process.env.ALPHA_VANTAGE_API_KEY
-    const results: Record<string, any> = {}
+    const results: Record<string, ETFMetadata> = {}
 
     for (const symbol of symbols) {
       // Check cache first

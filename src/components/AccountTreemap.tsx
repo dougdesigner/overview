@@ -14,22 +14,41 @@ const formatSI = (value: number) => {
   return `$${value.toFixed(0)}`
 }
 
+// Type for Highcharts module initializers
+type HighchartsModule = (H: typeof Highcharts) => void
+
 // Initialize modules only when Highcharts is loaded as an object
 if (typeof Highcharts === "object") {
-  // Check each module is a function before calling
-  if (typeof HighchartsTreemap === "function") {
-    HighchartsTreemap(Highcharts)
+  // Cast modules to callable functions before checking and calling
+  const treemapInit = HighchartsTreemap as unknown as HighchartsModule
+  const exportingInit = HighchartsExporting as unknown as HighchartsModule
+  const exportDataInit = HighchartsExportData as unknown as HighchartsModule
+
+  if (typeof treemapInit === "function") {
+    treemapInit(Highcharts)
   }
-  if (typeof HighchartsExporting === "function") {
-    HighchartsExporting(Highcharts)
+  if (typeof exportingInit === "function") {
+    exportingInit(Highcharts)
   }
-  if (typeof HighchartsExportData === "function") {
-    HighchartsExportData(Highcharts)
+  if (typeof exportDataInit === "function") {
+    exportDataInit(Highcharts)
   }
 }
 
 export type AccountGrouping = "institution" | "type" | "institution-type"
 export type AccountDisplayValue = "value" | "allocation" | "none"
+
+// TreemapPoint interface for Highcharts data
+interface TreemapPoint {
+  id: string
+  name: string
+  parent?: string
+  value: number
+  color?: string
+  institution?: string
+  accountType?: string
+  allocation?: number
+}
 
 interface AccountTreemapProps {
   accounts: Array<{
@@ -142,7 +161,7 @@ export default function AccountTreemap({
         institutionGroups.get(institution)!.push(account)
       })
 
-      const data: any[] = []
+      const data: TreemapPoint[] = []
       institutionGroups.forEach((accounts, institution) => {
         const institutionTotal = accounts.reduce((sum, acc) => sum + acc.totalValue, 0)
 
@@ -182,7 +201,7 @@ export default function AccountTreemap({
         typeGroups.get(accountType)!.push(account)
       })
 
-      const data: any[] = []
+      const data: TreemapPoint[] = []
       typeGroups.forEach((accounts, accountType) => {
         const typeTotal = accounts.reduce((sum, acc) => sum + acc.totalValue, 0)
 
@@ -282,7 +301,7 @@ export default function AccountTreemap({
       height: height,
       margin: [0, 0, 0, 0],
       events: {
-        fullscreenOpen: function() {
+        fullscreenOpen: function(this: Highcharts.Chart) {
           // Read theme from DOM to get current theme state
           const currentIsDark = document.documentElement.classList.contains('dark')
 
@@ -291,7 +310,7 @@ export default function AccountTreemap({
             chart: {
               backgroundColor: currentIsDark ? "#111827" : "#ffffff"
             }
-          }, false)
+          })
         },
         fullscreenClose: function() {
           // No need to update - chart returns to normal state automatically
@@ -351,8 +370,8 @@ export default function AccountTreemap({
                 fontWeight: "500",
                 color: "#f3f4f6",  // White text on colored backgrounds
               },
-              formatter: function() {
-                const point = this.point as any
+              formatter: function(this: { point: TreemapPoint }) {
+                const point = this.point
                 const name = point.name
                 const value = point.value
                 const allocation = point.allocation

@@ -5,7 +5,7 @@ import path from "path"
 
 // Cache company data for 24 hours to avoid hitting API limits
 const COMPANY_CACHE_DURATION = 24 * 60 * 60 * 1000 // 24 hours in milliseconds
-const companyCache = new Map<string, { data: any; timestamp: number }>()
+const companyCache = new Map<string, { data: CompanyProfile; timestamp: number }>()
 
 // File-based cache directory
 const CACHE_DIR = path.join(process.cwd(), "src", "data", "company-profiles")
@@ -28,7 +28,7 @@ async function readCachedProfile(symbol: string): Promise<CompanyProfile | null>
     const data = JSON.parse(fileContent)
     console.log(`Loaded cached profile for ${symbol} from file`)
     return data
-  } catch (error) {
+  } catch {
     // File doesn't exist or can't be read
     return null
   }
@@ -175,8 +175,8 @@ export async function POST(request: NextRequest) {
         // Add small delay to avoid rate limiting
         await new Promise(resolve => setTimeout(resolve, 200))
 
-      } catch (error) {
-        console.error(`Error fetching ${upperSymbol}:`, error)
+      } catch (_error) {
+        console.error(`Error fetching ${upperSymbol}:`, _error)
         // Try to use cached data on any error
         const cachedData = await readCachedProfile(upperSymbol)
         if (cachedData) {

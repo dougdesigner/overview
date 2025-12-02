@@ -2,7 +2,7 @@
 
 import { TabNavigation, TabNavigationLink } from "@/components/TabNavigation"
 import Link from "next/link"
-import { RiDonutChartFill, RiLayout2Fill } from "@remixicon/react"
+import { RiLayout2Fill } from "@remixicon/react"
 import { usePathname } from "next/navigation"
 import { DropdownUserProfile } from "./UserProfile"
 

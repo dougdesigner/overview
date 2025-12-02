@@ -27,7 +27,6 @@ function HoldingsContent() {
   )
   const [currentAccountFilter, setCurrentAccountFilter] =
     React.useState<string>(searchParams.get("account") || "all")
-  const [isRefreshing, setIsRefreshing] = React.useState(false)
   const [isFilterSticky, setIsFilterSticky] = React.useState(false)
   const filterRef = React.useRef<HTMLDivElement>(null)
 
@@ -35,13 +34,10 @@ function HoldingsContent() {
   const {
     accounts: storeAccounts,
     holdings,
-    isLoading,
-    error,
     addHolding,
     updateHolding,
     deleteHolding,
     refreshETFNames,
-    updatePrices,
   } = usePortfolioStore()
 
   // Convert accounts to the format expected by components
@@ -66,6 +62,7 @@ function HoldingsContent() {
       console.log("Detected QQQM with basic name, refreshing ETF names...")
       refreshETFNames()
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []) // Only run once on mount
 
   // Calculate allocations for all holdings
@@ -204,7 +201,7 @@ function HoldingsContent() {
           } else {
             console.log(`Using default price for ${holding.ticker}`)
           }
-        } catch (error) {
+        } catch {
           console.log(
             `Error fetching price for ${holding.ticker}, using default`,
           )
@@ -257,15 +254,6 @@ function HoldingsContent() {
 
   const handleDelete = (holdingId: string) => {
     deleteHolding(holdingId)
-  }
-
-  const handleRefreshPrices = async () => {
-    setIsRefreshing(true)
-    try {
-      await updatePrices()
-    } finally {
-      setIsRefreshing(false)
-    }
   }
 
   // Show loading state

@@ -1,5 +1,7 @@
 "use client"
 
+export const dynamic = 'force-dynamic'
+
 import AssetAllocationCard from "@/components/AssetAllocationCard"
 import KPICard from "@/components/KPICard"
 import { OnboardingFlow } from "@/components/OnboardingFlow"
@@ -23,8 +25,8 @@ export default function OverviewPage() {
     isLoading,
   } = usePortfolioStore()
 
-  // Get exposure calculations for asset breakdown
-  const { assetClassBreakdown } = useExposureCalculations()
+  // Get exposure calculations for asset breakdown (unused but kept for future use)
+  useExposureCalculations()
 
   // Calculate asset values from portfolio allocation
   const assetValues = useMemo(() => {
@@ -292,7 +294,7 @@ export default function OverviewPage() {
                     "amber",
                     "emerald",
                     "violet",
-                  ] as any,
+                  ] as ("blue" | "gray" | "cyan" | "amber" | "emerald" | "violet")[],
                 },
                 {
                   name: "Asset Classes",
@@ -323,7 +325,7 @@ export default function OverviewPage() {
                     },
                   ].filter((item) => item.amount > 0),
                   // These colors are not used when useAssetClassColors is true, but kept for compatibility
-                  colors: ["blue", "cyan", "amber", "emerald"] as any,
+                  colors: ["blue", "cyan", "amber", "emerald"] as ("blue" | "cyan" | "amber" | "emerald")[],
                 },
                 {
                   name: "Accounts",
@@ -346,7 +348,7 @@ export default function OverviewPage() {
                         ][index] || "border-gray-500 dark:border-gray-500",
                       institution: account.institution,
                     })),
-                  colors: ["violet", "fuchsia", "pink", "sky", "lime"] as any,
+                  colors: ["violet", "fuchsia", "pink", "sky", "lime"] as ("violet" | "fuchsia" | "pink" | "sky" | "lime")[],
                 },
               ]}
             />

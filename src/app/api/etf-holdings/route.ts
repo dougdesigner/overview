@@ -2,19 +2,36 @@ import { NextRequest, NextResponse } from "next/server"
 import fs from "fs/promises"
 import path from "path"
 
-// Cache ETF data for 24 hours to avoid hitting API limits
-const ETF_CACHE_DURATION = 24 * 60 * 60 * 1000 // 24 hours in milliseconds
-const etfCache = new Map<string, { data: any; timestamp: number }>()
-
-// File-based cache directory
-const CACHE_DIR = path.join(process.cwd(), "src", "data", "etf-profiles")
-
 interface ETFHolding {
   symbol: string
   name: string
   weight: string
   shares?: string
 }
+
+interface ProcessedETFHolding {
+  symbol: string
+  name: string
+  weight: number  // Processed weight as number
+  shares?: number // Processed shares as number
+}
+
+interface ETFProfile {
+  symbol: string
+  name: string
+  holdings: ProcessedETFHolding[]  // Use processed type
+  lastUpdated: string
+  cachedAt?: string
+  source?: string
+  error?: string
+}
+
+// Cache ETF data for 24 hours to avoid hitting API limits
+const ETF_CACHE_DURATION = 24 * 60 * 60 * 1000 // 24 hours in milliseconds
+const etfCache = new Map<string, { data: ETFProfile; timestamp: number }>()
+
+// File-based cache directory
+const CACHE_DIR = path.join(process.cwd(), "src", "data", "etf-profiles")
 
 interface AlphaVantageETFResponse {
   symbol: string
@@ -24,21 +41,21 @@ interface AlphaVantageETFResponse {
 }
 
 // Helper function to read cached ETF profile from file
-async function readCachedProfile(symbol: string): Promise<any | null> {
+async function readCachedProfile(symbol: string): Promise<ETFProfile | null> {
   try {
     const filePath = path.join(CACHE_DIR, `${symbol}.json`)
     const fileContent = await fs.readFile(filePath, "utf-8")
     const data = JSON.parse(fileContent)
     console.log(`Loaded cached profile for ${symbol} from file with ${data.holdings?.length || 0} holdings`)
     return data
-  } catch (error) {
+  } catch {
     // File doesn't exist or can't be read
     return null
   }
 }
 
 // Helper function to write ETF profile to cache file
-async function writeCachedProfile(symbol: string, data: any): Promise<void> {
+async function writeCachedProfile(symbol: string, data: ETFProfile): Promise<void> {
   try {
     // Ensure directory exists
     await fs.mkdir(CACHE_DIR, { recursive: true })
@@ -73,7 +90,7 @@ export async function POST(request: NextRequest) {
     // If no API key, try to load from file cache
     if (!apiKey) {
       console.warn("ALPHA_VANTAGE_API_KEY not configured, using cached data only...")
-      const results: Record<string, any> = {}
+      const results: Record<string, ETFProfile> = {}
 
       for (const symbol of symbols) {
         const fileCached = await readCachedProfile(symbol)
@@ -95,7 +112,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json(results)
     }
 
-    const results: Record<string, any> = {}
+    const results: Record<string, ETFProfile> = {}
 
     for (const symbol of symbols) {
       // Check file-based cache first
@@ -192,8 +209,8 @@ export async function POST(request: NextRequest) {
         // Add small delay to avoid rate limiting
         await new Promise(resolve => setTimeout(resolve, 200))
 
-      } catch (error) {
-        console.error(`Error fetching ${symbol}:`, error)
+      } catch (fetchError) {
+        console.error(`Error fetching ${symbol}:`, fetchError)
         // Try to use cached data on any error
         const cachedData = await readCachedProfile(symbol)
         if (cachedData) {
@@ -205,7 +222,7 @@ export async function POST(request: NextRequest) {
             name: `${symbol} ETF`,
             holdings: [],
             lastUpdated: new Date().toISOString(),
-            error: `Error fetching data: ${error instanceof Error ? error.message : 'Unknown error'}`
+            error: `Error fetching data: ${fetchError instanceof Error ? fetchError.message : 'Unknown error'}`
           }
         }
       }

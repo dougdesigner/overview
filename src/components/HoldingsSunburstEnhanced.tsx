@@ -59,13 +59,12 @@ export function HoldingsSunburstEnhanced({
   const [modulesLoaded, setModulesLoaded] = useState(false)
 
   // Control states
-  const [chartType, setChartType] = useState<ChartType>("sunburst")
+  const [chartType] = useState<ChartType>("sunburst")
   const [sunburstGrouping, setSunburstGrouping] =
     useState<GroupingMode>("account")
   const [pieGrouping, setPieGrouping] = useState<GroupingMode>("account")
   const [selectedAccount, setSelectedAccount] =
     useState<string>(selectedAccountId)
-  const [logoUrls, setLogoUrls] = useState<Record<string, string | null>>({})
 
   // Sync internal state with prop when it changes from parent
   useEffect(() => {
@@ -546,9 +545,19 @@ export function HoldingsSunburstEnhanced({
     return data
   }
 
+  interface PieDataPoint {
+    name: string
+    y: number
+    color: string
+    ticker?: string
+    fullName?: string
+    accountName?: string
+    marketValue?: number
+  }
+
   // Transform holdings data to pie format
   const transformToPieData = () => {
-    const data: any[] = []
+    const data: PieDataPoint[] = []
 
     if (groupingMode === "none") {
       // Show individual holdings - sort by value and limit to top N

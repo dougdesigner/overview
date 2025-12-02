@@ -6,8 +6,7 @@ import { AccountSelector } from "@/components/ui/AccountSelector"
 import { ExposureTable } from "@/components/ui/data-table-exposure/ExposureTable"
 import { useExposureCalculations } from "@/hooks/useExposureCalculations"
 import { usePortfolioStore } from "@/hooks/usePortfolioStore"
-import { clearIndexedDBBackups } from "@/lib/indexedDBBackup"
-import React, { useEffect, useMemo, useRef, useState } from "react"
+import React, { useMemo, useRef, useState, useEffect } from "react"
 
 export default function ExposurePage() {
   // Use portfolio store for holdings and accounts data
@@ -16,15 +15,10 @@ export default function ExposurePage() {
     accounts,
     isLoading: holdingsLoading,
     dataVersion,
-    clearAllData,
   } = usePortfolioStore()
 
   // Get exposure calculations
   const {
-    exposures,
-    assetClassBreakdown,
-    sectorBreakdown,
-    isCalculating,
     error,
   } = useExposureCalculations()
 
@@ -109,39 +103,9 @@ export default function ExposurePage() {
     console.log("Refreshing exposure data...")
   }
 
-  const handleFullRefresh = async () => {
-    const confirmed = confirm(
-      "This will clear all portfolio data, including:\n\n" +
-        "• All accounts and holdings\n" +
-        "• All ETF cache data\n" +
-        "• All IndexedDB backups\n\n" +
-        "This action cannot be undone. Continue?",
-    )
-
-    if (!confirmed) return
-
-    try {
-      // Clear all portfolio data and ETF caches
-      clearAllData()
-
-      // Clear IndexedDB backups
-      await clearIndexedDBBackups()
-
-      console.log("✅ All data cleared successfully")
-
-      // Reload the page to fetch fresh data
-      window.location.reload()
-    } catch (error) {
-      console.error("Error clearing data:", error)
-      alert("Failed to clear all data. Please try again.")
-    }
-  }
-
-  // Show loading state
-  const isLoading = holdingsLoading || isCalculating
-
-  // Remove loading state check to prevent stuck loading screen
+  // Show loading state check removed to prevent stuck loading screen
   // The empty state will show immediately for new users
+  // Combined loading state available from: holdingsLoading || isCalculating
 
   // Show error if there's one
   if (error && !holdings.length) {

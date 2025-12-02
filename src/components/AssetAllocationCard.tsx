@@ -7,7 +7,6 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/Tabs"
 import { InstitutionLogo } from "@/components/ui/InstitutionLogo"
 import { TickerLogo } from "@/components/ui/TickerLogo"
 import { AvailableChartColorsKeys } from "@/lib/chartUtils"
-import { getTickerType } from "@/lib/tickerColors"
 import { cx } from "@/lib/utils"
 import React from "react"
 
