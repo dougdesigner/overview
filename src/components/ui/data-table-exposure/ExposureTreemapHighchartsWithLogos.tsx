@@ -1275,6 +1275,7 @@ export function ExposureTreemapHighchartsWithLogos({
     tooltip: {
       useHTML: true,
       outside: true,
+      headerFormat: "",
       backgroundColor: isDark ? "#1f2937" : "#ffffff",
       borderColor: isDark ? "#4b5563" : "#e5e7eb",
       borderRadius: 6,
