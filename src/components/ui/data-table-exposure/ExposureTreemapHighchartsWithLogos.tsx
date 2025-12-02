@@ -209,6 +209,32 @@ export function ExposureTreemapHighchartsWithLogos({
     "#84cc16",
   ]
 
+  /**
+   * Darkens a hex color by a percentage
+   * @param hexColor - Hex color string (e.g., "#3b82f6")
+   * @param percent - Percentage to darken (0-100, where 100 = black)
+   * @returns Darkened hex color
+   */
+  const darkenColor = (hexColor: string, percent: number): string => {
+    // Remove # if present
+    const hex = hexColor.replace("#", "")
+
+    // Parse RGB
+    const r = parseInt(hex.substring(0, 2), 16)
+    const g = parseInt(hex.substring(2, 4), 16)
+    const b = parseInt(hex.substring(4, 6), 16)
+
+    // Darken by percentage (move toward black)
+    const factor = 1 - percent / 100
+    const newR = Math.round(r * factor)
+    const newG = Math.round(g * factor)
+    const newB = Math.round(b * factor)
+
+    // Convert back to hex
+    const toHex = (n: number) => n.toString(16).padStart(2, "0")
+    return `#${toHex(newR)}${toHex(newG)}${toHex(newB)}`
+  }
+
   // Format currency values
   const formatValue = (value: number) => {
     if (value >= 1000000) return `$${(value / 1000000).toFixed(1)}M`
@@ -742,61 +768,167 @@ export function ExposureTreemapHighchartsWithLogos({
       return data
     }
 
-    // Handle grouped modes (sector and sector-industry) - show aggregated sectors
-    // Both modes show sectors in pie chart since pie doesn't support hierarchy
+    // Handle grouped modes - differentiate between sector and sector-industry
+    if (groupingMode === "sector") {
+      // Show sectors (existing behavior)
+      // Group stocks by sector and aggregate values
+      const groups = new Map<string, number>()
+      validExposures.forEach((exposure) => {
+        const group = toProperCase(exposure.sector || "Unknown Sector")
+        groups.set(group, (groups.get(group) || 0) + exposure.totalValue)
+      })
 
-    // Group stocks by sector and aggregate values
-    const groups = new Map<string, number>()
-    validExposures.forEach((exposure) => {
-      const group = toProperCase(exposure.sector || "Unknown Sector")
-      groups.set(group, (groups.get(group) || 0) + exposure.totalValue)
-    })
+      // Convert to array and sort by value
+      const sortedGroups = Array.from(groups.entries()).sort(
+        (a, b) => b[1] - a[1],
+      )
 
-    // Convert to array and sort by value
-    const sortedGroups = Array.from(groups.entries()).sort(
-      (a, b) => b[1] - a[1],
-    )
+      // Calculate total value for percentage calculation
+      const totalValue = sortedGroups.reduce((sum, [, value]) => sum + value, 0)
 
-    // Calculate total value for percentage calculation
-    const totalValue = sortedGroups.reduce((sum, [, value]) => sum + value, 0)
+      // Separate main and small segments
+      const mainGroups: typeof sortedGroups = []
+      const smallGroups: typeof sortedGroups = []
 
-    // Separate main and small segments
-    const mainGroups: typeof sortedGroups = []
-    const smallGroups: typeof sortedGroups = []
+      sortedGroups.forEach(([groupName, value]) => {
+        const percentage = (value / totalValue) * 100
+        if (percentage >= THRESHOLD_PERCENTAGE) {
+          mainGroups.push([groupName, value])
+        } else {
+          smallGroups.push([groupName, value])
+        }
+      })
 
-    sortedGroups.forEach(([groupName, value]) => {
-      const percentage = (value / totalValue) * 100
-      if (percentage >= THRESHOLD_PERCENTAGE) {
-        mainGroups.push([groupName, value])
-      } else {
-        smallGroups.push([groupName, value])
+      // Add main groups with consistent color mapping
+      mainGroups.forEach(([groupName, value]) => {
+        data.push({
+          name: groupName,
+          y: value,
+          actualValue: value,
+          color: getGroupColor(groupName, "sector"),
+        })
+      })
+
+      // Add "Others" segment if there are small groups
+      if (smallGroups.length > 0) {
+        const othersTotal = smallGroups.reduce((sum, [, value]) => sum + value, 0)
+        const othersPercentage = (othersTotal / totalValue) * 100
+
+        data.push({
+          name: `Others (${smallGroups.length} sectors)`,
+          y: othersTotal,
+          actualValue: othersTotal,
+          color: "#9ca3af",
+          custom: {
+            description: `${smallGroups.length} sectors < 0.5% each (${othersPercentage.toFixed(1)}% total)`,
+          },
+        })
       }
-    })
 
-    // Add main groups with consistent color mapping
-    mainGroups.forEach(([groupName, value]) => {
-      data.push({
-        name: groupName,
-        y: value,
-        actualValue: value,
-        color: getGroupColor(groupName, "sector"), // Always use sector colors for pie chart
+      return data
+    } else if (groupingMode === "sector-industry") {
+      // Show industries with darkened colors by sector
+
+      // Step 1: Build sector → industries mapping
+      const sectorIndustries = new Map<string, Map<string, number>>()
+
+      validExposures.forEach((exposure) => {
+        const sector = toProperCase(exposure.sector || "Unknown Sector")
+        const industry = toProperCase(exposure.industry || "Unknown Industry")
+
+        if (!sectorIndustries.has(sector)) {
+          sectorIndustries.set(sector, new Map())
+        }
+
+        const industries = sectorIndustries.get(sector)!
+        industries.set(
+          industry,
+          (industries.get(industry) || 0) + exposure.totalValue,
+        )
       })
-    })
 
-    // Add "Others" segment if there are small groups
-    if (smallGroups.length > 0) {
-      const othersTotal = smallGroups.reduce((sum, [, value]) => sum + value, 0)
-      const othersPercentage = (othersTotal / totalValue) * 100
-
-      data.push({
-        name: `Others (${smallGroups.length} sectors)`,
-        y: othersTotal,
-        actualValue: othersTotal,
-        color: "#9ca3af", // Gray color for others
-        custom: {
-          description: `${smallGroups.length} sectors < 1% each (${othersPercentage.toFixed(1)}% total)`,
-        },
+      // Step 2: Sort sectors by total value to get consistent sector colors
+      const sectorTotals = new Map<string, number>()
+      sectorIndustries.forEach((industries, sector) => {
+        const total = Array.from(industries.values()).reduce(
+          (sum, val) => sum + val,
+          0,
+        )
+        sectorTotals.set(sector, total)
       })
+
+      const sortedSectors = Array.from(sectorTotals.entries()).sort(
+        (a, b) => b[1] - a[1],
+      )
+
+      // Step 3: Assign colors to each industry
+      const allIndustries: Array<[string, number, string, string]> = [] // [industry, value, color, sector]
+
+      sortedSectors.forEach(([sector, _], sectorIndex) => {
+        const sectorColor = getGroupColor(sector, "sector") // Base sector color
+        const industries = Array.from(
+          sectorIndustries.get(sector)!.entries(),
+        ).sort((a, b) => b[1] - a[1]) // Sort industries within sector by value
+
+        industries.forEach(([industry, value], industryIndex) => {
+          // Darken by 15%, 30%, 45%, 60% for 1st, 2nd, 3rd, 4th+ industries
+          const darkenPercent = Math.min(15 + industryIndex * 15, 60)
+          const industryColor = darkenColor(sectorColor, darkenPercent)
+
+          allIndustries.push([industry, value, industryColor, sector])
+        })
+      })
+
+      // Step 4: Keep industries grouped by sector (already sorted within each sector)
+      const sortedIndustries = allIndustries
+      const totalValue = sortedIndustries.reduce((sum, [, val]) => sum + val, 0)
+
+      const mainIndustries: typeof sortedIndustries = []
+      const smallIndustries: typeof sortedIndustries = []
+
+      sortedIndustries.forEach((item) => {
+        const [, value] = item
+        const percentage = (value / totalValue) * 100
+        if (percentage >= THRESHOLD_PERCENTAGE) {
+          mainIndustries.push(item)
+        } else {
+          smallIndustries.push(item)
+        }
+      })
+
+      // Step 5: Build pie chart data
+      mainIndustries.forEach(([industry, value, color, sector]) => {
+        data.push({
+          name: industry,
+          y: value,
+          actualValue: value,
+          color: color,
+          custom: {
+            sector: sector, // Add sector info for tooltip
+          },
+        })
+      })
+
+      // Add "Others" if needed
+      if (smallIndustries.length > 0) {
+        const othersTotal = smallIndustries.reduce(
+          (sum, [, val]) => sum + val,
+          0,
+        )
+        const othersPercentage = (othersTotal / totalValue) * 100
+
+        data.push({
+          name: `Others (${smallIndustries.length} industries)`,
+          y: othersTotal,
+          actualValue: othersTotal,
+          color: "#9ca3af",
+          custom: {
+            description: `${smallIndustries.length} industries < 0.5% each (${othersPercentage.toFixed(1)}% total)`,
+          },
+        })
+      }
+
+      return data
     }
 
     return data
@@ -1173,8 +1305,15 @@ export function ExposureTreemapHighchartsWithLogos({
             ? ((value / stocksOnlyValue) * 100).toFixed(1)
             : "0.0"
         const name = point.ticker || point.name
+
+        // Show sector information when in sector-industry mode
+        const sectorInfo = groupingMode === "sector-industry" && point.custom?.sector
+          ? `<div style="font-size: 11px; opacity: 0.8; margin-bottom: 4px;">Sector: ${point.custom.sector}</div>`
+          : ""
+
         return `<div style="padding: 2px;">
                   <div style="font-weight: 600; margin-bottom: 4px;">${name}</div>
+                  ${sectorInfo}
                   <div>Market Value: <b>${formatValue(value)}</b></div>
                   <div>Portfolio %: <b>${pctPortfolio}%</b></div>
                   <div>Stock %: <b>${pctStocks}%</b></div>
