@@ -278,6 +278,66 @@ export const createColumns = ({
           className="flex w-full items-center justify-end gap-1 font-medium hover:text-gray-900 dark:hover:text-gray-50"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
+          Market Value
+          {column.getIsSorted() === "asc" && (
+            <RiArrowUpSLine className="h-4 w-4" />
+          )}
+          {column.getIsSorted() === "desc" && (
+            <RiArrowDownSLine className="h-4 w-4" />
+          )}
+        </button>
+      )
+    },
+    accessorKey: "marketValue",
+    cell: ({ row }) => {
+      const value = row.original.marketValue
+      return <span className="text-sm font-semibold text-gray-900 dark:text-gray-50">{formatCurrency(value)}</span>
+    },
+    enableSorting: true,
+    meta: {
+      className: "text-right",
+      displayName: "Market Value",
+    },
+  },
+  {
+    header: ({ column }) => {
+      return (
+        <button
+          className="flex w-full items-center justify-end gap-1 font-medium hover:text-gray-900 dark:hover:text-gray-50"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Allocation (%)
+          {column.getIsSorted() === "asc" && (
+            <RiArrowUpSLine className="h-4 w-4" />
+          )}
+          {column.getIsSorted() === "desc" && (
+            <RiArrowDownSLine className="h-4 w-4" />
+          )}
+        </button>
+      )
+    },
+    accessorKey: "allocation",
+    cell: ({ row }) => {
+      const allocation = row.original.allocation
+      return (
+        <span className="text-sm font-semibold text-gray-900 dark:text-gray-50">
+          {formatPercentage(allocation)}
+        </span>
+      )
+    },
+    enableSorting: true,
+    meta: {
+      className: "text-right min-w-40",
+      displayName: "Portfolio %",
+    },
+  },
+  {
+    header: ({ column }) => {
+      return (
+        <button
+          className="flex w-full items-center justify-end gap-1 font-medium hover:text-gray-900 dark:hover:text-gray-50"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
           Quantity
           {column.getIsSorted() === "asc" && (
             <RiArrowUpSLine className="h-4 w-4" />
@@ -347,7 +407,7 @@ export const createColumns = ({
     },
     enableSorting: true,
     meta: {
-      className: "text-right",
+      className: "text-right min-w-32",
       displayName: "Last Price",
     },
   },
@@ -393,36 +453,8 @@ export const createColumns = ({
     },
     enableSorting: true,
     meta: {
-      className: "text-right",
+      className: "text-right min-w-40",
       displayName: "Day Change (%)",
-    },
-  },
-  {
-    header: ({ column }) => {
-      return (
-        <button
-          className="flex w-full items-center justify-end gap-1 font-medium hover:text-gray-900 dark:hover:text-gray-50"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        >
-          Market Value
-          {column.getIsSorted() === "asc" && (
-            <RiArrowUpSLine className="h-4 w-4" />
-          )}
-          {column.getIsSorted() === "desc" && (
-            <RiArrowDownSLine className="h-4 w-4" />
-          )}
-        </button>
-      )
-    },
-    accessorKey: "marketValue",
-    cell: ({ row }) => {
-      const value = row.original.marketValue
-      return <span className="text-sm font-semibold text-gray-900 dark:text-gray-50">{formatCurrency(value)}</span>
-    },
-    enableSorting: true,
-    meta: {
-      className: "text-right",
-      displayName: "Market Value",
     },
   },
   {
@@ -472,40 +504,8 @@ export const createColumns = ({
     },
     enableSorting: true,
     meta: {
-      className: "text-right",
+      className: "text-right min-w-40",
       displayName: "Market Value Day Change",
-    },
-  },
-  {
-    header: ({ column }) => {
-      return (
-        <button
-          className="flex w-full items-center justify-end gap-1 font-medium hover:text-gray-900 dark:hover:text-gray-50"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        >
-          Allocation (%)
-          {column.getIsSorted() === "asc" && (
-            <RiArrowUpSLine className="h-4 w-4" />
-          )}
-          {column.getIsSorted() === "desc" && (
-            <RiArrowDownSLine className="h-4 w-4" />
-          )}
-        </button>
-      )
-    },
-    accessorKey: "allocation",
-    cell: ({ row }) => {
-      const allocation = row.original.allocation
-      return (
-        <span className="text-sm font-semibold text-gray-900 dark:text-gray-50">
-          {formatPercentage(allocation)}
-        </span>
-      )
-    },
-    enableSorting: true,
-    meta: {
-      className: "text-right",
-      displayName: "Portfolio %",
     },
   },
   {
@@ -546,7 +546,7 @@ export const createColumns = ({
     },
     enableSorting: true,
     meta: {
-      className: "text-left",
+      className: "text-left min-w-40",
       displayName: "Institution",
     },
   },
@@ -576,7 +576,7 @@ export const createColumns = ({
     },
     enableSorting: true,
     meta: {
-      className: "text-left",
+      className: "text-left min-w-40",
       displayName: "Account",
     },
   },

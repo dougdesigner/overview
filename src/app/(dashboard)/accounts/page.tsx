@@ -62,9 +62,7 @@ export default function AccountsPage() {
   >(null)
 
   // Chart view state
-  const [chartType] = React.useState<"sankey" | "treemap">(
-    "sankey",
-  )
+  const [chartType] = React.useState<"sankey" | "treemap">("sankey")
   const [selectedAccountFilter, setSelectedAccountFilter] =
     React.useState<string>("all")
   const [groupBy, setGroupBy] = React.useState<AccountGrouping>("institution")
@@ -255,7 +253,7 @@ export default function AccountsPage() {
             {/* Title and Controls Row */}
             <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
               <p className="text-base font-medium text-gray-900 dark:text-gray-50">
-                Account Flow
+                Account flow
               </p>
               <div className="flex flex-wrap items-center gap-2">
                 {/* Chart Type Toggle */}

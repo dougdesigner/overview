@@ -392,7 +392,7 @@ export const createColumns = ({
     },
     enableSorting: true,
     meta: {
-      className: "text-right",
+      className: "text-right min-w-40",
       displayName: "Market Value",
     },
   },
@@ -431,7 +431,7 @@ export const createColumns = ({
     },
     enableSorting: true,
     meta: {
-      className: "text-right",
+      className: "text-right min-w-40",
       displayName: "Allocation (%)",
     },
   },
@@ -536,7 +536,7 @@ export const createColumns = ({
     },
     enableSorting: false,
     meta: {
-      className: "text-left",
+      className: "text-left min-w-40",
       displayName: "Institution",
     },
   },
@@ -554,7 +554,7 @@ export const createColumns = ({
     },
     enableSorting: false,
     meta: {
-      className: "text-left",
+      className: "text-left min-w-40 pr-6",
       displayName: "Account",
     },
   },
