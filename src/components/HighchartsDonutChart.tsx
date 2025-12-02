@@ -14,8 +14,6 @@ import { getAssetClassHexColor } from "@/lib/assetClassColors"
 import { RiDownloadLine, RiFullscreenLine } from "@remixicon/react"
 import Highcharts from "highcharts"
 import HighchartsReact from "highcharts-react-official"
-import HighchartsExportData from "highcharts/modules/export-data"
-import HighchartsExporting from "highcharts/modules/exporting"
 import { useTheme } from "next-themes"
 import { useEffect, useRef, useState } from "react"
 
@@ -58,12 +56,24 @@ export function HighchartsDonutChart({
   // Initialize Highcharts modules once
   useEffect(() => {
     if (!modulesInitialized && typeof Highcharts === "object") {
+      // Load exporting first, then export-data (which depends on exporting's prototype)
+      // Using require() ensures sequential loading
+      // eslint-disable-next-line @typescript-eslint/no-require-imports
+      const HighchartsExporting = require("highcharts/modules/exporting")
       if (typeof HighchartsExporting === "function") {
         HighchartsExporting(Highcharts)
+      } else if (HighchartsExporting?.default) {
+        HighchartsExporting.default(Highcharts)
       }
+
+      // eslint-disable-next-line @typescript-eslint/no-require-imports
+      const HighchartsExportData = require("highcharts/modules/export-data")
       if (typeof HighchartsExportData === "function") {
         HighchartsExportData(Highcharts)
+      } else if (HighchartsExportData?.default) {
+        HighchartsExportData.default(Highcharts)
       }
+
       modulesInitialized = true
     }
   }, [])
