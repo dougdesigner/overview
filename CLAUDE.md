@@ -4,7 +4,10 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Overview
 
-This is a Next.js 15 application template from Tremor called "Overview" - a dashboard application for summarizing data across four main areas: agents, retention, support, and workflow management.
+This is a Next.js 15 application template from Tremor called "Overview" - a dashboard application that includes:
+- **Portfolio Management**: Account and holdings tracking with real-time price updates
+- **Exposure Analysis**: Asset class allocation, sector exposure, institution exposure visualizations
+- **Original Dashboard Areas**: Agents, retention, support, and workflow management
 
 ## Tech Stack
 
@@ -61,17 +64,29 @@ pnpm run generate:retention # Generate retention cohorts
   - Faker.js for generating mock data
 
 - `src/lib/` - Utility functions
-  - `utils.ts` - cn() function for class merging
+  - `utils.ts` - cx() function for class merging, focusRing/focusInput utilities
   - `formatters.ts` - Number and date formatting utilities
-  - `chartUtils.ts` - Chart configuration helpers
-  - `logoUtils.ts` - Functions for fetching ticker and institution logos via logo.dev API
+  - `chartUtils.ts` - Chart color palette and configuration helpers
+  - `assetClassColors.ts` - Centralized asset class color configuration for all visualizations
+  - `logoUtils.ts` - Ticker and institution logo URLs via logo.dev API
   - `institutionUtils.ts` - Institution brand colors, labels, and initials helpers
+  - `localStorage.ts` - Versioned localStorage operations with migration support
+  - `indexedDBBackup.ts` - IndexedDB backup/recovery for storage resilience
+  - `stockPriceService.ts` - Stock price lookup with caching
+  - `etfDataService.ts` - ETF holdings and composition data
+  - `etfMetadataService.ts` - ETF metadata lookups
+  - `exposureCalculator.ts` - Portfolio exposure calculations
+  - `alphaVantage.ts` - Alpha Vantage API integration
+
+- `src/hooks/` - Custom React hooks
+  - `usePortfolioStore.ts` - Central state management for portfolio data
+  - `useExposureCalculations.ts` - Portfolio exposure analysis calculations
 
 ### Key Patterns
 
 1. **Component Structure**: All components use TypeScript with explicit prop interfaces and forwardRef pattern for composability
 
-2. **Styling**: Uses tailwind-merge and clsx via `cn()` utility for conditional classes
+2. **Styling**: Uses tailwind-merge and clsx via `cx()` utility for conditional classes
 
 3. **Data Generation**: Mock data generators use Faker.js and follow defined Zod schemas
 
@@ -80,6 +95,12 @@ pnpm run generate:retention # Generate retention cohorts
 5. **Dark Mode**: Implemented with next-themes, class-based switching
 
 6. **Tables**: TanStack Table with server-side features, custom column definitions, and filtering
+
+7. **Storage Events**: Cross-tab synchronization via window storage events
+
+8. **Price Updates**: Holdings auto-update prices via polling with configurable intervals
+
+9. **Logo Fallbacks**: Logo components gracefully degrade to initials with brand colors
 
 ### TypeScript Configuration
 
@@ -289,3 +310,110 @@ const HeavyComponent = dynamic(
 - Uses React 19 with new features
 - Geist Sans font is auto-optimized via next/font
 - No testing framework is currently set up
+
+## API Routes
+
+Serverless API endpoints in `src/app/api/`:
+
+- `/api/logo-url` - Batch logo URL validation and caching
+- `/api/stock-price` - Stock price lookups via Alpha Vantage
+- `/api/etf-data` - ETF holdings and composition data
+- `/api/etf-metadata` - ETF metadata service
+- `/api/etf-holdings` - ETF holdings lookup
+- `/api/company-overview` - Company profile information
+
+## Custom Hooks
+
+### usePortfolioStore
+
+Central state management hook for portfolio data (`src/hooks/usePortfolioStore.ts`):
+- Manages accounts, holdings, and derived calculations
+- Implements layered storage: localStorage (primary) → IndexedDB (backup) → defaults (fallback)
+- Auto-saves on data changes
+- Cross-tab synchronization via storage events
+- Price update polling (every 5 minutes)
+
+### useExposureCalculations
+
+Portfolio exposure analysis hook (`src/hooks/useExposureCalculations.ts`):
+- Calculates asset class, sector, and institution exposures
+- Memoized for performance
+
+## Storage Patterns
+
+### Layered Storage Strategy
+
+Portfolio data uses a resilient layered storage approach:
+
+```
+Storage priority (highest to lowest):
+LocalStorage (primary) → IndexedDB (backup) → Default data (fallback)
+```
+
+### Versioned Storage
+
+All localStorage operations use versioned wrappers for future migrations:
+
+```typescript
+interface StorageData<T> {
+  version: string
+  data: T
+  timestamp: number
+}
+
+// Use helpers from src/lib/localStorage.ts
+import { getFromStorage, setToStorage } from "@/lib/localStorage"
+```
+
+## Asset Class Colors
+
+Centralized color configuration in `src/lib/assetClassColors.ts`:
+
+```typescript
+import {
+  ASSET_CLASS_COLORS,        // Chart color keys (for Recharts)
+  ASSET_CLASS_HEX_COLORS,    // Hex values (for Highcharts)
+  ASSET_CLASS_BG_COLORS,     // Tailwind bg classes
+  getAssetClassColor,        // Helper function
+} from "@/lib/assetClassColors"
+```
+
+This ensures consistent colors for asset classes across all visualizations (Recharts, Highcharts, badges).
+
+## Client Hydration Pattern
+
+For charts and components that need DOM access, ensure hydration is complete before rendering:
+
+```typescript
+const [isClient, setIsClient] = React.useState(false)
+
+React.useEffect(() => {
+  setIsClient(true)
+}, [])
+
+if (!isClient) {
+  return <LoadingPlaceholder />
+}
+
+return <ChartComponent />
+```
+
+## Styling with cx()
+
+The `cx()` utility (from `src/lib/utils.ts`) combines clsx and tailwind-merge:
+
+```typescript
+import { cx } from "@/lib/utils"
+
+className={cx(
+  // base styles
+  "flex items-center gap-2",
+  // theme aware
+  "text-gray-900 dark:text-gray-50",
+  "bg-white dark:bg-gray-950",
+  // conditional
+  isActive && "font-bold",
+  // override safe
+  className,
+)}
+```
