@@ -1,22 +1,25 @@
-# Overview – Portfolio Dashboard
+# ETF Exposure – Portfolio Dashboard
 
 A modern portfolio management dashboard built with [Next.js 15](https://nextjs.org) and [Tremor Raw](https://tremor.so). Track accounts, holdings, and analyze portfolio exposure across asset classes, sectors, and institutions.
 
 ## Features
 
 ### Portfolio Management
+
 - **Account Tracking**: Manage multiple brokerage accounts with institution branding
 - **Holdings Management**: Track stocks, ETFs, mutual funds, and other securities
 - **Real-time Prices**: Auto-updating stock prices with configurable polling
 - **Cross-tab Sync**: Changes sync across browser tabs automatically
 
 ### Exposure Analysis
+
 - **Asset Class Allocation**: Visualize portfolio distribution across U.S. stocks, international stocks, fixed income, and cash
 - **Sector Exposure**: Break down holdings by market sector
 - **Institution Exposure**: See allocation across brokerage accounts
 - **Interactive Charts**: Treemaps, sunbursts, Sankey diagrams, and donut charts
 
 ### Dashboard Areas
+
 - **Overview**: Portfolio summary with key metrics and visualizations
 - **Accounts**: Manage brokerage accounts and view account-level details
 - **Holdings**: Full holdings table with filtering, sorting, and bulk operations
@@ -91,15 +94,19 @@ src/
 ## Key Features
 
 ### Resilient Storage
+
 Portfolio data uses a layered storage strategy:
+
 - **Primary**: localStorage for fast access
 - **Backup**: IndexedDB for resilience
 - **Fallback**: Default data if storage is unavailable
 
 ### Real-time Price Updates
+
 Holdings automatically fetch updated prices via the Alpha Vantage API with intelligent caching and rate limiting.
 
 ### Logo Integration
+
 Institution and ticker logos are fetched from logo.dev with graceful fallbacks to branded initials when logos are unavailable.
 
 ## Notes
