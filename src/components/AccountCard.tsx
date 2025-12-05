@@ -43,6 +43,9 @@ interface AccountCardProps {
     cash: number
   }
 
+  // Portfolio allocation percentage (0-100)
+  allocation?: number
+
   // Action handlers
   onEdit?: () => void
   onDelete?: () => void
@@ -56,6 +59,7 @@ export default function AccountCard({
   totalValue,
   holdingsCount,
   assetAllocation,
+  allocation,
   onEdit,
   onDelete,
   onClick,
@@ -171,8 +175,15 @@ export default function AccountCard({
 
         {/* Financial data */}
         <div className="text-right">
-          <div className="text-base font-medium text-gray-900 dark:text-gray-50">
-            {formatCurrency(totalValue)}
+          <div className="flex items-center justify-end gap-2">
+            <span className="text-base font-medium text-gray-900 dark:text-gray-50">
+              {formatCurrency(totalValue)}
+            </span>
+            {allocation !== undefined && (
+              <span className="rounded-md bg-gray-100 px-1.5 py-0.5 text-sm font-medium tabular-nums text-gray-700 dark:bg-gray-800 dark:text-gray-300">
+                {allocation.toFixed(1)}%
+              </span>
+            )}
           </div>
           <div className="text-sm font-normal text-gray-500 dark:text-gray-400">
             {holdingsCount} {holdingsCount === 1 ? "holding" : "holdings"}

@@ -121,6 +121,11 @@ export default function AccountsPage() {
     setDrawerMode("create")
   }
 
+  // Calculate total portfolio value for allocation percentages
+  const totalPortfolioValue = React.useMemo(() => {
+    return accounts.reduce((sum, acc) => sum + acc.totalValue, 0)
+  }, [accounts])
+
   // Sort accounts alphabetically by name
   const sortedAccounts = React.useMemo(() => {
     return [...accounts].sort((a, b) => a.name.localeCompare(b.name))
@@ -641,6 +646,11 @@ export default function AccountsPage() {
               totalValue={account.totalValue}
               holdingsCount={account.holdingsCount}
               assetAllocation={account.assetAllocation}
+              allocation={
+                totalPortfolioValue > 0
+                  ? (account.totalValue / totalPortfolioValue) * 100
+                  : 0
+              }
               onEdit={() => handleEdit(account.id)}
               onDelete={() => handleDelete(account.id)}
               onClick={() => handleAccountClick(account.id)}
