@@ -70,6 +70,7 @@ interface ExposureTreemapHighchartsProps {
   selectedAccount: string
   logoUrls: Record<string, string | null>
   dataVersion?: number
+  displayValue?: DisplayValue  // External override from page-level filter
 }
 
 type ChartType = "treemap" | "pie"
@@ -100,14 +101,18 @@ export function ExposureTreemapHighchartsWithLogos({
   exposures,
   totalValue,
   logoUrls,
+  displayValue: externalDisplayValue,
 }: ExposureTreemapHighchartsProps) {
   const [chartType, setChartType] = useState<ChartType>("treemap")
   const [groupingMode, setGroupingMode] = useState<GroupingMode>("sector")
   const [sizingMode] = useState<SizingMode>("proportional")
   const [showLogo, setShowLogo] = useState(true)
   const [titleMode, setTitleMode] = useState<TitleMode>("symbol")
-  const [displayValue, setDisplayValue] =
+  const [internalDisplayValue, setInternalDisplayValue] =
     useState<DisplayValue>("pct-portfolio")
+
+  // Use external display value if provided, otherwise use internal state
+  const displayValue = externalDisplayValue ?? internalDisplayValue
   // Modules are initialized at module level, so we default to true
   const [modulesLoaded] = useState(true)
   const { theme } = useTheme()
@@ -1551,7 +1556,7 @@ export function ExposureTreemapHighchartsWithLogos({
                   <DropdownMenuRadioGroup
                     value={displayValue}
                     onValueChange={(value) =>
-                      setDisplayValue(value as DisplayValue)
+                      setInternalDisplayValue(value as DisplayValue)
                     }
                   >
                     <DropdownMenuRadioItem

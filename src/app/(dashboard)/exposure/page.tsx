@@ -3,11 +3,21 @@
 import { Badge } from "@/components/Badge"
 import { Button } from "@/components/Button"
 import { Divider } from "@/components/Divider"
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/Select"
 import { AccountSelector } from "@/components/ui/AccountSelector"
 import { ExposureTable } from "@/components/ui/data-table-exposure/ExposureTable"
 import { useExposureCalculations } from "@/hooks/useExposureCalculations"
 import { usePortfolioStore } from "@/hooks/usePortfolioStore"
 import React, { useMemo, useRef, useState, useEffect } from "react"
+
+// Display value type for the exposure visualization
+export type ExposureDisplayValue = "market-value" | "pct-stocks" | "pct-portfolio"
 
 export default function ExposurePage() {
   // Use portfolio store for holdings and accounts data
@@ -50,6 +60,9 @@ export default function ExposurePage() {
 
   // Account filter state
   const [selectedAccount, setSelectedAccount] = React.useState<string>("all")
+
+  // Display value filter state
+  const [displayValue, setDisplayValue] = useState<ExposureDisplayValue>("pct-portfolio")
 
   // Sticky filter state
   const [isFilterSticky, setIsFilterSticky] = useState(false)
@@ -159,17 +172,37 @@ export default function ExposurePage() {
           }`}
         >
           <div className="flex items-center justify-between rounded-lg border border-gray-200 bg-white/95 px-4 py-3 shadow-lg backdrop-blur-sm dark:border-gray-800 dark:bg-gray-950/95">
-            <div className="flex items-center gap-2">
-              <label className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                Account
-              </label>
-              <AccountSelector
-                accounts={exposureAccounts}
-                value={selectedAccount}
-                onValueChange={setSelectedAccount}
-                showAllOption={true}
-                className="w-[200px]"
-              />
+            <div className="flex items-center gap-4">
+              <div className="flex items-center gap-2">
+                <label className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                  Account
+                </label>
+                <AccountSelector
+                  accounts={exposureAccounts}
+                  value={selectedAccount}
+                  onValueChange={setSelectedAccount}
+                  showAllOption={true}
+                  className="w-[200px]"
+                />
+              </div>
+              <div className="flex items-center gap-2">
+                <label className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                  Display
+                </label>
+                <Select
+                  value={displayValue}
+                  onValueChange={(value) => setDisplayValue(value as ExposureDisplayValue)}
+                >
+                  <SelectTrigger className="w-[140px]">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="market-value">Market value</SelectItem>
+                    <SelectItem value="pct-stocks">Stock %</SelectItem>
+                    <SelectItem value="pct-portfolio">Portfolio %</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
             </div>
             <div className="text-right">
               <div className="text-base font-medium text-gray-900 dark:text-gray-50">
@@ -187,21 +220,44 @@ export default function ExposurePage() {
       {/* Account Filter and Summary - Only show when there are accounts and holdings */}
       {accounts.length > 0 && holdings.length > 0 && (
         <div ref={filterRef} className="flex items-center justify-between">
-          <div className="flex flex-col gap-1 sm:flex-row sm:items-center sm:gap-2">
-            <label
-              htmlFor="account-filter"
-              className="text-sm font-medium text-gray-700 dark:text-gray-300"
-            >
-              Account
-            </label>
-            <AccountSelector
-              accounts={exposureAccounts}
-              value={selectedAccount}
-              onValueChange={setSelectedAccount}
-              showAllOption={true}
-              className="w-full sm:w-[200px]"
-              id="account-filter"
-            />
+          <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:gap-4">
+            <div className="flex flex-col gap-1 sm:flex-row sm:items-center sm:gap-2">
+              <label
+                htmlFor="account-filter"
+                className="text-sm font-medium text-gray-700 dark:text-gray-300"
+              >
+                Account
+              </label>
+              <AccountSelector
+                accounts={exposureAccounts}
+                value={selectedAccount}
+                onValueChange={setSelectedAccount}
+                showAllOption={true}
+                className="w-full sm:w-[200px]"
+                id="account-filter"
+              />
+            </div>
+            <div className="flex flex-col gap-1 sm:flex-row sm:items-center sm:gap-2">
+              <label
+                htmlFor="display-filter"
+                className="text-sm font-medium text-gray-700 dark:text-gray-300"
+              >
+                Display
+              </label>
+              <Select
+                value={displayValue}
+                onValueChange={(value) => setDisplayValue(value as ExposureDisplayValue)}
+              >
+                <SelectTrigger className="w-full sm:w-[140px]" id="display-filter">
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="market-value">Market value</SelectItem>
+                  <SelectItem value="pct-stocks">Stock %</SelectItem>
+                  <SelectItem value="pct-portfolio">Portfolio %</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
           </div>
           <div className="text-right">
             <div className="text-base font-medium text-gray-900 dark:text-gray-50">
@@ -273,6 +329,7 @@ export default function ExposurePage() {
             onRefresh={handleRefresh}
             dataVersion={dataVersion}
             selectedAccount={selectedAccount}
+            displayValue={displayValue}
           />
         )}
       </div>

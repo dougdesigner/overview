@@ -62,6 +62,9 @@ export interface Account {
   institution: string
 }
 
+// Display value type for exposure visualization
+export type ExposureDisplayValue = "market-value" | "pct-stocks" | "pct-portfolio"
+
 export interface ExposureTableProps {
   holdings: PortfolioHolding[]
   accounts: Account[]
@@ -69,6 +72,7 @@ export interface ExposureTableProps {
   lastUpdated?: Date
   dataVersion?: number
   selectedAccount?: string
+  displayValue?: ExposureDisplayValue
 }
 
 export interface ExposureCalculationResult {

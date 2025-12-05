@@ -126,9 +126,9 @@ export default function AccountsPage() {
     return accounts.reduce((sum, acc) => sum + acc.totalValue, 0)
   }, [accounts])
 
-  // Sort accounts alphabetically by name
+  // Sort accounts by highest value (highest allocation first)
   const sortedAccounts = React.useMemo(() => {
-    return [...accounts].sort((a, b) => a.name.localeCompare(b.name))
+    return [...accounts].sort((a, b) => b.totalValue - a.totalValue)
   }, [accounts])
 
   // Handlers for edit and delete actions

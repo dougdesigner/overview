@@ -35,7 +35,7 @@ import { createColumns } from "./columns"
 import { ExposureTreemapHighchartsWithLogos as ExposureTreemapHighcharts } from "./ExposureTreemapHighchartsWrapper" // Version with logos
 import { ExposureTableProps, StockExposure } from "./types"
 
-export function ExposureTable({ holdings, accounts, dataVersion, selectedAccount = "all" }: ExposureTableProps) {
+export function ExposureTable({ holdings, accounts, dataVersion, selectedAccount = "all", displayValue }: ExposureTableProps) {
   const [data, setData] = React.useState<StockExposure[]>([])
   const [sorting, setSorting] = React.useState<SortingState>([
     { id: "percentOfPortfolio", desc: true },
@@ -290,6 +290,7 @@ export function ExposureTable({ holdings, accounts, dataVersion, selectedAccount
           selectedAccount={selectedAccount}
           logoUrls={logoUrls}
           dataVersion={dataVersion}
+          displayValue={displayValue}
         />
       )}
 
