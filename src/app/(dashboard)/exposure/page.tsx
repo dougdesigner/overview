@@ -1,5 +1,6 @@
 "use client"
 
+import { Badge } from "@/components/Badge"
 import { Button } from "@/components/Button"
 import { Divider } from "@/components/Divider"
 import { AccountSelector } from "@/components/ui/AccountSelector"
@@ -19,6 +20,7 @@ export default function ExposurePage() {
 
   // Get exposure calculations
   const {
+    exposures,
     error,
   } = useExposureCalculations()
 
@@ -133,8 +135,9 @@ export default function ExposurePage() {
     <main className="min-h-[calc(100vh-180px)]">
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <h1 className="text-2xl font-semibold text-gray-900 dark:text-gray-50">
+          <h1 className="flex items-center gap-2 text-2xl font-semibold text-gray-900 dark:text-gray-50">
             Exposure
+            {exposures.length > 0 && <Badge variant="neutral">{exposures.length.toLocaleString()}</Badge>}
           </h1>
           <p className="text-gray-500 dark:text-gray-500 sm:text-sm/6">
             See your true stock exposure across all ETFs and direct holdings

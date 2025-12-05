@@ -1,6 +1,7 @@
 "use client"
 
 import AccountCard from "@/components/AccountCard"
+import { Badge } from "@/components/Badge"
 import type {
   AccountDisplayValue,
   AccountGrouping,
@@ -210,8 +211,9 @@ export default function AccountsPage() {
       {errorMessage}
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <h1 className="text-2xl font-semibold text-gray-900 dark:text-gray-50">
+          <h1 className="flex items-center gap-2 text-2xl font-semibold text-gray-900 dark:text-gray-50">
             Accounts
+            {accounts.length > 0 && <Badge variant="neutral">{accounts.length}</Badge>}
           </h1>
           <p className="text-gray-500 dark:text-gray-400 sm:text-sm/6">
             Organize your holdings by account for clearer insights
