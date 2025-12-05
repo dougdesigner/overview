@@ -42,22 +42,23 @@ export const ASSET_CLASS_HEX_COLORS: Record<string, string> = {
 }
 
 // Background color classes for asset class indicators
+// Uses -500 shades to match CategoryBar visualization (from chartUtils.ts)
 export const ASSET_CLASS_BG_COLORS: Record<string, string> = {
   // Core asset classes
-  "U.S. Stocks": "bg-blue-600 dark:bg-blue-500",
-  "Non-U.S. Stocks": "bg-cyan-600 dark:bg-cyan-500",
-  "Fixed Income": "bg-amber-600 dark:bg-amber-500",
-  "Cash": "bg-emerald-600 dark:bg-emerald-500",
-  "Other": "bg-gray-600 dark:bg-gray-500",
+  "U.S. Stocks": "bg-blue-500",
+  "Non-U.S. Stocks": "bg-cyan-500",
+  "Fixed Income": "bg-amber-500",
+  "Cash": "bg-emerald-500",
+  "Other": "bg-gray-500",
 
   // Alternative names
-  "US Stocks": "bg-blue-600 dark:bg-blue-500",
-  "Non-US Stocks": "bg-cyan-600 dark:bg-cyan-500",
-  "Bonds": "bg-amber-600 dark:bg-amber-500",
-  "Cash & Equivalents": "bg-emerald-600 dark:bg-emerald-500",
-  "Alternative": "bg-violet-600 dark:bg-violet-500",
-  "Real Estate": "bg-rose-600 dark:bg-rose-500",
-  "Commodities": "bg-orange-600 dark:bg-orange-500",
+  "US Stocks": "bg-blue-500",
+  "Non-US Stocks": "bg-cyan-500",
+  "Bonds": "bg-amber-500",
+  "Cash & Equivalents": "bg-emerald-500",
+  "Alternative": "bg-violet-500",
+  "Real Estate": "bg-rose-500",
+  "Commodities": "bg-orange-500",
 }
 
 // Border color classes for asset class indicators
@@ -91,7 +92,7 @@ export function getAssetClassHexColor(assetClass: string): string {
 
 // Helper function to get background color class for an asset class
 export function getAssetClassBgColor(assetClass: string): string {
-  return ASSET_CLASS_BG_COLORS[assetClass] || "bg-gray-600 dark:bg-gray-500"
+  return ASSET_CLASS_BG_COLORS[assetClass] || "bg-gray-500"
 }
 
 // Helper function to get border color class for an asset class

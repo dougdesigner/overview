@@ -28,31 +28,31 @@ const getDefaultAssetClasses = (): AssetClassItem[] => [
     name: "U.S. Stocks",
     percentage: 34.4,
     color: "blue",
-    bgColorClass: "bg-blue-600 dark:bg-blue-500",
+    bgColorClass: "bg-blue-500",
   },
   {
     name: "Non-U.S. Stocks",
     percentage: 30.6,
     color: "cyan",
-    bgColorClass: "bg-cyan-600 dark:bg-cyan-500",
+    bgColorClass: "bg-cyan-500",
   },
   {
     name: "Fixed Income",
     percentage: 20.9,
     color: "amber",
-    bgColorClass: "bg-amber-600 dark:bg-amber-500",
+    bgColorClass: "bg-amber-500",
   },
   {
     name: "Cash",
     percentage: 14.1,
     color: "emerald",
-    bgColorClass: "bg-emerald-600 dark:bg-emerald-500",
+    bgColorClass: "bg-emerald-500",
   },
   {
     name: "Other",
     percentage: 0,
     color: "gray",
-    bgColorClass: "bg-gray-400 dark:bg-gray-600",
+    bgColorClass: "bg-gray-500",
   },
 ]
 
