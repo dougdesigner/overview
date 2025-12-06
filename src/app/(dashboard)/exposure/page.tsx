@@ -13,10 +13,7 @@ import {
 import { useExposureCalculations } from "@/hooks/useExposureCalculations"
 import { usePortfolioStore } from "@/hooks/usePortfolioStore"
 import { RiCloseLine } from "@remixicon/react"
-import React, { useMemo, useRef, useState, useEffect } from "react"
-
-// Magnificent 7 tickers (matching ExposureTable)
-const MAGNIFICENT_7 = ["AAPL", "MSFT", "GOOGL", "GOOG", "AMZN", "NVDA", "META", "TSLA"]
+import React, { useMemo, useRef, useState, useEffect, useCallback } from "react"
 
 export default function ExposurePage() {
   // Use portfolio store for holdings and accounts data
@@ -77,6 +74,16 @@ export default function ExposurePage() {
   const [isFilterSticky, setIsFilterSticky] = useState(false)
   const filterRef = useRef<HTMLDivElement>(null)
 
+  // State for filtered data reported by ExposureTable
+  const [tableFilteredCount, setTableFilteredCount] = useState(0)
+  const [tableFilteredValue, setTableFilteredValue] = useState(0)
+
+  // Callback for ExposureTable to report filtered data
+  const handleFilteredDataChange = useCallback((count: number, value: number) => {
+    setTableFilteredCount(count)
+    setTableFilteredValue(value)
+  }, [])
+
   // Intersection Observer for sticky filter
   useEffect(() => {
     const filterElement = filterRef.current
@@ -98,38 +105,6 @@ export default function ExposurePage() {
     observer.observe(filterElement)
     return () => observer.disconnect()
   }, [accounts.length, holdings.length])
-
-  // Filter holdings by account
-  const filteredHoldings = useMemo(() => {
-    if (selectedAccount === "all") return portfolioHoldings
-    return portfolioHoldings.filter((h) => h.accountId === selectedAccount)
-  }, [portfolioHoldings, selectedAccount])
-
-  // Calculate total value of filtered holdings
-  const filteredTotalValue = useMemo(() => {
-    return filteredHoldings.reduce((sum, h) => sum + h.marketValue, 0)
-  }, [filteredHoldings])
-
-  // Get filtered stock count based on selected account and holdings filter
-  const filteredStockCount = useMemo(() => {
-    // Start with all exposures or account-filtered exposures
-    let filtered = exposures
-    if (selectedAccount !== "all") {
-      const accountTickers = new Set(filteredHoldings.map((h) => h.ticker))
-      filtered = exposures.filter((e) => accountTickers.has(e.ticker))
-    }
-
-    // Apply holdings filter
-    if (holdingsFilter === "mag7") {
-      filtered = filtered.filter((e) => MAGNIFICENT_7.includes(e.ticker.toUpperCase()))
-    } else if (holdingsFilter === "top7") {
-      filtered = [...filtered].sort((a, b) => b.percentOfPortfolio - a.percentOfPortfolio).slice(0, 7)
-    } else if (holdingsFilter === "top10") {
-      filtered = [...filtered].sort((a, b) => b.percentOfPortfolio - a.percentOfPortfolio).slice(0, 10)
-    }
-
-    return filtered.length
-  }, [exposures, selectedAccount, filteredHoldings, holdingsFilter])
 
   // Format currency
   const formatCurrency = (value: number) => {
@@ -233,11 +208,11 @@ export default function ExposurePage() {
           <div className="flex items-center justify-between rounded-lg border border-gray-200 bg-white/95 px-4 py-3 shadow-lg backdrop-blur-sm dark:border-gray-800 dark:bg-gray-950/95">
             <div className="text-left">
               <div className="text-base font-medium text-gray-900 dark:text-gray-50">
-                {formatCurrency(filteredTotalValue)}
+                {formatCurrency(tableFilteredValue)}
               </div>
               <div className="text-sm text-gray-500 dark:text-gray-400">
-                {filteredStockCount.toLocaleString()}{" "}
-                {filteredStockCount === 1 ? "stock" : "stocks"}
+                {tableFilteredCount.toLocaleString()}{" "}
+                {tableFilteredCount === 1 ? "stock" : "stocks"}
               </div>
             </div>
             <div className="flex items-center gap-2 sm:gap-4">
@@ -293,11 +268,11 @@ export default function ExposurePage() {
         <div ref={filterRef} className="flex items-center justify-between">
           <div className="text-left">
             <div className="text-base font-medium text-gray-900 dark:text-gray-50">
-              {formatCurrency(filteredTotalValue)}
+              {formatCurrency(tableFilteredValue)}
             </div>
             <div className="text-sm font-normal text-gray-500 dark:text-gray-400">
-              {filteredStockCount.toLocaleString()}{" "}
-              {filteredStockCount === 1 ? "stock" : "stocks"}
+              {tableFilteredCount.toLocaleString()}{" "}
+              {tableFilteredCount === 1 ? "stock" : "stocks"}
             </div>
           </div>
           <div className="flex items-center gap-2 sm:gap-4">
@@ -409,6 +384,7 @@ export default function ExposurePage() {
             holdingsFilter={holdingsFilter}
             combineGoogleShares={combineGoogleShares}
             displayValue={displayValue}
+            onFilteredDataChange={handleFilteredDataChange}
           />
         )}
       </div>

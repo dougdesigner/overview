@@ -81,6 +81,7 @@ export interface ExposureTableProps {
   holdingsFilter?: HoldingsFilter
   combineGoogleShares?: boolean
   displayValue?: ExposureDisplayValue
+  onFilteredDataChange?: (count: number, totalValue: number) => void
 }
 
 export interface ExposureCalculationResult {

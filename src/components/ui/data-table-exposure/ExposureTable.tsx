@@ -66,7 +66,7 @@ const combineGoogleEntries = (exposures: StockExposure[]): StockExposure[] => {
     .map((e) => (e.ticker === "GOOGL" ? combined : e))
 }
 
-export function ExposureTable({ holdings, accounts, dataVersion, selectedAccount = "all", holdingsFilter = "all", combineGoogleShares = false, displayValue = "pct-portfolio" }: ExposureTableProps) {
+export function ExposureTable({ holdings, accounts, dataVersion, selectedAccount = "all", holdingsFilter = "all", combineGoogleShares = false, displayValue = "pct-portfolio", onFilteredDataChange }: ExposureTableProps) {
   const [data, setData] = React.useState<StockExposure[]>([])
   const [sorting, setSorting] = React.useState<SortingState>([
     { id: "percentOfPortfolio", desc: true },
@@ -256,6 +256,17 @@ export function ExposureTable({ holdings, accounts, dataVersion, selectedAccount
       .filter((exp) => !exp.isETFBreakdown && exp.totalValue > 0)
       .reduce((sum, exp) => sum + exp.totalValue, 0)
   }, [data, filteredData, selectedAccount, combineGoogleShares])
+
+  // Report filtered data count and value to parent
+  React.useEffect(() => {
+    if (onFilteredDataChange) {
+      const count = exposuresForVisualization.filter((e) => !e.isETFBreakdown).length
+      const value = exposuresForVisualization
+        .filter((e) => !e.isETFBreakdown)
+        .reduce((sum, e) => sum + e.totalValue, 0)
+      onFilteredDataChange(count, value)
+    }
+  }, [exposuresForVisualization, onFilteredDataChange])
 
   // Paginate the sorted data (parent rows only)
   const paginatedData = React.useMemo(() => {
