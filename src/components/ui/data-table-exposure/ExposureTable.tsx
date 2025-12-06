@@ -66,7 +66,7 @@ const combineGoogleEntries = (exposures: StockExposure[]): StockExposure[] => {
     .map((e) => (e.ticker === "GOOGL" ? combined : e))
 }
 
-export function ExposureTable({ holdings, accounts, dataVersion, selectedAccount = "all", holdingsFilter = "all", combineGoogleShares = false, displayValue = "pct-portfolio", groupingMode = "sector" }: ExposureTableProps) {
+export function ExposureTable({ holdings, accounts, dataVersion, selectedAccount = "all", holdingsFilter = "all", combineGoogleShares = false, displayValue = "pct-portfolio" }: ExposureTableProps) {
   const [data, setData] = React.useState<StockExposure[]>([])
   const [sorting, setSorting] = React.useState<SortingState>([
     { id: "percentOfPortfolio", desc: true },
@@ -402,7 +402,6 @@ export function ExposureTable({ holdings, accounts, dataVersion, selectedAccount
           logoUrls={logoUrls}
           dataVersion={dataVersion}
           holdingsFilter={holdingsFilter}
-          groupingMode={groupingMode}
           displayValue={displayValue}
         />
       )}

@@ -71,7 +71,6 @@ interface ExposureTreemapHighchartsProps {
   logoUrls: Record<string, string | null>
   dataVersion?: number
   holdingsFilter?: "all" | "mag7" | "top7" | "top10"  // View filter for legend display
-  groupingMode?: GroupingMode  // Grouping mode from page-level settings
   displayValue?: DisplayValue  // Display value from page-level settings
 }
 
@@ -108,7 +107,6 @@ export function ExposureTreemapHighchartsWithLogos({
   stocksOnlyValue: stocksOnlyValueProp,
   logoUrls,
   holdingsFilter = "all",
-  groupingMode = "sector",
   displayValue: displayValueProp = "pct-portfolio",
 }: ExposureTreemapHighchartsProps) {
   const [chartType, setChartType] = useState<ChartType>("treemap")
@@ -119,6 +117,8 @@ export function ExposureTreemapHighchartsWithLogos({
   const [showChartValue, setShowChartValue] = useState(true)
   // Effective display value: uses page-level setting when show is on, "none" when off
   const displayValue = showChartValue ? displayValueProp : "none"
+  // Local state for grouping mode
+  const [groupingMode, setGroupingMode] = useState<GroupingMode>("sector")
   // Modules are initialized at module level, so we default to true
   const [modulesLoaded] = useState(true)
   const { theme } = useTheme()
@@ -1559,6 +1559,39 @@ export function ExposureTreemapHighchartsWithLogos({
               >
                 Show value
               </DropdownMenuCheckboxItem>
+
+              <DropdownMenuSeparator />
+
+              <DropdownMenuSubMenu>
+                <DropdownMenuSubMenuTrigger>
+                  <span>Group by</span>
+                  <span className="ml-auto text-xs text-gray-500">
+                    {groupingMode === "none"
+                      ? "None"
+                      : groupingMode === "sector"
+                        ? "Sector"
+                        : "Sector & Industry"}
+                  </span>
+                </DropdownMenuSubMenuTrigger>
+                <DropdownMenuSubMenuContent>
+                  <DropdownMenuRadioGroup
+                    value={groupingMode}
+                    onValueChange={(value) =>
+                      setGroupingMode(value as GroupingMode)
+                    }
+                  >
+                    <DropdownMenuRadioItem value="none" iconType="check">
+                      None
+                    </DropdownMenuRadioItem>
+                    <DropdownMenuRadioItem value="sector" iconType="check">
+                      Sector
+                    </DropdownMenuRadioItem>
+                    <DropdownMenuRadioItem value="sector-industry" iconType="check">
+                      Sector & Industry
+                    </DropdownMenuRadioItem>
+                  </DropdownMenuRadioGroup>
+                </DropdownMenuSubMenuContent>
+              </DropdownMenuSubMenu>
             </DropdownMenuContent>
           </DropdownMenu>
 

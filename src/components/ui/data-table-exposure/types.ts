@@ -81,7 +81,6 @@ export interface ExposureTableProps {
   holdingsFilter?: HoldingsFilter
   combineGoogleShares?: boolean
   displayValue?: ExposureDisplayValue
-  groupingMode?: GroupingMode
 }
 
 export interface ExposureCalculationResult {

@@ -8,7 +8,6 @@ import { DashboardSettingsDropdown } from "@/components/ui/DashboardSettingsDrop
 import { ExposureTable } from "@/components/ui/data-table-exposure/ExposureTable"
 import {
   ExposureDisplayValue,
-  GroupingMode,
   HoldingsFilter,
 } from "@/components/ui/data-table-exposure/types"
 import { useExposureCalculations } from "@/hooks/useExposureCalculations"
@@ -66,9 +65,6 @@ export default function ExposurePage() {
   // Display value state (moved from chart)
   const [displayValue, setDisplayValue] =
     useState<ExposureDisplayValue>("pct-portfolio")
-
-  // Grouping mode state (moved from chart)
-  const [groupingMode, setGroupingMode] = useState<GroupingMode>("sector")
 
   // Sticky filter state
   const [isFilterSticky, setIsFilterSticky] = useState(false)
@@ -203,8 +199,6 @@ export default function ExposurePage() {
               <DashboardSettingsDropdown
                 holdingsFilter={holdingsFilter}
                 onHoldingsFilterChange={setHoldingsFilter}
-                groupingMode={groupingMode}
-                onGroupingModeChange={setGroupingMode}
                 displayValue={displayValue}
                 onDisplayValueChange={setDisplayValue}
                 combineGoogleShares={combineGoogleShares}
@@ -247,8 +241,6 @@ export default function ExposurePage() {
             <DashboardSettingsDropdown
               holdingsFilter={holdingsFilter}
               onHoldingsFilterChange={setHoldingsFilter}
-              groupingMode={groupingMode}
-              onGroupingModeChange={setGroupingMode}
               displayValue={displayValue}
               onDisplayValueChange={setDisplayValue}
               combineGoogleShares={combineGoogleShares}
@@ -319,7 +311,6 @@ export default function ExposurePage() {
             holdingsFilter={holdingsFilter}
             combineGoogleShares={combineGoogleShares}
             displayValue={displayValue}
-            groupingMode={groupingMode}
           />
         )}
       </div>

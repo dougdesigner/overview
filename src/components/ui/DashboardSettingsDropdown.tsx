@@ -17,7 +17,6 @@ import {
 import { Tooltip } from "@/components/Tooltip"
 import {
   ExposureDisplayValue,
-  GroupingMode,
   HoldingsFilter,
 } from "@/components/ui/data-table-exposure/types"
 import { RiFilterLine } from "@remixicon/react"
@@ -25,8 +24,6 @@ import { RiFilterLine } from "@remixicon/react"
 interface DashboardSettingsDropdownProps {
   holdingsFilter: HoldingsFilter
   onHoldingsFilterChange: (value: HoldingsFilter) => void
-  groupingMode: GroupingMode
-  onGroupingModeChange: (value: GroupingMode) => void
   displayValue: ExposureDisplayValue
   onDisplayValueChange: (value: ExposureDisplayValue) => void
   combineGoogleShares: boolean
@@ -47,18 +44,6 @@ const getHoldingsFilterLabel = (filter: HoldingsFilter): string => {
   }
 }
 
-// Helper to get display text for grouping mode
-const getGroupingModeLabel = (mode: GroupingMode): string => {
-  switch (mode) {
-    case "none":
-      return "No group"
-    case "sector":
-      return "Sector"
-    case "sector-industry":
-      return "Sector & Industry"
-  }
-}
-
 // Helper to get display text for display value
 const getDisplayValueLabel = (value: ExposureDisplayValue): string => {
   switch (value) {
@@ -76,8 +61,6 @@ const getDisplayValueLabel = (value: ExposureDisplayValue): string => {
 export function DashboardSettingsDropdown({
   holdingsFilter,
   onHoldingsFilterChange,
-  groupingMode,
-  onGroupingModeChange,
   displayValue,
   onDisplayValueChange,
   combineGoogleShares,
@@ -122,36 +105,6 @@ export function DashboardSettingsDropdown({
               </DropdownMenuRadioItem>
               <DropdownMenuRadioItem value="top10" iconType="check">
                 Top 10
-              </DropdownMenuRadioItem>
-            </DropdownMenuRadioGroup>
-          </DropdownMenuSubMenuContent>
-        </DropdownMenuSubMenu>
-
-        <DropdownMenuSeparator />
-
-        {/* Group by submenu */}
-        <DropdownMenuSubMenu>
-          <DropdownMenuSubMenuTrigger>
-            <span>Group by</span>
-            <span className="ml-auto text-xs text-gray-500">
-              {getGroupingModeLabel(groupingMode)}
-            </span>
-          </DropdownMenuSubMenuTrigger>
-          <DropdownMenuSubMenuContent>
-            <DropdownMenuRadioGroup
-              value={groupingMode}
-              onValueChange={(value) =>
-                onGroupingModeChange(value as GroupingMode)
-              }
-            >
-              <DropdownMenuRadioItem value="none" iconType="check">
-                No group
-              </DropdownMenuRadioItem>
-              <DropdownMenuRadioItem value="sector" iconType="check">
-                Sector
-              </DropdownMenuRadioItem>
-              <DropdownMenuRadioItem value="sector-industry" iconType="check">
-                Sector & Industry
               </DropdownMenuRadioItem>
             </DropdownMenuRadioGroup>
           </DropdownMenuSubMenuContent>
