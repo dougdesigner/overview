@@ -5,6 +5,7 @@ import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
   DropdownMenuContent,
+  DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuRadioGroup,
   DropdownMenuRadioItem,
@@ -16,18 +17,24 @@ import {
 } from "@/components/DropdownMenu"
 import { Tooltip } from "@/components/Tooltip"
 import {
+  Account,
   ExposureDisplayValue,
   HoldingsFilter,
 } from "@/components/ui/data-table-exposure/types"
-import { RiFilterLine } from "@remixicon/react"
+import { InstitutionLogo } from "@/components/ui/InstitutionLogo"
+import { RiFilterLine, RiResetLeftLine } from "@remixicon/react"
 
 interface DashboardSettingsDropdownProps {
+  accounts?: Account[]
+  selectedAccount?: string
+  onAccountChange?: (value: string) => void
   holdingsFilter: HoldingsFilter
   onHoldingsFilterChange: (value: HoldingsFilter) => void
   displayValue: ExposureDisplayValue
   onDisplayValueChange: (value: ExposureDisplayValue) => void
   combineGoogleShares: boolean
   onCombineGoogleSharesChange: (value: boolean) => void
+  onReset?: () => void
 }
 
 // Helper to get display text for holdings filter
@@ -59,18 +66,29 @@ const getDisplayValueLabel = (value: ExposureDisplayValue): string => {
 }
 
 export function DashboardSettingsDropdown({
+  accounts,
+  selectedAccount,
+  onAccountChange,
   holdingsFilter,
   onHoldingsFilterChange,
   displayValue,
   onDisplayValueChange,
   combineGoogleShares,
   onCombineGoogleSharesChange,
+  onReset,
 }: DashboardSettingsDropdownProps) {
   // Check if any setting differs from default
   const hasChanges =
+    (selectedAccount && selectedAccount !== "all") ||
     holdingsFilter !== "all" ||
     displayValue !== "pct-portfolio" ||
     combineGoogleShares !== false
+
+  // Get selected account name for display
+  const selectedAccountName =
+    selectedAccount === "all" || !selectedAccount
+      ? "All"
+      : accounts?.find((a) => a.id === selectedAccount)?.name || "All"
 
   return (
     <DropdownMenu>
@@ -88,10 +106,45 @@ export function DashboardSettingsDropdown({
         <DropdownMenuLabel>DASHBOARD SETTINGS</DropdownMenuLabel>
         <DropdownMenuSeparator />
 
-        {/* View submenu */}
+        {/* Account filter */}
+        {accounts && accounts.length > 0 && onAccountChange && (
+          <DropdownMenuSubMenu>
+            <DropdownMenuSubMenuTrigger>
+              <span>Account</span>
+              <span className="ml-auto text-xs text-gray-500">
+                {selectedAccountName}
+              </span>
+            </DropdownMenuSubMenuTrigger>
+            <DropdownMenuSubMenuContent>
+              <DropdownMenuRadioGroup
+                value={selectedAccount || "all"}
+                onValueChange={onAccountChange}
+              >
+                <DropdownMenuRadioItem value="all" iconType="check">
+                  All Accounts
+                </DropdownMenuRadioItem>
+                {accounts.map((account) => (
+                  <DropdownMenuRadioItem
+                    key={account.id}
+                    value={account.id}
+                    iconType="check"
+                  >
+                    <InstitutionLogo
+                      institution={account.institution}
+                      className="size-5"
+                    />
+                    {account.name}
+                  </DropdownMenuRadioItem>
+                ))}
+              </DropdownMenuRadioGroup>
+            </DropdownMenuSubMenuContent>
+          </DropdownMenuSubMenu>
+        )}
+
+        {/* Stocks filter */}
         <DropdownMenuSubMenu>
           <DropdownMenuSubMenuTrigger>
-            <span>View</span>
+            <span>Stocks</span>
             <span className="ml-auto text-xs text-gray-500">
               {getHoldingsFilterLabel(holdingsFilter)}
             </span>
@@ -118,11 +171,12 @@ export function DashboardSettingsDropdown({
             </DropdownMenuRadioGroup>
           </DropdownMenuSubMenuContent>
         </DropdownMenuSubMenu>
+        <DropdownMenuSeparator />
 
-        {/* Display value submenu */}
+        {/* Highlight */}
         <DropdownMenuSubMenu>
           <DropdownMenuSubMenuTrigger>
-            <span>Display value</span>
+            <span>Highlight</span>
             <span className="ml-auto text-xs text-gray-500">
               {getDisplayValueLabel(displayValue)}
             </span>
@@ -146,7 +200,6 @@ export function DashboardSettingsDropdown({
             </DropdownMenuRadioGroup>
           </DropdownMenuSubMenuContent>
         </DropdownMenuSubMenu>
-
         <DropdownMenuSeparator />
 
         {/* Combine Google checkbox */}
@@ -156,6 +209,20 @@ export function DashboardSettingsDropdown({
         >
           Combine GOOG/GOOGL
         </DropdownMenuCheckboxItem>
+
+        {/* ACTIONS - Reset with muted styling */}
+        {onReset && hasChanges && (
+          <>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem
+              onClick={onReset}
+              className="text-gray-500 dark:text-gray-400"
+            >
+              <RiResetLeftLine className="mr-2 size-4" aria-hidden="true" />
+              Reset All
+            </DropdownMenuItem>
+          </>
+        )}
       </DropdownMenuContent>
     </DropdownMenu>
   )

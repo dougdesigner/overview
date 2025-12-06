@@ -3,9 +3,8 @@
 import { Badge } from "@/components/Badge"
 import { Button } from "@/components/Button"
 import { Divider } from "@/components/Divider"
-import { Tooltip } from "@/components/Tooltip"
-import { AccountSelector } from "@/components/ui/AccountSelector"
 import { DashboardSettingsDropdown } from "@/components/ui/DashboardSettingsDropdown"
+import { InstitutionLogo } from "@/components/ui/InstitutionLogo"
 import { ExposureTable } from "@/components/ui/data-table-exposure/ExposureTable"
 import {
   ExposureDisplayValue,
@@ -13,8 +12,11 @@ import {
 } from "@/components/ui/data-table-exposure/types"
 import { useExposureCalculations } from "@/hooks/useExposureCalculations"
 import { usePortfolioStore } from "@/hooks/usePortfolioStore"
-import { RiCloseLine, RiResetLeftLine } from "@remixicon/react"
+import { RiCloseLine } from "@remixicon/react"
 import React, { useMemo, useRef, useState, useEffect } from "react"
+
+// Magnificent 7 tickers (matching ExposureTable)
+const MAGNIFICENT_7 = ["AAPL", "MSFT", "GOOGL", "GOOG", "AMZN", "NVDA", "META", "TSLA"]
 
 export default function ExposurePage() {
   // Use portfolio store for holdings and accounts data
@@ -97,17 +99,37 @@ export default function ExposurePage() {
     return () => observer.disconnect()
   }, [accounts.length, holdings.length])
 
-  // Filter holdings by selected account
+  // Filter holdings by account
   const filteredHoldings = useMemo(() => {
-    return selectedAccount === "all"
-      ? portfolioHoldings
-      : portfolioHoldings.filter((h) => h.accountId === selectedAccount)
+    if (selectedAccount === "all") return portfolioHoldings
+    return portfolioHoldings.filter((h) => h.accountId === selectedAccount)
   }, [portfolioHoldings, selectedAccount])
 
   // Calculate total value of filtered holdings
   const filteredTotalValue = useMemo(() => {
     return filteredHoldings.reduce((sum, h) => sum + h.marketValue, 0)
   }, [filteredHoldings])
+
+  // Get filtered stock count based on selected account and holdings filter
+  const filteredStockCount = useMemo(() => {
+    // Start with all exposures or account-filtered exposures
+    let filtered = exposures
+    if (selectedAccount !== "all") {
+      const accountTickers = new Set(filteredHoldings.map((h) => h.ticker))
+      filtered = exposures.filter((e) => accountTickers.has(e.ticker))
+    }
+
+    // Apply holdings filter
+    if (holdingsFilter === "mag7") {
+      filtered = filtered.filter((e) => MAGNIFICENT_7.includes(e.ticker.toUpperCase()))
+    } else if (holdingsFilter === "top7") {
+      filtered = [...filtered].sort((a, b) => b.percentOfPortfolio - a.percentOfPortfolio).slice(0, 7)
+    } else if (holdingsFilter === "top10") {
+      filtered = [...filtered].sort((a, b) => b.percentOfPortfolio - a.percentOfPortfolio).slice(0, 10)
+    }
+
+    return filtered.length
+  }, [exposures, selectedAccount, filteredHoldings, holdingsFilter])
 
   // Format currency
   const formatCurrency = (value: number) => {
@@ -214,23 +236,30 @@ export default function ExposurePage() {
                 {formatCurrency(filteredTotalValue)}
               </div>
               <div className="text-sm text-gray-500 dark:text-gray-400">
-                {exposures.length}{" "}
-                {exposures.length === 1 ? "stock" : "stocks"}
+                {filteredStockCount.toLocaleString()}{" "}
+                {filteredStockCount === 1 ? "stock" : "stocks"}
               </div>
             </div>
-            <div className="flex items-center gap-4">
-              <div className="flex items-center gap-2">
-                <label className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                  Account
-                </label>
-                <AccountSelector
-                  accounts={exposureAccounts}
-                  value={selectedAccount}
-                  onValueChange={setSelectedAccount}
-                  showAllOption={true}
-                  className="w-[200px]"
-                />
-              </div>
+            <div className="flex items-center gap-2 sm:gap-4">
+              {/* Account filter pill */}
+              {selectedAccount !== "all" && (
+                <Badge variant="default" className="flex h-9 items-center gap-1.5 px-3 text-sm">
+                  <InstitutionLogo
+                    institution={exposureAccounts.find((a) => a.id === selectedAccount)?.institution || ""}
+                    className="size-5"
+                  />
+                  <span className="hidden sm:inline">
+                    {exposureAccounts.find((a) => a.id === selectedAccount)?.name}
+                  </span>
+                  <button
+                    onClick={() => setSelectedAccount("all")}
+                    className="rounded-full p-0.5 hover:bg-blue-200 dark:hover:bg-blue-500/30"
+                  >
+                    <RiCloseLine className="size-4" />
+                  </button>
+                </Badge>
+              )}
+              {/* Holdings filter pill */}
               {holdingsFilter !== "all" && (
                 <Badge variant="default" className="flex h-9 items-center gap-1.5 px-3 text-sm">
                   {getFilterLabel(holdingsFilter)}
@@ -243,24 +272,17 @@ export default function ExposurePage() {
                 </Badge>
               )}
               <DashboardSettingsDropdown
+                accounts={exposureAccounts}
+                selectedAccount={selectedAccount}
+                onAccountChange={setSelectedAccount}
                 holdingsFilter={holdingsFilter}
                 onHoldingsFilterChange={setHoldingsFilter}
                 displayValue={displayValue}
                 onDisplayValueChange={setDisplayValue}
                 combineGoogleShares={combineGoogleShares}
                 onCombineGoogleSharesChange={setCombineGoogleShares}
+                onReset={resetFilters}
               />
-              {hasFilterChanges && (
-                <Tooltip triggerAsChild content="Reset filters">
-                  <Button
-                    variant="ghost"
-                    onClick={resetFilters}
-                    className="h-9"
-                  >
-                    <RiResetLeftLine className="size-4" aria-hidden="true" />
-                  </Button>
-                </Tooltip>
-              )}
             </div>
           </div>
         </div>
@@ -274,27 +296,30 @@ export default function ExposurePage() {
               {formatCurrency(filteredTotalValue)}
             </div>
             <div className="text-sm font-normal text-gray-500 dark:text-gray-400">
-              {exposures.length}{" "}
-              {exposures.length === 1 ? "stock" : "stocks"}
+              {filteredStockCount.toLocaleString()}{" "}
+              {filteredStockCount === 1 ? "stock" : "stocks"}
             </div>
           </div>
-          <div className="flex items-center gap-4">
-            <div className="flex items-center gap-2">
-              <label
-                htmlFor="account-filter"
-                className="text-sm font-medium text-gray-700 dark:text-gray-300"
-              >
-                Account
-              </label>
-              <AccountSelector
-                accounts={exposureAccounts}
-                value={selectedAccount}
-                onValueChange={setSelectedAccount}
-                showAllOption={true}
-                className="w-[200px]"
-                id="account-filter"
-              />
-            </div>
+          <div className="flex items-center gap-2 sm:gap-4">
+            {/* Account filter pill */}
+            {selectedAccount !== "all" && (
+              <Badge variant="default" className="flex h-9 items-center gap-1.5 px-3 text-sm">
+                <InstitutionLogo
+                  institution={exposureAccounts.find((a) => a.id === selectedAccount)?.institution || ""}
+                  className="size-5"
+                />
+                <span className="hidden sm:inline">
+                  {exposureAccounts.find((a) => a.id === selectedAccount)?.name}
+                </span>
+                <button
+                  onClick={() => setSelectedAccount("all")}
+                  className="rounded-full p-0.5 hover:bg-blue-200 dark:hover:bg-blue-500/30"
+                >
+                  <RiCloseLine className="size-4" />
+                </button>
+              </Badge>
+            )}
+            {/* Holdings filter pill */}
             {holdingsFilter !== "all" && (
               <Badge variant="default" className="flex h-9 items-center gap-1.5 px-3 text-sm">
                 {getFilterLabel(holdingsFilter)}
@@ -307,24 +332,17 @@ export default function ExposurePage() {
               </Badge>
             )}
             <DashboardSettingsDropdown
+              accounts={exposureAccounts}
+              selectedAccount={selectedAccount}
+              onAccountChange={setSelectedAccount}
               holdingsFilter={holdingsFilter}
               onHoldingsFilterChange={setHoldingsFilter}
               displayValue={displayValue}
               onDisplayValueChange={setDisplayValue}
               combineGoogleShares={combineGoogleShares}
               onCombineGoogleSharesChange={setCombineGoogleShares}
+              onReset={resetFilters}
             />
-            {hasFilterChanges && (
-              <Tooltip triggerAsChild content="Reset filters">
-                <Button
-                  variant="ghost"
-                  onClick={resetFilters}
-                  className="h-9"
-                >
-                  <RiResetLeftLine className="size-4" aria-hidden="true" />
-                </Button>
-              </Tooltip>
-            )}
           </div>
         </div>
       )}
