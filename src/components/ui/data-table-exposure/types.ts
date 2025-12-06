@@ -69,7 +69,7 @@ export type ExposureDisplayValue = "market-value" | "pct-stocks" | "pct-portfoli
 export type HoldingsFilter = "all" | "mag7" | "top7" | "top10"
 
 // Grouping mode for exposure visualization
-export type GroupingMode = "none" | "sector" | "sector-industry" | "mag7" | "top10"
+export type GroupingMode = "none" | "sector" | "sector-industry"
 
 export interface ExposureTableProps {
   holdings: PortfolioHolding[]

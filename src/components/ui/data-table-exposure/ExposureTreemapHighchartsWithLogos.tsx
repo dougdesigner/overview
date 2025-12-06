@@ -76,7 +76,7 @@ interface ExposureTreemapHighchartsProps {
 }
 
 type ChartType = "treemap" | "pie"
-type GroupingMode = "none" | "sector" | "sector-industry" | "mag7" | "top10"
+type GroupingMode = "none" | "sector" | "sector-industry"
 type SizingMode = "proportional" | "monosize"
 type TitleMode = "symbol" | "name" | "none"
 type DisplayValue = "market-value" | "pct-stocks" | "pct-portfolio" | "none"
@@ -658,80 +658,6 @@ export function ExposureTreemapHighchartsWithLogos({
       return data
     }
 
-    // Handle "mag7" or "top10" mode - 2-level hierarchy: Target Group → Stocks, Other → Stocks
-    if (groupingMode === "mag7" || groupingMode === "top10") {
-      // Determine which stocks belong to the target group
-      const targetTickers =
-        groupingMode === "mag7"
-          ? MAG7_TICKERS
-          : [...validExposures]
-              .sort((a, b) => b.totalValue - a.totalValue)
-              .slice(0, 10)
-              .map((e) => e.ticker.toUpperCase())
-
-      const targetStocks = validExposures.filter((e) =>
-        targetTickers.includes(e.ticker.toUpperCase()),
-      )
-      const otherStocks = validExposures.filter(
-        (e) => !targetTickers.includes(e.ticker.toUpperCase()),
-      )
-
-      const groupName = groupingMode === "mag7" ? "Magnificent 7" : "Top 10"
-
-      // Create parent nodes
-      if (targetStocks.length > 0) {
-        data.push({
-          id: groupName,
-          name: groupName,
-          color: colors[0], // Blue for the target group
-        })
-      }
-      if (otherStocks.length > 0) {
-        data.push({
-          id: "Other",
-          name: "Other",
-          color: colors[1], // Sky for other stocks
-        })
-      }
-
-      // Add target stocks under their group
-      targetStocks.forEach((stock, stockIndex) => {
-        const percentage = (stock.totalValue / totalValue) * 100
-        const logoUrl = logoUrls[stock.ticker.toUpperCase()] ?? null
-
-        data.push({
-          id: `${groupName}-${stock.ticker}-${stockIndex}`,
-          name: stock.ticker,
-          parent: groupName,
-          value: sizingMode === "monosize" ? 1 : stock.totalValue,
-          actualValue: stock.totalValue,
-          logoUrl: logoUrl,
-          percentage: percentage,
-          ticker: stock.ticker,
-          companyName: stock.name,
-        } as ExtendedTreemapPoint)
-      })
-
-      // Add other stocks under "Other" group
-      otherStocks.forEach((stock, stockIndex) => {
-        const percentage = (stock.totalValue / totalValue) * 100
-        const logoUrl = logoUrls[stock.ticker.toUpperCase()] ?? null
-
-        data.push({
-          id: `Other-${stock.ticker}-${stockIndex}`,
-          name: stock.ticker,
-          parent: "Other",
-          value: sizingMode === "monosize" ? 1 : stock.totalValue,
-          actualValue: stock.totalValue,
-          logoUrl: logoUrl,
-          percentage: percentage,
-          ticker: stock.ticker,
-          companyName: stock.name,
-        } as ExtendedTreemapPoint)
-      })
-
-      return data
-    }
 
     // Handle "sector" mode - 2-level hierarchy: Sector → Stocks
     const groups = new Map<string, StockExposure[]>()
@@ -1011,50 +937,6 @@ export function ExposureTreemapHighchartsWithLogos({
           custom: {
             description: `${smallIndustries.length} industries < 0.5% each (${othersPercentage.toFixed(1)}% total)`,
           },
-        })
-      }
-
-      return data
-    } else if (groupingMode === "mag7" || groupingMode === "top10") {
-      // Show two groups: Target group (Mag7 or Top10) and Other
-      const targetTickers =
-        groupingMode === "mag7"
-          ? MAG7_TICKERS
-          : [...validExposures]
-              .sort((a, b) => b.totalValue - a.totalValue)
-              .slice(0, 10)
-              .map((e) => e.ticker.toUpperCase())
-
-      const targetStocks = validExposures.filter((e) =>
-        targetTickers.includes(e.ticker.toUpperCase()),
-      )
-      const otherStocks = validExposures.filter(
-        (e) => !targetTickers.includes(e.ticker.toUpperCase()),
-      )
-
-      const groupName = groupingMode === "mag7" ? "Magnificent 7" : "Top 10"
-
-      // Calculate totals for each group
-      const targetTotal = targetStocks.reduce((sum, s) => sum + s.totalValue, 0)
-      const otherTotal = otherStocks.reduce((sum, s) => sum + s.totalValue, 0)
-
-      // Add target group
-      if (targetTotal > 0) {
-        data.push({
-          name: groupName,
-          y: targetTotal,
-          actualValue: targetTotal,
-          color: colors[0], // Blue for target group
-        })
-      }
-
-      // Add other group
-      if (otherTotal > 0) {
-        data.push({
-          name: `Other (${otherStocks.length} stocks)`,
-          y: otherTotal,
-          actualValue: otherTotal,
-          color: colors[1], // Sky for other stocks
         })
       }
 
@@ -1398,11 +1280,7 @@ export function ExposureTreemapHighchartsWithLogos({
             ? "Holdings"
             : groupingMode === "sector"
               ? "Sectors"
-              : groupingMode === "sector-industry"
-                ? "Industries"
-                : groupingMode === "mag7"
-                  ? "Magnificent 7"
-                  : "Top 10",
+              : "Industries",
         data: getPieChartData(),
       },
     ],
@@ -1472,37 +1350,6 @@ export function ExposureTreemapHighchartsWithLogos({
           value: exp.totalValue,
           logoUrl: logoUrls[exp.ticker.toUpperCase()] ?? null,
         }))
-    }
-
-    // For mag7 or top10 grouping mode, show the two groups
-    if (groupingMode === "mag7" || groupingMode === "top10") {
-      const targetTickers =
-        groupingMode === "mag7"
-          ? MAG7_TICKERS
-          : [...validExposures]
-              .sort((a, b) => b.totalValue - a.totalValue)
-              .slice(0, 10)
-              .map((e) => e.ticker.toUpperCase())
-
-      const targetStocks = validExposures.filter((e) =>
-        targetTickers.includes(e.ticker.toUpperCase()),
-      )
-      const otherStocks = validExposures.filter(
-        (e) => !targetTickers.includes(e.ticker.toUpperCase()),
-      )
-
-      const groupName = groupingMode === "mag7" ? "Magnificent 7" : "Top 10"
-      const targetTotal = targetStocks.reduce((sum, s) => sum + s.totalValue, 0)
-      const otherTotal = otherStocks.reduce((sum, s) => sum + s.totalValue, 0)
-
-      const result: Array<{ name: string; value: number; logoUrl: null }> = []
-      if (targetTotal > 0) {
-        result.push({ name: groupName, value: targetTotal, logoUrl: null })
-      }
-      if (otherTotal > 0) {
-        result.push({ name: "Other", value: otherTotal, logoUrl: null })
-      }
-      return result
     }
 
     if (groupingMode === "none") {
@@ -1767,11 +1614,7 @@ export function ExposureTreemapHighchartsWithLogos({
                     ? "Top 10 Holdings"
                     : groupingMode === "none"
                       ? "Top Holdings"
-                      : groupingMode === "mag7"
-                        ? "Magnificent 7 vs Other"
-                        : groupingMode === "top10"
-                          ? "Top 10 vs Other"
-                          : "Top Sectors"}
+                      : "Top Sectors"}
             </p>
             <ul className="flex flex-wrap gap-x-10 gap-y-4 text-sm">
               {/* Total at START for filtered views */}

@@ -56,10 +56,6 @@ const getGroupingModeLabel = (mode: GroupingMode): string => {
       return "Sector"
     case "sector-industry":
       return "Sector & Industry"
-    case "mag7":
-      return "Magnificent 7"
-    case "top10":
-      return "Top 10"
   }
 }
 
@@ -156,12 +152,6 @@ export function DashboardSettingsDropdown({
               </DropdownMenuRadioItem>
               <DropdownMenuRadioItem value="sector-industry" iconType="check">
                 Sector & Industry
-              </DropdownMenuRadioItem>
-              <DropdownMenuRadioItem value="mag7" iconType="check">
-                Magnificent 7
-              </DropdownMenuRadioItem>
-              <DropdownMenuRadioItem value="top10" iconType="check">
-                Top 10
               </DropdownMenuRadioItem>
             </DropdownMenuRadioGroup>
           </DropdownMenuSubMenuContent>
