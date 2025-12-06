@@ -183,8 +183,8 @@ export default function ExposurePage() {
                 {formatCurrency(filteredTotalValue)}
               </div>
               <div className="text-sm text-gray-500 dark:text-gray-400">
-                {filteredHoldings.length}{" "}
-                {filteredHoldings.length === 1 ? "holding" : "holdings"}
+                {exposures.length}{" "}
+                {exposures.length === 1 ? "stock" : "stocks"}
               </div>
             </div>
             <div className="flex items-center gap-4">
@@ -223,8 +223,8 @@ export default function ExposurePage() {
               {formatCurrency(filteredTotalValue)}
             </div>
             <div className="text-sm font-normal text-gray-500 dark:text-gray-400">
-              {filteredHoldings.length}{" "}
-              {filteredHoldings.length === 1 ? "holding" : "holdings"}
+              {exposures.length}{" "}
+              {exposures.length === 1 ? "stock" : "stocks"}
             </div>
           </div>
           <div className="flex items-center gap-4">

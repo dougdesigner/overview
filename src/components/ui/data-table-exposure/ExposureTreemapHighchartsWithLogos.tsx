@@ -1237,27 +1237,65 @@ export function ExposureTreemapHighchartsWithLogos({
         allowPointSelect: true,
         cursor: "pointer",
         dataLabels: {
-          enabled: showLogo,
+          enabled: true,
           useHTML: true,
+          distance: 15,
+          connectorColor: isDark ? "#4b5563" : "#9ca3af",
+          connectorWidth: 1,
           formatter: function () {
             const point = this as any
             const value = point.actualValue ?? point.y
             const ticker = point.ticker || point.name
             const logoUrl = point.logoUrl
+            const companyName = point.companyName || ticker
 
             // Calculate percentage of this section relative to stock portfolio
             const percentage = stocksOnlyValue > 0 ? (value / stocksOnlyValue) * 100 : 0
 
-            // Only show logo if enabled, available, and section is ≥5%
+            // Skip very small slices
+            if (percentage < 3) return null
+
+            // Check if nothing is enabled
+            if (!showLogo && titleMode === "none" && !showChartValue) return null
+
+            const parts: string[] = []
+
+            // Logo (if enabled and available)
             if (showLogo && logoUrl && percentage >= 5) {
-              return `<div style="display: flex; justify-content: center;">
-                        <div style="width: 28px; height: 28px; border-radius: 50%; background: ${isDark ? "#1f2937" : "#f3f4f6"}; display: flex; align-items: center; justify-content: center; overflow: hidden;">
-                          <img src="${logoUrl}" alt="${ticker}" style="width: 100%; height: 100%; object-fit: contain;" />
-                        </div>
-                      </div>`
+              parts.push(`<div style="display:flex;justify-content:center;margin-bottom:2px;">
+                <div style="width:24px;height:24px;border-radius:50%;background:${isDark ? "#1f2937" : "#f3f4f6"};display:flex;align-items:center;justify-content:center;overflow:hidden;">
+                  <img src="${logoUrl}" alt="${ticker}" style="width:100%;height:100%;object-fit:contain;" />
+                </div>
+              </div>`)
             }
 
-            return ""
+            // Title (based on titleMode)
+            if (titleMode === "symbol") {
+              parts.push(`<div style="font-weight:600;text-align:center;">${ticker}</div>`)
+            } else if (titleMode === "name") {
+              // Truncate long names
+              const displayName = companyName.length > 15 ? companyName.substring(0, 12) + "..." : companyName
+              parts.push(`<div style="font-weight:600;text-align:center;font-size:10px;">${displayName}</div>`)
+            }
+
+            // Value (if showChartValue enabled)
+            if (showChartValue) {
+              let displayVal: string
+              if (displayValue === "market-value") {
+                displayVal = formatValue(value)
+              } else if (displayValue === "pct-stocks") {
+                displayVal = `${percentage.toFixed(1)}%`
+              } else {
+                // pct-portfolio or none - show portfolio %
+                const pctPortfolio = (value / totalValue) * 100
+                displayVal = `${pctPortfolio.toFixed(1)}%`
+              }
+              parts.push(`<div style="text-align:center;font-size:10px;">${displayVal}</div>`)
+            }
+
+            if (parts.length === 0) return null
+
+            return `<div style="text-align:center;">${parts.join("")}</div>`
           },
           style: {
             color: isDark ? "#f3f4f6" : "#111827",
@@ -1265,7 +1303,6 @@ export function ExposureTreemapHighchartsWithLogos({
             fontWeight: "500",
             textOutline: "none",
           },
-          distance: 10,
         },
         showInLegend: false,
         borderWidth: 2,
@@ -1466,66 +1503,64 @@ export function ExposureTreemapHighchartsWithLogos({
             </Button>
           </Tooltip>
 
-          {chartType === "treemap" && (
-            <DropdownMenu>
-              <Tooltip triggerAsChild content="Configure chart display options">
-                <DropdownMenuTrigger asChild>
-                  <Button variant="secondary" className="h-9">
-                    <RiSettings3Line className="size-4" aria-hidden="true" />
-                  </Button>
-                </DropdownMenuTrigger>
-              </Tooltip>
-              <DropdownMenuContent align="end" className="w-56">
-                <DropdownMenuLabel>DISPLAY SETTINGS</DropdownMenuLabel>
-                <DropdownMenuSeparator />
+          <DropdownMenu>
+            <Tooltip triggerAsChild content="Configure chart display options">
+              <DropdownMenuTrigger asChild>
+                <Button variant="secondary" className="h-9">
+                  <RiSettings3Line className="size-4" aria-hidden="true" />
+                </Button>
+              </DropdownMenuTrigger>
+            </Tooltip>
+            <DropdownMenuContent align="end" className="w-56">
+              <DropdownMenuLabel>DISPLAY SETTINGS</DropdownMenuLabel>
+              <DropdownMenuSeparator />
 
-                <DropdownMenuCheckboxItem
-                  checked={showLogo}
-                  onCheckedChange={setShowLogo}
-                >
-                  Logo
-                </DropdownMenuCheckboxItem>
+              <DropdownMenuCheckboxItem
+                checked={showLogo}
+                onCheckedChange={setShowLogo}
+              >
+                Logo
+              </DropdownMenuCheckboxItem>
 
-                <DropdownMenuSubMenu>
-                  <DropdownMenuSubMenuTrigger>
-                    <span>Title</span>
-                    <span className="ml-auto text-xs text-gray-500">
-                      {titleMode === "symbol"
-                        ? "Symbol"
-                        : titleMode === "name"
-                          ? "Name"
-                          : "None"}
-                    </span>
-                  </DropdownMenuSubMenuTrigger>
-                  <DropdownMenuSubMenuContent>
-                    <DropdownMenuRadioGroup
-                      value={titleMode}
-                      onValueChange={(value) =>
-                        setTitleMode(value as TitleMode)
-                      }
-                    >
-                      <DropdownMenuRadioItem value="symbol" iconType="check">
-                        Symbol
-                      </DropdownMenuRadioItem>
-                      <DropdownMenuRadioItem value="name" iconType="check">
-                        Name
-                      </DropdownMenuRadioItem>
-                      <DropdownMenuRadioItem value="none" iconType="check">
-                        None
-                      </DropdownMenuRadioItem>
-                    </DropdownMenuRadioGroup>
-                  </DropdownMenuSubMenuContent>
-                </DropdownMenuSubMenu>
+              <DropdownMenuSubMenu>
+                <DropdownMenuSubMenuTrigger>
+                  <span>Title</span>
+                  <span className="ml-auto text-xs text-gray-500">
+                    {titleMode === "symbol"
+                      ? "Symbol"
+                      : titleMode === "name"
+                        ? "Name"
+                        : "None"}
+                  </span>
+                </DropdownMenuSubMenuTrigger>
+                <DropdownMenuSubMenuContent>
+                  <DropdownMenuRadioGroup
+                    value={titleMode}
+                    onValueChange={(value) =>
+                      setTitleMode(value as TitleMode)
+                    }
+                  >
+                    <DropdownMenuRadioItem value="symbol" iconType="check">
+                      Symbol
+                    </DropdownMenuRadioItem>
+                    <DropdownMenuRadioItem value="name" iconType="check">
+                      Name
+                    </DropdownMenuRadioItem>
+                    <DropdownMenuRadioItem value="none" iconType="check">
+                      None
+                    </DropdownMenuRadioItem>
+                  </DropdownMenuRadioGroup>
+                </DropdownMenuSubMenuContent>
+              </DropdownMenuSubMenu>
 
-                <DropdownMenuCheckboxItem
-                  checked={showChartValue}
-                  onCheckedChange={setShowChartValue}
-                >
-                  Show value
-                </DropdownMenuCheckboxItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
-          )}
+              <DropdownMenuCheckboxItem
+                checked={showChartValue}
+                onCheckedChange={setShowChartValue}
+              >
+                Show value
+              </DropdownMenuCheckboxItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
 
           <DropdownMenu>
             <Tooltip
