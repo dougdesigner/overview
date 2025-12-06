@@ -119,6 +119,12 @@ export function ExposureTreemapHighchartsWithLogos({
   const displayValue = showChartValue ? displayValueProp : "none"
   // Local state for grouping mode
   const [groupingMode, setGroupingMode] = useState<GroupingMode>("sector")
+  // Check if any display setting differs from default
+  const hasSettingsChanges =
+    showLogo !== true ||
+    titleMode !== "symbol" ||
+    showChartValue !== true ||
+    groupingMode !== "sector"
   // Modules are initialized at module level, so we default to true
   const [modulesLoaded] = useState(true)
   const { theme } = useTheme()
@@ -1421,12 +1427,15 @@ export function ExposureTreemapHighchartsWithLogos({
     }
   })()
 
-  // Calculate total for filtered views (mag7, top7, or top10)
+  // Calculate total for filtered views (mag7, top7, or top10) or "none" grouping mode
+  // For filtered views, sum all exposures; for "none" mode, sum only the legend items (top 10)
   const filteredTotal = (holdingsFilter === "mag7" || holdingsFilter === "top7" || holdingsFilter === "top10")
     ? exposures
         .filter((exp) => !exp.isETFBreakdown && exp.totalValue > 0)
         .reduce((sum, exp) => sum + exp.totalValue, 0)
-    : null
+    : groupingMode === "none"
+      ? topGroups.reduce((sum, item) => sum + item.value, 0)
+      : null
 
   // Export handlers
   const handleExport = (type: string) => {
@@ -1506,8 +1515,11 @@ export function ExposureTreemapHighchartsWithLogos({
           <DropdownMenu>
             <Tooltip triggerAsChild content="Configure chart display options">
               <DropdownMenuTrigger asChild>
-                <Button variant="secondary" className="h-9">
+                <Button variant="secondary" className="relative h-9">
                   <RiSettings3Line className="size-4" aria-hidden="true" />
+                  {hasSettingsChanges && (
+                    <span className="absolute -right-0.5 -top-0.5 size-2 rounded-full bg-blue-500" />
+                  )}
                 </Button>
               </DropdownMenuTrigger>
             </Tooltip>
@@ -1693,7 +1705,11 @@ export function ExposureTreemapHighchartsWithLogos({
                   </span>
                   <div className="flex items-center gap-2">
                     <span className="text-sm font-medium">
-                      {holdingsFilter === "mag7" ? "Magnificent 7" : holdingsFilter === "top7" ? "Top 7" : "Top 10"} Total
+                      {holdingsFilter === "mag7"
+                        ? "Magnificent 7"
+                        : holdingsFilter === "top7"
+                          ? "Top 7"
+                          : "Top 10"} Total
                     </span>
                   </div>
                 </li>

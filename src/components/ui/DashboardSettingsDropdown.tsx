@@ -66,12 +66,21 @@ export function DashboardSettingsDropdown({
   combineGoogleShares,
   onCombineGoogleSharesChange,
 }: DashboardSettingsDropdownProps) {
+  // Check if any setting differs from default
+  const hasChanges =
+    holdingsFilter !== "all" ||
+    displayValue !== "pct-portfolio" ||
+    combineGoogleShares !== false
+
   return (
     <DropdownMenu>
       <Tooltip triggerAsChild content="Dashboard settings">
         <DropdownMenuTrigger asChild>
-          <Button variant="secondary" className="h-9">
+          <Button variant="secondary" className="relative h-9">
             <RiFilterLine className="size-4" aria-hidden="true" />
+            {hasChanges && (
+              <span className="absolute -right-0.5 -top-0.5 size-2 rounded-full bg-blue-500" />
+            )}
           </Button>
         </DropdownMenuTrigger>
       </Tooltip>

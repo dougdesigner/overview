@@ -3,6 +3,7 @@
 import { Badge } from "@/components/Badge"
 import { Button } from "@/components/Button"
 import { Divider } from "@/components/Divider"
+import { Tooltip } from "@/components/Tooltip"
 import { AccountSelector } from "@/components/ui/AccountSelector"
 import { DashboardSettingsDropdown } from "@/components/ui/DashboardSettingsDropdown"
 import { ExposureTable } from "@/components/ui/data-table-exposure/ExposureTable"
@@ -12,6 +13,7 @@ import {
 } from "@/components/ui/data-table-exposure/types"
 import { useExposureCalculations } from "@/hooks/useExposureCalculations"
 import { usePortfolioStore } from "@/hooks/usePortfolioStore"
+import { RiResetLeftLine } from "@remixicon/react"
 import React, { useMemo, useRef, useState, useEffect } from "react"
 
 export default function ExposurePage() {
@@ -66,6 +68,9 @@ export default function ExposurePage() {
   const [displayValue, setDisplayValue] =
     useState<ExposureDisplayValue>("pct-portfolio")
 
+  // Reset key to force child components to remount and reset their local state
+  const [resetKey, setResetKey] = useState(0)
+
   // Sticky filter state
   const [isFilterSticky, setIsFilterSticky] = useState(false)
   const filterRef = useRef<HTMLDivElement>(null)
@@ -112,6 +117,22 @@ export default function ExposurePage() {
       minimumFractionDigits: 0,
       maximumFractionDigits: 0,
     }).format(value)
+  }
+
+  // Check if any filter has changed from default
+  const hasFilterChanges =
+    selectedAccount !== "all" ||
+    holdingsFilter !== "all" ||
+    displayValue !== "pct-portfolio" ||
+    combineGoogleShares !== false
+
+  // Reset all filters to defaults
+  const resetFilters = () => {
+    setSelectedAccount("all")
+    setHoldingsFilter("all")
+    setDisplayValue("pct-portfolio")
+    setCombineGoogleShares(false)
+    setResetKey((k) => k + 1) // Force child remount to reset chart settings
   }
 
   const handleRefresh = () => {
@@ -204,6 +225,17 @@ export default function ExposurePage() {
                 combineGoogleShares={combineGoogleShares}
                 onCombineGoogleSharesChange={setCombineGoogleShares}
               />
+              {hasFilterChanges && (
+                <Tooltip triggerAsChild content="Reset filters">
+                  <Button
+                    variant="ghost"
+                    onClick={resetFilters}
+                    className="h-9"
+                  >
+                    <RiResetLeftLine className="size-4" aria-hidden="true" />
+                  </Button>
+                </Tooltip>
+              )}
             </div>
           </div>
         </div>
@@ -246,6 +278,17 @@ export default function ExposurePage() {
               combineGoogleShares={combineGoogleShares}
               onCombineGoogleSharesChange={setCombineGoogleShares}
             />
+            {hasFilterChanges && (
+              <Tooltip triggerAsChild content="Reset filters">
+                <Button
+                  variant="ghost"
+                  onClick={resetFilters}
+                  className="h-9"
+                >
+                  <RiResetLeftLine className="size-4" aria-hidden="true" />
+                </Button>
+              </Tooltip>
+            )}
           </div>
         </div>
       )}
@@ -303,6 +346,7 @@ export default function ExposurePage() {
         ) : (
           // Show the exposure table with data
           <ExposureTable
+            key={resetKey}
             holdings={portfolioHoldings}
             accounts={exposureAccounts}
             onRefresh={handleRefresh}
