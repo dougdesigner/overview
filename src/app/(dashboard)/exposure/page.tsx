@@ -13,7 +13,7 @@ import {
 } from "@/components/ui/data-table-exposure/types"
 import { useExposureCalculations } from "@/hooks/useExposureCalculations"
 import { usePortfolioStore } from "@/hooks/usePortfolioStore"
-import { RiResetLeftLine } from "@remixicon/react"
+import { RiCloseLine, RiResetLeftLine } from "@remixicon/react"
 import React, { useMemo, useRef, useState, useEffect } from "react"
 
 export default function ExposurePage() {
@@ -119,6 +119,20 @@ export default function ExposurePage() {
     }).format(value)
   }
 
+  // Get display label for holdings filter
+  const getFilterLabel = (filter: HoldingsFilter): string => {
+    switch (filter) {
+      case "mag7":
+        return "Magnificent 7"
+      case "top7":
+        return "Top 7"
+      case "top10":
+        return "Top 10"
+      default:
+        return ""
+    }
+  }
+
   // Check if any filter has changed from default
   const hasFilterChanges =
     selectedAccount !== "all" ||
@@ -217,6 +231,17 @@ export default function ExposurePage() {
                   className="w-[200px]"
                 />
               </div>
+              {holdingsFilter !== "all" && (
+                <Badge variant="default" className="flex h-9 items-center gap-1.5 px-3 text-sm">
+                  {getFilterLabel(holdingsFilter)}
+                  <button
+                    onClick={() => setHoldingsFilter("all")}
+                    className="rounded-full p-0.5 hover:bg-blue-200 dark:hover:bg-blue-500/30"
+                  >
+                    <RiCloseLine className="size-4" />
+                  </button>
+                </Badge>
+              )}
               <DashboardSettingsDropdown
                 holdingsFilter={holdingsFilter}
                 onHoldingsFilterChange={setHoldingsFilter}
@@ -270,6 +295,17 @@ export default function ExposurePage() {
                 id="account-filter"
               />
             </div>
+            {holdingsFilter !== "all" && (
+              <Badge variant="default" className="flex h-9 items-center gap-1.5 px-3 text-sm">
+                {getFilterLabel(holdingsFilter)}
+                <button
+                  onClick={() => setHoldingsFilter("all")}
+                  className="rounded-full p-0.5 hover:bg-blue-200 dark:hover:bg-blue-500/30"
+                >
+                  <RiCloseLine className="size-4" />
+                </button>
+              </Badge>
+            )}
             <DashboardSettingsDropdown
               holdingsFilter={holdingsFilter}
               onHoldingsFilterChange={setHoldingsFilter}
