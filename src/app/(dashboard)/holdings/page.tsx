@@ -397,6 +397,7 @@ function HoldingsContent() {
             accounts={accounts}
             selectedAccountId={currentAccountFilter}
             onAccountChange={setCurrentAccountFilter}
+            height={500}
           />
         </div>
       )}

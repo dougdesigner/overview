@@ -75,20 +75,28 @@ const PortfolioValueCard = React.forwardRef<
     const classes = assetClasses || getDefaultAssetClasses()
     const valueFormatter = (number: number) => {
       const decimals = number % 1 === 0 ? 0 : 2
-      return "$" + Intl.NumberFormat("us", {
-        minimumFractionDigits: decimals,
-        maximumFractionDigits: decimals,
-      }).format(number).toString()
+      return (
+        "$" +
+        Intl.NumberFormat("us", {
+          minimumFractionDigits: decimals,
+          maximumFractionDigits: decimals,
+        })
+          .format(number)
+          .toString()
+      )
     }
 
     // Format percentage: show integers without decimals, non-integers with up to 2 decimal places
     const formatPercentage = (value: number): string => {
       // Check if the value is effectively an integer (within floating point precision)
-      if (Number.isInteger(value) || Math.abs(value - Math.round(value)) < 0.0001) {
+      if (
+        Number.isInteger(value) ||
+        Math.abs(value - Math.round(value)) < 0.0001
+      ) {
         return Math.round(value).toString()
       }
       // For non-integers, use up to 2 decimal places and remove trailing zeros
-      return value.toFixed(2).replace(/\.?0+$/, '')
+      return value.toFixed(2).replace(/\.?0+$/, "")
     }
 
     // Extract percentages and colors for CategoryBar
@@ -97,7 +105,7 @@ const PortfolioValueCard = React.forwardRef<
 
     return (
       <Card ref={forwardedRef} className={cx(className)} {...props}>
-        <dt className="pt-1.5 text-base font-medium text-gray-900 dark:text-gray-50">
+        <dt className="text-base font-medium text-gray-900 dark:text-gray-50">
           {title}
         </dt>
         <dd className="mt-1 text-3xl font-semibold text-gray-900 dark:text-gray-50">

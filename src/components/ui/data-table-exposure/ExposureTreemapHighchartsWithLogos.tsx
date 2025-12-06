@@ -20,7 +20,6 @@ import { Tooltip } from "@/components/Tooltip"
 import { toProperCase } from "@/lib/utils"
 import {
   RiDownloadLine,
-  RiExpandUpDownLine,
   RiFullscreenLine,
   RiLayout4Line,
   RiPieChartLine,
@@ -66,18 +65,24 @@ if (typeof Highcharts === "object") {
 interface ExposureTreemapHighchartsProps {
   exposures: StockExposure[]
   totalValue: number
+  stocksOnlyValue?: number  // Full stocks value for percentage calculations (not affected by view filter)
   accounts: Account[]
   selectedAccount: string
   logoUrls: Record<string, string | null>
   dataVersion?: number
-  displayValue?: DisplayValue  // External override from page-level filter
+  holdingsFilter?: "all" | "mag7" | "top7" | "top10"  // View filter for legend display
+  groupingMode?: GroupingMode  // Grouping mode from page-level settings
+  displayValue?: DisplayValue  // Display value from page-level settings
 }
 
 type ChartType = "treemap" | "pie"
-type GroupingMode = "none" | "sector" | "sector-industry"
+type GroupingMode = "none" | "sector" | "sector-industry" | "mag7" | "top10"
 type SizingMode = "proportional" | "monosize"
 type TitleMode = "symbol" | "name" | "none"
 type DisplayValue = "market-value" | "pct-stocks" | "pct-portfolio" | "none"
+
+// Magnificent 7 tickers
+const MAG7_TICKERS = ["AAPL", "MSFT", "GOOGL", "GOOG", "AMZN", "NVDA", "META", "TSLA"]
 
 // Extended data point type to include custom properties
 interface ExtendedTreemapPoint extends Highcharts.PointOptionsObject {
@@ -100,19 +105,20 @@ interface PointWithGraphic {
 export function ExposureTreemapHighchartsWithLogos({
   exposures,
   totalValue,
+  stocksOnlyValue: stocksOnlyValueProp,
   logoUrls,
-  displayValue: externalDisplayValue,
+  holdingsFilter = "all",
+  groupingMode = "sector",
+  displayValue: displayValueProp = "pct-portfolio",
 }: ExposureTreemapHighchartsProps) {
   const [chartType, setChartType] = useState<ChartType>("treemap")
-  const [groupingMode, setGroupingMode] = useState<GroupingMode>("sector")
   const [sizingMode] = useState<SizingMode>("proportional")
   const [showLogo, setShowLogo] = useState(true)
   const [titleMode, setTitleMode] = useState<TitleMode>("symbol")
-  const [internalDisplayValue, setInternalDisplayValue] =
-    useState<DisplayValue>("pct-portfolio")
-
-  // Use external display value if provided, otherwise use internal state
-  const displayValue = externalDisplayValue ?? internalDisplayValue
+  // Local toggle for showing/hiding values in chart cells
+  const [showChartValue, setShowChartValue] = useState(true)
+  // Effective display value: uses page-level setting when show is on, "none" when off
+  const displayValue = showChartValue ? displayValueProp : "none"
   // Modules are initialized at module level, so we default to true
   const [modulesLoaded] = useState(true)
   const { theme } = useTheme()
@@ -248,17 +254,17 @@ export function ExposureTreemapHighchartsWithLogos({
   }
 
   // Format legend values based on display value setting
+  // Note: Legend always shows values even when displayValue is "none"
+  // (defaults to portfolio percentage for legend readability)
   const getLegendDisplayValue = (value: number): string => {
-    if (displayValue === "none") {
-      return ""
-    } else if (displayValue === "market-value") {
+    if (displayValue === "market-value") {
       return formatValue(value)
     } else if (displayValue === "pct-stocks") {
       const percentage =
         stocksOnlyValue > 0 ? (value / stocksOnlyValue) * 100 : 0
       return `${percentage.toFixed(1)}%`
     } else {
-      // "pct-portfolio"
+      // "pct-portfolio" or "none" - legend always shows portfolio %
       const percentage = (value / totalValue) * 100
       return `${percentage.toFixed(1)}%`
     }
@@ -380,8 +386,8 @@ export function ExposureTreemapHighchartsWithLogos({
     }
   }
 
-  // Calculate stocks-only total value (for pct-stocks display mode)
-  const stocksOnlyValue = exposures
+  // Use passed stocksOnlyValue, or calculate from exposures if not provided (backward compatibility)
+  const stocksOnlyValue = stocksOnlyValueProp ?? exposures
     .filter((exp) => !exp.isETFBreakdown && exp.totalValue > 0)
     .reduce((sum, exp) => sum + exp.totalValue, 0)
 
@@ -647,6 +653,81 @@ export function ExposureTreemapHighchartsWithLogos({
             } as ExtendedTreemapPoint)
           })
         })
+      })
+
+      return data
+    }
+
+    // Handle "mag7" or "top10" mode - 2-level hierarchy: Target Group → Stocks, Other → Stocks
+    if (groupingMode === "mag7" || groupingMode === "top10") {
+      // Determine which stocks belong to the target group
+      const targetTickers =
+        groupingMode === "mag7"
+          ? MAG7_TICKERS
+          : [...validExposures]
+              .sort((a, b) => b.totalValue - a.totalValue)
+              .slice(0, 10)
+              .map((e) => e.ticker.toUpperCase())
+
+      const targetStocks = validExposures.filter((e) =>
+        targetTickers.includes(e.ticker.toUpperCase()),
+      )
+      const otherStocks = validExposures.filter(
+        (e) => !targetTickers.includes(e.ticker.toUpperCase()),
+      )
+
+      const groupName = groupingMode === "mag7" ? "Magnificent 7" : "Top 10"
+
+      // Create parent nodes
+      if (targetStocks.length > 0) {
+        data.push({
+          id: groupName,
+          name: groupName,
+          color: colors[0], // Blue for the target group
+        })
+      }
+      if (otherStocks.length > 0) {
+        data.push({
+          id: "Other",
+          name: "Other",
+          color: colors[1], // Sky for other stocks
+        })
+      }
+
+      // Add target stocks under their group
+      targetStocks.forEach((stock, stockIndex) => {
+        const percentage = (stock.totalValue / totalValue) * 100
+        const logoUrl = logoUrls[stock.ticker.toUpperCase()] ?? null
+
+        data.push({
+          id: `${groupName}-${stock.ticker}-${stockIndex}`,
+          name: stock.ticker,
+          parent: groupName,
+          value: sizingMode === "monosize" ? 1 : stock.totalValue,
+          actualValue: stock.totalValue,
+          logoUrl: logoUrl,
+          percentage: percentage,
+          ticker: stock.ticker,
+          companyName: stock.name,
+        } as ExtendedTreemapPoint)
+      })
+
+      // Add other stocks under "Other" group
+      otherStocks.forEach((stock, stockIndex) => {
+        const percentage = (stock.totalValue / totalValue) * 100
+        const logoUrl = logoUrls[stock.ticker.toUpperCase()] ?? null
+
+        data.push({
+          id: `Other-${stock.ticker}-${stockIndex}`,
+          name: stock.ticker,
+          parent: "Other",
+          value: sizingMode === "monosize" ? 1 : stock.totalValue,
+          actualValue: stock.totalValue,
+          logoUrl: logoUrl,
+          percentage: percentage,
+          ticker: stock.ticker,
+          companyName: stock.name,
+        } as ExtendedTreemapPoint)
       })
 
       return data
@@ -934,6 +1015,50 @@ export function ExposureTreemapHighchartsWithLogos({
       }
 
       return data
+    } else if (groupingMode === "mag7" || groupingMode === "top10") {
+      // Show two groups: Target group (Mag7 or Top10) and Other
+      const targetTickers =
+        groupingMode === "mag7"
+          ? MAG7_TICKERS
+          : [...validExposures]
+              .sort((a, b) => b.totalValue - a.totalValue)
+              .slice(0, 10)
+              .map((e) => e.ticker.toUpperCase())
+
+      const targetStocks = validExposures.filter((e) =>
+        targetTickers.includes(e.ticker.toUpperCase()),
+      )
+      const otherStocks = validExposures.filter(
+        (e) => !targetTickers.includes(e.ticker.toUpperCase()),
+      )
+
+      const groupName = groupingMode === "mag7" ? "Magnificent 7" : "Top 10"
+
+      // Calculate totals for each group
+      const targetTotal = targetStocks.reduce((sum, s) => sum + s.totalValue, 0)
+      const otherTotal = otherStocks.reduce((sum, s) => sum + s.totalValue, 0)
+
+      // Add target group
+      if (targetTotal > 0) {
+        data.push({
+          name: groupName,
+          y: targetTotal,
+          actualValue: targetTotal,
+          color: colors[0], // Blue for target group
+        })
+      }
+
+      // Add other group
+      if (otherTotal > 0) {
+        data.push({
+          name: `Other (${otherStocks.length} stocks)`,
+          y: otherTotal,
+          actualValue: otherTotal,
+          color: colors[1], // Sky for other stocks
+        })
+      }
+
+      return data
     }
 
     return data
@@ -944,7 +1069,7 @@ export function ExposureTreemapHighchartsWithLogos({
     chart: {
       type: "treemap",
       backgroundColor: "transparent",
-      height: 300,
+      height: 500,
       margin: [0, 0, 0, 0],
       events: {
         fullscreenOpen: function () {
@@ -1181,7 +1306,7 @@ export function ExposureTreemapHighchartsWithLogos({
     chart: {
       type: "pie",
       backgroundColor: "transparent",
-      height: 300,
+      height: 500,
       events: {
         fullscreenOpen: function () {
           // Get current theme from DOM
@@ -1273,7 +1398,11 @@ export function ExposureTreemapHighchartsWithLogos({
             ? "Holdings"
             : groupingMode === "sector"
               ? "Sectors"
-              : "Industries",
+              : groupingMode === "sector-industry"
+                ? "Industries"
+                : groupingMode === "mag7"
+                  ? "Magnificent 7"
+                  : "Top 10",
         data: getPieChartData(),
       },
     ],
@@ -1334,6 +1463,48 @@ export function ExposureTreemapHighchartsWithLogos({
       (exp) => !exp.isETFBreakdown && exp.totalValue > 0,
     )
 
+    // For mag7, top7, or top10 filters, show all items in the filtered list
+    if (holdingsFilter === "mag7" || holdingsFilter === "top7" || holdingsFilter === "top10") {
+      return validExposures
+        .sort((a, b) => b.totalValue - a.totalValue)
+        .map((exp) => ({
+          name: exp.ticker,
+          value: exp.totalValue,
+          logoUrl: logoUrls[exp.ticker.toUpperCase()] ?? null,
+        }))
+    }
+
+    // For mag7 or top10 grouping mode, show the two groups
+    if (groupingMode === "mag7" || groupingMode === "top10") {
+      const targetTickers =
+        groupingMode === "mag7"
+          ? MAG7_TICKERS
+          : [...validExposures]
+              .sort((a, b) => b.totalValue - a.totalValue)
+              .slice(0, 10)
+              .map((e) => e.ticker.toUpperCase())
+
+      const targetStocks = validExposures.filter((e) =>
+        targetTickers.includes(e.ticker.toUpperCase()),
+      )
+      const otherStocks = validExposures.filter(
+        (e) => !targetTickers.includes(e.ticker.toUpperCase()),
+      )
+
+      const groupName = groupingMode === "mag7" ? "Magnificent 7" : "Top 10"
+      const targetTotal = targetStocks.reduce((sum, s) => sum + s.totalValue, 0)
+      const otherTotal = otherStocks.reduce((sum, s) => sum + s.totalValue, 0)
+
+      const result: Array<{ name: string; value: number; logoUrl: null }> = []
+      if (targetTotal > 0) {
+        result.push({ name: groupName, value: targetTotal, logoUrl: null })
+      }
+      if (otherTotal > 0) {
+        result.push({ name: "Other", value: otherTotal, logoUrl: null })
+      }
+      return result
+    }
+
     if (groupingMode === "none") {
       // For "none" mode, show top 10 holdings with logo URLs
       return validExposures
@@ -1365,6 +1536,13 @@ export function ExposureTreemapHighchartsWithLogos({
         }))
     }
   })()
+
+  // Calculate total for filtered views (mag7, top7, or top10)
+  const filteredTotal = (holdingsFilter === "mag7" || holdingsFilter === "top7" || holdingsFilter === "top10")
+    ? exposures
+        .filter((exp) => !exp.isETFBreakdown && exp.totalValue > 0)
+        .reduce((sum, exp) => sum + exp.totalValue, 0)
+    : null
 
   // Export handlers
   const handleExport = (type: string) => {
@@ -1407,7 +1585,7 @@ export function ExposureTreemapHighchartsWithLogos({
   if (!modulesLoaded) {
     return (
       <Card className="pb-4 pt-6">
-        <div className="flex h-[400px] items-center justify-center">
+        <div className="flex h-[500px] items-center justify-center">
           <div className="text-sm text-gray-500">Loading chart...</div>
         </div>
       </Card>
@@ -1422,52 +1600,6 @@ export function ExposureTreemapHighchartsWithLogos({
         </h3>
 
         <div className="flex items-center gap-2">
-          <DropdownMenu>
-            <Tooltip
-              triggerAsChild
-              content="Group holdings by sector, industry, or show all stocks"
-            >
-              <DropdownMenuTrigger asChild>
-                <Button
-                  variant="secondary"
-                  className="h-9 w-[160px] justify-between"
-                >
-                  <span>
-                    {groupingMode === "none"
-                      ? "No group"
-                      : groupingMode === "sector"
-                        ? "Sector"
-                        : "Sector & Industry"}
-                  </span>
-                  <RiExpandUpDownLine
-                    className="size-4 text-gray-400 dark:text-gray-600"
-                    aria-hidden="true"
-                  />
-                </Button>
-              </DropdownMenuTrigger>
-            </Tooltip>
-            <DropdownMenuContent align="start" className="w-[150px]">
-              <DropdownMenuLabel>GROUP BY</DropdownMenuLabel>
-              <DropdownMenuSeparator />
-              <DropdownMenuRadioGroup
-                value={groupingMode}
-                onValueChange={(value) =>
-                  setGroupingMode(value as GroupingMode)
-                }
-              >
-                <DropdownMenuRadioItem value="none" iconType="check">
-                  No group
-                </DropdownMenuRadioItem>
-                <DropdownMenuRadioItem value="sector" iconType="check">
-                  Sector
-                </DropdownMenuRadioItem>
-                <DropdownMenuRadioItem value="sector-industry" iconType="check">
-                  Sector & Industry
-                </DropdownMenuRadioItem>
-              </DropdownMenuRadioGroup>
-            </DropdownMenuContent>
-          </DropdownMenu>
-
           <Tooltip
             triggerAsChild
             content="Switch between treemap and pie chart views"
@@ -1487,103 +1619,66 @@ export function ExposureTreemapHighchartsWithLogos({
             </Button>
           </Tooltip>
 
-          <DropdownMenu>
-            <Tooltip triggerAsChild content="Configure chart display options">
-              <DropdownMenuTrigger asChild>
-                <Button variant="secondary" className="h-9">
-                  <RiSettings3Line className="size-4" aria-hidden="true" />
-                </Button>
-              </DropdownMenuTrigger>
-            </Tooltip>
-            <DropdownMenuContent align="end" className="w-56">
-              <DropdownMenuLabel>DISPLAY SETTINGS</DropdownMenuLabel>
-              <DropdownMenuSeparator />
+          {chartType === "treemap" && (
+            <DropdownMenu>
+              <Tooltip triggerAsChild content="Configure chart display options">
+                <DropdownMenuTrigger asChild>
+                  <Button variant="secondary" className="h-9">
+                    <RiSettings3Line className="size-4" aria-hidden="true" />
+                  </Button>
+                </DropdownMenuTrigger>
+              </Tooltip>
+              <DropdownMenuContent align="end" className="w-56">
+                <DropdownMenuLabel>DISPLAY SETTINGS</DropdownMenuLabel>
+                <DropdownMenuSeparator />
 
-              <DropdownMenuCheckboxItem
-                checked={showLogo}
-                onCheckedChange={setShowLogo}
-              >
-                Logo
-              </DropdownMenuCheckboxItem>
+                <DropdownMenuCheckboxItem
+                  checked={showLogo}
+                  onCheckedChange={setShowLogo}
+                >
+                  Logo
+                </DropdownMenuCheckboxItem>
 
-              {chartType === "treemap" && (
-                <>
-                  <DropdownMenuSubMenu>
-                    <DropdownMenuSubMenuTrigger>
-                      <span>Title</span>
-                      <span className="ml-auto text-xs text-gray-500">
-                        {titleMode === "symbol"
-                          ? "Symbol"
-                          : titleMode === "name"
-                            ? "Name"
-                            : "None"}
-                      </span>
-                    </DropdownMenuSubMenuTrigger>
-                    <DropdownMenuSubMenuContent>
-                      <DropdownMenuRadioGroup
-                        value={titleMode}
-                        onValueChange={(value) =>
-                          setTitleMode(value as TitleMode)
-                        }
-                      >
-                        <DropdownMenuRadioItem value="symbol" iconType="check">
-                          Symbol
-                        </DropdownMenuRadioItem>
-                        <DropdownMenuRadioItem value="name" iconType="check">
-                          Name
-                        </DropdownMenuRadioItem>
-                        <DropdownMenuRadioItem value="none" iconType="check">
-                          None
-                        </DropdownMenuRadioItem>
-                      </DropdownMenuRadioGroup>
-                    </DropdownMenuSubMenuContent>
-                  </DropdownMenuSubMenu>
-
-                  <DropdownMenuSubMenu>
-                <DropdownMenuSubMenuTrigger>
-                  <span>Display value</span>
-                  <span className="ml-auto text-xs text-gray-500">
-                    {displayValue === "market-value"
-                      ? "Market value"
-                      : displayValue === "pct-stocks"
-                        ? "Stock %"
-                        : displayValue === "pct-portfolio"
-                          ? "Portfolio %"
+                <DropdownMenuSubMenu>
+                  <DropdownMenuSubMenuTrigger>
+                    <span>Title</span>
+                    <span className="ml-auto text-xs text-gray-500">
+                      {titleMode === "symbol"
+                        ? "Symbol"
+                        : titleMode === "name"
+                          ? "Name"
                           : "None"}
-                  </span>
-                </DropdownMenuSubMenuTrigger>
-                <DropdownMenuSubMenuContent>
-                  <DropdownMenuRadioGroup
-                    value={displayValue}
-                    onValueChange={(value) =>
-                      setInternalDisplayValue(value as DisplayValue)
-                    }
-                  >
-                    <DropdownMenuRadioItem
-                      value="market-value"
-                      iconType="check"
+                    </span>
+                  </DropdownMenuSubMenuTrigger>
+                  <DropdownMenuSubMenuContent>
+                    <DropdownMenuRadioGroup
+                      value={titleMode}
+                      onValueChange={(value) =>
+                        setTitleMode(value as TitleMode)
+                      }
                     >
-                      Market value
-                    </DropdownMenuRadioItem>
-                    <DropdownMenuRadioItem value="pct-stocks" iconType="check">
-                      Stock %
-                    </DropdownMenuRadioItem>
-                    <DropdownMenuRadioItem
-                      value="pct-portfolio"
-                      iconType="check"
-                    >
-                      Portfolio %
-                    </DropdownMenuRadioItem>
-                    <DropdownMenuRadioItem value="none" iconType="check">
-                      None
-                    </DropdownMenuRadioItem>
-                  </DropdownMenuRadioGroup>
-                </DropdownMenuSubMenuContent>
-              </DropdownMenuSubMenu>
-                </>
-              )}
-            </DropdownMenuContent>
-          </DropdownMenu>
+                      <DropdownMenuRadioItem value="symbol" iconType="check">
+                        Symbol
+                      </DropdownMenuRadioItem>
+                      <DropdownMenuRadioItem value="name" iconType="check">
+                        Name
+                      </DropdownMenuRadioItem>
+                      <DropdownMenuRadioItem value="none" iconType="check">
+                        None
+                      </DropdownMenuRadioItem>
+                    </DropdownMenuRadioGroup>
+                  </DropdownMenuSubMenuContent>
+                </DropdownMenuSubMenu>
+
+                <DropdownMenuCheckboxItem
+                  checked={showChartValue}
+                  onCheckedChange={setShowChartValue}
+                >
+                  Show value
+                </DropdownMenuCheckboxItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          )}
 
           <DropdownMenu>
             <Tooltip
@@ -1639,7 +1734,7 @@ export function ExposureTreemapHighchartsWithLogos({
 
       {validExposures.length === 0 ? (
         // Empty state when no stocks exist
-        <div className="mt-4 flex h-[300px] flex-col items-center justify-center">
+        <div className="mt-4 flex h-[500px] flex-col items-center justify-center">
           <RiPieChartLine
             className="mb-3 size-12 text-gray-300 dark:text-gray-600"
             aria-hidden="true"
@@ -1664,9 +1759,34 @@ export function ExposureTreemapHighchartsWithLogos({
           {/* Legend */}
           <div className="mt-4">
             <p className="mb-1 text-sm font-medium text-gray-700 dark:text-gray-300">
-              {groupingMode === "none" ? "Top Holdings" : "Top Sectors"}
+              {holdingsFilter === "mag7"
+                ? "Magnificent 7"
+                : holdingsFilter === "top7"
+                  ? "Top 7 Holdings"
+                  : holdingsFilter === "top10"
+                    ? "Top 10 Holdings"
+                    : groupingMode === "none"
+                      ? "Top Holdings"
+                      : groupingMode === "mag7"
+                        ? "Magnificent 7 vs Other"
+                        : groupingMode === "top10"
+                          ? "Top 10 vs Other"
+                          : "Top Sectors"}
             </p>
             <ul className="flex flex-wrap gap-x-10 gap-y-4 text-sm">
+              {/* Total at START for filtered views */}
+              {filteredTotal !== null && (
+                <li className="border-r border-gray-300 pr-6 dark:border-gray-700">
+                  <span className="text-base font-semibold text-gray-900 dark:text-gray-50">
+                    {getLegendDisplayValue(filteredTotal)}
+                  </span>
+                  <div className="flex items-center gap-2">
+                    <span className="text-sm font-medium">
+                      {holdingsFilter === "mag7" ? "Magnificent 7" : holdingsFilter === "top7" ? "Top 7" : "Top 10"} Total
+                    </span>
+                  </div>
+                </li>
+              )}
               {topGroups.map((item, index) => {
                 const logoUrl = showLogo ? item.logoUrl : null
 

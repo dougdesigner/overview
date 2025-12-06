@@ -3,21 +3,17 @@
 import { Badge } from "@/components/Badge"
 import { Button } from "@/components/Button"
 import { Divider } from "@/components/Divider"
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/Select"
 import { AccountSelector } from "@/components/ui/AccountSelector"
+import { DashboardSettingsDropdown } from "@/components/ui/DashboardSettingsDropdown"
 import { ExposureTable } from "@/components/ui/data-table-exposure/ExposureTable"
+import {
+  ExposureDisplayValue,
+  GroupingMode,
+  HoldingsFilter,
+} from "@/components/ui/data-table-exposure/types"
 import { useExposureCalculations } from "@/hooks/useExposureCalculations"
 import { usePortfolioStore } from "@/hooks/usePortfolioStore"
 import React, { useMemo, useRef, useState, useEffect } from "react"
-
-// Display value type for the exposure visualization
-export type ExposureDisplayValue = "market-value" | "pct-stocks" | "pct-portfolio"
 
 export default function ExposurePage() {
   // Use portfolio store for holdings and accounts data
@@ -61,8 +57,18 @@ export default function ExposurePage() {
   // Account filter state
   const [selectedAccount, setSelectedAccount] = React.useState<string>("all")
 
-  // Display value filter state
-  const [displayValue, setDisplayValue] = useState<ExposureDisplayValue>("pct-portfolio")
+  // Holdings filter state (All, Magnificent 7, Top 10)
+  const [holdingsFilter, setHoldingsFilter] = useState<HoldingsFilter>("all")
+
+  // Combine GOOG/GOOGL toggle state
+  const [combineGoogleShares, setCombineGoogleShares] = useState(false)
+
+  // Display value state (moved from chart)
+  const [displayValue, setDisplayValue] =
+    useState<ExposureDisplayValue>("pct-portfolio")
+
+  // Grouping mode state (moved from chart)
+  const [groupingMode, setGroupingMode] = useState<GroupingMode>("sector")
 
   // Sticky filter state
   const [isFilterSticky, setIsFilterSticky] = useState(false)
@@ -194,24 +200,16 @@ export default function ExposurePage() {
                   className="w-[200px]"
                 />
               </div>
-              <div className="flex items-center gap-2">
-                <label className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                  Allocation
-                </label>
-                <Select
-                  value={displayValue}
-                  onValueChange={(value) => setDisplayValue(value as ExposureDisplayValue)}
-                >
-                  <SelectTrigger className="w-[140px]">
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="market-value">Market value</SelectItem>
-                    <SelectItem value="pct-stocks">Stock %</SelectItem>
-                    <SelectItem value="pct-portfolio">Portfolio %</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
+              <DashboardSettingsDropdown
+                holdingsFilter={holdingsFilter}
+                onHoldingsFilterChange={setHoldingsFilter}
+                groupingMode={groupingMode}
+                onGroupingModeChange={setGroupingMode}
+                displayValue={displayValue}
+                onDisplayValueChange={setDisplayValue}
+                combineGoogleShares={combineGoogleShares}
+                onCombineGoogleSharesChange={setCombineGoogleShares}
+              />
             </div>
           </div>
         </div>
@@ -229,8 +227,8 @@ export default function ExposurePage() {
               {filteredHoldings.length === 1 ? "holding" : "holdings"}
             </div>
           </div>
-          <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:gap-4">
-            <div className="flex flex-col gap-1 sm:flex-row sm:items-center sm:gap-2">
+          <div className="flex items-center gap-4">
+            <div className="flex items-center gap-2">
               <label
                 htmlFor="account-filter"
                 className="text-sm font-medium text-gray-700 dark:text-gray-300"
@@ -242,31 +240,20 @@ export default function ExposurePage() {
                 value={selectedAccount}
                 onValueChange={setSelectedAccount}
                 showAllOption={true}
-                className="w-full sm:w-[200px]"
+                className="w-[200px]"
                 id="account-filter"
               />
             </div>
-            <div className="flex flex-col gap-1 sm:flex-row sm:items-center sm:gap-2">
-              <label
-                htmlFor="allocation-filter"
-                className="text-sm font-medium text-gray-700 dark:text-gray-300"
-              >
-                Allocation
-              </label>
-              <Select
-                value={displayValue}
-                onValueChange={(value) => setDisplayValue(value as ExposureDisplayValue)}
-              >
-                <SelectTrigger className="w-full sm:w-[140px]" id="allocation-filter">
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="market-value">Market value</SelectItem>
-                  <SelectItem value="pct-stocks">Stock %</SelectItem>
-                  <SelectItem value="pct-portfolio">Portfolio %</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
+            <DashboardSettingsDropdown
+              holdingsFilter={holdingsFilter}
+              onHoldingsFilterChange={setHoldingsFilter}
+              groupingMode={groupingMode}
+              onGroupingModeChange={setGroupingMode}
+              displayValue={displayValue}
+              onDisplayValueChange={setDisplayValue}
+              combineGoogleShares={combineGoogleShares}
+              onCombineGoogleSharesChange={setCombineGoogleShares}
+            />
           </div>
         </div>
       )}
@@ -329,7 +316,10 @@ export default function ExposurePage() {
             onRefresh={handleRefresh}
             dataVersion={dataVersion}
             selectedAccount={selectedAccount}
+            holdingsFilter={holdingsFilter}
+            combineGoogleShares={combineGoogleShares}
             displayValue={displayValue}
+            groupingMode={groupingMode}
           />
         )}
       </div>

@@ -165,28 +165,7 @@ export const createColumns = ({
   displayValue = "pct-portfolio",
   totalStocksValue = 0,
 }: ColumnsProps): ColumnDef<StockExposure>[] => {
-  // Helper to get column header based on display value
-  const getAllocationHeader = () => {
-    switch (displayValue) {
-      case "pct-stocks":
-        return "Stock %"
-      case "pct-portfolio":
-      default:
-        return "Portfolio %"
-    }
-  }
-
-  // Helper to format allocation value based on display setting
-  const formatAllocationValue = (row: StockExposure) => {
-    const value = row.totalValue
-    if (displayValue === "pct-stocks" && totalStocksValue > 0) {
-      return formatPercentage((value / totalStocksValue) * 100)
-    }
-    // Default to portfolio percentage
-    return formatPercentage(row.percentOfPortfolio)
-  }
-
-  // Build columns array, conditionally excluding Allocation column for market-value
+  // Build columns array with all value columns always visible
   const columns: ColumnDef<StockExposure>[] = [
   {
     id: "expander",
@@ -390,9 +369,15 @@ export const createColumns = ({
   // },
   {
     header: ({ column }) => {
+      const isHighlighted = displayValue === "market-value"
       return (
         <button
-          className="flex w-full items-center justify-end gap-1 font-medium hover:text-gray-900 dark:hover:text-gray-50"
+          className={cx(
+            "flex w-full items-center justify-end gap-1 font-medium",
+            isHighlighted
+              ? "text-gray-900 hover:text-gray-900 dark:text-gray-50 dark:hover:text-gray-50"
+              : "text-gray-400 hover:text-gray-600 dark:text-gray-500 dark:hover:text-gray-400",
+          )}
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
           Market Value
@@ -409,11 +394,13 @@ export const createColumns = ({
     cell: ({ row }) => {
       const value = row.original.totalValue
       const isETFBreakdown = row.original.isETFBreakdown
+      const isHighlighted = displayValue === "market-value"
       return (
         <span
           className={cx(
             "text-sm",
-            !isETFBreakdown && "font-semibold text-gray-900 dark:text-gray-50",
+            isHighlighted && !isETFBreakdown && "font-semibold text-gray-900 dark:text-gray-50",
+            !isHighlighted && "text-gray-400 dark:text-gray-500",
           )}
         >
           {formatCurrency(value)}
@@ -422,19 +409,80 @@ export const createColumns = ({
     },
     enableSorting: true,
     meta: {
-      className: "text-right min-w-40",
+      className: "text-right min-w-32",
       displayName: "Market Value",
     },
   },
-  // Conditionally include Allocation column (hidden when market-value is selected)
-  ...(displayValue !== "market-value" ? [{
-    header: ({ column }: { column: any }) => {
+  // Stock % column - always visible, highlighted when selected
+  {
+    header: ({ column }) => {
+      const isHighlighted = displayValue === "pct-stocks"
       return (
         <button
-          className="flex w-full items-center justify-end gap-1 font-medium hover:text-gray-900 dark:hover:text-gray-50"
+          className={cx(
+            "flex w-full items-center justify-end gap-1 font-medium",
+            isHighlighted
+              ? "text-gray-900 hover:text-gray-900 dark:text-gray-50 dark:hover:text-gray-50"
+              : "text-gray-400 hover:text-gray-600 dark:text-gray-500 dark:hover:text-gray-400",
+          )}
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
-          {getAllocationHeader()}
+          Stock %
+          {column.getIsSorted() === "asc" && (
+            <RiArrowUpSLine className="h-4 w-4" />
+          )}
+          {column.getIsSorted() === "desc" && (
+            <RiArrowDownSLine className="h-4 w-4" />
+          )}
+        </button>
+      )
+    },
+    id: "stockPercent",
+    accessorFn: (row) => {
+      if (totalStocksValue > 0) {
+        return (row.totalValue / totalStocksValue) * 100
+      }
+      return 0
+    },
+    cell: ({ row }) => {
+      const isETFBreakdown = row.original.isETFBreakdown
+      const isHighlighted = displayValue === "pct-stocks"
+      const value = totalStocksValue > 0
+        ? (row.original.totalValue / totalStocksValue) * 100
+        : 0
+      return (
+        <span
+          className={cx(
+            "text-sm",
+            isHighlighted && !isETFBreakdown && "font-semibold text-gray-900 dark:text-gray-50",
+            !isHighlighted && "text-gray-400 dark:text-gray-500",
+          )}
+        >
+          {formatPercentage(value)}
+        </span>
+      )
+    },
+    enableSorting: true,
+    meta: {
+      className: "text-right min-w-24",
+      displayName: "Stock %",
+    },
+  },
+  // Portfolio % column - always visible, highlighted when selected
+  {
+    header: ({ column }) => {
+      const isHighlighted = displayValue === "pct-portfolio"
+      return (
+        <button
+          className={cx(
+            "flex w-full items-center justify-end gap-1 font-medium",
+            isHighlighted
+              ? "text-gray-900 hover:text-gray-900 dark:text-gray-50 dark:hover:text-gray-50"
+              : "text-gray-400 hover:text-gray-600 dark:text-gray-500 dark:hover:text-gray-400",
+          )}
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Portfolio %
           {column.getIsSorted() === "asc" && (
             <RiArrowUpSLine className="h-4 w-4" />
           )}
@@ -445,26 +493,27 @@ export const createColumns = ({
       )
     },
     accessorKey: "percentOfPortfolio",
-    cell: ({ row }: { row: any }) => {
+    cell: ({ row }) => {
       const isETFBreakdown = row.original.isETFBreakdown
-
+      const isHighlighted = displayValue === "pct-portfolio"
       return (
         <span
           className={cx(
             "text-sm",
-            !isETFBreakdown && "font-semibold text-gray-900 dark:text-gray-50",
+            isHighlighted && !isETFBreakdown && "font-semibold text-gray-900 dark:text-gray-50",
+            !isHighlighted && "text-gray-400 dark:text-gray-500",
           )}
         >
-          {formatAllocationValue(row.original)}
+          {formatPercentage(row.original.percentOfPortfolio)}
         </span>
       )
     },
     enableSorting: true,
     meta: {
-      className: "text-right min-w-40",
-      displayName: getAllocationHeader(),
+      className: "text-right min-w-32",
+      displayName: "Portfolio %",
     },
-  } as ColumnDef<StockExposure>] : []),
+  },
   {
     header: ({ column }) => {
       return (

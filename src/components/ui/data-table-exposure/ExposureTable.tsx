@@ -35,7 +35,38 @@ import { createColumns } from "./columns"
 import { ExposureTreemapHighchartsWithLogos as ExposureTreemapHighcharts } from "./ExposureTreemapHighchartsWrapper" // Version with logos
 import { ExposureTableProps, StockExposure } from "./types"
 
-export function ExposureTable({ holdings, accounts, dataVersion, selectedAccount = "all", displayValue }: ExposureTableProps) {
+// Magnificent 7 tickers (including both Alphabet share classes)
+const MAGNIFICENT_7 = ["AAPL", "MSFT", "GOOGL", "GOOG", "AMZN", "NVDA", "META", "TSLA"]
+
+// Function to combine GOOG and GOOGL into a single entry
+const combineGoogleEntries = (exposures: StockExposure[]): StockExposure[] => {
+  const googl = exposures.find((e) => e.ticker === "GOOGL")
+  const goog = exposures.find((e) => e.ticker === "GOOG")
+
+  if (!googl || !goog) return exposures
+
+  // Create combined entry using GOOGL as base
+  const combined: StockExposure = {
+    ...googl,
+    name: "Alphabet Inc.", // Use full company name
+    directShares: googl.directShares + goog.directShares,
+    etfExposure: googl.etfExposure + goog.etfExposure,
+    totalShares: googl.totalShares + goog.totalShares,
+    directValue: googl.directValue + goog.directValue,
+    etfValue: googl.etfValue + goog.etfValue,
+    totalValue: googl.totalValue + goog.totalValue,
+    percentOfPortfolio: googl.percentOfPortfolio + goog.percentOfPortfolio,
+    exposureSources: [...googl.exposureSources, ...goog.exposureSources],
+    subRows: [...(googl.subRows || []), ...(goog.subRows || [])],
+  }
+
+  // Return all entries except GOOG, with GOOGL replaced by combined
+  return exposures
+    .filter((e) => e.ticker !== "GOOG")
+    .map((e) => (e.ticker === "GOOGL" ? combined : e))
+}
+
+export function ExposureTable({ holdings, accounts, dataVersion, selectedAccount = "all", holdingsFilter = "all", combineGoogleShares = false, displayValue = "pct-portfolio", groupingMode = "sector" }: ExposureTableProps) {
   const [data, setData] = React.useState<StockExposure[]>([])
   const [sorting, setSorting] = React.useState<SortingState>([
     { id: "percentOfPortfolio", desc: true },
@@ -130,8 +161,11 @@ export function ExposureTable({ holdings, accounts, dataVersion, selectedAccount
     fetchLogos()
   }, [data])
 
-  // Get the active data source based on account filter
-  const activeData = selectedAccount === "all" ? data : filteredData
+  // Get the active data source based on account filter, with optional GOOG/GOOGL combining
+  const activeData = React.useMemo(() => {
+    const baseData = selectedAccount === "all" ? data : filteredData
+    return combineGoogleShares ? combineGoogleEntries(baseData) : baseData
+  }, [selectedAccount, data, filteredData, combineGoogleShares])
 
   // Sort data globally before pagination
   // Uses activeData which is already filtered by account when needed
@@ -156,16 +190,83 @@ export function ExposureTable({ holdings, accounts, dataVersion, selectedAccount
     })
   }, [activeData, sorting])
 
+  // Filter by holdings filter (Magnificent 7, Top 10, or All)
+  const filteredByHoldingsFilter = React.useMemo(() => {
+    if (!holdingsFilter || holdingsFilter === "all") return sortedData
+
+    if (holdingsFilter === "mag7") {
+      return sortedData.filter(
+        (row) => !row.isETFBreakdown && MAGNIFICENT_7.includes(row.ticker.toUpperCase())
+      )
+    }
+
+    if (holdingsFilter === "top7") {
+      // Get parent rows only (not ETF breakdowns), already sorted by percentOfPortfolio desc
+      const parentRows = sortedData.filter((row) => !row.isETFBreakdown)
+      return parentRows.slice(0, 7)
+    }
+
+    if (holdingsFilter === "top10") {
+      // Get parent rows only (not ETF breakdowns), already sorted by percentOfPortfolio desc
+      const parentRows = sortedData.filter((row) => !row.isETFBreakdown)
+      return parentRows.slice(0, 10)
+    }
+
+    return sortedData
+  }, [sortedData, holdingsFilter])
+
+  // Apply holdings filter to data for treemap visualization
+  const exposuresForVisualization = React.useMemo(() => {
+    const rawData = selectedAccount === "all" ? data : filteredData
+    // Apply GOOG/GOOGL combining if enabled
+    const baseData = combineGoogleShares ? combineGoogleEntries(rawData) : rawData
+
+    if (!holdingsFilter || holdingsFilter === "all") return baseData
+
+    if (holdingsFilter === "mag7") {
+      return baseData.filter(
+        (row) => !row.isETFBreakdown && MAGNIFICENT_7.includes(row.ticker.toUpperCase())
+      )
+    }
+
+    if (holdingsFilter === "top7") {
+      // Sort by percentOfPortfolio desc and take top 7
+      const sorted = [...baseData]
+        .filter((row) => !row.isETFBreakdown)
+        .sort((a, b) => b.percentOfPortfolio - a.percentOfPortfolio)
+      return sorted.slice(0, 7)
+    }
+
+    if (holdingsFilter === "top10") {
+      // Sort by percentOfPortfolio desc and take top 10
+      const sorted = [...baseData]
+        .filter((row) => !row.isETFBreakdown)
+        .sort((a, b) => b.percentOfPortfolio - a.percentOfPortfolio)
+      return sorted.slice(0, 10)
+    }
+
+    return baseData
+  }, [data, filteredData, selectedAccount, holdingsFilter, combineGoogleShares])
+
+  // Calculate stocks-only total for percentage calculations (unaffected by view filter)
+  const stocksOnlyValue = React.useMemo(() => {
+    const rawData = selectedAccount === "all" ? data : filteredData
+    const baseData = combineGoogleShares ? combineGoogleEntries(rawData) : rawData
+    return baseData
+      .filter((exp) => !exp.isETFBreakdown && exp.totalValue > 0)
+      .reduce((sum, exp) => sum + exp.totalValue, 0)
+  }, [data, filteredData, selectedAccount, combineGoogleShares])
+
   // Paginate the sorted data (parent rows only)
   const paginatedData = React.useMemo(() => {
     const startIndex = currentPage * PAGE_SIZE
-    return sortedData.slice(startIndex, startIndex + PAGE_SIZE)
-  }, [sortedData, currentPage, PAGE_SIZE])
+    return filteredByHoldingsFilter.slice(startIndex, startIndex + PAGE_SIZE)
+  }, [filteredByHoldingsFilter, currentPage, PAGE_SIZE])
 
   // Reset to first page when data/filter/sort changes
   React.useEffect(() => {
     setCurrentPage(0)
-  }, [activeData.length, globalFilter, sorting])
+  }, [activeData.length, globalFilter, sorting, holdingsFilter])
 
   const areAllExpanded = React.useCallback(() => {
     const expandableRows = activeData.filter(
@@ -207,10 +308,10 @@ export function ExposureTable({ holdings, accounts, dataVersion, selectedAccount
         areAllExpanded,
         logoUrls,
         accounts,
-        displayValue,
         totalStocksValue,
+        displayValue,
       }),
-    [toggleExpandAll, areAllExpanded, logoUrls, accounts, displayValue, totalStocksValue],
+    [toggleExpandAll, areAllExpanded, logoUrls, accounts, totalStocksValue, displayValue],
   )
 
   const table = useReactTable({
@@ -293,12 +394,15 @@ export function ExposureTable({ holdings, accounts, dataVersion, selectedAccount
       {/* Treemap Visualization */}
       {data.length > 0 && (
         <ExposureTreemapHighcharts
-          exposures={selectedAccount === "all" ? data : filteredData}
+          exposures={exposuresForVisualization}
           totalValue={selectedAccount === "all" ? totalPortfolioValue : filteredTotalValue}
+          stocksOnlyValue={stocksOnlyValue}
           accounts={accounts}
           selectedAccount={selectedAccount}
           logoUrls={logoUrls}
           dataVersion={dataVersion}
+          holdingsFilter={holdingsFilter}
+          groupingMode={groupingMode}
           displayValue={displayValue}
         />
       )}
@@ -413,7 +517,7 @@ export function ExposureTable({ holdings, accounts, dataVersion, selectedAccount
 
           {/* Pagination */}
           <ExposureTablePagination
-            totalRows={activeData.length}
+            totalRows={filteredByHoldingsFilter.length}
             currentPage={currentPage}
             pageSize={PAGE_SIZE}
             onPageChange={setCurrentPage}

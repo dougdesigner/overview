@@ -63,7 +63,13 @@ export interface Account {
 }
 
 // Display value type for exposure visualization
-export type ExposureDisplayValue = "market-value" | "pct-stocks" | "pct-portfolio"
+export type ExposureDisplayValue = "market-value" | "pct-stocks" | "pct-portfolio" | "none"
+
+// Holdings filter type for quick views
+export type HoldingsFilter = "all" | "mag7" | "top7" | "top10"
+
+// Grouping mode for exposure visualization
+export type GroupingMode = "none" | "sector" | "sector-industry" | "mag7" | "top10"
 
 export interface ExposureTableProps {
   holdings: PortfolioHolding[]
@@ -72,7 +78,10 @@ export interface ExposureTableProps {
   lastUpdated?: Date
   dataVersion?: number
   selectedAccount?: string
+  holdingsFilter?: HoldingsFilter
+  combineGoogleShares?: boolean
   displayValue?: ExposureDisplayValue
+  groupingMode?: GroupingMode
 }
 
 export interface ExposureCalculationResult {

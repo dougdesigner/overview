@@ -1193,7 +1193,7 @@ export function HoldingsSunburstEnhanced({
   if (!isClient || !modulesLoaded) {
     return (
       <Card className="pb-4 pt-6">
-        <div className="flex h-[400px] items-center justify-center">
+        <div className="flex items-center justify-center" style={{ height }}>
           <div className="text-sm text-gray-500">Loading chart...</div>
         </div>
       </Card>
@@ -1434,7 +1434,7 @@ export function HoldingsSunburstEnhanced({
 
       <div className="mt-4">
         {filteredHoldings.length === 0 ? (
-          <div className="flex h-[300px] items-center justify-center rounded-lg border border-dashed border-gray-300 dark:border-gray-700">
+          <div className="flex items-center justify-center rounded-lg border border-dashed border-gray-300 dark:border-gray-700" style={{ height }}>
             <div className="text-center">
               <p className="text-sm font-medium text-gray-900 dark:text-gray-100">
                 No holdings found
