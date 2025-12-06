@@ -262,7 +262,7 @@ function HoldingsContent() {
   // The empty state will show immediately for new users
 
   return (
-    <main className="min-h-[calc(100vh-180px)]">
+    <main className="min-h-[calc(100vh-180px)] pb-24 sm:pb-0">
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <h1 className="flex items-center gap-2 text-2xl font-semibold text-gray-900 dark:text-gray-50">
@@ -288,7 +288,7 @@ function HoldingsContent() {
             )} */}
             <Button
               onClick={() => setIsOpen(true)}
-              className="flex items-center gap-2 text-base sm:text-sm"
+              className="hidden items-center gap-2 sm:flex sm:text-sm"
             >
               Add Holdings
               <RiAddLine
@@ -326,7 +326,7 @@ function HoldingsContent() {
       {/* Sticky Account Filter - Bottom positioned, narrower */}
       {accounts.length > 0 && holdings.length > 0 && (
         <div
-          className={`fixed bottom-6 left-1/2 z-50 w-full max-w-3xl -translate-x-1/2 px-4 transition-[transform,opacity] duration-300 ease-out sm:px-6 ${
+          className={`fixed bottom-20 left-1/2 z-50 w-full max-w-2xl -translate-x-1/2 px-4 transition-[transform,opacity] duration-300 ease-out sm:bottom-6 sm:px-6 ${
             isFilterSticky
               ? "translate-y-0 opacity-100"
               : "pointer-events-none translate-y-4 opacity-0"
@@ -448,6 +448,22 @@ function HoldingsContent() {
           />
         )}
       </div>
+
+      {/* Mobile Add Holdings Button - Only show on mobile when accounts exist */}
+      {accounts.length > 0 && (
+        <div className="mt-6 sm:hidden">
+          <Button
+            onClick={() => setIsOpen(true)}
+            className="flex w-full items-center justify-center gap-2 text-base"
+          >
+            Add Holdings
+            <RiAddLine
+              className="-mr-0.5 size-5 shrink-0"
+              aria-hidden="true"
+            />
+          </Button>
+        </div>
+      )}
     </main>
   )
 }

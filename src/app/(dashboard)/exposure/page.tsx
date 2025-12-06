@@ -159,7 +159,7 @@ export default function ExposurePage() {
   // Show error if there's one
   if (error && !holdings.length) {
     return (
-      <main className="min-h-[calc(100vh-180px)]">
+      <main className="min-h-[calc(100vh-180px)] pb-20 sm:pb-0">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div>
             <h1 className="text-2xl font-semibold text-gray-900 dark:text-gray-50">
@@ -179,7 +179,7 @@ export default function ExposurePage() {
   }
 
   return (
-    <main className="min-h-[calc(100vh-180px)]">
+    <main className="min-h-[calc(100vh-180px)] pb-20 sm:pb-0">
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <h1 className="flex items-center gap-2 text-2xl font-semibold text-gray-900 dark:text-gray-50">
@@ -199,7 +199,7 @@ export default function ExposurePage() {
       {/* Sticky Account Filter - Bottom positioned, narrower */}
       {accounts.length > 0 && holdings.length > 0 && (
         <div
-          className={`fixed bottom-6 left-1/2 z-50 w-full max-w-3xl -translate-x-1/2 px-4 transition-[transform,opacity] duration-300 ease-out sm:px-6 ${
+          className={`fixed bottom-20 left-1/2 z-50 w-full max-w-2xl -translate-x-1/2 px-4 transition-[transform,opacity] duration-300 ease-out sm:bottom-6 sm:px-6 ${
             isFilterSticky
               ? "translate-y-0 opacity-100"
               : "translate-y-4 pointer-events-none opacity-0"
