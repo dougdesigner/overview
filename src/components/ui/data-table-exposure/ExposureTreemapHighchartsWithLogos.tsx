@@ -17,6 +17,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/DropdownMenu"
 import { Tooltip } from "@/components/Tooltip"
+import { getAssetClassHexColor } from "@/lib/assetClassColors"
 import { toProperCase } from "@/lib/utils"
 import {
   RiDownloadLine,
@@ -82,6 +83,11 @@ type DisplayValue = "market-value" | "pct-stocks" | "pct-portfolio" | "none"
 
 // Magnificent 7 tickers
 const MAG7_TICKERS = ["AAPL", "MSFT", "GOOGL", "GOOG", "AMZN", "NVDA", "META", "TSLA"]
+
+// Colors for non-stock holdings (cash, bonds, etc.)
+const CASH_COLOR = getAssetClassHexColor("Cash")   // emerald-500 (#10b981)
+const BONDS_COLOR = getAssetClassHexColor("Bonds") // amber-500 (#f59e0b)
+const OTHER_COLOR = getAssetClassHexColor("Other") // gray-500 (#6b7280)
 
 // Extended data point type to include custom properties
 interface ExtendedTreemapPoint extends Highcharts.PointOptionsObject {
@@ -279,13 +285,27 @@ export function ExposureTreemapHighchartsWithLogos({
   // Get consistent color for a sector group across both chart types
   // Both "sector" and "sector-industry" modes use sector-based coloring
   const getGroupColor = (groupName: string, mode: GroupingMode): string => {
+    // Use asset class colors for non-stock sectors
+    if (groupName === "Cash") {
+      return CASH_COLOR
+    }
+    if (groupName === "Bonds") {
+      return BONDS_COLOR
+    }
+    if (groupName === "Real Estate" || groupName === "Commodities" || groupName === "Other") {
+      return OTHER_COLOR
+    }
+
     if (mode === "none") {
       return colors[0] // All stocks use the same color in no-group mode
     }
 
-    // Get all valid exposures
+    // Non-stock sectors to exclude from stock color assignment
+    const nonStockSectors = ["Cash", "Bonds", "Real Estate", "Commodities", "Other"]
+
+    // Get all valid exposures (excluding non-stock sectors for color assignment)
     const validExposures = exposures.filter(
-      (exp) => !exp.isETFBreakdown && exp.totalValue > 0,
+      (exp) => !exp.isETFBreakdown && exp.totalValue > 0 && !nonStockSectors.includes(exp.sector || ""),
     )
 
     // Always group by sector for color consistency (both sector and sector-industry use sectors)
@@ -438,38 +458,59 @@ export function ExposureTreemapHighchartsWithLogos({
     const { tickerSize, weightSize } = calculateTextSizes(point)
     const displayValueText = getDisplayValueText(point)
 
+    // Check if this is a cash entry
+    const isCash = ticker === "CASH"
+
     // Strategy: logo-only
     if (strategy === "logo-only") {
-      if (showLogo && logoUrl) {
-        return `<div style="text-align: center; display: flex; align-items: center; justify-content: center; height: 100%; overflow: hidden;">
-          <div style="width: ${logoSize}px; height: ${logoSize}px; border-radius: 50%; background: #f1f3fa; overflow: hidden; display: flex; align-items: center; justify-content: center;">
-            <img src="${logoUrl}"
-                 alt="${ticker}"
-                 style="width: 100%; height: 100%; object-fit: contain;"
-                 onerror="this.style.display='none'"
-            />
-          </div>
-        </div>`
-      } else {
-        return ""
+      if (showLogo) {
+        if (isCash) {
+          // Show "$" initials for cash
+          return `<div style="text-align: center; display: flex; align-items: center; justify-content: center; height: 100%; overflow: hidden;">
+            <div style="width: ${logoSize}px; height: ${logoSize}px; border-radius: 50%; background: ${isDark ? "#374151" : "#e5e7eb"}; display: flex; align-items: center; justify-content: center;">
+              <span style="font-size: ${Math.round(logoSize * 0.5)}px; font-weight: 700; color: ${isDark ? "#9ca3af" : "#6b7280"};">$</span>
+            </div>
+          </div>`
+        } else if (logoUrl) {
+          return `<div style="text-align: center; display: flex; align-items: center; justify-content: center; height: 100%; overflow: hidden;">
+            <div style="width: ${logoSize}px; height: ${logoSize}px; border-radius: 50%; background: #f1f3fa; overflow: hidden; display: flex; align-items: center; justify-content: center;">
+              <img src="${logoUrl}"
+                   alt="${ticker}"
+                   style="width: 100%; height: 100%; object-fit: contain;"
+                   onerror="this.style.display='none'"
+              />
+            </div>
+          </div>`
+        }
       }
+      return ""
     }
 
     // Strategy: logo-ticker
     if (strategy === "logo-ticker") {
-      const hasLogo = showLogo && logoUrl
+      const hasLogo = showLogo && (logoUrl || isCash)
       const hasTitle = titleMode === "symbol" || titleMode === "name"
+
+      // Render cash "$" logo or stock logo
+      const renderLogoElement = (withMargin: boolean = false) => {
+        if (isCash) {
+          return `<div style="width: ${logoSize}px; height: ${logoSize}px; border-radius: 50%; background: ${isDark ? "#374151" : "#e5e7eb"}; display: flex; align-items: center; justify-content: center;${withMargin ? " margin-bottom: 2px;" : ""}">
+            <span style="font-size: ${Math.round(logoSize * 0.5)}px; font-weight: 700; color: ${isDark ? "#9ca3af" : "#6b7280"};">$</span>
+          </div>`
+        }
+        return `<div style="width: ${logoSize}px; height: ${logoSize}px; border-radius: 50%; background: #f1f3fa; overflow: hidden; display: flex; align-items: center; justify-content: center;${withMargin ? " margin-bottom: 2px;" : ""}">
+          <img src="${logoUrl}"
+               alt="${ticker}"
+               style="width: 100%; height: 100%; object-fit: contain;"
+               onerror="this.style.display='none'"
+          />
+        </div>`
+      }
 
       if (hasLogo && hasTitle) {
         // Logo + ticker/name
         return `<div style="text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; overflow: hidden;">
-          <div style="width: ${logoSize}px; height: ${logoSize}px; border-radius: 50%; background: #f1f3fa; overflow: hidden; display: flex; align-items: center; justify-content: center; margin-bottom: 2px;">
-            <img src="${logoUrl}"
-                 alt="${ticker}"
-                 style="width: 100%; height: 100%; object-fit: contain;"
-                 onerror="this.style.display='none'"
-            />
-          </div>
+          ${renderLogoElement(true)}
           <span style="color: ${isDark ? "#f3f4f6" : "#f3f4f6"}; font-size: ${tickerSize}px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
             ${displayText}
           </span>
@@ -477,13 +518,7 @@ export function ExposureTreemapHighchartsWithLogos({
       } else if (hasLogo) {
         // Logo only
         return `<div style="text-align: center; display: flex; align-items: center; justify-content: center; height: 100%; overflow: hidden;">
-          <div style="width: ${logoSize}px; height: ${logoSize}px; border-radius: 50%; background: #f1f3fa; overflow: hidden; display: flex; align-items: center; justify-content: center;">
-            <img src="${logoUrl}"
-                 alt="${ticker}"
-                 style="width: 100%; height: 100%; object-fit: contain;"
-                 onerror="this.style.display='none'"
-            />
-          </div>
+          ${renderLogoElement()}
         </div>`
       } else if (hasTitle) {
         // Ticker/name only
@@ -499,19 +534,29 @@ export function ExposureTreemapHighchartsWithLogos({
 
     // Strategy: full
     if (strategy === "full") {
-      const hasLogo = showLogo && logoUrl
+      const hasLogo = showLogo && (logoUrl || isCash)
       const hasTitle = titleMode === "symbol" || titleMode === "name"
+
+      // Render cash "$" logo or stock logo for full strategy
+      const renderFullLogo = () => {
+        if (isCash) {
+          return `<div style="width: ${logoSize}px; height: ${logoSize}px; border-radius: 50%; background: ${isDark ? "#374151" : "#e5e7eb"}; display: flex; align-items: center; justify-content: center; margin-bottom: 2px;">
+            <span style="font-size: ${Math.round(logoSize * 0.5)}px; font-weight: 700; color: ${isDark ? "#9ca3af" : "#6b7280"};">$</span>
+          </div>`
+        }
+        return `<div style="width: ${logoSize}px; height: ${logoSize}px; border-radius: 50%; background: #f1f3fa; overflow: hidden; display: flex; align-items: center; justify-content: center; margin-bottom: 2px;">
+          <img src="${logoUrl}"
+               alt="${ticker}"
+               style="width: 100%; height: 100%; object-fit: contain;"
+               onerror="this.style.display='none'"
+          />
+        </div>`
+      }
 
       if (hasLogo && hasTitle) {
         // Logo + ticker/name + value
         return `<div style="text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; overflow: hidden;">
-          <div style="width: ${logoSize}px; height: ${logoSize}px; border-radius: 50%; background: #f1f3fa; overflow: hidden; display: flex; align-items: center; justify-content: center; margin-bottom: 2px;">
-            <img src="${logoUrl}"
-                 alt="${ticker}"
-                 style="width: 100%; height: 100%; object-fit: contain;"
-                 onerror="this.style.display='none'"
-            />
-          </div>
+          ${renderFullLogo()}
           <span style="color: ${isDark ? "#f3f4f6" : "#f3f4f6"}; font-size: ${tickerSize}px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
             ${displayText}
           </span>
@@ -526,13 +571,7 @@ export function ExposureTreemapHighchartsWithLogos({
       } else if (hasLogo) {
         // Logo + value only
         return `<div style="text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; overflow: hidden;">
-          <div style="width: ${logoSize}px; height: ${logoSize}px; border-radius: 50%; background: #f1f3fa; overflow: hidden; display: flex; align-items: center; justify-content: center; margin-bottom: 2px;">
-            <img src="${logoUrl}"
-                 alt="${ticker}"
-                 style="width: 100%; height: 100%; object-fit: contain;"
-                 onerror="this.style.display='none'"
-            />
-          </div>
+          ${renderFullLogo()}
           ${
             displayValueText
               ? `<span style="color: ${isDark ? "#f3f4f6" : "#f3f4f6"}; font-size: ${weightSize}px; font-weight: 500; white-space: nowrap;">
@@ -585,16 +624,27 @@ export function ExposureTreemapHighchartsWithLogos({
         (a, b) => b.totalValue - a.totalValue,
       )
 
+      // Non-stock sectors that need special coloring
+      const nonStockSectors = ["Cash", "Bonds", "Real Estate", "Commodities", "Other"]
+
       sortedExposures.forEach((stock) => {
         const percentage = (stock.totalValue / totalValue) * 100
         const logoUrl = logoUrls[stock.ticker.toUpperCase()] ?? null
+        const sector = stock.sector || ""
+        const isNonStock = nonStockSectors.includes(sector)
+
+        // Determine color based on sector
+        let itemColor = colors[0] // Default for stocks
+        if (sector === "Cash") itemColor = CASH_COLOR
+        else if (sector === "Bonds") itemColor = BONDS_COLOR
+        else if (isNonStock) itemColor = OTHER_COLOR
 
         data.push({
-          id: stock.ticker,
+          id: stock.ticker + (isNonStock ? `-${stock.id}` : ""),
           name: stock.ticker,
           value: sizingMode === "monosize" ? 1 : stock.totalValue,
           actualValue: stock.totalValue,
-          color: colors[0], // Use first color (blue) for all stocks in no-group mode
+          color: itemColor,
           logoUrl: logoUrl,
           percentage: percentage,
           ticker: stock.ticker,
@@ -750,14 +800,26 @@ export function ExposureTreemapHighchartsWithLogos({
         }
       })
 
+      // Non-stock sectors that need special coloring
+      const nonStockSectors = ["Cash", "Bonds", "Real Estate", "Commodities", "Other"]
+
       // Add main segments
       mainSegments.forEach((stock) => {
         const logoUrl = logoUrls[stock.ticker.toUpperCase()] ?? null
+        const sector = stock.sector || ""
+        const isNonStock = nonStockSectors.includes(sector)
+
+        // Determine color based on sector
+        let itemColor = colors[0] // Default for stocks
+        if (sector === "Cash") itemColor = CASH_COLOR
+        else if (sector === "Bonds") itemColor = BONDS_COLOR
+        else if (isNonStock) itemColor = OTHER_COLOR
+
         data.push({
           name: stock.ticker,
           y: stock.totalValue,
           actualValue: stock.totalValue,
-          color: colors[0], // Use blue for all stocks in no-group mode
+          color: itemColor,
           logoUrl: logoUrl,
           ticker: stock.ticker,
           companyName: stock.name,
@@ -1265,14 +1327,24 @@ export function ExposureTreemapHighchartsWithLogos({
             if (!showLogo && titleMode === "none" && !showChartValue) return null
 
             const parts: string[] = []
+            const isCash = ticker === "CASH"
 
-            // Logo (if enabled and available)
-            if (showLogo && logoUrl && percentage >= 5) {
-              parts.push(`<div style="display:flex;justify-content:center;margin-bottom:2px;">
-                <div style="width:24px;height:24px;border-radius:50%;background:${isDark ? "#1f2937" : "#f3f4f6"};display:flex;align-items:center;justify-content:center;overflow:hidden;">
-                  <img src="${logoUrl}" alt="${ticker}" style="width:100%;height:100%;object-fit:contain;" />
-                </div>
-              </div>`)
+            // Logo (if enabled and available, or "$" for cash)
+            if (showLogo && percentage >= 5) {
+              if (isCash) {
+                // Show "$" for cash entries
+                parts.push(`<div style="display:flex;justify-content:center;margin-bottom:2px;">
+                  <div style="width:24px;height:24px;border-radius:50%;background:${isDark ? "#374151" : "#e5e7eb"};display:flex;align-items:center;justify-content:center;">
+                    <span style="font-size:12px;font-weight:700;color:${isDark ? "#9ca3af" : "#6b7280"};">$</span>
+                  </div>
+                </div>`)
+              } else if (logoUrl) {
+                parts.push(`<div style="display:flex;justify-content:center;margin-bottom:2px;">
+                  <div style="width:24px;height:24px;border-radius:50%;background:${isDark ? "#1f2937" : "#f3f4f6"};display:flex;align-items:center;justify-content:center;overflow:hidden;">
+                    <img src="${logoUrl}" alt="${ticker}" style="width:100%;height:100%;object-fit:contain;" />
+                  </div>
+                </div>`)
+              }
             }
 
             // Title (based on titleMode)
@@ -1716,6 +1788,18 @@ export function ExposureTreemapHighchartsWithLogos({
               )}
               {topGroups.map((item, index) => {
                 const logoUrl = showLogo ? item.logoUrl : null
+                const isCash = item.name === "CASH" || item.name === "Cash"
+                const isBonds = item.name === "Bonds" || item.name === "BONDS"
+
+                // Non-stock sectors for legend coloring
+                const nonStockSectors = ["Cash", "CASH", "Bonds", "BONDS", "Real Estate", "Commodities", "Other"]
+                const isNonStock = nonStockSectors.includes(item.name)
+
+                // Determine color for legend indicator
+                let legendColor = groupingMode === "none" ? colors[0] : colors[index % colors.length]
+                if (isCash) legendColor = CASH_COLOR
+                else if (isBonds) legendColor = BONDS_COLOR
+                else if (isNonStock) legendColor = OTHER_COLOR
 
                 return (
                   <li key={`${item.name}-${index}`}>
@@ -1723,7 +1807,17 @@ export function ExposureTreemapHighchartsWithLogos({
                       {getLegendDisplayValue(item.value)}
                     </span>
                     <div className="flex items-center gap-2">
-                      {logoUrl ? (
+                      {showLogo && isCash ? (
+                        // Show "$" for cash entries
+                        <div className="flex size-5 shrink-0 items-center justify-center rounded-full bg-emerald-100 dark:bg-emerald-900/30">
+                          <span className="text-xs font-bold text-emerald-600 dark:text-emerald-400">$</span>
+                        </div>
+                      ) : showLogo && isBonds ? (
+                        // Show bond icon for bonds entries
+                        <div className="flex size-5 shrink-0 items-center justify-center rounded-full bg-amber-100 dark:bg-amber-900/30">
+                          <span className="text-xs font-bold text-amber-600 dark:text-amber-400">B</span>
+                        </div>
+                      ) : logoUrl ? (
                         <div className="flex size-5 shrink-0 items-center justify-center overflow-hidden rounded-full bg-gray-100 dark:bg-gray-800">
                           <img
                             src={logoUrl}
@@ -1735,10 +1829,7 @@ export function ExposureTreemapHighchartsWithLogos({
                         <span
                           className="size-2.5 shrink-0 rounded-sm"
                           style={{
-                            backgroundColor:
-                              groupingMode === "none"
-                                ? colors[0]
-                                : colors[index % colors.length],
+                            backgroundColor: legendColor,
                           }}
                           aria-hidden="true"
                         />

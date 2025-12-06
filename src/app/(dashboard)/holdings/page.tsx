@@ -370,7 +370,7 @@ function HoldingsContent() {
               {filteredHoldings.length === 1 ? "holding" : "holdings"}
             </div>
           </div>
-          <div className="flex flex-col gap-1 sm:flex-row sm:items-center sm:gap-2">
+          <div className="flex items-center gap-2">
             <label
               htmlFor="account-filter"
               className="text-sm font-medium text-gray-700 dark:text-gray-300"
@@ -382,7 +382,7 @@ function HoldingsContent() {
               value={currentAccountFilter}
               onValueChange={setCurrentAccountFilter}
               showAllOption={true}
-              className="w-full sm:w-[200px]"
+              className="w-[200px]"
               id="account-filter"
             />
           </div>

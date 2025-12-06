@@ -63,6 +63,9 @@ export default function ExposurePage() {
   // Combine GOOG/GOOGL toggle state
   const [combineGoogleShares, setCombineGoogleShares] = useState(false)
 
+  // Show other assets (cash + funds) toggle state
+  const [showOtherAssets, setShowOtherAssets] = useState(false)
+
   // Display value state (moved from chart)
   const [displayValue, setDisplayValue] =
     useState<ExposureDisplayValue>("pct-portfolio")
@@ -135,7 +138,8 @@ export default function ExposurePage() {
     selectedAccount !== "all" ||
     holdingsFilter !== "all" ||
     displayValue !== "pct-portfolio" ||
-    combineGoogleShares !== false
+    combineGoogleShares !== false ||
+    showOtherAssets !== false
 
   // Reset all filters to defaults
   const resetFilters = () => {
@@ -143,6 +147,7 @@ export default function ExposurePage() {
     setHoldingsFilter("all")
     setDisplayValue("pct-portfolio")
     setCombineGoogleShares(false)
+    setShowOtherAssets(false)
     setResetKey((k) => k + 1) // Force child remount to reset chart settings
   }
 
@@ -256,6 +261,8 @@ export default function ExposurePage() {
                 onDisplayValueChange={setDisplayValue}
                 combineGoogleShares={combineGoogleShares}
                 onCombineGoogleSharesChange={setCombineGoogleShares}
+                showOtherAssets={showOtherAssets}
+                onShowOtherAssetsChange={setShowOtherAssets}
                 onReset={resetFilters}
               />
             </div>
@@ -316,6 +323,8 @@ export default function ExposurePage() {
               onDisplayValueChange={setDisplayValue}
               combineGoogleShares={combineGoogleShares}
               onCombineGoogleSharesChange={setCombineGoogleShares}
+              showOtherAssets={showOtherAssets}
+              onShowOtherAssetsChange={setShowOtherAssets}
               onReset={resetFilters}
             />
           </div>
@@ -383,6 +392,7 @@ export default function ExposurePage() {
             selectedAccount={selectedAccount}
             holdingsFilter={holdingsFilter}
             combineGoogleShares={combineGoogleShares}
+            showOtherAssets={showOtherAssets}
             displayValue={displayValue}
             onFilteredDataChange={handleFilteredDataChange}
           />

@@ -17,6 +17,10 @@ export interface StockExposure {
   isETFBreakdown?: boolean // True for ETF contribution rows
   accountId?: string // For subRows that come from a single account
   accountName?: string // For subRows that come from a single account
+  // For "other assets" entries (non-stock portions of holdings)
+  sourceHolding?: string // Original fund ticker (e.g., "VFFVX")
+  sourceETF?: string // ETF from mapping (e.g., "BND")
+  assetClass?: string // Asset class for non-stock holdings (e.g., "fixed_income")
 }
 
 export interface ExposureSource {
@@ -80,6 +84,7 @@ export interface ExposureTableProps {
   selectedAccount?: string
   holdingsFilter?: HoldingsFilter
   combineGoogleShares?: boolean
+  showOtherAssets?: boolean
   displayValue?: ExposureDisplayValue
   onFilteredDataChange?: (count: number, totalValue: number) => void
 }

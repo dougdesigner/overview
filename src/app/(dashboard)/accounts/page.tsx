@@ -385,7 +385,7 @@ export default function AccountsPage() {
               {filteredAccounts.length === 1 ? "account" : "accounts"}
             </div>
           </div>
-          <div className="flex flex-col gap-1 sm:flex-row sm:items-center sm:gap-2">
+          <div className="flex items-center gap-2">
             <label
               htmlFor="institution-filter"
               className="text-sm font-medium text-gray-700 dark:text-gray-300"
@@ -396,7 +396,7 @@ export default function AccountsPage() {
               value={selectedInstitution}
               onValueChange={setSelectedInstitution}
             >
-              <SelectTrigger className="w-full sm:w-[200px]" id="institution-filter">
+              <SelectTrigger className="w-[200px]" id="institution-filter">
                 {selectedInstitution === "all" ? (
                   <span>
                     All{" "}

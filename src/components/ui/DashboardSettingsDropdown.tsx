@@ -34,6 +34,8 @@ interface DashboardSettingsDropdownProps {
   onDisplayValueChange: (value: ExposureDisplayValue) => void
   combineGoogleShares: boolean
   onCombineGoogleSharesChange: (value: boolean) => void
+  showOtherAssets: boolean
+  onShowOtherAssetsChange: (value: boolean) => void
   onReset?: () => void
 }
 
@@ -75,6 +77,8 @@ export function DashboardSettingsDropdown({
   onDisplayValueChange,
   combineGoogleShares,
   onCombineGoogleSharesChange,
+  showOtherAssets,
+  onShowOtherAssetsChange,
   onReset,
 }: DashboardSettingsDropdownProps) {
   // Check if any setting differs from default
@@ -82,7 +86,8 @@ export function DashboardSettingsDropdown({
     (selectedAccount && selectedAccount !== "all") ||
     holdingsFilter !== "all" ||
     displayValue !== "pct-portfolio" ||
-    combineGoogleShares !== false
+    combineGoogleShares !== false ||
+    showOtherAssets !== false
 
   // Get selected account name for display
   const selectedAccountName =
@@ -208,6 +213,14 @@ export function DashboardSettingsDropdown({
           onCheckedChange={onCombineGoogleSharesChange}
         >
           Combine GOOG/GOOGL
+        </DropdownMenuCheckboxItem>
+
+        {/* Show Other Assets checkbox */}
+        <DropdownMenuCheckboxItem
+          checked={showOtherAssets}
+          onCheckedChange={onShowOtherAssetsChange}
+        >
+          Show Other Assets
         </DropdownMenuCheckboxItem>
 
         {/* ACTIONS - Reset with muted styling */}

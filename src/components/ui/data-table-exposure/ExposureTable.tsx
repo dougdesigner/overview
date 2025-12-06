@@ -33,10 +33,210 @@ import { createColumns } from "./columns"
 // import { ExposureTreemapHighcharts } from "./ExposureTreemapHighcharts"  // Original version
 // import { ExposureTreemapHighcharts } from "./ExposureTreemapHighchartsSimplified"  // Simplified version
 import { ExposureTreemapHighchartsWithLogos as ExposureTreemapHighcharts } from "./ExposureTreemapHighchartsWrapper" // Version with logos
-import { ExposureTableProps, StockExposure } from "./types"
+import { ExposureTableProps, PortfolioHolding, StockExposure } from "./types"
+// Data files for calculating non-stock portions of funds
+import mutualFundMappings from "@/data/mutual-fund-mappings.json"
+import assetClassifications from "@/data/asset-classifications.json"
 
 // Magnificent 7 tickers (including both Alphabet share classes)
 const MAGNIFICENT_7 = ["AAPL", "MSFT", "GOOGL", "GOOG", "AMZN", "NVDA", "META", "TSLA"]
+
+// Type definitions for mutual fund mappings and asset classifications
+interface MutualFundMapping {
+  etf: string
+  percentage: number
+  notes: string
+}
+
+interface MutualFundData {
+  name: string
+  description?: string
+  mappings: MutualFundMapping[]
+}
+
+interface ETFBreakdown {
+  class: string
+  percentage: number
+  subClass?: string
+}
+
+interface ETFData {
+  name: string
+  breakdown: ETFBreakdown[]
+}
+
+interface OtherAssetEntry {
+  id: string
+  ticker: string
+  name: string
+  sector: string // "Cash" or "Bonds" (asset class display name)
+  marketValue: number
+  sourceHolding?: string // e.g., "VFFVX" for fund portions
+  sourceETF?: string // e.g., "BND" for the ETF mapping
+  accountName?: string
+}
+
+// Map asset class codes to display names
+const ASSET_CLASS_DISPLAY_NAMES: Record<string, string> = {
+  fixed_income: "Bonds",
+  real_estate: "Real Estate",
+  commodity: "Commodities",
+  cash: "Cash",
+}
+
+// Equity asset classes to skip (already counted in stock exposures)
+const EQUITY_ASSET_CLASSES = ["us_equity", "intl_equity"]
+
+/**
+ * Calculate non-stock asset entries from holdings.
+ * - Cash: 100% of value
+ * - Funds with mappings: Only non-stock portions (fixed_income, real_estate, etc.)
+ * - Funds without mappings: Skipped entirely (can't safely separate stock from non-stock)
+ */
+const calculateOtherAssets = (
+  holdings: PortfolioHolding[],
+): OtherAssetEntry[] => {
+  const otherAssets: OtherAssetEntry[] = []
+  const mutualFunds = mutualFundMappings as Record<string, MutualFundData>
+  const etfs = (assetClassifications as { etfs: Record<string, ETFData> }).etfs
+
+  holdings.forEach((holding) => {
+    // Handle cash - include full value
+    if (holding.type === "cash") {
+      otherAssets.push({
+        id: `cash-${holding.accountId}`,
+        ticker: "CASH",
+        name: `${holding.accountName} Cash`,
+        sector: "Cash",
+        marketValue: holding.marketValue,
+        accountName: holding.accountName,
+      })
+      return
+    }
+
+    // Handle funds
+    if (holding.type === "fund" && holding.ticker) {
+      const mfData = mutualFunds[holding.ticker]
+
+      if (!mfData) {
+        // Fund has no mapping - skip it entirely
+        // (We cannot track its stock portion, so we cannot safely add it to avoid double-counting)
+        return
+      }
+
+      // Calculate non-stock portions from fund mappings
+      mfData.mappings.forEach((mapping) => {
+        const etfData = etfs[mapping.etf]
+        if (!etfData) return
+
+        // Check each breakdown in the ETF
+        etfData.breakdown.forEach((breakdown) => {
+          // Skip equity asset classes (already counted in stock exposures)
+          if (EQUITY_ASSET_CLASSES.includes(breakdown.class)) {
+            return
+          }
+
+          // This is a non-stock asset class - calculate the portion value
+          const portionValue =
+            holding.marketValue *
+            (mapping.percentage / 100) *
+            (breakdown.percentage / 100)
+
+          if (portionValue > 0) {
+            const sectorName =
+              ASSET_CLASS_DISPLAY_NAMES[breakdown.class] || "Other"
+
+            otherAssets.push({
+              id: `${holding.id}-${mapping.etf}-${breakdown.class}`,
+              ticker: mapping.etf,
+              name: `${holding.ticker} ${mapping.etf} portion`,
+              sector: sectorName,
+              marketValue: portionValue,
+              sourceHolding: holding.ticker,
+              sourceETF: mapping.etf,
+              accountName: holding.accountName,
+            })
+          }
+        })
+      })
+    }
+  })
+
+  return otherAssets
+}
+
+/**
+ * Group other asset entries by asset class and create parent/sub-row structure
+ */
+const groupOtherAssetsByClass = (
+  entries: OtherAssetEntry[],
+  totalPortfolioValue: number,
+): StockExposure[] => {
+  // Group entries by sector (asset class)
+  const groupedAssets = new Map<string, OtherAssetEntry[]>()
+  entries.forEach((entry) => {
+    const existing = groupedAssets.get(entry.sector) || []
+    existing.push(entry)
+    groupedAssets.set(entry.sector, existing)
+  })
+
+  // Create parent rows with sub-rows for each asset class
+  const otherExposures: StockExposure[] = []
+
+  groupedAssets.forEach((groupEntries, sectorName) => {
+    const totalSectorValue = groupEntries.reduce(
+      (sum, e) => sum + e.marketValue,
+      0,
+    )
+
+    // Create sub-rows for each entry within this asset class
+    const subRows: StockExposure[] = groupEntries.map((entry) => ({
+      id: entry.id,
+      ticker: entry.sourceETF || entry.ticker,
+      name: entry.name,
+      sector: sectorName,
+      directShares: 0,
+      etfExposure: 0,
+      totalShares: 0,
+      lastPrice: 0,
+      directValue: entry.marketValue,
+      etfValue: 0,
+      totalValue: entry.marketValue,
+      percentOfPortfolio:
+        totalPortfolioValue > 0
+          ? (entry.marketValue / totalPortfolioValue) * 100
+          : 0,
+      exposureSources: [],
+      isETFBreakdown: true,
+      accountName: entry.accountName || "",
+      sourceHolding: entry.sourceHolding,
+      sourceETF: entry.sourceETF,
+    }))
+
+    // Create parent row for the asset class
+    otherExposures.push({
+      id: `other-${sectorName.toLowerCase().replace(/\s+/g, "-")}`,
+      ticker: sectorName === "Cash" ? "CASH" : sectorName.toUpperCase(),
+      name: sectorName,
+      sector: sectorName,
+      directShares: 0,
+      etfExposure: 0,
+      totalShares: 0,
+      lastPrice: 0,
+      directValue: totalSectorValue,
+      etfValue: 0,
+      totalValue: totalSectorValue,
+      percentOfPortfolio:
+        totalPortfolioValue > 0
+          ? (totalSectorValue / totalPortfolioValue) * 100
+          : 0,
+      exposureSources: [],
+      subRows: subRows,
+    })
+  })
+
+  return otherExposures
+}
 
 // Function to combine GOOG and GOOGL into a single entry
 const combineGoogleEntries = (exposures: StockExposure[]): StockExposure[] => {
@@ -66,7 +266,7 @@ const combineGoogleEntries = (exposures: StockExposure[]): StockExposure[] => {
     .map((e) => (e.ticker === "GOOGL" ? combined : e))
 }
 
-export function ExposureTable({ holdings, accounts, dataVersion, selectedAccount = "all", holdingsFilter = "all", combineGoogleShares = false, displayValue = "pct-portfolio", onFilteredDataChange }: ExposureTableProps) {
+export function ExposureTable({ holdings, accounts, dataVersion, selectedAccount = "all", holdingsFilter = "all", combineGoogleShares = false, showOtherAssets = false, displayValue = "pct-portfolio", onFilteredDataChange }: ExposureTableProps) {
   const [data, setData] = React.useState<StockExposure[]>([])
   const [sorting, setSorting] = React.useState<SortingState>([
     { id: "percentOfPortfolio", desc: true },
@@ -162,10 +362,30 @@ export function ExposureTable({ holdings, accounts, dataVersion, selectedAccount
   }, [data])
 
   // Get the active data source based on account filter, with optional GOOG/GOOGL combining
+  // Also includes other assets (non-stock portions) when showOtherAssets is enabled
   const activeData = React.useMemo(() => {
-    const baseData = selectedAccount === "all" ? data : filteredData
-    return combineGoogleShares ? combineGoogleEntries(baseData) : baseData
-  }, [selectedAccount, data, filteredData, combineGoogleShares])
+    const rawData = selectedAccount === "all" ? data : filteredData
+    let baseData = combineGoogleShares ? combineGoogleEntries(rawData) : rawData
+
+    // Add other assets (cash + non-stock fund portions) as grouped exposure entries if enabled
+    if (showOtherAssets) {
+      const relevantHoldings = selectedAccount === "all"
+        ? holdings
+        : holdings.filter(h => h.accountId === selectedAccount)
+
+      const totalValue = relevantHoldings.reduce((sum, h) => sum + h.marketValue, 0)
+
+      // Calculate non-stock portions only (cash + bond portions of funds)
+      const otherAssetEntries = calculateOtherAssets(relevantHoldings)
+
+      // Group by asset class (Cash, Bonds) with sub-rows
+      const otherExposures = groupOtherAssetsByClass(otherAssetEntries, totalValue)
+
+      baseData = [...baseData, ...otherExposures]
+    }
+
+    return baseData
+  }, [selectedAccount, data, filteredData, combineGoogleShares, showOtherAssets, holdings])
 
   // Sort data globally before pagination
   // Uses activeData which is already filtered by account when needed
@@ -219,7 +439,40 @@ export function ExposureTable({ holdings, accounts, dataVersion, selectedAccount
   const exposuresForVisualization = React.useMemo(() => {
     const rawData = selectedAccount === "all" ? data : filteredData
     // Apply GOOG/GOOGL combining if enabled
-    const baseData = combineGoogleShares ? combineGoogleEntries(rawData) : rawData
+    let baseData = combineGoogleShares ? combineGoogleEntries(rawData) : rawData
+
+    // Add other assets (cash + non-stock fund portions) as flat entries for treemap
+    if (showOtherAssets) {
+      const relevantHoldings = selectedAccount === "all"
+        ? holdings
+        : holdings.filter(h => h.accountId === selectedAccount)
+
+      const totalValue = relevantHoldings.reduce((sum, h) => sum + h.marketValue, 0)
+
+      // Calculate non-stock portions only (cash + bond portions of funds)
+      const otherAssetEntries = calculateOtherAssets(relevantHoldings)
+
+      // Convert to flat StockExposure entries for treemap (no grouping)
+      const otherExposures: StockExposure[] = otherAssetEntries.map(entry => ({
+        id: entry.id,
+        ticker: entry.sourceETF || entry.ticker,
+        name: entry.name,
+        sector: entry.sector, // "Cash" or "Bonds"
+        directShares: 0,
+        etfExposure: 0,
+        totalShares: 0,
+        lastPrice: 0,
+        directValue: entry.marketValue,
+        etfValue: 0,
+        totalValue: entry.marketValue,
+        percentOfPortfolio: totalValue > 0 ? (entry.marketValue / totalValue) * 100 : 0,
+        exposureSources: [],
+        sourceHolding: entry.sourceHolding,
+        sourceETF: entry.sourceETF,
+      }))
+
+      baseData = [...baseData, ...otherExposures]
+    }
 
     if (!holdingsFilter || holdingsFilter === "all") return baseData
 
@@ -246,7 +499,7 @@ export function ExposureTable({ holdings, accounts, dataVersion, selectedAccount
     }
 
     return baseData
-  }, [data, filteredData, selectedAccount, holdingsFilter, combineGoogleShares])
+  }, [data, filteredData, selectedAccount, holdingsFilter, combineGoogleShares, showOtherAssets, holdings])
 
   // Calculate stocks-only total for percentage calculations (unaffected by view filter)
   const stocksOnlyValue = React.useMemo(() => {
