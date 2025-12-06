@@ -23,6 +23,7 @@ import {
 } from "@remixicon/react"
 import { ColumnDef } from "@tanstack/react-table"
 import { institutionLabels } from "@/lib/institutionUtils"
+import { InstitutionLogo } from "@/components/ui/InstitutionLogo"
 import { Account, Holding } from "./types"
 
 // Format currency
@@ -536,12 +537,14 @@ export const createColumns = ({
       }
       const account = accounts.find((a) => a.id === row.original.accountId)
       const institution = account?.institution
+      if (!institution) {
+        return <span className="text-gray-400">Unknown</span>
+      }
       return (
-        <span>
-          {institution
-            ? institutionLabels[institution] || institution
-            : "Unknown"}
-        </span>
+        <div className="flex items-center gap-2">
+          <InstitutionLogo institution={institution} className="size-5" />
+          <span>{institutionLabels[institution] || institution}</span>
+        </div>
       )
     },
     enableSorting: true,

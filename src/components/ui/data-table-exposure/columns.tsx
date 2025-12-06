@@ -4,6 +4,7 @@ import { Badge } from "@/components/Badge"
 import { stockDomainOverrides } from "@/lib/logoUtils"
 import { getTickerColor } from "@/lib/tickerColors"
 import { institutionLabels } from "@/lib/institutionUtils"
+import { InstitutionLogo } from "@/components/ui/InstitutionLogo"
 import { cx, toProperCase } from "@/lib/utils"
 import {
   RiArrowDownSLine,
@@ -145,11 +146,15 @@ function TickerCell({
   )
 }
 
+type ExposureDisplayValue = "market-value" | "pct-stocks" | "pct-portfolio"
+
 interface ColumnsProps {
   toggleExpandAll: () => void
   areAllExpanded: () => boolean
   logoUrls?: Record<string, string | null>
   accounts: Account[]
+  displayValue?: ExposureDisplayValue
+  totalStocksValue?: number
 }
 
 export const createColumns = ({
@@ -157,7 +162,32 @@ export const createColumns = ({
   areAllExpanded,
   logoUrls,
   accounts,
-}: ColumnsProps): ColumnDef<StockExposure>[] => [
+  displayValue = "pct-portfolio",
+  totalStocksValue = 0,
+}: ColumnsProps): ColumnDef<StockExposure>[] => {
+  // Helper to get column header based on display value
+  const getAllocationHeader = () => {
+    switch (displayValue) {
+      case "pct-stocks":
+        return "Stock %"
+      case "pct-portfolio":
+      default:
+        return "Portfolio %"
+    }
+  }
+
+  // Helper to format allocation value based on display setting
+  const formatAllocationValue = (row: StockExposure) => {
+    const value = row.totalValue
+    if (displayValue === "pct-stocks" && totalStocksValue > 0) {
+      return formatPercentage((value / totalStocksValue) * 100)
+    }
+    // Default to portfolio percentage
+    return formatPercentage(row.percentOfPortfolio)
+  }
+
+  // Build columns array, conditionally excluding Allocation column for market-value
+  const columns: ColumnDef<StockExposure>[] = [
   {
     id: "expander",
     header: ({ table }) => {
@@ -396,14 +426,15 @@ export const createColumns = ({
       displayName: "Market Value",
     },
   },
-  {
-    header: ({ column }) => {
+  // Conditionally include Allocation column (hidden when market-value is selected)
+  ...(displayValue !== "market-value" ? [{
+    header: ({ column }: { column: any }) => {
       return (
         <button
           className="flex w-full items-center justify-end gap-1 font-medium hover:text-gray-900 dark:hover:text-gray-50"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
-          Allocation (%)
+          {getAllocationHeader()}
           {column.getIsSorted() === "asc" && (
             <RiArrowUpSLine className="h-4 w-4" />
           )}
@@ -414,8 +445,7 @@ export const createColumns = ({
       )
     },
     accessorKey: "percentOfPortfolio",
-    cell: ({ row }) => {
-      const percent = row.original.percentOfPortfolio
+    cell: ({ row }: { row: any }) => {
       const isETFBreakdown = row.original.isETFBreakdown
 
       return (
@@ -425,16 +455,16 @@ export const createColumns = ({
             !isETFBreakdown && "font-semibold text-gray-900 dark:text-gray-50",
           )}
         >
-          {formatPercentage(percent)}
+          {formatAllocationValue(row.original)}
         </span>
       )
     },
     enableSorting: true,
     meta: {
       className: "text-right min-w-40",
-      displayName: "Allocation (%)",
+      displayName: getAllocationHeader(),
     },
-  },
+  } as ColumnDef<StockExposure>] : []),
   {
     header: ({ column }) => {
       return (
@@ -526,12 +556,14 @@ export const createColumns = ({
       }
       const account = accounts.find((a) => a.id === accountId)
       const institution = account?.institution
+      if (!institution) {
+        return <span className="text-gray-400">—</span>
+      }
       return (
-        <span>
-          {institution
-            ? institutionLabels[institution] || institution
-            : "—"}
-        </span>
+        <div className="flex items-center gap-2">
+          <InstitutionLogo institution={institution} className="size-5" />
+          <span>{institutionLabels[institution] || institution}</span>
+        </div>
       )
     },
     enableSorting: false,
@@ -559,3 +591,6 @@ export const createColumns = ({
     },
   },
 ]
+
+  return columns
+}

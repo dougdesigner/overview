@@ -193,6 +193,13 @@ export function ExposureTable({ holdings, accounts, dataVersion, selectedAccount
     }
   }, [activeData, areAllExpanded])
 
+  // Calculate total stocks value for pct-stocks display mode
+  const totalStocksValue = React.useMemo(() => {
+    return activeData
+      .filter((exp) => !exp.isETFBreakdown)
+      .reduce((sum, exp) => sum + exp.totalValue, 0)
+  }, [activeData])
+
   const columns = React.useMemo(
     () =>
       createColumns({
@@ -200,8 +207,10 @@ export function ExposureTable({ holdings, accounts, dataVersion, selectedAccount
         areAllExpanded,
         logoUrls,
         accounts,
+        displayValue,
+        totalStocksValue,
       }),
-    [toggleExpandAll, areAllExpanded, logoUrls, accounts],
+    [toggleExpandAll, areAllExpanded, logoUrls, accounts, displayValue, totalStocksValue],
   )
 
   const table = useReactTable({

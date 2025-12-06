@@ -60,7 +60,14 @@ export function AccountSelector({
 
   const getSelectedDisplay = () => {
     if (value === "all" && showAllOption) {
-      return "All Accounts"
+      return (
+        <>
+          All{" "}
+          <span className="rounded-md bg-gray-100 px-1.5 py-0.5 text-sm font-medium tabular-nums text-gray-700 dark:bg-gray-800 dark:text-gray-300">
+            {accounts.length}
+          </span>
+        </>
+      )
     }
 
     const selectedAccount = accounts.find(a => a.id === value)
@@ -85,7 +92,12 @@ export function AccountSelector({
       </SelectTrigger>
       <SelectContent>
         {showAllOption && (
-          <SelectItem value="all">All Accounts</SelectItem>
+          <SelectItem value="all">
+            All{" "}
+            <span className="rounded-md bg-gray-100 px-1.5 py-0.5 text-sm font-medium tabular-nums text-gray-700 dark:bg-gray-800 dark:text-gray-300">
+              {accounts.length}
+            </span>
+          </SelectItem>
         )}
         {accounts.map((account) => (
           <SelectItem key={account.id} value={account.id}>

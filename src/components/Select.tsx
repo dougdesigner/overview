@@ -11,7 +11,12 @@ import React from "react"
 
 import { cx, focusInput, hasErrorInput } from "@/lib/utils"
 
-const Select = SelectPrimitives.Root
+const Select = React.forwardRef<
+  React.ComponentRef<typeof SelectPrimitives.Root>,
+  React.ComponentPropsWithoutRef<typeof SelectPrimitives.Root>
+>(({ modal = false, ...props }, _ref) => (
+  <SelectPrimitives.Root modal={modal} {...props} />
+))
 Select.displayName = "Select"
 
 const SelectGroup = SelectPrimitives.Group

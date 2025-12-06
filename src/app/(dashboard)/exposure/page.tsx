@@ -165,13 +165,22 @@ export default function ExposurePage() {
       {/* Sticky Account Filter - Bottom positioned, narrower */}
       {accounts.length > 0 && holdings.length > 0 && (
         <div
-          className={`fixed bottom-6 left-1/2 z-50 w-full max-w-3xl -translate-x-1/2 px-4 transition-all duration-300 ease-out sm:px-6 ${
+          className={`fixed bottom-6 left-1/2 z-50 w-full max-w-3xl -translate-x-1/2 px-4 transition-[transform,opacity] duration-300 ease-out sm:px-6 ${
             isFilterSticky
               ? "translate-y-0 opacity-100"
               : "translate-y-4 pointer-events-none opacity-0"
           }`}
         >
           <div className="flex items-center justify-between rounded-lg border border-gray-200 bg-white/95 px-4 py-3 shadow-lg backdrop-blur-sm dark:border-gray-800 dark:bg-gray-950/95">
+            <div className="text-left">
+              <div className="text-base font-medium text-gray-900 dark:text-gray-50">
+                {formatCurrency(filteredTotalValue)}
+              </div>
+              <div className="text-sm text-gray-500 dark:text-gray-400">
+                {filteredHoldings.length}{" "}
+                {filteredHoldings.length === 1 ? "holding" : "holdings"}
+              </div>
+            </div>
             <div className="flex items-center gap-4">
               <div className="flex items-center gap-2">
                 <label className="text-sm font-medium text-gray-700 dark:text-gray-300">
@@ -187,7 +196,7 @@ export default function ExposurePage() {
               </div>
               <div className="flex items-center gap-2">
                 <label className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                  Display
+                  Allocation
                 </label>
                 <Select
                   value={displayValue}
@@ -204,15 +213,6 @@ export default function ExposurePage() {
                 </Select>
               </div>
             </div>
-            <div className="text-right">
-              <div className="text-base font-medium text-gray-900 dark:text-gray-50">
-                {formatCurrency(filteredTotalValue)}
-              </div>
-              <div className="text-sm text-gray-500 dark:text-gray-400">
-                {filteredHoldings.length}{" "}
-                {filteredHoldings.length === 1 ? "holding" : "holdings"}
-              </div>
-            </div>
           </div>
         </div>
       )}
@@ -220,6 +220,15 @@ export default function ExposurePage() {
       {/* Account Filter and Summary - Only show when there are accounts and holdings */}
       {accounts.length > 0 && holdings.length > 0 && (
         <div ref={filterRef} className="flex items-center justify-between">
+          <div className="text-left">
+            <div className="text-base font-medium text-gray-900 dark:text-gray-50">
+              {formatCurrency(filteredTotalValue)}
+            </div>
+            <div className="text-sm font-normal text-gray-500 dark:text-gray-400">
+              {filteredHoldings.length}{" "}
+              {filteredHoldings.length === 1 ? "holding" : "holdings"}
+            </div>
+          </div>
           <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:gap-4">
             <div className="flex flex-col gap-1 sm:flex-row sm:items-center sm:gap-2">
               <label
@@ -239,16 +248,16 @@ export default function ExposurePage() {
             </div>
             <div className="flex flex-col gap-1 sm:flex-row sm:items-center sm:gap-2">
               <label
-                htmlFor="display-filter"
+                htmlFor="allocation-filter"
                 className="text-sm font-medium text-gray-700 dark:text-gray-300"
               >
-                Display
+                Allocation
               </label>
               <Select
                 value={displayValue}
                 onValueChange={(value) => setDisplayValue(value as ExposureDisplayValue)}
               >
-                <SelectTrigger className="w-full sm:w-[140px]" id="display-filter">
+                <SelectTrigger className="w-full sm:w-[140px]" id="allocation-filter">
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
@@ -257,15 +266,6 @@ export default function ExposurePage() {
                   <SelectItem value="pct-portfolio">Portfolio %</SelectItem>
                 </SelectContent>
               </Select>
-            </div>
-          </div>
-          <div className="text-right">
-            <div className="text-base font-medium text-gray-900 dark:text-gray-50">
-              {formatCurrency(filteredTotalValue)}
-            </div>
-            <div className="text-sm font-normal text-gray-500 dark:text-gray-400">
-              {filteredHoldings.length}{" "}
-              {filteredHoldings.length === 1 ? "holding" : "holdings"}
             </div>
           </div>
         </div>

@@ -40,6 +40,19 @@ export default function OverviewPage() {
     }
   }, [totalPortfolioValue, portfolioAllocation])
 
+  // Sort asset classes by highest value
+  const sortedAssetClasses = useMemo(() => {
+    const assetClassData = [
+      { name: "U.S. Stocks", value: assetValues.usStocks, percentage: portfolioAllocation.usStocks },
+      { name: "Non-U.S. Stocks", value: assetValues.nonUsStocks, percentage: portfolioAllocation.nonUsStocks },
+      { name: "Fixed Income", value: assetValues.fixedIncome, percentage: portfolioAllocation.fixedIncome },
+      { name: "Cash", value: assetValues.cash, percentage: portfolioAllocation.cash },
+    ]
+    return assetClassData
+      .filter(ac => ac.value > 0)
+      .sort((a, b) => b.value - a.value)
+  }, [assetValues, portfolioAllocation])
+
   return (
     <main className="min-h-[calc(100vh-180px)]">
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
@@ -86,32 +99,12 @@ export default function OverviewPage() {
               value={totalPortfolioValue}
               accountCount={accounts.length}
               holdingsCount={holdings.length}
-              assetClasses={[
-                {
-                  name: "U.S. Stocks",
-                  percentage: portfolioAllocation.usStocks,
-                  color: getAssetClassColor("U.S. Stocks"),
-                  bgColorClass: getAssetClassBgColor("U.S. Stocks"),
-                },
-                {
-                  name: "Non-U.S. Stocks",
-                  percentage: portfolioAllocation.nonUsStocks,
-                  color: getAssetClassColor("Non-U.S. Stocks"),
-                  bgColorClass: getAssetClassBgColor("Non-U.S. Stocks"),
-                },
-                {
-                  name: "Fixed Income",
-                  percentage: portfolioAllocation.fixedIncome,
-                  color: getAssetClassColor("Fixed Income"),
-                  bgColorClass: getAssetClassBgColor("Fixed Income"),
-                },
-                {
-                  name: "Cash",
-                  percentage: portfolioAllocation.cash,
-                  color: getAssetClassColor("Cash"),
-                  bgColorClass: getAssetClassBgColor("Cash"),
-                },
-              ]}
+              assetClasses={sortedAssetClasses.map(ac => ({
+                name: ac.name,
+                percentage: ac.percentage,
+                color: getAssetClassColor(ac.name),
+                bgColorClass: getAssetClassBgColor(ac.name),
+              }))}
             />
 
             {/* Asset Allocation Donut Chart */}
@@ -202,30 +195,15 @@ export default function OverviewPage() {
           {/* <DataTable data={tickets} columns={columns} /> */}
 
           <dl className="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-4 lg:grid-cols-4">
-            <KPICard
-              name="U.S. Stocks"
-              stat={`$${assetValues.usStocks.toLocaleString("en-US", { maximumFractionDigits: 0 })}`}
-              change={`${portfolioAllocation.usStocks.toFixed(1)}%`}
-              color={getAssetClassColor("U.S. Stocks")}
-            />
-            <KPICard
-              name="Non-U.S. Stocks"
-              stat={`$${assetValues.nonUsStocks.toLocaleString("en-US", { maximumFractionDigits: 0 })}`}
-              change={`${portfolioAllocation.nonUsStocks.toFixed(1)}%`}
-              color={getAssetClassColor("Non-U.S. Stocks")}
-            />
-            <KPICard
-              name="Fixed Income"
-              stat={`$${assetValues.fixedIncome.toLocaleString("en-US", { maximumFractionDigits: 0 })}`}
-              change={`${portfolioAllocation.fixedIncome.toFixed(1)}%`}
-              color={getAssetClassColor("Fixed Income")}
-            />
-            <KPICard
-              name="Cash"
-              stat={`$${assetValues.cash.toLocaleString("en-US", { maximumFractionDigits: 0 })}`}
-              change={`${portfolioAllocation.cash.toFixed(1)}%`}
-              color={getAssetClassColor("Cash")}
-            />
+            {sortedAssetClasses.map(ac => (
+              <KPICard
+                key={ac.name}
+                name={ac.name}
+                stat={`$${ac.value.toLocaleString("en-US", { maximumFractionDigits: 0 })}`}
+                change={`${ac.percentage.toFixed(1)}%`}
+                color={getAssetClassColor(ac.name)}
+              />
+            ))}
           </dl>
 
           <dl className="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-1 lg:grid-cols-1">
@@ -298,32 +276,12 @@ export default function OverviewPage() {
                 },
                 {
                   name: "Asset Classes",
-                  data: [
-                    {
-                      name: "U.S. Stocks",
-                      amount: assetValues.usStocks,
-                      share: `${portfolioAllocation.usStocks.toFixed(1)}%`,
-                      borderColor: getAssetClassBorderColor("U.S. Stocks"),
-                    },
-                    {
-                      name: "Non-U.S. Stocks",
-                      amount: assetValues.nonUsStocks,
-                      share: `${portfolioAllocation.nonUsStocks.toFixed(1)}%`,
-                      borderColor: getAssetClassBorderColor("Non-U.S. Stocks"),
-                    },
-                    {
-                      name: "Fixed Income",
-                      amount: assetValues.fixedIncome,
-                      share: `${portfolioAllocation.fixedIncome.toFixed(1)}%`,
-                      borderColor: getAssetClassBorderColor("Fixed Income"),
-                    },
-                    {
-                      name: "Cash",
-                      amount: assetValues.cash,
-                      share: `${portfolioAllocation.cash.toFixed(1)}%`,
-                      borderColor: getAssetClassBorderColor("Cash"),
-                    },
-                  ].filter((item) => item.amount > 0),
+                  data: sortedAssetClasses.map(ac => ({
+                    name: ac.name,
+                    amount: ac.value,
+                    share: `${ac.percentage.toFixed(1)}%`,
+                    borderColor: getAssetClassBorderColor(ac.name),
+                  })),
                   // These colors are not used when useAssetClassColors is true, but kept for compatibility
                   colors: ["blue", "cyan", "amber", "emerald"] as ("blue" | "cyan" | "amber" | "emerald")[],
                 },

@@ -12,13 +12,17 @@ import {
 import { Tooltip } from "@/components/Tooltip"
 import { getAssetClassHexColor } from "@/lib/assetClassColors"
 import { RiDownloadLine, RiFullscreenLine } from "@remixicon/react"
-import Highcharts from "highcharts"
-import HighchartsReact from "highcharts-react-official"
 import { useTheme } from "next-themes"
 import { useEffect, useRef, useState } from "react"
 
+// Import Highcharts dynamically only on client-side
+import type HighchartsType from "highcharts"
+import type HighchartsReactType from "highcharts-react-official"
+
 // Track if modules are initialized globally to prevent duplicate initialization
 let modulesInitialized = false
+let Highcharts: typeof HighchartsType | null = null
+let HighchartsReact: typeof HighchartsReactType | null = null
 
 interface HighchartsDonutChartProps {
   data: {
@@ -46,36 +50,45 @@ export function HighchartsDonutChart({
 }: HighchartsDonutChartProps) {
   const { resolvedTheme } = useTheme()
   const isDark = resolvedTheme === "dark"
-  const chartRef = useRef<HighchartsReact.RefObject>(null)
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const chartRef = useRef<any>(null)
   const [isClient, setIsClient] = useState(false)
+  const [isHighchartsLoaded, setIsHighchartsLoaded] = useState(false)
 
+  // Load Highcharts dynamically on client-side
   useEffect(() => {
     setIsClient(true)
-  }, [])
 
-  // Initialize Highcharts modules once
-  useEffect(() => {
-    if (!modulesInitialized && typeof Highcharts === "object") {
-      // Load exporting first, then export-data (which depends on exporting's prototype)
-      // Using require() ensures sequential loading
-      // eslint-disable-next-line @typescript-eslint/no-require-imports
-      const HighchartsExporting = require("highcharts/modules/exporting")
-      if (typeof HighchartsExporting === "function") {
-        HighchartsExporting(Highcharts)
-      } else if (HighchartsExporting?.default) {
-        HighchartsExporting.default(Highcharts)
+    const loadHighcharts = async () => {
+      if (!Highcharts) {
+        // Dynamically import Highcharts
+        const highchartsModule = await import("highcharts")
+        Highcharts = highchartsModule.default
+
+        const highchartsReactModule = await import("highcharts-react-official")
+        HighchartsReact = highchartsReactModule.default
       }
 
-      // eslint-disable-next-line @typescript-eslint/no-require-imports
-      const HighchartsExportData = require("highcharts/modules/export-data")
-      if (typeof HighchartsExportData === "function") {
-        HighchartsExportData(Highcharts)
-      } else if (HighchartsExportData?.default) {
-        HighchartsExportData.default(Highcharts)
+      // Initialize modules once
+      if (!modulesInitialized && Highcharts && typeof Highcharts === "object") {
+        // Load exporting first, then export-data (which depends on exporting's prototype)
+        const HighchartsExporting = await import("highcharts/modules/exporting")
+        if (typeof HighchartsExporting.default === "function") {
+          HighchartsExporting.default(Highcharts)
+        }
+
+        const HighchartsExportData = await import("highcharts/modules/export-data")
+        if (typeof HighchartsExportData.default === "function") {
+          HighchartsExportData.default(Highcharts)
+        }
+
+        modulesInitialized = true
       }
 
-      modulesInitialized = true
+      setIsHighchartsLoaded(true)
     }
+
+    loadHighcharts()
   }, [])
 
   // Export handler
@@ -151,7 +164,8 @@ export function HighchartsDonutChart({
     }
   })
 
-  const options: Highcharts.Options = {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const options: any = {
     chart: {
       type: "pie",
       backgroundColor: "transparent",
@@ -280,9 +294,11 @@ export function HighchartsDonutChart({
     }
   }, [isDark, totalValue, valueFormatter])
 
-  if (!isClient) {
+  if (!isClient || !isHighchartsLoaded || !Highcharts || !HighchartsReact) {
     return <div style={{ height }} />
   }
+
+  const HighchartsReactComponent = HighchartsReact
 
   return (
     <div className="relative">
@@ -338,7 +354,7 @@ export function HighchartsDonutChart({
         </Tooltip>
       </div>
 
-      <HighchartsReact
+      <HighchartsReactComponent
         highcharts={Highcharts}
         options={options}
         ref={chartRef}

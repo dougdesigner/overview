@@ -9,6 +9,7 @@ import type {
 import { AccountTreemap } from "@/components/AccountTreemapWrapper"
 import { Button } from "@/components/Button"
 import { Card } from "@/components/Card"
+import { Divider } from "@/components/Divider"
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -70,6 +71,11 @@ export default function AccountsPage() {
   const [displayValue, setDisplayValue] =
     React.useState<AccountDisplayValue>("value")
 
+  // Institution filter state
+  const [selectedInstitution, setSelectedInstitution] = React.useState<string>("all")
+  const [isFilterSticky, setIsFilterSticky] = React.useState(false)
+  const filterRef = React.useRef<HTMLDivElement>(null)
+
   // Chart refs for export functionality - proper typing for Highcharts React
   const sankeyChartRef = React.useRef<HighchartsReact.RefObject>(null!)
   const treemapChartRef = React.useRef<HighchartsReact.RefObject>(null!)
@@ -126,10 +132,60 @@ export default function AccountsPage() {
     return accounts.reduce((sum, acc) => sum + acc.totalValue, 0)
   }, [accounts])
 
+  // Format currency
+  const formatCurrency = (value: number) => {
+    return new Intl.NumberFormat("en-US", {
+      style: "currency",
+      currency: "USD",
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 0,
+    }).format(value)
+  }
+
   // Sort accounts by highest value (highest allocation first)
   const sortedAccounts = React.useMemo(() => {
     return [...accounts].sort((a, b) => b.totalValue - a.totalValue)
   }, [accounts])
+
+  // Get unique institutions from accounts
+  const uniqueInstitutions = React.useMemo(() => {
+    const institutions = [...new Set(accounts.map(a => a.institution))]
+    return institutions.map(inst => ({
+      id: inst,
+      label: institutionLabels[inst] || inst
+    }))
+  }, [accounts])
+
+  // Filter accounts by selected institution
+  const filteredAccounts = React.useMemo(() => {
+    if (selectedInstitution === "all") return sortedAccounts
+    return sortedAccounts.filter(a => a.institution === selectedInstitution)
+  }, [sortedAccounts, selectedInstitution])
+
+  // Calculate total value of filtered accounts
+  const filteredTotalValue = React.useMemo(() => {
+    return filteredAccounts.reduce((sum, acc) => sum + acc.totalValue, 0)
+  }, [filteredAccounts])
+
+  // Intersection Observer for sticky filter
+  React.useEffect(() => {
+    const filterElement = filterRef.current
+    if (!filterElement) return
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsFilterSticky(!entry.isIntersecting)
+      },
+      {
+        root: null,
+        rootMargin: "-100px 0px 0px 0px",
+        threshold: 0,
+      },
+    )
+
+    observer.observe(filterElement)
+    return () => observer.disconnect()
+  }, [accounts.length])
 
   // Handlers for edit and delete actions
   const handleEdit = (accountId: string) => {
@@ -251,7 +307,130 @@ export default function AccountsPage() {
           }
         />
       </div>
-      {/* <Divider /> */}
+      <Divider />
+
+      {/* Sticky Institution Filter - Bottom positioned */}
+      {accounts.length > 0 && (
+        <div
+          className={`fixed bottom-6 left-1/2 z-50 w-full max-w-3xl -translate-x-1/2 px-4 transition-[transform,opacity] duration-300 ease-out sm:px-6 ${
+            isFilterSticky
+              ? "translate-y-0 opacity-100"
+              : "translate-y-4 pointer-events-none opacity-0"
+          }`}
+        >
+          <div className="flex items-center justify-between rounded-lg border border-gray-200 bg-white/95 px-4 py-3 shadow-lg backdrop-blur-sm dark:border-gray-800 dark:bg-gray-950/95">
+            <div className="text-left">
+              <div className="text-base font-medium text-gray-900 dark:text-gray-50">
+                {formatCurrency(filteredTotalValue)}
+              </div>
+              <div className="text-sm text-gray-500 dark:text-gray-400">
+                {filteredAccounts.length}{" "}
+                {filteredAccounts.length === 1 ? "account" : "accounts"}
+              </div>
+            </div>
+            <div className="flex items-center gap-2">
+              <label className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                Institution
+              </label>
+              <Select
+                value={selectedInstitution}
+                onValueChange={setSelectedInstitution}
+              >
+                <SelectTrigger className="w-[200px]">
+                  {selectedInstitution === "all" ? (
+                    <span>
+                      All{" "}
+                      <span className="rounded-md bg-gray-100 px-1.5 py-0.5 text-sm font-medium tabular-nums text-gray-700 dark:bg-gray-800 dark:text-gray-300">
+                        {uniqueInstitutions.length}
+                      </span>
+                    </span>
+                  ) : (
+                    <div className="flex items-center gap-2">
+                      <InstitutionLogo institution={selectedInstitution} className="size-5" />
+                      <span className="truncate">{institutionLabels[selectedInstitution] || selectedInstitution}</span>
+                    </div>
+                  )}
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="all">
+                    All{" "}
+                    <span className="rounded-md bg-gray-100 px-1.5 py-0.5 text-sm font-medium tabular-nums text-gray-700 dark:bg-gray-800 dark:text-gray-300">
+                      {uniqueInstitutions.length}
+                    </span>
+                  </SelectItem>
+                  {uniqueInstitutions.map((inst) => (
+                    <SelectItem key={inst.id} value={inst.id}>
+                      <div className="flex items-center gap-2">
+                        <InstitutionLogo institution={inst.id} className="size-5" />
+                        <span>{inst.label}</span>
+                      </div>
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Portfolio Summary and Filter - Only show when there are accounts */}
+      {accounts.length > 0 && (
+        <div ref={filterRef} className="flex items-center justify-between">
+          <div className="text-left">
+            <div className="text-base font-medium text-gray-900 dark:text-gray-50">
+              {formatCurrency(filteredTotalValue)}
+            </div>
+            <div className="text-sm font-normal text-gray-500 dark:text-gray-400">
+              {filteredAccounts.length}{" "}
+              {filteredAccounts.length === 1 ? "account" : "accounts"}
+            </div>
+          </div>
+          <div className="flex flex-col gap-1 sm:flex-row sm:items-center sm:gap-2">
+            <label
+              htmlFor="institution-filter"
+              className="text-sm font-medium text-gray-700 dark:text-gray-300"
+            >
+              Institution
+            </label>
+            <Select
+              value={selectedInstitution}
+              onValueChange={setSelectedInstitution}
+            >
+              <SelectTrigger className="w-full sm:w-[200px]" id="institution-filter">
+                {selectedInstitution === "all" ? (
+                  <span>
+                    All{" "}
+                    <span className="rounded-md bg-gray-100 px-1.5 py-0.5 text-sm font-medium tabular-nums text-gray-700 dark:bg-gray-800 dark:text-gray-300">
+                      {uniqueInstitutions.length}
+                    </span>
+                  </span>
+                ) : (
+                  <div className="flex items-center gap-2">
+                    <InstitutionLogo institution={selectedInstitution} className="size-5" />
+                    <span className="truncate">{institutionLabels[selectedInstitution] || selectedInstitution}</span>
+                  </div>
+                )}
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">
+                  All{" "}
+                  <span className="rounded-md bg-gray-100 px-1.5 py-0.5 text-sm font-medium tabular-nums text-gray-700 dark:bg-gray-800 dark:text-gray-300">
+                    {uniqueInstitutions.length}
+                  </span>
+                </SelectItem>
+                {uniqueInstitutions.map((inst) => (
+                  <SelectItem key={inst.id} value={inst.id}>
+                    <div className="flex items-center gap-2">
+                      <InstitutionLogo institution={inst.id} className="size-5" />
+                      <span>{inst.label}</span>
+                    </div>
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
+        </div>
+      )}
 
       {/* Account Flow Chart - only show when there are holdings */}
       {accounts.length > 0 && holdings.length > 0 && (
@@ -315,7 +494,12 @@ export default function AccountsPage() {
                         >
                           <span className="flex items-center gap-2">
                             {selectedAccountFilter === "all" ? (
-                              "All Accounts"
+                              <>
+                                All{" "}
+                                <span className="rounded-md bg-gray-100 px-1.5 py-0.5 text-sm font-medium tabular-nums text-gray-700 dark:bg-gray-800 dark:text-gray-300">
+                                  {accounts.length}
+                                </span>
+                              </>
                             ) : (
                               <>
                                 <InstitutionLogo
@@ -349,7 +533,10 @@ export default function AccountsPage() {
                         onValueChange={setSelectedAccountFilter}
                       >
                         <DropdownMenuRadioItem value="all" iconType="check">
-                          All Accounts
+                          All{" "}
+                          <span className="rounded-md bg-gray-100 px-1.5 py-0.5 text-sm font-medium tabular-nums text-gray-700 dark:bg-gray-800 dark:text-gray-300">
+                            {accounts.length}
+                          </span>
                         </DropdownMenuRadioItem>
                         {accounts.map((account) => (
                           <DropdownMenuRadioItem
@@ -496,12 +683,12 @@ export default function AccountsPage() {
             <div>
               {chartType === "sankey" ? (
                 (() => {
-                  // Get unique institutions for the first level
-                  const uniqueInstitutions = [
-                    ...new Set(accounts.map((a) => a.institution)),
+                  // Get unique institutions for the first level (from filtered accounts)
+                  const sankeyInstitutions = [
+                    ...new Set(filteredAccounts.map((a) => a.institution)),
                   ]
                   // Convert institution IDs to display labels
-                  const institutionDisplayNames = uniqueInstitutions.map(
+                  const institutionDisplayNames = sankeyInstitutions.map(
                     (inst) => institutionLabels[inst] || inst,
                   )
                   return (
@@ -513,7 +700,7 @@ export default function AccountsPage() {
                             id: name,
                           })),
                           // Account nodes (second level)
-                          ...accounts.map((account) => ({ id: account.name })),
+                          ...filteredAccounts.map((account) => ({ id: account.name })),
                           // Portfolio Total (center)
                           { id: "Portfolio Total" },
                           // Asset type nodes (right side)
@@ -524,7 +711,7 @@ export default function AccountsPage() {
                         ],
                         links: [
                           // Institutions to Accounts - use display names for source
-                          ...accounts.map((account) => ({
+                          ...filteredAccounts.map((account) => ({
                             source:
                               institutionLabels[account.institution] ||
                               account.institution,
@@ -532,7 +719,7 @@ export default function AccountsPage() {
                             value: account.totalValue,
                           })),
                           // Accounts to Portfolio Total
-                          ...accounts.map((account) => ({
+                          ...filteredAccounts.map((account) => ({
                             source: account.name,
                             target: "Portfolio Total",
                             value: account.totalValue,
@@ -541,7 +728,7 @@ export default function AccountsPage() {
                           {
                             source: "Portfolio Total",
                             target: "U.S. Stocks",
-                            value: accounts.reduce(
+                            value: filteredAccounts.reduce(
                               (sum, acc) =>
                                 sum +
                                 (acc.totalValue *
@@ -553,7 +740,7 @@ export default function AccountsPage() {
                           {
                             source: "Portfolio Total",
                             target: "Non-U.S. Stocks",
-                            value: accounts.reduce(
+                            value: filteredAccounts.reduce(
                               (sum, acc) =>
                                 sum +
                                 (acc.totalValue *
@@ -565,7 +752,7 @@ export default function AccountsPage() {
                           {
                             source: "Portfolio Total",
                             target: "Fixed Income",
-                            value: accounts.reduce(
+                            value: filteredAccounts.reduce(
                               (sum, acc) =>
                                 sum +
                                 (acc.totalValue *
@@ -577,7 +764,7 @@ export default function AccountsPage() {
                           {
                             source: "Portfolio Total",
                             target: "Cash",
-                            value: accounts.reduce(
+                            value: filteredAccounts.reduce(
                               (sum, acc) =>
                                 sum +
                                 (acc.totalValue * acc.assetAllocation.cash) /
@@ -603,7 +790,7 @@ export default function AccountsPage() {
                 })()
               ) : (
                 <AccountTreemap
-                  accounts={accounts}
+                  accounts={filteredAccounts}
                   selectedAccounts={
                     selectedAccountFilter === "all"
                       ? []
@@ -623,7 +810,7 @@ export default function AccountsPage() {
       {/* Account Cards */}
       <div className="mt-6">
         <div className="space-y-4">
-          {sortedAccounts.map((account) => (
+          {filteredAccounts.map((account) => (
             <AccountCard
               key={account.id}
               name={account.name}
