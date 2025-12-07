@@ -4,11 +4,34 @@ import { TabNavigation, TabNavigationLink } from "@/components/TabNavigation"
 import { cx } from "@/lib/utils"
 import {
   RiBankLine,
-  RiLayout2Fill,
   RiLineChartLine,
   RiPieChartLine,
   RiHome5Line,
 } from "@remixicon/react"
+
+// Custom gradient logo icon (donut chart)
+function GradientLogoIcon({ className }: { className?: string }) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      className={className}
+      aria-hidden="true"
+    >
+      <defs>
+        <linearGradient id="logo-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stopColor="#3B82F6" />
+          <stop offset="100%" stopColor="#06B6D4" />
+        </linearGradient>
+      </defs>
+      {/* Donut chart icon */}
+      <path
+        fill="url(#logo-gradient)"
+        d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 14c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4z"
+      />
+    </svg>
+  )
+}
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { DropdownUserProfile } from "./UserProfile"
@@ -20,17 +43,8 @@ function Navigation() {
     <div className="shadow-s z-20 bg-white sm:sticky sm:top-0 dark:bg-gray-950">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 pt-3 sm:px-6">
         <div className="flex items-center gap-2">
-          {/* Alternative icon options - easily switch between them: */}
-          {/* <RiDonutChartFill
-            className="size-6 text-blue-600 dark:text-blue-400"
-            aria-hidden="true"
-          /> */}
-          <RiLayout2Fill
-            className="size-6 text-blue-600 dark:text-blue-400"
-            aria-hidden="true"
-          />
+          <GradientLogoIcon className="size-6" />
           <span className="text-lg font-semibold">ETF Exposure</span>
-          {/* <Logo className="h-6" /> */}
         </div>
         <div className="flex h-[42px] flex-nowrap gap-1">
           {/* <Notifications /> */}

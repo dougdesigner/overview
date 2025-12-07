@@ -329,14 +329,14 @@ export default function AccountsPage() {
               </div>
             </div>
             <div className="flex items-center gap-2">
-              <label className="text-sm font-medium text-gray-700 dark:text-gray-300">
+              <label className="hidden text-sm font-medium text-gray-700 sm:block dark:text-gray-300">
                 Institution
               </label>
               <Select
                 value={selectedInstitution}
                 onValueChange={setSelectedInstitution}
               >
-                <SelectTrigger className="w-[200px]">
+                <SelectTrigger className="w-auto sm:w-[200px]">
                   {selectedInstitution === "all" ? (
                     <span>
                       All{" "}
@@ -347,7 +347,7 @@ export default function AccountsPage() {
                   ) : (
                     <div className="flex items-center gap-2">
                       <InstitutionLogo institution={selectedInstitution} className="size-5" />
-                      <span className="truncate">{institutionLabels[selectedInstitution] || selectedInstitution}</span>
+                      <span className="hidden truncate sm:inline">{institutionLabels[selectedInstitution] || selectedInstitution}</span>
                     </div>
                   )}
                 </SelectTrigger>
@@ -368,6 +368,17 @@ export default function AccountsPage() {
                   ))}
                 </SelectContent>
               </Select>
+              {/* Add button - mobile only */}
+              <Button
+                onClick={() => {
+                  setDrawerMode("create")
+                  setEditingAccount(null)
+                  setIsOpen(true)
+                }}
+                className="size-9 p-0 sm:hidden"
+              >
+                <RiAddLine className="size-5" aria-hidden="true" />
+              </Button>
             </div>
           </div>
         </div>

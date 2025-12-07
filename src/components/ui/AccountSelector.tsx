@@ -8,6 +8,7 @@ import {
   SelectValue,
 } from "@/components/Select"
 import { institutionLabels } from "@/lib/institutionUtils"
+import { cx } from "@/lib/utils"
 import React from "react"
 import { InstitutionLogo } from "./InstitutionLogo"
 
@@ -26,6 +27,7 @@ interface AccountSelectorProps {
   showAllOption?: boolean
   className?: string
   id?: string
+  compactOnMobile?: boolean // Only show logo on mobile when account selected
 }
 
 export function AccountSelector({
@@ -36,6 +38,7 @@ export function AccountSelector({
   showAllOption = false,
   className,
   id,
+  compactOnMobile = false,
 }: AccountSelectorProps) {
   const renderAccountOption = (account: Account, showInstitutionName = true) => {
     const institutionLabel =
@@ -75,7 +78,9 @@ export function AccountSelector({
       return (
         <div className="flex items-center gap-2">
           <InstitutionLogo institution={selectedAccount.institution} />
-          <span className="truncate">{selectedAccount.name}</span>
+          <span className={cx("truncate", compactOnMobile && "hidden sm:inline")}>
+            {selectedAccount.name}
+          </span>
         </div>
       )
     }

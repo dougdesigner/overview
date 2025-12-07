@@ -396,7 +396,7 @@ function HoldingsContent() {
               </div>
             </div>
             <div className="flex items-center gap-2">
-              <label className="text-sm font-medium text-gray-700 dark:text-gray-300">
+              <label className="hidden text-sm font-medium text-gray-700 sm:block dark:text-gray-300">
                 Account
               </label>
               <AccountSelector
@@ -404,8 +404,16 @@ function HoldingsContent() {
                 value={currentAccountFilter}
                 onValueChange={setCurrentAccountFilter}
                 showAllOption={true}
-                className="w-[200px]"
+                className="w-auto sm:w-[200px]"
+                compactOnMobile={true}
               />
+              {/* Add button - mobile only */}
+              <Button
+                onClick={() => setIsOpen(true)}
+                className="size-9 p-0 sm:hidden"
+              >
+                <RiAddLine className="size-5" aria-hidden="true" />
+              </Button>
             </div>
           </div>
         </div>
