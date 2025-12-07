@@ -1,12 +1,12 @@
 "use client"
 
 import AccountCard from "@/components/AccountCard"
-import { Badge } from "@/components/Badge"
 import type {
   AccountDisplayValue,
   AccountGrouping,
 } from "@/components/AccountTreemap"
 import { AccountTreemap } from "@/components/AccountTreemapWrapper"
+import { Badge } from "@/components/Badge"
 import { Button } from "@/components/Button"
 import { Card } from "@/components/Card"
 import { Divider } from "@/components/Divider"
@@ -72,7 +72,8 @@ export default function AccountsPage() {
     React.useState<AccountDisplayValue>("value")
 
   // Institution filter state
-  const [selectedInstitution, setSelectedInstitution] = React.useState<string>("all")
+  const [selectedInstitution, setSelectedInstitution] =
+    React.useState<string>("all")
   const [isFilterSticky, setIsFilterSticky] = React.useState(false)
   const filterRef = React.useRef<HTMLDivElement>(null)
 
@@ -149,17 +150,17 @@ export default function AccountsPage() {
 
   // Get unique institutions from accounts
   const uniqueInstitutions = React.useMemo(() => {
-    const institutions = [...new Set(accounts.map(a => a.institution))]
-    return institutions.map(inst => ({
+    const institutions = [...new Set(accounts.map((a) => a.institution))]
+    return institutions.map((inst) => ({
       id: inst,
-      label: institutionLabels[inst] || inst
+      label: institutionLabels[inst] || inst,
     }))
   }, [accounts])
 
   // Filter accounts by selected institution
   const filteredAccounts = React.useMemo(() => {
     if (selectedInstitution === "all") return sortedAccounts
-    return sortedAccounts.filter(a => a.institution === selectedInstitution)
+    return sortedAccounts.filter((a) => a.institution === selectedInstitution)
   }, [sortedAccounts, selectedInstitution])
 
   // Calculate total value of filtered accounts
@@ -274,7 +275,9 @@ export default function AccountsPage() {
         <div>
           <h1 className="flex items-center gap-2 text-2xl font-semibold text-gray-900 dark:text-gray-50">
             Accounts
-            {accounts.length > 0 && <Badge variant="neutral">{accounts.length}</Badge>}
+            {accounts.length > 0 && (
+              <Badge variant="neutral">{accounts.length}</Badge>
+            )}
           </h1>
           <p className="text-gray-500 dark:text-gray-400 sm:text-sm/6">
             Organize your holdings by account for clearer insights
@@ -315,7 +318,7 @@ export default function AccountsPage() {
           className={`fixed bottom-20 left-1/2 z-50 w-full max-w-2xl -translate-x-1/2 px-4 transition-[transform,opacity] duration-300 ease-out sm:bottom-6 sm:px-6 ${
             isFilterSticky
               ? "translate-y-0 opacity-100"
-              : "translate-y-4 pointer-events-none opacity-0"
+              : "pointer-events-none translate-y-4 opacity-0"
           }`}
         >
           <div className="flex items-center justify-between rounded-lg border border-gray-200 bg-white/95 px-4 py-3 shadow-lg backdrop-blur-sm dark:border-gray-800 dark:bg-gray-950/95">
@@ -329,7 +332,7 @@ export default function AccountsPage() {
               </div>
             </div>
             <div className="flex items-center gap-2">
-              <label className="hidden text-sm font-medium text-gray-700 sm:block dark:text-gray-300">
+              <label className="hidden text-sm font-medium text-gray-700 dark:text-gray-300 sm:block">
                 Institution
               </label>
               <Select
@@ -346,8 +349,14 @@ export default function AccountsPage() {
                     </span>
                   ) : (
                     <div className="flex items-center gap-2">
-                      <InstitutionLogo institution={selectedInstitution} className="size-5" />
-                      <span className="hidden truncate sm:inline">{institutionLabels[selectedInstitution] || selectedInstitution}</span>
+                      <InstitutionLogo
+                        institution={selectedInstitution}
+                        className="size-5"
+                      />
+                      <span className="hidden truncate sm:inline">
+                        {institutionLabels[selectedInstitution] ||
+                          selectedInstitution}
+                      </span>
                     </div>
                   )}
                 </SelectTrigger>
@@ -361,7 +370,10 @@ export default function AccountsPage() {
                   {uniqueInstitutions.map((inst) => (
                     <SelectItem key={inst.id} value={inst.id}>
                       <div className="flex items-center gap-2">
-                        <InstitutionLogo institution={inst.id} className="size-5" />
+                        <InstitutionLogo
+                          institution={inst.id}
+                          className="size-5"
+                        />
                         <span>{inst.label}</span>
                       </div>
                     </SelectItem>
@@ -417,8 +429,14 @@ export default function AccountsPage() {
                   </span>
                 ) : (
                   <div className="flex items-center gap-2">
-                    <InstitutionLogo institution={selectedInstitution} className="size-5" />
-                    <span className="truncate">{institutionLabels[selectedInstitution] || selectedInstitution}</span>
+                    <InstitutionLogo
+                      institution={selectedInstitution}
+                      className="size-5"
+                    />
+                    <span className="truncate">
+                      {institutionLabels[selectedInstitution] ||
+                        selectedInstitution}
+                    </span>
                   </div>
                 )}
               </SelectTrigger>
@@ -432,7 +450,10 @@ export default function AccountsPage() {
                 {uniqueInstitutions.map((inst) => (
                   <SelectItem key={inst.id} value={inst.id}>
                     <div className="flex items-center gap-2">
-                      <InstitutionLogo institution={inst.id} className="size-5" />
+                      <InstitutionLogo
+                        institution={inst.id}
+                        className="size-5"
+                      />
                       <span>{inst.label}</span>
                     </div>
                   </SelectItem>
@@ -446,21 +467,23 @@ export default function AccountsPage() {
       {/* Account Flow Chart - only show when there are holdings */}
       {accounts.length > 0 && holdings.length > 0 && (
         <div className="pt-6" id="accounts-section">
-        <Card data-chart="account-flow">
-          <div className="flex flex-col gap-4">
-            {/* Title and Controls Row */}
-            <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-              <p
-                className="cursor-pointer text-base font-medium text-gray-900 transition-colors hover:text-blue-600 dark:text-gray-50 dark:hover:text-blue-400"
-                onClick={() => {
-                  document.getElementById('accounts-section')?.scrollIntoView({ behavior: 'smooth' })
-                }}
-              >
-                Account flow
-              </p>
-              <div className="flex items-center gap-2">
-                {/* Chart Type Toggle */}
-                {/* <DropdownMenu>
+          <Card data-chart="account-flow">
+            <div className="flex flex-col gap-4">
+              {/* Title and Controls Row */}
+              <div className="flex items-center justify-between">
+                <p
+                  className="cursor-pointer text-base font-medium text-gray-900 transition-colors hover:text-blue-600 dark:text-gray-50 dark:hover:text-blue-400"
+                  onClick={() => {
+                    document
+                      .getElementById("accounts-section")
+                      ?.scrollIntoView({ behavior: "smooth" })
+                  }}
+                >
+                  Account flow
+                </p>
+                <div className="flex items-center gap-2">
+                  {/* Chart Type Toggle */}
+                  {/* <DropdownMenu>
                   <Tooltip content="Switch chart type" triggerAsChild>
                     <DropdownMenuTrigger asChild>
                       <Button
@@ -500,328 +523,338 @@ export default function AccountsPage() {
                   </DropdownMenuContent>
                 </DropdownMenu> */}
 
-                {/* Account Filter (for Treemap) */}
-                {chartType === "treemap" && (
-                  <DropdownMenu>
-                    <Tooltip triggerAsChild content="Select account to view">
-                      <DropdownMenuTrigger asChild>
-                        <Button
-                          variant="secondary"
-                          className="h-9 w-[280px] justify-between"
-                        >
-                          <span className="flex items-center gap-2">
-                            {selectedAccountFilter === "all" ? (
-                              <>
-                                All{" "}
-                                <span className="rounded-md bg-gray-100 px-1.5 py-0.5 text-sm font-medium tabular-nums text-gray-700 dark:bg-gray-800 dark:text-gray-300">
-                                  {accounts.length}
-                                </span>
-                              </>
-                            ) : (
-                              <>
-                                <InstitutionLogo
-                                  institution={
-                                    accounts.find(
+                  {/* Account Filter (for Treemap) */}
+                  {chartType === "treemap" && (
+                    <DropdownMenu>
+                      <Tooltip triggerAsChild content="Select account to view">
+                        <DropdownMenuTrigger asChild>
+                          <Button
+                            variant="secondary"
+                            className="h-9 w-[280px] justify-between"
+                          >
+                            <span className="flex items-center gap-2">
+                              {selectedAccountFilter === "all" ? (
+                                <>
+                                  All{" "}
+                                  <span className="rounded-md bg-gray-100 px-1.5 py-0.5 text-sm font-medium tabular-nums text-gray-700 dark:bg-gray-800 dark:text-gray-300">
+                                    {accounts.length}
+                                  </span>
+                                </>
+                              ) : (
+                                <>
+                                  <InstitutionLogo
+                                    institution={
+                                      accounts.find(
+                                        (a) => a.id === selectedAccountFilter,
+                                      )?.institution || ""
+                                    }
+                                    className="size-4"
+                                  />
+                                  <span className="truncate">
+                                    {accounts.find(
                                       (a) => a.id === selectedAccountFilter,
-                                    )?.institution || ""
-                                  }
+                                    )?.name || "Select account"}
+                                  </span>
+                                </>
+                              )}
+                            </span>
+                            <RiExpandUpDownLine
+                              className="size-4 text-gray-400 dark:text-gray-600"
+                              aria-hidden="true"
+                            />
+                          </Button>
+                        </DropdownMenuTrigger>
+                      </Tooltip>
+                      <DropdownMenuContent align="start" className="w-[280px]">
+                        <DropdownMenuLabel>ACCOUNT</DropdownMenuLabel>
+                        <DropdownMenuSeparator />
+                        <DropdownMenuRadioGroup
+                          value={selectedAccountFilter}
+                          onValueChange={setSelectedAccountFilter}
+                        >
+                          <DropdownMenuRadioItem value="all" iconType="check">
+                            All{" "}
+                            <span className="rounded-md bg-gray-100 px-1.5 py-0.5 text-sm font-medium tabular-nums text-gray-700 dark:bg-gray-800 dark:text-gray-300">
+                              {accounts.length}
+                            </span>
+                          </DropdownMenuRadioItem>
+                          {accounts.map((account) => (
+                            <DropdownMenuRadioItem
+                              key={account.id}
+                              value={account.id}
+                              iconType="check"
+                            >
+                              <div className="flex items-center gap-2">
+                                <InstitutionLogo
+                                  institution={account.institution}
                                   className="size-4"
                                 />
-                                <span className="truncate">
-                                  {accounts.find(
-                                    (a) => a.id === selectedAccountFilter,
-                                  )?.name || "Select account"}
-                                </span>
-                              </>
+                                <span className="truncate">{account.name}</span>
+                              </div>
+                            </DropdownMenuRadioItem>
+                          ))}
+                        </DropdownMenuRadioGroup>
+                      </DropdownMenuContent>
+                    </DropdownMenu>
+                  )}
+
+                  {/* Group By (for Treemap) */}
+                  {chartType === "treemap" && (
+                    <Select
+                      value={groupBy}
+                      onValueChange={(value) =>
+                        setGroupBy(value as AccountGrouping)
+                      }
+                    >
+                      <SelectTrigger className="h-9 w-[180px] text-sm">
+                        <SelectValue placeholder="Group by" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectGroup>
+                          <SelectItem value="institution">
+                            Institution
+                          </SelectItem>
+                          <SelectItem value="type">Account Type</SelectItem>
+                          <SelectItem value="institution-type">
+                            Institution & Type
+                          </SelectItem>
+                        </SelectGroup>
+                      </SelectContent>
+                    </Select>
+                  )}
+
+                  {/* Display Settings (for Treemap) */}
+                  {chartType === "treemap" && (
+                    <DropdownMenu>
+                      <Tooltip content="Display value settings" triggerAsChild>
+                        <DropdownMenuTrigger asChild>
+                          <Button
+                            variant="secondary"
+                            className="flex h-9 items-center gap-2 px-3 text-sm"
+                          >
+                            {displayValue === "value" ? (
+                              <RiArrowUpDownLine className="size-4 shrink-0" />
+                            ) : displayValue === "allocation" ? (
+                              <RiPercentLine className="size-4 shrink-0" />
+                            ) : (
+                              <RiEyeOffLine className="size-4 shrink-0" />
                             )}
-                          </span>
-                          <RiExpandUpDownLine
-                            className="size-4 text-gray-400 dark:text-gray-600"
+                            <span className="hidden sm:inline">Display</span>
+                          </Button>
+                        </DropdownMenuTrigger>
+                      </Tooltip>
+                      <DropdownMenuContent align="end" className="w-48">
+                        <DropdownMenuRadioGroup
+                          value={displayValue}
+                          onValueChange={(value) =>
+                            setDisplayValue(value as AccountDisplayValue)
+                          }
+                        >
+                          <DropdownMenuRadioItem value="value">
+                            <RiArrowUpDownLine className="mr-2 size-4" />
+                            Market Value
+                          </DropdownMenuRadioItem>
+                          <DropdownMenuRadioItem value="allocation">
+                            <RiPercentLine className="mr-2 size-4" />
+                            Allocation %
+                          </DropdownMenuRadioItem>
+                          <DropdownMenuRadioItem value="none">
+                            <RiEyeOffLine className="mr-2 size-4" />
+                            None
+                          </DropdownMenuRadioItem>
+                        </DropdownMenuRadioGroup>
+                      </DropdownMenuContent>
+                    </DropdownMenu>
+                  )}
+
+                  {/* Export Button */}
+                  <DropdownMenu>
+                    <Tooltip
+                      triggerAsChild
+                      content="Export chart as image or data file"
+                    >
+                      <DropdownMenuTrigger asChild>
+                        <Button variant="secondary" className="h-9">
+                          <RiDownloadLine
+                            className="size-4"
                             aria-hidden="true"
                           />
                         </Button>
                       </DropdownMenuTrigger>
                     </Tooltip>
-                    <DropdownMenuContent align="start" className="w-[280px]">
-                      <DropdownMenuLabel>ACCOUNT</DropdownMenuLabel>
+                    <DropdownMenuContent align="end" className="w-56">
+                      <DropdownMenuLabel>EXPORT OPTIONS</DropdownMenuLabel>
                       <DropdownMenuSeparator />
-                      <DropdownMenuRadioGroup
-                        value={selectedAccountFilter}
-                        onValueChange={setSelectedAccountFilter}
-                      >
-                        <DropdownMenuRadioItem value="all" iconType="check">
-                          All{" "}
-                          <span className="rounded-md bg-gray-100 px-1.5 py-0.5 text-sm font-medium tabular-nums text-gray-700 dark:bg-gray-800 dark:text-gray-300">
-                            {accounts.length}
-                          </span>
-                        </DropdownMenuRadioItem>
-                        {accounts.map((account) => (
-                          <DropdownMenuRadioItem
-                            key={account.id}
-                            value={account.id}
-                            iconType="check"
-                          >
-                            <div className="flex items-center gap-2">
-                              <InstitutionLogo
-                                institution={account.institution}
-                                className="size-4"
-                              />
-                              <span className="truncate">{account.name}</span>
-                            </div>
-                          </DropdownMenuRadioItem>
-                        ))}
-                      </DropdownMenuRadioGroup>
+                      <DropdownMenuItem onClick={() => handleExport("print")}>
+                        Print chart
+                      </DropdownMenuItem>
+                      <DropdownMenuSeparator />
+                      <DropdownMenuItem onClick={() => handleExport("png")}>
+                        Download PNG image
+                      </DropdownMenuItem>
+                      <DropdownMenuItem onClick={() => handleExport("jpeg")}>
+                        Download JPEG image
+                      </DropdownMenuItem>
+                      <DropdownMenuItem onClick={() => handleExport("pdf")}>
+                        Download PDF document
+                      </DropdownMenuItem>
+                      <DropdownMenuItem onClick={() => handleExport("svg")}>
+                        Download SVG vector
+                      </DropdownMenuItem>
+                      <DropdownMenuSeparator />
+                      <DropdownMenuItem onClick={() => handleExport("csv")}>
+                        Download CSV
+                      </DropdownMenuItem>
+                      <DropdownMenuItem onClick={() => handleExport("xls")}>
+                        Download XLS
+                      </DropdownMenuItem>
                     </DropdownMenuContent>
                   </DropdownMenu>
-                )}
 
-                {/* Group By (for Treemap) */}
-                {chartType === "treemap" && (
-                  <Select
-                    value={groupBy}
-                    onValueChange={(value) =>
-                      setGroupBy(value as AccountGrouping)
-                    }
-                  >
-                    <SelectTrigger className="h-9 w-[180px] text-sm">
-                      <SelectValue placeholder="Group by" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectGroup>
-                        <SelectItem value="institution">Institution</SelectItem>
-                        <SelectItem value="type">Account Type</SelectItem>
-                        <SelectItem value="institution-type">
-                          Institution & Type
-                        </SelectItem>
-                      </SelectGroup>
-                    </SelectContent>
-                  </Select>
-                )}
-
-                {/* Display Settings (for Treemap) */}
-                {chartType === "treemap" && (
-                  <DropdownMenu>
-                    <Tooltip content="Display value settings" triggerAsChild>
-                      <DropdownMenuTrigger asChild>
-                        <Button
-                          variant="secondary"
-                          className="flex h-9 items-center gap-2 px-3 text-sm"
-                        >
-                          {displayValue === "value" ? (
-                            <RiArrowUpDownLine className="size-4 shrink-0" />
-                          ) : displayValue === "allocation" ? (
-                            <RiPercentLine className="size-4 shrink-0" />
-                          ) : (
-                            <RiEyeOffLine className="size-4 shrink-0" />
-                          )}
-                          <span className="hidden sm:inline">Display</span>
-                        </Button>
-                      </DropdownMenuTrigger>
-                    </Tooltip>
-                    <DropdownMenuContent align="end" className="w-48">
-                      <DropdownMenuRadioGroup
-                        value={displayValue}
-                        onValueChange={(value) =>
-                          setDisplayValue(value as AccountDisplayValue)
-                        }
-                      >
-                        <DropdownMenuRadioItem value="value">
-                          <RiArrowUpDownLine className="mr-2 size-4" />
-                          Market Value
-                        </DropdownMenuRadioItem>
-                        <DropdownMenuRadioItem value="allocation">
-                          <RiPercentLine className="mr-2 size-4" />
-                          Allocation %
-                        </DropdownMenuRadioItem>
-                        <DropdownMenuRadioItem value="none">
-                          <RiEyeOffLine className="mr-2 size-4" />
-                          None
-                        </DropdownMenuRadioItem>
-                      </DropdownMenuRadioGroup>
-                    </DropdownMenuContent>
-                  </DropdownMenu>
-                )}
-
-                {/* Export Button */}
-                <DropdownMenu>
+                  {/* Fullscreen Button */}
                   <Tooltip
                     triggerAsChild
-                    content="Export chart as image or data file"
+                    content="View chart in fullscreen mode"
                   >
-                    <DropdownMenuTrigger asChild>
-                      <Button variant="secondary" className="h-9">
-                        <RiDownloadLine className="size-4" aria-hidden="true" />
-                      </Button>
-                    </DropdownMenuTrigger>
+                    <Button
+                      variant="secondary"
+                      className="h-9"
+                      onClick={() => handleExport("fullscreen")}
+                    >
+                      <RiFullscreenLine className="size-4" aria-hidden="true" />
+                    </Button>
                   </Tooltip>
-                  <DropdownMenuContent align="end" className="w-56">
-                    <DropdownMenuLabel>EXPORT OPTIONS</DropdownMenuLabel>
-                    <DropdownMenuSeparator />
-                    <DropdownMenuItem onClick={() => handleExport("print")}>
-                      Print chart
-                    </DropdownMenuItem>
-                    <DropdownMenuSeparator />
-                    <DropdownMenuItem onClick={() => handleExport("png")}>
-                      Download PNG image
-                    </DropdownMenuItem>
-                    <DropdownMenuItem onClick={() => handleExport("jpeg")}>
-                      Download JPEG image
-                    </DropdownMenuItem>
-                    <DropdownMenuItem onClick={() => handleExport("pdf")}>
-                      Download PDF document
-                    </DropdownMenuItem>
-                    <DropdownMenuItem onClick={() => handleExport("svg")}>
-                      Download SVG vector
-                    </DropdownMenuItem>
-                    <DropdownMenuSeparator />
-                    <DropdownMenuItem onClick={() => handleExport("csv")}>
-                      Download CSV
-                    </DropdownMenuItem>
-                    <DropdownMenuItem onClick={() => handleExport("xls")}>
-                      Download XLS
-                    </DropdownMenuItem>
-                  </DropdownMenuContent>
-                </DropdownMenu>
+                </div>
+              </div>
 
-                {/* Fullscreen Button */}
-                <Tooltip triggerAsChild content="View chart in fullscreen mode">
-                  <Button
-                    variant="secondary"
-                    className="h-9"
-                    onClick={() => handleExport("fullscreen")}
-                  >
-                    <RiFullscreenLine className="size-4" aria-hidden="true" />
-                  </Button>
-                </Tooltip>
+              {/* Chart */}
+              <div>
+                {chartType === "sankey" ? (
+                  (() => {
+                    // Get unique institutions for the first level (from filtered accounts)
+                    const sankeyInstitutions = [
+                      ...new Set(filteredAccounts.map((a) => a.institution)),
+                    ]
+                    // Convert institution IDs to display labels
+                    const institutionDisplayNames = sankeyInstitutions.map(
+                      (inst) => institutionLabels[inst] || inst,
+                    )
+                    return (
+                      <SankeyChartHighcharts
+                        data={{
+                          nodes: [
+                            // Institution nodes (first level) - use display names
+                            ...institutionDisplayNames.map((name) => ({
+                              id: name,
+                            })),
+                            // Account nodes (second level)
+                            ...filteredAccounts.map((account) => ({
+                              id: account.name,
+                            })),
+                            // Portfolio Total (center)
+                            { id: "Portfolio Total" },
+                            // Asset type nodes (right side)
+                            { id: "U.S. Stocks" },
+                            { id: "Non-U.S. Stocks" },
+                            { id: "Fixed Income" },
+                            { id: "Cash" },
+                          ],
+                          links: [
+                            // Institutions to Accounts - use display names for source
+                            ...filteredAccounts.map((account) => ({
+                              source:
+                                institutionLabels[account.institution] ||
+                                account.institution,
+                              target: account.name,
+                              value: account.totalValue,
+                            })),
+                            // Accounts to Portfolio Total
+                            ...filteredAccounts.map((account) => ({
+                              source: account.name,
+                              target: "Portfolio Total",
+                              value: account.totalValue,
+                            })),
+                            // Portfolio Total to Asset Types - calculate from account allocations
+                            {
+                              source: "Portfolio Total",
+                              target: "U.S. Stocks",
+                              value: filteredAccounts.reduce(
+                                (sum, acc) =>
+                                  sum +
+                                  (acc.totalValue *
+                                    acc.assetAllocation.usStocks) /
+                                    100,
+                                0,
+                              ),
+                            },
+                            {
+                              source: "Portfolio Total",
+                              target: "Non-U.S. Stocks",
+                              value: filteredAccounts.reduce(
+                                (sum, acc) =>
+                                  sum +
+                                  (acc.totalValue *
+                                    acc.assetAllocation.nonUsStocks) /
+                                    100,
+                                0,
+                              ),
+                            },
+                            {
+                              source: "Portfolio Total",
+                              target: "Fixed Income",
+                              value: filteredAccounts.reduce(
+                                (sum, acc) =>
+                                  sum +
+                                  (acc.totalValue *
+                                    acc.assetAllocation.fixedIncome) /
+                                    100,
+                                0,
+                              ),
+                            },
+                            {
+                              source: "Portfolio Total",
+                              target: "Cash",
+                              value: filteredAccounts.reduce(
+                                (sum, acc) =>
+                                  sum +
+                                  (acc.totalValue * acc.assetAllocation.cash) /
+                                    100,
+                                0,
+                              ),
+                            },
+                          ],
+                        }}
+                        colors={["blue", "cyan", "amber", "emerald"]}
+                        accountColors={[
+                          "violet",
+                          "fuchsia",
+                          "pink",
+                          "sky",
+                          "lime",
+                        ]}
+                        institutions={institutionDisplayNames}
+                        height={350}
+                        chartRef={sankeyChartRef}
+                      />
+                    )
+                  })()
+                ) : (
+                  <AccountTreemap
+                    accounts={filteredAccounts}
+                    selectedAccounts={
+                      selectedAccountFilter === "all"
+                        ? []
+                        : [selectedAccountFilter]
+                    }
+                    groupBy={groupBy}
+                    displayValue={displayValue}
+                    height={350}
+                    chartRef={treemapChartRef}
+                  />
+                )}
               </div>
             </div>
-
-            {/* Chart */}
-            <div>
-              {chartType === "sankey" ? (
-                (() => {
-                  // Get unique institutions for the first level (from filtered accounts)
-                  const sankeyInstitutions = [
-                    ...new Set(filteredAccounts.map((a) => a.institution)),
-                  ]
-                  // Convert institution IDs to display labels
-                  const institutionDisplayNames = sankeyInstitutions.map(
-                    (inst) => institutionLabels[inst] || inst,
-                  )
-                  return (
-                    <SankeyChartHighcharts
-                      data={{
-                        nodes: [
-                          // Institution nodes (first level) - use display names
-                          ...institutionDisplayNames.map((name) => ({
-                            id: name,
-                          })),
-                          // Account nodes (second level)
-                          ...filteredAccounts.map((account) => ({ id: account.name })),
-                          // Portfolio Total (center)
-                          { id: "Portfolio Total" },
-                          // Asset type nodes (right side)
-                          { id: "U.S. Stocks" },
-                          { id: "Non-U.S. Stocks" },
-                          { id: "Fixed Income" },
-                          { id: "Cash" },
-                        ],
-                        links: [
-                          // Institutions to Accounts - use display names for source
-                          ...filteredAccounts.map((account) => ({
-                            source:
-                              institutionLabels[account.institution] ||
-                              account.institution,
-                            target: account.name,
-                            value: account.totalValue,
-                          })),
-                          // Accounts to Portfolio Total
-                          ...filteredAccounts.map((account) => ({
-                            source: account.name,
-                            target: "Portfolio Total",
-                            value: account.totalValue,
-                          })),
-                          // Portfolio Total to Asset Types - calculate from account allocations
-                          {
-                            source: "Portfolio Total",
-                            target: "U.S. Stocks",
-                            value: filteredAccounts.reduce(
-                              (sum, acc) =>
-                                sum +
-                                (acc.totalValue *
-                                  acc.assetAllocation.usStocks) /
-                                  100,
-                              0,
-                            ),
-                          },
-                          {
-                            source: "Portfolio Total",
-                            target: "Non-U.S. Stocks",
-                            value: filteredAccounts.reduce(
-                              (sum, acc) =>
-                                sum +
-                                (acc.totalValue *
-                                  acc.assetAllocation.nonUsStocks) /
-                                  100,
-                              0,
-                            ),
-                          },
-                          {
-                            source: "Portfolio Total",
-                            target: "Fixed Income",
-                            value: filteredAccounts.reduce(
-                              (sum, acc) =>
-                                sum +
-                                (acc.totalValue *
-                                  acc.assetAllocation.fixedIncome) /
-                                  100,
-                              0,
-                            ),
-                          },
-                          {
-                            source: "Portfolio Total",
-                            target: "Cash",
-                            value: filteredAccounts.reduce(
-                              (sum, acc) =>
-                                sum +
-                                (acc.totalValue * acc.assetAllocation.cash) /
-                                  100,
-                              0,
-                            ),
-                          },
-                        ],
-                      }}
-                      colors={["blue", "cyan", "amber", "emerald"]}
-                      accountColors={[
-                        "violet",
-                        "fuchsia",
-                        "pink",
-                        "sky",
-                        "lime",
-                      ]}
-                      institutions={institutionDisplayNames}
-                      height={350}
-                      chartRef={sankeyChartRef}
-                    />
-                  )
-                })()
-              ) : (
-                <AccountTreemap
-                  accounts={filteredAccounts}
-                  selectedAccounts={
-                    selectedAccountFilter === "all"
-                      ? []
-                      : [selectedAccountFilter]
-                  }
-                  groupBy={groupBy}
-                  displayValue={displayValue}
-                  height={350}
-                  chartRef={treemapChartRef}
-                />
-              )}
-            </div>
-          </div>
-        </Card>
+          </Card>
         </div>
       )}
 
