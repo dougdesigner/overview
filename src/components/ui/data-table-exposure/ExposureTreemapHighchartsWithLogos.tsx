@@ -137,6 +137,18 @@ export function ExposureTreemapHighchartsWithLogos({
   const isDark = theme === "dark"
   const chartRef = useRef<HighchartsReact.RefObject>(null)
 
+  // Responsive height: 350 on mobile (<640px), 500 on desktop
+  const [responsiveHeight, setResponsiveHeight] = useState(500)
+
+  useEffect(() => {
+    const updateHeight = () => {
+      setResponsiveHeight(window.innerWidth < 640 ? 350 : 500)
+    }
+    updateHeight()
+    window.addEventListener("resize", updateHeight)
+    return () => window.removeEventListener("resize", updateHeight)
+  }, [])
+
   // Update chart when theme changes
   useEffect(() => {
     if (chartRef.current && chartRef.current.chart) {
@@ -1034,7 +1046,7 @@ export function ExposureTreemapHighchartsWithLogos({
     chart: {
       type: "treemap",
       backgroundColor: "transparent",
-      height: 500,
+      height: responsiveHeight,
       margin: [0, 0, 0, 0],
       events: {
         fullscreenOpen: function () {
@@ -1271,7 +1283,7 @@ export function ExposureTreemapHighchartsWithLogos({
     chart: {
       type: "pie",
       backgroundColor: "transparent",
-      height: 500,
+      height: responsiveHeight,
       events: {
         fullscreenOpen: function () {
           // Get current theme from DOM
@@ -1566,7 +1578,7 @@ export function ExposureTreemapHighchartsWithLogos({
   if (!modulesLoaded) {
     return (
       <Card className="pb-4 pt-6">
-        <div className="flex h-[500px] items-center justify-center">
+        <div className="flex items-center justify-center" style={{ height: responsiveHeight }}>
           <div className="text-sm text-gray-500">Loading chart...</div>
         </div>
       </Card>
@@ -1754,7 +1766,7 @@ export function ExposureTreemapHighchartsWithLogos({
 
       {validExposures.length === 0 ? (
         // Empty state when no stocks exist
-        <div className="mt-4 flex h-[500px] flex-col items-center justify-center">
+        <div className="mt-4 flex flex-col items-center justify-center" style={{ height: responsiveHeight }}>
           <RiPieChartLine
             className="mb-3 size-12 text-gray-300 dark:text-gray-600"
             aria-hidden="true"

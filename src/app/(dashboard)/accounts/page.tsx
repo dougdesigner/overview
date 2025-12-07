@@ -458,7 +458,7 @@ export default function AccountsPage() {
               >
                 Account flow
               </p>
-              <div className="flex flex-wrap items-center gap-2">
+              <div className="flex items-center gap-2">
                 {/* Chart Type Toggle */}
                 {/* <DropdownMenu>
                   <Tooltip content="Switch chart type" triggerAsChild>
