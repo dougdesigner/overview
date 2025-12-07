@@ -18,8 +18,10 @@ import { usePortfolioStore } from "@/hooks/usePortfolioStore"
 import { clearETFCache } from "@/lib/etfCacheUtils"
 import { cx, focusRing } from "@/lib/utils"
 import {
+  RiCheckLine,
   RiComputerLine,
   RiDownloadLine,
+  RiLockLine,
   RiMoonLine,
   RiSettings3Line,
   RiSunLine,
@@ -202,6 +204,21 @@ function DropdownUserProfile() {
               </DropdownMenuSubMenuContent>
             </DropdownMenuSubMenu>
           </DropdownMenuGroup>
+
+          {/* Privacy & Security Notice */}
+          <DropdownMenuSeparator />
+          <div className="px-2 py-2">
+            <div className="flex items-center justify-center gap-1.5 text-xs text-gray-500 dark:text-gray-400">
+              <RiCheckLine className="size-3.5" aria-hidden="true" />
+              <span>No signup required</span>
+              <span className="text-gray-300 dark:text-gray-600">•</span>
+              <RiLockLine className="size-3.5" aria-hidden="true" />
+              <span>Safe & secure</span>
+            </div>
+            <p className="mt-1 text-center text-[11px] text-gray-400 dark:text-gray-500">
+              All data is stored locally on your device
+            </p>
+          </div>
 
           {/* <DropdownMenuSeparator />
           <DropdownMenuGroup>

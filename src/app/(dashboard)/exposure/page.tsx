@@ -13,7 +13,7 @@ import {
 import { useExposureCalculations } from "@/hooks/useExposureCalculations"
 import { usePortfolioStore } from "@/hooks/usePortfolioStore"
 import { RiCloseLine } from "@remixicon/react"
-import React, { useMemo, useRef, useState, useEffect, useCallback } from "react"
+import React, { useCallback, useEffect, useMemo, useRef, useState } from "react"
 
 export default function ExposurePage() {
   // Use portfolio store for holdings and accounts data
@@ -25,18 +25,7 @@ export default function ExposurePage() {
   } = usePortfolioStore()
 
   // Get exposure calculations
-  const {
-    exposures,
-    totalValue,
-    error,
-  } = useExposureCalculations()
-
-  // Calculate stocks-only total for "pct-stocks" display mode
-  const stocksOnlyValue = useMemo(() => {
-    return exposures
-      .filter((exp) => !exp.isETFBreakdown && exp.totalValue > 0)
-      .reduce((sum, exp) => sum + exp.totalValue, 0)
-  }, [exposures])
+  const { exposures, totalValue, error } = useExposureCalculations()
 
   // Convert holdings to the format expected by ExposureTable
   const portfolioHoldings = useMemo(() => {
@@ -90,10 +79,13 @@ export default function ExposurePage() {
   const [tableFilteredValue, setTableFilteredValue] = useState(0)
 
   // Callback for ExposureTable to report filtered data
-  const handleFilteredDataChange = useCallback((count: number, value: number) => {
-    setTableFilteredCount(count)
-    setTableFilteredValue(value)
-  }, [])
+  const handleFilteredDataChange = useCallback(
+    (count: number, value: number) => {
+      setTableFilteredCount(count)
+      setTableFilteredValue(value)
+    },
+    [],
+  )
 
   // Intersection Observer for sticky filter
   useEffect(() => {
@@ -197,10 +189,14 @@ export default function ExposurePage() {
         <div>
           <h1 className="flex items-center gap-2 text-2xl font-semibold text-gray-900 dark:text-gray-50">
             Exposure
-            {exposures.length > 0 && <Badge variant="neutral">{exposures.length.toLocaleString()}</Badge>}
+            {exposures.length > 0 && (
+              <Badge variant="neutral">
+                {exposures.length.toLocaleString()}
+              </Badge>
+            )}
           </h1>
           <p className="text-gray-500 dark:text-gray-500 sm:text-sm/6">
-            See your true stock exposure across all ETFs and direct holdings
+            Stock exposure across all ETFs and direct holdings
           </p>
         </div>
         {/* <Button onClick={handleFullRefresh} variant="secondary" className="text-sm">
@@ -215,18 +211,16 @@ export default function ExposurePage() {
           className={`fixed bottom-20 left-1/2 z-50 w-full max-w-2xl -translate-x-1/2 px-4 transition-[transform,opacity] duration-300 ease-out sm:bottom-6 sm:px-6 ${
             isFilterSticky
               ? "translate-y-0 opacity-100"
-              : "translate-y-4 pointer-events-none opacity-0"
+              : "pointer-events-none translate-y-4 opacity-0"
           }`}
         >
           <div className="flex items-center justify-between rounded-lg border border-gray-200 bg-white/95 px-4 py-3 shadow-lg backdrop-blur-sm dark:border-gray-800 dark:bg-gray-950/95">
             <div className="text-left">
               <div className="flex items-center gap-2 text-base font-medium text-gray-900 dark:text-gray-50">
                 {formatCurrency(tableFilteredValue)}
-                {(displayValue === "pct-stocks" ? stocksOnlyValue : totalValue) > 0 && (
+                {totalValue > 0 && (
                   <span className="rounded-md bg-gray-100 px-1.5 py-0.5 text-sm font-medium tabular-nums text-gray-700 dark:bg-gray-800 dark:text-gray-300">
-                    {displayValue === "pct-stocks"
-                      ? ((tableFilteredValue / stocksOnlyValue) * 100).toFixed(1)
-                      : ((tableFilteredValue / totalValue) * 100).toFixed(1)}%
+                    {((tableFilteredValue / totalValue) * 100).toFixed(1)}%
                   </span>
                 )}
               </div>
@@ -238,13 +232,22 @@ export default function ExposurePage() {
             <div className="flex items-center gap-2 sm:gap-4">
               {/* Account filter pill */}
               {selectedAccount !== "all" && (
-                <Badge variant="default" className="flex h-9 items-center gap-1.5 px-3 text-sm">
+                <Badge
+                  variant="default"
+                  className="flex h-9 items-center gap-1.5 px-3 text-sm"
+                >
                   <InstitutionLogo
-                    institution={exposureAccounts.find((a) => a.id === selectedAccount)?.institution || ""}
+                    institution={
+                      exposureAccounts.find((a) => a.id === selectedAccount)
+                        ?.institution || ""
+                    }
                     className="size-5"
                   />
                   <span className="hidden sm:inline">
-                    {exposureAccounts.find((a) => a.id === selectedAccount)?.name}
+                    {
+                      exposureAccounts.find((a) => a.id === selectedAccount)
+                        ?.name
+                    }
                   </span>
                   <button
                     onClick={() => setSelectedAccount("all")}
@@ -256,7 +259,10 @@ export default function ExposurePage() {
               )}
               {/* Holdings filter pill */}
               {holdingsFilter !== "all" && (
-                <Badge variant="default" className="flex h-9 items-center gap-1.5 px-3 text-sm">
+                <Badge
+                  variant="default"
+                  className="flex h-9 items-center gap-1.5 px-3 text-sm"
+                >
                   {getFilterLabel(holdingsFilter)}
                   <button
                     onClick={() => setHoldingsFilter("all")}
@@ -305,9 +311,15 @@ export default function ExposurePage() {
           <div className="flex items-center gap-2 sm:gap-4">
             {/* Account filter pill */}
             {selectedAccount !== "all" && (
-              <Badge variant="default" className="flex h-9 items-center gap-1.5 px-3 text-sm">
+              <Badge
+                variant="default"
+                className="flex h-9 items-center gap-1.5 px-3 text-sm"
+              >
                 <InstitutionLogo
-                  institution={exposureAccounts.find((a) => a.id === selectedAccount)?.institution || ""}
+                  institution={
+                    exposureAccounts.find((a) => a.id === selectedAccount)
+                      ?.institution || ""
+                  }
                   className="size-5"
                 />
                 <span className="hidden sm:inline">
@@ -323,7 +335,10 @@ export default function ExposurePage() {
             )}
             {/* Holdings filter pill */}
             {holdingsFilter !== "all" && (
-              <Badge variant="default" className="flex h-9 items-center gap-1.5 px-3 text-sm">
+              <Badge
+                variant="default"
+                className="flex h-9 items-center gap-1.5 px-3 text-sm"
+              >
                 {getFilterLabel(holdingsFilter)}
                 <button
                   onClick={() => setHoldingsFilter("all")}

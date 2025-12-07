@@ -15,8 +15,8 @@ import mutualFundMappings from "@/data/mutual-fund-mappings.json"
 import { usePortfolioStore } from "@/hooks/usePortfolioStore"
 import { getETFName } from "@/lib/etfMetadataService"
 import { getKnownETFName } from "@/lib/knownETFNames"
-import { getStockPrice } from "@/lib/stockPriceService"
 import { extractDomainsFromCompanyName } from "@/lib/logoUtils"
+import { getStockPrice } from "@/lib/stockPriceService"
 import { RiAddLine } from "@remixicon/react"
 import { useSearchParams } from "next/navigation"
 import React, { Suspense, useMemo } from "react"
@@ -320,10 +320,12 @@ function HoldingsContent() {
         <div>
           <h1 className="flex items-center gap-2 text-2xl font-semibold text-gray-900 dark:text-gray-50">
             Holdings
-            {holdings.length > 0 && <Badge variant="neutral">{holdings.length}</Badge>}
+            {holdings.length > 0 && (
+              <Badge variant="neutral">{holdings.length}</Badge>
+            )}
           </h1>
           <p className="text-gray-500 dark:text-gray-500 sm:text-sm/6">
-            See all your investments in one place, across every account
+            All investments in one place, across every account
           </p>
         </div>
         {accounts.length > 0 && (
@@ -396,7 +398,7 @@ function HoldingsContent() {
               </div>
             </div>
             <div className="flex items-center gap-2">
-              <label className="hidden text-sm font-medium text-gray-700 sm:block dark:text-gray-300">
+              <label className="hidden text-sm font-medium text-gray-700 dark:text-gray-300 sm:block">
                 Account
               </label>
               <AccountSelector
@@ -518,10 +520,7 @@ function HoldingsContent() {
             className="flex w-full items-center justify-center gap-2 text-base"
           >
             Add Holdings
-            <RiAddLine
-              className="-mr-0.5 size-5 shrink-0"
-              aria-hidden="true"
-            />
+            <RiAddLine className="-mr-0.5 size-5 shrink-0" aria-hidden="true" />
           </Button>
         </div>
       )}

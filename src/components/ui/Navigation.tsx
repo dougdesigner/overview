@@ -4,9 +4,9 @@ import { TabNavigation, TabNavigationLink } from "@/components/TabNavigation"
 import { cx } from "@/lib/utils"
 import {
   RiBankLine,
-  RiLineChartLine,
+  RiDonutChartFill,
+  RiLayoutMasonryLine,
   RiPieChartLine,
-  RiHome5Line,
 } from "@remixicon/react"
 
 // Custom gradient logo icon (donut chart)
@@ -133,7 +133,7 @@ function Navigation() {
               : "text-gray-500 dark:text-gray-400"
           )}
         >
-          <RiHome5Line className="size-6" />
+          <RiDonutChartFill className="size-6" />
           <span>Overview</span>
         </Link>
         <Link
@@ -157,7 +157,7 @@ function Navigation() {
               : "text-gray-500 dark:text-gray-400"
           )}
         >
-          <RiLineChartLine className="size-6" />
+          <RiPieChartLine className="size-6" />
           <span>Holdings</span>
         </Link>
         <Link
@@ -169,7 +169,7 @@ function Navigation() {
               : "text-gray-500 dark:text-gray-400"
           )}
         >
-          <RiPieChartLine className="size-6" />
+          <RiLayoutMasonryLine className="size-6" />
           <span>Exposure</span>
         </Link>
       </div>

@@ -1,6 +1,6 @@
 "use client"
 
-export const dynamic = 'force-dynamic'
+export const dynamic = "force-dynamic"
 
 import AssetAllocationCard from "@/components/AssetAllocationCard"
 import KPICard from "@/components/KPICard"
@@ -43,13 +43,29 @@ export default function OverviewPage() {
   // Sort asset classes by highest value
   const sortedAssetClasses = useMemo(() => {
     const assetClassData = [
-      { name: "U.S. Stocks", value: assetValues.usStocks, percentage: portfolioAllocation.usStocks },
-      { name: "Non-U.S. Stocks", value: assetValues.nonUsStocks, percentage: portfolioAllocation.nonUsStocks },
-      { name: "Fixed Income", value: assetValues.fixedIncome, percentage: portfolioAllocation.fixedIncome },
-      { name: "Cash", value: assetValues.cash, percentage: portfolioAllocation.cash },
+      {
+        name: "U.S. Stocks",
+        value: assetValues.usStocks,
+        percentage: portfolioAllocation.usStocks,
+      },
+      {
+        name: "Non-U.S. Stocks",
+        value: assetValues.nonUsStocks,
+        percentage: portfolioAllocation.nonUsStocks,
+      },
+      {
+        name: "Fixed Income",
+        value: assetValues.fixedIncome,
+        percentage: portfolioAllocation.fixedIncome,
+      },
+      {
+        name: "Cash",
+        value: assetValues.cash,
+        percentage: portfolioAllocation.cash,
+      },
     ]
     return assetClassData
-      .filter(ac => ac.value > 0)
+      .filter((ac) => ac.value > 0)
       .sort((a, b) => b.value - a.value)
   }, [assetValues, portfolioAllocation])
 
@@ -61,7 +77,7 @@ export default function OverviewPage() {
             Overview
           </h1>
           <p className="text-gray-500 dark:text-gray-400 sm:text-sm/6">
-            Your portfolio value and asset class distribution at a glance
+            Portfolio value and asset class distribution at a glance
           </p>
         </div>
         {/* <Button
@@ -99,7 +115,7 @@ export default function OverviewPage() {
               value={totalPortfolioValue}
               accountCount={accounts.length}
               holdingsCount={holdings.length}
-              assetClasses={sortedAssetClasses.map(ac => ({
+              assetClasses={sortedAssetClasses.map((ac) => ({
                 name: ac.name,
                 percentage: ac.percentage,
                 color: getAssetClassColor(ac.name),
@@ -195,7 +211,7 @@ export default function OverviewPage() {
           {/* <DataTable data={tickets} columns={columns} /> */}
 
           <dl className="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-4 lg:grid-cols-4">
-            {sortedAssetClasses.map(ac => (
+            {sortedAssetClasses.map((ac) => (
               <KPICard
                 key={ac.name}
                 name={ac.name}
@@ -272,18 +288,30 @@ export default function OverviewPage() {
                     "amber",
                     "emerald",
                     "violet",
-                  ] as ("blue" | "gray" | "cyan" | "amber" | "emerald" | "violet")[],
+                  ] as (
+                    | "blue"
+                    | "gray"
+                    | "cyan"
+                    | "amber"
+                    | "emerald"
+                    | "violet"
+                  )[],
                 },
                 {
                   name: "Asset Classes",
-                  data: sortedAssetClasses.map(ac => ({
+                  data: sortedAssetClasses.map((ac) => ({
                     name: ac.name,
                     amount: ac.value,
                     share: `${ac.percentage.toFixed(1)}%`,
                     borderColor: getAssetClassBorderColor(ac.name),
                   })),
                   // These colors are not used when useAssetClassColors is true, but kept for compatibility
-                  colors: ["blue", "cyan", "amber", "emerald"] as ("blue" | "cyan" | "amber" | "emerald")[],
+                  colors: ["blue", "cyan", "amber", "emerald"] as (
+                    | "blue"
+                    | "cyan"
+                    | "amber"
+                    | "emerald"
+                  )[],
                 },
                 {
                   name: "Accounts",
@@ -306,7 +334,13 @@ export default function OverviewPage() {
                         ][index] || "border-gray-500 dark:border-gray-500",
                       institution: account.institution,
                     })),
-                  colors: ["violet", "fuchsia", "pink", "sky", "lime"] as ("violet" | "fuchsia" | "pink" | "sky" | "lime")[],
+                  colors: ["violet", "fuchsia", "pink", "sky", "lime"] as (
+                    | "violet"
+                    | "fuchsia"
+                    | "pink"
+                    | "sky"
+                    | "lime"
+                  )[],
                 },
               ]}
             />
