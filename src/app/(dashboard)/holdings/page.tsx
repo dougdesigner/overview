@@ -16,6 +16,7 @@ import { usePortfolioStore } from "@/hooks/usePortfolioStore"
 import { getETFName } from "@/lib/etfMetadataService"
 import { getKnownETFName } from "@/lib/knownETFNames"
 import { getStockPrice } from "@/lib/stockPriceService"
+import { extractDomainsFromCompanyName } from "@/lib/logoUtils"
 import { RiAddLine } from "@remixicon/react"
 import { useSearchParams } from "next/navigation"
 import React, { Suspense, useMemo } from "react"
@@ -122,12 +123,32 @@ function HoldingsContent() {
   const handleHoldingSubmit = async (holding: HoldingFormData) => {
     if (editingHolding) {
       // Update existing holding
-      updateHolding(editingHolding.id, {
-        ticker: holding.ticker,
-        name: holding.ticker || holding.description || "",
-        quantity: holding.shares || holding.amount || 0,
-        // Market value will be recalculated automatically by the store
-      })
+      if (holding.isManualEntry) {
+        // Manual entry update
+        const domains = holding.companyName
+          ? extractDomainsFromCompanyName(holding.companyName)
+          : []
+        updateHolding(editingHolding.id, {
+          ticker: holding.ticker,
+          name: holding.companyName || holding.ticker || "",
+          quantity: holding.shares || 0,
+          lastPrice: holding.pricePerShare || editingHolding.lastPrice,
+          marketValue:
+            (holding.shares || 0) *
+            (holding.pricePerShare || editingHolding.lastPrice),
+          isUSStock: holding.isUSStock ?? true,
+          isManualEntry: true,
+          domain: domains[0],
+        })
+      } else {
+        // Predefined ticker update
+        updateHolding(editingHolding.id, {
+          ticker: holding.ticker,
+          name: holding.ticker || holding.description || "",
+          quantity: holding.shares || holding.amount || 0,
+          // Market value will be recalculated automatically by the store
+        })
+      }
     } else {
       // Add new holding
       const account = accounts.find((a) => a.id === holding.accountId)
@@ -140,12 +161,36 @@ function HoldingsContent() {
       let name = holding.ticker || holding.description || ""
       let type: "stock" | "fund" | "cash" = "stock"
       let lastPrice = 100 // Default price
+      let isUSStock: boolean | undefined = undefined
+      let isManualEntry: boolean | undefined = undefined
+      let domain: string | undefined = undefined
 
       if (holding.holdingType === "cash") {
         type = "cash"
         name = holding.description || "Cash"
         lastPrice = 1
+      } else if (holding.isManualEntry && holding.ticker) {
+        // Manual entry - use provided values directly, skip API lookups
+        name = holding.companyName || holding.ticker
+        lastPrice = holding.pricePerShare || 100
+        isUSStock = holding.isUSStock ?? true
+        isManualEntry = true
+
+        // Extract domain from company name for logo lookup
+        if (holding.companyName) {
+          const domains = extractDomainsFromCompanyName(holding.companyName)
+          domain = domains[0]
+          console.log(
+            `Manual entry - extracted domains from "${holding.companyName}":`,
+            domains,
+          )
+        }
+
+        console.log(
+          `Manual entry: ${holding.ticker} - ${name} at $${lastPrice} (${isUSStock ? "US" : "Non-US"})`,
+        )
       } else if (holding.ticker) {
+        // Predefined ticker - use existing logic
         // First, check if it's a mutual fund
         const mutualFund =
           mutualFundMappings[holding.ticker as keyof typeof mutualFundMappings]
@@ -221,6 +266,9 @@ function HoldingsContent() {
         lastPrice: lastPrice,
         marketValue: marketValue,
         type: type,
+        isUSStock: isUSStock,
+        isManualEntry: isManualEntry,
+        domain: domain,
       })
     }
     setEditingHolding(null)
@@ -249,6 +297,11 @@ function HoldingsContent() {
         holdingType: "stocks-funds",
         ticker: holding.ticker,
         shares: holding.quantity,
+        // Manual entry fields
+        isManualEntry: holding.isManualEntry || false,
+        companyName: holding.isManualEntry ? holding.name : undefined,
+        pricePerShare: holding.isManualEntry ? holding.lastPrice : undefined,
+        isUSStock: holding.isUSStock ?? true,
       }
     }
   }
@@ -391,7 +444,7 @@ function HoldingsContent() {
 
       {/* Hero Visualization - Sunburst Chart - Only show when there are holdings */}
       {holdings.length > 0 && (
-        <div className="mt-6">
+        <div className="pt-6" id="holdings-section">
           <HoldingsSunburst
             holdings={holdingsWithAllocations}
             accounts={accounts}

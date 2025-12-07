@@ -1,3 +1,18 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Scroll offset for focus mode - accounts for fixed nav (only on sm+ where nav is sticky) */
+#exposure-section,
+#holdings-section,
+#accounts-section {
+  scroll-margin-top: 0;
+}
+
+@media (min-width: 640px) {
+  #exposure-section,
+  #holdings-section,
+  #accounts-section {
+    scroll-margin-top: 80px;
+  }
+}

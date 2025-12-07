@@ -58,6 +58,10 @@ export interface PortfolioHolding {
   lastPrice: number
   marketValue: number
   type: "stock" | "fund" | "cash"
+  // For manual entries
+  isUSStock?: boolean // True for US stocks, false for international
+  isManualEntry?: boolean // True if manually entered
+  domain?: string // Company domain for logo lookup
 }
 
 export interface Account {

@@ -346,9 +346,14 @@ export function HoldingsSunburst({
   }
 
   return (
-    <Card className="p-6">
+    <Card className="p-6" data-chart="holdings-hierarchy">
       <div className="mb-4">
-        <h3 className="text-base font-medium text-gray-900 dark:text-gray-50">
+        <h3
+          className="cursor-pointer text-base font-medium text-gray-900 transition-colors hover:text-blue-600 dark:text-gray-50 dark:hover:text-blue-400"
+          onClick={() => {
+            document.getElementById('holdings-section')?.scrollIntoView({ behavior: 'smooth' })
+          }}
+        >
           Holdings hierarchy
         </h3>
         {/* <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">

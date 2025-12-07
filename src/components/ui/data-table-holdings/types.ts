@@ -18,6 +18,10 @@ export interface Holding {
   // For nested rows
   subRows?: Holding[]
   isGroup?: boolean // True for parent rows that aggregate multiple holdings
+  // For manual entries
+  isUSStock?: boolean // True for US stocks, false for international
+  isManualEntry?: boolean // True if manually entered (not from predefined list)
+  domain?: string // Company domain for logo lookup
 }
 
 export interface Account {

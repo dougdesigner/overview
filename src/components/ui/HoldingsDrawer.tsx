@@ -11,6 +11,7 @@ import {
 } from "@/components/Drawer"
 import { Input } from "@/components/Input"
 import { Label } from "@/components/Label"
+import { Switch } from "@/components/Switch"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/Tabs"
 import { AccountSelector } from "@/components/ui/AccountSelector"
 import { TickerSelector } from "@/components/ui/TickerSelector"
@@ -26,6 +27,11 @@ export interface HoldingFormData {
   // For cash
   amount?: number
   description?: string
+  // For manual entry
+  isManualEntry?: boolean
+  companyName?: string // For logo lookup
+  pricePerShare?: number // Required for manual entry
+  isUSStock?: boolean // Default: true
 }
 
 interface HoldingsDrawerProps {
@@ -87,13 +93,21 @@ export function HoldingsDrawer({
     shares: undefined,
     amount: undefined,
     description: "",
+    isManualEntry: false,
+    companyName: "",
+    pricePerShare: undefined,
+    isUSStock: true,
   })
 
   // Reset form when drawer opens/closes with new initial data
   React.useEffect(() => {
     if (open) {
       if (initialData) {
-        setFormData(initialData)
+        setFormData({
+          ...initialData,
+          isManualEntry: initialData.isManualEntry ?? false,
+          isUSStock: initialData.isUSStock ?? true,
+        })
       } else if (mode === "create") {
         setFormData({
           accountId: "",
@@ -102,6 +116,10 @@ export function HoldingsDrawer({
           shares: undefined,
           amount: undefined,
           description: "",
+          isManualEntry: false,
+          companyName: "",
+          pricePerShare: undefined,
+          isUSStock: true,
         })
       }
     }
@@ -123,6 +141,10 @@ export function HoldingsDrawer({
       shares: undefined,
       amount: undefined,
       description: "",
+      isManualEntry: false,
+      companyName: "",
+      pricePerShare: undefined,
+      isUSStock: true,
     })
     onOpenChange(false)
   }
@@ -131,7 +153,22 @@ export function HoldingsDrawer({
     if (!formData.accountId) return false
 
     if (formData.holdingType === "stocks-funds") {
-      return !!formData.ticker && formData.shares !== undefined && formData.shares > 0
+      if (formData.isManualEntry) {
+        // Manual entry validation
+        return !!(
+          formData.ticker &&
+          formData.ticker.trim().length > 0 &&
+          formData.companyName &&
+          formData.companyName.trim().length > 0 &&
+          formData.pricePerShare !== undefined &&
+          formData.pricePerShare > 0 &&
+          formData.shares !== undefined &&
+          formData.shares > 0
+        )
+      } else {
+        // Predefined ticker validation
+        return !!formData.ticker && formData.shares !== undefined && formData.shares > 0
+      }
     } else {
       return (
         formData.amount !== undefined &&
@@ -187,28 +224,133 @@ export function HoldingsDrawer({
               </TabsList>
 
               <TabsContent value="stocks-funds" className="mt-4 space-y-4">
-                <FormField label="Ticker Symbol" required>
-                  <TickerSelector
-                    value={formData.ticker || ""}
-                    onValueChange={(value) =>
-                      handleUpdateForm({ ticker: value })
+                {/* Manual Entry Toggle */}
+                <div className="flex items-center justify-between rounded-lg border border-gray-200 p-3 dark:border-gray-800">
+                  <div>
+                    <Label className="font-medium">Manual Entry</Label>
+                    <p className="text-sm text-gray-500 dark:text-gray-400">
+                      For unlisted or foreign stocks
+                    </p>
+                  </div>
+                  <Switch
+                    checked={formData.isManualEntry || false}
+                    onCheckedChange={(checked) =>
+                      handleUpdateForm({
+                        isManualEntry: checked,
+                        // Reset ticker when switching modes
+                        ticker: "",
+                        companyName: "",
+                        pricePerShare: undefined,
+                      })
                     }
-                    placeholder="Select or enter ticker"
                   />
-                </FormField>
+                </div>
 
-                <FormField label="Number of Shares" required>
-                  <Input
-                    name="shares"
-                    type="number"
-                    step="0.0001"
-                    value={formData.shares || ""}
-                    onChange={(e) =>
-                      handleUpdateForm({ shares: parseFloat(e.target.value) })
-                    }
-                    placeholder="e.g., 100, 25.5"
-                  />
-                </FormField>
+                {formData.isManualEntry ? (
+                  <>
+                    {/* Manual Entry Fields */}
+                    <FormField label="Ticker Symbol" required>
+                      <Input
+                        name="ticker"
+                        value={formData.ticker || ""}
+                        onChange={(e) =>
+                          handleUpdateForm({
+                            ticker: e.target.value.toUpperCase(),
+                          })
+                        }
+                        placeholder="e.g., AAPL, MSFT"
+                      />
+                    </FormField>
+
+                    <FormField label="Company Name" required>
+                      <Input
+                        name="companyName"
+                        value={formData.companyName || ""}
+                        onChange={(e) =>
+                          handleUpdateForm({ companyName: e.target.value })
+                        }
+                        placeholder="e.g., Apple Inc."
+                      />
+                      <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">
+                        Used for logo lookup
+                      </p>
+                    </FormField>
+
+                    <FormField label="Price per Share" required>
+                      <Input
+                        name="pricePerShare"
+                        type="number"
+                        step="0.01"
+                        value={formData.pricePerShare || ""}
+                        onChange={(e) =>
+                          handleUpdateForm({
+                            pricePerShare: parseFloat(e.target.value),
+                          })
+                        }
+                        placeholder="e.g., 193.60"
+                      />
+                    </FormField>
+
+                    <FormField label="Number of Shares" required>
+                      <Input
+                        name="shares"
+                        type="number"
+                        step="0.0001"
+                        value={formData.shares || ""}
+                        onChange={(e) =>
+                          handleUpdateForm({
+                            shares: parseFloat(e.target.value),
+                          })
+                        }
+                        placeholder="e.g., 100, 25.5"
+                      />
+                    </FormField>
+
+                    {/* US/Non-US Toggle */}
+                    <div className="flex items-center justify-between rounded-lg border border-gray-200 p-3 dark:border-gray-800">
+                      <div>
+                        <Label className="font-medium">US Stock</Label>
+                        <p className="text-sm text-gray-500 dark:text-gray-400">
+                          Toggle off for international stocks
+                        </p>
+                      </div>
+                      <Switch
+                        checked={formData.isUSStock ?? true}
+                        onCheckedChange={(checked) =>
+                          handleUpdateForm({ isUSStock: checked })
+                        }
+                      />
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    {/* Predefined Ticker Selector */}
+                    <FormField label="Ticker Symbol" required>
+                      <TickerSelector
+                        value={formData.ticker || ""}
+                        onValueChange={(value) =>
+                          handleUpdateForm({ ticker: value })
+                        }
+                        placeholder="Select or enter ticker"
+                      />
+                    </FormField>
+
+                    <FormField label="Number of Shares" required>
+                      <Input
+                        name="shares"
+                        type="number"
+                        step="0.0001"
+                        value={formData.shares || ""}
+                        onChange={(e) =>
+                          handleUpdateForm({
+                            shares: parseFloat(e.target.value),
+                          })
+                        }
+                        placeholder="e.g., 100, 25.5"
+                      />
+                    </FormField>
+                  </>
+                )}
               </TabsContent>
 
               <TabsContent value="cash" className="mt-4 space-y-4">

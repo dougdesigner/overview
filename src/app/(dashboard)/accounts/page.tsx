@@ -434,11 +434,17 @@ export default function AccountsPage() {
 
       {/* Account Flow Chart - only show when there are holdings */}
       {accounts.length > 0 && holdings.length > 0 && (
-        <Card className="mt-6">
+        <div className="pt-6" id="accounts-section">
+        <Card data-chart="account-flow">
           <div className="flex flex-col gap-4">
             {/* Title and Controls Row */}
             <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-              <p className="text-base font-medium text-gray-900 dark:text-gray-50">
+              <p
+                className="cursor-pointer text-base font-medium text-gray-900 transition-colors hover:text-blue-600 dark:text-gray-50 dark:hover:text-blue-400"
+                onClick={() => {
+                  document.getElementById('accounts-section')?.scrollIntoView({ behavior: 'smooth' })
+                }}
+              >
                 Account flow
               </p>
               <div className="flex flex-wrap items-center gap-2">
@@ -805,6 +811,7 @@ export default function AccountsPage() {
             </div>
           </div>
         </Card>
+        </div>
       )}
 
       {/* Account Cards */}

@@ -32,6 +32,18 @@ const formatPercentage = (value: number) => {
 // Cache for company domains to avoid repeated API calls
 const domainCache = new Map<string, string>()
 
+// Helper function for special ticker logos (Google, Apple need padding)
+const getLogoStyle = (ticker: string) => {
+  const upperTicker = ticker?.toUpperCase() || ""
+  if (upperTicker === "GOOGL" || upperTicker === "GOOG") {
+    return { background: "#f2f3fa", needsPadding: true }
+  }
+  if (upperTicker === "AAPL") {
+    return { background: "#ebebeb", needsPadding: true }
+  }
+  return { background: "#f1f3fa", needsPadding: false }
+}
+
 // Component for rendering ticker with logo
 function TickerCell({
   ticker,
@@ -118,15 +130,34 @@ function TickerCell({
           BH
         </div>
       ) : logoUrl && !logoError ? (
-        <Image
-          src={logoUrl}
-          alt={ticker}
-          width={48}
-          height={48}
-          className="size-6 rounded-full object-cover"
-          style={{ backgroundColor: "#f1f3fa" }}
-          onError={() => setLogoError(true)}
-        />
+        (() => {
+          const logoStyle = getLogoStyle(ticker)
+          return logoStyle.needsPadding ? (
+            <div
+              className="flex size-6 shrink-0 items-center justify-center rounded-full"
+              style={{ backgroundColor: logoStyle.background }}
+            >
+              <Image
+                src={logoUrl}
+                alt={ticker}
+                width={48}
+                height={48}
+                className="size-[18px] rounded-full object-contain"
+                onError={() => setLogoError(true)}
+              />
+            </div>
+          ) : (
+            <Image
+              src={logoUrl}
+              alt={ticker}
+              width={48}
+              height={48}
+              className="size-6 rounded-full object-cover"
+              style={{ backgroundColor: logoStyle.background }}
+              onError={() => setLogoError(true)}
+            />
+          )
+        })()
       ) : (
         <div
           className={cx("h-6 w-6 shrink-0 rounded-full", color)}

@@ -459,8 +459,15 @@ export class EnhancedExposureCalculator {
       }
       // It's a direct stock holding
       else if (holding.type === "stock") {
-        const stockData = this.assetClasses.stocks[holding.ticker as keyof typeof assetClassifications.stocks]
-        const assetClass = stockData?.class || "us_equity" // Default to US equity
+        let assetClass: string
+        // Check if manual entry with explicit US/non-US flag
+        if (holding.isManualEntry && holding.isUSStock !== undefined) {
+          assetClass = holding.isUSStock ? "us_equity" : "intl_equity"
+        } else {
+          // Use existing classification lookup
+          const stockData = this.assetClasses.stocks[holding.ticker as keyof typeof assetClassifications.stocks]
+          assetClass = stockData?.class || "us_equity" // Default to US equity
+        }
         const current = assetClassMap.get(assetClass) || 0
         assetClassMap.set(assetClass, current + holding.marketValue)
       }

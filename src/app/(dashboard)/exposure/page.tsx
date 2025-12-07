@@ -27,8 +27,16 @@ export default function ExposurePage() {
   // Get exposure calculations
   const {
     exposures,
+    totalValue,
     error,
   } = useExposureCalculations()
+
+  // Calculate stocks-only total for "pct-stocks" display mode
+  const stocksOnlyValue = useMemo(() => {
+    return exposures
+      .filter((exp) => !exp.isETFBreakdown && exp.totalValue > 0)
+      .reduce((sum, exp) => sum + exp.totalValue, 0)
+  }, [exposures])
 
   // Convert holdings to the format expected by ExposureTable
   const portfolioHoldings = useMemo(() => {
@@ -61,14 +69,14 @@ export default function ExposurePage() {
   const [holdingsFilter, setHoldingsFilter] = useState<HoldingsFilter>("all")
 
   // Combine GOOG/GOOGL toggle state
-  const [combineGoogleShares, setCombineGoogleShares] = useState(false)
+  const [combineGoogleShares, setCombineGoogleShares] = useState(true)
 
   // Show other assets (cash + funds) toggle state
   const [showOtherAssets, setShowOtherAssets] = useState(false)
 
   // Display value state (moved from chart)
   const [displayValue, setDisplayValue] =
-    useState<ExposureDisplayValue>("pct-portfolio")
+    useState<ExposureDisplayValue>("pct-stocks")
 
   // Reset key to force child components to remount and reset their local state
   const [resetKey, setResetKey] = useState(0)
@@ -137,16 +145,16 @@ export default function ExposurePage() {
   const hasFilterChanges =
     selectedAccount !== "all" ||
     holdingsFilter !== "all" ||
-    displayValue !== "pct-portfolio" ||
-    combineGoogleShares !== false ||
+    displayValue !== "pct-stocks" ||
+    combineGoogleShares !== true ||
     showOtherAssets !== false
 
   // Reset all filters to defaults
   const resetFilters = () => {
     setSelectedAccount("all")
     setHoldingsFilter("all")
-    setDisplayValue("pct-portfolio")
-    setCombineGoogleShares(false)
+    setDisplayValue("pct-stocks")
+    setCombineGoogleShares(true)
     setShowOtherAssets(false)
     setResetKey((k) => k + 1) // Force child remount to reset chart settings
   }
@@ -212,8 +220,15 @@ export default function ExposurePage() {
         >
           <div className="flex items-center justify-between rounded-lg border border-gray-200 bg-white/95 px-4 py-3 shadow-lg backdrop-blur-sm dark:border-gray-800 dark:bg-gray-950/95">
             <div className="text-left">
-              <div className="text-base font-medium text-gray-900 dark:text-gray-50">
+              <div className="flex items-center gap-2 text-base font-medium text-gray-900 dark:text-gray-50">
                 {formatCurrency(tableFilteredValue)}
+                {(displayValue === "pct-stocks" ? stocksOnlyValue : totalValue) > 0 && (
+                  <span className="rounded-md bg-gray-100 px-1.5 py-0.5 text-sm font-medium tabular-nums text-gray-700 dark:bg-gray-800 dark:text-gray-300">
+                    {displayValue === "pct-stocks"
+                      ? ((tableFilteredValue / stocksOnlyValue) * 100).toFixed(1)
+                      : ((tableFilteredValue / totalValue) * 100).toFixed(1)}%
+                  </span>
+                )}
               </div>
               <div className="text-sm text-gray-500 dark:text-gray-400">
                 {tableFilteredCount.toLocaleString()}{" "}
@@ -274,8 +289,13 @@ export default function ExposurePage() {
       {accounts.length > 0 && holdings.length > 0 && (
         <div ref={filterRef} className="flex items-center justify-between">
           <div className="text-left">
-            <div className="text-base font-medium text-gray-900 dark:text-gray-50">
+            <div className="flex items-center gap-2 text-base font-medium text-gray-900 dark:text-gray-50">
               {formatCurrency(tableFilteredValue)}
+              {totalValue > 0 && (
+                <span className="rounded-md bg-gray-100 px-1.5 py-0.5 text-sm font-medium tabular-nums text-gray-700 dark:bg-gray-800 dark:text-gray-300">
+                  {((tableFilteredValue / totalValue) * 100).toFixed(1)}%
+                </span>
+              )}
             </div>
             <div className="text-sm font-normal text-gray-500 dark:text-gray-400">
               {tableFilteredCount.toLocaleString()}{" "}
@@ -332,7 +352,7 @@ export default function ExposurePage() {
       )}
 
       {/* Exposure Table */}
-      <div className="mt-6">
+      <div className="pt-6" id="exposure-section">
         {holdingsLoading ? null : portfolioHoldings.length === 0 ? ( // Loading state is already handled above
           // Empty state
           <div className="py-12 text-center">

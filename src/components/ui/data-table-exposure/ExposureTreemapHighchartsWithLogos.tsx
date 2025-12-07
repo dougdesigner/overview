@@ -444,6 +444,18 @@ export function ExposureTreemapHighchartsWithLogos({
     }
   }
 
+  // Helper function to get logo background and scale for special tickers (Google, Apple)
+  const getLogoStyle = (ticker: string) => {
+    const upperTicker = ticker?.toUpperCase() || ""
+    if (upperTicker === "GOOGL" || upperTicker === "GOOG") {
+      return { background: "#f2f3fa", scale: "75%" }
+    }
+    if (upperTicker === "AAPL") {
+      return { background: "#ebebeb", scale: "75%" }
+    }
+    return { background: "#f1f3fa", scale: "100%" }
+  }
+
   // Helper function to render cell content based on display settings
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const renderCellContent = (
@@ -472,11 +484,12 @@ export function ExposureTreemapHighchartsWithLogos({
             </div>
           </div>`
         } else if (logoUrl) {
+          const logoStyle = getLogoStyle(ticker)
           return `<div style="text-align: center; display: flex; align-items: center; justify-content: center; height: 100%; overflow: hidden;">
-            <div style="width: ${logoSize}px; height: ${logoSize}px; border-radius: 50%; background: #f1f3fa; overflow: hidden; display: flex; align-items: center; justify-content: center;">
+            <div style="width: ${logoSize}px; height: ${logoSize}px; border-radius: 50%; background: ${logoStyle.background}; overflow: hidden; display: flex; align-items: center; justify-content: center;">
               <img src="${logoUrl}"
                    alt="${ticker}"
-                   style="width: 100%; height: 100%; object-fit: contain;"
+                   style="width: ${logoStyle.scale}; height: ${logoStyle.scale}; object-fit: contain;"
                    onerror="this.style.display='none'"
               />
             </div>
@@ -498,10 +511,11 @@ export function ExposureTreemapHighchartsWithLogos({
             <span style="font-size: ${Math.round(logoSize * 0.5)}px; font-weight: 700; color: ${isDark ? "#9ca3af" : "#6b7280"};">$</span>
           </div>`
         }
-        return `<div style="width: ${logoSize}px; height: ${logoSize}px; border-radius: 50%; background: #f1f3fa; overflow: hidden; display: flex; align-items: center; justify-content: center;${withMargin ? " margin-bottom: 2px;" : ""}">
+        const logoStyle = getLogoStyle(ticker)
+        return `<div style="width: ${logoSize}px; height: ${logoSize}px; border-radius: 50%; background: ${logoStyle.background}; overflow: hidden; display: flex; align-items: center; justify-content: center;${withMargin ? " margin-bottom: 2px;" : ""}">
           <img src="${logoUrl}"
                alt="${ticker}"
-               style="width: 100%; height: 100%; object-fit: contain;"
+               style="width: ${logoStyle.scale}; height: ${logoStyle.scale}; object-fit: contain;"
                onerror="this.style.display='none'"
           />
         </div>`
@@ -544,10 +558,11 @@ export function ExposureTreemapHighchartsWithLogos({
             <span style="font-size: ${Math.round(logoSize * 0.5)}px; font-weight: 700; color: ${isDark ? "#9ca3af" : "#6b7280"};">$</span>
           </div>`
         }
-        return `<div style="width: ${logoSize}px; height: ${logoSize}px; border-radius: 50%; background: #f1f3fa; overflow: hidden; display: flex; align-items: center; justify-content: center; margin-bottom: 2px;">
+        const logoStyle = getLogoStyle(ticker)
+        return `<div style="width: ${logoSize}px; height: ${logoSize}px; border-radius: 50%; background: ${logoStyle.background}; overflow: hidden; display: flex; align-items: center; justify-content: center; margin-bottom: 2px;">
           <img src="${logoUrl}"
                alt="${ticker}"
-               style="width: 100%; height: 100%; object-fit: contain;"
+               style="width: ${logoStyle.scale}; height: ${logoStyle.scale}; object-fit: contain;"
                onerror="this.style.display='none'"
           />
         </div>`
@@ -1339,9 +1354,10 @@ export function ExposureTreemapHighchartsWithLogos({
                   </div>
                 </div>`)
               } else if (logoUrl) {
+                const tooltipLogoStyle = getLogoStyle(ticker)
                 parts.push(`<div style="display:flex;justify-content:center;margin-bottom:2px;">
-                  <div style="width:24px;height:24px;border-radius:50%;background:${isDark ? "#1f2937" : "#f3f4f6"};display:flex;align-items:center;justify-content:center;overflow:hidden;">
-                    <img src="${logoUrl}" alt="${ticker}" style="width:100%;height:100%;object-fit:contain;" />
+                  <div style="width:24px;height:24px;border-radius:50%;background:${tooltipLogoStyle.background};display:flex;align-items:center;justify-content:center;overflow:hidden;">
+                    <img src="${logoUrl}" alt="${ticker}" style="width:${tooltipLogoStyle.scale};height:${tooltipLogoStyle.scale};object-fit:contain;" />
                   </div>
                 </div>`)
               }
@@ -1558,9 +1574,14 @@ export function ExposureTreemapHighchartsWithLogos({
   }
 
   return (
-    <Card className="pb-4 pt-6">
+    <Card className="pb-4 pt-6" data-chart="exposure-map">
       <div className="flex items-center justify-between">
-        <h3 className="text-base font-medium text-gray-900 dark:text-gray-50">
+        <h3
+          className="cursor-pointer text-base font-medium text-gray-900 transition-colors hover:text-blue-600 dark:text-gray-50 dark:hover:text-blue-400"
+          onClick={() => {
+            document.getElementById('exposure-section')?.scrollIntoView({ behavior: 'smooth' })
+          }}
+        >
           Exposure map
         </h3>
 

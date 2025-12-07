@@ -85,8 +85,8 @@ export function DashboardSettingsDropdown({
   const hasChanges =
     (selectedAccount && selectedAccount !== "all") ||
     holdingsFilter !== "all" ||
-    displayValue !== "pct-portfolio" ||
-    combineGoogleShares !== false ||
+    displayValue !== "pct-stocks" ||
+    combineGoogleShares !== true ||
     showOtherAssets !== false
 
   // Get selected account name for display
