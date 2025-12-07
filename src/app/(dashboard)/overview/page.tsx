@@ -210,7 +210,7 @@ export default function OverviewPage() {
           </dl>
           {/* <DataTable data={tickets} columns={columns} /> */}
 
-          <dl className="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-4 lg:grid-cols-4">
+          <dl className="mt-6 grid grid-cols-2 gap-6 sm:grid-cols-4 lg:grid-cols-4">
             {sortedAssetClasses.map((ac) => (
               <KPICard
                 key={ac.name}
