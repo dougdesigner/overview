@@ -655,16 +655,16 @@ export function usePortfolioStore() {
             assetBreakdown.forEach(item => {
               switch (item.class) {
                 case "us_equity":
-                  assetAllocation.usStocks = item.percentage
+                  assetAllocation.usStocks += item.percentage
                   break
                 case "intl_equity":
-                  assetAllocation.nonUsStocks = item.percentage
+                  assetAllocation.nonUsStocks += item.percentage
                   break
                 case "fixed_income":
-                  assetAllocation.fixedIncome = item.percentage
+                  assetAllocation.fixedIncome += item.percentage
                   break
                 case "cash":
-                  assetAllocation.cash = item.percentage
+                  assetAllocation.cash += item.percentage
                   break
                 // Handle other asset classes by defaulting to US equity
                 case "real_estate":
