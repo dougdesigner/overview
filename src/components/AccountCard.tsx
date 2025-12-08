@@ -9,6 +9,11 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/DropdownMenu"
+import {
+  getInstitutionBrandColor,
+  getInstitutionInitials,
+  institutionLabels,
+} from "@/lib/institutionUtils"
 import { getInstitutionLogoUrl } from "@/lib/logoUtils"
 import { cx } from "@/lib/utils"
 import { RiDeleteBinLine, RiEditLine, RiMore2Fill } from "@remixicon/react"
@@ -24,12 +29,7 @@ interface AccountCardProps {
     | "Personal Investment"
     | "Checking"
     | "Savings"
-  institution:
-    | "Fidelity Investments"
-    | "Chase"
-    | "American Express"
-    | "Wealthfront"
-    | "Vanguard"
+  institution: string
 
   // Financial data
   totalValue: number
@@ -70,43 +70,9 @@ export default function AccountCard({
   // Default name to account type if no custom name provided
   const displayName = name || accountType
 
-  // Get logo URL
+  // Get logo URL and display label from institution key
   const logoUrl = getInstitutionLogoUrl(institution)
-
-  // Get institution brand color
-  const getInstitutionBrandColor = (institution: string): string => {
-    const brandColors: Record<string, string> = {
-      "Fidelity Investments": "bg-emerald-600",
-      Chase: "bg-blue-600",
-      Vanguard: "bg-red-600",
-      Wealthfront: "bg-purple-600",
-      "American Express": "bg-blue-700",
-      "Charles Schwab": "bg-orange-600",
-      "E*TRADE": "bg-purple-700",
-      "TD Ameritrade": "bg-green-600",
-      "Merrill Edge": "bg-blue-600",
-      Betterment: "bg-blue-500",
-      Robinhood: "bg-green-500",
-      "Bank of America": "bg-red-700",
-      "Wells Fargo": "bg-red-600",
-      Citibank: "bg-blue-600",
-      Other: "bg-gray-500",
-    }
-    return brandColors[institution] || "bg-gray-500"
-  }
-
-  // Get institution initials for logo
-  const getInstitutionInitials = (institution: string): string => {
-    const words = institution.split(" ")
-    if (words.length === 1) {
-      return words[0].substring(0, 2).toUpperCase()
-    }
-    return words
-      .map((word) => word[0])
-      .join("")
-      .substring(0, 2)
-      .toUpperCase()
-  }
+  const institutionLabel = institutionLabels[institution] || institution
 
   // Format currency
   const formatCurrency = (value: number) => {
@@ -149,7 +115,7 @@ export default function AccountCard({
         {logoUrl && !logoError ? (
           <Image
             src={logoUrl}
-            alt={institution}
+            alt={institutionLabel}
             width={80}
             height={80}
             className="size-9 rounded-full bg-white object-cover"
@@ -159,7 +125,7 @@ export default function AccountCard({
           <div
             className={`flex size-9 shrink-0 items-center justify-center rounded-full text-sm font-semibold text-white ${getInstitutionBrandColor(institution)}`}
           >
-            {getInstitutionInitials(institution)}
+            {getInstitutionInitials(institutionLabel)}
           </div>
         )}
 
@@ -169,7 +135,7 @@ export default function AccountCard({
             {displayName}
           </h3>
           <p className="text-sm font-normal text-gray-500 dark:text-gray-400">
-            {institution}
+            {institutionLabel}
           </p>
         </div>
 

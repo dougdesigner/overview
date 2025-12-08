@@ -873,14 +873,7 @@ export default function AccountsPage() {
                   | "Checking"
                   | "Savings"
               }
-              institution={
-                account.institutionLabel as
-                  | "Fidelity Investments"
-                  | "Chase"
-                  | "American Express"
-                  | "Wealthfront"
-                  | "Vanguard"
-              }
+              institution={account.institution}
               totalValue={account.totalValue}
               holdingsCount={account.holdingsCount}
               assetAllocation={account.assetAllocation}
