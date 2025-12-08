@@ -21,7 +21,8 @@ export function InstitutionLogo({
 }: InstitutionLogoProps) {
   const [logoError, setLogoError] = React.useState(false)
   const institutionLabel = institutionLabels[institution] || institution
-  const logoUrl = getInstitutionLogoUrl(institutionLabel)
+  // Pass the institution key (not label) to get local logo path
+  const logoUrl = getInstitutionLogoUrl(institution)
 
   if (!logoUrl || logoError) {
     // Fallback to initials

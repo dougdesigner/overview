@@ -18,7 +18,7 @@ import {
 } from "@/components/Select"
 import { getInstitutionLogoUrl } from "@/lib/logoUtils"
 import Image from "next/image"
-import React, { useState } from "react"
+import React, { useCallback, useState } from "react"
 import { Input } from "../Input"
 import { Label } from "../Label"
 
@@ -232,6 +232,23 @@ export function AccountDrawer({
     accountName: "",
   })
 
+  // Institution search state
+  const [institutionSearch, setInstitutionSearch] = useState("")
+  const [institutionSelectOpen, setInstitutionSelectOpen] = useState(false)
+
+  // Filter institutions by search
+  const filteredInstitutions = institutions.filter((inst) =>
+    inst.label.toLowerCase().includes(institutionSearch.toLowerCase())
+  )
+
+  // Handle institution select open/close
+  const handleInstitutionOpenChange = useCallback((open: boolean) => {
+    setInstitutionSelectOpen(open)
+    if (!open) {
+      setInstitutionSearch("") // Clear search when closing
+    }
+  }, [])
+
 
   // Reset form when drawer opens/closes with new initial data
   React.useEffect(() => {
@@ -291,9 +308,12 @@ export function AccountDrawer({
           <FormField label="Institution" required>
             <Select
               value={formData.institution}
-              onValueChange={(value) =>
+              onValueChange={(value) => {
                 handleUpdateForm({ institution: value })
-              }
+                setInstitutionSearch("") // Clear search after selection
+              }}
+              open={institutionSelectOpen}
+              onOpenChange={handleInstitutionOpenChange}
             >
               <SelectTrigger>
                 <SelectValue placeholder="Select Institution">
@@ -305,11 +325,28 @@ export function AccountDrawer({
                 </SelectValue>
               </SelectTrigger>
               <SelectContent>
-                {institutions.map((inst) => (
-                  <SelectItem key={inst.value} value={inst.value}>
-                    <InstitutionItem institution={inst} />
-                  </SelectItem>
-                ))}
+                {/* Search input */}
+                <div className="sticky top-0 z-10 border-b border-gray-200 bg-white p-2 dark:border-gray-800 dark:bg-gray-950">
+                  <Input
+                    placeholder="Search institutions..."
+                    value={institutionSearch}
+                    onChange={(e) => setInstitutionSearch(e.target.value)}
+                    onKeyDown={(e) => e.stopPropagation()} // Prevent Radix from intercepting
+                    className="h-8"
+                    autoFocus
+                  />
+                </div>
+                {filteredInstitutions.length === 0 ? (
+                  <div className="px-2 py-4 text-center text-sm text-gray-500 dark:text-gray-400">
+                    No institutions found
+                  </div>
+                ) : (
+                  filteredInstitutions.map((inst) => (
+                    <SelectItem key={inst.value} value={inst.value}>
+                      <InstitutionItem institution={inst} />
+                    </SelectItem>
+                  ))
+                )}
               </SelectContent>
             </Select>
           </FormField>

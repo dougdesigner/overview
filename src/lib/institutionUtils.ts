@@ -3,6 +3,7 @@
 // Get institution brand color
 export const getInstitutionBrandColor = (institution: string): string => {
   const brandColors: Record<string, string> = {
+    ally: "bg-purple-600",
     fidelity: "bg-emerald-600",
     chase: "bg-blue-600",
     vanguard: "bg-red-600",
@@ -18,6 +19,8 @@ export const getInstitutionBrandColor = (institution: string): string => {
     "wells-fargo": "bg-red-600",
     citi: "bg-blue-600",
     carta: "bg-blue-600",
+    pnc: "bg-orange-600",
+    "capital-one": "bg-red-600",
   }
   return brandColors[institution] || "bg-gray-500"
 }
@@ -35,22 +38,25 @@ export const getInstitutionInitials = (institutionLabel: string): string => {
     .toUpperCase()
 }
 
-// Map institutions to labels (matching the names in logoUtils)
+// Map institutions to labels
 export const institutionLabels: Record<string, string> = {
-  fidelity: "Fidelity Investments",
-  vanguard: "Vanguard",
-  schwab: "Charles Schwab",
-  etrade: "E*TRADE",
-  "td-ameritrade": "TD Ameritrade",
-  merrill: "Merrill Edge",
-  wealthfront: "Wealthfront",
-  betterment: "Betterment",
-  robinhood: "Robinhood",
-  chase: "Chase",
-  bofa: "Bank of America",
-  "wells-fargo": "Wells Fargo",
-  citi: "Citibank",
+  ally: "Ally Bank",
   amex: "American Express",
+  betterment: "Betterment",
+  bofa: "Bank of America",
+  "capital-one": "Capital One",
   carta: "Carta",
+  chase: "Chase",
+  citi: "Citibank",
+  etrade: "E*TRADE",
+  fidelity: "Fidelity Investments",
+  merrill: "Merrill Edge",
+  pnc: "PNC Bank",
+  robinhood: "Robinhood",
+  schwab: "Charles Schwab",
+  "td-ameritrade": "TD Ameritrade",
+  vanguard: "Vanguard",
+  wealthfront: "Wealthfront",
+  "wells-fargo": "Wells Fargo",
   other: "Other",
 }

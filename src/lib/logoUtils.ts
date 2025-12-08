@@ -387,42 +387,36 @@ const mutualFundProviderDomains: Record<string, string> = {
   TRRBX: "troweprice.com", // Retirement 2040
 }
 
-// Map institution names to their domain names for logo.dev API
-const institutionDomains: Record<string, string | null> = {
-  "Ally Bank": "ally.com",
-  "American Express": "americanexpress.com",
-  "Bank of America": "bankofamerica.com",
-  Betterment: "betterment.com",
-  "Capital One": "capitalone.com",
-  Carta: "carta.com",
-  "Charles Schwab": "schwab.com",
-  Chase: "chase.com",
-  Citibank: "citi.com",
-  "E*TRADE": "etrade.com",
-  "Fidelity Investments": "fidelity.com",
-  "Merrill Edge": "ml.com",
-  "PNC Bank": "pnc.com",
-  Robinhood: "robinhood.com",
-  "TD Ameritrade": "tdameritrade.com",
-  Vanguard: "vanguard.com",
-  Wealthfront: "wealthfront.com",
-  "Wells Fargo": "wellsfargo.com",
-  Other: null, // No logo for "Other"
+// Map institution keys to local logo paths (stored in /public/logos/institutions/)
+const institutionLogoPaths: Record<string, string | null> = {
+  ally: "/logos/institutions/ally.png",
+  amex: "/logos/institutions/amex.png",
+  bofa: "/logos/institutions/bofa.png",
+  betterment: "/logos/institutions/betterment.png",
+  "capital-one": "/logos/institutions/capital-one.png",
+  carta: "/logos/institutions/carta.png",
+  schwab: "/logos/institutions/schwab.png",
+  chase: "/logos/institutions/chase.png",
+  citi: "/logos/institutions/citi.png",
+  etrade: "/logos/institutions/etrade.png",
+  fidelity: "/logos/institutions/fidelity.png",
+  merrill: "/logos/institutions/merrill.png",
+  pnc: "/logos/institutions/pnc.png",
+  robinhood: "/logos/institutions/robinhood.png",
+  "td-ameritrade": "/logos/institutions/td-ameritrade.png",
+  vanguard: "/logos/institutions/vanguard.png",
+  wealthfront: "/logos/institutions/wealthfront.png",
+  "wells-fargo": "/logos/institutions/wells-fargo.png",
+  other: null, // No logo for "Other"
 }
 
 /**
- * Get the logo URL for an institution using the logo.dev API
- * @param institution - The name of the institution
- * @returns The logo URL or null if not available
+ * Get the logo URL for an institution (uses local assets)
+ * @param institutionKey - The institution key (e.g., "fidelity", "vanguard")
+ * @returns The local logo path or null if not available
  */
-export function getInstitutionLogoUrl(institution: string): string | null {
-  const domain = institutionDomains[institution]
-  const token = process.env.NEXT_PUBLIC_LOGO_DEV_TOKEN
-
-  if (!domain || !token) return null
-
-  // Logo.dev API with optimized parameters for high resolution
-  return `https://img.logo.dev/${domain}?token=${token}&retina=true&fallback=monogram&format=webp&size=400`
+export function getInstitutionLogoUrl(institutionKey: string): string | null {
+  return institutionLogoPaths[institutionKey] || null
 }
 
 /**
