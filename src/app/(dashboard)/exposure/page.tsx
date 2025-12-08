@@ -39,6 +39,9 @@ export default function ExposurePage() {
       lastPrice: holding.lastPrice,
       marketValue: holding.marketValue,
       type: holding.type,
+      isManualEntry: holding.isManualEntry,
+      sector: holding.sector,
+      industry: holding.industry,
     }))
   }, [holdings])
 

@@ -124,7 +124,7 @@ function HoldingsContent() {
     if (editingHolding) {
       // Update existing holding
       if (holding.isManualEntry) {
-        // Manual entry update
+        // Manual entry update - derive domain from company name
         const domains = holding.companyName
           ? extractDomainsFromCompanyName(holding.companyName)
           : []
@@ -139,6 +139,8 @@ function HoldingsContent() {
           isUSStock: holding.isUSStock ?? true,
           isManualEntry: true,
           domain: domains[0],
+          sector: holding.sector || undefined,
+          industry: holding.industry || undefined,
         })
       } else {
         // Predefined ticker update
@@ -164,6 +166,8 @@ function HoldingsContent() {
       let isUSStock: boolean | undefined = undefined
       let isManualEntry: boolean | undefined = undefined
       let domain: string | undefined = undefined
+      let sector: string | undefined = undefined
+      let industry: string | undefined = undefined
 
       if (holding.holdingType === "cash") {
         type = "cash"
@@ -175,8 +179,10 @@ function HoldingsContent() {
         lastPrice = holding.pricePerShare || 100
         isUSStock = holding.isUSStock ?? true
         isManualEntry = true
+        sector = holding.sector || undefined
+        industry = holding.industry || undefined
 
-        // Extract domain from company name for logo lookup
+        // Derive domain from company name for logo lookup
         if (holding.companyName) {
           const domains = extractDomainsFromCompanyName(holding.companyName)
           domain = domains[0]
@@ -187,7 +193,7 @@ function HoldingsContent() {
         }
 
         console.log(
-          `Manual entry: ${holding.ticker} - ${name} at $${lastPrice} (${isUSStock ? "US" : "Non-US"})`,
+          `Manual entry: ${holding.ticker} - ${name} at $${lastPrice} (${isUSStock ? "US" : "Non-US"}, sector: ${sector || "N/A"})`,
         )
       } else if (holding.ticker) {
         // Predefined ticker - use existing logic
@@ -269,6 +275,8 @@ function HoldingsContent() {
         isUSStock: isUSStock,
         isManualEntry: isManualEntry,
         domain: domain,
+        sector: sector,
+        industry: industry,
       })
     }
     setEditingHolding(null)
@@ -302,6 +310,8 @@ function HoldingsContent() {
         companyName: holding.isManualEntry ? holding.name : undefined,
         pricePerShare: holding.isManualEntry ? holding.lastPrice : undefined,
         isUSStock: holding.isUSStock ?? true,
+        sector: holding.sector,
+        industry: holding.industry,
       }
     }
   }

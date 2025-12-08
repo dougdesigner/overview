@@ -22,6 +22,8 @@ export interface Holding {
   isUSStock?: boolean // True for US stocks, false for international
   isManualEntry?: boolean // True if manually entered (not from predefined list)
   domain?: string // Company domain for logo lookup
+  sector?: string // Company sector (e.g., "Technology", "Healthcare")
+  industry?: string // Company industry (e.g., "Software", "Semiconductors")
 }
 
 export interface Account {

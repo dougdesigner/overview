@@ -270,17 +270,22 @@ export class EnhancedExposureCalculator {
         // Aggregate multiple holdings of the same stock
         existing.directValue += holding.marketValue
         existing.totalValue = existing.directValue + existing.etfValue
-        // Update name if we have a better one from company overview
-        if (overview?.name && !existing.name) {
+        // Update name if we have a better one from company overview (but NOT for manual entries)
+        if (overview?.name && !existing.name && !holding.isManualEntry) {
           existing.name = overview.name
         }
       } else {
+        // For manual entries, always use the user-entered name instead of API response
+        const displayName = holding.isManualEntry ? holding.name : (overview?.name || holding.name)
+        // For manual entries, prefer holding's sector/industry if provided
+        const sector = holding.isManualEntry && holding.sector ? holding.sector : overview?.sector
+        const industry = holding.isManualEntry && holding.industry ? holding.industry : overview?.industry
         exposureMap.set(ticker, {
           id: `stock-${ticker}`,
           ticker,
-          name: overview?.name || holding.name,
-          sector: overview?.sector,
-          industry: overview?.industry,
+          name: displayName,
+          sector: sector,
+          industry: industry,
           directShares: 0, // Not calculating shares anymore
           etfExposure: 0,
           totalShares: 0,

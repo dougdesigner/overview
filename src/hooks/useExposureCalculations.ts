@@ -34,6 +34,9 @@ export function useExposureCalculations() {
       lastPrice: holding.lastPrice,
       marketValue: holding.marketValue,
       type: holding.type as "stock" | "fund" | "cash",
+      isManualEntry: holding.isManualEntry,
+      sector: holding.sector,
+      industry: holding.industry,
     }))
   }, [holdings])
 

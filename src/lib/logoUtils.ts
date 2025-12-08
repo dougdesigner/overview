@@ -1,5 +1,10 @@
 // Logo utility functions for fetching institution and ticker logos
 
+// Manual company name to domain overrides for non-.com domains
+const companyNameDomainOverrides: Record<string, string> = {
+  "Tulip Interfaces": "tulip.co",
+}
+
 /**
  * Extract a potential domain from a company name
  * Tries multiple strategies to find a working domain
@@ -8,6 +13,12 @@
  */
 export function extractDomainsFromCompanyName(companyName: string): string[] {
   if (!companyName) return []
+
+  // Check for manual override first
+  const override = companyNameDomainOverrides[companyName]
+  if (override) {
+    return [override]
+  }
 
   const domains: string[] = []
 
@@ -87,6 +98,9 @@ export function extractDomainsFromCompanyName(companyName: string): string[] {
 // Stock ticker overrides for better logo matching
 // These take precedence over Alpha Vantage's OfficialSite to avoid API limits
 const stockDomainOverrides: Record<string, string> = {
+  // Manual entry overrides (private companies)
+  TULIP: "tulip.co",
+
   // Tech Giants
   AAPL: "apple.com.cn",
   MSFT: "office.com",
@@ -519,4 +533,22 @@ export async function getCachedLogoUrls(
     })
     return fallbackResults
   }
+}
+
+/**
+ * Get logo URL from a domain using logo.dev API
+ * Useful for manual entries where we have a company domain
+ * @param domain - Company domain (e.g., "tulip.co", "https://www.tulip.co")
+ * @returns Logo URL or null if no token configured
+ */
+export function getLogoUrlFromDomain(domain: string): string | null {
+  const token = process.env.NEXT_PUBLIC_LOGO_DEV_TOKEN
+  if (!domain || !token) return null
+
+  // Clean domain (remove protocol, www, trailing slashes)
+  const cleanDomain = domain
+    .replace(/^https?:\/\/(www\.)?/, "")
+    .replace(/\/$/, "")
+
+  return `https://img.logo.dev/${cleanDomain}?token=${token}&retina=true&fallback=monogram&format=webp&size=400`
 }

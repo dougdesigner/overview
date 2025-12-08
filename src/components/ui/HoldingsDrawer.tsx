@@ -11,11 +11,33 @@ import {
 } from "@/components/Drawer"
 import { Input } from "@/components/Input"
 import { Label } from "@/components/Label"
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/Select"
 import { Switch } from "@/components/Switch"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/Tabs"
 import { AccountSelector } from "@/components/ui/AccountSelector"
 import { TickerSelector } from "@/components/ui/TickerSelector"
 import React from "react"
+
+// Standard sector options based on common stock classifications
+const sectorOptions = [
+  "Technology",
+  "Financial Services",
+  "Healthcare",
+  "Consumer Cyclical",
+  "Consumer Defensive",
+  "Communication Services",
+  "Industrials",
+  "Energy",
+  "Utilities",
+  "Real Estate",
+  "Basic Materials",
+]
 
 export interface HoldingFormData {
   id?: string
@@ -32,6 +54,8 @@ export interface HoldingFormData {
   companyName?: string // For logo lookup
   pricePerShare?: number // Required for manual entry
   isUSStock?: boolean // Default: true
+  sector?: string // Optional sector classification
+  industry?: string // Optional industry classification
 }
 
 interface HoldingsDrawerProps {
@@ -97,6 +121,8 @@ export function HoldingsDrawer({
     companyName: "",
     pricePerShare: undefined,
     isUSStock: true,
+    sector: "",
+    industry: "",
   })
 
   // Reset form when drawer opens/closes with new initial data
@@ -120,6 +146,8 @@ export function HoldingsDrawer({
           companyName: "",
           pricePerShare: undefined,
           isUSStock: true,
+          sector: "",
+          industry: "",
         })
       }
     }
@@ -145,6 +173,8 @@ export function HoldingsDrawer({
       companyName: "",
       pricePerShare: undefined,
       isUSStock: true,
+      sector: "",
+      industry: "",
     })
     onOpenChange(false)
   }
@@ -321,6 +351,45 @@ export function HoldingsDrawer({
                         }
                       />
                     </div>
+
+                    {/* Sector Select (optional) */}
+                    <FormField label="Sector">
+                      <Select
+                        value={formData.sector || ""}
+                        onValueChange={(value) =>
+                          handleUpdateForm({ sector: value })
+                        }
+                      >
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select a sector (optional)" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          {sectorOptions.map((sector) => (
+                            <SelectItem key={sector} value={sector}>
+                              {sector}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                      <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">
+                        Used for exposure analysis
+                      </p>
+                    </FormField>
+
+                    {/* Industry Input (optional) */}
+                    <FormField label="Industry">
+                      <Input
+                        name="industry"
+                        value={formData.industry || ""}
+                        onChange={(e) =>
+                          handleUpdateForm({ industry: e.target.value })
+                        }
+                        placeholder="e.g., Software, Semiconductors"
+                      />
+                      <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">
+                        Used for exposure analysis
+                      </p>
+                    </FormField>
                   </>
                 ) : (
                   <>
