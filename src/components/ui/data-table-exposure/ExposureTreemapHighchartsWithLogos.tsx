@@ -24,6 +24,7 @@ import {
   RiFullscreenLine,
   RiLayout4Line,
   RiPieChartLine,
+  RiResetLeftLine,
   RiSettings3Line,
 } from "@remixicon/react"
 import Highcharts from "highcharts"
@@ -73,6 +74,7 @@ interface ExposureTreemapHighchartsProps {
   dataVersion?: number
   holdingsFilter?: "all" | "mag7" | "top7" | "top10"  // View filter for legend display
   displayValue?: DisplayValue  // Display value from page-level settings
+  onChartSettingsChange?: (hasChanges: boolean) => void  // Callback when chart settings change
 }
 
 type ChartType = "treemap" | "pie"
@@ -114,6 +116,7 @@ export function ExposureTreemapHighchartsWithLogos({
   logoUrls,
   holdingsFilter = "all",
   displayValue: displayValueProp = "pct-portfolio",
+  onChartSettingsChange,
 }: ExposureTreemapHighchartsProps) {
   const [chartType, setChartType] = useState<ChartType>("treemap")
   const [sizingMode] = useState<SizingMode>("proportional")
@@ -131,6 +134,20 @@ export function ExposureTreemapHighchartsWithLogos({
     titleMode !== "symbol" ||
     showChartValue !== true ||
     groupingMode !== "sector"
+
+  // Reset all chart settings to defaults
+  const resetChartSettings = () => {
+    setShowLogo(true)
+    setTitleMode("symbol")
+    setShowChartValue(true)
+    setGroupingMode("sector")
+  }
+
+  // Notify parent when chart settings change
+  useEffect(() => {
+    onChartSettingsChange?.(hasSettingsChanges)
+  }, [hasSettingsChanges, onChartSettingsChange])
+
   // Modules are initialized at module level, so we default to true
   const [modulesLoaded] = useState(true)
   const { theme } = useTheme()
@@ -1709,6 +1726,20 @@ export function ExposureTreemapHighchartsWithLogos({
                   </DropdownMenuRadioGroup>
                 </DropdownMenuSubMenuContent>
               </DropdownMenuSubMenu>
+
+              {/* Reset Chart - shows when settings have changed */}
+              {hasSettingsChanges && (
+                <>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem
+                    onClick={resetChartSettings}
+                    className="text-gray-500 dark:text-gray-400"
+                  >
+                    <RiResetLeftLine className="mr-2 size-4" aria-hidden="true" />
+                    Reset Chart
+                  </DropdownMenuItem>
+                </>
+              )}
             </DropdownMenuContent>
           </DropdownMenu>
 

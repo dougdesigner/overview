@@ -93,6 +93,7 @@ export interface ExposureTableProps {
   showOtherAssets?: boolean
   displayValue?: ExposureDisplayValue
   onFilteredDataChange?: (count: number, totalValue: number) => void
+  onChartSettingsChange?: (hasChanges: boolean) => void
 }
 
 export interface ExposureCalculationResult {
