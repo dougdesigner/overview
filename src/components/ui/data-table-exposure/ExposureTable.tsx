@@ -671,8 +671,8 @@ export function ExposureTable({ holdings, accounts, dataVersion, selectedAccount
         />
       )}
 
-      {/* Table Controls */}
-      {data.length > 0 && (
+      {/* Table Controls - only show when there are exposures to display */}
+      {exposuresForVisualization.length > 0 && (
         <>
           <Card className="p-0">
             {/* <div className="flex flex-col gap-4 p-4 sm:flex-row sm:items-center sm:justify-between">

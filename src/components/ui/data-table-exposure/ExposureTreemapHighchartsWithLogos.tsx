@@ -23,6 +23,7 @@ import {
   RiDownloadLine,
   RiFullscreenLine,
   RiLayout4Line,
+  RiLayoutMasonryLine,
   RiPieChartLine,
   RiResetLeftLine,
   RiSettings3Line,
@@ -1798,7 +1799,7 @@ export function ExposureTreemapHighchartsWithLogos({
       {validExposures.length === 0 ? (
         // Empty state when no stocks exist
         <div className="mt-4 flex flex-col items-center justify-center" style={{ height: responsiveHeight }}>
-          <RiPieChartLine
+          <RiLayoutMasonryLine
             className="mb-3 size-12 text-gray-300 dark:text-gray-600"
             aria-hidden="true"
           />
