@@ -854,7 +854,7 @@ export function usePortfolioStore() {
     // Use functional update to get current holdings without dependency
     setHoldingsState(prevHoldings => {
       const tickersToUpdate = prevHoldings
-        .filter(h => h.ticker && h.type !== "cash")
+        .filter(h => h.ticker && h.type !== "cash" && !h.isManualEntry)
         .map(h => h.ticker!)
 
       if (tickersToUpdate.length === 0) return prevHoldings

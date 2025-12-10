@@ -161,22 +161,20 @@ export default function SankeyChartHighcharts({
 
     // Create nodes array with colors and label positioning
     const nodes = data.nodes.map((node) => {
-      // Determine if node is on the right side of the chart
-      // Portfolio Total and Asset Types are on the right side
-      const isRightSide =
-        node.id === "Portfolio Total" || assetTypes.includes(node.id)
+      // Determine node position in the chart
+      // Flow: Portfolio Total (left) → Institutions → Accounts → Asset Types (right)
+      const isLeftSide = node.id === "Portfolio Total"
 
       return {
         id: node.id,
         color: getNodeColor(node.id),
         dataLabels: {
           // Position labels outside the nodes consistently
-          // Left-side nodes: labels extend LEFT from node's left edge
-          // Right-side nodes: labels extend RIGHT from node's right edge
-          align: isRightSide ? "left" : "right",
-          // For left-side: small gap from left edge (label extends left)
-          // For right-side: small gap from right edge (label extends right)
-          x: isRightSide ? 5 : -5,
+          // Left-side (Portfolio Total): label extends LEFT from node
+          // Right-side (Asset Types): label extends RIGHT from node
+          // Middle nodes (Institutions, Accounts): label extends RIGHT from node
+          align: isLeftSide ? "right" : "left",
+          x: isLeftSide ? -5 : 5,
           inside: false,
           style: {
             color: isDark ? "#f3f4f6" : "#111827",

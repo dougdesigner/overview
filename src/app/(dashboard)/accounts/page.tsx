@@ -743,24 +743,35 @@ export default function AccountsPage() {
                       <SankeyChartHighcharts
                         data={{
                           nodes: [
-                            // Institution nodes (first level) - use display names
+                            // Portfolio Total (leftmost)
+                            { id: "Portfolio Total" },
+                            // Institution nodes (second level) - use display names
                             ...institutionDisplayNames.map((name) => ({
                               id: name,
                             })),
-                            // Account nodes (second level)
+                            // Account nodes (third level)
                             ...filteredAccounts.map((account) => ({
                               id: account.name,
                             })),
-                            // Portfolio Total (center)
-                            { id: "Portfolio Total" },
-                            // Asset type nodes (right side)
+                            // Asset type nodes (rightmost)
                             { id: "U.S. Stocks" },
                             { id: "Non-U.S. Stocks" },
                             { id: "Fixed Income" },
                             { id: "Cash" },
                           ],
                           links: [
-                            // Institutions to Accounts - use display names for source
+                            // Portfolio Total to Institutions - aggregate by institution
+                            ...sankeyInstitutions.map((inst) => {
+                              const instTotal = filteredAccounts
+                                .filter((acc) => acc.institution === inst)
+                                .reduce((sum, acc) => sum + acc.totalValue, 0)
+                              return {
+                                source: "Portfolio Total",
+                                target: institutionLabels[inst] || inst,
+                                value: instTotal,
+                              }
+                            }),
+                            // Institutions to Accounts
                             ...filteredAccounts.map((account) => ({
                               source:
                                 institutionLabels[account.institution] ||
@@ -768,60 +779,56 @@ export default function AccountsPage() {
                               target: account.name,
                               value: account.totalValue,
                             })),
-                            // Accounts to Portfolio Total
-                            ...filteredAccounts.map((account) => ({
-                              source: account.name,
-                              target: "Portfolio Total",
-                              value: account.totalValue,
-                            })),
-                            // Portfolio Total to Asset Types - calculate from account allocations
-                            {
-                              source: "Portfolio Total",
-                              target: "U.S. Stocks",
-                              value: filteredAccounts.reduce(
-                                (sum, acc) =>
-                                  sum +
-                                  (acc.totalValue *
-                                    acc.assetAllocation.usStocks) /
-                                    100,
-                                0,
-                              ),
-                            },
-                            {
-                              source: "Portfolio Total",
-                              target: "Non-U.S. Stocks",
-                              value: filteredAccounts.reduce(
-                                (sum, acc) =>
-                                  sum +
-                                  (acc.totalValue *
-                                    acc.assetAllocation.nonUsStocks) /
-                                    100,
-                                0,
-                              ),
-                            },
-                            {
-                              source: "Portfolio Total",
-                              target: "Fixed Income",
-                              value: filteredAccounts.reduce(
-                                (sum, acc) =>
-                                  sum +
-                                  (acc.totalValue *
-                                    acc.assetAllocation.fixedIncome) /
-                                    100,
-                                0,
-                              ),
-                            },
-                            {
-                              source: "Portfolio Total",
-                              target: "Cash",
-                              value: filteredAccounts.reduce(
-                                (sum, acc) =>
-                                  sum +
-                                  (acc.totalValue * acc.assetAllocation.cash) /
-                                    100,
-                                0,
-                              ),
-                            },
+                            // Accounts to Asset Types - based on each account's allocation
+                            ...filteredAccounts.flatMap((account) => {
+                              const links = []
+                              const usStocksValue =
+                                (account.totalValue *
+                                  account.assetAllocation.usStocks) /
+                                100
+                              const nonUsStocksValue =
+                                (account.totalValue *
+                                  account.assetAllocation.nonUsStocks) /
+                                100
+                              const fixedIncomeValue =
+                                (account.totalValue *
+                                  account.assetAllocation.fixedIncome) /
+                                100
+                              const cashValue =
+                                (account.totalValue *
+                                  account.assetAllocation.cash) /
+                                100
+
+                              if (usStocksValue > 0) {
+                                links.push({
+                                  source: account.name,
+                                  target: "U.S. Stocks",
+                                  value: usStocksValue,
+                                })
+                              }
+                              if (nonUsStocksValue > 0) {
+                                links.push({
+                                  source: account.name,
+                                  target: "Non-U.S. Stocks",
+                                  value: nonUsStocksValue,
+                                })
+                              }
+                              if (fixedIncomeValue > 0) {
+                                links.push({
+                                  source: account.name,
+                                  target: "Fixed Income",
+                                  value: fixedIncomeValue,
+                                })
+                              }
+                              if (cashValue > 0) {
+                                links.push({
+                                  source: account.name,
+                                  target: "Cash",
+                                  value: cashValue,
+                                })
+                              }
+                              return links
+                            }),
                           ],
                         }}
                         colors={["blue", "cyan", "amber", "emerald"]}
