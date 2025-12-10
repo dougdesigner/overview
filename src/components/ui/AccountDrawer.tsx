@@ -192,7 +192,7 @@ const FormField = ({
 // Component for rendering institution item with logo
 function InstitutionItem({ institution }: { institution: { value: string; label: string } }) {
   const [logoError, setLogoError] = useState(false)
-  const logoUrl = getInstitutionLogoUrl(institution.label)
+  const logoUrl = getInstitutionLogoUrl(institution.value)
 
   return (
     <div className="flex items-center gap-2">
