@@ -149,15 +149,15 @@ export function TickerSelector({
           {getSelectedDisplay()}
         </SelectValue>
       </SelectTrigger>
-      <SelectContent>
-        {/* Search input */}
-        <div className="sticky top-0 z-10 border-b border-gray-200 bg-white p-2 dark:border-gray-800 dark:bg-gray-950">
+      <SelectContent hideScrollButtons>
+        {/* Search input - negative margins to cover viewport padding and prevent content clipping */}
+        <div className="sticky -top-1 z-10 -mx-1 border-b border-gray-200 bg-white px-3 pb-4 pt-4 dark:border-gray-800 dark:bg-gray-950">
           <Input
             placeholder="Search tickers..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             onKeyDown={(e) => e.stopPropagation()} // Prevent Radix from intercepting
-            className="h-8 pb-2"
+            className="h-8"
             autoFocus
           />
         </div>

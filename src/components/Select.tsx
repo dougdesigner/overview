@@ -121,7 +121,9 @@ SelectScrollDownButton.displayName =
 
 const SelectContent = React.forwardRef<
   React.ComponentRef<typeof SelectPrimitives.Content>,
-  React.ComponentPropsWithoutRef<typeof SelectPrimitives.Content>
+  React.ComponentPropsWithoutRef<typeof SelectPrimitives.Content> & {
+    hideScrollButtons?: boolean
+  }
 >(
   (
     {
@@ -130,6 +132,7 @@ const SelectContent = React.forwardRef<
       children,
       sideOffset = 8,
       collisionPadding = 10,
+      hideScrollButtons = false,
       ...props
     },
     forwardedRef,
@@ -162,7 +165,7 @@ const SelectContent = React.forwardRef<
         collisionPadding={collisionPadding}
         {...props}
       >
-        <SelectScrollUpButton />
+        {!hideScrollButtons && <SelectScrollUpButton />}
         <SelectPrimitives.Viewport
           className={cx(
             "p-1",
@@ -172,7 +175,7 @@ const SelectContent = React.forwardRef<
         >
           {children}
         </SelectPrimitives.Viewport>
-        <SelectScrollDownButton />
+        {!hideScrollButtons && <SelectScrollDownButton />}
       </SelectPrimitives.Content>
     </SelectPrimitives.Portal>
   ),
