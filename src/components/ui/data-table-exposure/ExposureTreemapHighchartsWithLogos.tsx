@@ -1436,6 +1436,7 @@ export function ExposureTreemapHighchartsWithLogos({
     series: [
       {
         type: "pie",
+        innerSize: "50%",
         name:
           groupingMode === "none"
             ? "Holdings"

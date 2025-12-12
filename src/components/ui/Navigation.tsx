@@ -1,6 +1,7 @@
 "use client"
 
 import { TabNavigation, TabNavigationLink } from "@/components/TabNavigation"
+import { usePortfolioStore } from "@/hooks/usePortfolioStore"
 import { cx } from "@/lib/utils"
 import { Icon } from "@iconify/react"
 import * as Dialog from "@radix-ui/react-dialog"
@@ -38,6 +39,7 @@ function Navigation() {
   const pathname = usePathname()
   const router = useRouter()
   const [isAddOpen, setIsAddOpen] = useState(false)
+  const { isDemoMode } = usePortfolioStore()
 
   const handleAddAccount = () => {
     setIsAddOpen(false)
@@ -56,7 +58,12 @@ function Navigation() {
         {/* Left: Logo + Title */}
         <div className="flex shrink-0 items-center gap-2">
           <GradientLogoIcon className="size-6" />
-          <span className="text-lg font-semibold">ETF Exposure</span>
+          <span className="text-lg font-semibold">Overview</span>
+          {isDemoMode && (
+            <span className="rounded bg-amber-100 px-1.5 py-0.5 text-[10px] font-medium text-amber-700 dark:bg-amber-900/30 dark:text-amber-400">
+              Demo
+            </span>
+          )}
         </div>
 
         {/* Center: Tab Pills */}

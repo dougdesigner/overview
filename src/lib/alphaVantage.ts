@@ -24,14 +24,36 @@ interface CompanyOverview {
   OfficialSite?: string
 }
 
-interface CacheEntry<T = ETFProfileResponse | CompanyOverview> {
+interface SymbolSearchMatch {
+  symbol: string
+  name: string
+  type: string      // "Equity", "ETF", etc.
+  region: string
+  matchScore: string
+}
+
+interface SymbolSearchResponse {
+  bestMatches?: Array<{
+    "1. symbol": string
+    "2. name": string
+    "3. type": string
+    "4. region": string
+    "5. marketOpen": string
+    "6. marketClose": string
+    "7. timezone": string
+    "8. currency": string
+    "9. matchScore": string
+  }>
+}
+
+interface CacheEntry<T = ETFProfileResponse | CompanyOverview | SymbolSearchMatch[]> {
   data: T
   timestamp: number
 }
 
 class AlphaVantageClient {
   private baseURL = "https://www.alphavantage.co/query"
-  private cache: Map<string, CacheEntry<ETFProfileResponse | CompanyOverview>> = new Map()
+  private cache: Map<string, CacheEntry<ETFProfileResponse | CompanyOverview | SymbolSearchMatch[]>> = new Map()
   private cacheDuration: number
 
   constructor() {
@@ -55,7 +77,7 @@ class AlphaVantageClient {
     return entry.data as T
   }
 
-  private setCache(key: string, data: ETFProfileResponse | CompanyOverview): void {
+  private setCache(key: string, data: ETFProfileResponse | CompanyOverview | SymbolSearchMatch[]): void {
     this.cache.set(key, {
       data,
       timestamp: Date.now()
@@ -439,10 +461,98 @@ class AlphaVantageClient {
     }
   }
 
+  async searchSymbols(keywords: string): Promise<SymbolSearchMatch[]> {
+    const apiKey = process.env.ALPHA_VANTAGE_API_KEY
+
+    if (!apiKey || apiKey === "YOUR_API_KEY_HERE") {
+      console.warn("Alpha Vantage API key not configured. Using mock data.")
+      return this.getMockSymbolSearch(keywords)
+    }
+
+    const cacheKey = this.getCacheKey(keywords, "SYMBOL_SEARCH")
+    const cached = this.getFromCache<SymbolSearchMatch[]>(cacheKey)
+    if (cached) {
+      console.log(`Using cached symbol search for ${keywords}`)
+      return cached
+    }
+
+    try {
+      const url = new URL(this.baseURL)
+      url.searchParams.append("function", "SYMBOL_SEARCH")
+      url.searchParams.append("keywords", keywords)
+      url.searchParams.append("apikey", apiKey)
+
+      const response = await fetch(url.toString())
+
+      if (!response.ok) {
+        throw new Error(`API request failed: ${response.status}`)
+      }
+
+      const data: SymbolSearchResponse = await response.json()
+
+      if (!data.bestMatches) {
+        console.error("Alpha Vantage API error: No matches returned")
+        return this.getMockSymbolSearch(keywords)
+      }
+
+      // Normalize the response
+      const matches: SymbolSearchMatch[] = data.bestMatches.map((match) => ({
+        symbol: match["1. symbol"],
+        name: match["2. name"],
+        type: match["3. type"],
+        region: match["4. region"],
+        matchScore: match["9. matchScore"]
+      }))
+
+      this.setCache(cacheKey, matches)
+      return matches
+    } catch (error) {
+      console.error(`Error searching symbols for ${keywords}:`, error)
+      return this.getMockSymbolSearch(keywords)
+    }
+  }
+
+  private getMockSymbolSearch(keywords: string): SymbolSearchMatch[] {
+    // Mock data for common stock searches
+    const mockSymbols: Record<string, SymbolSearchMatch[]> = {
+      "APP": [
+        { symbol: "AAPL", name: "Apple Inc.", type: "Equity", region: "United States", matchScore: "0.8000" },
+        { symbol: "APP", name: "Applovin Corporation", type: "Equity", region: "United States", matchScore: "1.0000" }
+      ],
+      "GOO": [
+        { symbol: "GOOGL", name: "Alphabet Inc. Class A", type: "Equity", region: "United States", matchScore: "0.8000" },
+        { symbol: "GOOG", name: "Alphabet Inc. Class C", type: "Equity", region: "United States", matchScore: "0.7500" }
+      ],
+      "MIC": [
+        { symbol: "MSFT", name: "Microsoft Corporation", type: "Equity", region: "United States", matchScore: "0.6000" }
+      ],
+      "TES": [
+        { symbol: "TSLA", name: "Tesla Inc.", type: "Equity", region: "United States", matchScore: "0.8000" }
+      ],
+      "AMZ": [
+        { symbol: "AMZN", name: "Amazon.com Inc.", type: "Equity", region: "United States", matchScore: "0.9000" }
+      ],
+      "NVI": [
+        { symbol: "NVDA", name: "NVIDIA Corporation", type: "Equity", region: "United States", matchScore: "0.8500" }
+      ]
+    }
+
+    // Check if any mock key starts with the keywords (case insensitive)
+    const keywordsUpper = keywords.toUpperCase()
+    for (const [key, matches] of Object.entries(mockSymbols)) {
+      if (keywordsUpper.startsWith(key) || key.startsWith(keywordsUpper)) {
+        return matches
+      }
+    }
+
+    // Return empty array for unknown searches
+    return []
+  }
+
   clearCache(): void {
     this.cache.clear()
   }
 }
 
 export const alphaVantageClient = new AlphaVantageClient()
-export type { ETFProfileResponse, CompanyOverview }
+export type { ETFProfileResponse, CompanyOverview, SymbolSearchMatch }

@@ -1,4 +1,4 @@
-# ETF Exposure – Portfolio Dashboard
+# Overview Dashboard
 
 A modern portfolio management dashboard built with [Next.js 15](https://nextjs.org) and [Tremor Raw](https://tremor.so). Track accounts, holdings, and analyze portfolio exposure across asset classes, sectors, and institutions.
 

@@ -51,9 +51,9 @@ import {
 } from "@remixicon/react"
 import HighchartsReact from "highcharts-react-official"
 import { useRouter, useSearchParams } from "next/navigation"
-import React from "react"
+import React, { Suspense } from "react"
 
-export default function AccountsPage() {
+function AccountsContent() {
   const router = useRouter()
   const searchParams = useSearchParams()
   const [isOpen, setIsOpen] = React.useState(false)
@@ -990,5 +990,19 @@ export default function AccountsPage() {
         )}
       </div>
     </main>
+  )
+}
+
+export default function AccountsPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="flex min-h-[400px] items-center justify-center">
+          <div className="text-gray-500">Loading...</div>
+        </div>
+      }
+    >
+      <AccountsContent />
+    </Suspense>
   )
 }

@@ -11,7 +11,8 @@ import {
 } from "@/components/Select"
 import { popularTickers, type TickerOption } from "@/lib/tickerData"
 import { cx } from "@/lib/utils"
-import { useState } from "react"
+import { useState, useRef, useEffect } from "react"
+import { useDebouncedCallback } from "use-debounce"
 import { TickerLogo } from "./TickerLogo"
 
 interface TickerSelectorProps {
@@ -31,6 +32,54 @@ export function TickerSelector({
 }: TickerSelectorProps) {
   const [search, setSearch] = useState("")
   const [isOpen, setIsOpen] = useState(false)
+  const [isSearching, setIsSearching] = useState(false)
+  const [apiResults, setApiResults] = useState<TickerOption[]>([])
+  const [selectedApiTicker, setSelectedApiTicker] = useState<TickerOption | null>(null)
+  const abortControllerRef = useRef<AbortController | null>(null)
+
+  // Cleanup on unmount
+  useEffect(() => {
+    return () => {
+      abortControllerRef.current?.abort()
+    }
+  }, [])
+
+  // Debounced search function (300ms delay, 3+ chars)
+  const debouncedSearch = useDebouncedCallback(async (query: string) => {
+    if (query.length < 3) {
+      setApiResults([])
+      setIsSearching(false)
+      return
+    }
+
+    // Cancel previous request
+    abortControllerRef.current?.abort()
+    abortControllerRef.current = new AbortController()
+
+    setIsSearching(true)
+    try {
+      const response = await fetch(
+        `/api/symbol-search?keywords=${encodeURIComponent(query)}`,
+        { signal: abortControllerRef.current.signal }
+      )
+      const data = await response.json()
+
+      // Convert to TickerOption format
+      const results: TickerOption[] = data.matches.map((m: { symbol: string; name: string; type: string }) => ({
+        symbol: m.symbol,
+        name: m.name,
+        type: m.type === "ETF" ? "etf" as const : "stock" as const
+      }))
+
+      setApiResults(results)
+    } catch (error) {
+      if ((error as Error).name !== "AbortError") {
+        console.error("Symbol search failed:", error)
+      }
+    } finally {
+      setIsSearching(false)
+    }
+  }, 300)
   const renderTickerOption = (ticker: TickerOption) => {
     return (
       <div className="flex items-center gap-2">
@@ -66,40 +115,45 @@ export function TickerSelector({
     )
   }
 
+  // Helper to render selected ticker display
+  const renderSelectedTicker = (ticker: TickerOption) => (
+    <div className="flex items-center gap-2">
+      <TickerLogo
+        ticker={ticker.symbol}
+        type={ticker.type === "mutual-fund" ? "mutual-fund" : ticker.type}
+        className="size-5"
+      />
+      <span className="font-medium">{ticker.symbol}</span>
+      <Badge
+        variant="flat"
+        className={cx(
+          "text-xs",
+          ticker.type === "etf"
+            ? "bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-400"
+            : ticker.type === "mutual-fund"
+              ? "bg-purple-100 text-purple-800 dark:bg-purple-900/30 dark:text-purple-400"
+              : "bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-400",
+        )}
+      >
+        {ticker.type === "etf"
+          ? "ETF"
+          : ticker.type === "mutual-fund"
+            ? "MF"
+            : "STOCK"}
+      </Badge>
+    </div>
+  )
+
   const getSelectedDisplay = () => {
+    // First check if we have a stored API selection
+    if (selectedApiTicker && selectedApiTicker.symbol === value) {
+      return renderSelectedTicker(selectedApiTicker)
+    }
+
+    // Fall back to static list
     const selectedTicker = popularTickers.find((t) => t.symbol === value)
     if (selectedTicker) {
-      return (
-        <div className="flex items-center gap-2">
-          <TickerLogo
-            ticker={selectedTicker.symbol}
-            type={
-              selectedTicker.type === "mutual-fund"
-                ? "mutual-fund"
-                : selectedTicker.type
-            }
-            className="size-5"
-          />
-          <span className="font-medium">{selectedTicker.symbol}</span>
-          <Badge
-            variant="flat"
-            className={cx(
-              "text-xs",
-              selectedTicker.type === "etf"
-                ? "bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-400"
-                : selectedTicker.type === "mutual-fund"
-                  ? "bg-purple-100 text-purple-800 dark:bg-purple-900/30 dark:text-purple-400"
-                  : "bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-400",
-            )}
-          >
-            {selectedTicker.type === "etf"
-              ? "ETF"
-              : selectedTicker.type === "mutual-fund"
-                ? "MF"
-                : "STOCK"}
-          </Badge>
-        </div>
-      )
+      return renderSelectedTicker(selectedTicker)
     }
 
     return null
@@ -116,30 +170,62 @@ export function TickerSelector({
     )
   }
 
+  // Merge API results with static list (deduplicate by symbol)
+  const mergeWithApiResults = (staticList: TickerOption[]) => {
+    if (apiResults.length === 0) return staticList
+    const staticSymbols = new Set(staticList.map((t) => t.symbol))
+    const uniqueApiResults = apiResults.filter((t) => !staticSymbols.has(t.symbol))
+    return [...staticList, ...uniqueApiResults]
+  }
+
   // Separate and filter stocks, ETFs, and mutual funds
-  const stocks = filterTickers(popularTickers.filter((t) => t.type === "stock"))
-  const etfs = filterTickers(popularTickers.filter((t) => t.type === "etf"))
-  const mutualFunds = filterTickers(
+  const filteredStocks = filterTickers(popularTickers.filter((t) => t.type === "stock"))
+  const filteredEtfs = filterTickers(popularTickers.filter((t) => t.type === "etf"))
+  const filteredMutualFunds = filterTickers(
     popularTickers.filter((t) => t.type === "mutual-fund"),
   )
 
-  const hasResults =
-    stocks.length > 0 || etfs.length > 0 || mutualFunds.length > 0
+  // Merge API results into respective categories
+  const stocks = mergeWithApiResults(filteredStocks).filter((t) => t.type === "stock")
+  const etfs = mergeWithApiResults(filteredEtfs).filter((t) => t.type === "etf")
+  const mutualFunds = filteredMutualFunds // API doesn't return mutual funds
+
+  const hasResults = stocks.length > 0 || etfs.length > 0 || mutualFunds.length > 0
 
   // Handle select open/close
   const handleOpenChange = (open: boolean) => {
     setIsOpen(open)
     if (!open) {
       setSearch("") // Clear search when closing
+      setApiResults([]) // Clear API results
+      setIsSearching(false)
     }
+  }
+
+  // Handle search input change
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value
+    setSearch(value)
+    debouncedSearch(value)
   }
 
   return (
     <Select
       value={value}
       onValueChange={(val) => {
+        // Check if selected from API results (not in popularTickers)
+        const isFromPopular = popularTickers.some((t) => t.symbol === val)
+        if (!isFromPopular) {
+          const apiTicker = apiResults.find((t) => t.symbol === val)
+          if (apiTicker) {
+            setSelectedApiTicker(apiTicker)
+          }
+        } else {
+          setSelectedApiTicker(null) // Clear if selecting from static list
+        }
         onValueChange(val)
         setSearch("") // Clear search after selection
+        setApiResults([]) // Clear API results
       }}
       open={isOpen}
       onOpenChange={handleOpenChange}
@@ -155,60 +241,66 @@ export function TickerSelector({
           <Input
             placeholder="Search tickers..."
             value={search}
-            onChange={(e) => setSearch(e.target.value)}
+            onChange={handleSearchChange}
             onKeyDown={(e) => e.stopPropagation()} // Prevent Radix from intercepting
             className="h-8"
             autoFocus
           />
         </div>
 
-        {!hasResults ? (
+        {/* Loading state - shown inline while searching */}
+        {isSearching && (
+          <div className="px-2 py-2 text-center text-sm text-gray-500 dark:text-gray-400">
+            Searching...
+          </div>
+        )}
+
+        {/* No results message */}
+        {!hasResults && !isSearching && (
           <div className="px-2 py-4 text-center text-sm text-gray-500 dark:text-gray-400">
             No tickers found
           </div>
-        ) : (
+        )}
+
+        {/* Stocks section */}
+        {stocks.length > 0 && (
           <>
-            {/* Stocks section */}
-            {stocks.length > 0 && (
-              <>
-                <div className="px-2 py-1 text-xs font-medium text-gray-500 dark:text-gray-400">
-                  Stocks
-                </div>
-                {stocks.map((ticker) => (
-                  <SelectItem key={ticker.symbol} value={ticker.symbol}>
-                    {renderTickerOption(ticker)}
-                  </SelectItem>
-                ))}
-              </>
-            )}
+            <div className="px-2 py-1 text-xs font-medium text-gray-500 dark:text-gray-400">
+              Stocks
+            </div>
+            {stocks.map((ticker) => (
+              <SelectItem key={ticker.symbol} value={ticker.symbol}>
+                {renderTickerOption(ticker)}
+              </SelectItem>
+            ))}
+          </>
+        )}
 
-            {/* ETFs section */}
-            {etfs.length > 0 && (
-              <>
-                <div className="mt-2 px-2 py-1 text-xs font-medium text-gray-500 dark:text-gray-400">
-                  ETFs
-                </div>
-                {etfs.map((ticker) => (
-                  <SelectItem key={ticker.symbol} value={ticker.symbol}>
-                    {renderTickerOption(ticker)}
-                  </SelectItem>
-                ))}
-              </>
-            )}
+        {/* ETFs section */}
+        {etfs.length > 0 && (
+          <>
+            <div className="mt-2 px-2 py-1 text-xs font-medium text-gray-500 dark:text-gray-400">
+              ETFs
+            </div>
+            {etfs.map((ticker) => (
+              <SelectItem key={ticker.symbol} value={ticker.symbol}>
+                {renderTickerOption(ticker)}
+              </SelectItem>
+            ))}
+          </>
+        )}
 
-            {/* Mutual Funds section */}
-            {mutualFunds.length > 0 && (
-              <>
-                <div className="mt-2 px-2 py-1 text-xs font-medium text-gray-500 dark:text-gray-400">
-                  Mutual Funds
-                </div>
-                {mutualFunds.map((ticker) => (
-                  <SelectItem key={ticker.symbol} value={ticker.symbol}>
-                    {renderTickerOption(ticker)}
-                  </SelectItem>
-                ))}
-              </>
-            )}
+        {/* Mutual Funds section */}
+        {mutualFunds.length > 0 && (
+          <>
+            <div className="mt-2 px-2 py-1 text-xs font-medium text-gray-500 dark:text-gray-400">
+              Mutual Funds
+            </div>
+            {mutualFunds.map((ticker) => (
+              <SelectItem key={ticker.symbol} value={ticker.symbol}>
+                {renderTickerOption(ticker)}
+              </SelectItem>
+            ))}
           </>
         )}
       </SelectContent>

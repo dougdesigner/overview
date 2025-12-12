@@ -322,6 +322,7 @@ export function usePortfolioStore() {
   const [error, setError] = useState<string | null>(null)
   const [hasInitialized, setHasInitialized] = useState(false)
   const [dataVersion, setDataVersion] = useState(0)
+  const [isDemoMode, setDemoMode] = useState(false)
 
   // Load data from localStorage on mount
   useEffect(() => {
@@ -956,13 +957,43 @@ export function usePortfolioStore() {
     return () => clearInterval(interval)
   }, [hasInitialized, isLoading, holdings.length, updatePrices])
 
+  // Return demo data when in demo mode, otherwise return real data
+  const activeAccounts = isDemoMode ? defaultAccounts : accounts
+  const activeHoldings = isDemoMode ? defaultHoldings : holdings
+
+  // Calculate portfolio values for active data (demo or real)
+  const activeTotalValue = activeAccounts.reduce((sum, account) => sum + account.totalValue, 0)
+  const activeAllocation = activeTotalValue === 0
+    ? { usStocks: 0, nonUsStocks: 0, fixedIncome: 0, cash: 0 }
+    : (() => {
+        const totals = activeAccounts.reduce(
+          (acc, account) => ({
+            usStocks: acc.usStocks + (account.totalValue * account.assetAllocation.usStocks) / 100,
+            nonUsStocks: acc.nonUsStocks + (account.totalValue * account.assetAllocation.nonUsStocks) / 100,
+            fixedIncome: acc.fixedIncome + (account.totalValue * account.assetAllocation.fixedIncome) / 100,
+            cash: acc.cash + (account.totalValue * account.assetAllocation.cash) / 100,
+          }),
+          { usStocks: 0, nonUsStocks: 0, fixedIncome: 0, cash: 0 }
+        )
+        return {
+          usStocks: (totals.usStocks / activeTotalValue) * 100,
+          nonUsStocks: (totals.nonUsStocks / activeTotalValue) * 100,
+          fixedIncome: (totals.fixedIncome / activeTotalValue) * 100,
+          cash: (totals.cash / activeTotalValue) * 100,
+        }
+      })()
+
   return {
-    // State
-    accounts,
-    holdings,
+    // State - use demo data when in demo mode
+    accounts: activeAccounts,
+    holdings: activeHoldings,
     isLoading,
     error,
     dataVersion,
+
+    // Demo mode
+    isDemoMode,
+    setDemoMode,
 
     // Account operations
     addAccount,
@@ -975,9 +1006,9 @@ export function usePortfolioStore() {
     deleteHolding,
     getHoldingsByAccount,
 
-    // Calculated values
-    totalPortfolioValue,
-    portfolioAllocation,
+    // Calculated values - use active data values
+    totalPortfolioValue: activeTotalValue,
+    portfolioAllocation: activeAllocation,
 
     // Utility functions
     clearAllData,

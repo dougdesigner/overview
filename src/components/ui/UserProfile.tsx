@@ -21,6 +21,8 @@ import {
   RiCheckLine,
   RiComputerLine,
   RiDownloadLine,
+  RiEyeLine,
+  RiEyeOffLine,
   RiLockLine,
   RiMoonLine,
   RiSettings3Line,
@@ -33,7 +35,7 @@ import React from "react"
 function DropdownUserProfile() {
   const [mounted, setMounted] = React.useState(false)
   const { theme, setTheme } = useTheme()
-  const { exportPortfolioData, importPortfolioData } = usePortfolioStore()
+  const { exportPortfolioData, importPortfolioData, isDemoMode, setDemoMode } = usePortfolioStore()
   const fileInputRef = React.useRef<HTMLInputElement>(null)
 
   React.useEffect(() => {
@@ -156,6 +158,25 @@ function DropdownUserProfile() {
                 aria-hidden="true"
               />
               Import Portfolio
+            </DropdownMenuItem>
+            <DropdownMenuItem onClick={() => setDemoMode(!isDemoMode)}>
+              {isDemoMode ? (
+                <RiEyeOffLine
+                  className="mr-2 size-4 shrink-0"
+                  aria-hidden="true"
+                />
+              ) : (
+                <RiEyeLine
+                  className="mr-2 size-4 shrink-0"
+                  aria-hidden="true"
+                />
+              )}
+              {isDemoMode ? "Exit Demo Mode" : "View Demo Data"}
+              {isDemoMode && (
+                <span className="ml-auto rounded bg-amber-100 px-1.5 py-0.5 text-[10px] font-medium text-amber-700 dark:bg-amber-900/30 dark:text-amber-400">
+                  Active
+                </span>
+              )}
             </DropdownMenuItem>
           </DropdownMenuGroup>
 
