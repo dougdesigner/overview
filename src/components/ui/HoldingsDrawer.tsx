@@ -9,6 +9,7 @@ import {
   DrawerHeader,
   DrawerTitle,
 } from "@/components/Drawer"
+import { Icon } from "@iconify/react"
 import { Input } from "@/components/Input"
 import { Label } from "@/components/Label"
 import {
@@ -218,12 +219,21 @@ export function HoldingsDrawer({
       <DrawerContent className="overflow-x-hidden sm:max-w-lg">
         <DrawerHeader>
           <DrawerTitle>
-            <p>{title || (mode === "edit" ? "Edit Holding" : "Add Holdings")}</p>
-            <span className="text-sm font-normal text-gray-500 dark:text-gray-500">
-              {mode === "edit"
-                ? "Update holding information"
-                : "Add new stocks, funds, or cash to your accounts"}
-            </span>
+            <div className="flex items-center gap-4">
+              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-emerald-100 dark:bg-emerald-900/30">
+                <Icon icon="mdi:format-list-bulleted" className="h-5 w-5 text-emerald-600 dark:text-emerald-400" />
+              </div>
+              <div>
+                <div className="font-medium text-gray-900 dark:text-gray-50">
+                  {title || (mode === "edit" ? "Edit holding" : "Add holdings")}
+                </div>
+                <div className="text-sm text-gray-500 dark:text-gray-400">
+                  {mode === "edit"
+                    ? "Update holding information"
+                    : "Add new stocks, funds, or cash to your accounts"}
+                </div>
+              </div>
+            </div>
           </DrawerTitle>
         </DrawerHeader>
 
@@ -469,7 +479,7 @@ export function HoldingsDrawer({
             <Button variant="secondary">Cancel</Button>
           </DrawerClose>
           <Button onClick={handleSubmit} disabled={!isFormValid()}>
-            {mode === "edit" ? "Save Changes" : "Add Holding"}
+            {mode === "edit" ? "Save changes" : "Add holding"}
           </Button>
         </DrawerFooter>
       </DrawerContent>

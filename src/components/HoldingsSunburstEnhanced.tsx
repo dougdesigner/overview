@@ -16,7 +16,12 @@ import type {
   Holding,
 } from "@/components/ui/data-table-holdings/types"
 import { institutionLabels } from "@/lib/institutionUtils"
-import { RiDownloadLine, RiFullscreenLine } from "@remixicon/react"
+import {
+  RiDonutChartLine,
+  RiDownloadLine,
+  RiFullscreenLine,
+  RiSunLine,
+} from "@remixicon/react"
 import Highcharts from "highcharts"
 import HighchartsReact from "highcharts-react-official"
 import HighchartsSunburst from "highcharts/modules/sunburst"
@@ -59,18 +64,22 @@ export function HoldingsSunburstEnhanced({
 
   // Responsive height: 350 on mobile (<640px), use prop height on desktop
   const [responsiveHeight, setResponsiveHeight] = useState(height)
+  // Hide data labels on small screens - rely on legend and tooltips
+  const [showDataLabels, setShowDataLabels] = useState(true)
 
   useEffect(() => {
-    const updateHeight = () => {
-      setResponsiveHeight(window.innerWidth < 640 ? 350 : height)
+    const updateResponsive = () => {
+      const isMobile = window.innerWidth < 640
+      setResponsiveHeight(isMobile ? 350 : height)
+      setShowDataLabels(!isMobile)
     }
-    updateHeight()
-    window.addEventListener("resize", updateHeight)
-    return () => window.removeEventListener("resize", updateHeight)
+    updateResponsive()
+    window.addEventListener("resize", updateResponsive)
+    return () => window.removeEventListener("resize", updateResponsive)
   }, [height])
 
   // Control states
-  const [chartType] = useState<ChartType>("sunburst")
+  const [chartType, setChartType] = useState<ChartType>("pie")
   const [sunburstGrouping, setSunburstGrouping] =
     useState<GroupingMode>("account")
   const [pieGrouping, setPieGrouping] = useState<GroupingMode>("account")
@@ -858,6 +867,7 @@ export function HoldingsSunburstEnhanced({
         allowTraversingTree: true,
         cursor: "pointer",
         dataLabels: {
+          enabled: showDataLabels,
           format: "{point.name}",
           filter: {
             property: "innerArcLength",
@@ -1017,10 +1027,12 @@ export function HoldingsSunburstEnhanced({
       pie: {
         allowPointSelect: true,
         cursor: "pointer",
+        innerSize: "60%",
+        borderRadius: 4,
         borderColor: isDark ? "#1f2937" : "#f3f4f6",
         borderWidth: 2,
         dataLabels: {
-          enabled: true,
+          enabled: showDataLabels,
           format: "<b>{point.name}</b>: {point.percentage:.1f}%",
           style: {
             color: isDark ? "#f3f4f6" : "#111827",
@@ -1200,6 +1212,7 @@ export function HoldingsSunburstEnhanced({
     selectedAccount,
     groupingMode,
     filteredHoldings,
+    showDataLabels,
   ])
 
   if (!isClient || !modulesLoaded) {
@@ -1371,7 +1384,7 @@ export function HoldingsSunburstEnhanced({
             </DropdownMenu> */}
 
           {/* Chart Type Toggle */}
-          {/* <Tooltip
+          <Tooltip
             triggerAsChild
             content="Switch between sunburst and pie chart"
           >
@@ -1383,12 +1396,12 @@ export function HoldingsSunburstEnhanced({
               className="h-9"
             >
               {chartType === "sunburst" ? (
-                <RiPieChart2Line className="size-4" aria-hidden="true" />
+                <RiDonutChartLine className="size-4" aria-hidden="true" />
               ) : (
                 <RiSunLine className="size-4" aria-hidden="true" />
               )}
             </Button>
-          </Tooltip> */}
+          </Tooltip>
 
           {/* Export Menu */}
           <DropdownMenu>

@@ -1,19 +1,31 @@
 "use client"
 
 import { Card } from "@/components/Card"
-import { CategoryBar } from "@/components/CategoryBar"
-import { AvailableChartColorsKeys } from "@/lib/chartUtils"
 import { cx } from "@/lib/utils"
-import React from "react"
+import Highcharts from "highcharts"
+import HighchartsReact from "highcharts-react-official"
+import React, { useEffect, useMemo, useState } from "react"
+
+// Hex colors matching Tailwind chart colors
+const CHART_HEX_COLORS: Record<string, string> = {
+  blue: "#3b82f6",
+  cyan: "#06b6d4",
+  amber: "#f59e0b",
+  emerald: "#10b981",
+  gray: "#6b7280",
+  violet: "#8b5cf6",
+  rose: "#f43f5e",
+  orange: "#fb923c",
+}
 
 export interface AssetClassItem {
   name: string
   percentage: number
-  color: AvailableChartColorsKeys
+  color: string
   bgColorClass: string
 }
 
-export interface PortfolioValueCardProps {
+export interface PortfolioValueCardHighchartsProps {
   title?: string
   value?: number
   accountCount?: number
@@ -56,9 +68,9 @@ const getDefaultAssetClasses = (): AssetClassItem[] => [
   },
 ]
 
-const PortfolioValueCard = React.forwardRef<
+const PortfolioValueCardHighcharts = React.forwardRef<
   HTMLDivElement,
-  PortfolioValueCardProps
+  PortfolioValueCardHighchartsProps
 >(
   (
     {
@@ -72,7 +84,14 @@ const PortfolioValueCard = React.forwardRef<
     },
     forwardedRef,
   ) => {
+    const [isClient, setIsClient] = useState(false)
+
+    useEffect(() => {
+      setIsClient(true)
+    }, [])
+
     const classes = assetClasses || getDefaultAssetClasses()
+
     const valueFormatter = (number: number) => {
       const decimals = number % 1 === 0 ? 0 : 2
       return (
@@ -88,20 +107,85 @@ const PortfolioValueCard = React.forwardRef<
 
     // Format percentage: show integers without decimals, non-integers with up to 2 decimal places
     const formatPercentage = (value: number): string => {
-      // Check if the value is effectively an integer (within floating point precision)
       if (
         Number.isInteger(value) ||
         Math.abs(value - Math.round(value)) < 0.0001
       ) {
         return Math.round(value).toString()
       }
-      // For non-integers, use up to 2 decimal places and remove trailing zeros
       return value.toFixed(2).replace(/\.?0+$/, "")
     }
 
-    // Extract percentages and colors for CategoryBar
-    const percentages = classes.slice(0, 4).map((item) => item.percentage) // Exclude "Other" if 0%
-    const colors = classes.slice(0, 4).map((item) => item.color)
+    // Build Highcharts options
+    const chartOptions: Highcharts.Options = useMemo(() => {
+      // Filter out zero-percentage items and create series data
+      const nonZeroClasses = classes.filter((item) => item.percentage > 0)
+
+      return {
+        chart: {
+          type: "bar",
+          height: 8,
+          backgroundColor: "transparent",
+          spacing: [0, 0, 0, 0],
+          margin: [0, 0, 0, 0],
+          animation: {
+            duration: 1000,
+          },
+        },
+        title: {
+          text: undefined,
+        },
+        xAxis: {
+          visible: false,
+          categories: [""],
+        },
+        yAxis: {
+          visible: false,
+          min: 0,
+          max: 100,
+        },
+        legend: {
+          enabled: false,
+        },
+        tooltip: {
+          enabled: false,
+        },
+        credits: {
+          enabled: false,
+        },
+        plotOptions: {
+          bar: {
+            stacking: "normal",
+            borderRadius: 0,
+            pointPadding: 0,
+            groupPadding: 0,
+            borderWidth: 0,
+            pointWidth: 8,
+          },
+          series: {
+            animation: {
+              duration: 1000,
+              easing: "easeOutQuart",
+            },
+          },
+        },
+        series: nonZeroClasses.map((item, index) => ({
+          type: "bar" as const,
+          name: item.name,
+          data: [item.percentage],
+          color: CHART_HEX_COLORS[item.color] || CHART_HEX_COLORS.gray,
+          // Add border radius to first and last segments
+          borderRadiusTopLeft:
+            index === 0 ? 4 : 0,
+          borderRadiusBottomLeft:
+            index === 0 ? 4 : 0,
+          borderRadiusTopRight:
+            index === nonZeroClasses.length - 1 ? 4 : 0,
+          borderRadiusBottomRight:
+            index === nonZeroClasses.length - 1 ? 4 : 0,
+        })),
+      }
+    }, [classes])
 
     return (
       <Card ref={forwardedRef} className={cx(className)} {...props}>
@@ -115,13 +199,23 @@ const PortfolioValueCard = React.forwardRef<
           {accountCount} {accountCount === 1 ? "account" : "accounts"} ·{" "}
           {holdingsCount} {holdingsCount === 1 ? "holding" : "holdings"}
         </div>
-        <CategoryBar
-          values={percentages}
-          className="mt-6"
-          colors={colors}
-          showLabels={false}
-          animate
-        />
+
+        {/* Highcharts stacked bar */}
+        <div className="mt-6 overflow-hidden rounded-full">
+          {isClient ? (
+            <HighchartsReact
+              highcharts={Highcharts}
+              options={chartOptions}
+              containerProps={{
+                style: { height: "8px", width: "100%" },
+              }}
+            />
+          ) : (
+            // Placeholder during SSR
+            <div className="h-2 w-full rounded-full bg-gray-200 dark:bg-gray-800" />
+          )}
+        </div>
+
         <ul
           role="list"
           className="mt-4 flex flex-wrap gap-x-10 gap-y-4 text-sm"
@@ -149,7 +243,7 @@ const PortfolioValueCard = React.forwardRef<
   },
 )
 
-PortfolioValueCard.displayName = "PortfolioValueCard"
+PortfolioValueCardHighcharts.displayName = "PortfolioValueCardHighcharts"
 
-export { PortfolioValueCard }
-export default PortfolioValueCard
+export { PortfolioValueCardHighcharts }
+export default PortfolioValueCardHighcharts

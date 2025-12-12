@@ -116,6 +116,7 @@ interface CategoryBarProps extends React.HTMLAttributes<HTMLDivElement> {
   showLabels?: boolean
   segmentLabels?: string[]
   label?: string
+  animate?: boolean
 }
 
 const CategoryBar = React.forwardRef<HTMLDivElement, CategoryBarProps>(
@@ -127,11 +128,23 @@ const CategoryBar = React.forwardRef<HTMLDivElement, CategoryBarProps>(
       showLabels = true,
       segmentLabels,
       label,
+      animate = false,
       className,
       ...props
     },
     forwardedRef,
   ) => {
+    // Animation state - starts false, becomes true after mount to trigger transition
+    const [isAnimated, setIsAnimated] = React.useState(false)
+
+    React.useEffect(() => {
+      if (animate) {
+        // Small delay to ensure initial render with 0 width
+        const timer = setTimeout(() => setIsAnimated(true), 50)
+        return () => clearTimeout(timer)
+      }
+    }, [animate])
+
     const markerBgColor = React.useMemo(
       () => getMarkerBgColor(marker?.value, values, colors),
       [marker, values, colors],
@@ -179,13 +192,16 @@ const CategoryBar = React.forwardRef<HTMLDivElement, CategoryBarProps>(
                   key={`item-${index}`}
                   className={cx(
                     "h-full",
+                    animate && "transition-all duration-700 ease-out",
                     getColorClassName(
                       barColor as AvailableChartColorsKeys,
                       "bg",
                     ),
                     percentage === 0 && "hidden",
                   )}
-                  style={{ width: `${percentage}%` }}
+                  style={{
+                    width: animate && !isAnimated ? "0%" : `${percentage}%`,
+                  }}
                 />
               )
 

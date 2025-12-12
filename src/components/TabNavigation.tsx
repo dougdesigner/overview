@@ -46,10 +46,8 @@ const TabNavigation = React.forwardRef<
   >
     <NavigationMenuPrimitives.List
       className={cx(
-        // base
-        "flex items-center justify-start whitespace-nowrap border-b [scrollbar-width:none] [&::-webkit-scrollbar]:hidden",
-        // border color
-        "border-gray-200 dark:border-gray-800",
+        // base - pill style nav, no border
+        "flex items-center justify-start gap-2 whitespace-nowrap [scrollbar-width:none] [&::-webkit-scrollbar]:hidden",
         className,
       )}
     >
@@ -82,17 +80,16 @@ const TabNavigationLink = React.forwardRef<
       {getSubtree({ asChild, children }, (children) => (
         <span
           className={cx(
-            // base
-            "flex items-center justify-center whitespace-nowrap border-b-2 border-transparent px-3 pb-2 text-sm font-medium transition-all",
-            // text color
+            // base - pill style
+            "flex items-center justify-center whitespace-nowrap rounded-full px-4 py-1.5 text-sm font-medium transition-all",
+            // text color (inactive)
             "text-gray-500 dark:text-gray-400",
-            // hover
-            "group-hover:text-gray-600 group-hover:dark:text-gray-300",
-            // border hover
-            "group-hover:border-gray-600 group-hover:dark:border-gray-300",
-            // selected
-            "group-data-[active]:border-blue-600 group-data-[active]:text-blue-600",
-            "group-data-[active]:dark:border-blue-500 group-data-[active]:dark:text-blue-500",
+            // hover (inactive)
+            "group-hover:bg-gray-50 group-hover:text-gray-700",
+            "group-hover:dark:bg-gray-800/50 group-hover:dark:text-gray-300",
+            // selected (pill background)
+            "group-data-[active]:bg-gray-100 group-data-[active]:text-gray-900",
+            "group-data-[active]:dark:bg-gray-800 group-data-[active]:dark:text-gray-50",
             // disabled
             disabled
               ? "pointer-events-none text-gray-300 dark:text-gray-700"

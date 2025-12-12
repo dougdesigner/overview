@@ -2,12 +2,10 @@
 
 import { TabNavigation, TabNavigationLink } from "@/components/TabNavigation"
 import { cx } from "@/lib/utils"
-import {
-  RiBankLine,
-  RiDonutChartFill,
-  RiLayoutMasonryLine,
-  RiPieChartLine,
-} from "@remixicon/react"
+import { Icon } from "@iconify/react"
+import * as Dialog from "@radix-ui/react-dialog"
+import { useRouter } from "next/navigation"
+import { useState } from "react"
 
 // Custom gradient logo icon (donut chart)
 function GradientLogoIcon({ className }: { className?: string }) {
@@ -38,27 +36,37 @@ import { DropdownUserProfile } from "./UserProfile"
 
 function Navigation() {
   const pathname = usePathname()
+  const router = useRouter()
+  const [isAddOpen, setIsAddOpen] = useState(false)
+
+  const handleAddAccount = () => {
+    setIsAddOpen(false)
+    router.push("/accounts?add=true")
+  }
+
+  const handleAddHolding = () => {
+    setIsAddOpen(false)
+    router.push("/holdings?add=true")
+  }
+
   return (
     <>
     <div className="shadow-s z-20 bg-white sm:sticky sm:top-0 dark:bg-gray-950">
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-4 pt-3 sm:px-6">
-        <div className="flex items-center gap-2">
+      <div className="mx-auto flex max-w-7xl items-center px-4 py-3 sm:px-6">
+        {/* Left: Logo + Title */}
+        <div className="flex shrink-0 items-center gap-2">
           <GradientLogoIcon className="size-6" />
           <span className="text-lg font-semibold">ETF Exposure</span>
         </div>
-        <div className="flex h-[42px] flex-nowrap gap-1">
-          {/* <Notifications /> */}
-          <DropdownUserProfile />
-        </div>
-      </div>
-      <TabNavigation className="mt-5 hidden sm:flex">
-        <div className="mx-auto flex w-full max-w-7xl items-center px-6">
+
+        {/* Center: Tab Pills */}
+        <TabNavigation className="mx-4 hidden flex-1 sm:flex sm:justify-start lg:justify-center">
           <TabNavigationLink
             className="inline-flex gap-2"
             asChild
             active={pathname === "/overview"}
           >
-            <Link href="/overview">Overview</Link>
+            <Link href="/overview">Home</Link>
           </TabNavigationLink>
           <TabNavigationLink
             className="inline-flex gap-2"
@@ -79,99 +87,136 @@ function Navigation() {
             asChild
             active={pathname === "/exposure"}
           >
-            <Link href="/exposure">Exposure</Link>
+            <Link href="/exposure">Stocks</Link>
           </TabNavigationLink>
-          {/* <TabNavigationLink
-            className="inline-flex gap-2"
-            asChild
-            active={pathname === "/analysis"}
-          >
-            <Link href="/analysis">Analysis</Link>
-          </TabNavigationLink> */}
+        </TabNavigation>
 
-          {/* <TabNavigationLink
-            className="inline-flex gap-2"
-            asChild
-            active={pathname === "/support"}
-          >
-            <Link href="/support">Support</Link>
-          </TabNavigationLink>
-          <TabNavigationLink
-            className="inline-flex gap-2"
-            asChild
-            active={pathname === "/retention"}
-          >
-            <Link href="/retention">Retention</Link>
-          </TabNavigationLink>
-          <TabNavigationLink
-            className="inline-flex gap-2"
-            asChild
-            active={pathname === "/workflow"}
-          >
-            <Link href="/workflow">Workflow</Link>
-          </TabNavigationLink>
-          <TabNavigationLink
-            className="inline-flex gap-2"
-            asChild
-            active={pathname === "/agents"}
-          >
-            <Link href="/agents">Agents</Link>
-          </TabNavigationLink> */}
+        {/* Right: Settings */}
+        <div className="ml-auto flex shrink-0 items-center">
+          <DropdownUserProfile />
         </div>
-      </TabNavigation>
+      </div>
     </div>
 
     {/* Mobile Bottom Navigation */}
     <div className="fixed bottom-0 left-0 right-0 z-50 border-t border-gray-200 bg-white pb-safe sm:hidden dark:border-gray-800 dark:bg-gray-950">
-      <div className="flex items-center justify-around py-2">
+      <div className="flex items-center justify-around px-2 py-2">
         <Link
           href="/overview"
+          onClick={() => setIsAddOpen(false)}
           className={cx(
-            "flex flex-col items-center gap-1 px-3 py-1 text-xs font-medium",
-            pathname === "/overview"
-              ? "text-blue-600 dark:text-blue-400"
+            "flex min-w-[4rem] flex-col items-center gap-0.5 rounded-2xl px-2 py-2 text-xs font-medium transition-colors",
+            !isAddOpen && pathname === "/overview"
+              ? "bg-gray-100 text-gray-900 dark:bg-gray-800 dark:text-gray-50"
               : "text-gray-500 dark:text-gray-400"
           )}
         >
-          <RiDonutChartFill className="size-6" />
-          <span>Overview</span>
+          <Icon icon="mdi:home" className="size-5" />
+          <span>Home</span>
         </Link>
         <Link
           href="/accounts"
+          onClick={() => setIsAddOpen(false)}
           className={cx(
-            "flex flex-col items-center gap-1 px-3 py-1 text-xs font-medium",
-            pathname === "/accounts"
-              ? "text-blue-600 dark:text-blue-400"
+            "flex min-w-[4rem] flex-col items-center gap-0.5 rounded-2xl px-2 py-2 text-xs font-medium transition-colors",
+            !isAddOpen && pathname === "/accounts"
+              ? "bg-gray-100 text-gray-900 dark:bg-gray-800 dark:text-gray-50"
               : "text-gray-500 dark:text-gray-400"
           )}
         >
-          <RiBankLine className="size-6" />
+          <Icon icon="mdi:chart-sankey" className="size-5" />
           <span>Accounts</span>
         </Link>
         <Link
           href="/holdings"
+          onClick={() => setIsAddOpen(false)}
           className={cx(
-            "flex flex-col items-center gap-1 px-3 py-1 text-xs font-medium",
-            pathname === "/holdings"
-              ? "text-blue-600 dark:text-blue-400"
+            "flex min-w-[4rem] flex-col items-center gap-0.5 rounded-2xl px-2 py-2 text-xs font-medium transition-colors",
+            !isAddOpen && pathname === "/holdings"
+              ? "bg-gray-100 text-gray-900 dark:bg-gray-800 dark:text-gray-50"
               : "text-gray-500 dark:text-gray-400"
           )}
         >
-          <RiPieChartLine className="size-6" />
+          <Icon icon="mdi:chart-donut" className="size-5" />
           <span>Holdings</span>
         </Link>
         <Link
           href="/exposure"
+          onClick={() => setIsAddOpen(false)}
           className={cx(
-            "flex flex-col items-center gap-1 px-3 py-1 text-xs font-medium",
-            pathname === "/exposure"
-              ? "text-blue-600 dark:text-blue-400"
+            "flex min-w-[4rem] flex-col items-center gap-0.5 rounded-2xl px-2 py-2 text-xs font-medium transition-colors",
+            !isAddOpen && pathname === "/exposure"
+              ? "bg-gray-100 text-gray-900 dark:bg-gray-800 dark:text-gray-50"
               : "text-gray-500 dark:text-gray-400"
           )}
         >
-          <RiLayoutMasonryLine className="size-6" />
-          <span>Exposure</span>
+          <Icon icon="mdi:view-grid" className="size-5" />
+          <span>Stocks</span>
         </Link>
+
+        {/* Add Button */}
+        <Dialog.Root open={isAddOpen} onOpenChange={setIsAddOpen}>
+          <Dialog.Trigger asChild>
+            <button
+              className={cx(
+                "flex min-w-[4rem] flex-col items-center gap-0.5 rounded-2xl px-2 py-2 text-xs font-medium transition-all",
+                isAddOpen
+                  ? "bg-gray-100 text-gray-900 dark:bg-gray-800 dark:text-gray-50"
+                  : "text-gray-500 dark:text-gray-400"
+              )}
+            >
+              <Icon
+                icon={isAddOpen ? "mdi:close" : "mdi:plus"}
+                className={cx(
+                  "size-5 transition-transform duration-200",
+                  isAddOpen && "rotate-90"
+                )}
+              />
+              <span>{isAddOpen ? "Close" : "Add"}</span>
+            </button>
+          </Dialog.Trigger>
+
+          <Dialog.Portal>
+            {/* Overlay - stops above the mobile nav */}
+            <Dialog.Overlay className="fixed inset-x-0 top-0 bottom-[4.5rem] z-40 bg-black/50 data-[state=open]:animate-dialogOverlayShow" />
+
+            {/* Bottom Sheet Content - positioned above mobile nav */}
+            <Dialog.Content
+              className="fixed inset-x-0 bottom-[4.5rem] z-40 mx-2 rounded-2xl border border-gray-200 bg-white shadow-lg data-[state=open]:animate-bottomSheetSlideUp data-[state=closed]:animate-bottomSheetSlideDown dark:border-gray-800 dark:bg-gray-950"
+            >
+              <Dialog.Title className="sr-only">Add new item</Dialog.Title>
+              <Dialog.Description className="sr-only">
+                Choose to add a new account or holding
+              </Dialog.Description>
+              <div className="space-y-1 p-2">
+                <button
+                  onClick={handleAddAccount}
+                  className="flex w-full items-center gap-4 rounded-xl p-4 text-left transition-colors hover:bg-gray-100 dark:hover:bg-gray-800"
+                >
+                  <div className="flex size-10 items-center justify-center rounded-full bg-blue-100 dark:bg-blue-900/30">
+                    <Icon icon="mdi:bank" className="size-5 text-blue-600 dark:text-blue-400" />
+                  </div>
+                  <div>
+                    <div className="font-medium text-gray-900 dark:text-gray-50">Account</div>
+                    <div className="text-sm text-gray-500 dark:text-gray-400">Add a new investment account</div>
+                  </div>
+                </button>
+                <button
+                  onClick={handleAddHolding}
+                  className="flex w-full items-center gap-4 rounded-xl p-4 text-left transition-colors hover:bg-gray-100 dark:hover:bg-gray-800"
+                >
+                  <div className="flex size-10 items-center justify-center rounded-full bg-emerald-100 dark:bg-emerald-900/30">
+                    <Icon icon="mdi:format-list-bulleted" className="size-5 text-emerald-600 dark:text-emerald-400" />
+                  </div>
+                  <div>
+                    <div className="font-medium text-gray-900 dark:text-gray-50">Holding</div>
+                    <div className="text-sm text-gray-500 dark:text-gray-400">Add stocks, ETFs, or cash</div>
+                  </div>
+                </button>
+              </div>
+            </Dialog.Content>
+          </Dialog.Portal>
+        </Dialog.Root>
       </div>
     </div>
     </>

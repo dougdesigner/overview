@@ -68,6 +68,15 @@ const config: Config = {
           from: { opacity: "1", transform: "translateX(0)" },
           to: { opacity: "0", transform: "translateX(100%)" },
         },
+        // Bottom sheet animations
+        bottomSheetSlideUp: {
+          from: { opacity: "0", transform: "translateY(100%)" },
+          to: { opacity: "1", transform: "translateY(0)" },
+        },
+        bottomSheetSlideDown: {
+          from: { opacity: "1", transform: "translateY(0)" },
+          to: { opacity: "0", transform: "translateY(100%)" },
+        },
       },
       animation: {
         hide: "hide 150ms cubic-bezier(0.16, 1, 0.3, 1)",
@@ -92,6 +101,10 @@ const config: Config = {
         drawerSlideLeftAndFade:
           "drawerSlideLeftAndFade 150ms cubic-bezier(0.16, 1, 0.3, 1)",
         drawerSlideRightAndFade: "drawerSlideRightAndFade 150ms ease-in",
+        // Bottom sheet
+        bottomSheetSlideUp:
+          "bottomSheetSlideUp 200ms cubic-bezier(0.16, 1, 0.3, 1)",
+        bottomSheetSlideDown: "bottomSheetSlideDown 150ms ease-in",
       },
     },
   },

@@ -18,6 +18,7 @@ type HighchartsModule = (H: typeof Highcharts) => void
 interface SankeyNode {
   id: string
   nodeColor?: string
+  offset?: number // Vertical position offset within column (0 = top)
 }
 
 interface SankeyLink {
@@ -168,6 +169,7 @@ export default function SankeyChartHighcharts({
       return {
         id: node.id,
         color: getNodeColor(node.id),
+        ...(node.offset !== undefined && { offset: node.offset }), // Pass through offset for vertical ordering
         dataLabels: {
           // Position labels outside the nodes consistently
           // Left-side (Portfolio Total): label extends LEFT from node

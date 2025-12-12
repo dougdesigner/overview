@@ -50,12 +50,23 @@ import {
   RiPercentLine,
 } from "@remixicon/react"
 import HighchartsReact from "highcharts-react-official"
-import { useRouter } from "next/navigation"
+import { useRouter, useSearchParams } from "next/navigation"
 import React from "react"
 
 export default function AccountsPage() {
   const router = useRouter()
+  const searchParams = useSearchParams()
   const [isOpen, setIsOpen] = React.useState(false)
+
+  // Auto-open drawer when ?add=true is in URL
+  React.useEffect(() => {
+    if (searchParams.get("add") === "true") {
+      setIsOpen(true)
+      setDrawerMode("create")
+      // Clean up URL param
+      router.replace("/accounts")
+    }
+  }, [searchParams, router])
   const [drawerMode, setDrawerMode] = React.useState<"create" | "edit">(
     "create",
   )
@@ -90,6 +101,10 @@ export default function AccountsPage() {
     updateAccount,
     deleteAccount,
   } = usePortfolioStore()
+
+  // Debug logging
+  console.log('[Accounts] accounts:', accounts.length, accounts)
+  console.log('[Accounts] holdings:', holdings.length)
 
   // Handle adding or editing account from the drawer
   const handleAccountSubmit = (formData: AccountFormData) => {
@@ -291,7 +306,7 @@ export default function AccountsPage() {
           }}
           className="hidden items-center gap-2 text-base sm:flex sm:text-sm"
         >
-          Add Account
+          Add account
           <RiAddLine className="-mr-0.5 size-5 shrink-0" aria-hidden="true" />
         </Button>
         <AccountDrawer
@@ -380,17 +395,6 @@ export default function AccountsPage() {
                   ))}
                 </SelectContent>
               </Select>
-              {/* Add button - mobile only */}
-              <Button
-                onClick={() => {
-                  setDrawerMode("create")
-                  setEditingAccount(null)
-                  setIsOpen(true)
-                }}
-                className="size-9 p-0 sm:hidden"
-              >
-                <RiAddLine className="size-5" aria-hidden="true" />
-              </Button>
             </div>
           </div>
         </div>
@@ -739,6 +743,52 @@ export default function AccountsPage() {
                     const institutionDisplayNames = sankeyInstitutions.map(
                       (inst) => institutionLabels[inst] || inst,
                     )
+
+                    // Calculate total value for each asset class and sort by value descending
+                    const assetClassTotals = [
+                      {
+                        id: "U.S. Stocks",
+                        value: filteredAccounts.reduce(
+                          (sum, acc) =>
+                            sum +
+                            (acc.totalValue * acc.assetAllocation.usStocks) /
+                              100,
+                          0,
+                        ),
+                      },
+                      {
+                        id: "Non-U.S. Stocks",
+                        value: filteredAccounts.reduce(
+                          (sum, acc) =>
+                            sum +
+                            (acc.totalValue * acc.assetAllocation.nonUsStocks) /
+                              100,
+                          0,
+                        ),
+                      },
+                      {
+                        id: "Fixed Income",
+                        value: filteredAccounts.reduce(
+                          (sum, acc) =>
+                            sum +
+                            (acc.totalValue * acc.assetAllocation.fixedIncome) /
+                              100,
+                          0,
+                        ),
+                      },
+                      {
+                        id: "Cash",
+                        value: filteredAccounts.reduce(
+                          (sum, acc) =>
+                            sum +
+                            (acc.totalValue * acc.assetAllocation.cash) / 100,
+                          0,
+                        ),
+                      },
+                    ]
+                      .filter((asset) => asset.value > 0)
+                      .sort((a, b) => b.value - a.value)
+
                     return (
                       <SankeyChartHighcharts
                         data={{
@@ -753,11 +803,11 @@ export default function AccountsPage() {
                             ...filteredAccounts.map((account) => ({
                               id: account.name,
                             })),
-                            // Asset type nodes (rightmost)
-                            { id: "U.S. Stocks" },
-                            { id: "Non-U.S. Stocks" },
-                            { id: "Fixed Income" },
-                            { id: "Cash" },
+                            // Asset type nodes (rightmost) - sorted by value descending with offset for ordering
+                            ...assetClassTotals.map((asset, index) => ({
+                              id: asset.id,
+                              offset: index, // Forces vertical ordering: 0 = top, 1 = second, etc.
+                            })),
                           ],
                           links: [
                             // Portfolio Total to Institutions - aggregate by institution
@@ -907,7 +957,7 @@ export default function AccountsPage() {
               }}
               className="flex w-full items-center justify-center gap-2 text-base"
             >
-              Add Account
+              Add account
               <RiAddLine
                 className="-mr-0.5 size-5 shrink-0"
                 aria-hidden="true"

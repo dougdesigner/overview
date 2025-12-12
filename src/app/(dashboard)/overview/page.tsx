@@ -25,6 +25,11 @@ export default function OverviewPage() {
     isLoading,
   } = usePortfolioStore()
 
+  // Debug logging
+  console.log("[Overview] isLoading:", isLoading)
+  console.log("[Overview] accounts:", accounts.length, accounts)
+  console.log("[Overview] holdings:", holdings.length)
+
   // Get exposure calculations for asset breakdown (unused but kept for future use)
   useExposureCalculations()
 
@@ -71,29 +76,9 @@ export default function OverviewPage() {
 
   return (
     <main className="min-h-[calc(100vh-180px)]">
-      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-        <div>
-          <h1 className="text-2xl font-semibold text-gray-900 dark:text-gray-50">
-            Overview
-          </h1>
-          <p className="text-gray-500 dark:text-gray-400 sm:text-sm/6">
-            Portfolio value and asset class distribution at a glance
-          </p>
-        </div>
-        {/* <Button
-          onClick={() => setIsOpen(true)}
-          className="flex items-center gap-2 text-base sm:text-sm"
-        >
-          Create Ticket
-          <RiAddLine className="-mr-0.5 size-5 shrink-0" aria-hidden="true" />
-        </Button>
-        <TicketDrawer open={isOpen} onOpenChange={setIsOpen} /> */}
-      </div>
-      {/* <Divider /> */}
-
       {isLoading ? (
         // Loading state
-        <div className="mt-6 animate-pulse">
+        <div className="animate-pulse">
           <div className="mb-6 h-48 rounded-lg bg-gray-100 dark:bg-gray-800"></div>
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
             <div className="h-32 rounded-lg bg-gray-100 dark:bg-gray-800"></div>
@@ -104,12 +89,10 @@ export default function OverviewPage() {
         </div>
       ) : accounts.length === 0 ? (
         // Empty state with onboarding flow
-        <div className="mt-6">
-          <OnboardingFlow />
-        </div>
+        <OnboardingFlow />
       ) : (
         <>
-          <dl className="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-1 lg:grid-cols-1">
+          <dl className="grid grid-cols-1 gap-6 sm:grid-cols-1 lg:grid-cols-1">
             {/* Portfolio Value Card */}
             <PortfolioValueCard
               value={totalPortfolioValue}
@@ -210,7 +193,7 @@ export default function OverviewPage() {
           </dl>
           {/* <DataTable data={tickets} columns={columns} /> */}
 
-          <dl className="mt-6 grid grid-cols-2 gap-6 sm:grid-cols-4 lg:grid-cols-4">
+          <dl className="mt-6 grid grid-cols-2 gap-6 lg:grid-cols-4">
             {sortedAssetClasses.map((ac) => (
               <KPICard
                 key={ac.name}

@@ -18,12 +18,23 @@ import { getKnownETFName } from "@/lib/knownETFNames"
 import { extractDomainsFromCompanyName } from "@/lib/logoUtils"
 import { getStockPrice } from "@/lib/stockPriceService"
 import { RiAddLine } from "@remixicon/react"
-import { useSearchParams } from "next/navigation"
+import { useRouter, useSearchParams } from "next/navigation"
 import React, { Suspense, useMemo } from "react"
 
 function HoldingsContent() {
   const searchParams = useSearchParams()
+  const router = useRouter()
   const [isOpen, setIsOpen] = React.useState(false)
+
+  // Auto-open drawer when ?add=true is in URL
+  React.useEffect(() => {
+    if (searchParams.get("add") === "true") {
+      setIsOpen(true)
+      setEditingHolding(null) // Ensure create mode
+      // Clean up URL param
+      router.replace("/holdings")
+    }
+  }, [searchParams, router])
   const [editingHolding, setEditingHolding] = React.useState<Holding | null>(
     null,
   )
@@ -41,6 +52,10 @@ function HoldingsContent() {
     deleteHolding,
     refreshETFNames,
   } = usePortfolioStore()
+
+  // Debug logging
+  console.log('[Holdings] storeAccounts:', storeAccounts.length, storeAccounts)
+  console.log('[Holdings] holdings:', holdings.length)
 
   // Convert accounts to the format expected by components
   const accounts = useMemo(
@@ -355,7 +370,7 @@ function HoldingsContent() {
               onClick={() => setIsOpen(true)}
               className="hidden items-center gap-2 sm:flex sm:text-sm"
             >
-              Add Holdings
+              Add holdings
               <RiAddLine
                 className="-mr-0.5 size-5 shrink-0"
                 aria-hidden="true"
@@ -419,13 +434,6 @@ function HoldingsContent() {
                 className="w-auto sm:w-[200px]"
                 compactOnMobile={true}
               />
-              {/* Add button - mobile only */}
-              <Button
-                onClick={() => setIsOpen(true)}
-                className="size-9 p-0 sm:hidden"
-              >
-                <RiAddLine className="size-5" aria-hidden="true" />
-              </Button>
             </div>
           </div>
         </div>
@@ -529,7 +537,7 @@ function HoldingsContent() {
             onClick={() => setIsOpen(true)}
             className="flex w-full items-center justify-center gap-2 text-base"
           >
-            Add Holdings
+            Add holdings
             <RiAddLine className="-mr-0.5 size-5 shrink-0" aria-hidden="true" />
           </Button>
         </div>

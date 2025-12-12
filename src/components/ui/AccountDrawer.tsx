@@ -9,6 +9,7 @@ import {
   DrawerHeader,
   DrawerTitle,
 } from "@/components/Drawer"
+import { Icon } from "@iconify/react"
 import {
   Select,
   SelectContent,
@@ -295,12 +296,21 @@ export function AccountDrawer({
       <DrawerContent className="overflow-x-hidden sm:max-w-lg">
         <DrawerHeader>
           <DrawerTitle>
-            <p>{title || (mode === "edit" ? "Edit Account" : "Add Account")}</p>
-            <span className="text-sm font-normal text-gray-500 dark:text-gray-500">
-              {mode === "edit"
-                ? "Update account information"
-                : "Create a new account to organize your holdings"}
-            </span>
+            <div className="flex items-center gap-4">
+              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-blue-100 dark:bg-blue-900/30">
+                <Icon icon="mdi:bank" className="h-5 w-5 text-blue-600 dark:text-blue-400" />
+              </div>
+              <div>
+                <div className="font-medium text-gray-900 dark:text-gray-50">
+                  {title || (mode === "edit" ? "Edit account" : "Add account")}
+                </div>
+                <div className="text-sm text-gray-500 dark:text-gray-400">
+                  {mode === "edit"
+                    ? "Update account information"
+                    : "Create a new account to organize your holdings"}
+                </div>
+              </div>
+            </div>
           </DrawerTitle>
         </DrawerHeader>
 
@@ -401,7 +411,7 @@ export function AccountDrawer({
             <Button variant="secondary">Cancel</Button>
           </DrawerClose>
           <Button onClick={handleSubmit} disabled={!isFormValid()}>
-            {mode === "edit" ? "Save Changes" : "Add Account"}
+            {mode === "edit" ? "Save changes" : "Add account"}
           </Button>
         </DrawerFooter>
       </DrawerContent>
