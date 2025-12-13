@@ -251,7 +251,7 @@ export const createColumns = ({
           className="flex items-center gap-1 font-medium hover:text-gray-900 dark:hover:text-gray-50"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
-          Ticker
+          Symbol
           {column.getIsSorted() === "asc" && (
             <RiArrowUpSLine className="h-4 w-4" />
           )}
@@ -291,7 +291,7 @@ export const createColumns = ({
     enableSorting: true,
     meta: {
       className: "text-left",
-      displayName: "Ticker",
+      displayName: "Symbol",
     },
   },
   {
