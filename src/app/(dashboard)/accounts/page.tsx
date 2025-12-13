@@ -329,13 +329,20 @@ function AccountsContent() {
 
       {/* Sticky Institution Filter - Bottom positioned */}
       {accounts.length > 0 && (
-        <div
-          className={`fixed inset-x-0 bottom-20 z-50 mx-2 transition-[transform,opacity] duration-300 ease-out sm:left-1/2 sm:right-auto sm:mx-0 sm:w-full sm:max-w-2xl sm:-translate-x-1/2 sm:bottom-6 sm:px-6 ${
-            isFilterSticky
-              ? "translate-y-0 opacity-100"
-              : "pointer-events-none translate-y-4 opacity-0"
-          }`}
-        >
+        <>
+          {/* Bottom gradient - fades content behind filter (mobile only) */}
+          <div
+            className={`pointer-events-none fixed inset-x-0 bottom-0 z-40 h-40 bg-gradient-to-t from-white via-white/80 to-transparent transition-opacity duration-300 sm:hidden dark:from-gray-950 dark:via-gray-950/80 ${
+              isFilterSticky ? "opacity-100" : "opacity-0"
+            }`}
+          />
+          <div
+            className={`fixed inset-x-0 bottom-20 z-50 mx-2 transition-[transform,opacity] duration-300 ease-out sm:left-1/2 sm:right-auto sm:mx-0 sm:w-full sm:max-w-2xl sm:-translate-x-1/2 sm:bottom-6 sm:px-6 ${
+              isFilterSticky
+                ? "translate-y-0 opacity-100"
+                : "pointer-events-none translate-y-4 opacity-0"
+            }`}
+          >
           <div className="flex items-center justify-between rounded-lg border border-gray-200 bg-white/95 px-4 py-3 shadow-lg backdrop-blur-sm dark:border-gray-800 dark:bg-gray-950/95">
             <div className="text-left">
               <div className="text-base font-medium text-gray-900 dark:text-gray-50">
@@ -398,6 +405,7 @@ function AccountsContent() {
             </div>
           </div>
         </div>
+        </>
       )}
 
       {/* Portfolio Summary and Filter - Only show when there are accounts */}
