@@ -185,11 +185,11 @@ function Navigation() {
 
           <Dialog.Portal>
             {/* Overlay - stops above the mobile nav */}
-            <Dialog.Overlay className="fixed inset-x-0 top-0 bottom-[4.5rem] z-40 bg-black/50 data-[state=open]:animate-dialogOverlayShow" />
+            <Dialog.Overlay className="fixed inset-x-0 top-0 bottom-20 z-[60] bg-black/50 data-[state=open]:animate-dialogOverlayShow" />
 
             {/* Bottom Sheet Content - positioned above mobile nav */}
             <Dialog.Content
-              className="fixed inset-x-0 bottom-[4.5rem] z-40 mx-2 rounded-2xl border border-gray-200 bg-white shadow-lg data-[state=open]:animate-bottomSheetSlideUp data-[state=closed]:animate-bottomSheetSlideDown dark:border-gray-800 dark:bg-gray-950"
+              className="fixed inset-x-0 bottom-20 z-[60] mx-2 rounded-2xl border border-gray-200 bg-white shadow-lg data-[state=open]:animate-bottomSheetSlideUp data-[state=closed]:animate-bottomSheetSlideDown dark:border-gray-800 dark:bg-gray-950"
             >
               <Dialog.Title className="sr-only">Add new item</Dialog.Title>
               <Dialog.Description className="sr-only">
