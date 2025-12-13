@@ -189,7 +189,7 @@ function Navigation() {
 
             {/* Bottom Sheet Content - positioned above mobile nav */}
             <Dialog.Content
-              className="fixed inset-x-0 bottom-20 z-[60] mx-2 rounded-2xl border border-gray-200 bg-white shadow-lg data-[state=open]:animate-bottomSheetSlideUp data-[state=closed]:animate-bottomSheetSlideDown dark:border-gray-800 dark:bg-gray-950"
+              className="fixed inset-x-0 bottom-20 z-[60] mx-2 rounded-lg border border-gray-200 bg-white shadow-lg data-[state=open]:animate-bottomSheetSlideUp data-[state=closed]:animate-bottomSheetSlideDown dark:border-gray-800 dark:bg-gray-950"
             >
               <Dialog.Title className="sr-only">Add new item</Dialog.Title>
               <Dialog.Description className="sr-only">

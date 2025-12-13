@@ -330,7 +330,7 @@ function AccountsContent() {
       {/* Sticky Institution Filter - Bottom positioned */}
       {accounts.length > 0 && (
         <div
-          className={`fixed bottom-20 left-1/2 z-50 w-full max-w-2xl -translate-x-1/2 px-4 transition-[transform,opacity] duration-300 ease-out sm:bottom-6 sm:px-6 ${
+          className={`fixed inset-x-0 bottom-20 z-50 mx-2 transition-[transform,opacity] duration-300 ease-out sm:left-1/2 sm:right-auto sm:mx-0 sm:w-full sm:max-w-2xl sm:-translate-x-1/2 sm:bottom-6 sm:px-6 ${
             isFilterSticky
               ? "translate-y-0 opacity-100"
               : "pointer-events-none translate-y-4 opacity-0"
