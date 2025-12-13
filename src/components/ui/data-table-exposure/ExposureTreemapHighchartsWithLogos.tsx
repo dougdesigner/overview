@@ -474,7 +474,7 @@ export function ExposureTreemapHighchartsWithLogos({
     }
   }
 
-  // Helper function to get logo background and scale for special tickers (Google, Apple)
+  // Helper function to get logo background and scale for special tickers (Google, Apple, Figma)
   const getLogoStyle = (ticker: string) => {
     const upperTicker = ticker?.toUpperCase() || ""
     if (upperTicker === "GOOGL" || upperTicker === "GOOG") {
@@ -482,6 +482,9 @@ export function ExposureTreemapHighchartsWithLogos({
     }
     if (upperTicker === "AAPL") {
       return { background: "#ebebeb", scale: "75%" }
+    }
+    if (upperTicker === "FIGM" || upperTicker === "FIG") {
+      return { background: "#f1f3f9", scale: "75%" }
     }
     return { background: "#f1f3fa", scale: "100%" }
   }

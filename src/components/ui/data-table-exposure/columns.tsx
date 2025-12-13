@@ -32,7 +32,7 @@ const formatPercentage = (value: number) => {
 // Cache for company domains to avoid repeated API calls
 const domainCache = new Map<string, string>()
 
-// Helper function for special ticker logos (Google, Apple need padding)
+// Helper function for special ticker logos (Google, Apple, Figma need padding)
 const getLogoStyle = (ticker: string) => {
   const upperTicker = ticker?.toUpperCase() || ""
   if (upperTicker === "GOOGL" || upperTicker === "GOOG") {
@@ -40,6 +40,9 @@ const getLogoStyle = (ticker: string) => {
   }
   if (upperTicker === "AAPL") {
     return { background: "#ebebeb", needsPadding: true }
+  }
+  if (upperTicker === "FIGM" || upperTicker === "FIG") {
+    return { background: "#f1f3f9", needsPadding: true }
   }
   return { background: "#f1f3fa", needsPadding: false }
 }

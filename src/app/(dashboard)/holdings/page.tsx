@@ -233,28 +233,34 @@ function HoldingsContent() {
               `Using known ETF name for ${holding.ticker}: ${knownName}`,
             )
           } else {
-            // Check if it's likely an ETF based on ticker format
-            const isLikelyETF =
-              holding.ticker.length >= 2 &&
-              holding.ticker.length <= 5 &&
-              holding.ticker === holding.ticker.toUpperCase()
+            // If we have a company name from Alpha Vantage, use it directly
+            if (holding.companyName) {
+              name = holding.companyName
+              console.log(`Using Alpha Vantage name for ${holding.ticker}: ${name}`)
+            } else {
+              // Check if it's likely an ETF based on ticker format
+              const isLikelyETF =
+                holding.ticker.length >= 2 &&
+                holding.ticker.length <= 5 &&
+                holding.ticker === holding.ticker.toUpperCase()
 
-            if (isLikelyETF) {
-              // Try to fetch from API for unknown ETFs
-              const etfNameResult = await getETFName(holding.ticker)
-              if (etfNameResult && etfNameResult !== `${holding.ticker} ETF`) {
-                name = etfNameResult
-                type = "fund"
-                console.log(
-                  `Fetched ETF name for ${holding.ticker}: ${etfNameResult}`,
-                )
+              if (isLikelyETF) {
+                // Try to fetch from API for unknown ETFs
+                const etfNameResult = await getETFName(holding.ticker)
+                if (etfNameResult && etfNameResult !== `${holding.ticker} ETF`) {
+                  name = etfNameResult
+                  type = "fund"
+                  console.log(
+                    `Fetched ETF name for ${holding.ticker}: ${etfNameResult}`,
+                  )
+                } else {
+                  // Default name for unknown ETFs
+                  name = holding.ticker
+                }
               } else {
-                // Default name for unknown ETFs
+                // No company name provided - use ticker as fallback
                 name = holding.ticker
               }
-            } else {
-              // Not an ETF - use company name from Alpha Vantage if available
-              name = holding.companyName || holding.ticker
             }
           }
         }
