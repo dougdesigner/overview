@@ -11,6 +11,7 @@ import {
 } from "@/components/Select"
 import { popularTickers, type TickerOption } from "@/lib/tickerData"
 import { cx } from "@/lib/utils"
+import { Icon } from "@iconify/react"
 import { useState, useRef, useEffect } from "react"
 import { useDebouncedCallback } from "use-debounce"
 import { TickerLogo } from "./TickerLogo"
@@ -19,6 +20,7 @@ interface TickerSelectorProps {
   value: string
   onValueChange: (value: string) => void
   onTickerSelect?: (ticker: { symbol: string; name: string; type: string }) => void
+  onManualEntry?: () => void
   placeholder?: string
   className?: string
   id?: string
@@ -28,6 +30,7 @@ export function TickerSelector({
   value,
   onValueChange,
   onTickerSelect,
+  onManualEntry,
   placeholder = "Select a ticker",
   className,
   id,
@@ -316,6 +319,23 @@ export function TickerSelector({
               </SelectItem>
             ))}
           </>
+        )}
+
+        {/* Manual Entry Option */}
+        {onManualEntry && (
+          <div className="mt-2 border-t border-gray-200 px-2 pt-2 dark:border-gray-800">
+            <button
+              type="button"
+              onClick={() => {
+                onManualEntry()
+                setIsOpen(false)
+              }}
+              className="flex w-full items-center gap-2 rounded-md px-2 py-2 text-sm text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-800"
+            >
+              <Icon icon="mdi:plus-circle-outline" className="size-4" />
+              <span>Can't find it? Add manually</span>
+            </button>
+          </div>
         )}
       </SelectContent>
     </Select>

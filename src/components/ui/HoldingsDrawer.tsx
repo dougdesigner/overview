@@ -264,32 +264,27 @@ export function HoldingsDrawer({
               </TabsList>
 
               <TabsContent value="stocks-funds" className="mt-4 space-y-4">
-                {/* Manual Entry Toggle */}
-                <div className="flex items-center justify-between rounded-lg border border-gray-200 p-3 dark:border-gray-800">
-                  <div>
-                    <Label className="font-medium">Manual Entry</Label>
-                    <p className="text-sm text-gray-500 dark:text-gray-400">
-                      For unlisted or foreign stocks
-                    </p>
-                  </div>
-                  <Switch
-                    checked={formData.isManualEntry || false}
-                    onCheckedChange={(checked) =>
-                      handleUpdateForm({
-                        isManualEntry: checked,
-                        // Reset ticker when switching modes
-                        ticker: "",
-                        companyName: "",
-                        pricePerShare: undefined,
-                      })
-                    }
-                  />
-                </div>
-
                 {formData.isManualEntry ? (
                   <>
+                    {/* Back to search link */}
+                    <button
+                      type="button"
+                      onClick={() =>
+                        handleUpdateForm({
+                          isManualEntry: false,
+                          ticker: "",
+                          companyName: "",
+                          pricePerShare: undefined,
+                        })
+                      }
+                      className="flex items-center gap-1 text-sm text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300"
+                    >
+                      <Icon icon="mdi:arrow-left" className="size-4" />
+                      Back to search
+                    </button>
+
                     {/* Manual Entry Fields */}
-                    <FormField label="Ticker Symbol" required>
+                    <FormField label="Symbol" required>
                       <Input
                         name="ticker"
                         value={formData.ticker || ""}
@@ -404,7 +399,7 @@ export function HoldingsDrawer({
                 ) : (
                   <>
                     {/* Predefined Ticker Selector */}
-                    <FormField label="Ticker Symbol" required>
+                    <FormField label="Symbol" required>
                       <TickerSelector
                         value={formData.ticker || ""}
                         onValueChange={(value) =>
@@ -416,7 +411,15 @@ export function HoldingsDrawer({
                             companyName: ticker.name,
                           })
                         }
-                        placeholder="Select or enter ticker"
+                        onManualEntry={() =>
+                          handleUpdateForm({
+                            isManualEntry: true,
+                            ticker: "",
+                            companyName: "",
+                            pricePerShare: undefined,
+                          })
+                        }
+                        placeholder="Select or search"
                       />
                     </FormField>
 
