@@ -200,6 +200,7 @@ export default function AccountCard({
             colors={["blue", "cyan", "amber", "emerald"]}
             showLabels={false}
             segmentLabels={allocationLabels}
+            animate
           />
         </div>
       )}

@@ -410,6 +410,12 @@ export function HoldingsDrawer({
                         onValueChange={(value) =>
                           handleUpdateForm({ ticker: value })
                         }
+                        onTickerSelect={(ticker) =>
+                          handleUpdateForm({
+                            ticker: ticker.symbol,
+                            companyName: ticker.name,
+                          })
+                        }
                         placeholder="Select or enter ticker"
                       />
                     </FormField>

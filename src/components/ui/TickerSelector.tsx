@@ -18,6 +18,7 @@ import { TickerLogo } from "./TickerLogo"
 interface TickerSelectorProps {
   value: string
   onValueChange: (value: string) => void
+  onTickerSelect?: (ticker: { symbol: string; name: string; type: string }) => void
   placeholder?: string
   className?: string
   id?: string
@@ -26,6 +27,7 @@ interface TickerSelectorProps {
 export function TickerSelector({
   value,
   onValueChange,
+  onTickerSelect,
   placeholder = "Select a ticker",
   className,
   id,
@@ -213,16 +215,27 @@ export function TickerSelector({
     <Select
       value={value}
       onValueChange={(val) => {
-        // Check if selected from API results (not in popularTickers)
-        const isFromPopular = popularTickers.some((t) => t.symbol === val)
-        if (!isFromPopular) {
-          const apiTicker = apiResults.find((t) => t.symbol === val)
-          if (apiTicker) {
-            setSelectedApiTicker(apiTicker)
-          }
+        // Find full ticker data from API results or popular tickers
+        const apiTicker = apiResults.find((t) => t.symbol === val)
+        const popularTicker = popularTickers.find((t) => t.symbol === val)
+        const tickerData = apiTicker || popularTicker
+
+        // Store API ticker for display purposes
+        if (apiTicker) {
+          setSelectedApiTicker(apiTicker)
         } else {
-          setSelectedApiTicker(null) // Clear if selecting from static list
+          setSelectedApiTicker(null)
         }
+
+        // Call onTickerSelect with full ticker data if available
+        if (tickerData && onTickerSelect) {
+          onTickerSelect({
+            symbol: tickerData.symbol,
+            name: tickerData.name,
+            type: tickerData.type,
+          })
+        }
+
         onValueChange(val)
         setSearch("") // Clear search after selection
         setApiResults([]) // Clear API results

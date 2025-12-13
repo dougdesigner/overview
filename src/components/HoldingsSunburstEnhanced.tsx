@@ -64,14 +64,13 @@ export function HoldingsSunburstEnhanced({
 
   // Responsive height: 350 on mobile (<640px), use prop height on desktop
   const [responsiveHeight, setResponsiveHeight] = useState(height)
-  // Hide data labels on small screens - rely on legend and tooltips
-  const [showDataLabels, setShowDataLabels] = useState(true)
+  // Hide data labels - rely on legend and tooltips
+  const [showDataLabels, setShowDataLabels] = useState(false)
 
   useEffect(() => {
     const updateResponsive = () => {
       const isMobile = window.innerWidth < 640
       setResponsiveHeight(isMobile ? 350 : height)
-      setShowDataLabels(!isMobile)
     }
     updateResponsive()
     window.addEventListener("resize", updateResponsive)
@@ -967,7 +966,7 @@ export function HoldingsSunburstEnhanced({
       },
       style: {
         color: isDark ? "#f3f4f6" : "#111827",
-        fontSize: "12px",
+        fontSize: "14px",
       },
       pointFormatter: function () {
         const point = this as any
@@ -976,9 +975,9 @@ export function HoldingsSunburstEnhanced({
         const ticker = point.ticker || point.name
         const fullName = point.fullName || ""
 
-        return `<div style="padding: 2px;">
+        return `<div style="padding: 2px; font-size: 14px;">
                   <div style="font-weight: 600; margin-bottom: 4px;">${ticker}</div>
-                  ${fullName ? `<div style="font-size: 11px; color: ${isDark ? "#9ca3af" : "#6b7280"}">${fullName}</div>` : ""}
+                  ${fullName ? `<div style="font-size: 12px; color: ${isDark ? "#9ca3af" : "#6b7280"}">${fullName}</div>` : ""}
                   <div>Value: <b>${formatValue(value)}</b></div>
                   <div>Portfolio: <b>${percentage}%</b></div>
                 </div>`
@@ -1059,7 +1058,7 @@ export function HoldingsSunburstEnhanced({
       borderWidth: 1,
       style: {
         color: isDark ? "#f3f4f6" : "#111827",
-        fontSize: "12px",
+        fontSize: "14px",
       },
       pointFormatter: function () {
         const point = this as any
@@ -1069,9 +1068,9 @@ export function HoldingsSunburstEnhanced({
         const ticker = point.ticker
         const fullName = point.fullName
 
-        return `<div style="padding: 2px;">
+        return `<div style="padding: 2px; font-size: 14px;">
                   <div style="font-weight: 600; margin-bottom: 4px;">${name}</div>
-                  ${fullName && name !== fullName ? `<div style="font-size: 11px; color: ${isDark ? "#9ca3af" : "#6b7280"}">${fullName}</div>` : ""}
+                  ${fullName && name !== fullName ? `<div style="font-size: 12px; color: ${isDark ? "#9ca3af" : "#6b7280"}">${fullName}</div>` : ""}
                   <div>Value: <b>${formatValue(value)}</b></div>
                   <div>Portfolio: <b>${percentage}%</b></div>
                 </div>`
@@ -1136,9 +1135,9 @@ export function HoldingsSunburstEnhanced({
       },
       tooltip: {
         useHTML: true,
-        headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+        headerFormat: '<span style="font-size:14px">{series.name}</span><br>',
         pointFormat:
-          '<span style="color:{point.color}">{point.name}</span>: ' +
+          '<span style="color:{point.color}; font-size:14px">{point.name}</span>: ' +
           "<b>${point.y:,.0f}</b> ({point.percentage:.1f}%)<br/>",
         backgroundColor: isDark ? "#1f2937" : "#ffffff",
         borderColor: isDark ? "#4b5563" : "#e5e7eb",
@@ -1146,6 +1145,7 @@ export function HoldingsSunburstEnhanced({
         borderWidth: 1,
         style: {
           color: isDark ? "#f3f4f6" : "#111827",
+          fontSize: "14px",
         },
       },
       series: [

@@ -253,8 +253,8 @@ function HoldingsContent() {
                 name = holding.ticker
               }
             } else {
-              // Not an ETF, just use ticker as name
-              name = holding.ticker
+              // Not an ETF - use company name from Alpha Vantage if available
+              name = holding.companyName || holding.ticker
             }
           }
         }
@@ -271,6 +271,16 @@ function HoldingsContent() {
         } catch {
           console.log(
             `Error fetching price for ${holding.ticker}, using default`,
+          )
+        }
+
+        // For API-searched stocks, derive domain from company name for logo lookup
+        if (holding.companyName && !domain) {
+          const domains = extractDomainsFromCompanyName(holding.companyName)
+          domain = domains[0]
+          console.log(
+            `API stock - extracted domain from "${holding.companyName}":`,
+            domain,
           )
         }
       }
