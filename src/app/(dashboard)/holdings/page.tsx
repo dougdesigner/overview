@@ -608,8 +608,17 @@ export default function HoldingsPage() {
   return (
     <Suspense
       fallback={
-        <div className="flex h-full items-center justify-center">
-          <div className="text-sm text-gray-500">Loading...</div>
+        <div className="animate-pulse">
+          {/* Chart area skeleton */}
+          <div className="mb-6 h-80 rounded-lg bg-gray-100 dark:bg-gray-800"></div>
+          {/* Table skeleton - header + rows */}
+          <div className="space-y-3">
+            <div className="h-12 rounded-lg bg-gray-100 dark:bg-gray-800"></div>
+            <div className="h-16 rounded-lg bg-gray-100 dark:bg-gray-800"></div>
+            <div className="h-16 rounded-lg bg-gray-100 dark:bg-gray-800"></div>
+            <div className="h-16 rounded-lg bg-gray-100 dark:bg-gray-800"></div>
+            <div className="h-16 rounded-lg bg-gray-100 dark:bg-gray-800"></div>
+          </div>
         </div>
       }
     >

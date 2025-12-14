@@ -411,7 +411,20 @@ export default function ExposurePage() {
 
       {/* Exposure Table */}
       <div className="pt-6" id="exposure-section">
-        {holdingsLoading ? null : portfolioHoldings.length === 0 ? ( // Loading state is already handled above
+        {holdingsLoading ? (
+          <div className="animate-pulse">
+            {/* Chart area skeleton */}
+            <div className="mb-6 h-80 rounded-lg bg-gray-100 dark:bg-gray-800"></div>
+            {/* Table skeleton */}
+            <div className="space-y-3">
+              <div className="h-12 rounded-lg bg-gray-100 dark:bg-gray-800"></div>
+              <div className="h-16 rounded-lg bg-gray-100 dark:bg-gray-800"></div>
+              <div className="h-16 rounded-lg bg-gray-100 dark:bg-gray-800"></div>
+              <div className="h-16 rounded-lg bg-gray-100 dark:bg-gray-800"></div>
+              <div className="h-16 rounded-lg bg-gray-100 dark:bg-gray-800"></div>
+            </div>
+          </div>
+        ) : portfolioHoldings.length === 0 ? (
           // Empty state
           <div className="py-12 text-center">
             {accounts.length === 0 ? (

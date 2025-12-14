@@ -1040,8 +1040,15 @@ export default function AccountsPage() {
   return (
     <Suspense
       fallback={
-        <div className="flex min-h-[400px] items-center justify-center">
-          <div className="text-gray-500">Loading...</div>
+        <div className="animate-pulse">
+          {/* Chart area skeleton */}
+          <div className="mb-6 h-80 rounded-lg bg-gray-100 dark:bg-gray-800"></div>
+          {/* Account cards grid skeleton */}
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="h-48 rounded-lg bg-gray-100 dark:bg-gray-800"></div>
+            <div className="h-48 rounded-lg bg-gray-100 dark:bg-gray-800"></div>
+            <div className="h-48 rounded-lg bg-gray-100 dark:bg-gray-800"></div>
+          </div>
         </div>
       }
     >
