@@ -62,6 +62,11 @@ export function HoldingsSunburstEnhanced({
   const [isClient, setIsClient] = useState(false)
   const [modulesLoaded, setModulesLoaded] = useState(false)
 
+  // Touch device detection for double-tap to drill down
+  const isTouchDevice = useRef(false)
+  const lastTapTime = useRef(0)
+  const lastTapPointId = useRef<string | null>(null)
+
   // Responsive height: 350 on mobile (<640px), use prop height on desktop
   const [responsiveHeight, setResponsiveHeight] = useState(height)
   // Hide data labels - rely on legend and tooltips
@@ -126,6 +131,15 @@ export function HoldingsSunburstEnhanced({
     }
     setIsClient(true)
     setModulesLoaded(true)
+  }, [])
+
+  // Detect touch device on first touch interaction
+  useEffect(() => {
+    const handleTouchStart = () => {
+      isTouchDevice.current = true
+    }
+    window.addEventListener("touchstart", handleTouchStart, { once: true })
+    return () => window.removeEventListener("touchstart", handleTouchStart)
   }, [])
 
   // Reset drilled state when chart type or selected account changes
@@ -866,6 +880,48 @@ export function HoldingsSunburstEnhanced({
         data: transformToSunburstData(),
         allowTraversingTree: true,
         cursor: "pointer",
+        point: {
+          events: {
+            click: function (
+              this: Highcharts.Point,
+              _event: Highcharts.PointClickEventObject,
+            ) {
+              // On desktop, allow default behavior (single click drills down)
+              if (!isTouchDevice.current) {
+                return true // Let Highcharts handle it
+              }
+
+              // On touch device, require double-tap to drill down
+              const now = Date.now()
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any
+              const pointId = (this as any).id || this.name
+
+              // Check if this is a double-tap on the same point
+              if (
+                lastTapPointId.current === pointId &&
+                now - lastTapTime.current < 300
+              ) {
+                // Double-tap detected - drill down
+                lastTapTime.current = 0
+                lastTapPointId.current = null
+
+                // Manually trigger drill-down if point has children
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                if ((this as any).node?.children?.length) {
+                  const chart = this.series.chart
+                  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                  ;(chart.series[0] as any).setRootNode(pointId, true)
+                }
+                return false // Prevent default
+              }
+
+              // First tap - record it, show tooltip only (tooltip shows automatically)
+              lastTapTime.current = now
+              lastTapPointId.current = pointId
+              return false // Prevent drill-down on first tap
+            },
+          },
+        },
         dataLabels: {
           enabled: showDataLabels,
           format: "{point.name}",
