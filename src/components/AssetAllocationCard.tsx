@@ -32,6 +32,7 @@ interface AssetAllocationCardProps {
   data?: AssetAllocationData[]
   defaultTab?: string
   className?: string
+  sectionId?: string
 }
 
 // Default data - same as original overview page
@@ -239,6 +240,7 @@ const AssetAllocationCard = React.forwardRef<
       data,
       defaultTab,
       className,
+      sectionId = "portfolio-distribution-section",
       ...props
     },
     forwardedRef,
@@ -270,11 +272,17 @@ const AssetAllocationCard = React.forwardRef<
     return (
       <Card
         ref={forwardedRef}
+        id={sectionId}
         className={cx("overflow-hidden p-0", className)}
         {...props}
       >
         <div className="px-6 pt-6">
-          <h3 className="text-base font-medium text-gray-900 dark:text-gray-50">
+          <h3
+            className="cursor-pointer text-base font-medium text-gray-900 transition-colors hover:text-blue-600 dark:text-gray-50 dark:hover:text-blue-400"
+            onClick={() => {
+              document.getElementById(sectionId)?.scrollIntoView({ behavior: "smooth" })
+            }}
+          >
             {title}
           </h3>
           <p className="mt-1 text-sm/6 text-gray-500 dark:text-gray-500">

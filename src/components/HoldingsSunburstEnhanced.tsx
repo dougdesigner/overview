@@ -20,8 +20,8 @@ import {
   RiDonutChartLine,
   RiDownloadLine,
   RiFullscreenLine,
-  RiSunLine,
 } from "@remixicon/react"
+import { Icon } from "@iconify/react"
 import Highcharts from "highcharts"
 import HighchartsReact from "highcharts-react-official"
 import HighchartsSunburst from "highcharts/modules/sunburst"
@@ -1458,7 +1458,7 @@ export function HoldingsSunburstEnhanced({
               {chartType === "sunburst" ? (
                 <RiDonutChartLine className="size-4" aria-hidden="true" />
               ) : (
-                <RiSunLine className="size-4" aria-hidden="true" />
+                <Icon icon="carbon:chart-sunburst" className="size-4" aria-hidden="true" />
               )}
             </Button>
           </Tooltip>

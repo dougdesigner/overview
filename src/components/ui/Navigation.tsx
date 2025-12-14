@@ -149,7 +149,7 @@ function Navigation() {
               : "text-gray-500 dark:text-gray-400"
           )}
         >
-          <Icon icon="ri:home-4-line" className="size-5" />
+          <Icon icon="carbon:home" className="size-5" />
           <span>Home</span>
         </Link>
         <div className="relative">
@@ -199,7 +199,7 @@ function Navigation() {
                 : "text-gray-500 dark:text-gray-400"
             )}
           >
-            <Icon icon="ri:layout-masonry-line" className="size-5" />
+            <Icon icon="carbon:chart-treemap" className="size-5" />
             <span>Stocks</span>
           </Link>
           {getOnboardingDot("/exposure") && (

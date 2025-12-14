@@ -20,11 +20,11 @@ import { Tooltip } from "@/components/Tooltip"
 import { getAssetClassHexColor } from "@/lib/assetClassColors"
 import { toProperCase } from "@/lib/utils"
 import {
+  RiDonutChartLine,
   RiDownloadLine,
   RiFullscreenLine,
   RiLayout4Line,
   RiLayoutMasonryLine,
-  RiPieChartLine,
   RiResetLeftLine,
   RiSettings3Line,
 } from "@remixicon/react"
@@ -1635,7 +1635,7 @@ export function ExposureTreemapHighchartsWithLogos({
               }
             >
               {chartType === "treemap" ? (
-                <RiPieChartLine className="size-4" aria-hidden="true" />
+                <RiDonutChartLine className="size-4" aria-hidden="true" />
               ) : (
                 <RiLayout4Line className="size-4" aria-hidden="true" />
               )}
