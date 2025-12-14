@@ -342,19 +342,30 @@ export function ExposureTable({ holdings, accounts, dataVersion, selectedAccount
     const fetchLogos = async () => {
       if (data.length === 0) return
 
-      // Extract unique tickers from data and subRows
-      const tickers = new Set<string>()
+      // Collect tickers and domains together (domain helps with logo lookup for search-added stocks)
+      const tickerDomainMap = new Map<string, string | undefined>()
       data.forEach((exp) => {
-        if (exp.ticker) tickers.add(exp.ticker)
+        if (exp.ticker) {
+          // Only set domain if not already set (first one wins)
+          if (!tickerDomainMap.has(exp.ticker)) {
+            tickerDomainMap.set(exp.ticker, exp.domain)
+          }
+        }
         exp.subRows?.forEach((sub) => {
-          if (sub.ticker) tickers.add(sub.ticker)
+          if (sub.ticker && !tickerDomainMap.has(sub.ticker)) {
+            tickerDomainMap.set(sub.ticker, sub.domain)
+          }
         })
       })
 
-      if (tickers.size === 0) return
+      if (tickerDomainMap.size === 0) return
 
-      // Batch fetch logos
-      const logos = await getCachedLogoUrls(Array.from(tickers))
+      // Extract parallel arrays for the API call
+      const tickers = Array.from(tickerDomainMap.keys())
+      const domains = tickers.map((t) => tickerDomainMap.get(t))
+
+      // Batch fetch logos with domains
+      const logos = await getCachedLogoUrls(tickers, domains)
       setLogoUrls(logos)
     }
 

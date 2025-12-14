@@ -53,11 +53,13 @@ function TickerCell({
   isETFBreakdown,
   isDirectHolding,
   logoUrls,
+  domain,
 }: {
   ticker: string
   isETFBreakdown?: boolean
   isDirectHolding?: boolean
   logoUrls?: Record<string, string | null>
+  domain?: string // Domain from holding data (for search-added stocks)
 }) {
   const [logoError, setLogoError] = useState(false)
   const [companyDomain, setCompanyDomain] = useState<string | undefined>(
@@ -82,19 +84,29 @@ function TickerCell({
       ? "bg-gray-200 dark:bg-gray-700"
       : getTickerColor(ticker, "stock")
 
-  // If no domain and it's a stock (not an ETF contribution), check overrides first, then fetch from Alpha Vantage
+  // If no domain and it's a stock (not an ETF contribution), check domain prop, overrides, then fetch from Alpha Vantage
   useEffect(() => {
     if (!companyDomain && !logoUrl && treatAsStock && ticker) {
       const upperTicker = ticker.toUpperCase()
 
-      // Check if we have an override first
+      // Priority 1: Use domain from holding data (search-added stocks)
+      if (domain) {
+        const domainUrl = domain.startsWith("http")
+          ? domain
+          : `https://${domain}`
+        domainCache.set(ticker, domainUrl)
+        setCompanyDomain(domainUrl)
+        return
+      }
+
+      // Priority 2: Check if we have an override
       const override = stockDomainOverrides[upperTicker]
       if (override) {
         // Use override, skip API call
         domainCache.set(ticker, `https://${override}`)
         setCompanyDomain(`https://${override}`)
       } else if (!domainCache.has(ticker)) {
-        // Only make API call if no override exists
+        // Priority 3: API lookup - only if no override exists
         // Mark as fetching to avoid duplicate requests
         domainCache.set(ticker, "")
 
@@ -119,7 +131,7 @@ function TickerCell({
           })
       }
     }
-  }, [ticker, isETFBreakdown, companyDomain, logoUrl, treatAsStock])
+  }, [ticker, isETFBreakdown, companyDomain, logoUrl, treatAsStock, domain])
 
   return (
     <div className="flex items-center gap-2">
@@ -280,6 +292,7 @@ export const createColumns = ({
           isETFBreakdown={isETFBreakdown}
           isDirectHolding={isDirectHolding}
           logoUrls={logoUrls}
+          domain={row.original.domain}
         />
       )
     },

@@ -274,6 +274,10 @@ export class EnhancedExposureCalculator {
         if (overview?.name && !existing.name && !holding.isManualEntry) {
           existing.name = overview.name
         }
+        // Preserve domain from any holding that has it
+        if (!existing.domain && holding.domain) {
+          existing.domain = holding.domain
+        }
       } else {
         // For manual entries, always use the user-entered name instead of API response
         const displayName = holding.isManualEntry ? holding.name : (overview?.name || holding.name)
@@ -286,6 +290,7 @@ export class EnhancedExposureCalculator {
           name: displayName,
           sector: sector,
           industry: industry,
+          domain: holding.domain, // Preserve domain for logo lookup
           directShares: 0, // Not calculating shares anymore
           etfExposure: 0,
           totalShares: 0,

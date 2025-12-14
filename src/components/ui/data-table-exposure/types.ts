@@ -21,6 +21,8 @@ export interface StockExposure {
   sourceHolding?: string // Original fund ticker (e.g., "VFFVX")
   sourceETF?: string // ETF from mapping (e.g., "BND")
   assetClass?: string // Asset class for non-stock holdings (e.g., "fixed_income")
+  // For logo lookup (passed from PortfolioHolding)
+  domain?: string // Company domain for logo lookup (from manual entries or search)
 }
 
 export interface ExposureSource {
