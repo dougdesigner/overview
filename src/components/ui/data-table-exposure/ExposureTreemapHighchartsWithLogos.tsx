@@ -83,8 +83,8 @@ type SizingMode = "proportional" | "monosize"
 type TitleMode = "symbol" | "name" | "none"
 type DisplayValue = "market-value" | "pct-stocks" | "pct-portfolio" | "none"
 
-// Magnificent 7 tickers
-const MAG7_TICKERS = ["AAPL", "MSFT", "GOOGL", "GOOG", "AMZN", "NVDA", "META", "TSLA"]
+// Magnificent 7 tickers - may be used for future highlighting feature
+// const MAG7_TICKERS = ["AAPL", "MSFT", "GOOGL", "GOOG", "AMZN", "NVDA", "META", "TSLA"]
 
 // Colors for non-stock holdings (cash, bonds, etc.)
 const CASH_COLOR = getAssetClassHexColor("Cash")   // emerald-500 (#10b981)
@@ -107,6 +107,14 @@ interface PointWithGraphic {
     getBBox: () => { height: number; width: number }
   }
   percentage?: number
+}
+
+// Extended Chart type with export methods from exporting/export-data modules
+interface ChartWithExporting extends Highcharts.Chart {
+  print: () => void
+  exportChart: (options: { type: string }) => void
+  downloadCSV: () => void
+  downloadXLS: () => void
 }
 
 export function ExposureTreemapHighchartsWithLogos({
@@ -172,7 +180,8 @@ export function ExposureTreemapHighchartsWithLogos({
       const chart = chartRef.current.chart
 
       // Update chart with new theme colors
-      chart.update({
+      // Cast to any as Highcharts types don't include all valid options (states, borderColor)
+      ;(chart.update as (options: unknown) => void)({
         chart: {
           backgroundColor: "transparent",
         },
@@ -992,7 +1001,7 @@ export function ExposureTreemapHighchartsWithLogos({
       // Step 3: Assign colors to each industry
       const allIndustries: Array<[string, number, string, string]> = [] // [industry, value, color, sector]
 
-      sortedSectors.forEach(([sector, _], sectorIndex) => {
+      sortedSectors.forEach(([sector]) => {
         const sectorColor = getGroupColor(sector, "sector") // Base sector color
         const industries = Array.from(
           sectorIndustries.get(sector)!.entries(),
@@ -1070,7 +1079,7 @@ export function ExposureTreemapHighchartsWithLogos({
       height: responsiveHeight,
       margin: [0, 0, 0, 0],
       events: {
-        fullscreenOpen: function () {
+        fullscreenOpen: function (this: Highcharts.Chart) {
           // Get current theme from DOM
           const currentIsDark =
             document.documentElement.classList.contains("dark")
@@ -1307,7 +1316,7 @@ export function ExposureTreemapHighchartsWithLogos({
       backgroundColor: "transparent",
       height: responsiveHeight,
       events: {
-        fullscreenOpen: function () {
+        fullscreenOpen: function (this: Highcharts.Chart) {
           // Get current theme from DOM
           const currentIsDark =
             document.documentElement.classList.contains("dark")
@@ -1563,7 +1572,7 @@ export function ExposureTreemapHighchartsWithLogos({
 
   // Export handlers
   const handleExport = (type: string) => {
-    const chart = chartRef.current?.chart
+    const chart = chartRef.current?.chart as ChartWithExporting | undefined
     if (!chart) return
 
     switch (type) {
@@ -1890,6 +1899,7 @@ export function ExposureTreemapHighchartsWithLogos({
                         </div>
                       ) : logoUrl ? (
                         <div className="flex size-5 shrink-0 items-center justify-center overflow-hidden rounded-full bg-gray-100 dark:bg-gray-800">
+                          {/* eslint-disable-next-line @next/next/no-img-element */}
                           <img
                             src={logoUrl}
                             alt={item.name}

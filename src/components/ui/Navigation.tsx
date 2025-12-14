@@ -229,12 +229,14 @@ function Navigation() {
             </button>
           </Dialog.Trigger>
 
+          {/* Bottom gradient - fades content behind drawer, positioned at top of nav */}
+          {isAddOpen && (
+            <div className="pointer-events-none fixed inset-x-0 bottom-20 z-[45] h-52 bg-gradient-to-t from-white via-white to-transparent dark:from-gray-950 dark:via-gray-950" />
+          )}
+
           <Dialog.Portal>
             {/* Overlay - stops above the mobile nav */}
             <Dialog.Overlay className="fixed inset-x-0 top-0 bottom-20 z-[60] bg-black/50 data-[state=open]:animate-dialogOverlayShow" />
-
-            {/* Bottom gradient - fades content behind drawer, extends to bottom nav */}
-            <div className="pointer-events-none fixed inset-x-0 bottom-0 z-40 h-52 bg-gradient-to-t from-white via-white to-transparent dark:from-gray-950 dark:via-gray-950" />
 
             {/* Bottom Sheet Content - positioned above mobile nav */}
             <Dialog.Content
