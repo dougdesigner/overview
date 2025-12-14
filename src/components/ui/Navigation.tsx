@@ -181,7 +181,7 @@ function Navigation() {
                 : "text-gray-500 dark:text-gray-400"
             )}
           >
-            <Icon icon="mdi:chart-donut" className="size-5" />
+            <Icon icon="carbon:chart-ring" className="size-5" />
             <span>Holdings</span>
           </Link>
           {getOnboardingDot("/holdings") && (
@@ -219,7 +219,7 @@ function Navigation() {
               )}
             >
               <Icon
-                icon={isAddOpen ? "mdi:close" : "mdi:plus"}
+                icon={isAddOpen ? "mdi:close" : "carbon:add-large"}
                 className={cx(
                   "size-5 transition-transform duration-200",
                   isAddOpen && "rotate-90"
