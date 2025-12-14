@@ -41,6 +41,7 @@ import {
   institutionLabels,
   usePortfolioStore,
 } from "@/hooks/usePortfolioStore"
+import { getInstitutionDisplayLabel } from "@/lib/institutionUtils"
 import { Icon } from "@iconify/react"
 import {
   RiArrowUpDownLine,
@@ -701,10 +702,11 @@ function AccountsContent() {
                 {chartType === "sankey" ? (
                   (() => {
                     // Get unique institution labels for the first level (from filtered accounts)
+                    // Apply getInstitutionDisplayLabel to ensure proper formatting (converts "capital-one" to "Capital One")
                     const sankeyInstitutions = [
-                      ...new Set(filteredAccounts.map((a) => a.institutionLabel)),
+                      ...new Set(filteredAccounts.map((a) => getInstitutionDisplayLabel(a.institutionLabel))),
                     ]
-                    // Already display names, no conversion needed
+                    // Already display names with proper formatting
                     const institutionDisplayNames = sankeyInstitutions
 
                     // Calculate total value for each asset class and sort by value descending
@@ -755,10 +757,10 @@ function AccountsContent() {
                     // Calculate institution totals for legend
                     const institutionTotals = sankeyInstitutions
                       .map((instLabel) => ({
-                        key: filteredAccounts.find((a) => a.institutionLabel === instLabel)?.institution || instLabel,
+                        key: filteredAccounts.find((a) => getInstitutionDisplayLabel(a.institutionLabel) === instLabel)?.institution || instLabel,
                         label: instLabel,
                         value: filteredAccounts
-                          .filter((acc) => acc.institutionLabel === instLabel)
+                          .filter((acc) => getInstitutionDisplayLabel(acc.institutionLabel) === instLabel)
                           .reduce((sum, acc) => sum + acc.totalValue, 0),
                       }))
                       .sort((a, b) => b.value - a.value)
@@ -804,7 +806,7 @@ function AccountsContent() {
                               // Portfolio Total to Institutions - aggregate by institution label
                               ...sankeyInstitutions.map((instLabel) => {
                                 const instTotal = filteredAccounts
-                                  .filter((acc) => acc.institutionLabel === instLabel)
+                                  .filter((acc) => getInstitutionDisplayLabel(acc.institutionLabel) === instLabel)
                                   .reduce((sum, acc) => sum + acc.totalValue, 0)
                                 return {
                                   source: "Portfolio Total",
@@ -814,7 +816,7 @@ function AccountsContent() {
                               }),
                               // Institutions to Accounts
                               ...filteredAccounts.map((account) => ({
-                                source: account.institutionLabel,
+                                source: getInstitutionDisplayLabel(account.institutionLabel),
                                 target: account.name,
                                 value: account.totalValue,
                               })),

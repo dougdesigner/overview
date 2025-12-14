@@ -1,5 +1,47 @@
 // Shared utilities for institution-related functionality
 
+// Map institutions to labels (must be defined first for use in other functions)
+export const institutionLabels: Record<string, string> = {
+  ally: "Ally Bank",
+  amex: "American Express",
+  betterment: "Betterment",
+  bofa: "Bank of America",
+  "capital-one": "Capital One",
+  carta: "Carta",
+  chase: "Chase",
+  citi: "Citibank",
+  etrade: "E*TRADE",
+  fidelity: "Fidelity Investments",
+  merrill: "Merrill Edge",
+  pnc: "PNC Bank",
+  robinhood: "Robinhood",
+  schwab: "Charles Schwab",
+  "td-ameritrade": "TD Ameritrade",
+  vanguard: "Vanguard",
+  wealthfront: "Wealthfront",
+  "wells-fargo": "Wells Fargo",
+  other: "Other",
+}
+
+/**
+ * Convert kebab-case or snake_case to Title Case
+ * e.g., "capital-one" → "Capital One", "wells_fargo" → "Wells Fargo"
+ */
+export const toTitleCase = (str: string): string => {
+  return str
+    .split(/[-_]/)
+    .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+    .join(" ")
+}
+
+/**
+ * Get the display label for an institution
+ * Tries the lookup table first, falls back to converting to title case
+ */
+export const getInstitutionDisplayLabel = (institution: string): string => {
+  return institutionLabels[institution] || toTitleCase(institution)
+}
+
 // Get institution brand color
 export const getInstitutionBrandColor = (institution: string): string => {
   const brandColors: Record<string, string> = {
@@ -36,27 +78,4 @@ export const getInstitutionInitials = (institutionLabel: string): string => {
     .join("")
     .substring(0, 2)
     .toUpperCase()
-}
-
-// Map institutions to labels
-export const institutionLabels: Record<string, string> = {
-  ally: "Ally Bank",
-  amex: "American Express",
-  betterment: "Betterment",
-  bofa: "Bank of America",
-  "capital-one": "Capital One",
-  carta: "Carta",
-  chase: "Chase",
-  citi: "Citibank",
-  etrade: "E*TRADE",
-  fidelity: "Fidelity Investments",
-  merrill: "Merrill Edge",
-  pnc: "PNC Bank",
-  robinhood: "Robinhood",
-  schwab: "Charles Schwab",
-  "td-ameritrade": "TD Ameritrade",
-  vanguard: "Vanguard",
-  wealthfront: "Wealthfront",
-  "wells-fargo": "Wells Fargo",
-  other: "Other",
 }
