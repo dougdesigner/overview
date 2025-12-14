@@ -22,7 +22,15 @@ import {
   HoldingsFilter,
 } from "@/components/ui/data-table-exposure/types"
 import { InstitutionLogo } from "@/components/ui/InstitutionLogo"
-import { RiFilterLine, RiResetLeftLine } from "@remixicon/react"
+import { cx } from "@/lib/utils"
+import * as Dialog from "@radix-ui/react-dialog"
+import {
+  RiCheckLine,
+  RiCloseLine,
+  RiFilterLine,
+  RiResetLeftLine,
+} from "@remixicon/react"
+import { useEffect, useState } from "react"
 
 interface DashboardSettingsDropdownProps {
   accounts?: Account[]
@@ -85,6 +93,17 @@ export function DashboardSettingsDropdown({
   hideTextOnMobile = false,
   compactWhenActive = false,
 }: DashboardSettingsDropdownProps) {
+  // Mobile detection for responsive UI
+  const [isMobile, setIsMobile] = useState(false)
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false)
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 640)
+    checkMobile()
+    window.addEventListener("resize", checkMobile)
+    return () => window.removeEventListener("resize", checkMobile)
+  }, [])
+
   // Check if any setting differs from default
   const hasChanges =
     (selectedAccounts && !selectedAccounts.includes("all")) ||
@@ -128,30 +147,248 @@ export function DashboardSettingsDropdown({
     onAccountsChange(newAccounts)
   }
 
+  // Shared trigger button
+  const triggerButton = (
+    <Button variant="secondary" className="relative h-9 gap-1.5">
+      <span
+        className={
+          compactWhenActive
+            ? hasChanges
+              ? "hidden"
+              : "" // Always show text when no filters active
+            : hideTextOnMobile
+              ? "hidden sm:inline"
+              : ""
+        }
+      >
+        Filters
+      </span>
+      <RiFilterLine className="size-4" aria-hidden="true" />
+      {hasChanges && (
+        <span className="absolute -right-0.5 -top-0.5 size-2 rounded-full bg-blue-500" />
+      )}
+    </Button>
+  )
+
+  // Mobile: Bottom sheet drawer
+  if (isMobile) {
+    return (
+      <Dialog.Root open={isDrawerOpen} onOpenChange={setIsDrawerOpen}>
+        <Tooltip triggerAsChild content="Dashboard settings">
+          <Dialog.Trigger asChild>{triggerButton}</Dialog.Trigger>
+        </Tooltip>
+
+        <Dialog.Portal>
+          {/* Overlay */}
+          <Dialog.Overlay className="fixed inset-0 z-50 bg-black/50 data-[state=open]:animate-dialogOverlayShow" />
+
+          {/* Bottom Sheet Content */}
+          <Dialog.Content className="fixed inset-x-0 bottom-0 z-50 mx-2 mb-2 max-h-[85vh] overflow-hidden rounded-xl border border-gray-200 bg-white shadow-lg data-[state=open]:animate-bottomSheetSlideUp data-[state=closed]:animate-bottomSheetSlideDown dark:border-gray-800 dark:bg-gray-950">
+            {/* Header */}
+            <div className="flex items-center justify-between border-b border-gray-200 px-4 py-3 dark:border-gray-800">
+              <Dialog.Title className="text-base font-semibold text-gray-900 dark:text-gray-50">
+                Dashboard Settings
+              </Dialog.Title>
+              <Dialog.Close asChild>
+                <button className="rounded-full p-1.5 text-gray-500 hover:bg-gray-100 hover:text-gray-700 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-gray-200">
+                  <RiCloseLine className="size-5" />
+                </button>
+              </Dialog.Close>
+            </div>
+
+            {/* Scrollable Body */}
+            <div className="max-h-[calc(85vh-60px)] overflow-y-auto">
+              {/* Account Section */}
+              {accounts && accounts.length > 0 && onAccountsChange && (
+                <div className="border-b border-gray-200 px-4 py-3 dark:border-gray-800">
+                  <div className="mb-2 text-xs font-medium uppercase tracking-wide text-gray-500 dark:text-gray-400">
+                    Account
+                  </div>
+                  <div className="space-y-1">
+                    {/* All Accounts option */}
+                    <button
+                      onClick={() => onAccountsChange(["all"])}
+                      className="flex w-full items-center justify-between rounded-lg px-3 py-2.5 text-left hover:bg-gray-100 dark:hover:bg-gray-800"
+                    >
+                      <span className="text-sm font-medium text-gray-900 dark:text-gray-50">
+                        All Accounts
+                      </span>
+                      {(selectedAccounts?.includes("all") ?? true) && (
+                        <RiCheckLine className="size-5 text-blue-600 dark:text-blue-400" />
+                      )}
+                    </button>
+
+                    {/* Individual accounts */}
+                    {accounts.map((account) => {
+                      const isChecked =
+                        !selectedAccounts?.includes("all") &&
+                        (selectedAccounts?.includes(account.id) ?? false)
+                      return (
+                        <button
+                          key={account.id}
+                          onClick={() =>
+                            handleAccountToggle(account.id, !isChecked)
+                          }
+                          className="flex w-full items-center justify-between rounded-lg px-3 py-2.5 text-left hover:bg-gray-100 dark:hover:bg-gray-800"
+                        >
+                          <span className="flex items-center gap-2 text-sm font-medium text-gray-900 dark:text-gray-50">
+                            <InstitutionLogo
+                              institution={account.institution}
+                              className="size-5"
+                            />
+                            {account.name}
+                          </span>
+                          {isChecked && (
+                            <RiCheckLine className="size-5 text-blue-600 dark:text-blue-400" />
+                          )}
+                        </button>
+                      )
+                    })}
+                  </div>
+                </div>
+              )}
+
+              {/* Stocks Section */}
+              <div className="border-b border-gray-200 px-4 py-3 dark:border-gray-800">
+                <div className="mb-2 text-xs font-medium uppercase tracking-wide text-gray-500 dark:text-gray-400">
+                  Stocks
+                </div>
+                <div className="space-y-1">
+                  {(
+                    [
+                      { value: "all", label: "All" },
+                      { value: "mag7", label: "Magnificent 7" },
+                      { value: "top7", label: "Top 7" },
+                      { value: "top10", label: "Top 10" },
+                    ] as const
+                  ).map((option) => (
+                    <button
+                      key={option.value}
+                      onClick={() => onHoldingsFilterChange(option.value)}
+                      className="flex w-full items-center justify-between rounded-lg px-3 py-2.5 text-left hover:bg-gray-100 dark:hover:bg-gray-800"
+                    >
+                      <span className="text-sm font-medium text-gray-900 dark:text-gray-50">
+                        {option.label}
+                      </span>
+                      {holdingsFilter === option.value && (
+                        <RiCheckLine className="size-5 text-blue-600 dark:text-blue-400" />
+                      )}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Highlight Section */}
+              <div className="border-b border-gray-200 px-4 py-3 dark:border-gray-800">
+                <div className="mb-2 text-xs font-medium uppercase tracking-wide text-gray-500 dark:text-gray-400">
+                  Highlight
+                </div>
+                <div className="space-y-1">
+                  {(
+                    [
+                      { value: "market-value", label: "Market value" },
+                      { value: "pct-stocks", label: "Stock %" },
+                      { value: "pct-portfolio", label: "Portfolio %" },
+                      { value: "none", label: "None" },
+                    ] as const
+                  ).map((option) => (
+                    <button
+                      key={option.value}
+                      onClick={() => onDisplayValueChange(option.value)}
+                      className="flex w-full items-center justify-between rounded-lg px-3 py-2.5 text-left hover:bg-gray-100 dark:hover:bg-gray-800"
+                    >
+                      <span className="text-sm font-medium text-gray-900 dark:text-gray-50">
+                        {option.label}
+                      </span>
+                      {displayValue === option.value && (
+                        <RiCheckLine className="size-5 text-blue-600 dark:text-blue-400" />
+                      )}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Views Section */}
+              <div className="border-b border-gray-200 px-4 py-3 dark:border-gray-800">
+                <div className="mb-2 text-xs font-medium uppercase tracking-wide text-gray-500 dark:text-gray-400">
+                  Views
+                </div>
+                <div className="space-y-1">
+                  {/* Combine Google */}
+                  <button
+                    onClick={() =>
+                      onCombineGoogleSharesChange(!combineGoogleShares)
+                    }
+                    className="flex w-full items-center justify-between rounded-lg px-3 py-2.5 text-left hover:bg-gray-100 dark:hover:bg-gray-800"
+                  >
+                    <span className="text-sm font-medium text-gray-900 dark:text-gray-50">
+                      Combine GOOG/GOOGL
+                    </span>
+                    <div
+                      className={cx(
+                        "flex size-5 items-center justify-center rounded border",
+                        combineGoogleShares
+                          ? "border-blue-600 bg-blue-600 dark:border-blue-500 dark:bg-blue-500"
+                          : "border-gray-300 dark:border-gray-600",
+                      )}
+                    >
+                      {combineGoogleShares && (
+                        <RiCheckLine className="size-3.5 text-white" />
+                      )}
+                    </div>
+                  </button>
+
+                  {/* Show Other Assets */}
+                  <button
+                    onClick={() => onShowOtherAssetsChange(!showOtherAssets)}
+                    className="flex w-full items-center justify-between rounded-lg px-3 py-2.5 text-left hover:bg-gray-100 dark:hover:bg-gray-800"
+                  >
+                    <span className="text-sm font-medium text-gray-900 dark:text-gray-50">
+                      Show Other Assets
+                    </span>
+                    <div
+                      className={cx(
+                        "flex size-5 items-center justify-center rounded border",
+                        showOtherAssets
+                          ? "border-blue-600 bg-blue-600 dark:border-blue-500 dark:bg-blue-500"
+                          : "border-gray-300 dark:border-gray-600",
+                      )}
+                    >
+                      {showOtherAssets && (
+                        <RiCheckLine className="size-3.5 text-white" />
+                      )}
+                    </div>
+                  </button>
+                </div>
+              </div>
+
+              {/* Reset Button */}
+              {onReset && hasChanges && (
+                <div className="px-4 py-3">
+                  <button
+                    onClick={() => {
+                      onReset()
+                      setIsDrawerOpen(false)
+                    }}
+                    className="flex w-full items-center justify-center gap-2 rounded-lg bg-gray-100 px-4 py-2.5 text-sm font-medium text-gray-600 hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700"
+                  >
+                    <RiResetLeftLine className="size-4" />
+                    Reset All
+                  </button>
+                </div>
+              )}
+            </div>
+          </Dialog.Content>
+        </Dialog.Portal>
+      </Dialog.Root>
+    )
+  }
+
+  // Desktop: Dropdown menu with submenus
   return (
     <DropdownMenu>
       <Tooltip triggerAsChild content="Dashboard settings">
-        <DropdownMenuTrigger asChild>
-          <Button variant="secondary" className="relative h-9 gap-1.5">
-            <span
-              className={
-                compactWhenActive
-                  ? hasChanges
-                    ? "hidden"
-                    : "" // Always show text when no filters active
-                  : hideTextOnMobile
-                    ? "hidden sm:inline"
-                    : ""
-              }
-            >
-              Filters
-            </span>
-            <RiFilterLine className="size-4" aria-hidden="true" />
-            {hasChanges && (
-              <span className="absolute -right-0.5 -top-0.5 size-2 rounded-full bg-blue-500" />
-            )}
-          </Button>
-        </DropdownMenuTrigger>
+        <DropdownMenuTrigger asChild>{triggerButton}</DropdownMenuTrigger>
       </Tooltip>
       <DropdownMenuContent align="end" className="w-56">
         <DropdownMenuLabel>DASHBOARD SETTINGS</DropdownMenuLabel>
@@ -262,10 +499,16 @@ export function DashboardSettingsDropdown({
               <DropdownMenuRadioItem value="pct-portfolio" iconType="check">
                 Portfolio %
               </DropdownMenuRadioItem>
+              <DropdownMenuRadioItem value="none" iconType="check">
+                None
+              </DropdownMenuRadioItem>
             </DropdownMenuRadioGroup>
           </DropdownMenuSubMenuContent>
         </DropdownMenuSubMenu>
         <DropdownMenuSeparator />
+
+        {/* Views section */}
+        <DropdownMenuLabel>VIEWS</DropdownMenuLabel>
 
         {/* Combine Google checkbox */}
         <DropdownMenuCheckboxItem
