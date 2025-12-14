@@ -149,7 +149,7 @@ function Navigation() {
               : "text-gray-500 dark:text-gray-400"
           )}
         >
-          <Icon icon="mdi:home" className="size-5" />
+          <Icon icon="ri:home-4-line" className="size-5" />
           <span>Home</span>
         </Link>
         <div className="relative">
@@ -163,7 +163,7 @@ function Navigation() {
                 : "text-gray-500 dark:text-gray-400"
             )}
           >
-            <Icon icon="mdi:chart-sankey" className="size-5" />
+            <Icon icon="carbon:sankey-diagram-alt" className="size-5" />
             <span>Accounts</span>
           </Link>
           {getOnboardingDot("/accounts") && (
@@ -199,7 +199,7 @@ function Navigation() {
                 : "text-gray-500 dark:text-gray-400"
             )}
           >
-            <Icon icon="mdi:view-grid" className="size-5" />
+            <Icon icon="ri:layout-masonry-line" className="size-5" />
             <span>Stocks</span>
           </Link>
           {getOnboardingDot("/exposure") && (

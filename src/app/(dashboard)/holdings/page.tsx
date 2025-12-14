@@ -190,9 +190,8 @@ function HoldingsContent() {
         name = holding.description || "Cash"
         lastPrice = 1
       } else if (holding.isManualEntry && holding.ticker) {
-        // Manual entry - use provided values directly, skip API lookups
+        // Manual entry - use provided values directly
         name = holding.companyName || holding.ticker
-        lastPrice = holding.pricePerShare || 100
         isUSStock = holding.isUSStock ?? true
         isManualEntry = true
         sector = holding.sector || undefined
@@ -208,8 +207,35 @@ function HoldingsContent() {
           )
         }
 
+        // Try to fetch price from Alpha Vantage (works even without company overview)
+        if (holding.pricePerShare && holding.pricePerShare > 0) {
+          // User provided explicit price - use it
+          lastPrice = holding.pricePerShare
+        } else {
+          // Attempt to fetch from API
+          try {
+            const fetchedPrice = await getStockPrice(holding.ticker)
+            if (fetchedPrice && fetchedPrice > 0) {
+              lastPrice = fetchedPrice
+              console.log(
+                `Fetched price for manual entry ${holding.ticker}: $${fetchedPrice}`,
+              )
+            } else {
+              // API returned no data - leave at 0 (will show as missing)
+              lastPrice = 0
+              console.warn(`No price data available for ${holding.ticker}`)
+            }
+          } catch (error) {
+            console.error(
+              `Failed to fetch price for ${holding.ticker}:`,
+              error,
+            )
+            lastPrice = 0 // Leave blank rather than fake $100
+          }
+        }
+
         console.log(
-          `Manual entry: ${holding.ticker} - ${name} at $${lastPrice} (${isUSStock ? "US" : "Non-US"}, sector: ${sector || "N/A"})`,
+          `Manual entry: ${holding.ticker} - ${name} at $${lastPrice || "N/A"} (${isUSStock ? "US" : "Non-US"}, sector: ${sector || "N/A"})`,
         )
       } else if (holding.ticker) {
         // Predefined ticker - use existing logic

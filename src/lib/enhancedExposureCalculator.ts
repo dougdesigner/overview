@@ -570,8 +570,19 @@ export class EnhancedExposureCalculator {
 
         // Add direct holding rows (one per account that holds this stock directly)
         if (exposure.directValue > 0 && directHoldings.length > 0) {
+          // Aggregate holdings by account (in case same stock is held multiple times in same account)
+          const holdingsByAccount = new Map<string, { accountId: string; accountName: string; marketValue: number }>()
+          directHoldings.forEach((holding) => {
+            const existing = holdingsByAccount.get(holding.accountId)
+            if (existing) {
+              existing.marketValue += holding.marketValue
+            } else {
+              holdingsByAccount.set(holding.accountId, { ...holding })
+            }
+          })
+
           // Create a subRow for each account that holds this stock directly
-          const directSubRows = directHoldings.map((holding, index) => ({
+          const directSubRows = Array.from(holdingsByAccount.values()).map((holding, index) => ({
             id: `${exposure.id}-direct-${index}`,
             ticker: exposure.ticker,
             name: `Direct holding`,
@@ -587,6 +598,7 @@ export class EnhancedExposureCalculator {
             isETFBreakdown: true,
             accountId: holding.accountId,
             accountName: holding.accountName,
+            domain: exposure.domain, // Preserve domain for logo lookup
           }))
           // Add direct holdings at the beginning
           exposure.subRows.unshift(...directSubRows)

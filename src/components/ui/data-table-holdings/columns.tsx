@@ -211,6 +211,10 @@ export const createColumns = ({
     accessorKey: "marketValue",
     cell: ({ row }) => {
       const value = row.original.marketValue
+      // Show dash for missing/unavailable market values (except cash which is always valid)
+      if (row.original.type !== "cash" && (!value || value === 0)) {
+        return <span className="text-gray-400">—</span>
+      }
       return <span className="text-sm font-semibold text-gray-900 dark:text-gray-50">{formatCurrency(value)}</span>
     },
     enableSorting: true,
@@ -317,6 +321,10 @@ export const createColumns = ({
       if (row.original.type === "cash") {
         // For cash, always show $1.00
         return <span>{formatCurrency(1)}</span>
+      }
+      // Show dash for missing/unavailable prices
+      if (!price || price === 0) {
+        return <span className="text-gray-400">—</span>
       }
       return <span>{formatCurrency(price)}</span>
     },

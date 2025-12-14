@@ -140,7 +140,7 @@ function DropdownUserProfile() {
           align="end"
           className="!min-w-[calc(var(--radix-dropdown-menu-trigger-width))]"
         >
-          <DropdownMenuLabel>Settings</DropdownMenuLabel>
+          <DropdownMenuLabel>Portfolio Settings</DropdownMenuLabel>
 
           {/* Portfolio Data Management */}
           <DropdownMenuSeparator />
