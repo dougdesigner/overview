@@ -262,7 +262,7 @@ export class ExposureCalculator {
         if (!stockPrice) {
           // Estimate stock price if we don't have it
           // This is a simplification - in production you'd fetch real prices
-          stockPrice = 100 // Default price
+          stockPrice = 0 // Default to 0 for unknown prices
           this.stockPrices.set(stockSymbol, stockPrice)
         }
 

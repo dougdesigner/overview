@@ -159,11 +159,11 @@ export async function POST(request: NextRequest) {
       // If no API key, use mock data
       if (!apiKey) {
         const mockPrice = MOCK_PRICES[upperSymbol] || {
-          lastPrice: 100 + Math.random() * 100,
-          previousClose: 100,
-          changePercent: (Math.random() - 0.5) * 5,
+          lastPrice: 0,  // Return 0 to indicate no data (UI shows "-")
+          previousClose: 0,
+          changePercent: 0,
           changeAmount: 0,
-          volume: Math.floor(Math.random() * 10000000)
+          volume: 0
         }
         // Calculate changeAmount for mock data
         mockPrice.changeAmount = mockPrice.lastPrice - mockPrice.previousClose
@@ -184,8 +184,8 @@ export async function POST(request: NextRequest) {
             console.warn(`API limit for ${upperSymbol} price`)
             // Use mock data as fallback
             const mockPrice = MOCK_PRICES[upperSymbol] || {
-              lastPrice: 100,
-              previousClose: 100,
+              lastPrice: 0,  // Return 0 to indicate no data (UI shows "-")
+              previousClose: 0,
               changePercent: 0,
               volume: 0
             }
@@ -198,13 +198,16 @@ export async function POST(request: NextRequest) {
           if (timeSeries) {
             const dates = Object.keys(timeSeries).sort((a, b) => b.localeCompare(a))
 
-            if (dates.length >= 2) {
+            if (dates.length >= 1) {
               const todayData = timeSeries[dates[0]]
-              const yesterdayData = timeSeries[dates[1]]
+              // Use yesterday's data if available, otherwise use today's close as previous (0% change)
+              const yesterdayData = dates.length >= 2 ? timeSeries[dates[1]] : null
 
               const lastPrice = parseFloat(todayData["5. adjusted close"])
-              const previousClose = parseFloat(yesterdayData["5. adjusted close"])
-              const changePercent = ((lastPrice - previousClose) / previousClose) * 100
+              const previousClose = yesterdayData
+                ? parseFloat(yesterdayData["5. adjusted close"])
+                : lastPrice  // No previous data, use same price (0% change)
+              const changePercent = previousClose > 0 ? ((lastPrice - previousClose) / previousClose) * 100 : 0
               const changeAmount = lastPrice - previousClose
 
               const priceData = {
@@ -236,8 +239,8 @@ export async function POST(request: NextRequest) {
         } else {
           // Use mock data on API failure
           const mockPrice = MOCK_PRICES[upperSymbol] || {
-            lastPrice: 100,
-            previousClose: 100,
+            lastPrice: 0,  // Return 0 to indicate no data (UI shows "-")
+            previousClose: 0,
             changePercent: 0,
             volume: 0
           }
@@ -252,8 +255,8 @@ export async function POST(request: NextRequest) {
 
         // Use mock data on error
         const mockPrice = MOCK_PRICES[upperSymbol] || {
-          lastPrice: 100,
-          previousClose: 100,
+          lastPrice: 0,  // Return 0 to indicate no data (UI shows "-")
+          previousClose: 0,
           changePercent: 0,
           volume: 0
         }

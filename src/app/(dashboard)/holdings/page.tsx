@@ -178,7 +178,7 @@ function HoldingsContent() {
       // Determine if it's an ETF/Fund and get proper name
       let name = holding.ticker || holding.description || ""
       let type: "stock" | "fund" | "cash" = "stock"
-      let lastPrice = 100 // Default price
+      let lastPrice = 0 // Default to 0 (will show "-" in UI)
       let isUSStock: boolean | undefined = undefined
       let isManualEntry: boolean | undefined = undefined
       let domain: string | undefined = undefined

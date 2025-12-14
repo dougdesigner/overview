@@ -768,6 +768,8 @@ export function usePortfolioStore() {
       allocation: 0, // Will be calculated
     }
     setHoldingsState(prev => [...prev, newHolding])
+    // Clear exposure calculator cache to ensure fresh data on stocks page
+    enhancedExposureCalculator.clearCache()
     return newHolding
   }, [accounts])
 
@@ -785,10 +787,14 @@ export function usePortfolioStore() {
         return holding
       })
     )
+    // Clear exposure calculator cache to ensure fresh data on stocks page
+    enhancedExposureCalculator.clearCache()
   }, [])
 
   const deleteHolding = useCallback((id: string) => {
     setHoldingsState(prev => prev.filter(holding => holding.id !== id))
+    // Clear exposure calculator cache to ensure fresh data on stocks page
+    enhancedExposureCalculator.clearCache()
   }, [])
 
   // Get holdings for a specific account

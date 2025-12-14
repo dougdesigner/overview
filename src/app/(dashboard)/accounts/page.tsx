@@ -700,14 +700,12 @@ function AccountsContent() {
               <div>
                 {chartType === "sankey" ? (
                   (() => {
-                    // Get unique institutions for the first level (from filtered accounts)
+                    // Get unique institution labels for the first level (from filtered accounts)
                     const sankeyInstitutions = [
-                      ...new Set(filteredAccounts.map((a) => a.institution)),
+                      ...new Set(filteredAccounts.map((a) => a.institutionLabel)),
                     ]
-                    // Convert institution IDs to display labels
-                    const institutionDisplayNames = sankeyInstitutions.map(
-                      (inst) => institutionLabels[inst] || inst,
-                    )
+                    // Already display names, no conversion needed
+                    const institutionDisplayNames = sankeyInstitutions
 
                     // Calculate total value for each asset class and sort by value descending
                     const assetClassTotals = [
@@ -756,11 +754,11 @@ function AccountsContent() {
 
                     // Calculate institution totals for legend
                     const institutionTotals = sankeyInstitutions
-                      .map((inst) => ({
-                        key: inst,
-                        label: institutionLabels[inst] || inst,
+                      .map((instLabel) => ({
+                        key: filteredAccounts.find((a) => a.institutionLabel === instLabel)?.institution || instLabel,
+                        label: instLabel,
                         value: filteredAccounts
-                          .filter((acc) => acc.institution === inst)
+                          .filter((acc) => acc.institutionLabel === instLabel)
                           .reduce((sum, acc) => sum + acc.totalValue, 0),
                       }))
                       .sort((a, b) => b.value - a.value)
@@ -803,22 +801,20 @@ function AccountsContent() {
                               })),
                             ],
                             links: [
-                              // Portfolio Total to Institutions - aggregate by institution
-                              ...sankeyInstitutions.map((inst) => {
+                              // Portfolio Total to Institutions - aggregate by institution label
+                              ...sankeyInstitutions.map((instLabel) => {
                                 const instTotal = filteredAccounts
-                                  .filter((acc) => acc.institution === inst)
+                                  .filter((acc) => acc.institutionLabel === instLabel)
                                   .reduce((sum, acc) => sum + acc.totalValue, 0)
                                 return {
                                   source: "Portfolio Total",
-                                  target: institutionLabels[inst] || inst,
+                                  target: instLabel,
                                   value: instTotal,
                                 }
                               }),
                               // Institutions to Accounts
                               ...filteredAccounts.map((account) => ({
-                                source:
-                                  institutionLabels[account.institution] ||
-                                  account.institution,
+                                source: account.institutionLabel,
                                 target: account.name,
                                 value: account.totalValue,
                               })),
