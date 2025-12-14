@@ -39,7 +39,23 @@ function Navigation() {
   const pathname = usePathname()
   const router = useRouter()
   const [isAddOpen, setIsAddOpen] = useState(false)
-  const { isDemoMode } = usePortfolioStore()
+  const { isDemoMode, accounts, holdings, hasViewedStocksPage } = usePortfolioStore()
+
+  // Determine which tab should show an onboarding dot
+  const getOnboardingDot = (path: string) => {
+    // No dots in demo mode
+    if (isDemoMode) return false
+    // No accounts → dot on Accounts tab
+    if (accounts.length === 0 && path === "/accounts") return true
+    // Has account, no holdings → dot on Holdings tab
+    if (accounts.length > 0 && holdings.length === 0 && path === "/holdings") return true
+    // Has holdings, not viewed stocks → dot on Stocks tab
+    if (holdings.length > 0 && !hasViewedStocksPage && path === "/exposure") return true
+    return false
+  }
+
+  // Determine if user has accounts (for Add drawer options)
+  const hasAccounts = accounts.length > 0
 
   const handleAddAccount = () => {
     setIsAddOpen(false)
@@ -75,27 +91,42 @@ function Navigation() {
           >
             <Link href="/overview">Home</Link>
           </TabNavigationLink>
-          <TabNavigationLink
-            className="inline-flex gap-2"
-            asChild
-            active={pathname === "/accounts"}
-          >
-            <Link href="/accounts">Accounts</Link>
-          </TabNavigationLink>
-          <TabNavigationLink
-            className="inline-flex gap-2"
-            asChild
-            active={pathname === "/holdings"}
-          >
-            <Link href="/holdings">Holdings</Link>
-          </TabNavigationLink>
-          <TabNavigationLink
-            className="inline-flex gap-2"
-            asChild
-            active={pathname === "/exposure"}
-          >
-            <Link href="/exposure">Stocks</Link>
-          </TabNavigationLink>
+          <div className="relative">
+            <TabNavigationLink
+              className="inline-flex gap-2"
+              asChild
+              active={pathname === "/accounts"}
+            >
+              <Link href="/accounts">Accounts</Link>
+            </TabNavigationLink>
+            {getOnboardingDot("/accounts") && (
+              <span className="absolute -right-0.5 -top-0.5 size-2 rounded-full bg-blue-500" />
+            )}
+          </div>
+          <div className="relative">
+            <TabNavigationLink
+              className="inline-flex gap-2"
+              asChild
+              active={pathname === "/holdings"}
+            >
+              <Link href="/holdings">Holdings</Link>
+            </TabNavigationLink>
+            {getOnboardingDot("/holdings") && (
+              <span className="absolute -right-0.5 -top-0.5 size-2 rounded-full bg-blue-500" />
+            )}
+          </div>
+          <div className="relative">
+            <TabNavigationLink
+              className="inline-flex gap-2"
+              asChild
+              active={pathname === "/exposure"}
+            >
+              <Link href="/exposure">Stocks</Link>
+            </TabNavigationLink>
+            {getOnboardingDot("/exposure") && (
+              <span className="absolute -right-0.5 -top-0.5 size-2 rounded-full bg-blue-500" />
+            )}
+          </div>
         </TabNavigation>
 
         {/* Right: Settings */}
@@ -121,45 +152,60 @@ function Navigation() {
           <Icon icon="mdi:home" className="size-5" />
           <span>Home</span>
         </Link>
-        <Link
-          href="/accounts"
-          onClick={() => setIsAddOpen(false)}
-          className={cx(
-            "flex min-w-[4rem] flex-col items-center gap-0.5 rounded-2xl px-2 py-2 text-xs font-medium transition-colors",
-            !isAddOpen && pathname === "/accounts"
-              ? "bg-gray-100 text-gray-900 dark:bg-gray-800 dark:text-gray-50"
-              : "text-gray-500 dark:text-gray-400"
+        <div className="relative">
+          <Link
+            href="/accounts"
+            onClick={() => setIsAddOpen(false)}
+            className={cx(
+              "flex min-w-[4rem] flex-col items-center gap-0.5 rounded-2xl px-2 py-2 text-xs font-medium transition-colors",
+              !isAddOpen && pathname === "/accounts"
+                ? "bg-gray-100 text-gray-900 dark:bg-gray-800 dark:text-gray-50"
+                : "text-gray-500 dark:text-gray-400"
+            )}
+          >
+            <Icon icon="mdi:chart-sankey" className="size-5" />
+            <span>Accounts</span>
+          </Link>
+          {getOnboardingDot("/accounts") && (
+            <span className="absolute right-1 top-1 size-2 rounded-full bg-blue-500" />
           )}
-        >
-          <Icon icon="mdi:chart-sankey" className="size-5" />
-          <span>Accounts</span>
-        </Link>
-        <Link
-          href="/holdings"
-          onClick={() => setIsAddOpen(false)}
-          className={cx(
-            "flex min-w-[4rem] flex-col items-center gap-0.5 rounded-2xl px-2 py-2 text-xs font-medium transition-colors",
-            !isAddOpen && pathname === "/holdings"
-              ? "bg-gray-100 text-gray-900 dark:bg-gray-800 dark:text-gray-50"
-              : "text-gray-500 dark:text-gray-400"
+        </div>
+        <div className="relative">
+          <Link
+            href="/holdings"
+            onClick={() => setIsAddOpen(false)}
+            className={cx(
+              "flex min-w-[4rem] flex-col items-center gap-0.5 rounded-2xl px-2 py-2 text-xs font-medium transition-colors",
+              !isAddOpen && pathname === "/holdings"
+                ? "bg-gray-100 text-gray-900 dark:bg-gray-800 dark:text-gray-50"
+                : "text-gray-500 dark:text-gray-400"
+            )}
+          >
+            <Icon icon="mdi:chart-donut" className="size-5" />
+            <span>Holdings</span>
+          </Link>
+          {getOnboardingDot("/holdings") && (
+            <span className="absolute right-1 top-1 size-2 rounded-full bg-blue-500" />
           )}
-        >
-          <Icon icon="mdi:chart-donut" className="size-5" />
-          <span>Holdings</span>
-        </Link>
-        <Link
-          href="/exposure"
-          onClick={() => setIsAddOpen(false)}
-          className={cx(
-            "flex min-w-[4rem] flex-col items-center gap-0.5 rounded-2xl px-2 py-2 text-xs font-medium transition-colors",
-            !isAddOpen && pathname === "/exposure"
-              ? "bg-gray-100 text-gray-900 dark:bg-gray-800 dark:text-gray-50"
-              : "text-gray-500 dark:text-gray-400"
+        </div>
+        <div className="relative">
+          <Link
+            href="/exposure"
+            onClick={() => setIsAddOpen(false)}
+            className={cx(
+              "flex min-w-[4rem] flex-col items-center gap-0.5 rounded-2xl px-2 py-2 text-xs font-medium transition-colors",
+              !isAddOpen && pathname === "/exposure"
+                ? "bg-gray-100 text-gray-900 dark:bg-gray-800 dark:text-gray-50"
+                : "text-gray-500 dark:text-gray-400"
+            )}
+          >
+            <Icon icon="mdi:view-grid" className="size-5" />
+            <span>Stocks</span>
+          </Link>
+          {getOnboardingDot("/exposure") && (
+            <span className="absolute right-1 top-1 size-2 rounded-full bg-blue-500" />
           )}
-        >
-          <Icon icon="mdi:view-grid" className="size-5" />
-          <span>Stocks</span>
-        </Link>
+        </div>
 
         {/* Add Button */}
         <Dialog.Root open={isAddOpen} onOpenChange={setIsAddOpen}>
@@ -211,18 +257,20 @@ function Navigation() {
                     <div className="text-sm text-gray-500 dark:text-gray-400">Add a new investment account</div>
                   </div>
                 </button>
-                <button
-                  onClick={handleAddHolding}
-                  className="flex w-full items-center gap-4 rounded-xl p-4 text-left transition-colors hover:bg-gray-100 dark:hover:bg-gray-800"
-                >
-                  <div className="flex size-10 items-center justify-center rounded-full bg-emerald-100 dark:bg-emerald-900/30">
-                    <Icon icon="mdi:format-list-bulleted" className="size-5 text-emerald-600 dark:text-emerald-400" />
-                  </div>
-                  <div>
-                    <div className="font-medium text-gray-900 dark:text-gray-50">Holding</div>
-                    <div className="text-sm text-gray-500 dark:text-gray-400">Add stocks, ETFs, or cash</div>
-                  </div>
-                </button>
+                {hasAccounts && (
+                  <button
+                    onClick={handleAddHolding}
+                    className="flex w-full items-center gap-4 rounded-xl p-4 text-left transition-colors hover:bg-gray-100 dark:hover:bg-gray-800"
+                  >
+                    <div className="flex size-10 items-center justify-center rounded-full bg-emerald-100 dark:bg-emerald-900/30">
+                      <Icon icon="mdi:format-list-bulleted" className="size-5 text-emerald-600 dark:text-emerald-400" />
+                    </div>
+                    <div>
+                      <div className="font-medium text-gray-900 dark:text-gray-50">Holding</div>
+                      <div className="text-sm text-gray-500 dark:text-gray-400">Add stocks, ETFs, or cash</div>
+                    </div>
+                  </button>
+                )}
               </div>
             </Dialog.Content>
           </Dialog.Portal>

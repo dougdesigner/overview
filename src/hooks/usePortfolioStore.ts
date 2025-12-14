@@ -323,6 +323,7 @@ export function usePortfolioStore() {
   const [hasInitialized, setHasInitialized] = useState(false)
   const [dataVersion, setDataVersion] = useState(0)
   const [isDemoMode, setDemoMode] = useState(false)
+  const [hasViewedStocksPage, setHasViewedStocksPage] = useState(false)
 
   // Load data from localStorage on mount
   useEffect(() => {
@@ -412,6 +413,10 @@ export function usePortfolioStore() {
             setToStorage(STORAGE_KEYS.holdings, [])
           }
         }
+
+        // Load onboarding state
+        const hasViewedStocks = localStorage.getItem('onboarding_stocks_viewed') === 'true'
+        setHasViewedStocksPage(hasViewedStocks)
 
         setError(null)
       } catch (err) {
@@ -850,6 +855,12 @@ export function usePortfolioStore() {
     setToStorage(STORAGE_KEYS.holdings, defaultHoldings)
   }, [])
 
+  // Mark stocks page as viewed (for onboarding)
+  const markStocksPageViewed = useCallback(() => {
+    setHasViewedStocksPage(true)
+    localStorage.setItem('onboarding_stocks_viewed', 'true')
+  }, [])
+
   // Update prices for all holdings
   const updatePrices = useCallback(async () => {
     // Use functional update to get current holdings without dependency
@@ -1017,5 +1028,9 @@ export function usePortfolioStore() {
     refreshETFNames,
     exportPortfolioData,
     importPortfolioData,
+
+    // Onboarding state
+    hasViewedStocksPage,
+    markStocksPageViewed,
   }
 }

@@ -199,9 +199,8 @@ export const createColumns = ({
   displayValue = "pct-portfolio",
   totalStocksValue = 0,
 }: ColumnsProps): ColumnDef<StockExposure>[] => {
-  // Build columns array with all value columns always visible
-  const columns: ColumnDef<StockExposure>[] = [
-  {
+  // Define base columns
+  const expanderColumn: ColumnDef<StockExposure> = {
     id: "expander",
     header: ({ table }) => {
       const hasExpandableRows = table
@@ -243,8 +242,9 @@ export const createColumns = ({
       className: "!w-6 !pr-0",
       displayName: "Expand",
     },
-  },
-  {
+  }
+
+  const symbolColumn: ColumnDef<StockExposure> = {
     header: ({ column }) => {
       return (
         <button
@@ -293,8 +293,9 @@ export const createColumns = ({
       className: "text-left",
       displayName: "Symbol",
     },
-  },
-  {
+  }
+
+  const nameColumn: ColumnDef<StockExposure> = {
     header: ({ column }) => {
       return (
         <button
@@ -329,79 +330,13 @@ export const createColumns = ({
     },
     enableSorting: true,
     meta: {
-      className: "text-left min-w-80",
+      className: "text-left min-w-56",
       displayName: "Name",
     },
-  },
-  // Commented out Direct Shares and ETF Exposure columns
-  // Users can see this breakdown by expanding rows
-  // {
-  //   header: ({ column }) => {
-  //     return (
-  //       <button
-  //         className="flex w-full items-center justify-end gap-1 font-medium hover:text-gray-900 dark:hover:text-gray-50"
-  //         onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-  //       >
-  //         Direct Shares
-  //         {column.getIsSorted() === "asc" && (
-  //           <RiArrowUpSLine className="h-4 w-4" />
-  //         )}
-  //         {column.getIsSorted() === "desc" && (
-  //           <RiArrowDownSLine className="h-4 w-4" />
-  //         )}
-  //       </button>
-  //     )
-  //   },
-  //   accessorKey: "directShares",
-  //   cell: ({ row }) => {
-  //     const shares = row.original.directShares
-  //     if (shares === 0) {
-  //       return <span className="text-gray-400">—</span>
-  //     }
-  //     return <span>{formatNumber(shares)}</span>
-  //   },
-  //   enableSorting: true,
-  //   meta: {
-  //     className: "text-right",
-  //     displayName: "Direct Shares",
-  //   },
-  // },
-  // {
-  //   header: ({ column }) => {
-  //     return (
-  //       <button
-  //         className="flex w-full items-center justify-end gap-1 font-medium hover:text-gray-900 dark:hover:text-gray-50"
-  //         onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-  //       >
-  //         ETF Exposure
-  //         {column.getIsSorted() === "asc" && (
-  //           <RiArrowUpSLine className="h-4 w-4" />
-  //         )}
-  //         {column.getIsSorted() === "desc" && (
-  //           <RiArrowDownSLine className="h-4 w-4" />
-  //         )}
-  //       </button>
-  //     )
-  //   },
-  //   accessorKey: "etfExposure",
-  //   cell: ({ row }) => {
-  //     const shares = row.original.etfExposure
-  //     if (shares === 0) {
-  //       return <span className="text-gray-400">—</span>
-  //     }
-  //     return (
-  //       <span className="text-blue-600 dark:text-blue-400">
-  //         {formatNumber(shares)}
-  //       </span>
-  //     )
-  //   },
-  //   enableSorting: true,
-  //   meta: {
-  //     className: "text-right",
-  //     displayName: "ETF Exposure",
-  //   },
-  // },
-  {
+  }
+
+  // Define value columns (these get dynamically ordered based on displayValue)
+  const marketValueColumn: ColumnDef<StockExposure> = {
     header: ({ column }) => {
       const isHighlighted = displayValue === "market-value"
       return (
@@ -446,9 +381,9 @@ export const createColumns = ({
       className: "text-right min-w-32",
       displayName: "Market Value",
     },
-  },
-  // Stock % column - always visible, highlighted when selected
-  {
+  }
+
+  const stockPercentColumn: ColumnDef<StockExposure> = {
     header: ({ column }) => {
       const isHighlighted = displayValue === "pct-stocks"
       return (
@@ -501,9 +436,9 @@ export const createColumns = ({
       className: "text-right min-w-24",
       displayName: "Stock %",
     },
-  },
-  // Portfolio % column - always visible, highlighted when selected
-  {
+  }
+
+  const portfolioPercentColumn: ColumnDef<StockExposure> = {
     header: ({ column }) => {
       const isHighlighted = displayValue === "pct-portfolio"
       return (
@@ -547,8 +482,10 @@ export const createColumns = ({
       className: "text-right min-w-32",
       displayName: "Portfolio %",
     },
-  },
-  {
+  }
+
+  // Define remaining columns
+  const sectorColumn: ColumnDef<StockExposure> = {
     header: ({ column }) => {
       return (
         <button
@@ -585,8 +522,9 @@ export const createColumns = ({
       className: "text-left",
       displayName: "Sector",
     },
-  },
-  {
+  }
+
+  const industryColumn: ColumnDef<StockExposure> = {
     header: ({ column }) => {
       return (
         <button
@@ -623,8 +561,9 @@ export const createColumns = ({
       className: "text-left min-w-40",
       displayName: "Industry",
     },
-  },
-  {
+  }
+
+  const institutionColumn: ColumnDef<StockExposure> = {
     header: "Institution",
     id: "institution",
     cell: ({ row }) => {
@@ -654,8 +593,9 @@ export const createColumns = ({
       className: "text-left min-w-40",
       displayName: "Institution",
     },
-  },
-  {
+  }
+
+  const accountColumn: ColumnDef<StockExposure> = {
     header: "Account",
     id: "account",
     cell: ({ row }) => {
@@ -672,8 +612,32 @@ export const createColumns = ({
       className: "text-left min-w-40 pr-6",
       displayName: "Account",
     },
-  },
-]
+  }
 
-  return columns
+  // Order value columns based on displayValue - highlighted column comes first
+  let valueColumns: ColumnDef<StockExposure>[]
+  switch (displayValue) {
+    case "market-value":
+      valueColumns = [marketValueColumn, stockPercentColumn, portfolioPercentColumn]
+      break
+    case "pct-stocks":
+      valueColumns = [stockPercentColumn, marketValueColumn, portfolioPercentColumn]
+      break
+    case "pct-portfolio":
+    default:
+      valueColumns = [portfolioPercentColumn, marketValueColumn, stockPercentColumn]
+      break
+  }
+
+  // Build final columns array with dynamically ordered value columns
+  return [
+    expanderColumn,
+    symbolColumn,
+    nameColumn,
+    ...valueColumns,
+    sectorColumn,
+    industryColumn,
+    institutionColumn,
+    accountColumn,
+  ]
 }

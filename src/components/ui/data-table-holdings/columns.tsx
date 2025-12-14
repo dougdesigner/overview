@@ -187,7 +187,7 @@ export const createColumns = ({
     },
     enableSorting: true,
     meta: {
-      className: "text-left min-w-80",
+      className: "text-left min-w-56",
       displayName: "Name",
     },
   },

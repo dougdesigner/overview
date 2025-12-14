@@ -22,7 +22,16 @@ export default function ExposurePage() {
     accounts,
     isLoading: holdingsLoading,
     dataVersion,
+    hasViewedStocksPage,
+    markStocksPageViewed,
   } = usePortfolioStore()
+
+  // Mark stocks page as viewed for onboarding
+  useEffect(() => {
+    if (!hasViewedStocksPage && holdings.length > 0) {
+      markStocksPageViewed()
+    }
+  }, [hasViewedStocksPage, holdings.length, markStocksPageViewed])
 
   // Get exposure calculations
   const { exposures, totalValue, error } = useExposureCalculations()
