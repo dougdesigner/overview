@@ -24,12 +24,8 @@ import {
 import { InstitutionLogo } from "@/components/ui/InstitutionLogo"
 import { cx } from "@/lib/utils"
 import * as Dialog from "@radix-ui/react-dialog"
-import {
-  RiCheckLine,
-  RiCloseLine,
-  RiFilterLine,
-  RiResetLeftLine,
-} from "@remixicon/react"
+import { RiCheckLine, RiCloseLine } from "@remixicon/react"
+import { Icon } from "@iconify/react"
 import { useEffect, useState } from "react"
 
 interface DashboardSettingsDropdownProps {
@@ -163,7 +159,11 @@ export function DashboardSettingsDropdown({
       >
         Filters
       </span>
-      <RiFilterLine className="size-4" aria-hidden="true" />
+      <Icon
+        icon={hasChanges ? "carbon:filter-edit" : "carbon:filter"}
+        className="size-4"
+        aria-hidden="true"
+      />
       {hasChanges && (
         <span className="absolute -right-0.5 -top-0.5 size-2 rounded-full bg-blue-500" />
       )}
@@ -372,7 +372,7 @@ export function DashboardSettingsDropdown({
                     }}
                     className="flex w-full items-center justify-center gap-2 rounded-lg bg-gray-100 px-4 py-2.5 text-sm font-medium text-gray-600 hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700"
                   >
-                    <RiResetLeftLine className="size-4" />
+                    <Icon icon="carbon:filter-reset" className="size-4" />
                     Reset All
                   </button>
                 </div>
@@ -534,7 +534,7 @@ export function DashboardSettingsDropdown({
               onClick={onReset}
               className="text-gray-500 dark:text-gray-400"
             >
-              <RiResetLeftLine className="mr-2 size-4" aria-hidden="true" />
+              <Icon icon="carbon:filter-reset" className="mr-2 size-4" aria-hidden="true" />
               Reset All
             </DropdownMenuItem>
           </>

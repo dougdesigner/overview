@@ -233,8 +233,8 @@ function Navigation() {
             {/* Overlay - stops above the mobile nav */}
             <Dialog.Overlay className="fixed inset-x-0 top-0 bottom-20 z-[60] bg-black/50 data-[state=open]:animate-dialogOverlayShow" />
 
-            {/* Bottom gradient - fades content behind drawer, stops above mobile nav */}
-            <div className="pointer-events-none fixed inset-x-0 bottom-20 z-[59] h-32 bg-gradient-to-t from-white via-white/80 to-transparent dark:from-gray-950 dark:via-gray-950/80" />
+            {/* Bottom gradient - fades content behind drawer, extends to bottom nav */}
+            <div className="pointer-events-none fixed inset-x-0 bottom-0 z-40 h-52 bg-gradient-to-t from-white via-white to-transparent dark:from-gray-950 dark:via-gray-950" />
 
             {/* Bottom Sheet Content - positioned above mobile nav */}
             <Dialog.Content
