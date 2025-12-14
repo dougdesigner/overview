@@ -13,6 +13,15 @@ import {
 } from "@/lib/indexedDBBackup"
 import { clearETFCache } from "@/lib/etfCacheUtils"
 
+// Custom event for same-tab state synchronization
+// (storage events only fire for cross-tab changes, not same-tab)
+const PORTFOLIO_UPDATE_EVENT = 'portfolio-state-update'
+
+interface PortfolioUpdateDetail {
+  accounts?: Account[]
+  holdings?: Holding[]
+}
+
 // Account type definitions
 export interface Account {
   id: string
@@ -518,6 +527,12 @@ export function usePortfolioStore() {
       try {
         setToStorage(STORAGE_KEYS.accounts, accounts)
         setToStorage(STORAGE_KEYS.lastUpdated, Date.now())
+
+        // Dispatch custom event for same-tab sync
+        // (other components using this hook will receive this and update their state)
+        window.dispatchEvent(new CustomEvent(PORTFOLIO_UPDATE_EVENT, {
+          detail: { accounts } as PortfolioUpdateDetail
+        }))
       } catch (err) {
         console.error("Error saving accounts:", err)
         setError("Failed to save accounts")
@@ -535,6 +550,12 @@ export function usePortfolioStore() {
       try {
         setToStorage(STORAGE_KEYS.holdings, holdings)
         setToStorage(STORAGE_KEYS.lastUpdated, Date.now())
+
+        // Dispatch custom event for same-tab sync
+        // (other components using this hook will receive this and update their state)
+        window.dispatchEvent(new CustomEvent(PORTFOLIO_UPDATE_EVENT, {
+          detail: { holdings } as PortfolioUpdateDetail
+        }))
       } catch (err) {
         console.error("Error saving holdings:", err)
         setError("Failed to save holdings")
@@ -623,6 +644,29 @@ export function usePortfolioStore() {
       window.removeEventListener("storage", handleStorageChange)
     }
   }, [setAccountsState, setHoldingsState])
+
+  // Same-tab state sync via custom event
+  // This allows different components using this hook to stay in sync
+  useEffect(() => {
+    if (typeof window === "undefined") return
+
+    const handlePortfolioUpdate = (e: Event) => {
+      const customEvent = e as CustomEvent<PortfolioUpdateDetail>
+      // Update local state from the event (triggered by other components)
+      if (customEvent.detail.accounts) {
+        setAccountsState(customEvent.detail.accounts)
+      }
+      if (customEvent.detail.holdings) {
+        setHoldingsState(customEvent.detail.holdings)
+      }
+    }
+
+    window.addEventListener(PORTFOLIO_UPDATE_EVENT, handlePortfolioUpdate)
+
+    return () => {
+      window.removeEventListener(PORTFOLIO_UPDATE_EVENT, handlePortfolioUpdate)
+    }
+  }, [])
 
   // Recalculate account totals when holdings change
   useEffect(() => {

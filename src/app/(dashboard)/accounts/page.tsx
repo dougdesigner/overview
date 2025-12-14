@@ -139,9 +139,10 @@ function AccountsContent() {
       })
     }
 
-    // Reset state
+    // Reset state and close drawer
     setEditingAccount(null)
     setDrawerMode("create")
+    setIsOpen(false)
   }
 
   // Calculate total portfolio value for allocation percentages
