@@ -266,7 +266,7 @@ const combineGoogleEntries = (exposures: StockExposure[]): StockExposure[] => {
     .map((e) => (e.ticker === "GOOGL" ? combined : e))
 }
 
-export function ExposureTable({ holdings, accounts, dataVersion, selectedAccount = "all", holdingsFilter = "all", combineGoogleShares = false, showOtherAssets = false, displayValue = "pct-portfolio", onFilteredDataChange, onChartSettingsChange }: ExposureTableProps) {
+export function ExposureTable({ holdings, accounts, dataVersion, selectedAccounts = ["all"], holdingsFilter = "all", combineGoogleShares = false, showOtherAssets = false, displayValue = "pct-portfolio", onFilteredDataChange, onChartSettingsChange }: ExposureTableProps) {
   const [data, setData] = React.useState<StockExposure[]>([])
   const [sorting, setSorting] = React.useState<SortingState>([
     { id: "percentOfPortfolio", desc: true },
@@ -283,13 +283,13 @@ export function ExposureTable({ holdings, accounts, dataVersion, selectedAccount
   const [currentPage, setCurrentPage] = React.useState(0)
   const PAGE_SIZE = 20
 
-  // Filter holdings by selected account for treemap visualization
+  // Filter holdings by selected accounts for treemap visualization
   const filteredHoldings = React.useMemo(() => {
-    if (selectedAccount === "all") {
+    if (selectedAccounts.includes("all")) {
       return holdings
     }
-    return holdings.filter((h) => h.accountId === selectedAccount)
-  }, [holdings, selectedAccount])
+    return holdings.filter((h) => selectedAccounts.includes(h.accountId))
+  }, [holdings, selectedAccounts])
 
   // Calculate filtered exposures for treemap
   const [filteredData, setFilteredData] = React.useState<StockExposure[]>([])
@@ -364,14 +364,14 @@ export function ExposureTable({ holdings, accounts, dataVersion, selectedAccount
   // Get the active data source based on account filter, with optional GOOG/GOOGL combining
   // Also includes other assets (non-stock portions) when showOtherAssets is enabled
   const activeData = React.useMemo(() => {
-    const rawData = selectedAccount === "all" ? data : filteredData
+    const rawData = selectedAccounts.includes("all") ? data : filteredData
     let baseData = combineGoogleShares ? combineGoogleEntries(rawData) : rawData
 
     // Add other assets (cash + non-stock fund portions) as grouped exposure entries if enabled
     if (showOtherAssets) {
-      const relevantHoldings = selectedAccount === "all"
+      const relevantHoldings = selectedAccounts.includes("all")
         ? holdings
-        : holdings.filter(h => h.accountId === selectedAccount)
+        : holdings.filter((h) => selectedAccounts.includes(h.accountId))
 
       const totalValue = relevantHoldings.reduce((sum, h) => sum + h.marketValue, 0)
 
@@ -385,7 +385,7 @@ export function ExposureTable({ holdings, accounts, dataVersion, selectedAccount
     }
 
     return baseData
-  }, [selectedAccount, data, filteredData, combineGoogleShares, showOtherAssets, holdings])
+  }, [selectedAccounts, data, filteredData, combineGoogleShares, showOtherAssets, holdings])
 
   // Sort data globally before pagination
   // Uses activeData which is already filtered by account when needed
@@ -437,15 +437,15 @@ export function ExposureTable({ holdings, accounts, dataVersion, selectedAccount
 
   // Apply holdings filter to data for treemap visualization
   const exposuresForVisualization = React.useMemo(() => {
-    const rawData = selectedAccount === "all" ? data : filteredData
+    const rawData = selectedAccounts.includes("all") ? data : filteredData
     // Apply GOOG/GOOGL combining if enabled
     let baseData = combineGoogleShares ? combineGoogleEntries(rawData) : rawData
 
     // Add other assets (cash + non-stock fund portions) as flat entries for treemap
     if (showOtherAssets) {
-      const relevantHoldings = selectedAccount === "all"
+      const relevantHoldings = selectedAccounts.includes("all")
         ? holdings
-        : holdings.filter(h => h.accountId === selectedAccount)
+        : holdings.filter((h) => selectedAccounts.includes(h.accountId))
 
       const totalValue = relevantHoldings.reduce((sum, h) => sum + h.marketValue, 0)
 
@@ -499,16 +499,16 @@ export function ExposureTable({ holdings, accounts, dataVersion, selectedAccount
     }
 
     return baseData
-  }, [data, filteredData, selectedAccount, holdingsFilter, combineGoogleShares, showOtherAssets, holdings])
+  }, [data, filteredData, selectedAccounts, holdingsFilter, combineGoogleShares, showOtherAssets, holdings])
 
   // Calculate stocks-only total for percentage calculations (unaffected by view filter)
   const stocksOnlyValue = React.useMemo(() => {
-    const rawData = selectedAccount === "all" ? data : filteredData
+    const rawData = selectedAccounts.includes("all") ? data : filteredData
     const baseData = combineGoogleShares ? combineGoogleEntries(rawData) : rawData
     return baseData
       .filter((exp) => !exp.isETFBreakdown && exp.totalValue > 0)
       .reduce((sum, exp) => sum + exp.totalValue, 0)
-  }, [data, filteredData, selectedAccount, combineGoogleShares])
+  }, [data, filteredData, selectedAccounts, combineGoogleShares])
 
   // Report filtered data count and value to parent
   React.useEffect(() => {
@@ -659,10 +659,10 @@ export function ExposureTable({ holdings, accounts, dataVersion, selectedAccount
       {data.length > 0 && (
         <ExposureTreemapHighcharts
           exposures={exposuresForVisualization}
-          totalValue={selectedAccount === "all" ? totalPortfolioValue : filteredTotalValue}
+          totalValue={selectedAccounts.includes("all") ? totalPortfolioValue : filteredTotalValue}
           stocksOnlyValue={stocksOnlyValue}
           accounts={accounts}
-          selectedAccount={selectedAccount}
+          selectedAccounts={selectedAccounts}
           logoUrls={logoUrls}
           dataVersion={dataVersion}
           holdingsFilter={holdingsFilter}

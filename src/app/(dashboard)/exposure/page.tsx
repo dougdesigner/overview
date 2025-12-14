@@ -54,8 +54,10 @@ export default function ExposurePage() {
     }))
   }, [accounts])
 
-  // Account filter state
-  const [selectedAccount, setSelectedAccount] = React.useState<string>("all")
+  // Account filter state (multi-select)
+  const [selectedAccounts, setSelectedAccounts] = React.useState<string[]>([
+    "all",
+  ])
 
   // Holdings filter state (All, Magnificent 7, Top 10)
   const [holdingsFilter, setHoldingsFilter] = useState<HoldingsFilter>("all")
@@ -138,7 +140,7 @@ export default function ExposurePage() {
 
   // Check if any filter has changed from default
   const hasFilterChanges =
-    selectedAccount !== "all" ||
+    !selectedAccounts.includes("all") ||
     holdingsFilter !== "all" ||
     displayValue !== "pct-stocks" ||
     combineGoogleShares !== true ||
@@ -146,7 +148,7 @@ export default function ExposurePage() {
 
   // Reset all filters to defaults
   const resetFilters = () => {
-    setSelectedAccount("all")
+    setSelectedAccounts(["all"])
     setHoldingsFilter("all")
     setDisplayValue("pct-stocks")
     setCombineGoogleShares(true)
@@ -240,27 +242,35 @@ export default function ExposurePage() {
               </div>
             </div>
             <div className="flex items-center gap-2 sm:gap-4">
-              {/* Account filter pill */}
-              {selectedAccount !== "all" && (
+              {/* Account filter pill (multi-select) */}
+              {!selectedAccounts.includes("all") && (
                 <Badge
                   variant="default"
                   className="flex h-9 items-center gap-1.5 px-3 text-sm"
                 >
-                  <InstitutionLogo
-                    institution={
-                      exposureAccounts.find((a) => a.id === selectedAccount)
-                        ?.institution || ""
-                    }
-                    className="size-5"
-                  />
-                  <span className="hidden sm:inline">
-                    {
-                      exposureAccounts.find((a) => a.id === selectedAccount)
-                        ?.name
-                    }
-                  </span>
+                  {selectedAccounts.length === 1 ? (
+                    <>
+                      <InstitutionLogo
+                        institution={
+                          exposureAccounts.find(
+                            (a) => a.id === selectedAccounts[0],
+                          )?.institution || ""
+                        }
+                        className="size-5"
+                      />
+                      <span className="hidden sm:inline">
+                        {
+                          exposureAccounts.find(
+                            (a) => a.id === selectedAccounts[0],
+                          )?.name
+                        }
+                      </span>
+                    </>
+                  ) : (
+                    <span>{selectedAccounts.length} accounts</span>
+                  )}
                   <button
-                    onClick={() => setSelectedAccount("all")}
+                    onClick={() => setSelectedAccounts(["all"])}
                     className="rounded-full p-0.5 hover:bg-blue-200 dark:hover:bg-blue-500/30"
                   >
                     <RiCloseLine className="size-4" />
@@ -284,8 +294,8 @@ export default function ExposurePage() {
               )}
               <DashboardSettingsDropdown
                 accounts={exposureAccounts}
-                selectedAccount={selectedAccount}
-                onAccountChange={setSelectedAccount}
+                selectedAccounts={selectedAccounts}
+                onAccountsChange={setSelectedAccounts}
                 holdingsFilter={holdingsFilter}
                 onHoldingsFilterChange={setHoldingsFilter}
                 displayValue={displayValue}
@@ -295,6 +305,8 @@ export default function ExposurePage() {
                 showOtherAssets={showOtherAssets}
                 onShowOtherAssetsChange={setShowOtherAssets}
                 onReset={resetFilters}
+                hideTextOnMobile
+                compactWhenActive
               />
             </div>
           </div>
@@ -320,24 +332,35 @@ export default function ExposurePage() {
             </div>
           </div>
           <div className="flex items-center gap-2 sm:gap-4">
-            {/* Account filter pill */}
-            {selectedAccount !== "all" && (
+            {/* Account filter pill (multi-select) */}
+            {!selectedAccounts.includes("all") && (
               <Badge
                 variant="default"
                 className="flex h-9 items-center gap-1.5 px-3 text-sm"
               >
-                <InstitutionLogo
-                  institution={
-                    exposureAccounts.find((a) => a.id === selectedAccount)
-                      ?.institution || ""
-                  }
-                  className="size-5"
-                />
-                <span className="hidden sm:inline">
-                  {exposureAccounts.find((a) => a.id === selectedAccount)?.name}
-                </span>
+                {selectedAccounts.length === 1 ? (
+                  <>
+                    <InstitutionLogo
+                      institution={
+                        exposureAccounts.find(
+                          (a) => a.id === selectedAccounts[0],
+                        )?.institution || ""
+                      }
+                      className="size-5"
+                    />
+                    <span className="hidden sm:inline">
+                      {
+                        exposureAccounts.find(
+                          (a) => a.id === selectedAccounts[0],
+                        )?.name
+                      }
+                    </span>
+                  </>
+                ) : (
+                  <span>{selectedAccounts.length} accounts</span>
+                )}
                 <button
-                  onClick={() => setSelectedAccount("all")}
+                  onClick={() => setSelectedAccounts(["all"])}
                   className="rounded-full p-0.5 hover:bg-blue-200 dark:hover:bg-blue-500/30"
                 >
                   <RiCloseLine className="size-4" />
@@ -361,8 +384,8 @@ export default function ExposurePage() {
             )}
             <DashboardSettingsDropdown
               accounts={exposureAccounts}
-              selectedAccount={selectedAccount}
-              onAccountChange={setSelectedAccount}
+              selectedAccounts={selectedAccounts}
+              onAccountsChange={setSelectedAccounts}
               holdingsFilter={holdingsFilter}
               onHoldingsFilterChange={setHoldingsFilter}
               displayValue={displayValue}
@@ -435,7 +458,7 @@ export default function ExposurePage() {
             accounts={exposureAccounts}
             onRefresh={handleRefresh}
             dataVersion={dataVersion}
-            selectedAccount={selectedAccount}
+            selectedAccounts={selectedAccounts}
             holdingsFilter={holdingsFilter}
             combineGoogleShares={combineGoogleShares}
             showOtherAssets={showOtherAssets}

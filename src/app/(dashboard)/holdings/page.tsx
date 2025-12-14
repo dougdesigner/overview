@@ -4,7 +4,8 @@ import { Badge } from "@/components/Badge"
 import { Button } from "@/components/Button"
 import { Divider } from "@/components/Divider"
 import { HoldingsSunburst } from "@/components/HoldingsSunburstWrapper"
-import { AccountSelector } from "@/components/ui/AccountSelector"
+import { AccountFilterDropdown } from "@/components/ui/AccountFilterDropdown"
+import { InstitutionLogo } from "@/components/ui/InstitutionLogo"
 import {
   HoldingsDrawer,
   type HoldingFormData,
@@ -17,7 +18,7 @@ import { getETFName } from "@/lib/etfMetadataService"
 import { getKnownETFName } from "@/lib/knownETFNames"
 import { extractDomainsFromCompanyName } from "@/lib/logoUtils"
 import { getStockPrice } from "@/lib/stockPriceService"
-import { RiAddLine } from "@remixicon/react"
+import { RiAddLine, RiCloseLine } from "@remixicon/react"
 import { useRouter, useSearchParams } from "next/navigation"
 import React, { Suspense, useMemo } from "react"
 
@@ -446,16 +447,35 @@ function HoldingsContent() {
                 </div>
               </div>
               <div className="flex items-center gap-2">
-                <label className="hidden text-sm font-medium text-gray-700 dark:text-gray-300 sm:block">
-                  Account
-                </label>
-                <AccountSelector
+                {currentAccountFilter !== "all" && (
+                  <Badge
+                    variant="default"
+                    className="flex h-9 items-center gap-1.5 px-3 text-sm"
+                  >
+                    <InstitutionLogo
+                      institution={
+                        accounts.find((a) => a.id === currentAccountFilter)
+                          ?.institution || ""
+                      }
+                      className="size-5"
+                    />
+                    <span className="hidden sm:inline">
+                      {accounts.find((a) => a.id === currentAccountFilter)?.name}
+                    </span>
+                    <button
+                      onClick={() => setCurrentAccountFilter("all")}
+                      className="rounded-full p-0.5 hover:bg-blue-200 dark:hover:bg-blue-500/30"
+                    >
+                      <RiCloseLine className="size-4" />
+                    </button>
+                  </Badge>
+                )}
+                <AccountFilterDropdown
                   accounts={accounts}
-                  value={currentAccountFilter}
-                  onValueChange={setCurrentAccountFilter}
-                  showAllOption={true}
-                  className="w-auto sm:w-[200px]"
-                  compactOnMobile={true}
+                  selectedAccount={currentAccountFilter}
+                  onAccountChange={setCurrentAccountFilter}
+                  hideTextOnMobile
+                  compactWhenActive
                 />
               </div>
             </div>
@@ -476,19 +496,33 @@ function HoldingsContent() {
             </div>
           </div>
           <div className="flex items-center gap-2">
-            <label
-              htmlFor="account-filter"
-              className="text-sm font-medium text-gray-700 dark:text-gray-300"
-            >
-              Account
-            </label>
-            <AccountSelector
+            {currentAccountFilter !== "all" && (
+              <Badge
+                variant="default"
+                className="flex h-9 items-center gap-1.5 px-3 text-sm"
+              >
+                <InstitutionLogo
+                  institution={
+                    accounts.find((a) => a.id === currentAccountFilter)
+                      ?.institution || ""
+                  }
+                  className="size-5"
+                />
+                <span className="hidden sm:inline">
+                  {accounts.find((a) => a.id === currentAccountFilter)?.name}
+                </span>
+                <button
+                  onClick={() => setCurrentAccountFilter("all")}
+                  className="rounded-full p-0.5 hover:bg-blue-200 dark:hover:bg-blue-500/30"
+                >
+                  <RiCloseLine className="size-4" />
+                </button>
+              </Badge>
+            )}
+            <AccountFilterDropdown
               accounts={accounts}
-              value={currentAccountFilter}
-              onValueChange={setCurrentAccountFilter}
-              showAllOption={true}
-              className="w-[200px]"
-              id="account-filter"
+              selectedAccount={currentAccountFilter}
+              onAccountChange={setCurrentAccountFilter}
             />
           </div>
         </div>

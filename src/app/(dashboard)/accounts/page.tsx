@@ -34,6 +34,7 @@ import {
   AccountDrawer,
   type AccountFormData,
 } from "@/components/ui/AccountDrawer"
+import { InstitutionFilterDropdown } from "@/components/ui/InstitutionFilterDropdown"
 import { InstitutionLogo } from "@/components/ui/InstitutionLogo"
 import {
   accountTypeLabels,
@@ -43,6 +44,7 @@ import {
 import {
   RiAddLine,
   RiArrowUpDownLine,
+  RiCloseLine,
   RiDownloadLine,
   RiExpandUpDownLine,
   RiEyeOffLine,
@@ -354,54 +356,35 @@ function AccountsContent() {
               </div>
             </div>
             <div className="flex items-center gap-2">
-              <label className="hidden text-sm font-medium text-gray-700 dark:text-gray-300 sm:block">
-                Institution
-              </label>
-              <Select
-                value={selectedInstitution}
-                onValueChange={setSelectedInstitution}
-              >
-                <SelectTrigger className="w-auto sm:w-[200px]">
-                  {selectedInstitution === "all" ? (
-                    <span>
-                      All{" "}
-                      <span className="rounded-md bg-gray-100 px-1.5 py-0.5 text-sm font-medium tabular-nums text-gray-700 dark:bg-gray-800 dark:text-gray-300">
-                        {uniqueInstitutions.length}
-                      </span>
-                    </span>
-                  ) : (
-                    <div className="flex items-center gap-2">
-                      <InstitutionLogo
-                        institution={selectedInstitution}
-                        className="size-5"
-                      />
-                      <span className="hidden truncate sm:inline">
-                        {institutionLabels[selectedInstitution] ||
-                          selectedInstitution}
-                      </span>
-                    </div>
-                  )}
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="all">
-                    All{" "}
-                    <span className="rounded-md bg-gray-100 px-1.5 py-0.5 text-sm font-medium tabular-nums text-gray-700 dark:bg-gray-800 dark:text-gray-300">
-                      {uniqueInstitutions.length}
-                    </span>
-                  </SelectItem>
-                  {uniqueInstitutions.map((inst) => (
-                    <SelectItem key={inst.id} value={inst.id}>
-                      <div className="flex items-center gap-2">
-                        <InstitutionLogo
-                          institution={inst.id}
-                          className="size-5"
-                        />
-                        <span>{inst.label}</span>
-                      </div>
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
+              {selectedInstitution !== "all" && (
+                <Badge
+                  variant="default"
+                  className="flex h-9 items-center gap-1.5 px-3 text-sm"
+                >
+                  <InstitutionLogo
+                    institution={selectedInstitution}
+                    className="size-5"
+                  />
+                  <span className="hidden sm:inline">
+                    {institutionLabels[selectedInstitution] ||
+                      selectedInstitution}
+                  </span>
+                  <button
+                    onClick={() => setSelectedInstitution("all")}
+                    className="rounded-full p-0.5 hover:bg-blue-200 dark:hover:bg-blue-500/30"
+                  >
+                    <RiCloseLine className="size-4" />
+                  </button>
+                </Badge>
+              )}
+              <InstitutionFilterDropdown
+                institutions={uniqueInstitutions.map((inst) => inst.id)}
+                selectedInstitution={selectedInstitution}
+                onInstitutionChange={setSelectedInstitution}
+                totalCount={uniqueInstitutions.length}
+                hideTextOnMobile
+                compactWhenActive
+              />
             </div>
           </div>
         </div>
@@ -421,57 +404,32 @@ function AccountsContent() {
             </div>
           </div>
           <div className="flex items-center gap-2">
-            <label
-              htmlFor="institution-filter"
-              className="text-sm font-medium text-gray-700 dark:text-gray-300"
-            >
-              Institution
-            </label>
-            <Select
-              value={selectedInstitution}
-              onValueChange={setSelectedInstitution}
-            >
-              <SelectTrigger className="w-[200px]" id="institution-filter">
-                {selectedInstitution === "all" ? (
-                  <span>
-                    All{" "}
-                    <span className="rounded-md bg-gray-100 px-1.5 py-0.5 text-sm font-medium tabular-nums text-gray-700 dark:bg-gray-800 dark:text-gray-300">
-                      {uniqueInstitutions.length}
-                    </span>
-                  </span>
-                ) : (
-                  <div className="flex items-center gap-2">
-                    <InstitutionLogo
-                      institution={selectedInstitution}
-                      className="size-5"
-                    />
-                    <span className="truncate">
-                      {institutionLabels[selectedInstitution] ||
-                        selectedInstitution}
-                    </span>
-                  </div>
-                )}
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="all">
-                  All{" "}
-                  <span className="rounded-md bg-gray-100 px-1.5 py-0.5 text-sm font-medium tabular-nums text-gray-700 dark:bg-gray-800 dark:text-gray-300">
-                    {uniqueInstitutions.length}
-                  </span>
-                </SelectItem>
-                {uniqueInstitutions.map((inst) => (
-                  <SelectItem key={inst.id} value={inst.id}>
-                    <div className="flex items-center gap-2">
-                      <InstitutionLogo
-                        institution={inst.id}
-                        className="size-5"
-                      />
-                      <span>{inst.label}</span>
-                    </div>
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
+            {selectedInstitution !== "all" && (
+              <Badge
+                variant="default"
+                className="flex h-9 items-center gap-1.5 px-3 text-sm"
+              >
+                <InstitutionLogo
+                  institution={selectedInstitution}
+                  className="size-5"
+                />
+                <span className="hidden sm:inline">
+                  {institutionLabels[selectedInstitution] || selectedInstitution}
+                </span>
+                <button
+                  onClick={() => setSelectedInstitution("all")}
+                  className="rounded-full p-0.5 hover:bg-blue-200 dark:hover:bg-blue-500/30"
+                >
+                  <RiCloseLine className="size-4" />
+                </button>
+              </Badge>
+            )}
+            <InstitutionFilterDropdown
+              institutions={uniqueInstitutions.map((inst) => inst.id)}
+              selectedInstitution={selectedInstitution}
+              onInstitutionChange={setSelectedInstitution}
+              totalCount={uniqueInstitutions.length}
+            />
           </div>
         </div>
       )}
@@ -797,110 +755,187 @@ function AccountsContent() {
                       .filter((asset) => asset.value > 0)
                       .sort((a, b) => b.value - a.value)
 
-                    return (
-                      <SankeyChartHighcharts
-                        data={{
-                          nodes: [
-                            // Portfolio Total (leftmost)
-                            { id: "Portfolio Total" },
-                            // Institution nodes (second level) - use display names
-                            ...institutionDisplayNames.map((name) => ({
-                              id: name,
-                            })),
-                            // Account nodes (third level)
-                            ...filteredAccounts.map((account) => ({
-                              id: account.name,
-                            })),
-                            // Asset type nodes (rightmost) - sorted by value descending with offset for ordering
-                            ...assetClassTotals.map((asset, index) => ({
-                              id: asset.id,
-                              offset: index, // Forces vertical ordering: 0 = top, 1 = second, etc.
-                            })),
-                          ],
-                          links: [
-                            // Portfolio Total to Institutions - aggregate by institution
-                            ...sankeyInstitutions.map((inst) => {
-                              const instTotal = filteredAccounts
-                                .filter((acc) => acc.institution === inst)
-                                .reduce((sum, acc) => sum + acc.totalValue, 0)
-                              return {
-                                source: "Portfolio Total",
-                                target: institutionLabels[inst] || inst,
-                                value: instTotal,
-                              }
-                            }),
-                            // Institutions to Accounts
-                            ...filteredAccounts.map((account) => ({
-                              source:
-                                institutionLabels[account.institution] ||
-                                account.institution,
-                              target: account.name,
-                              value: account.totalValue,
-                            })),
-                            // Accounts to Asset Types - based on each account's allocation
-                            ...filteredAccounts.flatMap((account) => {
-                              const links = []
-                              const usStocksValue =
-                                (account.totalValue *
-                                  account.assetAllocation.usStocks) /
-                                100
-                              const nonUsStocksValue =
-                                (account.totalValue *
-                                  account.assetAllocation.nonUsStocks) /
-                                100
-                              const fixedIncomeValue =
-                                (account.totalValue *
-                                  account.assetAllocation.fixedIncome) /
-                                100
-                              const cashValue =
-                                (account.totalValue *
-                                  account.assetAllocation.cash) /
-                                100
+                    // Calculate institution totals for legend
+                    const institutionTotals = sankeyInstitutions
+                      .map((inst) => ({
+                        key: inst,
+                        label: institutionLabels[inst] || inst,
+                        value: filteredAccounts
+                          .filter((acc) => acc.institution === inst)
+                          .reduce((sum, acc) => sum + acc.totalValue, 0),
+                      }))
+                      .sort((a, b) => b.value - a.value)
 
-                              if (usStocksValue > 0) {
-                                links.push({
-                                  source: account.name,
-                                  target: "U.S. Stocks",
-                                  value: usStocksValue,
-                                })
-                              }
-                              if (nonUsStocksValue > 0) {
-                                links.push({
-                                  source: account.name,
-                                  target: "Non-U.S. Stocks",
-                                  value: nonUsStocksValue,
-                                })
-                              }
-                              if (fixedIncomeValue > 0) {
-                                links.push({
-                                  source: account.name,
-                                  target: "Fixed Income",
-                                  value: fixedIncomeValue,
-                                })
-                              }
-                              if (cashValue > 0) {
-                                links.push({
-                                  source: account.name,
-                                  target: "Cash",
-                                  value: cashValue,
-                                })
-                              }
-                              return links
-                            }),
-                          ],
-                        }}
-                        colors={["blue", "cyan", "amber", "emerald"]}
-                        accountColors={[
-                          "violet",
-                          "fuchsia",
-                          "pink",
-                          "sky",
-                          "lime",
-                        ]}
-                        institutions={institutionDisplayNames}
-                        height={350}
-                        chartRef={sankeyChartRef}
-                      />
+                    // Asset class colors (matches Sankey colors prop order)
+                    const assetClassColors = [
+                      "#3b82f6", // blue-500
+                      "#06b6d4", // cyan-500
+                      "#f59e0b", // amber-500
+                      "#10b981", // emerald-500
+                    ]
+
+                    // Format currency for legend
+                    const formatLegendValue = (value: number) => {
+                      if (value >= 1000000)
+                        return `$${(value / 1000000).toFixed(1)}M`
+                      if (value >= 1000) return `$${(value / 1000).toFixed(0)}K`
+                      return `$${value.toFixed(0)}`
+                    }
+
+                    return (
+                      <>
+                        <SankeyChartHighcharts
+                          data={{
+                            nodes: [
+                              // Portfolio Total (leftmost)
+                              { id: "Portfolio Total" },
+                              // Institution nodes (second level) - use display names
+                              ...institutionDisplayNames.map((name) => ({
+                                id: name,
+                              })),
+                              // Account nodes (third level)
+                              ...filteredAccounts.map((account) => ({
+                                id: account.name,
+                              })),
+                              // Asset type nodes (rightmost) - sorted by value descending with offset for ordering
+                              ...assetClassTotals.map((asset, index) => ({
+                                id: asset.id,
+                                offset: index, // Forces vertical ordering: 0 = top, 1 = second, etc.
+                              })),
+                            ],
+                            links: [
+                              // Portfolio Total to Institutions - aggregate by institution
+                              ...sankeyInstitutions.map((inst) => {
+                                const instTotal = filteredAccounts
+                                  .filter((acc) => acc.institution === inst)
+                                  .reduce((sum, acc) => sum + acc.totalValue, 0)
+                                return {
+                                  source: "Portfolio Total",
+                                  target: institutionLabels[inst] || inst,
+                                  value: instTotal,
+                                }
+                              }),
+                              // Institutions to Accounts
+                              ...filteredAccounts.map((account) => ({
+                                source:
+                                  institutionLabels[account.institution] ||
+                                  account.institution,
+                                target: account.name,
+                                value: account.totalValue,
+                              })),
+                              // Accounts to Asset Types - based on each account's allocation
+                              ...filteredAccounts.flatMap((account) => {
+                                const links = []
+                                const usStocksValue =
+                                  (account.totalValue *
+                                    account.assetAllocation.usStocks) /
+                                  100
+                                const nonUsStocksValue =
+                                  (account.totalValue *
+                                    account.assetAllocation.nonUsStocks) /
+                                  100
+                                const fixedIncomeValue =
+                                  (account.totalValue *
+                                    account.assetAllocation.fixedIncome) /
+                                  100
+                                const cashValue =
+                                  (account.totalValue *
+                                    account.assetAllocation.cash) /
+                                  100
+
+                                if (usStocksValue > 0) {
+                                  links.push({
+                                    source: account.name,
+                                    target: "U.S. Stocks",
+                                    value: usStocksValue,
+                                  })
+                                }
+                                if (nonUsStocksValue > 0) {
+                                  links.push({
+                                    source: account.name,
+                                    target: "Non-U.S. Stocks",
+                                    value: nonUsStocksValue,
+                                  })
+                                }
+                                if (fixedIncomeValue > 0) {
+                                  links.push({
+                                    source: account.name,
+                                    target: "Fixed Income",
+                                    value: fixedIncomeValue,
+                                  })
+                                }
+                                if (cashValue > 0) {
+                                  links.push({
+                                    source: account.name,
+                                    target: "Cash",
+                                    value: cashValue,
+                                  })
+                                }
+                                return links
+                              }),
+                            ],
+                          }}
+                          colors={["blue", "cyan", "amber", "emerald"]}
+                          accountColors={[
+                            "violet",
+                            "fuchsia",
+                            "pink",
+                            "sky",
+                            "lime",
+                          ]}
+                          institutions={institutionDisplayNames}
+                          height={350}
+                          chartRef={sankeyChartRef}
+                        />
+
+                        {/* Legend */}
+                        <div className="mt-4">
+                          {/* Asset Allocation */}
+                          <p className="mb-1 text-sm font-medium text-gray-700 dark:text-gray-300">
+                            Asset Allocation
+                          </p>
+                          <ul className="flex flex-wrap gap-x-10 gap-y-4 text-sm">
+                            {assetClassTotals.map((asset, index) => (
+                              <li key={asset.id}>
+                                <span className="text-base font-semibold text-gray-900 dark:text-gray-50">
+                                  {formatLegendValue(asset.value)}
+                                </span>
+                                <div className="flex items-center gap-2">
+                                  <span
+                                    className="size-2.5 shrink-0 rounded-sm"
+                                    style={{
+                                      backgroundColor: assetClassColors[index],
+                                    }}
+                                    aria-hidden="true"
+                                  />
+                                  <span className="text-sm">{asset.id}</span>
+                                </div>
+                              </li>
+                            ))}
+                          </ul>
+
+                          {/* Institutions */}
+                          <p className="mb-1 mt-4 text-sm font-medium text-gray-700 dark:text-gray-300">
+                            Institutions
+                          </p>
+                          <ul className="flex flex-wrap gap-x-10 gap-y-4 text-sm">
+                            {institutionTotals.map((inst) => (
+                              <li key={inst.key}>
+                                <span className="text-base font-semibold text-gray-900 dark:text-gray-50">
+                                  {formatLegendValue(inst.value)}
+                                </span>
+                                <div className="flex items-center gap-2">
+                                  <InstitutionLogo
+                                    institution={inst.key}
+                                    className="size-5"
+                                  />
+                                  <span className="text-sm">{inst.label}</span>
+                                </div>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      </>
                     )
                   })()
                 ) : (

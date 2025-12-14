@@ -26,8 +26,8 @@ import { RiFilterLine, RiResetLeftLine } from "@remixicon/react"
 
 interface DashboardSettingsDropdownProps {
   accounts?: Account[]
-  selectedAccount?: string
-  onAccountChange?: (value: string) => void
+  selectedAccounts?: string[]
+  onAccountsChange?: (value: string[]) => void
   holdingsFilter: HoldingsFilter
   onHoldingsFilterChange: (value: HoldingsFilter) => void
   displayValue: ExposureDisplayValue
@@ -37,6 +37,8 @@ interface DashboardSettingsDropdownProps {
   showOtherAssets: boolean
   onShowOtherAssetsChange: (value: boolean) => void
   onReset?: () => void
+  hideTextOnMobile?: boolean // Hide "Filters" text on mobile (for floating filter)
+  compactWhenActive?: boolean // Hide text when filters are active (show icon only)
 }
 
 // Helper to get display text for holdings filter
@@ -69,8 +71,8 @@ const getDisplayValueLabel = (value: ExposureDisplayValue): string => {
 
 export function DashboardSettingsDropdown({
   accounts,
-  selectedAccount,
-  onAccountChange,
+  selectedAccounts,
+  onAccountsChange,
   holdingsFilter,
   onHoldingsFilterChange,
   displayValue,
@@ -80,10 +82,12 @@ export function DashboardSettingsDropdown({
   showOtherAssets,
   onShowOtherAssetsChange,
   onReset,
+  hideTextOnMobile = false,
+  compactWhenActive = false,
 }: DashboardSettingsDropdownProps) {
   // Check if any setting differs from default
   const hasChanges =
-    (selectedAccount && selectedAccount !== "all") ||
+    (selectedAccounts && !selectedAccounts.includes("all")) ||
     holdingsFilter !== "all" ||
     displayValue !== "pct-stocks" ||
     combineGoogleShares !== true ||
@@ -91,15 +95,57 @@ export function DashboardSettingsDropdown({
 
   // Get selected account name for display
   const selectedAccountName =
-    selectedAccount === "all" || !selectedAccount
+    !selectedAccounts || selectedAccounts.includes("all")
       ? "All"
-      : accounts?.find((a) => a.id === selectedAccount)?.name || "All"
+      : selectedAccounts.length === 1
+        ? accounts?.find((a) => a.id === selectedAccounts[0])?.name || "1 account"
+        : `${selectedAccounts.length} accounts`
+
+  // Handle account toggle for multi-select
+  const handleAccountToggle = (accountId: string, checked: boolean) => {
+    if (!onAccountsChange || !accounts) return
+
+    const currentAccounts = selectedAccounts?.includes("all")
+      ? []
+      : (selectedAccounts || [])
+
+    let newAccounts: string[]
+
+    if (checked) {
+      newAccounts = [...currentAccounts, accountId]
+      // If all accounts are now selected, switch to "all"
+      if (newAccounts.length === accounts.length) {
+        newAccounts = ["all"]
+      }
+    } else {
+      newAccounts = currentAccounts.filter((id) => id !== accountId)
+      // If no accounts selected, revert to "all"
+      if (newAccounts.length === 0) {
+        newAccounts = ["all"]
+      }
+    }
+
+    onAccountsChange(newAccounts)
+  }
 
   return (
     <DropdownMenu>
       <Tooltip triggerAsChild content="Dashboard settings">
         <DropdownMenuTrigger asChild>
-          <Button variant="secondary" className="relative h-9">
+          <Button variant="secondary" className="relative h-9 gap-1.5">
+            <span
+              className={
+                compactWhenActive
+                  ? hasChanges
+                    ? "hidden"
+                    : "" // Always show text when no filters active
+                  : hideTextOnMobile
+                    ? "hidden sm:inline"
+                    : ""
+              }
+            >
+              Filters
+            </span>
             <RiFilterLine className="size-4" aria-hidden="true" />
             {hasChanges && (
               <span className="absolute -right-0.5 -top-0.5 size-2 rounded-full bg-blue-500" />
@@ -111,8 +157,8 @@ export function DashboardSettingsDropdown({
         <DropdownMenuLabel>DASHBOARD SETTINGS</DropdownMenuLabel>
         <DropdownMenuSeparator />
 
-        {/* Account filter */}
-        {accounts && accounts.length > 0 && onAccountChange && (
+        {/* Account filter (multi-select) */}
+        {accounts && accounts.length > 0 && onAccountsChange && (
           <DropdownMenuSubMenu>
             <DropdownMenuSubMenuTrigger>
               <span>Account</span>
@@ -121,27 +167,41 @@ export function DashboardSettingsDropdown({
               </span>
             </DropdownMenuSubMenuTrigger>
             <DropdownMenuSubMenuContent>
-              <DropdownMenuRadioGroup
-                value={selectedAccount || "all"}
-                onValueChange={onAccountChange}
+              {/* All Accounts option */}
+              <DropdownMenuCheckboxItem
+                onSelect={(e) => e.preventDefault()}
+                checked={selectedAccounts?.includes("all") ?? true}
+                onCheckedChange={(checked) => {
+                  if (checked) {
+                    onAccountsChange(["all"])
+                  }
+                }}
               >
-                <DropdownMenuRadioItem value="all" iconType="check">
-                  All Accounts
-                </DropdownMenuRadioItem>
-                {accounts.map((account) => (
-                  <DropdownMenuRadioItem
-                    key={account.id}
-                    value={account.id}
-                    iconType="check"
-                  >
-                    <InstitutionLogo
-                      institution={account.institution}
-                      className="size-5"
-                    />
-                    {account.name}
-                  </DropdownMenuRadioItem>
-                ))}
-              </DropdownMenuRadioGroup>
+                All Accounts
+              </DropdownMenuCheckboxItem>
+
+              <DropdownMenuSeparator />
+
+              {/* Individual accounts - UNCHECKED when All is selected */}
+              {accounts.map((account) => (
+                <DropdownMenuCheckboxItem
+                  key={account.id}
+                  onSelect={(e) => e.preventDefault()}
+                  checked={
+                    !selectedAccounts?.includes("all") &&
+                    (selectedAccounts?.includes(account.id) ?? false)
+                  }
+                  onCheckedChange={(checked) => {
+                    handleAccountToggle(account.id, checked)
+                  }}
+                >
+                  <InstitutionLogo
+                    institution={account.institution}
+                    className="size-5"
+                  />
+                  {account.name}
+                </DropdownMenuCheckboxItem>
+              ))}
             </DropdownMenuSubMenuContent>
           </DropdownMenuSubMenu>
         )}

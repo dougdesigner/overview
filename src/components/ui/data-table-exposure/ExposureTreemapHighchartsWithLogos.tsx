@@ -70,7 +70,7 @@ interface ExposureTreemapHighchartsProps {
   totalValue: number
   stocksOnlyValue?: number  // Full stocks value for percentage calculations (not affected by view filter)
   accounts: Account[]
-  selectedAccount: string
+  selectedAccounts: string[]
   logoUrls: Record<string, string | null>
   dataVersion?: number
   holdingsFilter?: "all" | "mag7" | "top7" | "top10"  // View filter for legend display

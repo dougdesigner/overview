@@ -87,7 +87,7 @@ export interface ExposureTableProps {
   onRefresh?: () => void
   lastUpdated?: Date
   dataVersion?: number
-  selectedAccount?: string
+  selectedAccounts?: string[]
   holdingsFilter?: HoldingsFilter
   combineGoogleShares?: boolean
   showOtherAssets?: boolean
