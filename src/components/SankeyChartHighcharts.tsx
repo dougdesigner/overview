@@ -73,8 +73,8 @@ export default function SankeyChartHighcharts({
   height = 500,
   chartRef: externalChartRef,
 }: SankeyChartHighchartsProps) {
-  const { theme } = useTheme()
-  const isDark = theme === "dark"
+  const { resolvedTheme } = useTheme()
+  const isDark = resolvedTheme === "dark"
   const internalChartRef = useRef<HighchartsReact.RefObject>(null)
   const chartRef = externalChartRef || internalChartRef
   const [isClient, setIsClient] = useState(false)

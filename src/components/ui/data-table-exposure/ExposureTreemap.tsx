@@ -27,8 +27,8 @@ export function ExposureTreemap({
   totalValue,
 }: ExposureTreemapProps) {
   const [groupingMode, setGroupingMode] = useState<GroupingMode>("sector")
-  const { theme } = useTheme()
-  const isDark = theme === "dark"
+  const { resolvedTheme } = useTheme()
+  const isDark = resolvedTheme === "dark"
 
   // Nivo's paired color scheme colors
   const pairedColors = [

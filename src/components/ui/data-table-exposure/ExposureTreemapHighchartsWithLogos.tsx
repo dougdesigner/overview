@@ -151,8 +151,8 @@ export function ExposureTreemapHighchartsWithLogos({
 
   // Modules are initialized at module level, so we default to true
   const [modulesLoaded] = useState(true)
-  const { theme } = useTheme()
-  const isDark = theme === "dark"
+  const { resolvedTheme } = useTheme()
+  const isDark = resolvedTheme === "dark"
   const chartRef = useRef<HighchartsReact.RefObject>(null)
 
   // Responsive height: 350 on mobile (<640px), 500 on desktop

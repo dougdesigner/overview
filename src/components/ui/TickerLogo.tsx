@@ -10,6 +10,21 @@ import { cx } from "@/lib/utils"
 import Image from "next/image"
 import React from "react"
 
+// Helper function for special ticker logos (Google, Apple, Figma need padding)
+const getLogoStyle = (ticker: string) => {
+  const upperTicker = ticker?.toUpperCase() || ""
+  if (upperTicker === "GOOGL" || upperTicker === "GOOG") {
+    return { background: "#f2f3fa", needsPadding: true }
+  }
+  if (upperTicker === "AAPL") {
+    return { background: "#ebebeb", needsPadding: true }
+  }
+  if (upperTicker === "FIGM" || upperTicker === "FIG") {
+    return { background: "#f1f3f9", needsPadding: true }
+  }
+  return { background: "#f1f3fa", needsPadding: false }
+}
+
 interface TickerLogoProps {
   ticker: string
   type?: "stock" | "etf" | "mutual-fund"
@@ -89,13 +104,30 @@ export function TickerLogo({
   }
 
   if (logoUrl && !logoError) {
-    return (
+    const logoStyle = getLogoStyle(ticker)
+
+    return logoStyle.needsPadding ? (
+      <div
+        className={cx("flex shrink-0 items-center justify-center rounded-full", className)}
+        style={{ backgroundColor: logoStyle.background }}
+      >
+        <Image
+          src={logoUrl}
+          alt={ticker}
+          width={48}
+          height={48}
+          className="size-[75%] rounded-full object-contain"
+          onError={() => setLogoError(true)}
+        />
+      </div>
+    ) : (
       <Image
         src={logoUrl}
         alt={ticker}
         width={48}
         height={48}
-        className={cx("shrink-0 rounded-full bg-white object-cover", className)}
+        className={cx("shrink-0 rounded-full object-cover", className)}
+        style={{ backgroundColor: logoStyle.background }}
         onError={() => setLogoError(true)}
       />
     )

@@ -70,8 +70,8 @@ export default function SankeyChart({
   animate = true,
   motionConfig = "gentle",
 }: SankeyChartProps) {
-  const { theme } = useTheme()
-  const isDark = theme === "dark"
+  const { resolvedTheme } = useTheme()
+  const isDark = resolvedTheme === "dark"
   const [isMounted, setIsMounted] = useState(false)
   const [animationKey, setAnimationKey] = useState(0)
 

@@ -30,8 +30,8 @@ export function ExposureTreemapHighcharts({
 }: ExposureTreemapHighchartsProps) {
   const [groupingMode, setGroupingMode] = useState<GroupingMode>("sector")
   const [isTreemapLoaded, setIsTreemapLoaded] = useState(false)
-  const { theme } = useTheme()
-  const isDark = theme === "dark"
+  const { resolvedTheme } = useTheme()
+  const isDark = resolvedTheme === "dark"
   const chartRef = useRef<HighchartsReact.RefObject>(null)
 
   useEffect(() => {

@@ -93,8 +93,8 @@ export default function AccountTreemap({
   height = 400,
   chartRef: externalChartRef,
 }: AccountTreemapProps) {
-  const { theme } = useTheme()
-  const isDark = theme === "dark"
+  const { resolvedTheme } = useTheme()
+  const isDark = resolvedTheme === "dark"
   const internalChartRef = useRef<HighchartsReact.RefObject>(null)
   const chartRef = externalChartRef || internalChartRef
   const [isClient, setIsClient] = useState(false)

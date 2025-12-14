@@ -25,8 +25,8 @@ export function HoldingsSunburst({
   holdings,
   height = 350,
 }: HoldingsSunburstProps) {
-  const { theme } = useTheme()
-  const isDark = theme === "dark"
+  const { resolvedTheme } = useTheme()
+  const isDark = resolvedTheme === "dark"
   const chartRef = useRef<HighchartsReact.RefObject>(null)
   const [isClient, setIsClient] = useState(false)
   const [modulesLoaded, setModulesLoaded] = useState(false)
