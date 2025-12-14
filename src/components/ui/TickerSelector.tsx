@@ -127,6 +127,7 @@ export function TickerSelector({
       <TickerLogo
         ticker={ticker.symbol}
         type={ticker.type === "mutual-fund" ? "mutual-fund" : ticker.type}
+        companyName={ticker.name}
         className="size-5"
       />
       <span className="font-medium">{ticker.symbol}</span>

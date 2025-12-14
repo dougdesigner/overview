@@ -38,8 +38,8 @@ export function TickerLogo({
 
   // Get logo URL with priority:
   // 1. Pre-resolved domain (for manual entries)
-  // 2. Domain derived from company name (for manual entries)
-  // 3. Ticker-based lookup (only for regular stocks/ETFs, NOT manual entries)
+  // 2. Ticker-based overrides (GOOGL→google.com, AAPL→apple.com.cn, etc.)
+  // 3. Domain derived from company name (fallback for unknown tickers)
   const getLogoUrl = (): string | null => {
     if (isBerkshire) return null
 
@@ -48,18 +48,21 @@ export function TickerLogo({
       return getLogoUrlFromDomain(domain)
     }
 
-    // Priority 2: Derive domain from company name (for manual entries)
+    // Priority 2: Check ticker-based overrides first (handles GOOGL→google.com, etc.)
+    const tickerUrl = getTickerLogoUrl(ticker)
+    if (tickerUrl) {
+      return tickerUrl
+    }
+
+    // Priority 3: Fall back to deriving domain from company name
     if (companyName) {
       const derivedDomains = extractDomainsFromCompanyName(companyName)
       if (derivedDomains.length > 0) {
         return getLogoUrlFromDomain(derivedDomains[0])
       }
-      // For manual entries, don't fall back to ticker lookup - show initials instead
-      return null
     }
 
-    // Priority 3: Standard ticker lookup (only for non-manual entries)
-    return getTickerLogoUrl(ticker)
+    return null
   }
 
   const logoUrl = getLogoUrl()
