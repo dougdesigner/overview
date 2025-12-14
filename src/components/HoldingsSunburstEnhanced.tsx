@@ -182,6 +182,7 @@ export function HoldingsSunburstEnhanced({
           },
         },
         tooltip: {
+          followTouchMove: false,
           backgroundColor: isDark ? "#1f2937" : "#ffffff",
           borderColor: isDark ? "#4b5563" : "#e5e7eb",
           style: {
@@ -952,6 +953,7 @@ export function HoldingsSunburstEnhanced({
     ],
     tooltip: {
       useHTML: true,
+      followTouchMove: false,
       headerFormat: "",
       backgroundColor: isDark ? "#1f2937" : "#ffffff",
       borderColor: isDark ? "#4b5563" : "#e5e7eb",
@@ -1051,6 +1053,7 @@ export function HoldingsSunburstEnhanced({
     ],
     tooltip: {
       useHTML: true,
+      followTouchMove: false,
       headerFormat: "",
       backgroundColor: isDark ? "#1f2937" : "#ffffff",
       borderColor: isDark ? "#4b5563" : "#e5e7eb",
@@ -1135,6 +1138,7 @@ export function HoldingsSunburstEnhanced({
       },
       tooltip: {
         useHTML: true,
+        followTouchMove: false,
         headerFormat: '<span style="font-size:14px">{series.name}</span><br>',
         pointFormat:
           '<span style="color:{point.color}; font-size:14px">{point.name}</span>: ' +

@@ -205,6 +205,7 @@ export function HighchartsDonutChart({
     },
     tooltip: {
       useHTML: true,
+      followTouchMove: false,
       headerFormat: "",
       pointFormat:
         '<div style="padding: 2px;">' +
@@ -283,6 +284,7 @@ export function HighchartsDonutChart({
           },
         },
         tooltip: {
+          followTouchMove: false,
           backgroundColor: isDark ? "#1f2937" : "#ffffff",
           borderColor: isDark ? "#4b5563" : "#e5e7eb",
           style: {

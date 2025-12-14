@@ -240,6 +240,7 @@ export function ExposureTreemapHighchartsWithLogos({
           },
         },
         tooltip: {
+          followTouchMove: false,
           backgroundColor: isDark ? "#1f2937" : "#ffffff",
           borderColor: isDark ? "#4b5563" : "#e5e7eb",
           style: {
@@ -1257,6 +1258,7 @@ export function ExposureTreemapHighchartsWithLogos({
     ],
     tooltip: {
       useHTML: true,
+      followTouchMove: false,
       outside: true, // Render tooltip above all HTML content
       backgroundColor: isDark ? "#1f2937" : "#ffffff",
       borderColor: isDark ? "#4b5563" : "#e5e7eb",
@@ -1451,6 +1453,7 @@ export function ExposureTreemapHighchartsWithLogos({
     ],
     tooltip: {
       useHTML: true,
+      followTouchMove: false,
       outside: true,
       headerFormat: "",
       backgroundColor: isDark ? "#1f2937" : "#ffffff",

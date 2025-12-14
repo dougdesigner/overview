@@ -274,6 +274,7 @@ export default function SankeyChartHighcharts({
     ],
     tooltip: {
       useHTML: true,
+      followTouchMove: false,
       headerFormat: "",
       backgroundColor: isDark ? "#1f2937" : "#ffffff",
       borderColor: isDark ? "#4b5563" : "#e5e7eb",
