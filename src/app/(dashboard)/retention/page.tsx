@@ -34,7 +34,8 @@ import {
 } from "@/data/retention/schema"
 import { valueFormatter } from "@/lib/formatters"
 import { cx, focusRing } from "@/lib/utils"
-import { RiCloseLine, RiExpandDiagonalLine } from "@remixicon/react"
+import { Icon } from "@iconify/react"
+import { RiExpandDiagonalLine } from "@remixicon/react"
 import { useState } from "react"
 
 const colorClasses = [
@@ -94,7 +95,7 @@ const CohortDetailsDialog = ({
           </DialogDescription>
           <DialogClose asChild>
             <Button className="absolute right-4 top-4 p-2" variant="ghost">
-              <RiCloseLine className="size-5 shrink-0" />
+              <Icon icon="carbon:close" className="size-5 shrink-0" />
             </Button>
           </DialogClose>
         </DialogHeader>

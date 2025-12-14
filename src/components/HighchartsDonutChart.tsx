@@ -11,7 +11,8 @@ import {
 } from "@/components/DropdownMenu"
 import { Tooltip } from "@/components/Tooltip"
 import { getAssetClassHexColor } from "@/lib/assetClassColors"
-import { RiDownloadLine, RiFullscreenLine } from "@remixicon/react"
+import { Icon } from "@iconify/react"
+import { RiFullscreenLine } from "@remixicon/react"
 import { useTheme } from "next-themes"
 import { useEffect, useRef, useState } from "react"
 
@@ -311,7 +312,7 @@ export function HighchartsDonutChart({
           <Tooltip triggerAsChild content="Export chart as image or data file">
             <DropdownMenuTrigger asChild>
               <Button variant="secondary" className="h-9">
-                <RiDownloadLine className="size-4" aria-hidden="true" />
+                <Icon icon="carbon:download" className="size-4" aria-hidden="true" />
               </Button>
             </DropdownMenuTrigger>
           </Tooltip>

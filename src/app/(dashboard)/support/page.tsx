@@ -11,7 +11,7 @@ import { DataTable } from "@/components/ui/data-table-support/DataTable"
 import { columns } from "@/components/ui/data-table-support/columns"
 import { tickets } from "@/data/support/tickets"
 import { volume } from "@/data/support/volume"
-import { RiAddLine } from "@remixicon/react"
+import { Icon } from "@iconify/react"
 import React from "react"
 
 export default function SupportDashboard() {
@@ -32,7 +32,7 @@ export default function SupportDashboard() {
           className="flex items-center gap-2 text-base sm:text-sm"
         >
           Create Ticket
-          <RiAddLine className="-mr-0.5 size-5 shrink-0" aria-hidden="true" />
+          <Icon icon="carbon:add" className="-mr-0.5 size-5 shrink-0" aria-hidden="true" />
         </Button>
         <TicketDrawer open={isOpen} onOpenChange={setIsOpen} />
       </div>

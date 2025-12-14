@@ -18,7 +18,6 @@ import type {
 import { institutionLabels } from "@/lib/institutionUtils"
 import {
   RiDonutChartLine,
-  RiDownloadLine,
   RiFullscreenLine,
 } from "@remixicon/react"
 import { Icon } from "@iconify/react"
@@ -1471,7 +1470,7 @@ export function HoldingsSunburstEnhanced({
             >
               <DropdownMenuTrigger asChild>
                 <Button variant="secondary" className="h-9">
-                  <RiDownloadLine className="size-4" aria-hidden="true" />
+                  <Icon icon="carbon:download" className="size-4" aria-hidden="true" />
                 </Button>
               </DropdownMenuTrigger>
             </Tooltip>

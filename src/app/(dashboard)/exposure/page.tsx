@@ -12,7 +12,7 @@ import {
 } from "@/components/ui/data-table-exposure/types"
 import { useExposureCalculations } from "@/hooks/useExposureCalculations"
 import { usePortfolioStore } from "@/hooks/usePortfolioStore"
-import { RiCloseLine } from "@remixicon/react"
+import { Icon } from "@iconify/react"
 import React, { useCallback, useEffect, useMemo, useRef, useState } from "react"
 
 export default function ExposurePage() {
@@ -282,7 +282,7 @@ export default function ExposurePage() {
                     onClick={() => setSelectedAccounts(["all"])}
                     className="rounded-full p-0.5 hover:bg-blue-200 dark:hover:bg-blue-500/30"
                   >
-                    <RiCloseLine className="size-4" />
+                    <Icon icon="carbon:close" className="size-4" />
                   </button>
                 </Badge>
               )}
@@ -297,7 +297,7 @@ export default function ExposurePage() {
                     onClick={() => setHoldingsFilter("all")}
                     className="rounded-full p-0.5 hover:bg-blue-200 dark:hover:bg-blue-500/30"
                   >
-                    <RiCloseLine className="size-4" />
+                    <Icon icon="carbon:close" className="size-4" />
                   </button>
                 </Badge>
               )}
@@ -372,7 +372,7 @@ export default function ExposurePage() {
                   onClick={() => setSelectedAccounts(["all"])}
                   className="rounded-full p-0.5 hover:bg-blue-200 dark:hover:bg-blue-500/30"
                 >
-                  <RiCloseLine className="size-4" />
+                  <Icon icon="carbon:close" className="size-4" />
                 </button>
               </Badge>
             )}
@@ -387,7 +387,7 @@ export default function ExposurePage() {
                   onClick={() => setHoldingsFilter("all")}
                   className="rounded-full p-0.5 hover:bg-blue-200 dark:hover:bg-blue-500/30"
                 >
-                  <RiCloseLine className="size-4" />
+                  <Icon icon="carbon:close" className="size-4" />
                 </button>
               </Badge>
             )}

@@ -16,7 +16,7 @@ import {
 } from "@/lib/institutionUtils"
 import { getInstitutionLogoUrl } from "@/lib/logoUtils"
 import { cx } from "@/lib/utils"
-import { RiDeleteBinLine, RiEditLine, RiMore2Fill } from "@remixicon/react"
+import { Icon } from "@iconify/react"
 import Image from "next/image"
 import { useState } from "react"
 
@@ -164,7 +164,7 @@ export default function AccountCard({
               className="h-8 w-8 p-0"
               onClick={(e) => e.stopPropagation()}
             >
-              <RiMore2Fill className="h-4 w-4" />
+              <Icon icon="carbon:overflow-menu-vertical" className="h-4 w-4" />
               <span className="sr-only">Open menu</span>
             </Button>
           </DropdownMenuTrigger>
@@ -175,7 +175,7 @@ export default function AccountCard({
                 onEdit?.()
               }}
             >
-              <RiEditLine className="mr-2 h-4 w-4" />
+              <Icon icon="carbon:edit" className="mr-2 h-4 w-4" />
               Edit Account
             </DropdownMenuItem>
             <DropdownMenuItem
@@ -185,7 +185,7 @@ export default function AccountCard({
               }}
               className="text-red-600 dark:text-red-400"
             >
-              <RiDeleteBinLine className="mr-2 h-4 w-4" />
+              <Icon icon="carbon:trash-can" className="mr-2 h-4 w-4" />
               Delete Account
             </DropdownMenuItem>
           </DropdownMenuContent>

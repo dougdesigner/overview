@@ -41,11 +41,9 @@ import {
   institutionLabels,
   usePortfolioStore,
 } from "@/hooks/usePortfolioStore"
+import { Icon } from "@iconify/react"
 import {
-  RiAddLine,
   RiArrowUpDownLine,
-  RiCloseLine,
-  RiDownloadLine,
   RiExpandUpDownLine,
   RiEyeOffLine,
   RiFullscreenLine,
@@ -309,7 +307,7 @@ function AccountsContent() {
           className="hidden items-center gap-2 text-base sm:flex sm:text-sm"
         >
           Add account
-          <RiAddLine className="-mr-0.5 size-5 shrink-0" aria-hidden="true" />
+          <Icon icon="carbon:add" className="-mr-0.5 size-5 shrink-0" aria-hidden="true" />
         </Button>
         <AccountDrawer
           open={isOpen}
@@ -373,7 +371,7 @@ function AccountsContent() {
                     onClick={() => setSelectedInstitution("all")}
                     className="rounded-full p-0.5 hover:bg-blue-200 dark:hover:bg-blue-500/30"
                   >
-                    <RiCloseLine className="size-4" />
+                    <Icon icon="carbon:close" className="size-4" />
                   </button>
                 </Badge>
               )}
@@ -420,7 +418,7 @@ function AccountsContent() {
                   onClick={() => setSelectedInstitution("all")}
                   className="rounded-full p-0.5 hover:bg-blue-200 dark:hover:bg-blue-500/30"
                 >
-                  <RiCloseLine className="size-4" />
+                  <Icon icon="carbon:close" className="size-4" />
                 </button>
               </Badge>
             )}
@@ -645,7 +643,8 @@ function AccountsContent() {
                     >
                       <DropdownMenuTrigger asChild>
                         <Button variant="secondary" className="h-9">
-                          <RiDownloadLine
+                          <Icon
+                            icon="carbon:download"
                             className="size-4"
                             aria-hidden="true"
                           />
@@ -1001,7 +1000,8 @@ function AccountsContent() {
               className="flex w-full items-center justify-center gap-2 text-base"
             >
               Add account
-              <RiAddLine
+              <Icon
+                icon="carbon:add"
                 className="-mr-0.5 size-5 shrink-0"
                 aria-hidden="true"
               />

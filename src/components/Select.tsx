@@ -1,12 +1,7 @@
 // Tremor Select [v0.0.3]
 
 import * as SelectPrimitives from "@radix-ui/react-select"
-import {
-  RiArrowDownSLine,
-  RiArrowUpSLine,
-  RiCheckLine,
-  RiExpandUpDownLine,
-} from "@remixicon/react"
+import { Icon } from "@iconify/react"
 import React from "react"
 
 import { cx, focusInput, hasErrorInput } from "@/lib/utils"
@@ -67,7 +62,8 @@ const SelectTrigger = React.forwardRef<
     >
       <span className="truncate">{children}</span>
       <SelectPrimitives.Icon asChild>
-        <RiExpandUpDownLine
+        <Icon
+          icon="carbon:chevron-sort"
           className={cx(
             // base
             "size-4 shrink-0",
@@ -96,7 +92,7 @@ const SelectScrollUpButton = React.forwardRef<
     )}
     {...props}
   >
-    <RiArrowUpSLine className="size-3 shrink-0" aria-hidden="true" />
+    <Icon icon="carbon:chevron-up" className="size-3 shrink-0" aria-hidden="true" />
   </SelectPrimitives.ScrollUpButton>
 ))
 SelectScrollUpButton.displayName = SelectPrimitives.ScrollUpButton.displayName
@@ -113,7 +109,7 @@ const SelectScrollDownButton = React.forwardRef<
     )}
     {...props}
   >
-    <RiArrowDownSLine className="size-3 shrink-0" aria-hidden="true" />
+    <Icon icon="carbon:chevron-down" className="size-3 shrink-0" aria-hidden="true" />
   </SelectPrimitives.ScrollDownButton>
 ))
 SelectScrollDownButton.displayName =
@@ -228,7 +224,8 @@ const SelectItem = React.forwardRef<
         {children}
       </SelectPrimitives.ItemText>
       <SelectPrimitives.ItemIndicator>
-        <RiCheckLine
+        <Icon
+          icon="carbon:checkmark"
           className="size-5 shrink-0 text-gray-800 dark:text-gray-200"
           aria-hidden="true"
         />

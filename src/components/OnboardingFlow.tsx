@@ -2,7 +2,8 @@
 
 import { Button } from "@/components/Button"
 import { cx } from "@/lib/utils"
-import { RiAddLine, RiArrowLeftLine, RiArrowRightLine } from "@remixicon/react"
+import { Icon } from "@iconify/react"
+import { RiArrowLeftLine, RiArrowRightLine } from "@remixicon/react"
 import { useRouter } from "next/navigation"
 import { useState } from "react"
 import { OnboardingStep } from "./OnboardingStep"
@@ -154,7 +155,7 @@ export function OnboardingFlow() {
           <Button variant="primary" onClick={handleNext} className="gap-2">
             {isLastStep ? (
               <>
-                <RiAddLine className="size-4" />
+                <Icon icon="carbon:add" className="size-4" />
                 Add Your First Account
               </>
             ) : (

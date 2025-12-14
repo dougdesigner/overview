@@ -10,14 +10,7 @@ import {
 } from "@/components/DropdownMenu"
 import { TickerLogo } from "@/components/ui/TickerLogo"
 import { cx } from "@/lib/utils"
-import {
-  RiArrowDownSLine,
-  RiArrowRightSLine,
-  RiArrowUpSLine,
-  RiDeleteBinLine,
-  RiEditLine,
-  RiMore2Fill,
-} from "@remixicon/react"
+import { Icon } from "@iconify/react"
 import { ColumnDef } from "@tanstack/react-table"
 import { institutionLabels } from "@/lib/institutionUtils"
 import { InstitutionLogo } from "@/components/ui/InstitutionLogo"
@@ -76,9 +69,9 @@ export const createColumns = ({
           title={areAllExpanded() ? "Collapse all" : "Expand all"}
         >
           {areAllExpanded() ? (
-            <RiArrowDownSLine className="h-4 w-4" />
+            <Icon icon="carbon:chevron-down" className="h-4 w-4" />
           ) : (
-            <RiArrowRightSLine className="h-4 w-4" />
+            <Icon icon="carbon:chevron-right" className="h-4 w-4" />
           )}
         </button>
       )
@@ -91,9 +84,9 @@ export const createColumns = ({
           className="cursor-pointer p-1"
         >
           {row.getIsExpanded() ? (
-            <RiArrowDownSLine className="h-4 w-4" />
+            <Icon icon="carbon:chevron-down" className="h-4 w-4" />
           ) : (
-            <RiArrowRightSLine className="h-4 w-4" />
+            <Icon icon="carbon:chevron-right" className="h-4 w-4" />
           )}
         </button>
       )
@@ -113,10 +106,10 @@ export const createColumns = ({
         >
           Symbol
           {column.getIsSorted() === "asc" && (
-            <RiArrowUpSLine className="h-4 w-4" />
+            <Icon icon="carbon:chevron-up" className="h-4 w-4" />
           )}
           {column.getIsSorted() === "desc" && (
-            <RiArrowDownSLine className="h-4 w-4" />
+            <Icon icon="carbon:chevron-down" className="h-4 w-4" />
           )}
         </button>
       )
@@ -163,10 +156,10 @@ export const createColumns = ({
         >
           Name
           {column.getIsSorted() === "asc" && (
-            <RiArrowUpSLine className="h-4 w-4" />
+            <Icon icon="carbon:chevron-up" className="h-4 w-4" />
           )}
           {column.getIsSorted() === "desc" && (
-            <RiArrowDownSLine className="h-4 w-4" />
+            <Icon icon="carbon:chevron-down" className="h-4 w-4" />
           )}
         </button>
       )
@@ -200,10 +193,10 @@ export const createColumns = ({
         >
           Market Value
           {column.getIsSorted() === "asc" && (
-            <RiArrowUpSLine className="h-4 w-4" />
+            <Icon icon="carbon:chevron-up" className="h-4 w-4" />
           )}
           {column.getIsSorted() === "desc" && (
-            <RiArrowDownSLine className="h-4 w-4" />
+            <Icon icon="carbon:chevron-down" className="h-4 w-4" />
           )}
         </button>
       )
@@ -232,10 +225,10 @@ export const createColumns = ({
         >
           Allocation (%)
           {column.getIsSorted() === "asc" && (
-            <RiArrowUpSLine className="h-4 w-4" />
+            <Icon icon="carbon:chevron-up" className="h-4 w-4" />
           )}
           {column.getIsSorted() === "desc" && (
-            <RiArrowDownSLine className="h-4 w-4" />
+            <Icon icon="carbon:chevron-down" className="h-4 w-4" />
           )}
         </button>
       )
@@ -264,10 +257,10 @@ export const createColumns = ({
         >
           Quantity
           {column.getIsSorted() === "asc" && (
-            <RiArrowUpSLine className="h-4 w-4" />
+            <Icon icon="carbon:chevron-up" className="h-4 w-4" />
           )}
           {column.getIsSorted() === "desc" && (
-            <RiArrowDownSLine className="h-4 w-4" />
+            <Icon icon="carbon:chevron-down" className="h-4 w-4" />
           )}
         </button>
       )
@@ -307,10 +300,10 @@ export const createColumns = ({
         >
           Last Price
           {column.getIsSorted() === "asc" && (
-            <RiArrowUpSLine className="h-4 w-4" />
+            <Icon icon="carbon:chevron-up" className="h-4 w-4" />
           )}
           {column.getIsSorted() === "desc" && (
-            <RiArrowDownSLine className="h-4 w-4" />
+            <Icon icon="carbon:chevron-down" className="h-4 w-4" />
           )}
         </button>
       )
@@ -348,10 +341,10 @@ export const createColumns = ({
         >
           Day Change (%)
           {column.getIsSorted() === "asc" && (
-            <RiArrowUpSLine className="h-4 w-4" />
+            <Icon icon="carbon:chevron-up" className="h-4 w-4" />
           )}
           {column.getIsSorted() === "desc" && (
-            <RiArrowDownSLine className="h-4 w-4" />
+            <Icon icon="carbon:chevron-down" className="h-4 w-4" />
           )}
         </button>
       )
@@ -394,10 +387,10 @@ export const createColumns = ({
         >
           MV Day Change
           {column.getIsSorted() === "asc" && (
-            <RiArrowUpSLine className="h-4 w-4" />
+            <Icon icon="carbon:chevron-up" className="h-4 w-4" />
           )}
           {column.getIsSorted() === "desc" && (
-            <RiArrowDownSLine className="h-4 w-4" />
+            <Icon icon="carbon:chevron-down" className="h-4 w-4" />
           )}
         </button>
       )
@@ -445,10 +438,10 @@ export const createColumns = ({
         >
           Institution
           {column.getIsSorted() === "asc" && (
-            <RiArrowUpSLine className="h-4 w-4" />
+            <Icon icon="carbon:chevron-up" className="h-4 w-4" />
           )}
           {column.getIsSorted() === "desc" && (
-            <RiArrowDownSLine className="h-4 w-4" />
+            <Icon icon="carbon:chevron-down" className="h-4 w-4" />
           )}
         </button>
       )
@@ -489,10 +482,10 @@ export const createColumns = ({
         >
           Account
           {column.getIsSorted() === "asc" && (
-            <RiArrowUpSLine className="h-4 w-4" />
+            <Icon icon="carbon:chevron-up" className="h-4 w-4" />
           )}
           {column.getIsSorted() === "desc" && (
-            <RiArrowDownSLine className="h-4 w-4" />
+            <Icon icon="carbon:chevron-down" className="h-4 w-4" />
           )}
         </button>
       )
@@ -522,20 +515,20 @@ export const createColumns = ({
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="ghost" className="h-8 w-8 p-0">
-              <RiMore2Fill className="h-4 w-4" />
+              <Icon icon="carbon:overflow-menu-vertical" className="h-4 w-4" />
               <span className="sr-only">Open menu</span>
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
             <DropdownMenuItem onClick={() => onEdit(holding)}>
-              <RiEditLine className="mr-2 h-4 w-4" />
+              <Icon icon="carbon:edit" className="mr-2 h-4 w-4" />
               Edit
             </DropdownMenuItem>
             <DropdownMenuItem
               onClick={() => onDelete(holding.id)}
               className="text-red-600 dark:text-red-400"
             >
-              <RiDeleteBinLine className="mr-2 h-4 w-4" />
+              <Icon icon="carbon:trash-can" className="mr-2 h-4 w-4" />
               Remove
             </DropdownMenuItem>
           </DropdownMenuContent>

@@ -19,13 +19,12 @@ import {
 import { Tooltip } from "@/components/Tooltip"
 import { getAssetClassHexColor } from "@/lib/assetClassColors"
 import { toProperCase } from "@/lib/utils"
+import { Icon } from "@iconify/react"
 import {
   RiDonutChartLine,
-  RiDownloadLine,
   RiFullscreenLine,
   RiLayout4Line,
   RiLayoutMasonryLine,
-  RiResetLeftLine,
   RiSettings3Line,
 } from "@remixicon/react"
 import Highcharts from "highcharts"
@@ -1743,7 +1742,7 @@ export function ExposureTreemapHighchartsWithLogos({
                     onClick={resetChartSettings}
                     className="text-gray-500 dark:text-gray-400"
                   >
-                    <RiResetLeftLine className="mr-2 size-4" aria-hidden="true" />
+                    <Icon icon="carbon:reset" className="mr-2 size-4" aria-hidden="true" />
                     Reset Chart
                   </DropdownMenuItem>
                 </>
@@ -1758,7 +1757,7 @@ export function ExposureTreemapHighchartsWithLogos({
             >
               <DropdownMenuTrigger asChild>
                 <Button variant="secondary" className="h-9">
-                  <RiDownloadLine className="size-4" aria-hidden="true" />
+                  <Icon icon="carbon:download" className="size-4" aria-hidden="true" />
                 </Button>
               </DropdownMenuTrigger>
             </Tooltip>

@@ -18,7 +18,7 @@ import { getETFName } from "@/lib/etfMetadataService"
 import { getKnownETFName } from "@/lib/knownETFNames"
 import { extractDomainsFromCompanyName } from "@/lib/logoUtils"
 import { getStockPrice } from "@/lib/stockPriceService"
-import { RiAddLine, RiCloseLine } from "@remixicon/react"
+import { Icon } from "@iconify/react"
 import { useRouter, useSearchParams } from "next/navigation"
 import React, { Suspense, useMemo } from "react"
 
@@ -414,7 +414,8 @@ function HoldingsContent() {
               className="hidden items-center gap-2 sm:flex sm:text-sm"
             >
               Add holdings
-              <RiAddLine
+              <Icon
+                icon="carbon:add"
                 className="-mr-0.5 size-5 shrink-0"
                 aria-hidden="true"
               />
@@ -492,7 +493,7 @@ function HoldingsContent() {
                       onClick={() => setCurrentAccountFilter("all")}
                       className="rounded-full p-0.5 hover:bg-blue-200 dark:hover:bg-blue-500/30"
                     >
-                      <RiCloseLine className="size-4" />
+                      <Icon icon="carbon:close" className="size-4" />
                     </button>
                   </Badge>
                 )}
@@ -541,7 +542,7 @@ function HoldingsContent() {
                   onClick={() => setCurrentAccountFilter("all")}
                   className="rounded-full p-0.5 hover:bg-blue-200 dark:hover:bg-blue-500/30"
                 >
-                  <RiCloseLine className="size-4" />
+                  <Icon icon="carbon:close" className="size-4" />
                 </button>
               </Badge>
             )}
@@ -597,7 +598,8 @@ function HoldingsContent() {
               className="inline-flex items-center gap-2"
             >
               Add Your First Holding
-              <RiAddLine
+              <Icon
+                icon="carbon:add"
                 className="-mr-0.5 size-5 shrink-0"
                 aria-hidden="true"
               />
@@ -622,7 +624,7 @@ function HoldingsContent() {
             className="flex w-full items-center justify-center gap-2 text-base"
           >
             Add holdings
-            <RiAddLine className="-mr-0.5 size-5 shrink-0" aria-hidden="true" />
+            <Icon icon="carbon:add" className="-mr-0.5 size-5 shrink-0" aria-hidden="true" />
           </Button>
         </div>
       )}

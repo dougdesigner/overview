@@ -3,10 +3,9 @@
 "use client"
 
 import * as DropdownMenuPrimitives from "@radix-ui/react-dropdown-menu"
+import { Icon } from "@iconify/react"
 import {
-  RiArrowRightSLine,
   RiCheckboxBlankCircleLine,
-  RiCheckLine,
   RiRadioButtonFill,
 } from "@remixicon/react"
 import * as React from "react"
@@ -54,7 +53,7 @@ const DropdownMenuSubMenuTrigger = React.forwardRef<
     {...props}
   >
     {children}
-    <RiArrowRightSLine className="ml-auto size-4 shrink-0" aria-hidden="true" />
+    <Icon icon="carbon:chevron-right" className="ml-auto size-4 shrink-0" aria-hidden="true" />
   </DropdownMenuPrimitives.SubTrigger>
 ))
 DropdownMenuSubMenuTrigger.displayName = "DropdownMenuSubMenuTrigger"
@@ -222,7 +221,8 @@ const DropdownMenuCheckboxItem = React.forwardRef<
     >
       <span className="absolute left-2 flex size-4 items-center justify-center">
         <DropdownMenuPrimitives.ItemIndicator>
-          <RiCheckLine
+          <Icon
+            icon="carbon:checkmark"
             aria-hidden="true"
             className="size-full shrink-0 text-gray-800 dark:text-gray-200"
           />
@@ -294,7 +294,8 @@ const DropdownMenuRadioItem = React.forwardRef<
         </span>
       ) : iconType === "check" ? (
         <span className="absolute left-2 flex size-4 items-center justify-center">
-          <RiCheckLine
+          <Icon
+            icon="carbon:checkmark"
             aria-hidden="true"
             className="size-full shrink-0 text-gray-800 group-data-[state=checked]/DropdownMenuRadioItem:flex group-data-[state=unchecked]/DropdownMenuRadioItem:hidden dark:text-gray-200"
           />

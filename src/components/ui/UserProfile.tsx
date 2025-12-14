@@ -17,17 +17,12 @@ import {
 import { usePortfolioStore } from "@/hooks/usePortfolioStore"
 import { clearETFCache } from "@/lib/etfCacheUtils"
 import { cx, focusRing } from "@/lib/utils"
+import { Icon } from "@iconify/react"
 import {
   RiCheckLine,
-  RiComputerLine,
-  RiDownloadLine,
   RiEyeLine,
   RiEyeOffLine,
   RiLockLine,
-  RiMoonLine,
-  RiSettings3Line,
-  RiSunLine,
-  RiUploadLine,
 } from "@remixicon/react"
 import { useTheme } from "next-themes"
 import React from "react"
@@ -132,7 +127,7 @@ function DropdownUserProfile() {
               className="flex size-8 shrink-0 items-center justify-center rounded-full border border-gray-300 bg-white text-xs font-medium text-gray-700 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300"
               aria-hidden="true"
             >
-              <RiSettings3Line className="size-5" aria-hidden="true" />
+              <Icon icon="carbon:settings" className="size-5" aria-hidden="true" />
             </span>
           </button>
         </DropdownMenuTrigger>
@@ -146,14 +141,16 @@ function DropdownUserProfile() {
           <DropdownMenuSeparator />
           <DropdownMenuGroup>
             <DropdownMenuItem onClick={handleExport}>
-              <RiDownloadLine
+              <Icon
+                icon="carbon:download"
                 className="mr-2 size-4 shrink-0"
                 aria-hidden="true"
               />
               Export Portfolio
             </DropdownMenuItem>
             <DropdownMenuItem onClick={handleImportClick}>
-              <RiUploadLine
+              <Icon
+                icon="carbon:upload"
                 className="mr-2 size-4 shrink-0"
                 aria-hidden="true"
               />
@@ -196,7 +193,7 @@ function DropdownUserProfile() {
                     value="light"
                     iconType="check"
                   >
-                    <RiSunLine className="size-4 shrink-0" aria-hidden="true" />
+                    <Icon icon="carbon:light" className="size-4 shrink-0" aria-hidden="true" />
                     Light
                   </DropdownMenuRadioItem>
                   <DropdownMenuRadioItem
@@ -204,7 +201,8 @@ function DropdownUserProfile() {
                     value="dark"
                     iconType="check"
                   >
-                    <RiMoonLine
+                    <Icon
+                      icon="carbon:moon"
                       className="size-4 shrink-0"
                       aria-hidden="true"
                     />
@@ -215,7 +213,8 @@ function DropdownUserProfile() {
                     value="system"
                     iconType="check"
                   >
-                    <RiComputerLine
+                    <Icon
+                      icon="carbon:laptop"
                       className="size-4 shrink-0"
                       aria-hidden="true"
                     />

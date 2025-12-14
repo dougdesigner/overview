@@ -24,7 +24,6 @@ import {
 import { InstitutionLogo } from "@/components/ui/InstitutionLogo"
 import { cx } from "@/lib/utils"
 import * as Dialog from "@radix-ui/react-dialog"
-import { RiCheckLine, RiCloseLine } from "@remixicon/react"
 import { Icon } from "@iconify/react"
 import { useEffect, useState } from "react"
 
@@ -191,7 +190,7 @@ export function DashboardSettingsDropdown({
               </Dialog.Title>
               <Dialog.Close asChild>
                 <button className="rounded-full p-1.5 text-gray-500 hover:bg-gray-100 hover:text-gray-700 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-gray-200">
-                  <RiCloseLine className="size-5" />
+                  <Icon icon="carbon:close" className="size-5" />
                 </button>
               </Dialog.Close>
             </div>
@@ -214,7 +213,7 @@ export function DashboardSettingsDropdown({
                         All Accounts
                       </span>
                       {(selectedAccounts?.includes("all") ?? true) && (
-                        <RiCheckLine className="size-5 text-blue-600 dark:text-blue-400" />
+                        <Icon icon="carbon:checkmark" className="size-5 text-blue-600 dark:text-blue-400" />
                       )}
                     </button>
 
@@ -239,7 +238,7 @@ export function DashboardSettingsDropdown({
                             {account.name}
                           </span>
                           {isChecked && (
-                            <RiCheckLine className="size-5 text-blue-600 dark:text-blue-400" />
+                            <Icon icon="carbon:checkmark" className="size-5 text-blue-600 dark:text-blue-400" />
                           )}
                         </button>
                       )
@@ -271,7 +270,7 @@ export function DashboardSettingsDropdown({
                         {option.label}
                       </span>
                       {holdingsFilter === option.value && (
-                        <RiCheckLine className="size-5 text-blue-600 dark:text-blue-400" />
+                        <Icon icon="carbon:checkmark" className="size-5 text-blue-600 dark:text-blue-400" />
                       )}
                     </button>
                   ))}
@@ -301,7 +300,7 @@ export function DashboardSettingsDropdown({
                         {option.label}
                       </span>
                       {displayValue === option.value && (
-                        <RiCheckLine className="size-5 text-blue-600 dark:text-blue-400" />
+                        <Icon icon="carbon:checkmark" className="size-5 text-blue-600 dark:text-blue-400" />
                       )}
                     </button>
                   ))}
@@ -333,7 +332,7 @@ export function DashboardSettingsDropdown({
                       )}
                     >
                       {combineGoogleShares && (
-                        <RiCheckLine className="size-3.5 text-white" />
+                        <Icon icon="carbon:checkmark" className="size-3.5 text-white" />
                       )}
                     </div>
                   </button>
@@ -355,7 +354,7 @@ export function DashboardSettingsDropdown({
                       )}
                     >
                       {showOtherAssets && (
-                        <RiCheckLine className="size-3.5 text-white" />
+                        <Icon icon="carbon:checkmark" className="size-3.5 text-white" />
                       )}
                     </div>
                   </button>
