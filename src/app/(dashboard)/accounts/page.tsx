@@ -705,7 +705,7 @@ function AccountsContent() {
                     // Get unique institution labels for the first level (from filtered accounts)
                     // Apply getInstitutionDisplayLabel to ensure proper formatting (converts "capital-one" to "Capital One")
                     const sankeyInstitutions = [
-                      ...new Set(filteredAccounts.map((a) => getInstitutionDisplayLabel(a.institutionLabel))),
+                      ...new Set(filteredAccounts.map((a) => getInstitutionDisplayLabel(a.institution))),
                     ]
                     // Already display names with proper formatting
                     const institutionDisplayNames = sankeyInstitutions
@@ -758,10 +758,10 @@ function AccountsContent() {
                     // Calculate institution totals for legend
                     const institutionTotals = sankeyInstitutions
                       .map((instLabel) => ({
-                        key: filteredAccounts.find((a) => getInstitutionDisplayLabel(a.institutionLabel) === instLabel)?.institution || instLabel,
+                        key: filteredAccounts.find((a) => getInstitutionDisplayLabel(a.institution) === instLabel)?.institution || instLabel,
                         label: instLabel,
                         value: filteredAccounts
-                          .filter((acc) => getInstitutionDisplayLabel(acc.institutionLabel) === instLabel)
+                          .filter((acc) => getInstitutionDisplayLabel(acc.institution) === instLabel)
                           .reduce((sum, acc) => sum + acc.totalValue, 0),
                       }))
                       .sort((a, b) => b.value - a.value)
@@ -807,7 +807,7 @@ function AccountsContent() {
                               // Portfolio Total to Institutions - aggregate by institution label
                               ...sankeyInstitutions.map((instLabel) => {
                                 const instTotal = filteredAccounts
-                                  .filter((acc) => getInstitutionDisplayLabel(acc.institutionLabel) === instLabel)
+                                  .filter((acc) => getInstitutionDisplayLabel(acc.institution) === instLabel)
                                   .reduce((sum, acc) => sum + acc.totalValue, 0)
                                 return {
                                   source: "Portfolio Total",
@@ -817,7 +817,7 @@ function AccountsContent() {
                               }),
                               // Institutions to Accounts
                               ...filteredAccounts.map((account) => ({
-                                source: getInstitutionDisplayLabel(account.institutionLabel),
+                                source: getInstitutionDisplayLabel(account.institution),
                                 target: account.name,
                                 value: account.totalValue,
                               })),
