@@ -13,7 +13,7 @@ import {
 import { useExposureCalculations } from "@/hooks/useExposureCalculations"
 import { usePortfolioStore } from "@/hooks/usePortfolioStore"
 import { Icon } from "@iconify/react"
-import React, { useCallback, useEffect, useMemo, useRef, useState } from "react"
+import React, { useCallback, useEffect, useMemo, useRef, useState, Suspense } from "react"
 
 export default function ExposurePage() {
   // Use portfolio store for holdings and accounts data
@@ -92,6 +92,9 @@ export default function ExposurePage() {
   const [tableFilteredCount, setTableFilteredCount] = useState(0)
   const [tableFilteredValue, setTableFilteredValue] = useState(0)
 
+  // Track ExposureTable's internal loading state
+  const [tableLoading, setTableLoading] = useState(true)
+
   // Callback for ExposureTable to report filtered data
   const handleFilteredDataChange = useCallback(
     (count: number, value: number) => {
@@ -100,6 +103,11 @@ export default function ExposurePage() {
     },
     [],
   )
+
+  // Callback for ExposureTable to report loading state
+  const handleLoadingChange = useCallback((loading: boolean) => {
+    setTableLoading(loading)
+  }, [])
 
   // Intersection Observer for sticky filter
   useEffect(() => {
@@ -192,6 +200,48 @@ export default function ExposurePage() {
         {/* <Divider /> */}
         <div className="mt-8 rounded-lg bg-red-50 p-4 dark:bg-red-900/10">
           <p className="text-sm text-red-800 dark:text-red-200">{error}</p>
+        </div>
+      </main>
+    )
+  }
+
+  // Determine if we should show loading skeleton
+  // Show skeleton only during initial portfolio data load
+  // ExposureTable handles its own loading state internally
+  const showLoadingSkeleton = holdingsLoading
+
+  // Full-page loading skeleton
+  if (showLoadingSkeleton) {
+    return (
+      <main className="min-h-[calc(100vh-180px)] pb-20 sm:pb-0">
+        <div className="animate-pulse">
+          {/* Header skeleton */}
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+            <div>
+              <div className="mb-2 h-8 w-32 rounded bg-gray-100 dark:bg-gray-800"></div>
+              <div className="h-4 w-64 rounded bg-gray-100 dark:bg-gray-800"></div>
+            </div>
+          </div>
+          {/* Divider */}
+          <div className="my-6 h-px bg-gray-200 dark:bg-gray-800"></div>
+          {/* Filter bar skeleton */}
+          <div className="mb-6 flex items-center justify-between">
+            <div>
+              <div className="mb-1 h-6 w-24 rounded bg-gray-100 dark:bg-gray-800"></div>
+              <div className="h-4 w-16 rounded bg-gray-100 dark:bg-gray-800"></div>
+            </div>
+            <div className="h-10 w-32 rounded-lg bg-gray-100 dark:bg-gray-800"></div>
+          </div>
+          {/* Chart skeleton */}
+          <div className="mb-6 h-80 rounded-lg bg-gray-100 dark:bg-gray-800"></div>
+          {/* Table skeleton */}
+          <div className="space-y-3">
+            <div className="h-12 rounded-lg bg-gray-100 dark:bg-gray-800"></div>
+            <div className="h-16 rounded-lg bg-gray-100 dark:bg-gray-800"></div>
+            <div className="h-16 rounded-lg bg-gray-100 dark:bg-gray-800"></div>
+            <div className="h-16 rounded-lg bg-gray-100 dark:bg-gray-800"></div>
+            <div className="h-16 rounded-lg bg-gray-100 dark:bg-gray-800"></div>
+          </div>
         </div>
       </main>
     )
@@ -411,20 +461,7 @@ export default function ExposurePage() {
 
       {/* Exposure Table */}
       <div className="pt-6" id="exposure-section">
-        {holdingsLoading ? (
-          <div className="animate-pulse">
-            {/* Chart area skeleton */}
-            <div className="mb-6 h-80 rounded-lg bg-gray-100 dark:bg-gray-800"></div>
-            {/* Table skeleton */}
-            <div className="space-y-3">
-              <div className="h-12 rounded-lg bg-gray-100 dark:bg-gray-800"></div>
-              <div className="h-16 rounded-lg bg-gray-100 dark:bg-gray-800"></div>
-              <div className="h-16 rounded-lg bg-gray-100 dark:bg-gray-800"></div>
-              <div className="h-16 rounded-lg bg-gray-100 dark:bg-gray-800"></div>
-              <div className="h-16 rounded-lg bg-gray-100 dark:bg-gray-800"></div>
-            </div>
-          </div>
-        ) : portfolioHoldings.length === 0 ? (
+        {portfolioHoldings.length === 0 ? (
           // Empty state
           <div className="py-12 text-center">
             {accounts.length === 0 ? (
@@ -486,6 +523,7 @@ export default function ExposurePage() {
             showOtherAssets={showOtherAssets}
             displayValue={displayValue}
             onFilteredDataChange={handleFilteredDataChange}
+            onLoadingChange={handleLoadingChange}
           />
         )}
       </div>

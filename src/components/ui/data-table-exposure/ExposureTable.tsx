@@ -266,14 +266,19 @@ const combineGoogleEntries = (exposures: StockExposure[]): StockExposure[] => {
     .map((e) => (e.ticker === "GOOGL" ? combined : e))
 }
 
-export function ExposureTable({ holdings, accounts, dataVersion, selectedAccounts = ["all"], holdingsFilter = "all", combineGoogleShares = false, showOtherAssets = false, displayValue = "pct-portfolio", onFilteredDataChange, onChartSettingsChange }: ExposureTableProps) {
+export function ExposureTable({ holdings, accounts, dataVersion, selectedAccounts = ["all"], holdingsFilter = "all", combineGoogleShares = false, showOtherAssets = false, displayValue = "pct-portfolio", onFilteredDataChange, onChartSettingsChange, onLoadingChange }: ExposureTableProps) {
   const [data, setData] = React.useState<StockExposure[]>([])
   const [sorting, setSorting] = React.useState<SortingState>([
     { id: "percentOfPortfolio", desc: true },
   ])
   const [globalFilter, setGlobalFilter] = React.useState("")
   const [expanded, setExpanded] = React.useState<ExpandedState>({})
-  const [isLoading, setIsLoading] = React.useState(false)
+  const [isLoading, setIsLoading] = React.useState(true) // Start as true for initial load
+
+  // Notify parent when loading state changes
+  React.useEffect(() => {
+    onLoadingChange?.(isLoading)
+  }, [isLoading, onLoadingChange])
   const [totalPortfolioValue, setTotalPortfolioValue] = React.useState(0)
   const [logoUrls, setLogoUrls] = React.useState<Record<string, string | null>>(
     {},
