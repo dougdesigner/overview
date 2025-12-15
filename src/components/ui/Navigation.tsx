@@ -244,7 +244,7 @@ function Navigation() {
 
             <Dialog.Portal>
               {/* Overlay - stops above the mobile nav */}
-              <Dialog.Overlay className="fixed inset-x-0 bottom-20 top-0 z-[60] bg-black/50 bg-white/50 data-[state=open]:animate-dialogOverlayShow" />
+              <Dialog.Overlay className="fixed inset-x-0 bottom-20 top-0 z-[60] bg-white/50 data-[state=open]:animate-dialogOverlayShow dark:bg-black/50" />
 
               {/* Bottom Sheet Content - positioned above mobile nav */}
               <Dialog.Content className="fixed inset-x-0 bottom-20 z-[60] mx-2 rounded-lg border border-gray-200 bg-white shadow-lg data-[state=closed]:animate-bottomSheetSlideDown data-[state=open]:animate-bottomSheetSlideUp dark:border-gray-800 dark:bg-gray-950">

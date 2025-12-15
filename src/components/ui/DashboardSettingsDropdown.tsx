@@ -182,7 +182,7 @@ export function DashboardSettingsDropdown({
 
         <Dialog.Portal>
           {/* Overlay */}
-          <Dialog.Overlay className="fixed inset-0 z-50 bg-black/50 bg-white/50 data-[state=open]:animate-dialogOverlayShow" />
+          <Dialog.Overlay className="fixed inset-0 z-50 bg-white/50 data-[state=open]:animate-dialogOverlayShow dark:bg-black/50" />
 
           {/* Bottom Sheet Content */}
           <Dialog.Content className="fixed inset-x-0 bottom-0 z-50 mx-2 mb-2 max-h-[85vh] overflow-hidden rounded-xl border border-gray-200 bg-white shadow-lg data-[state=closed]:animate-bottomSheetSlideDown data-[state=open]:animate-bottomSheetSlideUp dark:border-gray-800 dark:bg-gray-950">
