@@ -3,6 +3,7 @@
 export const dynamic = "force-dynamic"
 
 import AssetAllocationCard from "@/components/AssetAllocationCard"
+import BenchmarkCard from "@/components/BenchmarkCard"
 import KPICard from "@/components/KPICard"
 import { OnboardingFlow } from "@/components/OnboardingFlow"
 import PortfolioValueCard from "@/components/PortfolioValueCard"
@@ -461,6 +462,10 @@ export default function OverviewPage() {
                 })(),
               ]}
             />
+          </dl>
+
+          <dl className="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-1 lg:grid-cols-1">
+            <BenchmarkCard />
           </dl>
         </>
       )}

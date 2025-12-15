@@ -40,6 +40,8 @@ interface HighchartsDonutChartProps {
   useAssetClassColors?: boolean // Flag to use asset class specific colors
   tabName?: string // Tab name for conditional tooltip formatting
   portfolioTotal?: number // Full portfolio value for Portfolio % calculation
+  showControls?: boolean // Show/hide export and fullscreen buttons
+  showTitle?: boolean // Show/hide center title (default true)
 }
 
 export function HighchartsDonutChart({
@@ -52,6 +54,8 @@ export function HighchartsDonutChart({
   useAssetClassColors = false,
   tabName,
   portfolioTotal,
+  showControls = true,
+  showTitle = true,
 }: HighchartsDonutChartProps) {
   const { resolvedTheme } = useTheme()
   const isDark = resolvedTheme === "dark"
@@ -196,15 +200,17 @@ export function HighchartsDonutChart({
         },
       },
     },
-    title: {
-      text: valueFormatter(totalValue),
-      verticalAlign: "middle",
-      style: {
-        fontSize: "20px",
-        fontWeight: "600",
-        color: isDark ? "#f9fafb" : "#111827",
-      },
-    },
+    title: showTitle
+      ? {
+          text: valueFormatter(totalValue),
+          verticalAlign: "middle",
+          style: {
+            fontSize: "20px",
+            fontWeight: "600",
+            color: isDark ? "#f9fafb" : "#111827",
+          },
+        }
+      : { text: "" },
     credits: {
       enabled: false,
     },
@@ -299,14 +305,16 @@ export function HighchartsDonutChart({
 
       // Update title and colors based on theme
       chart.update({
-        title: {
-          text: valueFormatter(totalValue),
-          style: {
-            fontSize: "20px",
-            fontWeight: "600",
-            color: isDark ? "#f9fafb" : "#111827",
-          },
-        },
+        title: showTitle
+          ? {
+              text: valueFormatter(totalValue),
+              style: {
+                fontSize: "20px",
+                fontWeight: "600",
+                color: isDark ? "#f9fafb" : "#111827",
+              },
+            }
+          : { text: "" },
         tooltip: {
           followTouchMove: false,
           backgroundColor: isDark ? "#1f2937" : "#ffffff",
@@ -318,7 +326,7 @@ export function HighchartsDonutChart({
         },
       })
     }
-  }, [isDark, totalValue, valueFormatter])
+  }, [isDark, totalValue, valueFormatter, showTitle])
 
   if (!isClient || !isHighchartsLoaded || !Highcharts || !HighchartsReact) {
     return <div style={{ height }} />
@@ -329,56 +337,58 @@ export function HighchartsDonutChart({
   return (
     <div className="relative">
       {/* Control buttons - positioned in top right */}
-      <div className="absolute right-0 top-0 z-10 flex items-center gap-2">
-        {/* Export Menu */}
-        <DropdownMenu>
-          <Tooltip triggerAsChild content="Export chart as image or data file">
-            <DropdownMenuTrigger asChild>
-              <Button variant="secondary" className="h-9">
-                <Icon icon="carbon:download" className="size-4" aria-hidden="true" />
-              </Button>
-            </DropdownMenuTrigger>
-          </Tooltip>
-          <DropdownMenuContent align="end" className="w-56">
-            <DropdownMenuLabel>EXPORT OPTIONS</DropdownMenuLabel>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem onClick={() => handleExport("print")}>
-              Print chart
-            </DropdownMenuItem>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem onClick={() => handleExport("png")}>
-              Download PNG image
-            </DropdownMenuItem>
-            <DropdownMenuItem onClick={() => handleExport("jpeg")}>
-              Download JPEG image
-            </DropdownMenuItem>
-            <DropdownMenuItem onClick={() => handleExport("pdf")}>
-              Download PDF document
-            </DropdownMenuItem>
-            <DropdownMenuItem onClick={() => handleExport("svg")}>
-              Download SVG vector
-            </DropdownMenuItem>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem onClick={() => handleExport("csv")}>
-              Download CSV
-            </DropdownMenuItem>
-            <DropdownMenuItem onClick={() => handleExport("xls")}>
-              Download XLS
-            </DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
+      {showControls && (
+        <div className="absolute right-0 top-0 z-10 flex items-center gap-2">
+          {/* Export Menu */}
+          <DropdownMenu>
+            <Tooltip triggerAsChild content="Export chart as image or data file">
+              <DropdownMenuTrigger asChild>
+                <Button variant="secondary" className="h-9">
+                  <Icon icon="carbon:download" className="size-4" aria-hidden="true" />
+                </Button>
+              </DropdownMenuTrigger>
+            </Tooltip>
+            <DropdownMenuContent align="end" className="w-56">
+              <DropdownMenuLabel>EXPORT OPTIONS</DropdownMenuLabel>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem onClick={() => handleExport("print")}>
+                Print chart
+              </DropdownMenuItem>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem onClick={() => handleExport("png")}>
+                Download PNG image
+              </DropdownMenuItem>
+              <DropdownMenuItem onClick={() => handleExport("jpeg")}>
+                Download JPEG image
+              </DropdownMenuItem>
+              <DropdownMenuItem onClick={() => handleExport("pdf")}>
+                Download PDF document
+              </DropdownMenuItem>
+              <DropdownMenuItem onClick={() => handleExport("svg")}>
+                Download SVG vector
+              </DropdownMenuItem>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem onClick={() => handleExport("csv")}>
+                Download CSV
+              </DropdownMenuItem>
+              <DropdownMenuItem onClick={() => handleExport("xls")}>
+                Download XLS
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
 
-        {/* Fullscreen Button */}
-        <Tooltip triggerAsChild content="View chart in fullscreen mode">
-          <Button
-            variant="secondary"
-            onClick={() => handleExport("fullscreen")}
-            className="h-9"
-          >
-            <RiFullscreenLine className="size-4" aria-hidden="true" />
-          </Button>
-        </Tooltip>
-      </div>
+          {/* Fullscreen Button */}
+          <Tooltip triggerAsChild content="View chart in fullscreen mode">
+            <Button
+              variant="secondary"
+              onClick={() => handleExport("fullscreen")}
+              className="h-9"
+            >
+              <RiFullscreenLine className="size-4" aria-hidden="true" />
+            </Button>
+          </Tooltip>
+        </div>
+      )}
 
       <HighchartsReactComponent
         highcharts={Highcharts}

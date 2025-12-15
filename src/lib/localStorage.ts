@@ -8,6 +8,7 @@ const STORAGE_KEYS = {
   holdings: 'portfolio_holdings',
   version: 'portfolio_version',
   lastUpdated: 'portfolio_lastUpdated',
+  BENCHMARK: 'benchmark_selected',
 } as const
 
 export interface StorageData<T> {
