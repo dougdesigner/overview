@@ -185,7 +185,7 @@ function DropdownUserProfile() {
               )}
               {isDemoMode ? "Exit Demo Mode" : "View Demo Data"}
               {isDemoMode && (
-                <span className="ml-auto rounded bg-amber-100 px-1.5 py-0.5 text-[10px] font-medium text-amber-700 dark:bg-amber-900/30 dark:text-amber-400">
+                <span className="ml-auto rounded bg-gradient-to-r from-blue-500 to-cyan-500 px-1.5 py-0.5 text-[10px] font-medium text-white">
                   Active
                 </span>
               )}
