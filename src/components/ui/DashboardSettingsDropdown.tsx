@@ -51,6 +51,8 @@ const getHoldingsFilterLabel = (filter: HoldingsFilter): string => {
       return "All"
     case "mag7":
       return "Magnificent 7"
+    case "mag10":
+      return "Magnificent 10"
     case "top7":
       return "Top 7"
     case "top10":
@@ -257,6 +259,7 @@ export function DashboardSettingsDropdown({
                     [
                       { value: "all", label: "All" },
                       { value: "mag7", label: "Magnificent 7" },
+                      { value: "mag10", label: "Magnificent 10" },
                       { value: "top7", label: "Top 7" },
                       { value: "top10", label: "Top 10" },
                     ] as const
@@ -462,6 +465,9 @@ export function DashboardSettingsDropdown({
               </DropdownMenuRadioItem>
               <DropdownMenuRadioItem value="mag7" iconType="check">
                 Magnificent 7
+              </DropdownMenuRadioItem>
+              <DropdownMenuRadioItem value="mag10" iconType="check">
+                Magnificent 10
               </DropdownMenuRadioItem>
               <DropdownMenuRadioItem value="top7" iconType="check">
                 Top 7

@@ -72,7 +72,7 @@ interface ExposureTreemapHighchartsProps {
   selectedAccounts: string[]
   logoUrls: Record<string, string | null>
   dataVersion?: number
-  holdingsFilter?: "all" | "mag7" | "top7" | "top10" // View filter for legend display
+  holdingsFilter?: "all" | "mag7" | "mag10" | "top7" | "top10" // View filter for legend display
   displayValue?: DisplayValue // Display value from page-level settings
   onChartSettingsChange?: (hasChanges: boolean) => void // Callback when chart settings change
 }

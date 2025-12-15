@@ -41,6 +41,9 @@ import assetClassifications from "@/data/asset-classifications.json"
 // Magnificent 7 tickers (including both Alphabet share classes)
 const MAGNIFICENT_7 = ["AAPL", "MSFT", "GOOGL", "GOOG", "AMZN", "NVDA", "META", "TSLA"]
 
+// Magnificent 10 tickers (Cboe MGTN Index - Mag 7 plus AMD, AVGO, PLTR)
+const MAGNIFICENT_10 = [...MAGNIFICENT_7, "AMD", "AVGO", "PLTR"]
+
 // Type definitions for mutual fund mappings and asset classifications
 interface MutualFundMapping {
   etf: string
@@ -436,6 +439,12 @@ export function ExposureTable({ holdings, accounts, dataVersion, selectedAccount
       )
     }
 
+    if (holdingsFilter === "mag10") {
+      return sortedData.filter(
+        (row) => !row.isETFBreakdown && MAGNIFICENT_10.includes(row.ticker.toUpperCase())
+      )
+    }
+
     if (holdingsFilter === "top7") {
       // Get parent rows only (not ETF breakdowns), already sorted by percentOfPortfolio desc
       const parentRows = sortedData.filter((row) => !row.isETFBreakdown)
@@ -495,6 +504,12 @@ export function ExposureTable({ holdings, accounts, dataVersion, selectedAccount
     if (holdingsFilter === "mag7") {
       return baseData.filter(
         (row) => !row.isETFBreakdown && MAGNIFICENT_7.includes(row.ticker.toUpperCase())
+      )
+    }
+
+    if (holdingsFilter === "mag10") {
+      return baseData.filter(
+        (row) => !row.isETFBreakdown && MAGNIFICENT_10.includes(row.ticker.toUpperCase())
       )
     }
 

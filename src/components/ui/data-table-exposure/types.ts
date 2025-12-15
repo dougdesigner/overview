@@ -78,7 +78,7 @@ export interface Account {
 export type ExposureDisplayValue = "market-value" | "pct-stocks" | "pct-portfolio" | "none"
 
 // Holdings filter type for quick views
-export type HoldingsFilter = "all" | "mag7" | "top7" | "top10"
+export type HoldingsFilter = "all" | "mag7" | "mag10" | "top7" | "top10"
 
 // Grouping mode for exposure visualization
 export type GroupingMode = "none" | "sector" | "sector-industry"

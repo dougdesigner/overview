@@ -18,12 +18,12 @@ import { spawn, ChildProcess } from "child_process"
 const OUTPUT_DIR = path.join(process.cwd(), "public", "images", "onboarding")
 const BASE_URL = "http://localhost:3000"
 
-// Set to just holdings to debug, or all pages for full run
+// Pages to capture screenshots for
 const PAGES = [
-  // { id: "overview", path: "/overview" },
-  // { id: "accounts", path: "/accounts" },
+  { id: "overview", path: "/overview" },
+  { id: "accounts", path: "/accounts" },
   { id: "holdings", path: "/holdings" },
-  // { id: "exposure", path: "/exposure" },
+  { id: "exposure", path: "/exposure" },
 ]
 
 const VIEWPORTS = {
@@ -48,53 +48,35 @@ async function waitForServer(url: string, timeout = 60000): Promise<void> {
   throw new Error(`Server at ${url} did not start within ${timeout}ms`)
 }
 
-// Build and start Next.js production server
-async function startProductionServer(): Promise<ChildProcess> {
-  console.log("Building Next.js for production...")
+// Start Next.js dev server (better for pages with useSearchParams)
+async function startDevServer(): Promise<ChildProcess> {
+  console.log("Starting Next.js dev server...")
 
-  // First build
-  await new Promise<void>((resolve, reject) => {
-    const build = spawn("pnpm", ["build"], {
-      cwd: process.cwd(),
-      stdio: "pipe",
-      shell: true,
-    })
-
-    build.on("close", (code) => {
-      if (code === 0) {
-        console.log("  Build complete!")
-        resolve()
-      } else {
-        reject(new Error(`Build failed with code ${code}`))
-      }
-    })
-
-    build.stderr?.on("data", (data) => {
-      const output = data.toString()
-      if (output.includes("error") || output.includes("Error")) {
-        console.error("Build error:", output)
-      }
-    })
-  })
-
-  console.log("Starting Next.js production server...")
-
-  const server = spawn("pnpm", ["start"], {
+  const server = spawn("pnpm", ["dev"], {
     cwd: process.cwd(),
     stdio: "pipe",
     shell: true,
+    env: { ...process.env, NODE_ENV: "development" },
   })
 
   server.stdout?.on("data", (data) => {
     const output = data.toString()
-    if (output.includes("Ready") || output.includes("started")) {
+    if (output.includes("Ready") || output.includes("started") || output.includes("Local:")) {
       console.log("  Server ready!")
     }
   })
 
+  server.stderr?.on("data", (data) => {
+    const output = data.toString()
+    // Suppress noisy dev output but log actual errors
+    if (output.includes("Error") && !output.includes("Compiling")) {
+      console.error("  Dev error:", output)
+    }
+  })
+
   await waitForServer(BASE_URL)
-  // Extra wait for server to stabilize
-  await new Promise((resolve) => setTimeout(resolve, 2000))
+  // Extra wait for dev server to stabilize
+  await new Promise((resolve) => setTimeout(resolve, 3000))
   return server
 }
 
@@ -133,8 +115,27 @@ async function waitForPageReady(page: Page, pageId: string): Promise<void> {
   // Wait for network idle first
   await page.waitForLoadState("networkidle")
 
-  // Fixed delay to ensure CSS, JS, and charts are fully rendered
-  await page.waitForTimeout(8000)
+  // Wait for specific content selectors to ensure real content is loaded
+  const contentSelectors: Record<string, string> = {
+    overview: "text=Portfolio value",
+    accounts: "text=Accounts",
+    holdings: "#holdings-section",
+    exposure: "text=Exposure",
+  }
+
+  const selector = contentSelectors[pageId]
+  if (selector) {
+    try {
+      await page.waitForSelector(selector, { timeout: 15000 })
+      console.log(`    Content selector found: ${selector}`)
+    } catch (e) {
+      console.log(`    Warning: Content selector not found: ${selector}`)
+    }
+  }
+
+  // Additional delay for charts to render
+  const delay = pageId === "holdings" ? 5000 : 3000
+  await page.waitForTimeout(delay)
 
   console.log(`    ✓ Page ready`)
 }
@@ -156,8 +157,21 @@ async function capturePageScreenshots(
 
       const page = await context.newPage()
 
-      // Navigate directly with ?demo=true URL param (synced with useState initializer)
-      const url = `${BASE_URL}${pageConfig.path}?demo=true`
+      // Listen for critical page errors only
+      page.on("pageerror", (error) => {
+        // Suppress hydration errors in dev mode - they don't affect final rendering
+        if (!error.message.includes("Hydration")) {
+          console.log(`    [Page Error] ${error.message}`)
+        }
+      })
+
+      // Set demo mode via localStorage before navigating
+      await context.addInitScript(() => {
+        localStorage.setItem("portfolio_demo_mode", "true")
+      })
+
+      // Navigate without URL params (demo mode is set via localStorage)
+      const url = `${BASE_URL}${pageConfig.path}`
       await page.goto(url, { waitUntil: "networkidle" })
 
       // Apply theme to document
@@ -165,6 +179,14 @@ async function capturePageScreenshots(
 
       // Wait for page to be fully loaded
       await waitForPageReady(page, pageConfig.id)
+
+      // Hide Next.js dev error overlay for clean screenshots
+      await page.addStyleTag({
+        content: `
+          nextjs-portal { display: none !important; }
+          [data-nextjs-dialog-overlay] { display: none !important; }
+        `,
+      })
 
       // Capture screenshot
       const outputPath = path.join(OUTPUT_DIR, filename)
@@ -190,8 +212,8 @@ async function main(): Promise<void> {
     await fs.mkdir(OUTPUT_DIR, { recursive: true })
     console.log(`\n📁 Output directory: ${OUTPUT_DIR}\n`)
 
-    // Build and start production server (no dev error overlays)
-    server = await startProductionServer()
+    // Start dev server (better handles useSearchParams in Holdings page)
+    server = await startDevServer()
 
     // Launch browser
     console.log("\n🌐 Launching browser...")

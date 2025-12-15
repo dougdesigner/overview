@@ -18,20 +18,17 @@ import type {
 import { institutionLabels } from "@/lib/institutionUtils"
 import { Icon } from "@iconify/react"
 import { RiDonutChartLine, RiFullscreenLine } from "@remixicon/react"
-import Highcharts from "highcharts"
-import HighchartsReact from "highcharts-react-official"
-import HighchartsDrilldown from "highcharts/modules/drilldown"
-import HighchartsExportData from "highcharts/modules/export-data"
-import HighchartsExporting from "highcharts/modules/exporting"
-import HighchartsSunburst from "highcharts/modules/sunburst"
 import { useTheme } from "next-themes"
 import { useEffect, useMemo, useRef, useState } from "react"
 
+// Import Highcharts types only (not the actual modules)
+import type HighchartsType from "highcharts"
+import type HighchartsReactType from "highcharts-react-official"
+
 // Track if modules are initialized globally to prevent duplicate initialization
 let modulesInitialized = false
-
-// Type assertion for module initialization functions
-type HighchartsModule = (H: typeof Highcharts) => void
+let Highcharts: typeof HighchartsType | null = null
+let HighchartsReact: typeof HighchartsReactType | null = null
 
 // Chart and control types
 type ChartType = "drilldown" | "sunburst" | "pie"
@@ -54,7 +51,8 @@ export function HoldingsSunburstEnhanced({
 }: HoldingsSunburstEnhancedProps) {
   const { resolvedTheme } = useTheme()
   const isDark = resolvedTheme === "dark"
-  const chartRef = useRef<HighchartsReact.RefObject>(null)
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const chartRef = useRef<any>(null)
   const [isClient, setIsClient] = useState(false)
   const [modulesLoaded, setModulesLoaded] = useState(false)
 
@@ -99,35 +97,50 @@ export function HoldingsSunburstEnhanced({
 
   // Initialize Highcharts modules on client-side
   useEffect(() => {
-    if (!modulesInitialized && typeof Highcharts === "object") {
-      try {
-        // Cast modules to callable functions
-        const sunburstInit = HighchartsSunburst as unknown as HighchartsModule
-        const drilldownInit = HighchartsDrilldown as unknown as HighchartsModule
-        const exportingInit = HighchartsExporting as unknown as HighchartsModule
-        const exportDataInit =
-          HighchartsExportData as unknown as HighchartsModule
-
-        if (typeof sunburstInit === "function") {
-          sunburstInit(Highcharts)
-        }
-        if (typeof drilldownInit === "function") {
-          drilldownInit(Highcharts)
-        }
-        if (typeof exportingInit === "function") {
-          exportingInit(Highcharts)
-        }
-        if (typeof exportDataInit === "function") {
-          exportDataInit(Highcharts)
-        }
-        modulesInitialized = true
-      } catch (e) {
-        // Modules may already be initialized
-        console.log("Highcharts modules initialization:", e)
-      }
-    }
     setIsClient(true)
-    setModulesLoaded(true)
+
+    const loadHighcharts = async () => {
+      if (!Highcharts) {
+        // Dynamically import Highcharts
+        const highchartsModule = await import("highcharts")
+        Highcharts = highchartsModule.default
+
+        const highchartsReactModule = await import("highcharts-react-official")
+        HighchartsReact = highchartsReactModule.default
+      }
+
+      // Initialize modules once
+      if (!modulesInitialized && Highcharts && typeof Highcharts === "object") {
+        // Load modules - each one must be imported and initialized separately
+        // Type assertion needed because TypeScript doesn't know these are callable
+        const HighchartsSunburst = await import("highcharts/modules/sunburst")
+        if (typeof HighchartsSunburst.default === "function") {
+          ;(HighchartsSunburst.default as (hc: typeof Highcharts) => void)(Highcharts)
+        }
+
+        const HighchartsDrilldown = await import("highcharts/modules/drilldown")
+        if (typeof HighchartsDrilldown.default === "function") {
+          ;(HighchartsDrilldown.default as (hc: typeof Highcharts) => void)(Highcharts)
+        }
+
+        // Load exporting first, then export-data (which depends on exporting)
+        const HighchartsExporting = await import("highcharts/modules/exporting")
+        if (typeof HighchartsExporting.default === "function") {
+          ;(HighchartsExporting.default as (hc: typeof Highcharts) => void)(Highcharts)
+        }
+
+        const HighchartsExportData = await import("highcharts/modules/export-data")
+        if (typeof HighchartsExportData.default === "function") {
+          ;(HighchartsExportData.default as (hc: typeof Highcharts) => void)(Highcharts)
+        }
+
+        modulesInitialized = true
+      }
+
+      setModulesLoaded(true)
+    }
+
+    loadHighcharts()
   }, [])
 
   // Detect touch device on first touch interaction
@@ -836,7 +849,8 @@ export function HoldingsSunburstEnhanced({
   }
 
   // Chart options
-  const getSunburstOptions = (): Highcharts.Options => ({
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const getSunburstOptions = (): any => ({
     chart: {
       type: undefined, // Required for sunburst
       backgroundColor: "transparent",
@@ -1019,7 +1033,7 @@ export function HoldingsSunburstEnhanced({
             color: isDark ? "#f3f4f6" : "#111827",
           },
         },
-      } as Highcharts.SeriesSunburstOptions,
+      },
     ],
     tooltip: {
       useHTML: true,
@@ -1058,7 +1072,8 @@ export function HoldingsSunburstEnhanced({
   })
 
   // Chart options for pie
-  const getPieOptions = (): Highcharts.Options => ({
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const getPieOptions = (): any => ({
     chart: {
       type: "pie",
       backgroundColor: "transparent",
@@ -1119,7 +1134,7 @@ export function HoldingsSunburstEnhanced({
         type: "pie",
         name: "Holdings",
         data: transformToPieData(),
-      } as Highcharts.SeriesPieOptions,
+      },
     ],
     tooltip: {
       useHTML: true,
@@ -1134,11 +1149,11 @@ export function HoldingsSunburstEnhanced({
         fontSize: "14px",
       },
       pointFormatter: function () {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const point = this as any
         const value = point.y || 0
         const percentage = ((value / totalValue) * 100).toFixed(1)
         const name = point.name
-        const ticker = point.ticker
         const fullName = point.fullName
 
         return `<div style="padding: 2px; font-size: 14px;">
@@ -1152,7 +1167,8 @@ export function HoldingsSunburstEnhanced({
   })
 
   // Chart options for drilldown (3 levels: Institution → Account → Holdings)
-  const getDrilldownOptions = (): Highcharts.Options => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const getDrilldownOptions = (): any => {
     const { seriesData, drilldownSeries } = transformToDrilldownData()
 
     return {
@@ -1228,7 +1244,7 @@ export function HoldingsSunburstEnhanced({
           name: "Institutions",
           colorByPoint: true,
           data: seriesData,
-        } as Highcharts.SeriesPieOptions,
+        },
       ],
       drilldown: {
         activeAxisLabelStyle: {
@@ -1253,7 +1269,7 @@ export function HoldingsSunburstEnhanced({
             },
           },
         },
-        series: drilldownSeries as Highcharts.SeriesPieOptions[],
+        series: drilldownSeries,
       },
       exporting: {
         buttons: {
@@ -1289,7 +1305,7 @@ export function HoldingsSunburstEnhanced({
     showDataLabels,
   ])
 
-  if (!isClient || !modulesLoaded) {
+  if (!isClient || !modulesLoaded || !Highcharts || !HighchartsReact) {
     return (
       <Card className="pb-4 pt-6">
         <div
@@ -1301,6 +1317,8 @@ export function HoldingsSunburstEnhanced({
       </Card>
     )
   }
+
+  const HighchartsReactComponent = HighchartsReact
 
   return (
     <Card className="pb-4 pt-6">
@@ -1560,7 +1578,7 @@ export function HoldingsSunburstEnhanced({
             </div>
           </div>
         ) : (
-          <HighchartsReact
+          <HighchartsReactComponent
             highcharts={Highcharts}
             options={options}
             ref={chartRef}
