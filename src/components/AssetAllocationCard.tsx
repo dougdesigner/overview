@@ -249,8 +249,11 @@ const AssetAllocationCard = React.forwardRef<
   ) => {
     const allocationData = data || getDefaultData()
     // Find first tab with data, or use the provided defaultTab
-    const firstTabWithData = allocationData.find(category => category.data.length > 0)?.name
-    const defaultTabValue = defaultTab || firstTabWithData || allocationData[0]?.name
+    const firstTabWithData = allocationData.find(
+      (category) => category.data.length > 0,
+    )?.name
+    const defaultTabValue =
+      defaultTab || firstTabWithData || allocationData[0]?.name
 
     // Track current tab for animation reset on tab change
     const [currentTab, setCurrentTab] = React.useState(defaultTabValue)
@@ -267,10 +270,15 @@ const AssetAllocationCard = React.forwardRef<
 
     const currencyFormatter = (number: number) => {
       const decimals = number % 1 === 0 ? 0 : 2
-      return "$" + Intl.NumberFormat("us", {
-        minimumFractionDigits: decimals,
-        maximumFractionDigits: decimals,
-      }).format(number).toString()
+      return (
+        "$" +
+        Intl.NumberFormat("us", {
+          minimumFractionDigits: decimals,
+          maximumFractionDigits: decimals,
+        })
+          .format(number)
+          .toString()
+      )
     }
 
     // Calculate total value once (same for all tabs)
@@ -295,7 +303,9 @@ const AssetAllocationCard = React.forwardRef<
           <h3
             className="cursor-pointer text-base font-medium text-gray-900 transition-colors hover:text-blue-600 dark:text-gray-50 dark:hover:text-blue-400"
             onClick={() => {
-              document.getElementById(sectionId)?.scrollIntoView({ behavior: "smooth" })
+              document
+                .getElementById(sectionId)
+                ?.scrollIntoView({ behavior: "smooth" })
             }}
           >
             {title}
@@ -306,11 +316,13 @@ const AssetAllocationCard = React.forwardRef<
         </div>
         <Tabs value={currentTab} onValueChange={setCurrentTab}>
           <TabsList className="px-6 pt-6">
-            {allocationData.filter(category => category.data.length > 0).map((category) => (
-              <TabsTrigger key={category.name} value={category.name}>
-                {category.name}
-              </TabsTrigger>
-            ))}
+            {allocationData
+              .filter((category) => category.data.length > 0)
+              .map((category) => (
+                <TabsTrigger key={category.name} value={category.name}>
+                  {category.name}
+                </TabsTrigger>
+              ))}
           </TabsList>
           <div className="px-6 pb-6">
             {allocationData.map((category) => (
@@ -337,95 +349,99 @@ const AssetAllocationCard = React.forwardRef<
                       className="mt-2 divide-y divide-gray-200 text-sm text-gray-500 dark:divide-gray-800 dark:text-gray-500"
                     >
                       {category.data.map((item, index) => (
-                    <li
-                      key={`${item.name}-${index}`}
-                      className="py-3"
-                    >
-                      <div className="flex items-center justify-between space-x-6">
-                        <div className="flex items-center space-x-2.5 truncate">
-                          {category.name === "Holdings" &&
-                          item.type !== "cash" && item.type !== "other" ? (
-                            // Special styling for stock/fund tickers in Holdings tab
-                            <>
-                              {/* Legend color indicator (matches donut chart) */}
-                              <span
-                                className={cx(
-                                  item.borderColor.replace(/border/g, "bg"),
-                                  "size-2.5 shrink-0 rounded-sm",
-                                )}
-                                aria-hidden="true"
-                              />
-                              {/* Ticker logo */}
-                              <TickerLogo
-                                ticker={item.ticker || item.name}
-                                type={item.type === "fund" ? "etf" : "stock"}
-                                className="size-6"
-                                domain={item.domain}
-                                companyName={item.companyName}
-                              />
-                              {/* Ticker symbol badge */}
-                              <Badge variant="flat" className="font-semibold">
-                                {item.name}
-                              </Badge>
-                            </>
-                          ) : category.name === "Accounts" && item.institution ? (
-                            // Special styling for accounts with institution logos
-                            <>
-                              {/* Legend color indicator (matches donut chart) */}
-                              <span
-                                className={cx(
-                                  item.borderColor.replace(/border/g, "bg"),
-                                  "size-2.5 shrink-0 rounded-sm",
-                                )}
-                                aria-hidden="true"
-                              />
-                              {/* Institution logo */}
-                              <InstitutionLogo
-                                institution={item.institution}
-                                className="size-6"
-                              />
-                              {/* Account name */}
-                              <span className="truncate dark:text-gray-300">
-                                {item.name}
+                        <li key={`${item.name}-${index}`} className="py-3">
+                          <div className="flex items-center justify-between space-x-6">
+                            <div className="flex items-center space-x-2.5 truncate">
+                              {(category.name === "Holdings" || category.name === "Stocks") &&
+                              item.type !== "cash" &&
+                              item.type !== "other" ? (
+                                // Special styling for stock/fund tickers in Holdings/Stocks tab
+                                <>
+                                  {/* Legend color indicator (matches donut chart) */}
+                                  <span
+                                    className={cx(
+                                      item.borderColor.replace(/border/g, "bg"),
+                                      "size-2.5 shrink-0 rounded-sm",
+                                    )}
+                                    aria-hidden="true"
+                                  />
+                                  {/* Ticker logo */}
+                                  <TickerLogo
+                                    ticker={item.ticker || item.name}
+                                    type={
+                                      item.type === "fund" ? "etf" : "stock"
+                                    }
+                                    className="size-6"
+                                    domain={item.domain}
+                                    companyName={item.companyName}
+                                  />
+                                  {/* Ticker symbol badge */}
+                                  <Badge
+                                    variant="flat"
+                                    className="font-semibold"
+                                  >
+                                    {item.name}
+                                  </Badge>
+                                </>
+                              ) : category.name === "Accounts" &&
+                                item.institution ? (
+                                // Special styling for accounts with institution logos
+                                <>
+                                  {/* Legend color indicator (matches donut chart) */}
+                                  <span
+                                    className={cx(
+                                      item.borderColor.replace(/border/g, "bg"),
+                                      "size-2.5 shrink-0 rounded-sm",
+                                    )}
+                                    aria-hidden="true"
+                                  />
+                                  {/* Institution logo */}
+                                  <InstitutionLogo
+                                    institution={item.institution}
+                                    className="size-6"
+                                  />
+                                  {/* Account name */}
+                                  <span className="truncate dark:text-gray-300">
+                                    {item.name}
+                                  </span>
+                                </>
+                              ) : (
+                                // Default styling for other items
+                                <>
+                                  <span
+                                    className={cx(
+                                      item.borderColor.replace(/border/g, "bg"),
+                                      "size-2.5 shrink-0 rounded-sm",
+                                    )}
+                                    aria-hidden="true"
+                                  />
+                                  <span className="truncate dark:text-gray-300">
+                                    {item.name}
+                                  </span>
+                                </>
+                              )}
+                            </div>
+                            <div className="flex items-center space-x-2">
+                              <span className="font-medium tabular-nums text-gray-900 dark:text-gray-50">
+                                {currencyFormatter(item.amount)}
                               </span>
-                            </>
-                          ) : (
-                            // Default styling for other items
-                            <>
-                              <span
-                                className={cx(
-                                  item.borderColor.replace(/border/g, "bg"),
-                                  "size-2.5 shrink-0 rounded-sm",
-                                )}
-                                aria-hidden="true"
-                              />
-                              <span className="truncate dark:text-gray-300">
-                                {item.name}
+                              <span className="rounded-md bg-gray-100 px-1.5 py-0.5 text-xs font-medium tabular-nums text-gray-700 dark:bg-gray-800 dark:text-gray-300">
+                                {item.share}
                               </span>
-                            </>
-                          )}
-                        </div>
-                        <div className="flex items-center space-x-2">
-                          <span className="font-medium tabular-nums text-gray-900 dark:text-gray-50">
-                            {currencyFormatter(item.amount)}
-                          </span>
-                          <span className="rounded-md bg-gray-100 px-1.5 py-0.5 text-xs font-medium tabular-nums text-gray-700 dark:bg-gray-800 dark:text-gray-300">
-                            {item.share}
-                          </span>
-                        </div>
-                      </div>
-                      {/* Progress bar visualization */}
-                      <div className="mt-2 h-1.5 w-full overflow-hidden rounded-full bg-gray-200 dark:bg-gray-800">
-                        <div
-                          className={cx(
-                            "h-full rounded-full transition-all duration-700 ease-out",
-                            item.borderColor.replace(/border/g, "bg"),
-                          )}
-                          style={{ width: isAnimated ? item.share : "0%" }}
-                        />
-                      </div>
-                    </li>
-                  ))}
+                            </div>
+                          </div>
+                          {/* Progress bar visualization */}
+                          <div className="mt-2 h-1.5 w-full overflow-hidden rounded-full bg-gray-200 dark:bg-gray-800">
+                            <div
+                              className={cx(
+                                "h-full rounded-full transition-all duration-700 ease-out",
+                                item.borderColor.replace(/border/g, "bg"),
+                              )}
+                              style={{ width: isAnimated ? item.share : "0%" }}
+                            />
+                          </div>
+                        </li>
+                      ))}
                     </ul>
                   </>
                 )}

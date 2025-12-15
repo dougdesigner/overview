@@ -13,15 +13,21 @@ import { StockExposure } from "./types"
 
 // Initialize Highcharts modules for Next.js
 if (typeof Highcharts === "object") {
-  const treemapModule = HighchartsTreemap as unknown as (H: typeof Highcharts) => void
+  const treemapModule = HighchartsTreemap as unknown as (
+    H: typeof Highcharts,
+  ) => void
   if (typeof treemapModule === "function") {
     treemapModule(Highcharts)
   }
-  const exportingModule = HighchartsExporting as unknown as (H: typeof Highcharts) => void
+  const exportingModule = HighchartsExporting as unknown as (
+    H: typeof Highcharts,
+  ) => void
   if (typeof exportingModule === "function") {
     exportingModule(Highcharts)
   }
-  const exportDataModule = HighchartsExportData as unknown as (H: typeof Highcharts) => void
+  const exportDataModule = HighchartsExportData as unknown as (
+    H: typeof Highcharts,
+  ) => void
   if (typeof exportDataModule === "function") {
     exportDataModule(Highcharts)
   }
@@ -282,7 +288,7 @@ export function ExposureTreemapHighcharts({
     <Card className="pb-4 pt-6">
       <div className="flex items-center justify-between">
         <h3 className="text-base font-medium text-gray-900 dark:text-gray-50">
-          Exposure map
+          Stocks
         </h3>
 
         <div className="flex items-center rounded-lg bg-gray-100 p-1 dark:bg-gray-800">

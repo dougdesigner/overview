@@ -4,9 +4,9 @@ import { Card } from "@/components/Card"
 import type { Holding } from "@/components/ui/data-table-holdings/types"
 import Highcharts from "highcharts"
 import HighchartsReact from "highcharts-react-official"
-import HighchartsSunburst from "highcharts/modules/sunburst"
-import HighchartsExporting from "highcharts/modules/exporting"
 import HighchartsExportData from "highcharts/modules/export-data"
+import HighchartsExporting from "highcharts/modules/exporting"
+import HighchartsSunburst from "highcharts/modules/sunburst"
 import { useTheme } from "next-themes"
 import { useEffect, useRef, useState } from "react"
 
@@ -40,7 +40,8 @@ export function HoldingsSunburst({
         // Cast modules to callable functions
         const sunburstInit = HighchartsSunburst as unknown as HighchartsModule
         const exportingInit = HighchartsExporting as unknown as HighchartsModule
-        const exportDataInit = HighchartsExportData as unknown as HighchartsModule
+        const exportDataInit =
+          HighchartsExportData as unknown as HighchartsModule
 
         if (typeof sunburstInit === "function") {
           sunburstInit(Highcharts)
@@ -351,10 +352,12 @@ export function HoldingsSunburst({
         <h3
           className="cursor-pointer text-base font-medium text-gray-900 transition-colors hover:text-blue-600 dark:text-gray-50 dark:hover:text-blue-400"
           onClick={() => {
-            document.getElementById('holdings-section')?.scrollIntoView({ behavior: 'smooth' })
+            document
+              .getElementById("holdings-section")
+              ?.scrollIntoView({ behavior: "smooth" })
           }}
         >
-          Holdings hierarchy
+          Holdings
         </h3>
         {/* <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">
           Interactive view of your holdings across all accounts

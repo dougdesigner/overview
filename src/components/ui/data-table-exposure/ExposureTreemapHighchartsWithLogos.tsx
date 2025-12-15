@@ -67,14 +67,14 @@ if (typeof Highcharts === "object") {
 interface ExposureTreemapHighchartsProps {
   exposures: StockExposure[]
   totalValue: number
-  stocksOnlyValue?: number  // Full stocks value for percentage calculations (not affected by view filter)
+  stocksOnlyValue?: number // Full stocks value for percentage calculations (not affected by view filter)
   accounts: Account[]
   selectedAccounts: string[]
   logoUrls: Record<string, string | null>
   dataVersion?: number
-  holdingsFilter?: "all" | "mag7" | "top7" | "top10"  // View filter for legend display
-  displayValue?: DisplayValue  // Display value from page-level settings
-  onChartSettingsChange?: (hasChanges: boolean) => void  // Callback when chart settings change
+  holdingsFilter?: "all" | "mag7" | "top7" | "top10" // View filter for legend display
+  displayValue?: DisplayValue // Display value from page-level settings
+  onChartSettingsChange?: (hasChanges: boolean) => void // Callback when chart settings change
 }
 
 type ChartType = "treemap" | "pie"
@@ -87,7 +87,7 @@ type DisplayValue = "market-value" | "pct-stocks" | "pct-portfolio" | "none"
 // const MAG7_TICKERS = ["AAPL", "MSFT", "GOOGL", "GOOG", "AMZN", "NVDA", "META", "TSLA"]
 
 // Colors for non-stock holdings (cash, bonds, etc.)
-const CASH_COLOR = getAssetClassHexColor("Cash")   // emerald-500 (#10b981)
+const CASH_COLOR = getAssetClassHexColor("Cash") // emerald-500 (#10b981)
 const BONDS_COLOR = getAssetClassHexColor("Bonds") // amber-500 (#f59e0b)
 const OTHER_COLOR = getAssetClassHexColor("Other") // gray-500 (#6b7280)
 
@@ -331,7 +331,11 @@ export function ExposureTreemapHighchartsWithLogos({
     if (groupName === "Bonds") {
       return BONDS_COLOR
     }
-    if (groupName === "Real Estate" || groupName === "Commodities" || groupName === "Other") {
+    if (
+      groupName === "Real Estate" ||
+      groupName === "Commodities" ||
+      groupName === "Other"
+    ) {
       return OTHER_COLOR
     }
 
@@ -340,11 +344,20 @@ export function ExposureTreemapHighchartsWithLogos({
     }
 
     // Non-stock sectors to exclude from stock color assignment
-    const nonStockSectors = ["Cash", "Bonds", "Real Estate", "Commodities", "Other"]
+    const nonStockSectors = [
+      "Cash",
+      "Bonds",
+      "Real Estate",
+      "Commodities",
+      "Other",
+    ]
 
     // Get all valid exposures (excluding non-stock sectors for color assignment)
     const validExposures = exposures.filter(
-      (exp) => !exp.isETFBreakdown && exp.totalValue > 0 && !nonStockSectors.includes(exp.sector || ""),
+      (exp) =>
+        !exp.isETFBreakdown &&
+        exp.totalValue > 0 &&
+        !nonStockSectors.includes(exp.sector || ""),
     )
 
     // Always group by sector for color consistency (both sector and sector-industry use sectors)
@@ -452,9 +465,11 @@ export function ExposureTreemapHighchartsWithLogos({
   }
 
   // Use passed stocksOnlyValue, or calculate from exposures if not provided (backward compatibility)
-  const stocksOnlyValue = stocksOnlyValueProp ?? exposures
-    .filter((exp) => !exp.isETFBreakdown && exp.totalValue > 0)
-    .reduce((sum, exp) => sum + exp.totalValue, 0)
+  const stocksOnlyValue =
+    stocksOnlyValueProp ??
+    exposures
+      .filter((exp) => !exp.isETFBreakdown && exp.totalValue > 0)
+      .reduce((sum, exp) => sum + exp.totalValue, 0)
 
   // Helper function to get the display value text based on display settings
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -682,7 +697,13 @@ export function ExposureTreemapHighchartsWithLogos({
       )
 
       // Non-stock sectors that need special coloring
-      const nonStockSectors = ["Cash", "Bonds", "Real Estate", "Commodities", "Other"]
+      const nonStockSectors = [
+        "Cash",
+        "Bonds",
+        "Real Estate",
+        "Commodities",
+        "Other",
+      ]
 
       sortedExposures.forEach((stock) => {
         const percentage = (stock.totalValue / totalValue) * 100
@@ -771,7 +792,6 @@ export function ExposureTreemapHighchartsWithLogos({
       return data
     }
 
-
     // Handle "sector" mode - 2-level hierarchy: Sector → Stocks
     const groups = new Map<string, StockExposure[]>()
     validExposures.forEach((exposure) => {
@@ -858,7 +878,13 @@ export function ExposureTreemapHighchartsWithLogos({
       })
 
       // Non-stock sectors that need special coloring
-      const nonStockSectors = ["Cash", "Bonds", "Real Estate", "Commodities", "Other"]
+      const nonStockSectors = [
+        "Cash",
+        "Bonds",
+        "Real Estate",
+        "Commodities",
+        "Other",
+      ]
 
       // Add main segments
       mainSegments.forEach((stock) => {
@@ -948,7 +974,10 @@ export function ExposureTreemapHighchartsWithLogos({
 
       // Add "Others" segment if there are small groups
       if (smallGroups.length > 0) {
-        const othersTotal = smallGroups.reduce((sum, [, value]) => sum + value, 0)
+        const othersTotal = smallGroups.reduce(
+          (sum, [, value]) => sum + value,
+          0,
+        )
         const othersPercentage = (othersTotal / totalValue) * 100
 
         data.push({
@@ -1376,13 +1405,15 @@ export function ExposureTreemapHighchartsWithLogos({
             const companyName = point.companyName || ticker
 
             // Calculate percentage of this section relative to stock portfolio
-            const percentage = stocksOnlyValue > 0 ? (value / stocksOnlyValue) * 100 : 0
+            const percentage =
+              stocksOnlyValue > 0 ? (value / stocksOnlyValue) * 100 : 0
 
             // Skip very small slices
             if (percentage < 3) return null
 
             // Check if nothing is enabled
-            if (!showLogo && titleMode === "none" && !showChartValue) return null
+            if (!showLogo && titleMode === "none" && !showChartValue)
+              return null
 
             const parts: string[] = []
             const isCash = ticker === "CASH"
@@ -1408,11 +1439,18 @@ export function ExposureTreemapHighchartsWithLogos({
 
             // Title (based on titleMode)
             if (titleMode === "symbol") {
-              parts.push(`<div style="font-weight:600;text-align:center;">${ticker}</div>`)
+              parts.push(
+                `<div style="font-weight:600;text-align:center;">${ticker}</div>`,
+              )
             } else if (titleMode === "name") {
               // Truncate long names
-              const displayName = companyName.length > 15 ? companyName.substring(0, 12) + "..." : companyName
-              parts.push(`<div style="font-weight:600;text-align:center;font-size:10px;">${displayName}</div>`)
+              const displayName =
+                companyName.length > 15
+                  ? companyName.substring(0, 12) + "..."
+                  : companyName
+              parts.push(
+                `<div style="font-weight:600;text-align:center;font-size:10px;">${displayName}</div>`,
+              )
             }
 
             // Value (if showChartValue enabled)
@@ -1427,7 +1465,9 @@ export function ExposureTreemapHighchartsWithLogos({
                 const pctPortfolio = (value / totalValue) * 100
                 displayVal = `${pctPortfolio.toFixed(1)}%`
               }
-              parts.push(`<div style="text-align:center;font-size:10px;">${displayVal}</div>`)
+              parts.push(
+                `<div style="text-align:center;font-size:10px;">${displayVal}</div>`,
+              )
             }
 
             if (parts.length === 0) return null
@@ -1496,9 +1536,10 @@ export function ExposureTreemapHighchartsWithLogos({
         const name = point.ticker || point.name
 
         // Show sector information when in sector-industry mode
-        const sectorInfo = groupingMode === "sector-industry" && point.custom?.sector
-          ? `<div style="font-size: 11px; opacity: 0.8; margin-bottom: 4px;">Sector: ${point.custom.sector}</div>`
-          : ""
+        const sectorInfo =
+          groupingMode === "sector-industry" && point.custom?.sector
+            ? `<div style="font-size: 11px; opacity: 0.8; margin-bottom: 4px;">Sector: ${point.custom.sector}</div>`
+            : ""
 
         return `<div style="padding: 2px;">
                   <div style="font-weight: 600; margin-bottom: 4px;">${name}</div>
@@ -1518,7 +1559,11 @@ export function ExposureTreemapHighchartsWithLogos({
     )
 
     // For mag7, top7, or top10 filters, show all items in the filtered list
-    if (holdingsFilter === "mag7" || holdingsFilter === "top7" || holdingsFilter === "top10") {
+    if (
+      holdingsFilter === "mag7" ||
+      holdingsFilter === "top7" ||
+      holdingsFilter === "top10"
+    ) {
       return validExposures
         .sort((a, b) => b.totalValue - a.totalValue)
         .map((exp) => ({
@@ -1562,13 +1607,16 @@ export function ExposureTreemapHighchartsWithLogos({
 
   // Calculate total for filtered views (mag7, top7, or top10) or "none" grouping mode
   // For filtered views, sum all exposures; for "none" mode, sum only the legend items (top 10)
-  const filteredTotal = (holdingsFilter === "mag7" || holdingsFilter === "top7" || holdingsFilter === "top10")
-    ? exposures
-        .filter((exp) => !exp.isETFBreakdown && exp.totalValue > 0)
-        .reduce((sum, exp) => sum + exp.totalValue, 0)
-    : groupingMode === "none"
-      ? topGroups.reduce((sum, item) => sum + item.value, 0)
-      : null
+  const filteredTotal =
+    holdingsFilter === "mag7" ||
+    holdingsFilter === "top7" ||
+    holdingsFilter === "top10"
+      ? exposures
+          .filter((exp) => !exp.isETFBreakdown && exp.totalValue > 0)
+          .reduce((sum, exp) => sum + exp.totalValue, 0)
+      : groupingMode === "none"
+        ? topGroups.reduce((sum, item) => sum + item.value, 0)
+        : null
 
   // Export handlers
   const handleExport = (type: string) => {
@@ -1611,7 +1659,10 @@ export function ExposureTreemapHighchartsWithLogos({
   if (!modulesLoaded) {
     return (
       <Card className="pb-4 pt-6">
-        <div className="flex items-center justify-center" style={{ height: responsiveHeight }}>
+        <div
+          className="flex items-center justify-center"
+          style={{ height: responsiveHeight }}
+        >
           <div className="text-sm text-gray-500">Loading chart...</div>
         </div>
       </Card>
@@ -1624,10 +1675,12 @@ export function ExposureTreemapHighchartsWithLogos({
         <h3
           className="cursor-pointer text-base font-medium text-gray-900 transition-colors hover:text-blue-600 dark:text-gray-50 dark:hover:text-blue-400"
           onClick={() => {
-            document.getElementById('exposure-section')?.scrollIntoView({ behavior: 'smooth' })
+            document
+              .getElementById("exposure-section")
+              ?.scrollIntoView({ behavior: "smooth" })
           }}
         >
-          Exposure map
+          Stocks
         </h3>
 
         <div className="flex items-center gap-2">
@@ -1686,9 +1739,7 @@ export function ExposureTreemapHighchartsWithLogos({
                 <DropdownMenuSubMenuContent>
                   <DropdownMenuRadioGroup
                     value={titleMode}
-                    onValueChange={(value) =>
-                      setTitleMode(value as TitleMode)
-                    }
+                    onValueChange={(value) => setTitleMode(value as TitleMode)}
                   >
                     <DropdownMenuRadioItem value="symbol" iconType="check">
                       Symbol
@@ -1736,7 +1787,10 @@ export function ExposureTreemapHighchartsWithLogos({
                     <DropdownMenuRadioItem value="sector" iconType="check">
                       Sector
                     </DropdownMenuRadioItem>
-                    <DropdownMenuRadioItem value="sector-industry" iconType="check">
+                    <DropdownMenuRadioItem
+                      value="sector-industry"
+                      iconType="check"
+                    >
                       Sector & Industry
                     </DropdownMenuRadioItem>
                   </DropdownMenuRadioGroup>
@@ -1751,7 +1805,11 @@ export function ExposureTreemapHighchartsWithLogos({
                     onClick={resetChartSettings}
                     className="text-gray-500 dark:text-gray-400"
                   >
-                    <Icon icon="carbon:filter-reset" className="mr-2 size-4" aria-hidden="true" />
+                    <Icon
+                      icon="carbon:filter-reset"
+                      className="mr-2 size-4"
+                      aria-hidden="true"
+                    />
                     Reset Chart
                   </DropdownMenuItem>
                 </>
@@ -1766,7 +1824,11 @@ export function ExposureTreemapHighchartsWithLogos({
             >
               <DropdownMenuTrigger asChild>
                 <Button variant="secondary" className="h-9">
-                  <Icon icon="carbon:download" className="size-4" aria-hidden="true" />
+                  <Icon
+                    icon="carbon:download"
+                    className="size-4"
+                    aria-hidden="true"
+                  />
                 </Button>
               </DropdownMenuTrigger>
             </Tooltip>
@@ -1813,7 +1875,10 @@ export function ExposureTreemapHighchartsWithLogos({
 
       {validExposures.length === 0 ? (
         // Empty state when no stocks exist
-        <div className="mt-4 flex flex-col items-center justify-center" style={{ height: responsiveHeight }}>
+        <div
+          className="mt-4 flex flex-col items-center justify-center"
+          style={{ height: responsiveHeight }}
+        >
           <RiLayoutMasonryLine
             className="mb-3 size-12 text-gray-300 dark:text-gray-600"
             aria-hidden="true"
@@ -1861,7 +1926,8 @@ export function ExposureTreemapHighchartsWithLogos({
                         ? "Magnificent 7"
                         : holdingsFilter === "top7"
                           ? "Top 7"
-                          : "Top 10"} Total
+                          : "Top 10"}{" "}
+                      Total
                     </span>
                   </div>
                 </li>
@@ -1872,11 +1938,22 @@ export function ExposureTreemapHighchartsWithLogos({
                 const isBonds = item.name === "Bonds" || item.name === "BONDS"
 
                 // Non-stock sectors for legend coloring
-                const nonStockSectors = ["Cash", "CASH", "Bonds", "BONDS", "Real Estate", "Commodities", "Other"]
+                const nonStockSectors = [
+                  "Cash",
+                  "CASH",
+                  "Bonds",
+                  "BONDS",
+                  "Real Estate",
+                  "Commodities",
+                  "Other",
+                ]
                 const isNonStock = nonStockSectors.includes(item.name)
 
                 // Determine color for legend indicator
-                let legendColor = groupingMode === "none" ? colors[0] : colors[index % colors.length]
+                let legendColor =
+                  groupingMode === "none"
+                    ? colors[0]
+                    : colors[index % colors.length]
                 if (isCash) legendColor = CASH_COLOR
                 else if (isBonds) legendColor = BONDS_COLOR
                 else if (isNonStock) legendColor = OTHER_COLOR
@@ -1890,12 +1967,16 @@ export function ExposureTreemapHighchartsWithLogos({
                       {showLogo && isCash ? (
                         // Show "$" for cash entries
                         <div className="flex size-5 shrink-0 items-center justify-center rounded-full bg-emerald-100 dark:bg-emerald-900/30">
-                          <span className="text-xs font-bold text-emerald-600 dark:text-emerald-400">$</span>
+                          <span className="text-xs font-bold text-emerald-600 dark:text-emerald-400">
+                            $
+                          </span>
                         </div>
                       ) : showLogo && isBonds ? (
                         // Show bond icon for bonds entries
                         <div className="flex size-5 shrink-0 items-center justify-center rounded-full bg-amber-100 dark:bg-amber-900/30">
-                          <span className="text-xs font-bold text-amber-600 dark:text-amber-400">B</span>
+                          <span className="text-xs font-bold text-amber-600 dark:text-amber-400">
+                            B
+                          </span>
                         </div>
                       ) : logoUrl ? (
                         <div className="flex size-5 shrink-0 items-center justify-center overflow-hidden rounded-full bg-gray-100 dark:bg-gray-800">

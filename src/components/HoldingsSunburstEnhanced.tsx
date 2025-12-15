@@ -16,17 +16,14 @@ import type {
   Holding,
 } from "@/components/ui/data-table-holdings/types"
 import { institutionLabels } from "@/lib/institutionUtils"
-import {
-  RiDonutChartLine,
-  RiFullscreenLine,
-} from "@remixicon/react"
 import { Icon } from "@iconify/react"
+import { RiDonutChartLine, RiFullscreenLine } from "@remixicon/react"
 import Highcharts from "highcharts"
 import HighchartsReact from "highcharts-react-official"
-import HighchartsSunburst from "highcharts/modules/sunburst"
 import HighchartsDrilldown from "highcharts/modules/drilldown"
-import HighchartsExporting from "highcharts/modules/exporting"
 import HighchartsExportData from "highcharts/modules/export-data"
+import HighchartsExporting from "highcharts/modules/exporting"
+import HighchartsSunburst from "highcharts/modules/sunburst"
 import { useTheme } from "next-themes"
 import { useEffect, useMemo, useRef, useState } from "react"
 
@@ -108,7 +105,8 @@ export function HoldingsSunburstEnhanced({
         const sunburstInit = HighchartsSunburst as unknown as HighchartsModule
         const drilldownInit = HighchartsDrilldown as unknown as HighchartsModule
         const exportingInit = HighchartsExporting as unknown as HighchartsModule
-        const exportDataInit = HighchartsExportData as unknown as HighchartsModule
+        const exportDataInit =
+          HighchartsExportData as unknown as HighchartsModule
 
         if (typeof sunburstInit === "function") {
           sunburstInit(Highcharts)
@@ -275,8 +273,14 @@ export function HoldingsSunburstEnhanced({
         return Array.from(institutionGroups.entries())
           .filter(([_, value]) => value > 0)
           .sort((a, b) => b[1] - a[1])
-          .map(([name, value]) => [getInstitutionDisplayName(name), value] as [string, number])
-      } else if (drilledNodeId.startsWith("inst-") && !drilledNodeId.includes("-account-")) {
+          .map(
+            ([name, value]) =>
+              [getInstitutionDisplayName(name), value] as [string, number],
+          )
+      } else if (
+        drilledNodeId.startsWith("inst-") &&
+        !drilledNodeId.includes("-account-")
+      ) {
         // Drilled into an institution - show accounts for that institution
         const institutionKey = drilledNodeId.replace("inst-", "")
         const accountGroups = new Map<string, { name: string; value: number }>()
@@ -319,7 +323,10 @@ export function HoldingsSunburstEnhanced({
       return Array.from(institutionGroups.entries())
         .filter(([_, value]) => value > 0)
         .sort((a, b) => b[1] - a[1])
-        .map(([name, value]) => [getInstitutionDisplayName(name), value] as [string, number])
+        .map(
+          ([name, value]) =>
+            [getInstitutionDisplayName(name), value] as [string, number],
+        )
     }
 
     if (groupingMode === "none") {
@@ -727,12 +734,17 @@ export function HoldingsSunburstEnhanced({
       id: string
       name: string
       type?: string
-      data: Array<{ name: string; y: number; drilldown?: string; color?: string }>
+      data: Array<{
+        name: string
+        y: number
+        drilldown?: string
+        color?: string
+      }>
     }> = []
 
     // Sort institutions by total value for consistent color assignment
     const sortedInstitutions = Array.from(institutionMap.entries()).sort(
-      (a, b) => b[1].totalValue - a[1].totalValue
+      (a, b) => b[1].totalValue - a[1].totalValue,
     )
 
     sortedInstitutions.forEach(([instKey, inst], colorIndex) => {
@@ -747,12 +759,15 @@ export function HoldingsSunburstEnhanced({
       })
 
       // Level 2: Accounts within this institution
-      const accountsData: Array<{ name: string; y: number; drilldown: string }> =
-        []
+      const accountsData: Array<{
+        name: string
+        y: number
+        drilldown: string
+      }> = []
 
       // Sort accounts by value
       const sortedAccounts = Array.from(inst.accounts.entries()).sort(
-        (a, b) => b[1].totalValue - a[1].totalValue
+        (a, b) => b[1].totalValue - a[1].totalValue,
       )
 
       sortedAccounts.forEach(([acctId, acct]) => {
@@ -853,7 +868,7 @@ export function HoldingsSunburstEnhanced({
               rootNode === "" || rootNode === "portfolio" ? null : rootNode
             // Only update if different to avoid infinite loops
             setDrilledNodeId((prev: string | null) =>
-              prev !== newDrilledId ? newDrilledId : prev
+              prev !== newDrilledId ? newDrilledId : prev,
             )
           }
         },
@@ -1277,7 +1292,10 @@ export function HoldingsSunburstEnhanced({
   if (!isClient || !modulesLoaded) {
     return (
       <Card className="pb-4 pt-6">
-        <div className="flex items-center justify-center" style={{ height: responsiveHeight }}>
+        <div
+          className="flex items-center justify-center"
+          style={{ height: responsiveHeight }}
+        >
           <div className="text-sm text-gray-500">Loading chart...</div>
         </div>
       </Card>
@@ -1288,7 +1306,7 @@ export function HoldingsSunburstEnhanced({
     <Card className="pb-4 pt-6">
       <div className="flex items-center justify-between">
         <h3 className="text-base font-medium text-gray-900 dark:text-gray-50">
-          Holdings hierarchy
+          Holdings
         </h3>
         <div className="flex items-center gap-2">
           {/* Account Selector */}
@@ -1457,7 +1475,11 @@ export function HoldingsSunburstEnhanced({
               {chartType === "sunburst" ? (
                 <RiDonutChartLine className="size-4" aria-hidden="true" />
               ) : (
-                <Icon icon="carbon:chart-sunburst" className="size-4" aria-hidden="true" />
+                <Icon
+                  icon="carbon:chart-sunburst"
+                  className="size-4"
+                  aria-hidden="true"
+                />
               )}
             </Button>
           </Tooltip>
@@ -1470,7 +1492,11 @@ export function HoldingsSunburstEnhanced({
             >
               <DropdownMenuTrigger asChild>
                 <Button variant="secondary" className="h-9">
-                  <Icon icon="carbon:download" className="size-4" aria-hidden="true" />
+                  <Icon
+                    icon="carbon:download"
+                    className="size-4"
+                    aria-hidden="true"
+                  />
                 </Button>
               </DropdownMenuTrigger>
             </Tooltip>
@@ -1518,7 +1544,10 @@ export function HoldingsSunburstEnhanced({
 
       <div className="mt-4">
         {filteredHoldings.length === 0 ? (
-          <div className="flex items-center justify-center rounded-lg border border-dashed border-gray-300 dark:border-gray-700" style={{ height: responsiveHeight }}>
+          <div
+            className="flex items-center justify-center rounded-lg border border-dashed border-gray-300 dark:border-gray-700"
+            style={{ height: responsiveHeight }}
+          >
             <div className="text-center">
               <p className="text-sm font-medium text-gray-900 dark:text-gray-100">
                 No holdings found
@@ -1564,7 +1593,8 @@ export function HoldingsSunburstEnhanced({
           <ul className="flex flex-wrap gap-x-10 gap-y-4 text-sm">
             {topGroups.map(([name, value], index) => {
               // Only show color blocks at root level where colors match the chart
-              const isAtRootLevel = !drilledNodeId || drilledNodeId === "portfolio"
+              const isAtRootLevel =
+                !drilledNodeId || drilledNodeId === "portfolio"
 
               return (
                 <li key={`${name}-${index}`}>

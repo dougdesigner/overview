@@ -104,8 +104,8 @@ function AccountsContent() {
   } = usePortfolioStore()
 
   // Debug logging
-  console.log('[Accounts] accounts:', accounts.length, accounts)
-  console.log('[Accounts] holdings:', holdings.length)
+  console.log("[Accounts] accounts:", accounts.length, accounts)
+  console.log("[Accounts] holdings:", holdings.length)
 
   // Handle adding or editing account from the drawer
   const handleAccountSubmit = (formData: AccountFormData) => {
@@ -309,7 +309,11 @@ function AccountsContent() {
           className="hidden items-center gap-2 text-base sm:flex sm:text-sm"
         >
           Add account
-          <Icon icon="carbon:add" className="-mr-0.5 size-5 shrink-0" aria-hidden="true" />
+          <Icon
+            icon="carbon:add"
+            className="-mr-0.5 size-5 shrink-0"
+            aria-hidden="true"
+          />
         </Button>
         <AccountDrawer
           open={isOpen}
@@ -334,60 +338,60 @@ function AccountsContent() {
         <>
           {/* Bottom gradient - fades content behind filter (mobile only) */}
           <div
-            className={`pointer-events-none fixed inset-x-0 bottom-0 z-40 h-40 bg-gradient-to-t from-white via-white/80 to-transparent transition-opacity duration-300 sm:hidden dark:from-gray-950 dark:via-gray-950/80 ${
+            className={`pointer-events-none fixed inset-x-0 bottom-0 z-40 h-40 bg-gradient-to-t from-white via-white/80 to-transparent transition-opacity duration-300 dark:from-gray-950 dark:via-gray-950/80 sm:hidden ${
               isFilterSticky ? "opacity-100" : "opacity-0"
             }`}
           />
           <div
-            className={`fixed inset-x-0 bottom-20 z-50 mx-2 transition-[transform,opacity] duration-300 ease-out sm:left-1/2 sm:right-auto sm:mx-0 sm:w-full sm:max-w-2xl sm:-translate-x-1/2 sm:bottom-6 sm:px-6 ${
+            className={`fixed inset-x-0 bottom-20 z-50 mx-2 transition-[transform,opacity] duration-300 ease-out sm:bottom-6 sm:left-1/2 sm:right-auto sm:mx-0 sm:w-full sm:max-w-2xl sm:-translate-x-1/2 sm:px-6 ${
               isFilterSticky
                 ? "translate-y-0 opacity-100"
                 : "pointer-events-none translate-y-4 opacity-0"
             }`}
           >
-          <div className="flex items-center justify-between rounded-lg border border-gray-200 bg-white/95 px-4 py-3 shadow-lg backdrop-blur-sm dark:border-gray-800 dark:bg-gray-950/95">
-            <div className="text-left">
-              <div className="text-base font-medium text-gray-900 dark:text-gray-50">
-                {formatCurrency(filteredTotalValue)}
+            <div className="flex items-center justify-between rounded-lg border border-gray-200 bg-white/95 px-4 py-3 shadow-lg backdrop-blur-sm dark:border-gray-800 dark:bg-gray-950/95">
+              <div className="text-left">
+                <div className="text-base font-medium text-gray-900 dark:text-gray-50">
+                  {formatCurrency(filteredTotalValue)}
+                </div>
+                <div className="text-sm text-gray-500 dark:text-gray-400">
+                  {filteredAccounts.length}{" "}
+                  {filteredAccounts.length === 1 ? "account" : "accounts"}
+                </div>
               </div>
-              <div className="text-sm text-gray-500 dark:text-gray-400">
-                {filteredAccounts.length}{" "}
-                {filteredAccounts.length === 1 ? "account" : "accounts"}
-              </div>
-            </div>
-            <div className="flex items-center gap-2">
-              {selectedInstitution !== "all" && (
-                <Badge
-                  variant="default"
-                  className="flex h-9 items-center gap-1.5 px-3 text-sm"
-                >
-                  <InstitutionLogo
-                    institution={selectedInstitution}
-                    className="size-5"
-                  />
-                  <span className="hidden sm:inline">
-                    {institutionLabels[selectedInstitution] ||
-                      selectedInstitution}
-                  </span>
-                  <button
-                    onClick={() => setSelectedInstitution("all")}
-                    className="rounded-full p-0.5 hover:bg-blue-200 dark:hover:bg-blue-500/30"
+              <div className="flex items-center gap-2">
+                {selectedInstitution !== "all" && (
+                  <Badge
+                    variant="default"
+                    className="flex h-9 items-center gap-1.5 px-3 text-sm"
                   >
-                    <Icon icon="carbon:close" className="size-4" />
-                  </button>
-                </Badge>
-              )}
-              <InstitutionFilterDropdown
-                institutions={uniqueInstitutions.map((inst) => inst.id)}
-                selectedInstitution={selectedInstitution}
-                onInstitutionChange={setSelectedInstitution}
-                totalCount={uniqueInstitutions.length}
-                hideTextOnMobile
-                compactWhenActive
-              />
+                    <InstitutionLogo
+                      institution={selectedInstitution}
+                      className="size-5"
+                    />
+                    <span className="hidden sm:inline">
+                      {institutionLabels[selectedInstitution] ||
+                        selectedInstitution}
+                    </span>
+                    <button
+                      onClick={() => setSelectedInstitution("all")}
+                      className="rounded-full p-0.5 hover:bg-blue-200 dark:hover:bg-blue-500/30"
+                    >
+                      <Icon icon="carbon:close" className="size-4" />
+                    </button>
+                  </Badge>
+                )}
+                <InstitutionFilterDropdown
+                  institutions={uniqueInstitutions.map((inst) => inst.id)}
+                  selectedInstitution={selectedInstitution}
+                  onInstitutionChange={setSelectedInstitution}
+                  totalCount={uniqueInstitutions.length}
+                  hideTextOnMobile
+                  compactWhenActive
+                />
+              </div>
             </div>
           </div>
-        </div>
         </>
       )}
 
@@ -414,7 +418,8 @@ function AccountsContent() {
                   className="size-5"
                 />
                 <span className="hidden sm:inline">
-                  {institutionLabels[selectedInstitution] || selectedInstitution}
+                  {institutionLabels[selectedInstitution] ||
+                    selectedInstitution}
                 </span>
                 <button
                   onClick={() => setSelectedInstitution("all")}
@@ -449,7 +454,7 @@ function AccountsContent() {
                       ?.scrollIntoView({ behavior: "smooth" })
                   }}
                 >
-                  Account flow
+                  Accounts
                 </p>
                 <div className="flex items-center gap-2">
                   {/* Chart Type Toggle */}
@@ -705,7 +710,11 @@ function AccountsContent() {
                     // Get unique institution labels for the first level (from filtered accounts)
                     // Apply getInstitutionDisplayLabel to ensure proper formatting (converts "capital-one" to "Capital One")
                     const sankeyInstitutions = [
-                      ...new Set(filteredAccounts.map((a) => getInstitutionDisplayLabel(a.institution))),
+                      ...new Set(
+                        filteredAccounts.map((a) =>
+                          getInstitutionDisplayLabel(a.institution),
+                        ),
+                      ),
                     ]
                     // Already display names with proper formatting
                     const institutionDisplayNames = sankeyInstitutions
@@ -758,10 +767,19 @@ function AccountsContent() {
                     // Calculate institution totals for legend
                     const institutionTotals = sankeyInstitutions
                       .map((instLabel) => ({
-                        key: filteredAccounts.find((a) => getInstitutionDisplayLabel(a.institution) === instLabel)?.institution || instLabel,
+                        key:
+                          filteredAccounts.find(
+                            (a) =>
+                              getInstitutionDisplayLabel(a.institution) ===
+                              instLabel,
+                          )?.institution || instLabel,
                         label: instLabel,
                         value: filteredAccounts
-                          .filter((acc) => getInstitutionDisplayLabel(acc.institution) === instLabel)
+                          .filter(
+                            (acc) =>
+                              getInstitutionDisplayLabel(acc.institution) ===
+                              instLabel,
+                          )
                           .reduce((sum, acc) => sum + acc.totalValue, 0),
                       }))
                       .sort((a, b) => b.value - a.value)
@@ -807,7 +825,12 @@ function AccountsContent() {
                               // Portfolio Total to Institutions - aggregate by institution label
                               ...sankeyInstitutions.map((instLabel) => {
                                 const instTotal = filteredAccounts
-                                  .filter((acc) => getInstitutionDisplayLabel(acc.institution) === instLabel)
+                                  .filter(
+                                    (acc) =>
+                                      getInstitutionDisplayLabel(
+                                        acc.institution,
+                                      ) === instLabel,
+                                  )
                                   .reduce((sum, acc) => sum + acc.totalValue, 0)
                                 return {
                                   source: "Portfolio Total",
@@ -817,7 +840,9 @@ function AccountsContent() {
                               }),
                               // Institutions to Accounts
                               ...filteredAccounts.map((account) => ({
-                                source: getInstitutionDisplayLabel(account.institution),
+                                source: getInstitutionDisplayLabel(
+                                  account.institution,
+                                ),
                                 target: account.name,
                                 value: account.totalValue,
                               })),
