@@ -64,9 +64,19 @@ const BENCHMARKS: Record<BenchmarkType, BenchmarkProfile> = {
   },
 }
 
-// Mini donut chart for modal previews - uses asset class colors
-function MiniDonutPreview({ allocation }: { allocation: BenchmarkAllocation }) {
-  const data = [
+// Stable formatter for mini donuts
+const percentFormatter = (v: number) => `${v}%`
+
+// Static colors array for mini donuts
+const MINI_DONUT_COLORS = ["blue", "cyan", "amber", "gray"] as const
+
+// Mini donut chart for modal previews - memoized to prevent re-renders on selection change
+const MiniDonutPreview = React.memo(function MiniDonutPreview({
+  allocation
+}: {
+  allocation: BenchmarkAllocation
+}) {
+  const data = React.useMemo(() => [
     {
       name: "U.S. Stocks",
       amount: allocation.usStocks,
@@ -91,15 +101,15 @@ function MiniDonutPreview({ allocation }: { allocation: BenchmarkAllocation }) {
       share: `${allocation.other}%`,
       borderColor: getAssetClassBorderColor("Other"),
     },
-  ].filter((d) => d.amount > 0)
+  ].filter((d) => d.amount > 0), [allocation.usStocks, allocation.nonUsStocks, allocation.fixedIncome, allocation.other])
 
   return (
     <div className="h-24">
       <HighchartsDonutChart
         data={data}
         totalValue={100}
-        valueFormatter={(v) => `${v}%`}
-        colors={["blue", "cyan", "amber", "gray"]}
+        valueFormatter={percentFormatter}
+        colors={MINI_DONUT_COLORS as unknown as string[]}
         height={96}
         showControls={false}
         showTitle={false}
@@ -107,7 +117,7 @@ function MiniDonutPreview({ allocation }: { allocation: BenchmarkAllocation }) {
       />
     </div>
   )
-}
+})
 
 interface BenchmarkCardProps {
   className?: string
@@ -250,6 +260,7 @@ export function BenchmarkCard({
 
         {/* Mobile: Bottom Sheet / Desktop: Side Drawer */}
         <Dialog.Content
+          onOpenAutoFocus={(e) => e.preventDefault()}
           className={cx(
             "fixed z-50 flex flex-col overflow-hidden border border-gray-200 bg-white shadow-lg dark:border-gray-800 dark:bg-gray-950",
             // Mobile: Bottom sheet
@@ -273,7 +284,7 @@ export function BenchmarkCard({
           </div>
 
           {/* Scrollable Body */}
-          <div className="flex-1 overflow-y-auto p-4">
+          <div className="flex-1 overflow-y-auto overscroll-contain p-4">
             <p className="mb-4 text-sm text-gray-500">
               Choose a risk profile that aligns with your investment strategy.
               This will be used as a baseline for portfolio analysis.
@@ -284,6 +295,7 @@ export function BenchmarkCard({
                 ([key, benchmark]) => (
                   <button
                     key={key}
+                    type="button"
                     onClick={() => setTempSelection(key)}
                     className={cx(
                       "rounded-lg border-2 p-4 text-left transition-all hover:border-blue-500",
