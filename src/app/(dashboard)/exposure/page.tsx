@@ -129,7 +129,7 @@ export default function ExposurePage() {
 
     observer.observe(filterElement)
     return () => observer.disconnect()
-  }, [accounts.length, holdings.length])
+  }, [accounts.length, holdings.length, holdingsLoading])
 
   // Format currency
   const formatCurrency = (value: number) => {

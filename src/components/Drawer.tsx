@@ -1,7 +1,7 @@
 // Tremor Drawer [v0.0.1]
 
-import * as DrawerPrimitives from "@radix-ui/react-dialog"
 import { Icon } from "@iconify/react"
+import * as DrawerPrimitives from "@radix-ui/react-dialog"
 import * as React from "react"
 
 import { cx, focusRing } from "@/lib/utils"
@@ -50,7 +50,7 @@ const DrawerOverlay = React.forwardRef<
         // base
         "fixed inset-0 z-50 overflow-y-auto",
         // background color
-        "bg-black/30 backdrop-blur-sm",
+        "bg-white/30 backdrop-blur-sm dark:bg-black/50",
         // transition
         "data-[state=closed]:animate-hide data-[state=open]:animate-dialogOverlayShow",
         className,
@@ -172,7 +172,7 @@ const DrawerFooter = ({
   return (
     <div
       className={cx(
-        "flex flex-col-reverse border-t border-gray-200 pt-4 sm:flex-row sm:justify-end sm:space-x-2 dark:border-gray-900",
+        "flex flex-col-reverse border-t border-gray-200 pt-4 dark:border-gray-900 sm:flex-row sm:justify-end sm:space-x-2",
         className,
       )}
       {...props}

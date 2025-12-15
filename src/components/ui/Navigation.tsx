@@ -105,7 +105,7 @@ function Navigation() {
             >
               <Link href="/accounts">Accounts</Link>
             </TabNavigationLink>
-            {getOnboardingDot("/accounts") && (
+            {mounted && getOnboardingDot("/accounts") && (
               <span className="absolute -right-0.5 -top-0.5 size-2 rounded-full bg-blue-500" />
             )}
           </div>
@@ -117,7 +117,7 @@ function Navigation() {
             >
               <Link href="/holdings">Holdings</Link>
             </TabNavigationLink>
-            {getOnboardingDot("/holdings") && (
+            {mounted && getOnboardingDot("/holdings") && (
               <span className="absolute -right-0.5 -top-0.5 size-2 rounded-full bg-blue-500" />
             )}
           </div>
@@ -129,7 +129,7 @@ function Navigation() {
             >
               <Link href="/exposure">Stocks</Link>
             </TabNavigationLink>
-            {getOnboardingDot("/exposure") && (
+            {mounted && getOnboardingDot("/exposure") && (
               <span className="absolute -right-0.5 -top-0.5 size-2 rounded-full bg-blue-500" />
             )}
           </div>
@@ -172,7 +172,7 @@ function Navigation() {
             <Icon icon="carbon:sankey-diagram-alt" className="size-5" />
             <span>Accounts</span>
           </Link>
-          {getOnboardingDot("/accounts") && (
+          {mounted && getOnboardingDot("/accounts") && (
             <span className="absolute right-1 top-1 size-2 rounded-full bg-blue-500" />
           )}
         </div>
@@ -190,7 +190,7 @@ function Navigation() {
             <Icon icon="carbon:chart-ring" className="size-5" />
             <span>Holdings</span>
           </Link>
-          {getOnboardingDot("/holdings") && (
+          {mounted && getOnboardingDot("/holdings") && (
             <span className="absolute right-1 top-1 size-2 rounded-full bg-blue-500" />
           )}
         </div>
@@ -208,7 +208,7 @@ function Navigation() {
             <Icon icon="carbon:chart-treemap" className="size-5" />
             <span>Stocks</span>
           </Link>
-          {getOnboardingDot("/exposure") && (
+          {mounted && getOnboardingDot("/exposure") && (
             <span className="absolute right-1 top-1 size-2 rounded-full bg-blue-500" />
           )}
         </div>
