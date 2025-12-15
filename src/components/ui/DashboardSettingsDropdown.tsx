@@ -23,8 +23,8 @@ import {
 } from "@/components/ui/data-table-exposure/types"
 import { InstitutionLogo } from "@/components/ui/InstitutionLogo"
 import { cx } from "@/lib/utils"
-import * as Dialog from "@radix-ui/react-dialog"
 import { Icon } from "@iconify/react"
+import * as Dialog from "@radix-ui/react-dialog"
 import { useEffect, useState } from "react"
 
 interface DashboardSettingsDropdownProps {
@@ -114,7 +114,8 @@ export function DashboardSettingsDropdown({
     !selectedAccounts || selectedAccounts.includes("all")
       ? "All"
       : selectedAccounts.length === 1
-        ? accounts?.find((a) => a.id === selectedAccounts[0])?.name || "1 account"
+        ? accounts?.find((a) => a.id === selectedAccounts[0])?.name ||
+          "1 account"
         : `${selectedAccounts.length} accounts`
 
   // Handle account toggle for multi-select
@@ -123,7 +124,7 @@ export function DashboardSettingsDropdown({
 
     const currentAccounts = selectedAccounts?.includes("all")
       ? []
-      : (selectedAccounts || [])
+      : selectedAccounts || []
 
     let newAccounts: string[]
 
@@ -181,10 +182,10 @@ export function DashboardSettingsDropdown({
 
         <Dialog.Portal>
           {/* Overlay */}
-          <Dialog.Overlay className="fixed inset-0 z-50 bg-black/50 data-[state=open]:animate-dialogOverlayShow" />
+          <Dialog.Overlay className="fixed inset-0 z-50 bg-black/50 bg-white/50 data-[state=open]:animate-dialogOverlayShow" />
 
           {/* Bottom Sheet Content */}
-          <Dialog.Content className="fixed inset-x-0 bottom-0 z-50 mx-2 mb-2 max-h-[85vh] overflow-hidden rounded-xl border border-gray-200 bg-white shadow-lg data-[state=open]:animate-bottomSheetSlideUp data-[state=closed]:animate-bottomSheetSlideDown dark:border-gray-800 dark:bg-gray-950">
+          <Dialog.Content className="fixed inset-x-0 bottom-0 z-50 mx-2 mb-2 max-h-[85vh] overflow-hidden rounded-xl border border-gray-200 bg-white shadow-lg data-[state=closed]:animate-bottomSheetSlideDown data-[state=open]:animate-bottomSheetSlideUp dark:border-gray-800 dark:bg-gray-950">
             {/* Header */}
             <div className="flex items-center justify-between border-b border-gray-200 px-4 py-3 dark:border-gray-800">
               <Dialog.Title className="text-base font-semibold text-gray-900 dark:text-gray-50">
@@ -215,7 +216,10 @@ export function DashboardSettingsDropdown({
                         All Accounts
                       </span>
                       {(selectedAccounts?.includes("all") ?? true) && (
-                        <Icon icon="carbon:checkmark" className="size-5 text-blue-600 dark:text-blue-400" />
+                        <Icon
+                          icon="carbon:checkmark"
+                          className="size-5 text-blue-600 dark:text-blue-400"
+                        />
                       )}
                     </button>
 
@@ -240,7 +244,10 @@ export function DashboardSettingsDropdown({
                             {account.name}
                           </span>
                           {isChecked && (
-                            <Icon icon="carbon:checkmark" className="size-5 text-blue-600 dark:text-blue-400" />
+                            <Icon
+                              icon="carbon:checkmark"
+                              className="size-5 text-blue-600 dark:text-blue-400"
+                            />
                           )}
                         </button>
                       )
@@ -273,7 +280,10 @@ export function DashboardSettingsDropdown({
                         {option.label}
                       </span>
                       {holdingsFilter === option.value && (
-                        <Icon icon="carbon:checkmark" className="size-5 text-blue-600 dark:text-blue-400" />
+                        <Icon
+                          icon="carbon:checkmark"
+                          className="size-5 text-blue-600 dark:text-blue-400"
+                        />
                       )}
                     </button>
                   ))}
@@ -303,7 +313,10 @@ export function DashboardSettingsDropdown({
                         {option.label}
                       </span>
                       {displayValue === option.value && (
-                        <Icon icon="carbon:checkmark" className="size-5 text-blue-600 dark:text-blue-400" />
+                        <Icon
+                          icon="carbon:checkmark"
+                          className="size-5 text-blue-600 dark:text-blue-400"
+                        />
                       )}
                     </button>
                   ))}
@@ -335,7 +348,10 @@ export function DashboardSettingsDropdown({
                       )}
                     >
                       {combineGoogleShares && (
-                        <Icon icon="carbon:checkmark" className="size-3.5 text-white" />
+                        <Icon
+                          icon="carbon:checkmark"
+                          className="size-3.5 text-white"
+                        />
                       )}
                     </div>
                   </button>
@@ -357,7 +373,10 @@ export function DashboardSettingsDropdown({
                       )}
                     >
                       {showOtherAssets && (
-                        <Icon icon="carbon:checkmark" className="size-3.5 text-white" />
+                        <Icon
+                          icon="carbon:checkmark"
+                          className="size-3.5 text-white"
+                        />
                       )}
                     </div>
                   </button>
@@ -539,7 +558,11 @@ export function DashboardSettingsDropdown({
               onClick={onReset}
               className="text-gray-500 dark:text-gray-400"
             >
-              <Icon icon="carbon:filter-reset" className="mr-2 size-4" aria-hidden="true" />
+              <Icon
+                icon="carbon:filter-reset"
+                className="mr-2 size-4"
+                aria-hidden="true"
+              />
               Reset All
             </DropdownMenuItem>
           </>

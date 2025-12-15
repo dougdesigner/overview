@@ -50,7 +50,7 @@ const DrawerOverlay = React.forwardRef<
         // base
         "fixed inset-0 z-50 overflow-y-auto",
         // background color
-        "bg-white/30 backdrop-blur-sm dark:bg-black/50",
+        "bg-white/50 backdrop-blur-sm dark:bg-black/50",
         // transition
         "data-[state=closed]:animate-hide data-[state=open]:animate-dialogOverlayShow",
         className,
