@@ -250,6 +250,19 @@ const AssetAllocationCard = React.forwardRef<
     const firstTabWithData = allocationData.find(category => category.data.length > 0)?.name
     const defaultTabValue = defaultTab || firstTabWithData || allocationData[0]?.name
 
+    // Track current tab for animation reset on tab change
+    const [currentTab, setCurrentTab] = React.useState(defaultTabValue)
+
+    // Animation state - starts false, becomes true after mount/tab change to trigger transition
+    const [isAnimated, setIsAnimated] = React.useState(false)
+
+    React.useEffect(() => {
+      // Reset animation state, then trigger after small delay
+      setIsAnimated(false)
+      const timer = setTimeout(() => setIsAnimated(true), 50)
+      return () => clearTimeout(timer)
+    }, [currentTab])
+
     const currencyFormatter = (number: number) => {
       const decimals = number % 1 === 0 ? 0 : 2
       return "$" + Intl.NumberFormat("us", {
@@ -289,7 +302,7 @@ const AssetAllocationCard = React.forwardRef<
             {description}
           </p>
         </div>
-        <Tabs defaultValue={defaultTabValue}>
+        <Tabs value={currentTab} onValueChange={setCurrentTab}>
           <TabsList className="px-6 pt-6">
             {allocationData.filter(category => category.data.length > 0).map((category) => (
               <TabsTrigger key={category.name} value={category.name}>
@@ -401,10 +414,10 @@ const AssetAllocationCard = React.forwardRef<
                       <div className="mt-2 h-1.5 w-full overflow-hidden rounded-full bg-gray-200 dark:bg-gray-800">
                         <div
                           className={cx(
-                            "h-full rounded-full",
+                            "h-full rounded-full transition-all duration-700 ease-out",
                             item.borderColor.replace(/border/g, "bg"),
                           )}
-                          style={{ width: item.share }}
+                          style={{ width: isAnimated ? item.share : "0%" }}
                         />
                       </div>
                     </li>
