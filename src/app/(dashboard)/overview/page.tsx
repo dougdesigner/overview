@@ -210,7 +210,7 @@ export default function OverviewPage() {
               defaultTab={holdings.length === 0 ? "Accounts" : "Asset Classes"}
               data={[
                 {
-                  name: "Asset Classes",
+                  name: "Assets",
                   data: sortedAssetClasses.map((ac) => ({
                     name: ac.name,
                     amount: ac.value,
@@ -318,6 +318,7 @@ export default function OverviewPage() {
                     "amber",
                     "emerald",
                     "violet",
+                    "rose",
                   ] as (
                     | "blue"
                     | "gray"
@@ -325,6 +326,7 @@ export default function OverviewPage() {
                     | "amber"
                     | "emerald"
                     | "violet"
+                    | "rose"
                   )[],
                 },
                 {
@@ -335,7 +337,9 @@ export default function OverviewPage() {
                     let stockExposures = exposures.filter((e) => !e.assetClass) // Exclude non-stock entries
 
                     // Combine GOOG and GOOGL into single entry (matches Stocks page default)
-                    const googl = stockExposures.find((e) => e.ticker === "GOOGL")
+                    const googl = stockExposures.find(
+                      (e) => e.ticker === "GOOGL",
+                    )
                     const goog = stockExposures.find((e) => e.ticker === "GOOG")
                     if (googl && goog) {
                       const combined = {
@@ -347,7 +351,8 @@ export default function OverviewPage() {
                         directValue: googl.directValue + goog.directValue,
                         etfValue: googl.etfValue + goog.etfValue,
                         totalValue: googl.totalValue + goog.totalValue,
-                        percentOfPortfolio: googl.percentOfPortfolio + goog.percentOfPortfolio,
+                        percentOfPortfolio:
+                          googl.percentOfPortfolio + goog.percentOfPortfolio,
                       }
                       stockExposures = stockExposures
                         .filter((e) => e.ticker !== "GOOG")

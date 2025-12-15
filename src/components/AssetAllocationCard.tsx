@@ -315,7 +315,7 @@ const AssetAllocationCard = React.forwardRef<
           </p>
         </div>
         <Tabs value={currentTab} onValueChange={setCurrentTab}>
-          <TabsList className="px-6 pt-6">
+          <TabsList className="scrollbar-hide overflow-x-auto scroll-smooth px-6 pt-6">
             {allocationData
               .filter((category) => category.data.length > 0)
               .map((category) => (
@@ -352,7 +352,8 @@ const AssetAllocationCard = React.forwardRef<
                         <li key={`${item.name}-${index}`} className="py-3">
                           <div className="flex items-center justify-between space-x-6">
                             <div className="flex items-center space-x-2.5 truncate">
-                              {(category.name === "Holdings" || category.name === "Stocks") &&
+                              {(category.name === "Holdings" ||
+                                category.name === "Stocks") &&
                               item.type !== "cash" &&
                               item.type !== "other" ? (
                                 // Special styling for stock/fund tickers in Holdings/Stocks tab
