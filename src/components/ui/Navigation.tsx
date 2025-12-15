@@ -6,7 +6,7 @@ import { cx } from "@/lib/utils"
 import { Icon } from "@iconify/react"
 import * as Dialog from "@radix-ui/react-dialog"
 import { useRouter } from "next/navigation"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 
 // Custom gradient logo icon (donut chart)
 function GradientLogoIcon({ className }: { className?: string }) {
@@ -39,7 +39,13 @@ function Navigation() {
   const pathname = usePathname()
   const router = useRouter()
   const [isAddOpen, setIsAddOpen] = useState(false)
+  const [mounted, setMounted] = useState(false)
   const { isDemoMode, accounts, holdings, hasViewedStocksPage } = usePortfolioStore()
+
+  // Prevent hydration mismatch by only showing demo badge after mount
+  useEffect(() => {
+    setMounted(true)
+  }, [])
 
   // Determine which tab should show an onboarding dot
   const getOnboardingDot = (path: string) => {
@@ -75,7 +81,7 @@ function Navigation() {
         <div className="flex shrink-0 items-center gap-2">
           <GradientLogoIcon className="size-6" />
           <span className="text-lg font-semibold">Overview</span>
-          {isDemoMode && (
+          {mounted && isDemoMode && (
             <span className="rounded bg-amber-100 px-1.5 py-0.5 text-[10px] font-medium text-amber-700 dark:bg-amber-900/30 dark:text-amber-400">
               Demo
             </span>

@@ -331,8 +331,38 @@ export function usePortfolioStore() {
   const [error, setError] = useState<string | null>(null)
   const [hasInitialized, setHasInitialized] = useState(false)
   const [dataVersion, setDataVersion] = useState(0)
-  const [isDemoMode, setDemoMode] = useState(false)
+  const [isDemoMode, setDemoModeState] = useState(() => {
+    if (typeof window !== 'undefined') {
+      return localStorage.getItem('portfolio_demo_mode') === 'true'
+    }
+    return false
+  })
   const [hasViewedStocksPage, setHasViewedStocksPage] = useState(false)
+
+  // Wrapper for setDemoMode that persists to localStorage
+  const setDemoMode = useCallback((enabled: boolean) => {
+    setDemoModeState(enabled)
+    localStorage.setItem('portfolio_demo_mode', String(enabled))
+    // Dispatch storage event to same window (for same-tab sync across components)
+    window.dispatchEvent(new StorageEvent('storage', {
+      key: 'portfolio_demo_mode',
+      newValue: String(enabled),
+    }))
+    // Increment dataVersion to trigger re-renders across components
+    setDataVersion(prev => prev + 1)
+  }, [])
+
+  // Listen for demo mode changes from other tabs/components
+  useEffect(() => {
+    const handleStorage = (e: StorageEvent) => {
+      if (e.key === 'portfolio_demo_mode') {
+        setDemoModeState(e.newValue === 'true')
+        setDataVersion(prev => prev + 1)
+      }
+    }
+    window.addEventListener('storage', handleStorage)
+    return () => window.removeEventListener('storage', handleStorage)
+  }, [])
 
   // Load data from localStorage on mount
   useEffect(() => {

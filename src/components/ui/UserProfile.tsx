@@ -25,13 +25,28 @@ import {
   RiLockLine,
 } from "@remixicon/react"
 import { useTheme } from "next-themes"
+import { useRouter } from "next/navigation"
 import React from "react"
 
 function DropdownUserProfile() {
   const [mounted, setMounted] = React.useState(false)
   const { theme, setTheme } = useTheme()
+  const router = useRouter()
   const { exportPortfolioData, importPortfolioData, isDemoMode, setDemoMode } = usePortfolioStore()
   const fileInputRef = React.useRef<HTMLInputElement>(null)
+
+  // Handle demo mode toggle
+  const handleDemoModeToggle = () => {
+    const newDemoMode = !isDemoMode
+    setDemoMode(newDemoMode)
+    // Force full page reload to show loading state and refresh all data
+    if (newDemoMode) {
+      window.location.href = '/overview'
+    } else {
+      // When exiting demo mode, also reload to refresh data
+      window.location.reload()
+    }
+  }
 
   React.useEffect(() => {
     setMounted(true)
@@ -156,7 +171,7 @@ function DropdownUserProfile() {
               />
               Import Portfolio
             </DropdownMenuItem>
-            <DropdownMenuItem onClick={() => setDemoMode(!isDemoMode)}>
+            <DropdownMenuItem onClick={handleDemoModeToggle}>
               {isDemoMode ? (
                 <RiEyeOffLine
                   className="mr-2 size-4 shrink-0"
