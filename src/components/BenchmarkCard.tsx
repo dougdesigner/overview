@@ -241,17 +241,27 @@ export function BenchmarkCard({
       }))
   }
 
-  // Bottom Sheet Selection
+  // Responsive Selection Modal: Bottom sheet on mobile, side drawer on desktop
   const SelectionSheet = () => (
     <Dialog.Root open={isModalOpen} onOpenChange={setIsModalOpen}>
       <Dialog.Portal>
         {/* Overlay */}
         <Dialog.Overlay className="fixed inset-0 z-50 bg-black/50 data-[state=open]:animate-dialogOverlayShow" />
 
-        {/* Bottom Sheet Content */}
-        <Dialog.Content className="fixed inset-x-0 bottom-0 z-50 mx-2 mb-2 max-h-[85vh] overflow-hidden rounded-xl border border-gray-200 bg-white shadow-lg data-[state=open]:animate-bottomSheetSlideUp data-[state=closed]:animate-bottomSheetSlideDown dark:border-gray-800 dark:bg-gray-950">
+        {/* Mobile: Bottom Sheet / Desktop: Side Drawer */}
+        <Dialog.Content
+          className={cx(
+            "fixed z-50 flex flex-col overflow-hidden border border-gray-200 bg-white shadow-lg dark:border-gray-800 dark:bg-gray-950",
+            // Mobile: Bottom sheet
+            "inset-x-0 bottom-0 mx-2 mb-2 max-h-[85vh] rounded-xl",
+            "data-[state=open]:animate-bottomSheetSlideUp data-[state=closed]:animate-bottomSheetSlideDown",
+            // Desktop (md+): Side drawer from right
+            "md:inset-y-0 md:bottom-auto md:left-auto md:right-0 md:mx-0 md:mb-0 md:h-full md:max-h-full md:w-[480px] md:rounded-none md:rounded-l-xl",
+            "md:data-[state=open]:animate-drawerSlideLeftAndFade md:data-[state=closed]:animate-drawerSlideRightAndFade"
+          )}
+        >
           {/* Header */}
-          <div className="flex items-center justify-between border-b border-gray-200 px-4 py-3 dark:border-gray-800">
+          <div className="flex shrink-0 items-center justify-between border-b border-gray-200 px-4 py-3 dark:border-gray-800">
             <Dialog.Title className="text-base font-semibold text-gray-900 dark:text-gray-50">
               Select benchmark
             </Dialog.Title>
@@ -263,13 +273,13 @@ export function BenchmarkCard({
           </div>
 
           {/* Scrollable Body */}
-          <div className="max-h-[calc(85vh-120px)] overflow-y-auto p-4">
+          <div className="flex-1 overflow-y-auto p-4">
             <p className="mb-4 text-sm text-gray-500">
               Choose a risk profile that aligns with your investment strategy.
               This will be used as a baseline for portfolio analysis.
             </p>
 
-            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="grid grid-cols-1 gap-4">
               {(Object.entries(BENCHMARKS) as [BenchmarkType, BenchmarkProfile][]).map(
                 ([key, benchmark]) => (
                   <button
@@ -351,7 +361,7 @@ export function BenchmarkCard({
           </div>
 
           {/* Footer */}
-          <div className="flex gap-2 border-t border-gray-200 p-4 dark:border-gray-800">
+          <div className="flex shrink-0 gap-2 border-t border-gray-200 p-4 dark:border-gray-800">
             <Dialog.Close asChild>
               <Button variant="secondary" className="flex-1">
                 Cancel

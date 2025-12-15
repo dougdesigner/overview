@@ -283,15 +283,12 @@ const AssetAllocationCard = React.forwardRef<
     }
 
     // Calculate total for a tab (uses custom totalValue if provided, else sums data)
-    const getTabTotal = React.useCallback(
-      (category: AssetAllocationData) => {
-        if (category.totalValue !== undefined) {
-          return category.totalValue
-        }
-        return category.data.reduce((sum, item) => sum + item.amount, 0)
-      },
-      [],
-    )
+    const getTabTotal = React.useCallback((category: AssetAllocationData) => {
+      if (category.totalValue !== undefined) {
+        return category.totalValue
+      }
+      return category.data.reduce((sum, item) => sum + item.amount, 0)
+    }, [])
 
     return (
       <Card
@@ -311,9 +308,9 @@ const AssetAllocationCard = React.forwardRef<
           >
             {title}
           </h3>
-          <p className="mt-1 text-sm/6 text-gray-500 dark:text-gray-500">
+          {/* <p className="mt-1 text-sm/6 text-gray-500 dark:text-gray-500">
             {description}
-          </p>
+          </p> */}
         </div>
         <Tabs value={currentTab} onValueChange={setCurrentTab}>
           <TabsList className="scrollbar-hide overflow-x-auto scroll-smooth px-6 pt-6">
