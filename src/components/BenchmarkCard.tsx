@@ -421,16 +421,24 @@ export function BenchmarkCard({
     <>
       <Card id={sectionId} className={cx("overflow-hidden p-0", className)}>
         <div className="flex items-center justify-between px-6 pt-6">
-          <h3
-            className="cursor-pointer text-base font-medium text-gray-900 transition-colors hover:text-blue-600 dark:text-gray-50 dark:hover:text-blue-400"
-            onClick={() => {
-              document
-                .getElementById(sectionId)
-                ?.scrollIntoView({ behavior: "smooth" })
-            }}
-          >
-            Benchmark Comparison
-          </h3>
+          <div>
+            <h3
+              className="cursor-pointer text-base font-medium text-gray-900 transition-colors hover:text-blue-600 dark:text-gray-50 dark:hover:text-blue-400"
+              onClick={() => {
+                document
+                  .getElementById(sectionId)
+                  ?.scrollIntoView({ behavior: "smooth" })
+              }}
+            >
+              Benchmark Comparison
+            </h3>
+            <p className="mt-1 text-sm text-gray-500">
+              vs. {benchmark.name} Portfolio
+            </p>
+          </div>
+          <Button variant="secondary" onClick={openModal} className="h-9">
+            <Icon icon="carbon:chart-bullet" className="size-4" aria-hidden="true" />
+          </Button>
         </div>
 
         <div className="grid grid-cols-1 gap-6 p-6 lg:grid-cols-2">
@@ -507,16 +515,6 @@ export function BenchmarkCard({
           </div>
         </div>
 
-        {/* Footer */}
-        <div className="flex items-center justify-between border-t border-gray-200 px-6 py-4 dark:border-gray-800">
-          <span className="text-sm text-gray-500">
-            Benchmark: {benchmark.name} Portfolio
-          </span>
-          <Button variant="secondary" onClick={openModal}>
-            <Icon icon="mdi:cog" className="mr-2 size-4" />
-            Change Benchmark
-          </Button>
-        </div>
       </Card>
       <SelectionSheet />
     </>
