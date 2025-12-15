@@ -9,7 +9,6 @@ import {
   DrawerHeader,
   DrawerTitle,
 } from "@/components/Drawer"
-import { Icon } from "@iconify/react"
 import {
   Select,
   SelectContent,
@@ -18,6 +17,7 @@ import {
   SelectValue,
 } from "@/components/Select"
 import { getInstitutionLogoUrl } from "@/lib/logoUtils"
+import { Icon } from "@iconify/react"
 import Image from "next/image"
 import React, { useCallback, useState } from "react"
 import { Input } from "../Input"
@@ -191,7 +191,11 @@ const FormField = ({
 )
 
 // Component for rendering institution item with logo
-function InstitutionItem({ institution }: { institution: { value: string; label: string } }) {
+function InstitutionItem({
+  institution,
+}: {
+  institution: { value: string; label: string }
+}) {
   const [logoError, setLogoError] = useState(false)
   const logoUrl = getInstitutionLogoUrl(institution.value)
 
@@ -203,7 +207,7 @@ function InstitutionItem({ institution }: { institution: { value: string; label:
           alt={institution.label}
           width={48}
           height={48}
-          className="size-6 rounded-full object-cover bg-white"
+          className="size-6 rounded-full bg-white object-cover"
           onError={() => setLogoError(true)}
         />
       ) : (
@@ -239,7 +243,7 @@ export function AccountDrawer({
 
   // Filter institutions by search
   const filteredInstitutions = institutions.filter((inst) =>
-    inst.label.toLowerCase().includes(institutionSearch.toLowerCase())
+    inst.label.toLowerCase().includes(institutionSearch.toLowerCase()),
   )
 
   // Handle institution select open/close
@@ -249,7 +253,6 @@ export function AccountDrawer({
       setInstitutionSearch("") // Clear search when closing
     }
   }, [])
-
 
   // Reset form when drawer opens/closes with new initial data
   React.useEffect(() => {
@@ -298,7 +301,10 @@ export function AccountDrawer({
           <DrawerTitle>
             <div className="flex items-center gap-4">
               <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-blue-100 dark:bg-blue-900/30">
-                <Icon icon="mdi:bank" className="h-5 w-5 text-blue-600 dark:text-blue-400" />
+                <Icon
+                  icon="mdi:bank"
+                  className="h-5 w-5 text-blue-600 dark:text-blue-400"
+                />
               </div>
               <div>
                 <div className="font-medium text-gray-900 dark:text-gray-50">
@@ -329,14 +335,18 @@ export function AccountDrawer({
                 <SelectValue placeholder="Select Institution">
                   {formData.institution && (
                     <InstitutionItem
-                      institution={institutions.find(i => i.value === formData.institution)!}
+                      institution={
+                        institutions.find(
+                          (i) => i.value === formData.institution,
+                        )!
+                      }
                     />
                   )}
                 </SelectValue>
               </SelectTrigger>
               <SelectContent>
                 {/* Search input */}
-                <div className="sticky top-0 z-10 border-b border-gray-200 bg-white p-2 dark:border-gray-800 dark:bg-gray-950">
+                <div className="sticky top-0 z-10 border-b border-gray-200 bg-white px-2 pb-6 pt-2 dark:border-gray-800 dark:bg-gray-950">
                   <Input
                     placeholder="Search institutions..."
                     value={institutionSearch}

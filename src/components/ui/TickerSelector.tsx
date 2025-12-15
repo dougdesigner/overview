@@ -12,14 +12,18 @@ import {
 import { popularTickers, type TickerOption } from "@/lib/tickerData"
 import { cx } from "@/lib/utils"
 import { Icon } from "@iconify/react"
-import { useState, useRef, useEffect } from "react"
+import { useEffect, useRef, useState } from "react"
 import { useDebouncedCallback } from "use-debounce"
 import { TickerLogo } from "./TickerLogo"
 
 interface TickerSelectorProps {
   value: string
   onValueChange: (value: string) => void
-  onTickerSelect?: (ticker: { symbol: string; name: string; type: string }) => void
+  onTickerSelect?: (ticker: {
+    symbol: string
+    name: string
+    type: string
+  }) => void
   onManualEntry?: () => void
   placeholder?: string
   className?: string
@@ -39,7 +43,8 @@ export function TickerSelector({
   const [isOpen, setIsOpen] = useState(false)
   const [isSearching, setIsSearching] = useState(false)
   const [apiResults, setApiResults] = useState<TickerOption[]>([])
-  const [selectedApiTicker, setSelectedApiTicker] = useState<TickerOption | null>(null)
+  const [selectedApiTicker, setSelectedApiTicker] =
+    useState<TickerOption | null>(null)
   const abortControllerRef = useRef<AbortController | null>(null)
 
   // Cleanup on unmount
@@ -65,16 +70,18 @@ export function TickerSelector({
     try {
       const response = await fetch(
         `/api/symbol-search?keywords=${encodeURIComponent(query)}`,
-        { signal: abortControllerRef.current.signal }
+        { signal: abortControllerRef.current.signal },
       )
       const data = await response.json()
 
       // Convert to TickerOption format
-      const results: TickerOption[] = data.matches.map((m: { symbol: string; name: string; type: string }) => ({
-        symbol: m.symbol,
-        name: m.name,
-        type: m.type === "ETF" ? "etf" as const : "stock" as const
-      }))
+      const results: TickerOption[] = data.matches.map(
+        (m: { symbol: string; name: string; type: string }) => ({
+          symbol: m.symbol,
+          name: m.name,
+          type: m.type === "ETF" ? ("etf" as const) : ("stock" as const),
+        }),
+      )
 
       setApiResults(results)
     } catch (error) {
@@ -181,23 +188,32 @@ export function TickerSelector({
   const mergeWithApiResults = (staticList: TickerOption[]) => {
     if (apiResults.length === 0) return staticList
     const staticSymbols = new Set(staticList.map((t) => t.symbol))
-    const uniqueApiResults = apiResults.filter((t) => !staticSymbols.has(t.symbol))
+    const uniqueApiResults = apiResults.filter(
+      (t) => !staticSymbols.has(t.symbol),
+    )
     return [...staticList, ...uniqueApiResults]
   }
 
   // Separate and filter stocks, ETFs, and mutual funds
-  const filteredStocks = filterTickers(popularTickers.filter((t) => t.type === "stock"))
-  const filteredEtfs = filterTickers(popularTickers.filter((t) => t.type === "etf"))
+  const filteredStocks = filterTickers(
+    popularTickers.filter((t) => t.type === "stock"),
+  )
+  const filteredEtfs = filterTickers(
+    popularTickers.filter((t) => t.type === "etf"),
+  )
   const filteredMutualFunds = filterTickers(
     popularTickers.filter((t) => t.type === "mutual-fund"),
   )
 
   // Merge API results into respective categories
-  const stocks = mergeWithApiResults(filteredStocks).filter((t) => t.type === "stock")
+  const stocks = mergeWithApiResults(filteredStocks).filter(
+    (t) => t.type === "stock",
+  )
   const etfs = mergeWithApiResults(filteredEtfs).filter((t) => t.type === "etf")
   const mutualFunds = filteredMutualFunds // API doesn't return mutual funds
 
-  const hasResults = stocks.length > 0 || etfs.length > 0 || mutualFunds.length > 0
+  const hasResults =
+    stocks.length > 0 || etfs.length > 0 || mutualFunds.length > 0
 
   // Handle select open/close
   const handleOpenChange = (open: boolean) => {
@@ -255,7 +271,7 @@ export function TickerSelector({
       </SelectTrigger>
       <SelectContent hideScrollButtons>
         {/* Search input - negative margins to cover viewport padding and prevent content clipping */}
-        <div className="sticky -top-1 z-10 -mx-1 border-b border-gray-200 bg-white px-3 pb-4 pt-4 dark:border-gray-800 dark:bg-gray-950">
+        <div className="sticky -top-1 z-10 -mx-1 border-b border-gray-200 bg-white px-3 pb-6 pt-2 dark:border-gray-800 dark:bg-gray-950">
           <Input
             placeholder="Search tickers..."
             value={search}
