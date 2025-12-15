@@ -207,7 +207,7 @@ export default function OverviewPage() {
 
           <dl className="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-1 lg:grid-cols-1">
             <AssetAllocationCard
-              defaultTab={holdings.length === 0 ? "Accounts" : "Asset Classes"}
+              defaultTab={holdings.length === 0 ? "Accounts" : "Assets"}
               data={[
                 {
                   name: "Assets",
@@ -329,90 +329,136 @@ export default function OverviewPage() {
                     | "rose"
                   )[],
                 },
-                {
-                  name: "Stocks",
-                  data: (() => {
-                    // Use exposure data (after ETF look-through) for top 10 stocks
-                    // Match Stocks page defaults: combineGoogleShares=true, holdingsFilter="top10"
-                    let stockExposures = exposures.filter((e) => !e.assetClass) // Exclude non-stock entries
+                (() => {
+                  // Use exposure data (after ETF look-through) for stocks
+                  // Match Stocks page defaults: combineGoogleShares=true
+                  let stockExposures = exposures.filter((e) => !e.assetClass) // Exclude non-stock entries
 
-                    // Combine GOOG and GOOGL into single entry (matches Stocks page default)
-                    const googl = stockExposures.find(
-                      (e) => e.ticker === "GOOGL",
-                    )
-                    const goog = stockExposures.find((e) => e.ticker === "GOOG")
-                    if (googl && goog) {
-                      const combined = {
-                        ...googl,
-                        name: "Alphabet Inc.",
-                        directShares: googl.directShares + goog.directShares,
-                        etfExposure: googl.etfExposure + goog.etfExposure,
-                        totalShares: googl.totalShares + goog.totalShares,
-                        directValue: googl.directValue + goog.directValue,
-                        etfValue: googl.etfValue + goog.etfValue,
-                        totalValue: googl.totalValue + goog.totalValue,
-                        percentOfPortfolio:
-                          googl.percentOfPortfolio + goog.percentOfPortfolio,
-                      }
-                      stockExposures = stockExposures
-                        .filter((e) => e.ticker !== "GOOG")
-                        .map((e) => (e.ticker === "GOOGL" ? combined : e))
+                  // Combine GOOG and GOOGL into single entry (matches Stocks page default)
+                  const googl = stockExposures.find(
+                    (e) => e.ticker === "GOOGL",
+                  )
+                  const goog = stockExposures.find((e) => e.ticker === "GOOG")
+                  if (googl && goog) {
+                    const combined = {
+                      ...googl,
+                      name: "Alphabet Inc.",
+                      directShares: googl.directShares + goog.directShares,
+                      etfExposure: googl.etfExposure + goog.etfExposure,
+                      totalShares: googl.totalShares + goog.totalShares,
+                      directValue: googl.directValue + goog.directValue,
+                      etfValue: googl.etfValue + goog.etfValue,
+                      totalValue: googl.totalValue + goog.totalValue,
+                      percentOfPortfolio:
+                        googl.percentOfPortfolio + goog.percentOfPortfolio,
                     }
+                    stockExposures = stockExposures
+                      .filter((e) => e.ticker !== "GOOG")
+                      .map((e) => (e.ticker === "GOOGL" ? combined : e))
+                  }
 
-                    // Sort by value and take top 10 (matches Stocks page "Top 10" filter)
-                    const top10 = stockExposures
-                      .sort((a, b) => b.totalValue - a.totalValue)
-                      .slice(0, 10)
+                  // Calculate total stock exposure (all stocks, not just top 10)
+                  const totalStockValue = stockExposures.reduce(
+                    (sum, e) => sum + e.totalValue,
+                    0,
+                  )
 
-                    return top10
-                      .filter((e) => e.totalValue > 0)
-                      .map((e, index) => ({
-                        name: e.ticker,
-                        ticker: e.ticker,
-                        type: "stock" as const,
-                        amount: e.totalValue,
-                        share: `${e.percentOfPortfolio.toFixed(1)}%`,
-                        borderColor:
-                          [
-                            "border-blue-500 dark:border-blue-500",
-                            "border-cyan-500 dark:border-cyan-500",
-                            "border-violet-500 dark:border-violet-500",
-                            "border-amber-500 dark:border-amber-500",
-                            "border-emerald-500 dark:border-emerald-500",
-                            "border-rose-500 dark:border-rose-500",
-                            "border-pink-500 dark:border-pink-500",
-                            "border-fuchsia-500 dark:border-fuchsia-500",
-                            "border-lime-500 dark:border-lime-500",
-                            "border-sky-500 dark:border-sky-500",
-                          ][index] || "border-gray-500 dark:border-gray-500",
-                        domain: e.domain,
-                        companyName: e.name,
-                      }))
-                  })(),
-                  colors: [
-                    "blue",
-                    "cyan",
-                    "violet",
-                    "amber",
-                    "emerald",
-                    "rose",
-                    "pink",
-                    "fuchsia",
-                    "lime",
-                    "sky",
-                  ] as (
-                    | "blue"
-                    | "cyan"
-                    | "violet"
-                    | "amber"
-                    | "emerald"
-                    | "rose"
-                    | "pink"
-                    | "fuchsia"
-                    | "lime"
-                    | "sky"
-                  )[],
-                },
+                  // Sort by value, take top 10, and calculate "Others"
+                  const sortedExposures = [...stockExposures].sort(
+                    (a, b) => b.totalValue - a.totalValue,
+                  )
+                  const top10 = sortedExposures.slice(0, 10)
+                  const others = sortedExposures.slice(10)
+                  const othersValue = others.reduce(
+                    (sum, e) => sum + e.totalValue,
+                    0,
+                  )
+
+                  const borderColors = [
+                    "border-blue-500 dark:border-blue-500",
+                    "border-cyan-500 dark:border-cyan-500",
+                    "border-violet-500 dark:border-violet-500",
+                    "border-amber-500 dark:border-amber-500",
+                    "border-emerald-500 dark:border-emerald-500",
+                    "border-rose-500 dark:border-rose-500",
+                    "border-pink-500 dark:border-pink-500",
+                    "border-fuchsia-500 dark:border-fuchsia-500",
+                    "border-lime-500 dark:border-lime-500",
+                    "border-sky-500 dark:border-sky-500",
+                  ]
+
+                  const stocksData: {
+                    name: string
+                    ticker?: string
+                    type: "stock" | "other"
+                    amount: number
+                    share: string
+                    borderColor: string
+                    domain?: string
+                    companyName?: string
+                  }[] = top10
+                    .filter((e) => e.totalValue > 0)
+                    .map((e, index) => ({
+                      name: e.ticker,
+                      ticker: e.ticker,
+                      type: "stock" as const,
+                      amount: e.totalValue,
+                      share:
+                        totalStockValue > 0
+                          ? `${((e.totalValue / totalStockValue) * 100).toFixed(1)}%`
+                          : "0%",
+                      borderColor:
+                        borderColors[index] ||
+                        "border-gray-500 dark:border-gray-500",
+                      domain: e.domain,
+                      companyName: e.name,
+                    }))
+
+                  // Add "Others" segment if there are stocks beyond top 10
+                  if (othersValue > 0) {
+                    stocksData.push({
+                      name: "Others",
+                      type: "other",
+                      amount: othersValue,
+                      share:
+                        totalStockValue > 0
+                          ? `${((othersValue / totalStockValue) * 100).toFixed(1)}%`
+                          : "0%",
+                      borderColor: "border-gray-500 dark:border-gray-500",
+                    })
+                  }
+
+                  return {
+                    name: "Stocks",
+                    data: stocksData,
+                    totalValue: totalStockValue,
+                    colors: [
+                      "blue",
+                      "cyan",
+                      "violet",
+                      "amber",
+                      "emerald",
+                      "rose",
+                      "pink",
+                      "fuchsia",
+                      "lime",
+                      "sky",
+                      "gray",
+                    ] as (
+                      | "blue"
+                      | "cyan"
+                      | "violet"
+                      | "amber"
+                      | "emerald"
+                      | "rose"
+                      | "pink"
+                      | "fuchsia"
+                      | "lime"
+                      | "sky"
+                      | "gray"
+                    )[],
+                  }
+                })(),
               ]}
             />
           </dl>

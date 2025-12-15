@@ -26,6 +26,7 @@ export interface AssetAllocationData {
   name: string
   data: AssetAllocationItem[]
   colors: AvailableChartColorsKeys[]
+  totalValue?: number // Optional custom total for donut center (e.g., stock exposure total)
 }
 
 interface AssetAllocationCardProps {
@@ -281,16 +282,16 @@ const AssetAllocationCard = React.forwardRef<
       )
     }
 
-    // Calculate total value once (same for all tabs)
-    const totalValue = React.useMemo(() => {
-      if (allocationData.length > 0) {
-        return allocationData[0].data.reduce(
-          (sum, item) => sum + item.amount,
-          0,
-        )
-      }
-      return 0
-    }, [allocationData])
+    // Calculate total for a tab (uses custom totalValue if provided, else sums data)
+    const getTabTotal = React.useCallback(
+      (category: AssetAllocationData) => {
+        if (category.totalValue !== undefined) {
+          return category.totalValue
+        }
+        return category.data.reduce((sum, item) => sum + item.amount, 0)
+      },
+      [],
+    )
 
     return (
       <Card
@@ -331,11 +332,11 @@ const AssetAllocationCard = React.forwardRef<
                   {/* HighchartsDonutChart */}
                   <HighchartsDonutChart
                     data={category.data}
-                    totalValue={totalValue}
+                    totalValue={getTabTotal(category)}
                     valueFormatter={currencyFormatter}
                     colors={category.colors}
                     height={280}
-                    useAssetClassColors={category.name === "Asset Classes"}
+                    useAssetClassColors={category.name === "Assets"}
                   />
                 </div>
                 {category.data.length > 0 && (

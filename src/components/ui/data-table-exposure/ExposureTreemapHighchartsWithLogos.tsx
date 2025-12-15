@@ -91,6 +91,21 @@ const CASH_COLOR = getAssetClassHexColor("Cash") // emerald-500 (#10b981)
 const BONDS_COLOR = getAssetClassHexColor("Bonds") // amber-500 (#f59e0b)
 const OTHER_COLOR = getAssetClassHexColor("Other") // gray-500 (#6b7280)
 
+// 10-color palette matching AssetAllocationCard Stocks tab
+// Used when filter is mag7/top7/top10 and groupingMode is "none"
+const STOCKS_TAB_COLORS = [
+  "#3b82f6", // blue-500
+  "#06b6d4", // cyan-500
+  "#8b5cf6", // violet-500
+  "#f59e0b", // amber-500
+  "#10b981", // emerald-500
+  "#f43f5e", // rose-500
+  "#ec4899", // pink-500
+  "#d946ef", // fuchsia-500
+  "#84cc16", // lime-500
+  "#0ea5e9", // sky-500
+]
+
 // Extended data point type to include custom properties
 interface ExtendedTreemapPoint extends Highcharts.PointOptionsObject {
   logoUrl?: string | null
@@ -850,7 +865,8 @@ export function ExposureTreemapHighchartsWithLogos({
     )
 
     const data: PieChartPoint[] = []
-    const THRESHOLD_PERCENTAGE = 0.5 // 0.5% threshold - items below this go to "Others"
+    // 0.5% threshold - items below this go to "Others"
+    const THRESHOLD_PERCENTAGE = 0.5
 
     // Handle "none" mode - show individual stocks with single color
     if (groupingMode === "none") {
@@ -886,17 +902,25 @@ export function ExposureTreemapHighchartsWithLogos({
         "Other",
       ]
 
+      // Check if we should use multi-color palette (limited filters with no grouping)
+      const useMultiColor = ["mag7", "top7", "top10"].includes(holdingsFilter)
+
       // Add main segments
-      mainSegments.forEach((stock) => {
+      mainSegments.forEach((stock, index) => {
         const logoUrl = logoUrls[stock.ticker.toUpperCase()] ?? null
         const sector = stock.sector || ""
         const isNonStock = nonStockSectors.includes(sector)
 
-        // Determine color based on sector
-        let itemColor = colors[0] // Default for stocks
+        // Determine color based on sector or index
+        let itemColor: string
         if (sector === "Cash") itemColor = CASH_COLOR
         else if (sector === "Bonds") itemColor = BONDS_COLOR
         else if (isNonStock) itemColor = OTHER_COLOR
+        else if (useMultiColor) {
+          itemColor = STOCKS_TAB_COLORS[index % STOCKS_TAB_COLORS.length]
+        } else {
+          itemColor = colors[0] // Monochromatic for "all" filter
+        }
 
         data.push({
           name: stock.ticker,
