@@ -235,9 +235,9 @@ function Navigation() {
             </button>
           </Dialog.Trigger>
 
-          {/* Bottom overlay - fades content behind drawer, positioned at top of nav */}
+          {/* Bottom overlay - gradient fades content behind drawer down to nav */}
           {isAddOpen && (
-            <div className="pointer-events-none fixed inset-x-0 bottom-20 z-[45] h-52 bg-white/90 dark:bg-gray-950/90" />
+            <div className="pointer-events-none fixed inset-x-0 bottom-20 z-[45] h-52 bg-gradient-to-b from-white/0 via-white/90 to-white dark:from-gray-950/0 dark:via-gray-950/90 dark:to-gray-950" />
           )}
 
           <Dialog.Portal>
