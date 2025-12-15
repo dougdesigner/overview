@@ -333,6 +333,12 @@ export function usePortfolioStore() {
   const [dataVersion, setDataVersion] = useState(0)
   const [isDemoMode, setDemoModeState] = useState(() => {
     if (typeof window !== 'undefined') {
+      // Check URL param first (for screenshot automation)
+      const urlParams = new URLSearchParams(window.location.search)
+      if (urlParams.get('demo') === 'true') {
+        return true
+      }
+      // Fall back to localStorage
       return localStorage.getItem('portfolio_demo_mode') === 'true'
     }
     return false
@@ -363,6 +369,16 @@ export function usePortfolioStore() {
     window.addEventListener('storage', handleStorage)
     return () => window.removeEventListener('storage', handleStorage)
   }, [])
+
+  // Check for demo mode from URL param (for screenshot automation)
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const urlParams = new URLSearchParams(window.location.search)
+      if (urlParams.get('demo') === 'true') {
+        setDemoMode(true)
+      }
+    }
+  }, [setDemoMode])
 
   // Load data from localStorage on mount
   useEffect(() => {

@@ -5,15 +5,53 @@ import { usePortfolioStore } from "@/hooks/usePortfolioStore"
 import { cx } from "@/lib/utils"
 import { Icon } from "@iconify/react"
 import { RiArrowLeftLine, RiArrowRightLine } from "@remixicon/react"
+import Image from "next/image"
 import { useRouter } from "next/navigation"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { OnboardingStep } from "./OnboardingStep"
 
-// Import screenshot placeholders
-import { AccountsScreenshot } from "./screenshots/AccountsScreenshot"
-import { ExposureAnalysisScreenshot } from "./screenshots/ExposureAnalysisScreenshot"
-import { HoldingsScreenshot } from "./screenshots/HoldingsScreenshot"
-import { OverviewScreenshot } from "./screenshots/OverviewScreenshot"
+// Hook to detect mobile viewport
+function useIsMobile() {
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768)
+    checkMobile()
+    window.addEventListener("resize", checkMobile)
+    return () => window.removeEventListener("resize", checkMobile)
+  }, [])
+
+  return isMobile
+}
+
+// Screenshot component that loads appropriate image based on viewport
+function OnboardingScreenshot({
+  pageId,
+  alt,
+}: {
+  pageId: string
+  alt: string
+}) {
+  const isMobile = useIsMobile()
+  const viewport = isMobile ? "mobile" : "desktop"
+
+  // Use light theme for screenshots (could be extended to match current theme)
+  const theme = "light"
+  const src = `/images/onboarding/${pageId}-${viewport}-${theme}.png`
+
+  return (
+    <div className="relative aspect-[16/10] w-full overflow-hidden rounded-lg border border-gray-200 shadow-lg dark:border-gray-700">
+      <Image
+        src={src}
+        alt={alt}
+        fill
+        className="object-cover object-top"
+        sizes="(max-width: 768px) 100vw, 60vw"
+        priority
+      />
+    </div>
+  )
+}
 
 const onboardingSteps = [
   {
@@ -27,7 +65,7 @@ const onboardingSteps = [
       "Consolidated view for holistic understanding",
       "Dark mode support for comfortable viewing",
     ],
-    screenshot: <OverviewScreenshot />,
+    pageId: "overview",
   },
   {
     id: "accounts",
@@ -40,7 +78,7 @@ const onboardingSteps = [
       "Account-level asset class breakdowns",
       "Easy account management and updates",
     ],
-    screenshot: <AccountsScreenshot />,
+    pageId: "accounts",
   },
   {
     id: "holdings",
@@ -53,7 +91,7 @@ const onboardingSteps = [
       "Diversification analysis by security",
       "Cross-account holding aggregation",
     ],
-    screenshot: <HoldingsScreenshot />,
+    pageId: "holdings",
   },
   {
     id: "exposure",
@@ -66,7 +104,7 @@ const onboardingSteps = [
       "Concentration risk identification",
       "True underlying exposure analysis",
     ],
-    screenshot: <ExposureAnalysisScreenshot />,
+    pageId: "exposure",
   },
 ]
 
@@ -93,7 +131,7 @@ export function OnboardingFlow() {
 
   const handleTryDemo = () => {
     setDemoMode(true)
-    window.location.href = '/overview'
+    window.location.href = "/overview"
   }
 
   const handleStartFresh = () => {
@@ -103,26 +141,6 @@ export function OnboardingFlow() {
   return (
     <>
       <div className="flex min-h-[600px] flex-col justify-between">
-        {/* Progress Indicator */}
-        {/* <div className="mb-8">
-          <div className="flex items-center justify-between mb-2">
-            <span className="text-sm text-gray-600 dark:text-gray-400">
-              Step {currentStep + 1} of {onboardingSteps.length}
-            </span>
-            <span className="text-sm text-gray-600 dark:text-gray-400">
-              Getting Started
-            </span>
-          </div>
-          <div className="relative h-2 bg-gray-200 dark:bg-gray-800 rounded-full overflow-hidden">
-            <div
-              className="absolute left-0 top-0 h-full bg-blue-500 transition-all duration-300 ease-out rounded-full"
-              style={{
-                width: `${((currentStep + 1) / onboardingSteps.length) * 100}%`,
-              }}
-            />
-          </div>
-        </div> */}
-
         {/* Step Content */}
         <div className="flex-1">
           <OnboardingStep
@@ -130,7 +148,10 @@ export function OnboardingFlow() {
             description={step.description}
             highlights={step.highlights}
           >
-            {step.screenshot}
+            <OnboardingScreenshot
+              pageId={step.pageId}
+              alt={`${step.title} screenshot`}
+            />
           </OnboardingStep>
         </div>
 
