@@ -64,32 +64,32 @@ const BENCHMARKS: Record<BenchmarkType, BenchmarkProfile> = {
   },
 }
 
-// Mini donut chart for modal previews
+// Mini donut chart for modal previews - uses asset class colors
 function MiniDonutPreview({ allocation }: { allocation: BenchmarkAllocation }) {
   const data = [
     {
       name: "U.S. Stocks",
       amount: allocation.usStocks,
       share: `${allocation.usStocks}%`,
-      borderColor: "border-blue-500",
+      borderColor: getAssetClassBorderColor("U.S. Stocks"),
     },
     {
       name: "Non-U.S. Stocks",
       amount: allocation.nonUsStocks,
       share: `${allocation.nonUsStocks}%`,
-      borderColor: "border-violet-500",
+      borderColor: getAssetClassBorderColor("Non-U.S. Stocks"),
     },
     {
       name: "Fixed Income",
       amount: allocation.fixedIncome,
       share: `${allocation.fixedIncome}%`,
-      borderColor: "border-amber-500",
+      borderColor: getAssetClassBorderColor("Fixed Income"),
     },
     {
       name: "Other",
       amount: allocation.other,
       share: `${allocation.other}%`,
-      borderColor: "border-gray-500",
+      borderColor: getAssetClassBorderColor("Other"),
     },
   ].filter((d) => d.amount > 0)
 
@@ -99,10 +99,11 @@ function MiniDonutPreview({ allocation }: { allocation: BenchmarkAllocation }) {
         data={data}
         totalValue={100}
         valueFormatter={(v) => `${v}%`}
-        colors={["blue", "violet", "amber", "gray"]}
+        colors={["blue", "cyan", "amber", "gray"]}
         height={96}
         showControls={false}
         showTitle={false}
+        useAssetClassColors={true}
       />
     </div>
   )
@@ -110,9 +111,13 @@ function MiniDonutPreview({ allocation }: { allocation: BenchmarkAllocation }) {
 
 interface BenchmarkCardProps {
   className?: string
+  sectionId?: string
 }
 
-export function BenchmarkCard({ className }: BenchmarkCardProps) {
+export function BenchmarkCard({
+  className,
+  sectionId = "benchmark-comparison-section",
+}: BenchmarkCardProps) {
   const { totalPortfolioValue, portfolioAllocation } = usePortfolioStore()
 
   // State
@@ -284,56 +289,59 @@ export function BenchmarkCard({ className }: BenchmarkCardProps) {
                       {benchmark.description}
                     </p>
 
-                    {/* Mini donut chart preview */}
-                    <div className="mt-4">
-                      <MiniDonutPreview allocation={benchmark.allocation} />
-                    </div>
+                    {/* Chart left, Legend right layout */}
+                    <div className="mt-4 flex items-center gap-3">
+                      {/* Mini donut chart preview */}
+                      <div className="w-24 shrink-0">
+                        <MiniDonutPreview allocation={benchmark.allocation} />
+                      </div>
 
-                    {/* Legend */}
-                    <div className="mt-3 space-y-1.5 text-xs">
-                      <div className="flex items-center justify-between">
-                        <span className="flex items-center gap-1.5">
-                          <span className="size-2 rounded-sm bg-blue-500" />
-                          <span className="text-gray-600 dark:text-gray-400">
-                            U.S. Stocks
+                      {/* Legend */}
+                      <div className="flex-1 space-y-1 text-xs">
+                        <div className="flex items-center justify-between">
+                          <span className="flex items-center gap-1.5">
+                            <span className={cx("size-2 rounded-sm", getAssetClassBgColor("U.S. Stocks"))} />
+                            <span className="text-gray-600 dark:text-gray-400">
+                              U.S. Stocks
+                            </span>
                           </span>
-                        </span>
-                        <span className="font-medium text-gray-900 dark:text-gray-100">
-                          {benchmark.allocation.usStocks}%
-                        </span>
-                      </div>
-                      <div className="flex items-center justify-between">
-                        <span className="flex items-center gap-1.5">
-                          <span className="size-2 rounded-sm bg-violet-500" />
-                          <span className="text-gray-600 dark:text-gray-400">
-                            Non-U.S. Stocks
+                          <span className="font-medium text-gray-900 dark:text-gray-100">
+                            {benchmark.allocation.usStocks}%
                           </span>
-                        </span>
-                        <span className="font-medium text-gray-900 dark:text-gray-100">
-                          {benchmark.allocation.nonUsStocks}%
-                        </span>
-                      </div>
-                      <div className="flex items-center justify-between">
-                        <span className="flex items-center gap-1.5">
-                          <span className="size-2 rounded-sm bg-amber-500" />
-                          <span className="text-gray-600 dark:text-gray-400">
-                            Fixed Income
+                        </div>
+                        <div className="flex items-center justify-between">
+                          <span className="flex items-center gap-1.5">
+                            <span className={cx("size-2 rounded-sm", getAssetClassBgColor("Non-U.S. Stocks"))} />
+                            <span className="text-gray-600 dark:text-gray-400">
+                              Non-U.S. Stocks
+                            </span>
                           </span>
-                        </span>
-                        <span className="font-medium text-gray-900 dark:text-gray-100">
-                          {benchmark.allocation.fixedIncome}%
-                        </span>
-                      </div>
-                      <div className="flex items-center justify-between">
-                        <span className="flex items-center gap-1.5">
-                          <span className="size-2 rounded-sm bg-gray-500" />
-                          <span className="text-gray-600 dark:text-gray-400">
-                            Other
+                          <span className="font-medium text-gray-900 dark:text-gray-100">
+                            {benchmark.allocation.nonUsStocks}%
                           </span>
-                        </span>
-                        <span className="font-medium text-gray-900 dark:text-gray-100">
-                          {benchmark.allocation.other}%
-                        </span>
+                        </div>
+                        <div className="flex items-center justify-between">
+                          <span className="flex items-center gap-1.5">
+                            <span className={cx("size-2 rounded-sm", getAssetClassBgColor("Fixed Income"))} />
+                            <span className="text-gray-600 dark:text-gray-400">
+                              Fixed Income
+                            </span>
+                          </span>
+                          <span className="font-medium text-gray-900 dark:text-gray-100">
+                            {benchmark.allocation.fixedIncome}%
+                          </span>
+                        </div>
+                        <div className="flex items-center justify-between">
+                          <span className="flex items-center gap-1.5">
+                            <span className={cx("size-2 rounded-sm", getAssetClassBgColor("Other"))} />
+                            <span className="text-gray-600 dark:text-gray-400">
+                              Other
+                            </span>
+                          </span>
+                          <span className="font-medium text-gray-900 dark:text-gray-100">
+                            {benchmark.allocation.other}%
+                          </span>
+                        </div>
                       </div>
                     </div>
                   </button>
@@ -366,9 +374,16 @@ export function BenchmarkCard({ className }: BenchmarkCardProps) {
   if (!selectedBenchmark) {
     return (
       <>
-        <Card className={cx("overflow-hidden p-0", className)}>
+        <Card id={sectionId} className={cx("overflow-hidden p-0", className)}>
           <div className="flex items-center justify-between px-6 pt-6">
-            <h3 className="text-base font-medium text-gray-900 dark:text-gray-50">
+            <h3
+              className="cursor-pointer text-base font-medium text-gray-900 transition-colors hover:text-blue-600 dark:text-gray-50 dark:hover:text-blue-400"
+              onClick={() => {
+                document
+                  .getElementById(sectionId)
+                  ?.scrollIntoView({ behavior: "smooth" })
+              }}
+            >
               Benchmark Comparison
             </h3>
           </div>
@@ -404,34 +419,32 @@ export function BenchmarkCard({ className }: BenchmarkCardProps) {
 
   return (
     <>
-      <Card className={cx("overflow-hidden p-0", className)}>
+      <Card id={sectionId} className={cx("overflow-hidden p-0", className)}>
         <div className="flex items-center justify-between px-6 pt-6">
-          <h3 className="text-base font-medium text-gray-900 dark:text-gray-50">
+          <h3
+            className="cursor-pointer text-base font-medium text-gray-900 transition-colors hover:text-blue-600 dark:text-gray-50 dark:hover:text-blue-400"
+            onClick={() => {
+              document
+                .getElementById(sectionId)
+                ?.scrollIntoView({ behavior: "smooth" })
+            }}
+          >
             Benchmark Comparison
           </h3>
         </div>
 
         <div className="grid grid-cols-1 gap-6 p-6 lg:grid-cols-2">
-          {/* Left: Distribution Donut */}
-          <div>
-            <h4 className="mb-4 text-sm font-medium text-gray-500">
-              Distribution
-            </h4>
-            <div style={{ height: 280 }}>
-              <HighchartsDonutChart
-                data={getComparisonChartData()}
-                totalValue={totalPortfolioValue}
-                valueFormatter={currencyFormatter}
-                colors={["blue", "violet", "amber", "emerald", "gray"]}
-                height={280}
-                useAssetClassColors={true}
-                showControls={false}
-              />
-            </div>
-            <p className="mt-2 text-center text-xs text-gray-500">
-              Percent analyzed: 100%. Only applicable securities can be included
-              in this analysis.
-            </p>
+          {/* Left: Donut Chart */}
+          <div style={{ height: 280 }}>
+            <HighchartsDonutChart
+              data={getComparisonChartData()}
+              totalValue={totalPortfolioValue}
+              valueFormatter={currencyFormatter}
+              colors={["blue", "cyan", "amber", "emerald", "gray"]}
+              height={280}
+              useAssetClassColors={true}
+              showControls={false}
+            />
           </div>
 
           {/* Right: Comparison Table */}
