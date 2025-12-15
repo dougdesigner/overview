@@ -15,7 +15,7 @@ import { Holding } from "@/components/ui/data-table-holdings/types"
 import mutualFundMappings from "@/data/mutual-fund-mappings.json"
 import { usePortfolioStore } from "@/hooks/usePortfolioStore"
 import { getETFName } from "@/lib/etfMetadataService"
-import { getKnownETFName } from "@/lib/knownETFNames"
+import { getKnownETFName, getKnownStockName } from "@/lib/knownETFNames"
 import { extractDomainsFromCompanyName } from "@/lib/logoUtils"
 import { getStockPrice } from "@/lib/stockPriceService"
 import { Icon } from "@iconify/react"
@@ -260,8 +260,13 @@ function HoldingsContent() {
               `Using known ETF name for ${holding.ticker}: ${knownName}`,
             )
           } else {
-            // If we have a company name from Alpha Vantage, use it directly
-            if (holding.companyName) {
+            // Check for canonical stock name from asset-classifications first
+            const knownStockName = getKnownStockName(holding.ticker)
+            if (knownStockName) {
+              name = knownStockName
+              console.log(`Using canonical stock name for ${holding.ticker}: ${name}`)
+            } else if (holding.companyName) {
+              // Fall back to Alpha Vantage name
               name = holding.companyName
               console.log(`Using Alpha Vantage name for ${holding.ticker}: ${name}`)
             } else {

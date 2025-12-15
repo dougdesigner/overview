@@ -101,6 +101,9 @@ const stockDomainOverrides: Record<string, string> = {
   // Manual entry overrides (private companies)
   TULIP: "tulip.co",
 
+  // New listings / special cases
+  WLTH: "wealthfront.com", // Wealthfront IPO
+
   // Tech Giants
   AAPL: "apple.com.cn",
   MSFT: "office.com",
@@ -113,6 +116,8 @@ const stockDomainOverrides: Record<string, string> = {
   NFLX: "netflix.com",
 
   // More Tech
+  SNOW: "snowflake.com",
+  FIG: "figma.com",
   AMD: "amd.com",
   INTC: "intel.com",
   ORCL: "oracle.com",

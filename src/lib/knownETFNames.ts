@@ -429,3 +429,13 @@ export function getKnownETFName(ticker: string): string | null {
   const upperTicker = ticker.toUpperCase()
   return KNOWN_ETF_NAMES[upperTicker] || null
 }
+
+// Import asset classifications for stock name lookup
+import assetClassifications from "@/data/asset-classifications.json"
+
+// Helper function to get canonical stock name from asset-classifications
+export function getKnownStockName(ticker: string): string | null {
+  const upperTicker = ticker.toUpperCase()
+  const stockData = assetClassifications.stocks[upperTicker as keyof typeof assetClassifications.stocks]
+  return stockData?.name || null
+}

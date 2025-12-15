@@ -13,6 +13,7 @@ import { cx } from "@/lib/utils"
 import { Icon } from "@iconify/react"
 import { ColumnDef } from "@tanstack/react-table"
 import { institutionLabels } from "@/lib/institutionUtils"
+import { getKnownStockName } from "@/lib/knownETFNames"
 import { InstitutionLogo } from "@/components/ui/InstitutionLogo"
 import { Account, Holding } from "./types"
 
@@ -167,6 +168,10 @@ export const createColumns = ({
     accessorKey: "name",
     cell: ({ row }) => {
       const isNested = row.depth > 0
+      // Use canonical name from asset-classifications if available for consistency
+      const ticker = row.original.ticker
+      const canonicalName = ticker ? getKnownStockName(ticker) : null
+      const displayName = canonicalName || row.original.name
       return (
         <span
           className={cx(
@@ -174,7 +179,7 @@ export const createColumns = ({
             isNested && "pl-6 font-normal text-gray-600 dark:text-gray-400",
           )}
         >
-          {row.original.name}
+          {displayName}
         </span>
       )
     },

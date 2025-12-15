@@ -292,6 +292,38 @@
       "region": "US",
       "sector": "Financial Services",
       "industry": "Payment Processing"
+    },
+    "SNOW": {
+      "name": "Snowflake Inc.",
+      "class": "us_equity",
+      "subClass": "large_cap",
+      "region": "US",
+      "sector": "Technology",
+      "industry": "Software"
+    },
+    "FIG": {
+      "name": "Figma, Inc.",
+      "class": "us_equity",
+      "subClass": "mid_cap",
+      "region": "US",
+      "sector": "Technology",
+      "industry": "Software - Application"
+    },
+    "WLTH": {
+      "name": "Wealthfront",
+      "class": "us_equity",
+      "subClass": "mid_cap",
+      "region": "US",
+      "sector": "Financial Services",
+      "industry": "Asset Management"
+    },
+    "ADBE": {
+      "name": "Adobe Inc.",
+      "class": "us_equity",
+      "subClass": "large_cap",
+      "region": "US",
+      "sector": "Technology",
+      "industry": "Software"
     }
   },
   "assetClasses": {
