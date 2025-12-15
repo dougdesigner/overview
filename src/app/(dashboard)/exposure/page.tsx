@@ -463,10 +463,17 @@ export default function ExposurePage() {
       <div className="pt-6" id="exposure-section">
         {portfolioHoldings.length === 0 ? (
           // Empty state
-          <div className="py-12 text-center">
+          <div className="flex flex-col items-center py-12 text-center">
             {accounts.length === 0 ? (
               // No accounts at all
               <>
+                <div className="mb-4 rounded-full bg-gray-100 p-4 dark:bg-gray-800">
+                  <Icon
+                    icon="carbon:sankey-diagram-alt"
+                    className="size-8 text-gray-400 dark:text-gray-500"
+                    aria-hidden="true"
+                  />
+                </div>
                 <h3 className="mb-2 text-lg font-medium text-gray-900 dark:text-gray-50">
                   No accounts yet
                 </h3>
@@ -484,6 +491,13 @@ export default function ExposurePage() {
             ) : holdings.length === 0 ? (
               // Has accounts but no holdings
               <>
+                <div className="mb-4 rounded-full bg-gray-100 p-4 dark:bg-gray-800">
+                  <Icon
+                    icon="carbon:chart-ring"
+                    className="size-8 text-gray-400 dark:text-gray-500"
+                    aria-hidden="true"
+                  />
+                </div>
                 <h3 className="mb-2 text-lg font-medium text-gray-900 dark:text-gray-50">
                   No holdings to analyze
                 </h3>
@@ -500,6 +514,13 @@ export default function ExposurePage() {
             ) : (
               // Has holdings but no portfolio holdings (shouldn't happen, but just in case)
               <>
+                <div className="mb-4 rounded-full bg-gray-100 p-4 dark:bg-gray-800">
+                  <Icon
+                    icon="carbon:chart-treemap"
+                    className="size-8 text-gray-400 dark:text-gray-500"
+                    aria-hidden="true"
+                  />
+                </div>
                 <h3 className="mb-2 text-lg font-medium text-gray-900 dark:text-gray-50">
                   No exposure data available
                 </h3>

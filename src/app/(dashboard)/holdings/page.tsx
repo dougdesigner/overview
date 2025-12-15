@@ -5,11 +5,11 @@ import { Button } from "@/components/Button"
 import { Divider } from "@/components/Divider"
 import { HoldingsSunburst } from "@/components/HoldingsSunburstWrapper"
 import { AccountFilterDropdown } from "@/components/ui/AccountFilterDropdown"
-import { InstitutionLogo } from "@/components/ui/InstitutionLogo"
 import {
   HoldingsDrawer,
   type HoldingFormData,
 } from "@/components/ui/HoldingsDrawer"
+import { InstitutionLogo } from "@/components/ui/InstitutionLogo"
 import { HoldingsTable } from "@/components/ui/data-table-holdings/HoldingsTable"
 import { Holding } from "@/components/ui/data-table-holdings/types"
 import mutualFundMappings from "@/data/mutual-fund-mappings.json"
@@ -55,8 +55,8 @@ function HoldingsContent() {
   } = usePortfolioStore()
 
   // Debug logging
-  console.log('[Holdings] storeAccounts:', storeAccounts.length, storeAccounts)
-  console.log('[Holdings] holdings:', holdings.length)
+  console.log("[Holdings] storeAccounts:", storeAccounts.length, storeAccounts)
+  console.log("[Holdings] holdings:", holdings.length)
 
   // Convert accounts to the format expected by components
   const accounts = useMemo(
@@ -226,10 +226,7 @@ function HoldingsContent() {
               console.warn(`No price data available for ${holding.ticker}`)
             }
           } catch (error) {
-            console.error(
-              `Failed to fetch price for ${holding.ticker}:`,
-              error,
-            )
+            console.error(`Failed to fetch price for ${holding.ticker}:`, error)
             lastPrice = 0 // Leave blank rather than fake $100
           }
         }
@@ -264,11 +261,15 @@ function HoldingsContent() {
             const knownStockName = getKnownStockName(holding.ticker)
             if (knownStockName) {
               name = knownStockName
-              console.log(`Using canonical stock name for ${holding.ticker}: ${name}`)
+              console.log(
+                `Using canonical stock name for ${holding.ticker}: ${name}`,
+              )
             } else if (holding.companyName) {
               // Fall back to Alpha Vantage name
               name = holding.companyName
-              console.log(`Using Alpha Vantage name for ${holding.ticker}: ${name}`)
+              console.log(
+                `Using Alpha Vantage name for ${holding.ticker}: ${name}`,
+              )
             } else {
               // Check if it's likely an ETF based on ticker format
               const isLikelyETF =
@@ -279,7 +280,10 @@ function HoldingsContent() {
               if (isLikelyETF) {
                 // Try to fetch from API for unknown ETFs
                 const etfNameResult = await getETFName(holding.ticker)
-                if (etfNameResult && etfNameResult !== `${holding.ticker} ETF`) {
+                if (
+                  etfNameResult &&
+                  etfNameResult !== `${holding.ticker} ETF`
+                ) {
                   name = etfNameResult
                   type = "fund"
                   console.log(
@@ -457,12 +461,12 @@ function HoldingsContent() {
         <>
           {/* Bottom gradient - fades content behind filter (mobile only) */}
           <div
-            className={`pointer-events-none fixed inset-x-0 bottom-0 z-40 h-40 bg-gradient-to-t from-white via-white/80 to-transparent transition-opacity duration-300 sm:hidden dark:from-gray-950 dark:via-gray-950/80 ${
+            className={`pointer-events-none fixed inset-x-0 bottom-0 z-40 h-40 bg-gradient-to-t from-white via-white/80 to-transparent transition-opacity duration-300 dark:from-gray-950 dark:via-gray-950/80 sm:hidden ${
               isFilterSticky ? "opacity-100" : "opacity-0"
             }`}
           />
           <div
-            className={`fixed inset-x-0 bottom-20 z-50 mx-2 transition-[transform,opacity] duration-300 ease-out sm:left-1/2 sm:right-auto sm:mx-0 sm:w-full sm:max-w-2xl sm:-translate-x-1/2 sm:bottom-6 sm:px-6 ${
+            className={`fixed inset-x-0 bottom-20 z-50 mx-2 transition-[transform,opacity] duration-300 ease-out sm:bottom-6 sm:left-1/2 sm:right-auto sm:mx-0 sm:w-full sm:max-w-2xl sm:-translate-x-1/2 sm:px-6 ${
               isFilterSticky
                 ? "translate-y-0 opacity-100"
                 : "pointer-events-none translate-y-4 opacity-0"
@@ -492,7 +496,10 @@ function HoldingsContent() {
                       className="size-5"
                     />
                     <span className="hidden sm:inline">
-                      {accounts.find((a) => a.id === currentAccountFilter)?.name}
+                      {
+                        accounts.find((a) => a.id === currentAccountFilter)
+                          ?.name
+                      }
                     </span>
                     <button
                       onClick={() => setCurrentAccountFilter("all")}
@@ -576,7 +583,14 @@ function HoldingsContent() {
       {/* Holdings Table */}
       <div className="mt-6">
         {accounts.length === 0 ? (
-          <div className="py-12 text-center">
+          <div className="flex flex-col items-center py-12 text-center">
+            <div className="mb-4 rounded-full bg-gray-100 p-4 dark:bg-gray-800">
+              <Icon
+                icon="carbon:sankey-diagram-alt"
+                className="size-8 text-gray-400 dark:text-gray-500"
+                aria-hidden="true"
+              />
+            </div>
             <h3 className="mb-2 text-lg font-medium text-gray-900 dark:text-gray-50">
               No accounts yet
             </h3>
@@ -591,7 +605,14 @@ function HoldingsContent() {
             </Button>
           </div>
         ) : holdings.length === 0 ? (
-          <div className="py-12 text-center">
+          <div className="flex flex-col items-center py-12 text-center">
+            <div className="mb-4 rounded-full bg-gray-100 p-4 dark:bg-gray-800">
+              <Icon
+                icon="carbon:chart-ring"
+                className="size-8 text-gray-400 dark:text-gray-500"
+                aria-hidden="true"
+              />
+            </div>
             <h3 className="mb-2 text-lg font-medium text-gray-900 dark:text-gray-50">
               No holdings yet
             </h3>
@@ -602,7 +623,7 @@ function HoldingsContent() {
               onClick={() => setIsOpen(true)}
               className="inline-flex items-center gap-2"
             >
-              Add Your First Holding
+              Add your first holding
               <Icon
                 icon="carbon:add"
                 className="-mr-0.5 size-5 shrink-0"
@@ -621,15 +642,19 @@ function HoldingsContent() {
         )}
       </div>
 
-      {/* Mobile Add Holdings Button - Only show on mobile when accounts exist */}
-      {accounts.length > 0 && (
+      {/* Mobile Add Holdings Button - Only show on mobile when holdings exist */}
+      {accounts.length > 0 && holdings.length > 0 && (
         <div className="mt-6 sm:hidden">
           <Button
             onClick={() => setIsOpen(true)}
             className="flex w-full items-center justify-center gap-2 text-base"
           >
             Add holdings
-            <Icon icon="carbon:add" className="-mr-0.5 size-5 shrink-0" aria-hidden="true" />
+            <Icon
+              icon="carbon:add"
+              className="-mr-0.5 size-5 shrink-0"
+              aria-hidden="true"
+            />
           </Button>
         </div>
       )}

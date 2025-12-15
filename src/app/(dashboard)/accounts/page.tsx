@@ -1035,7 +1035,14 @@ function AccountsContent() {
 
         {/* Empty state */}
         {accounts.length === 0 && (
-          <div className="py-12 text-center">
+          <div className="flex flex-col items-center py-12 text-center">
+            <div className="mb-4 rounded-full bg-gray-100 p-4 dark:bg-gray-800">
+              <Icon
+                icon="carbon:sankey-diagram-alt"
+                className="size-8 text-gray-400 dark:text-gray-500"
+                aria-hidden="true"
+              />
+            </div>
             <h3 className="mb-2 text-lg font-medium text-gray-900 dark:text-gray-50">
               Welcome to your portfolio dashboard
             </h3>
@@ -1051,7 +1058,7 @@ function AccountsContent() {
               }}
               className="inline-flex items-center gap-2"
             >
-              Add Your First Account
+              Add your first account
             </Button>
           </div>
         )}
