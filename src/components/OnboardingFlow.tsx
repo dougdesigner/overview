@@ -135,92 +135,17 @@ export function OnboardingFlow() {
         </div>
 
         {/* Navigation */}
-        {isLastStep ? (
-          // Choice cards on last step
-          <div className="mt-12">
-            {/* Step Indicators */}
-            <div className="mb-8 flex items-center justify-center gap-2">
-              {onboardingSteps.map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => setCurrentStep(index)}
-                  className={cx(
-                    "size-2 rounded-full transition-all duration-200",
-                    index === currentStep
-                      ? "w-8 bg-blue-500"
-                      : "bg-gray-300 hover:bg-gray-400 dark:bg-gray-700 dark:hover:bg-gray-600",
-                  )}
-                  aria-label={`Go to step ${index + 1}`}
-                />
-              ))}
-            </div>
-
-            {/* Choice Cards */}
-            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-              {/* Try Demo Card */}
-              <button
-                onClick={handleTryDemo}
-                className="group flex flex-col items-center rounded-xl border border-gray-200 bg-white p-6 text-center transition-all hover:border-blue-300 hover:shadow-md dark:border-gray-800 dark:bg-gray-900 dark:hover:border-blue-700"
-              >
-                <div className="mb-3 flex size-12 items-center justify-center rounded-full bg-blue-100 text-blue-600 dark:bg-blue-900/30 dark:text-blue-400">
-                  <Icon icon="carbon:view" className="size-6" />
-                </div>
-                <h3 className="mb-1 text-base font-semibold text-gray-900 dark:text-gray-50">
-                  Explore Demo Data
-                </h3>
-                <p className="mb-4 text-sm text-gray-500 dark:text-gray-400">
-                  See how it works with a sample portfolio
-                </p>
-                <span className="inline-flex items-center gap-1 text-sm font-medium text-blue-600 group-hover:gap-2 dark:text-blue-400">
-                  Try Demo
-                  <RiArrowRightLine className="size-4 transition-transform group-hover:translate-x-0.5" />
-                </span>
-              </button>
-
-              {/* Start Fresh Card */}
-              <button
-                onClick={handleStartFresh}
-                className="group flex flex-col items-center rounded-xl border border-gray-200 bg-white p-6 text-center transition-all hover:border-emerald-300 hover:shadow-md dark:border-gray-800 dark:bg-gray-900 dark:hover:border-emerald-700"
-              >
-                <div className="mb-3 flex size-12 items-center justify-center rounded-full bg-emerald-100 text-emerald-600 dark:bg-emerald-900/30 dark:text-emerald-400">
-                  <Icon icon="carbon:add" className="size-6" />
-                </div>
-                <h3 className="mb-1 text-base font-semibold text-gray-900 dark:text-gray-50">
-                  Start Fresh
-                </h3>
-                <p className="mb-4 text-sm text-gray-500 dark:text-gray-400">
-                  Add your first account and holdings
-                </p>
-                <span className="inline-flex items-center gap-1 text-sm font-medium text-emerald-600 group-hover:gap-2 dark:text-emerald-400">
-                  Get Started
-                  <RiArrowRightLine className="size-4 transition-transform group-hover:translate-x-0.5" />
-                </span>
-              </button>
-            </div>
-
-            {/* Previous button */}
-            <div className="mt-6 flex justify-center">
-              <Button
-                variant="ghost"
-                onClick={handlePrevious}
-                className="gap-2 text-gray-500"
-              >
-                <RiArrowLeftLine className="size-4" />
-                Back
-              </Button>
-            </div>
-          </div>
-        ) : (
-          // Normal navigation for other steps
-          <div className="mt-12 flex items-center justify-between">
+        <div className="mt-12">
+          {/* Step Navigation */}
+          <div className="mb-8 flex items-center justify-between">
             <Button
-              variant="secondary"
+              variant="ghost"
               onClick={handlePrevious}
               disabled={isFirstStep}
               className={cx("gap-2", isFirstStep && "invisible")}
             >
               <RiArrowLeftLine className="size-4" />
-              Previous
+              Back
             </Button>
 
             {/* Step Indicators */}
@@ -240,12 +165,60 @@ export function OnboardingFlow() {
               ))}
             </div>
 
-            <Button variant="primary" onClick={handleNext} className="gap-2">
+            <Button
+              variant="ghost"
+              onClick={handleNext}
+              disabled={isLastStep}
+              className={cx("gap-2", isLastStep && "invisible")}
+            >
               Next
               <RiArrowRightLine className="size-4" />
             </Button>
           </div>
-        )}
+
+          {/* Choice Cards - Always visible */}
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+            {/* Try Demo Card */}
+            <button
+              onClick={handleTryDemo}
+              className="group flex flex-col items-center rounded-xl border border-gray-200 bg-white p-6 text-center transition-all hover:border-blue-300 hover:shadow-md dark:border-gray-800 dark:bg-gray-900 dark:hover:border-blue-700"
+            >
+              <div className="mb-3 flex size-12 items-center justify-center rounded-full bg-blue-100 text-blue-600 dark:bg-blue-900/30 dark:text-blue-400">
+                <Icon icon="carbon:view" className="size-6" />
+              </div>
+              <h3 className="mb-1 text-base font-semibold text-gray-900 dark:text-gray-50">
+                Explore Demo Data
+              </h3>
+              <p className="mb-4 text-sm text-gray-500 dark:text-gray-400">
+                See how it works with a sample portfolio
+              </p>
+              <span className="inline-flex items-center gap-1 text-sm font-medium text-blue-600 group-hover:gap-2 dark:text-blue-400">
+                Try Demo
+                <RiArrowRightLine className="size-4 transition-transform group-hover:translate-x-0.5" />
+              </span>
+            </button>
+
+            {/* Start Fresh Card */}
+            <button
+              onClick={handleStartFresh}
+              className="group flex flex-col items-center rounded-xl border border-gray-200 bg-white p-6 text-center transition-all hover:border-emerald-300 hover:shadow-md dark:border-gray-800 dark:bg-gray-900 dark:hover:border-emerald-700"
+            >
+              <div className="mb-3 flex size-12 items-center justify-center rounded-full bg-emerald-100 text-emerald-600 dark:bg-emerald-900/30 dark:text-emerald-400">
+                <Icon icon="carbon:add" className="size-6" />
+              </div>
+              <h3 className="mb-1 text-base font-semibold text-gray-900 dark:text-gray-50">
+                Start Fresh
+              </h3>
+              <p className="mb-4 text-sm text-gray-500 dark:text-gray-400">
+                Add your first account and holdings
+              </p>
+              <span className="inline-flex items-center gap-1 text-sm font-medium text-emerald-600 group-hover:gap-2 dark:text-emerald-400">
+                Get Started
+                <RiArrowRightLine className="size-4 transition-transform group-hover:translate-x-0.5" />
+              </span>
+            </button>
+          </div>
+        </div>
       </div>
     </>
   )

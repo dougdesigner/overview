@@ -1751,7 +1751,7 @@ export function ExposureTreemapHighchartsWithLogos({
                     onClick={resetChartSettings}
                     className="text-gray-500 dark:text-gray-400"
                   >
-                    <Icon icon="carbon:reset" className="mr-2 size-4" aria-hidden="true" />
+                    <Icon icon="carbon:filter-reset" className="mr-2 size-4" aria-hidden="true" />
                     Reset Chart
                   </DropdownMenuItem>
                 </>
