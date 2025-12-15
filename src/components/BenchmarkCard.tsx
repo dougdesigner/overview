@@ -12,7 +12,7 @@ import {
 import { getFromStorage, setToStorage, STORAGE_KEYS } from "@/lib/localStorage"
 import { cx } from "@/lib/utils"
 import { Icon } from "@iconify/react"
-import React, { useEffect, useState } from "react"
+import React, { useCallback, useEffect, useState } from "react"
 
 // Benchmark types
 type BenchmarkType =
@@ -119,6 +119,165 @@ const MiniDonutPreview = React.memo(function MiniDonutPreview({
   )
 })
 
+// Selection Sheet Props
+interface SelectionSheetProps {
+  isOpen: boolean
+  onOpenChange: (open: boolean) => void
+  tempSelection: BenchmarkType | null
+  onSelectionChange: (key: BenchmarkType) => void
+  onSave: () => void
+}
+
+// Responsive Selection Modal: Bottom sheet on mobile, side drawer on desktop
+// Extracted as a memoized component to prevent re-renders when selection changes
+const SelectionSheet = React.memo(function SelectionSheet({
+  isOpen,
+  onOpenChange,
+  tempSelection,
+  onSelectionChange,
+  onSave,
+}: SelectionSheetProps) {
+  return (
+    <Dialog.Root open={isOpen} onOpenChange={onOpenChange}>
+      <Dialog.Portal>
+        {/* Overlay */}
+        <Dialog.Overlay className="fixed inset-0 z-50 bg-black/50 data-[state=open]:animate-dialogOverlayShow" />
+
+        {/* Mobile: Bottom Sheet / Desktop: Side Drawer */}
+        <Dialog.Content
+          onOpenAutoFocus={(e) => e.preventDefault()}
+          className={cx(
+            "fixed z-50 flex flex-col overflow-hidden border border-gray-200 bg-white shadow-lg dark:border-gray-800 dark:bg-gray-950",
+            // Mobile: Bottom sheet
+            "inset-x-0 bottom-0 mx-2 mb-2 max-h-[85vh] rounded-xl",
+            "data-[state=open]:animate-bottomSheetSlideUp data-[state=closed]:animate-bottomSheetSlideDown",
+            // Desktop (md+): Side drawer from right
+            "md:inset-y-0 md:bottom-auto md:left-auto md:right-0 md:mx-0 md:mb-0 md:h-full md:max-h-full md:w-[480px] md:rounded-none md:rounded-l-xl",
+            "md:data-[state=open]:animate-drawerSlideLeftAndFade md:data-[state=closed]:animate-drawerSlideRightAndFade"
+          )}
+        >
+          {/* Header */}
+          <div className="flex shrink-0 items-center justify-between border-b border-gray-200 px-4 py-3 dark:border-gray-800">
+            <Dialog.Title className="text-base font-semibold text-gray-900 dark:text-gray-50">
+              Select benchmark
+            </Dialog.Title>
+            <Dialog.Close asChild>
+              <button className="rounded-full p-1.5 text-gray-500 hover:bg-gray-100 hover:text-gray-700 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-gray-200">
+                <Icon icon="carbon:close" className="size-5" />
+              </button>
+            </Dialog.Close>
+          </div>
+
+          {/* Scrollable Body */}
+          <div className="flex-1 overflow-y-auto overscroll-contain p-4">
+            <p className="mb-4 text-sm text-gray-500">
+              Choose a risk profile that aligns with your investment strategy.
+              This will be used as a baseline for portfolio analysis.
+            </p>
+
+            <div className="grid grid-cols-1 gap-4">
+              {(Object.entries(BENCHMARKS) as [BenchmarkType, BenchmarkProfile][]).map(
+                ([key, benchmark]) => (
+                  <button
+                    key={key}
+                    type="button"
+                    onClick={() => onSelectionChange(key)}
+                    className={cx(
+                      "rounded-lg border-2 p-4 text-left transition-all hover:border-blue-500",
+                      tempSelection === key
+                        ? "border-blue-500 bg-blue-50 dark:bg-blue-950/20"
+                        : "border-gray-200 dark:border-gray-800"
+                    )}
+                  >
+                    <h5 className="font-semibold text-gray-900 dark:text-gray-50">
+                      {benchmark.name}
+                    </h5>
+                    <p className="mt-1 line-clamp-2 text-xs text-gray-500">
+                      {benchmark.description}
+                    </p>
+
+                    {/* Chart left, Legend right layout */}
+                    <div className="mt-4 flex items-center gap-3">
+                      {/* Mini donut chart preview */}
+                      <div className="w-24 shrink-0">
+                        <MiniDonutPreview allocation={benchmark.allocation} />
+                      </div>
+
+                      {/* Legend */}
+                      <div className="flex-1 space-y-1 text-xs">
+                        <div className="flex items-center justify-between">
+                          <span className="flex items-center gap-1.5">
+                            <span className={cx("size-2 rounded-sm", getAssetClassBgColor("U.S. Stocks"))} />
+                            <span className="text-gray-600 dark:text-gray-400">
+                              U.S. Stocks
+                            </span>
+                          </span>
+                          <span className="font-medium text-gray-900 dark:text-gray-100">
+                            {benchmark.allocation.usStocks}%
+                          </span>
+                        </div>
+                        <div className="flex items-center justify-between">
+                          <span className="flex items-center gap-1.5">
+                            <span className={cx("size-2 rounded-sm", getAssetClassBgColor("Non-U.S. Stocks"))} />
+                            <span className="text-gray-600 dark:text-gray-400">
+                              Non-U.S. Stocks
+                            </span>
+                          </span>
+                          <span className="font-medium text-gray-900 dark:text-gray-100">
+                            {benchmark.allocation.nonUsStocks}%
+                          </span>
+                        </div>
+                        <div className="flex items-center justify-between">
+                          <span className="flex items-center gap-1.5">
+                            <span className={cx("size-2 rounded-sm", getAssetClassBgColor("Fixed Income"))} />
+                            <span className="text-gray-600 dark:text-gray-400">
+                              Fixed Income
+                            </span>
+                          </span>
+                          <span className="font-medium text-gray-900 dark:text-gray-100">
+                            {benchmark.allocation.fixedIncome}%
+                          </span>
+                        </div>
+                        <div className="flex items-center justify-between">
+                          <span className="flex items-center gap-1.5">
+                            <span className={cx("size-2 rounded-sm", getAssetClassBgColor("Other"))} />
+                            <span className="text-gray-600 dark:text-gray-400">
+                              Other
+                            </span>
+                          </span>
+                          <span className="font-medium text-gray-900 dark:text-gray-100">
+                            {benchmark.allocation.other}%
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </button>
+                )
+              )}
+            </div>
+          </div>
+
+          {/* Footer */}
+          <div className="flex shrink-0 gap-2 border-t border-gray-200 p-4 dark:border-gray-800">
+            <Dialog.Close asChild>
+              <Button variant="secondary" className="flex-1">
+                Cancel
+              </Button>
+            </Dialog.Close>
+            <Button
+              onClick={onSave}
+              disabled={!tempSelection}
+              className="flex-1"
+            >
+              Save
+            </Button>
+          </div>
+        </Dialog.Content>
+      </Dialog.Portal>
+    </Dialog.Root>
+  )
+})
+
 interface BenchmarkCardProps {
   className?: string
   sectionId?: string
@@ -144,20 +303,25 @@ export function BenchmarkCard({
     }
   }, [])
 
-  // Save benchmark selection
-  const handleSave = () => {
+  // Save benchmark selection - memoized to prevent SelectionSheet re-renders
+  const handleSave = useCallback(() => {
     if (tempSelection) {
       setSelectedBenchmark(tempSelection)
       setToStorage(STORAGE_KEYS.BENCHMARK, tempSelection)
       setIsModalOpen(false)
     }
-  }
+  }, [tempSelection])
+
+  // Handle selection change - memoized for SelectionSheet
+  const handleSelectionChange = useCallback((key: BenchmarkType) => {
+    setTempSelection(key)
+  }, [])
 
   // Open modal with current selection
-  const openModal = () => {
+  const openModal = useCallback(() => {
     setTempSelection(selectedBenchmark)
     setIsModalOpen(true)
-  }
+  }, [selectedBenchmark])
 
   // Currency formatter
   const currencyFormatter = (number: number) => {
@@ -251,147 +415,6 @@ export function BenchmarkCard({
       }))
   }
 
-  // Responsive Selection Modal: Bottom sheet on mobile, side drawer on desktop
-  const SelectionSheet = () => (
-    <Dialog.Root open={isModalOpen} onOpenChange={setIsModalOpen}>
-      <Dialog.Portal>
-        {/* Overlay */}
-        <Dialog.Overlay className="fixed inset-0 z-50 bg-black/50 data-[state=open]:animate-dialogOverlayShow" />
-
-        {/* Mobile: Bottom Sheet / Desktop: Side Drawer */}
-        <Dialog.Content
-          onOpenAutoFocus={(e) => e.preventDefault()}
-          className={cx(
-            "fixed z-50 flex flex-col overflow-hidden border border-gray-200 bg-white shadow-lg dark:border-gray-800 dark:bg-gray-950",
-            // Mobile: Bottom sheet
-            "inset-x-0 bottom-0 mx-2 mb-2 max-h-[85vh] rounded-xl",
-            "data-[state=open]:animate-bottomSheetSlideUp data-[state=closed]:animate-bottomSheetSlideDown",
-            // Desktop (md+): Side drawer from right
-            "md:inset-y-0 md:bottom-auto md:left-auto md:right-0 md:mx-0 md:mb-0 md:h-full md:max-h-full md:w-[480px] md:rounded-none md:rounded-l-xl",
-            "md:data-[state=open]:animate-drawerSlideLeftAndFade md:data-[state=closed]:animate-drawerSlideRightAndFade"
-          )}
-        >
-          {/* Header */}
-          <div className="flex shrink-0 items-center justify-between border-b border-gray-200 px-4 py-3 dark:border-gray-800">
-            <Dialog.Title className="text-base font-semibold text-gray-900 dark:text-gray-50">
-              Select benchmark
-            </Dialog.Title>
-            <Dialog.Close asChild>
-              <button className="rounded-full p-1.5 text-gray-500 hover:bg-gray-100 hover:text-gray-700 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-gray-200">
-                <Icon icon="carbon:close" className="size-5" />
-              </button>
-            </Dialog.Close>
-          </div>
-
-          {/* Scrollable Body */}
-          <div className="flex-1 overflow-y-auto overscroll-contain p-4">
-            <p className="mb-4 text-sm text-gray-500">
-              Choose a risk profile that aligns with your investment strategy.
-              This will be used as a baseline for portfolio analysis.
-            </p>
-
-            <div className="grid grid-cols-1 gap-4">
-              {(Object.entries(BENCHMARKS) as [BenchmarkType, BenchmarkProfile][]).map(
-                ([key, benchmark]) => (
-                  <button
-                    key={key}
-                    type="button"
-                    onClick={() => setTempSelection(key)}
-                    className={cx(
-                      "rounded-lg border-2 p-4 text-left transition-all hover:border-blue-500",
-                      tempSelection === key
-                        ? "border-blue-500 bg-blue-50 dark:bg-blue-950/20"
-                        : "border-gray-200 dark:border-gray-800"
-                    )}
-                  >
-                    <h5 className="font-semibold text-gray-900 dark:text-gray-50">
-                      {benchmark.name}
-                    </h5>
-                    <p className="mt-1 line-clamp-2 text-xs text-gray-500">
-                      {benchmark.description}
-                    </p>
-
-                    {/* Chart left, Legend right layout */}
-                    <div className="mt-4 flex items-center gap-3">
-                      {/* Mini donut chart preview */}
-                      <div className="w-24 shrink-0">
-                        <MiniDonutPreview allocation={benchmark.allocation} />
-                      </div>
-
-                      {/* Legend */}
-                      <div className="flex-1 space-y-1 text-xs">
-                        <div className="flex items-center justify-between">
-                          <span className="flex items-center gap-1.5">
-                            <span className={cx("size-2 rounded-sm", getAssetClassBgColor("U.S. Stocks"))} />
-                            <span className="text-gray-600 dark:text-gray-400">
-                              U.S. Stocks
-                            </span>
-                          </span>
-                          <span className="font-medium text-gray-900 dark:text-gray-100">
-                            {benchmark.allocation.usStocks}%
-                          </span>
-                        </div>
-                        <div className="flex items-center justify-between">
-                          <span className="flex items-center gap-1.5">
-                            <span className={cx("size-2 rounded-sm", getAssetClassBgColor("Non-U.S. Stocks"))} />
-                            <span className="text-gray-600 dark:text-gray-400">
-                              Non-U.S. Stocks
-                            </span>
-                          </span>
-                          <span className="font-medium text-gray-900 dark:text-gray-100">
-                            {benchmark.allocation.nonUsStocks}%
-                          </span>
-                        </div>
-                        <div className="flex items-center justify-between">
-                          <span className="flex items-center gap-1.5">
-                            <span className={cx("size-2 rounded-sm", getAssetClassBgColor("Fixed Income"))} />
-                            <span className="text-gray-600 dark:text-gray-400">
-                              Fixed Income
-                            </span>
-                          </span>
-                          <span className="font-medium text-gray-900 dark:text-gray-100">
-                            {benchmark.allocation.fixedIncome}%
-                          </span>
-                        </div>
-                        <div className="flex items-center justify-between">
-                          <span className="flex items-center gap-1.5">
-                            <span className={cx("size-2 rounded-sm", getAssetClassBgColor("Other"))} />
-                            <span className="text-gray-600 dark:text-gray-400">
-                              Other
-                            </span>
-                          </span>
-                          <span className="font-medium text-gray-900 dark:text-gray-100">
-                            {benchmark.allocation.other}%
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-                  </button>
-                )
-              )}
-            </div>
-          </div>
-
-          {/* Footer */}
-          <div className="flex shrink-0 gap-2 border-t border-gray-200 p-4 dark:border-gray-800">
-            <Dialog.Close asChild>
-              <Button variant="secondary" className="flex-1">
-                Cancel
-              </Button>
-            </Dialog.Close>
-            <Button
-              onClick={handleSave}
-              disabled={!tempSelection}
-              className="flex-1"
-            >
-              Save
-            </Button>
-          </div>
-        </Dialog.Content>
-      </Dialog.Portal>
-    </Dialog.Root>
-  )
-
   // Empty State
   if (!selectedBenchmark) {
     return (
@@ -430,7 +453,13 @@ export function BenchmarkCard({
             </Button>
           </div>
         </Card>
-        <SelectionSheet />
+        <SelectionSheet
+          isOpen={isModalOpen}
+          onOpenChange={setIsModalOpen}
+          tempSelection={tempSelection}
+          onSelectionChange={handleSelectionChange}
+          onSave={handleSave}
+        />
       </>
     )
   }
@@ -538,7 +567,13 @@ export function BenchmarkCard({
         </div>
 
       </Card>
-      <SelectionSheet />
+      <SelectionSheet
+        isOpen={isModalOpen}
+        onOpenChange={setIsModalOpen}
+        tempSelection={tempSelection}
+        onSelectionChange={handleSelectionChange}
+        onSave={handleSave}
+      />
     </>
   )
 }
