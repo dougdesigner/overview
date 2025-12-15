@@ -581,12 +581,11 @@ export function ExposureTable({ holdings, accounts, dataVersion, selectedAccount
       createColumns({
         toggleExpandAll,
         areAllExpanded,
-        logoUrls,
         accounts,
         totalStocksValue,
         displayValue,
       }),
-    [toggleExpandAll, areAllExpanded, logoUrls, accounts, totalStocksValue, displayValue],
+    [toggleExpandAll, areAllExpanded, accounts, totalStocksValue, displayValue],
   )
 
   const table = useReactTable({

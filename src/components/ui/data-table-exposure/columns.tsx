@@ -1,8 +1,7 @@
 "use client"
 
 import { Badge } from "@/components/Badge"
-import { stockDomainOverrides } from "@/lib/logoUtils"
-import { getTickerColor } from "@/lib/tickerColors"
+import { TickerLogo } from "@/components/ui/TickerLogo"
 import { institutionLabels } from "@/lib/institutionUtils"
 import { InstitutionLogo } from "@/components/ui/InstitutionLogo"
 import { cx, toProperCase } from "@/lib/utils"
@@ -12,8 +11,6 @@ import {
   RiArrowUpSLine,
 } from "@remixicon/react"
 import { ColumnDef } from "@tanstack/react-table"
-import Image from "next/image"
-import { useEffect, useState } from "react"
 import { Account, StockExposure } from "./types"
 
 const formatCurrency = (value: number) => {
@@ -29,175 +26,11 @@ const formatPercentage = (value: number) => {
   return `${value.toFixed(2)}%`
 }
 
-// Cache for company domains to avoid repeated API calls
-const domainCache = new Map<string, string>()
-
-// Helper function for special ticker logos (Google, Apple, Figma need padding)
-const getLogoStyle = (ticker: string) => {
-  const upperTicker = ticker?.toUpperCase() || ""
-  if (upperTicker === "GOOGL" || upperTicker === "GOOG") {
-    return { background: "#f2f3fa", needsPadding: true }
-  }
-  if (upperTicker === "AAPL") {
-    return { background: "#ebebeb", needsPadding: true }
-  }
-  if (upperTicker === "FIGM" || upperTicker === "FIG") {
-    return { background: "#f1f3f9", needsPadding: true }
-  }
-  return { background: "#f1f3fa", needsPadding: false }
-}
-
-// Component for rendering ticker with logo
-function TickerCell({
-  ticker,
-  isETFBreakdown,
-  isDirectHolding,
-  logoUrls,
-  domain,
-}: {
-  ticker: string
-  isETFBreakdown?: boolean
-  isDirectHolding?: boolean
-  logoUrls?: Record<string, string | null>
-  domain?: string // Domain from holding data (for search-added stocks)
-}) {
-  const [logoError, setLogoError] = useState(false)
-  const [companyDomain, setCompanyDomain] = useState<string | undefined>(
-    domainCache.get(ticker),
-  )
-
-  // Special handling for BRK.B - use custom text logo
-  const isBerkshire =
-    ticker.toUpperCase() === "BRK.B" || ticker.toUpperCase() === "BRK-B"
-
-  // Determine if this is a stock or ETF
-  // Direct holding breakdowns should be treated as stocks
-  // ETF contribution breakdowns should be treated as ETFs
-  const treatAsStock = !isETFBreakdown || isDirectHolding
-
-  // Try to get logo URL from cached logoUrls first (skip for Berkshire)
-  const logoUrl = isBerkshire
-    ? null
-    : logoUrls?.[ticker.toUpperCase()] ?? null
-  const color =
-    isETFBreakdown && !isDirectHolding
-      ? "bg-gray-200 dark:bg-gray-700"
-      : getTickerColor(ticker, "stock")
-
-  // If no domain and it's a stock (not an ETF contribution), check domain prop, overrides, then fetch from Alpha Vantage
-  useEffect(() => {
-    if (!companyDomain && !logoUrl && treatAsStock && ticker) {
-      const upperTicker = ticker.toUpperCase()
-
-      // Priority 1: Use domain from holding data (search-added stocks)
-      if (domain) {
-        const domainUrl = domain.startsWith("http")
-          ? domain
-          : `https://${domain}`
-        domainCache.set(ticker, domainUrl)
-        setCompanyDomain(domainUrl)
-        return
-      }
-
-      // Priority 2: Check if we have an override
-      const override = stockDomainOverrides[upperTicker]
-      if (override) {
-        // Use override, skip API call
-        domainCache.set(ticker, `https://${override}`)
-        setCompanyDomain(`https://${override}`)
-      } else if (!domainCache.has(ticker)) {
-        // Priority 3: API lookup - only if no override exists
-        // Mark as fetching to avoid duplicate requests
-        domainCache.set(ticker, "")
-
-        // Call API to get company overview with OfficialSite
-        fetch("/api/company-overview", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ symbols: [ticker] }),
-        })
-          .then((res) => res.json())
-          .then((data) => {
-            if (data[ticker]?.officialSite) {
-              const site = data[ticker].officialSite
-              domainCache.set(ticker, site)
-              setCompanyDomain(site)
-            }
-          })
-          .catch((err) => {
-            console.error(`Failed to fetch domain for ${ticker}:`, err)
-            // Remove from cache on error
-            domainCache.delete(ticker)
-          })
-      }
-    }
-  }, [ticker, isETFBreakdown, companyDomain, logoUrl, treatAsStock, domain])
-
-  return (
-    <div className="flex items-center gap-2">
-      {isBerkshire && treatAsStock ? (
-        // Custom Berkshire Hathaway logo
-        <div
-          className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full font-serif text-xs font-bold text-white"
-          style={{ backgroundColor: "#000080" }}
-          aria-hidden="true"
-        >
-          BH
-        </div>
-      ) : logoUrl && !logoError ? (
-        (() => {
-          const logoStyle = getLogoStyle(ticker)
-          return logoStyle.needsPadding ? (
-            <div
-              className="flex size-6 shrink-0 items-center justify-center rounded-full"
-              style={{ backgroundColor: logoStyle.background }}
-            >
-              <Image
-                src={logoUrl}
-                alt={ticker}
-                width={48}
-                height={48}
-                className="size-[18px] rounded-full object-contain"
-                onError={() => setLogoError(true)}
-              />
-            </div>
-          ) : (
-            <Image
-              src={logoUrl}
-              alt={ticker}
-              width={48}
-              height={48}
-              className="size-6 rounded-full object-cover"
-              style={{ backgroundColor: logoStyle.background }}
-              onError={() => setLogoError(true)}
-            />
-          )
-        })()
-      ) : (
-        <div
-          className={cx("h-6 w-6 shrink-0 rounded-full", color)}
-          aria-hidden="true"
-        />
-      )}
-      <Badge
-        variant="flat"
-        className={cx(
-          "font-semibold",
-          isETFBreakdown && "text-gray-600 dark:text-gray-400",
-        )}
-      >
-        {ticker}
-      </Badge>
-    </div>
-  )
-}
-
 type ExposureDisplayValue = "market-value" | "pct-stocks" | "pct-portfolio"
 
 interface ColumnsProps {
   toggleExpandAll: () => void
   areAllExpanded: () => boolean
-  logoUrls?: Record<string, string | null>
   accounts: Account[]
   displayValue?: ExposureDisplayValue
   totalStocksValue?: number
@@ -206,7 +39,6 @@ interface ColumnsProps {
 export const createColumns = ({
   toggleExpandAll,
   areAllExpanded,
-  logoUrls,
   accounts,
   displayValue = "pct-portfolio",
   totalStocksValue = 0,
@@ -286,14 +118,29 @@ export const createColumns = ({
       const isDirectHolding =
         isETFBreakdown && row.original.id?.includes("-direct")
 
+      // Determine the type for TickerLogo
+      // ETF contribution breakdowns should show as ETF, everything else as stock
+      const logoType = isETFBreakdown && !isDirectHolding ? "etf" : "stock"
+
       return (
-        <TickerCell
-          ticker={ticker}
-          isETFBreakdown={isETFBreakdown}
-          isDirectHolding={isDirectHolding}
-          logoUrls={logoUrls}
-          domain={row.original.domain}
-        />
+        <div className="flex items-center gap-2">
+          <TickerLogo
+            ticker={ticker}
+            type={logoType}
+            className="size-6"
+            domain={row.original.domain}
+            companyName={row.original.name}
+          />
+          <Badge
+            variant="flat"
+            className={cx(
+              "font-semibold",
+              isETFBreakdown && "text-gray-600 dark:text-gray-400",
+            )}
+          >
+            {ticker}
+          </Badge>
+        </div>
       )
     },
     sortingFn: (rowA, rowB) => {
