@@ -38,6 +38,8 @@ interface HighchartsDonutChartProps {
   colors: string[]
   colorMapping?: Record<string, string> // Optional explicit color mapping
   useAssetClassColors?: boolean // Flag to use asset class specific colors
+  tabName?: string // Tab name for conditional tooltip formatting
+  portfolioTotal?: number // Full portfolio value for Portfolio % calculation
 }
 
 export function HighchartsDonutChart({
@@ -48,6 +50,8 @@ export function HighchartsDonutChart({
   colors,
   colorMapping,
   useAssetClassColors = false,
+  tabName,
+  portfolioTotal,
 }: HighchartsDonutChartProps) {
   const { resolvedTheme } = useTheme()
   const isDark = resolvedTheme === "dark"
@@ -207,16 +211,11 @@ export function HighchartsDonutChart({
     tooltip: {
       useHTML: true,
       followTouchMove: false,
+      outside: true,
       headerFormat: "",
-      pointFormat:
-        '<div style="padding: 2px;">' +
-        '<div style="font-weight: 600; margin-bottom: 4px;">{point.name}</div>' +
-        "<div>Allocation: <b>{point.percentage:.1f}%</b></div>" +
-        "<div>Value: <b>${point.y:,.0f}</b></div>" +
-        "</div>",
       backgroundColor: isDark ? "#1f2937" : "#ffffff",
       borderColor: isDark ? "#4b5563" : "#e5e7eb",
-      borderRadius: 2,
+      borderRadius: 6,
       borderWidth: 1,
       shadow: {
         color: "rgba(0, 0, 0, 0.1)",
@@ -228,6 +227,30 @@ export function HighchartsDonutChart({
       style: {
         color: isDark ? "#f3f4f6" : "#111827",
         fontSize: "12px",
+      },
+      pointFormatter: function () {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const point = this as any
+        const value = point.y || 0
+        const pctAllocation = point.percentage?.toFixed(1) || "0.0"
+
+        // For Stocks tab, show Portfolio % and Stock %
+        if (tabName === "Stocks" && portfolioTotal) {
+          const pctPortfolio = ((value / portfolioTotal) * 100).toFixed(1)
+          return `<div style="padding: 2px;">
+            <div style="font-weight: 600; margin-bottom: 4px;">${point.name}</div>
+            <div>Market Value: <b>${valueFormatter(value)}</b></div>
+            <div>Portfolio %: <b>${pctPortfolio}%</b></div>
+            <div>Stock %: <b>${pctAllocation}%</b></div>
+          </div>`
+        }
+
+        // Default for other tabs
+        return `<div style="padding: 2px;">
+          <div style="font-weight: 600; margin-bottom: 4px;">${point.name}</div>
+          <div>Market Value: <b>${valueFormatter(value)}</b></div>
+          <div>Allocation: <b>${pctAllocation}%</b></div>
+        </div>`
       },
     },
     legend: {

@@ -337,6 +337,8 @@ const AssetAllocationCard = React.forwardRef<
                     colors={category.colors}
                     height={280}
                     useAssetClassColors={category.name === "Assets"}
+                    tabName={category.name}
+                    portfolioTotal={getTabTotal(allocationData[0])}
                   />
                 </div>
                 {category.data.length > 0 && (
