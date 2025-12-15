@@ -460,7 +460,7 @@ export default function ExposurePage() {
       )}
 
       {/* Exposure Table */}
-      <div className="pt-6" id="exposure-section">
+      <div className="mt-6" id="exposure-section">
         {portfolioHoldings.length === 0 ? (
           // Empty state
           <div className="flex flex-col items-center py-12 text-center">
