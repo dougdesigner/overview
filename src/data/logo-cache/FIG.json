@@ -2,7 +2,6 @@
   "ticker": "FIG",
   "logoUrl": "https://img.logo.dev/figma.com?token=pk_ARDallYvRuqePZO2jZF9Cw&retina=true&fallback=monogram&format=webp&size=400",
   "domain": "figma.com",
-  "companyName": "Figma, Inc.",
-  "source": "officialSite",
-  "cachedAt": "2025-12-12T11:17:53.090Z"
+  "source": "override",
+  "cachedAt": "2025-12-15T05:19:09.980Z"
 }

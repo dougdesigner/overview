@@ -1,5 +1,7 @@
 {
   "ticker": "MSTR",
   "logoUrl": "https://img.logo.dev/microstrategy.com?token=pk_ARDallYvRuqePZO2jZF9Cw&retina=true&fallback=monogram&format=webp&size=400",
-  "cachedAt": "2025-10-20T06:00:12.707Z"
+  "domain": "microstrategy.com",
+  "source": "override",
+  "cachedAt": "2025-12-15T05:19:10.019Z"
 }

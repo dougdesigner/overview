@@ -1,8 +1,7 @@
 {
   "ticker": "WLTH",
-  "logoUrl": "https://img.logo.dev/wlth.com?token=pk_ARDallYvRuqePZO2jZF9Cw&retina=true&fallback=monogram&format=webp&size=400",
-  "domain": "wlth.com",
-  "companyName": "WLTH Company",
-  "source": "companyName",
-  "cachedAt": "2025-12-15T04:23:20.077Z"
+  "logoUrl": "https://img.logo.dev/wealthfront.com?token=pk_ARDallYvRuqePZO2jZF9Cw&retina=true&fallback=monogram&format=webp&size=400",
+  "domain": "wealthfront.com",
+  "source": "override",
+  "cachedAt": "2025-12-15T05:19:09.979Z"
 }

@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server"
-import { getTickerLogoUrl, extractDomainsFromCompanyName } from "@/lib/logoUtils"
+import { getTickerLogoUrl, extractDomainsFromCompanyName, stockDomainOverrides } from "@/lib/logoUtils"
 import { getCompanyProfile, extractDomainFromUrl } from "@/lib/companyProfileService"
 import fs from "fs/promises"
 import path from "path"
@@ -77,19 +77,31 @@ export async function POST(request: NextRequest) {
       const upperTicker = ticker.toUpperCase()
       const providedDomain = domains?.[i]
 
-      // Check file-based cache first
+      let logoUrl: string | null = null
+      let usedDomain: string | undefined
+      let companyName: string | undefined
+      let source: LogoCache['source'] | undefined
+
+      // 1. Check stockDomainOverrides FIRST (always takes precedence over cache)
+      const overrideDomain = stockDomainOverrides[upperTicker]
+      if (overrideDomain && token) {
+        logoUrl = `https://img.logo.dev/${overrideDomain}?token=${token}&retina=true&fallback=monogram&format=webp&size=400`
+        usedDomain = overrideDomain
+        source = 'override'
+        results[upperTicker] = logoUrl
+        // Update cache with override (so future requests are faster)
+        await writeCachedLogo(upperTicker, logoUrl, usedDomain, undefined, source)
+        continue
+      }
+
+      // 2. Check file-based cache
       const fileCached = await readCachedLogo(upperTicker)
       if (fileCached && fileCached.logoUrl) {
         results[upperTicker] = fileCached.logoUrl
         continue
       }
 
-      let logoUrl: string | null = null
-      let usedDomain: string | undefined
-      let companyName: string | undefined
-      let source: LogoCache['source'] | undefined
-
-      // Try existing logic first (checks overrides, provided domain, ETF/mutual fund domains)
+      // 3. Try existing logic (provided domain, ETF/mutual fund domains)
       logoUrl = getTickerLogoUrl(upperTicker, providedDomain)
 
       if (logoUrl) {

@@ -1,5 +1,7 @@
 {
   "ticker": "INTU",
   "logoUrl": "https://img.logo.dev/intuit.com?token=pk_ARDallYvRuqePZO2jZF9Cw&retina=true&fallback=monogram&format=webp&size=400",
-  "cachedAt": "2025-10-20T05:40:02.039Z"
+  "domain": "intuit.com",
+  "source": "override",
+  "cachedAt": "2025-12-15T05:19:10.005Z"
 }

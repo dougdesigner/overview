@@ -1,5 +1,7 @@
 {
   "ticker": "RY",
   "logoUrl": "https://img.logo.dev/royalbank.com?token=pk_ARDallYvRuqePZO2jZF9Cw&retina=true&fallback=monogram&format=webp&size=400",
-  "cachedAt": "2025-10-20T05:49:46.069Z"
+  "domain": "royalbank.com",
+  "source": "override",
+  "cachedAt": "2025-12-15T05:19:10.008Z"
 }

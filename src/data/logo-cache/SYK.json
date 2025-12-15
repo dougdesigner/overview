@@ -1,5 +1,7 @@
 {
   "ticker": "SYK",
   "logoUrl": "https://img.logo.dev/stryker.com?token=pk_ARDallYvRuqePZO2jZF9Cw&retina=true&fallback=monogram&format=webp&size=400",
-  "cachedAt": "2025-10-20T06:00:12.707Z"
+  "domain": "stryker.com",
+  "source": "override",
+  "cachedAt": "2025-12-15T05:19:10.018Z"
 }

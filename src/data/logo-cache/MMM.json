@@ -1,5 +1,7 @@
 {
   "ticker": "MMM",
   "logoUrl": "https://img.logo.dev/3m.com?token=pk_ARDallYvRuqePZO2jZF9Cw&retina=true&fallback=monogram&format=webp&size=400",
-  "cachedAt": "2025-10-19T07:41:41.884Z"
+  "domain": "3m.com",
+  "source": "override",
+  "cachedAt": "2025-12-15T05:19:10.035Z"
 }
