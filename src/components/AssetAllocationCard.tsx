@@ -18,6 +18,8 @@ export interface AssetAllocationItem {
   institution?: string // For accounts tab
   type?: "stock" | "fund" | "cash" | "other" // For holdings tab to determine logo display
   ticker?: string // Optional ticker symbol (may differ from name)
+  domain?: string // Company domain for logo lookup
+  companyName?: string // Full company name for logo derivation
 }
 
 export interface AssetAllocationData {
@@ -358,6 +360,8 @@ const AssetAllocationCard = React.forwardRef<
                                 ticker={item.ticker || item.name}
                                 type={item.type === "fund" ? "etf" : "stock"}
                                 className="size-6"
+                                domain={item.domain}
+                                companyName={item.companyName}
                               />
                               {/* Ticker symbol badge */}
                               <Badge variant="flat" className="font-semibold">

@@ -262,6 +262,8 @@ export default function OverviewPage() {
                             "border-violet-500 dark:border-violet-500",
                             "border-rose-500 dark:border-rose-500",
                           ][index] || "border-gray-500 dark:border-gray-500",
+                        domain: (h as any).domain,
+                        companyName: h.name,
                       }))
                   })(),
                   colors: [
