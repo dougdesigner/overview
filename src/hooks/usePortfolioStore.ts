@@ -334,18 +334,8 @@ export function usePortfolioStore() {
   const [error, setError] = useState<string | null>(null)
   const [hasInitialized, setHasInitialized] = useState(false)
   const [dataVersion, setDataVersion] = useState(0)
-  const [isDemoMode, setDemoModeState] = useState(() => {
-    if (typeof window !== 'undefined') {
-      // Check URL param first (for screenshot automation)
-      const urlParams = new URLSearchParams(window.location.search)
-      if (urlParams.get('demo') === 'true') {
-        return true
-      }
-      // Fall back to localStorage
-      return localStorage.getItem('portfolio_demo_mode') === 'true'
-    }
-    return false
-  })
+  // Initialize to false to avoid hydration mismatch - will be set from localStorage in useEffect
+  const [isDemoMode, setDemoModeState] = useState(false)
   const [hasViewedStocksPage, setHasViewedStocksPage] = useState(false)
 
   // Wrapper for setDemoMode that persists to localStorage
@@ -373,15 +363,23 @@ export function usePortfolioStore() {
     return () => window.removeEventListener('storage', handleStorage)
   }, [])
 
-  // Check for demo mode from URL param (for screenshot automation)
+  // Initialize demo mode from URL param or localStorage (after hydration to avoid mismatch)
   useEffect(() => {
     if (typeof window !== 'undefined') {
+      // Check URL param first (for screenshot automation)
       const urlParams = new URLSearchParams(window.location.search)
       if (urlParams.get('demo') === 'true') {
-        setDemoMode(true)
+        setDemoModeState(true)
+        localStorage.setItem('portfolio_demo_mode', 'true')
+      } else {
+        // Load from localStorage
+        const stored = localStorage.getItem('portfolio_demo_mode')
+        if (stored === 'true') {
+          setDemoModeState(true)
+        }
       }
     }
-  }, [setDemoMode])
+  }, [])
 
   // Load data from localStorage on mount
   useEffect(() => {

@@ -37,6 +37,7 @@
     "@react-spring/web": "^10.0.2",
     "@react-stately/datepicker": "^3.13.0",
     "@remixicon/react": "^4.6.0",
+    "@sentry/nextjs": "^10",
     "@tanstack/match-sorter-utils": "^8.19.4",
     "@tanstack/react-table": "^8.21.2",
     "clsx": "^2.1.1",

@@ -24,6 +24,7 @@ import {
   RiEyeOffLine,
   RiLockLine,
 } from "@remixicon/react"
+import * as Sentry from "@sentry/nextjs"
 import { useTheme } from "next-themes"
 import { usePathname, useRouter } from "next/navigation"
 import React from "react"
@@ -134,6 +135,54 @@ function DropdownUserProfile() {
     }
   }
 
+  // Handle feedback - click the Sentry feedback button
+  const handleFeedback = () => {
+    // Try to find and click the Sentry feedback button
+
+    // 1. Try Sentry container with ID (may have shadow DOM)
+    const sentryRoot = document.getElementById("sentry-feedback")
+    if (sentryRoot) {
+      // Check for shadow DOM first (newer Sentry SDK versions)
+      if (sentryRoot.shadowRoot) {
+        const shadowButton = sentryRoot.shadowRoot.querySelector("button")
+        if (shadowButton) {
+          shadowButton.click()
+          return
+        }
+      }
+      // Fallback to regular DOM
+      const button = sentryRoot.querySelector("button")
+      if (button) {
+        button.click()
+        return
+      }
+    }
+
+    // 2. Look for button with our configured triggerLabel text "Feedback"
+    const allButtons = document.querySelectorAll("button")
+    for (const button of allButtons) {
+      const text = button.textContent?.trim()
+      if (text === "Feedback") {
+        ;(button as HTMLButtonElement).click()
+        return
+      }
+    }
+
+    // 3. Try any element with sentry-feedback in ID
+    const sentryElements = document.querySelectorAll('[id*="sentry-feedback"]')
+    for (const el of sentryElements) {
+      const button = el.querySelector("button") || (el.tagName === "BUTTON" ? el : null)
+      if (button) {
+        ;(button as HTMLButtonElement).click()
+        return
+      }
+    }
+
+    // Debug fallback
+    console.log("Sentry feedback button not found. Available Sentry elements:",
+      document.querySelectorAll('[id*="sentry"]'))
+  }
+
   if (!mounted) {
     return null
   }
@@ -214,6 +263,14 @@ function DropdownUserProfile() {
                   Active
                 </span>
               )}
+            </DropdownMenuItem>
+            <DropdownMenuItem onClick={handleFeedback}>
+              <Icon
+                icon="carbon:chat"
+                className="mr-2 size-4 shrink-0"
+                aria-hidden="true"
+              />
+              Send Feedback
             </DropdownMenuItem>
           </DropdownMenuGroup>
 

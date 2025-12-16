@@ -9,12 +9,13 @@ import { usePortfolioStore } from "@/hooks/usePortfolioStore"
 import {
   getAssetClassBgColor,
   getAssetClassBorderColor,
-  getAssetClassColor,
 } from "@/lib/assetClassColors"
 import { getInstitutionDisplayLabel } from "@/lib/institutionUtils"
 import { getCachedLogoUrls } from "@/lib/logoUtils"
 import { cx } from "@/lib/utils"
-import { useEffect, useMemo, useRef, useState } from "react"
+import { Icon } from "@iconify/react"
+import { RiArrowRightLine } from "@remixicon/react"
+import { useEffect, useMemo, useState } from "react"
 
 export default function ShowcasePage() {
   const {
@@ -27,8 +28,18 @@ export default function ShowcasePage() {
     isLoading,
   } = usePortfolioStore()
 
-  // Track if we auto-enabled demo mode so we can restore it on unmount
-  const autoEnabledDemoMode = useRef(false)
+  const handleTryDemo = () => {
+    setDemoMode(true)
+    window.location.href = "/overview"
+  }
+
+  const handleStartFresh = () => {
+    // Write directly to localStorage to avoid triggering the auto-enable effect
+    // (setDemoMode would cause a re-render where accounts.length === 0 && !isDemoMode
+    // would re-enable demo mode before navigation completes)
+    localStorage.setItem("portfolio_demo_mode", "false")
+    window.location.href = "/accounts"
+  }
 
   // Enable demo mode if user has no data (so showcase page isn't blank)
   useEffect(() => {
@@ -37,7 +48,6 @@ export default function ShowcasePage() {
 
     // If no accounts and not already in demo mode, enable it
     if (accounts.length === 0 && !isDemoMode) {
-      autoEnabledDemoMode.current = true
       setDemoMode(true)
     }
   }, [accounts.length, isDemoMode, isLoading, setDemoMode])
@@ -551,6 +561,53 @@ export default function ShowcasePage() {
             <div className="pointer-events-none absolute inset-0 rounded-lg shadow-sm ring-1 ring-black/5 dark:ring-white/15 max-lg:rounded-b-[2rem] lg:rounded-br-[2rem]" />
           </div>
         </div>
+
+        {/* Footer CTA Cards - only shown when viewing demo data (no user data) */}
+        {isDemoMode && (
+          <div className="mt-16 border-t border-gray-200 pt-12 dark:border-gray-800">
+            <div className="grid w-full grid-cols-1 gap-4 sm:grid-cols-2 lg:mx-auto lg:max-w-2xl">
+              {/* Try Demo Card */}
+              <button
+                onClick={handleTryDemo}
+                className="group flex flex-col items-center rounded-xl border border-gray-200 bg-white p-6 text-center transition-all hover:border-blue-300 hover:shadow-md dark:border-gray-800 dark:bg-gray-900 dark:hover:border-blue-700"
+              >
+                <div className="mb-3 flex size-12 items-center justify-center rounded-full bg-blue-100 text-blue-600 dark:bg-blue-900/30 dark:text-blue-400">
+                  <Icon icon="carbon:view" className="size-6" />
+                </div>
+                <h3 className="mb-1 text-base font-semibold text-gray-900 dark:text-gray-50">
+                  Explore Demo Data
+                </h3>
+                <p className="mb-4 text-sm text-gray-500 dark:text-gray-400">
+                  See how it works with a sample portfolio
+                </p>
+                <span className="inline-flex items-center gap-1 text-sm font-medium text-blue-600 group-hover:gap-2 dark:text-blue-400">
+                  Try Demo
+                  <RiArrowRightLine className="size-4 transition-transform group-hover:translate-x-0.5" />
+                </span>
+              </button>
+
+              {/* Start Fresh Card */}
+              <button
+                onClick={handleStartFresh}
+                className="group flex flex-col items-center rounded-xl border border-gray-200 bg-white p-6 text-center transition-all hover:border-emerald-300 hover:shadow-md dark:border-gray-800 dark:bg-gray-900 dark:hover:border-emerald-700"
+              >
+                <div className="mb-3 flex size-12 items-center justify-center rounded-full bg-emerald-100 text-emerald-600 dark:bg-emerald-900/30 dark:text-emerald-400">
+                  <Icon icon="carbon:add" className="size-6" />
+                </div>
+                <h3 className="mb-1 text-base font-semibold text-gray-900 dark:text-gray-50">
+                  Start Fresh
+                </h3>
+                <p className="mb-4 text-sm text-gray-500 dark:text-gray-400">
+                  Add your first account and holdings
+                </p>
+                <span className="inline-flex items-center gap-1 text-sm font-medium text-emerald-600 group-hover:gap-2 dark:text-emerald-400">
+                  Get Started
+                  <RiArrowRightLine className="size-4 transition-transform group-hover:translate-x-0.5" />
+                </span>
+              </button>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   )
