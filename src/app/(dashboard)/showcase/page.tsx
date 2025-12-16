@@ -14,11 +14,33 @@ import {
 import { getInstitutionDisplayLabel } from "@/lib/institutionUtils"
 import { getCachedLogoUrls } from "@/lib/logoUtils"
 import { cx } from "@/lib/utils"
-import { useEffect, useMemo, useState } from "react"
+import { useEffect, useMemo, useRef, useState } from "react"
 
 export default function ShowcasePage() {
-  const { accounts, holdings, totalPortfolioValue, portfolioAllocation } =
-    usePortfolioStore()
+  const {
+    accounts,
+    holdings,
+    totalPortfolioValue,
+    portfolioAllocation,
+    isDemoMode,
+    setDemoMode,
+    isLoading,
+  } = usePortfolioStore()
+
+  // Track if we auto-enabled demo mode so we can restore it on unmount
+  const autoEnabledDemoMode = useRef(false)
+
+  // Enable demo mode if user has no data (so showcase page isn't blank)
+  useEffect(() => {
+    // Wait for loading to complete before checking
+    if (isLoading) return
+
+    // If no accounts and not already in demo mode, enable it
+    if (accounts.length === 0 && !isDemoMode) {
+      autoEnabledDemoMode.current = true
+      setDemoMode(true)
+    }
+  }, [accounts.length, isDemoMode, isLoading, setDemoMode])
 
   // Get exposure calculations for the stocks treemap
   const { exposures, totalValue: exposureTotalValue } =
