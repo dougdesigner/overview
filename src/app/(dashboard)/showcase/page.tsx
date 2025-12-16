@@ -1,5 +1,6 @@
 "use client"
 
+import { CategoryBar } from "@/components/CategoryBar"
 import { HighchartsDonutChart } from "@/components/HighchartsDonutChartWrapper"
 import { SankeyChartHighcharts } from "@/components/SankeyChartHighchartsWrapper"
 import { ExposureTreemapHighchartsWithLogos } from "@/components/ui/data-table-exposure/ExposureTreemapHighchartsWrapper"
@@ -8,6 +9,7 @@ import { usePortfolioStore } from "@/hooks/usePortfolioStore"
 import {
   getAssetClassBgColor,
   getAssetClassBorderColor,
+  getAssetClassColor,
 } from "@/lib/assetClassColors"
 import { getInstitutionDisplayLabel } from "@/lib/institutionUtils"
 import { getCachedLogoUrls } from "@/lib/logoUtils"
@@ -22,21 +24,45 @@ export default function ShowcasePage() {
   const { exposures, totalValue: exposureTotalValue } =
     useExposureCalculations()
 
+  // Combine GOOG and GOOGL into a single entry
+  const combinedExposures = useMemo(() => {
+    const googl = exposures.find((e) => e.ticker === "GOOGL")
+    const goog = exposures.find((e) => e.ticker === "GOOG")
+
+    if (!googl || !goog) return exposures
+
+    // Create combined entry using GOOGL as base
+    const combined = {
+      ...googl,
+      name: "Alphabet Inc.",
+      directShares: googl.directShares + goog.directShares,
+      etfExposure: googl.etfExposure + goog.etfExposure,
+      totalShares: googl.totalShares + goog.totalShares,
+      totalValue: googl.totalValue + goog.totalValue,
+      percentOfPortfolio: googl.percentOfPortfolio + goog.percentOfPortfolio,
+    }
+
+    // Return all entries except GOOG, with GOOGL replaced by combined
+    return exposures
+      .filter((e) => e.ticker !== "GOOG")
+      .map((e) => (e.ticker === "GOOGL" ? combined : e))
+  }, [exposures])
+
   // Logo URLs for stocks treemap
   const [logoUrls, setLogoUrls] = useState<Record<string, string | null>>({})
 
   // Fetch logo URLs when exposures change
   useEffect(() => {
     const fetchLogos = async () => {
-      if (exposures.length === 0) return
+      if (combinedExposures.length === 0) return
 
-      const tickers = exposures.map((exp) => exp.ticker.toUpperCase())
+      const tickers = combinedExposures.map((exp) => exp.ticker.toUpperCase())
       const logos = await getCachedLogoUrls(tickers)
       setLogoUrls(logos)
     }
 
     fetchLogos()
-  }, [exposures])
+  }, [combinedExposures])
 
   // Currency formatter
   const formatCurrency = (value: number) => {
@@ -265,16 +291,17 @@ export default function ShowcasePage() {
             <div className="relative flex h-full flex-col overflow-hidden rounded-[calc(theme(borderRadius.lg)+1px)] lg:rounded-tr-[calc(2rem+1px)]">
               <div className="h-80 p-4">
                 <ExposureTreemapHighchartsWithLogos
-                  exposures={exposures}
+                  exposures={combinedExposures}
                   totalValue={exposureTotalValue || totalPortfolioValue}
                   accounts={accounts}
                   selectedAccounts={["all"]}
                   logoUrls={logoUrls}
                   showControls={false}
+                  showLegend={false}
                   height={280}
                 />
               </div>
-              <div className="p-6 pt-2">
+              <div className="p-6 pt-0">
                 <h3 className="text-sm/4 font-semibold text-blue-600 dark:text-blue-400">
                   Stock Exposure
                 </h3>
@@ -295,35 +322,46 @@ export default function ShowcasePage() {
             <div className="absolute inset-0 rounded-lg bg-white dark:bg-gray-800 lg:rounded-bl-[2rem]" />
             <div className="relative flex h-full flex-col overflow-hidden rounded-[calc(theme(borderRadius.lg)+1px)] lg:rounded-bl-[calc(2rem+1px)]">
               <div className="flex-1 p-6">
-                <h3 className="text-sm/4 font-semibold text-blue-600 dark:text-blue-400">
-                  Portfolio Value
-                </h3>
-                <p className="mt-4 text-4xl font-semibold tracking-tight text-gray-950 dark:text-white">
+                <p className="text-base font-medium text-gray-900 dark:text-gray-50">
+                  Portfolio value
+                </p>
+                <p className="mt-1 text-3xl font-semibold text-gray-900 dark:text-gray-50">
                   {formatCurrency(totalPortfolioValue)}
                 </p>
+                <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
+                  {accounts.length}{" "}
+                  {accounts.length === 1 ? "account" : "accounts"} ·{" "}
+                  {holdings.length}{" "}
+                  {holdings.length === 1 ? "holding" : "holdings"}
+                </p>
 
-                {/* Account & Holdings count */}
-                <div className="mt-6 grid grid-cols-2 gap-4">
-                  <div>
-                    <p className="text-2xl font-semibold text-gray-900 dark:text-gray-50">
-                      {accounts.length}
-                    </p>
-                    <p className="text-sm text-gray-500 dark:text-gray-400">
-                      Accounts
-                    </p>
-                  </div>
-                  <div>
-                    <p className="text-2xl font-semibold text-gray-900 dark:text-gray-50">
-                      {holdings.length}
-                    </p>
-                    <p className="text-sm text-gray-500 dark:text-gray-400">
-                      Holdings
-                    </p>
-                  </div>
-                </div>
+                {/* Category Bar */}
+                <CategoryBar
+                  values={[
+                    portfolioAllocation.usStocks,
+                    portfolioAllocation.nonUsStocks,
+                    portfolioAllocation.fixedIncome,
+                    portfolioAllocation.cash,
+                  ].filter((v) => v > 0)}
+                  colors={
+                    [
+                      portfolioAllocation.usStocks > 0 && "blue",
+                      portfolioAllocation.nonUsStocks > 0 && "cyan",
+                      portfolioAllocation.fixedIncome > 0 && "amber",
+                      portfolioAllocation.cash > 0 && "emerald",
+                    ].filter(Boolean) as (
+                      | "blue"
+                      | "cyan"
+                      | "amber"
+                      | "emerald"
+                    )[]
+                  }
+                  className="mt-6"
+                  showLabels={false}
+                />
 
-                {/* Asset allocation mini bars */}
-                <div className="mt-6 space-y-2">
+                {/* Asset class legend */}
+                <ul className="mt-4 flex flex-wrap gap-x-6 gap-y-2 text-sm">
                   {[
                     {
                       name: "U.S. Stocks",
@@ -341,26 +379,36 @@ export default function ShowcasePage() {
                   ]
                     .filter((item) => item.value > 0)
                     .map((item) => (
-                      <div key={item.name} className="flex items-center gap-2">
-                        <div className="h-1.5 flex-1 overflow-hidden rounded-full bg-gray-100 dark:bg-gray-700">
-                          <div
+                      <li key={item.name}>
+                        <span className="text-base font-semibold text-gray-900 dark:text-gray-50">
+                          {item.value % 1 === 0
+                            ? item.value
+                            : item.value.toFixed(1)}
+                          %
+                        </span>
+                        <div className="flex items-center gap-2">
+                          <span
                             className={cx(
-                              "h-full rounded-full transition-all",
+                              "size-2.5 shrink-0 rounded-sm",
                               getAssetClassBgColor(item.name),
                             )}
-                            style={{ width: `${Math.min(item.value, 100)}%` }}
+                            aria-hidden="true"
                           />
+                          <span className="text-sm">{item.name}</span>
                         </div>
-                        <span className="w-16 text-right text-xs tabular-nums text-gray-600 dark:text-gray-400">
-                          {item.value.toFixed(0)}%
-                        </span>
-                      </div>
+                      </li>
                     ))}
-                </div>
+                </ul>
               </div>
               <div className="p-6 pt-0">
-                <p className="max-w-lg text-sm/6 text-gray-600 dark:text-gray-400">
-                  Total value across all accounts and asset classes.
+                <h3 className="text-sm/4 font-semibold text-blue-600 dark:text-blue-400">
+                  Overview
+                </h3>
+                <p className="mt-2 text-lg font-medium tracking-tight text-gray-950 dark:text-white">
+                  Total portfolio summary
+                </p>
+                <p className="mt-2 max-w-lg text-sm/6 text-gray-600 dark:text-gray-400">
+                  Track your total value across all accounts and asset classes.
                 </p>
               </div>
             </div>
@@ -371,15 +419,18 @@ export default function ShowcasePage() {
           <div className="relative lg:col-span-2">
             <div className="absolute inset-0 rounded-lg bg-white dark:bg-gray-800" />
             <div className="relative flex h-full flex-col overflow-hidden rounded-[calc(theme(borderRadius.lg)+1px)]">
-              <div className="h-64 p-4">
+              <div className="flex-1 p-4">
                 <SankeyChartHighcharts
                   data={sankeyData}
                   height={220}
-                  colors={["#3b82f6", "#06b6d4", "#f59e0b", "#10b981"]}
-                  institutions={accounts.map((a) => ({
-                    key: a.institution,
-                    label: getInstitutionDisplayLabel(a.institution),
-                  }))}
+                  colors={["blue", "cyan", "amber", "emerald"]}
+                  institutions={[
+                    ...new Set(
+                      accounts.map((a) =>
+                        getInstitutionDisplayLabel(a.institution),
+                      ),
+                    ),
+                  ]}
                 />
               </div>
               <div className="p-6 pt-0">
@@ -403,15 +454,15 @@ export default function ShowcasePage() {
             <div className="absolute inset-0 rounded-lg bg-white dark:bg-gray-800 max-lg:rounded-b-[2rem] lg:rounded-br-[2rem]" />
             <div className="relative flex h-full flex-col overflow-hidden rounded-[calc(theme(borderRadius.lg)+1px)] max-lg:rounded-b-[calc(2rem+1px)] lg:rounded-br-[calc(2rem+1px)]">
               <div className="flex-1 p-6">
-                <h3 className="text-sm/4 font-semibold text-blue-600 dark:text-blue-400">
+                <p className="text-base font-medium text-gray-900 dark:text-gray-50">
                   Benchmark
-                </h3>
-                <p className="mt-2 text-lg font-medium tracking-tight text-gray-950 dark:text-white">
+                </p>
+                <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
                   vs. Moderate Portfolio
                 </p>
 
                 {/* Comparison bars */}
-                <div className="mt-6 space-y-4">
+                <div className="mt-4 space-y-4">
                   {[
                     {
                       name: "U.S. Stocks",
@@ -464,9 +515,14 @@ export default function ShowcasePage() {
                 </div>
               </div>
               <div className="p-6 pt-0">
-                <p className="max-w-lg text-sm/6 text-gray-600 dark:text-gray-400">
-                  Compare your allocation against a moderate risk profile
-                  benchmark.
+                <h3 className="text-sm/4 font-semibold text-blue-600 dark:text-blue-400">
+                  Benchmark
+                </h3>
+                <p className="mt-2 text-lg font-medium tracking-tight text-gray-950 dark:text-white">
+                  Target allocation comparison
+                </p>
+                <p className="mt-2 max-w-lg text-sm/6 text-gray-600 dark:text-gray-400">
+                  Compare your allocation against a moderate risk profile.
                 </p>
               </div>
             </div>

@@ -76,6 +76,7 @@ interface ExposureTreemapHighchartsProps {
   displayValue?: DisplayValue // Display value from page-level settings
   onChartSettingsChange?: (hasChanges: boolean) => void // Callback when chart settings change
   showControls?: boolean // Show/hide toolbar buttons (default true)
+  showLegend?: boolean // Show/hide legend below chart (default true)
   height?: number // Override chart height (default: responsive 350/500)
 }
 
@@ -143,6 +144,7 @@ export function ExposureTreemapHighchartsWithLogos({
   displayValue: displayValueProp = "pct-portfolio",
   onChartSettingsChange,
   showControls = true,
+  showLegend = true,
   height: heightProp,
 }: ExposureTreemapHighchartsProps) {
   const [chartType, setChartType] = useState<ChartType>("treemap")
@@ -1704,8 +1706,14 @@ export function ExposureTreemapHighchartsWithLogos({
     )
   }
 
+  // When showControls is false, render without Card wrapper for embedding
+  const Wrapper = showControls ? Card : "div"
+  const wrapperProps = showControls
+    ? { className: "pb-4 pt-6", "data-chart": "exposure-map" }
+    : { className: "h-full", "data-chart": "exposure-map" }
+
   return (
-    <Card className={showControls ? "pb-4 pt-6" : "p-0"} data-chart="exposure-map">
+    <Wrapper {...wrapperProps}>
       {showControls && (
         <div className="flex items-center justify-between">
           <h3
@@ -1938,110 +1946,112 @@ export function ExposureTreemapHighchartsWithLogos({
           </div>
 
           {/* Legend */}
-          <div className="mt-4">
-            <p className="mb-1 text-sm font-medium text-gray-700 dark:text-gray-300">
-              {holdingsFilter === "mag7"
-                ? "Magnificent 7"
-                : holdingsFilter === "top7"
-                  ? "Top 7 Holdings"
-                  : holdingsFilter === "top10"
-                    ? "Top 10 Holdings"
-                    : groupingMode === "none"
-                      ? "Top Holdings"
-                      : "Top Sectors"}
-            </p>
-            <ul className="flex flex-wrap gap-x-10 gap-y-4 text-sm">
-              {/* Total at START for filtered views */}
-              {filteredTotal !== null && (
-                <li className="border-r border-gray-300 pr-6 dark:border-gray-700">
-                  <span className="text-base font-semibold text-gray-900 dark:text-gray-50">
-                    {getLegendDisplayValue(filteredTotal)}
-                  </span>
-                  <div className="flex items-center gap-2">
-                    <span className="text-sm font-medium">
-                      {holdingsFilter === "mag7"
-                        ? "Magnificent 7"
-                        : holdingsFilter === "top7"
-                          ? "Top 7"
-                          : "Top 10"}{" "}
-                      Total
-                    </span>
-                  </div>
-                </li>
-              )}
-              {topGroups.map((item, index) => {
-                const logoUrl = showLogo ? item.logoUrl : null
-                const isCash = item.name === "CASH" || item.name === "Cash"
-                const isBonds = item.name === "Bonds" || item.name === "BONDS"
-
-                // Non-stock sectors for legend coloring
-                const nonStockSectors = [
-                  "Cash",
-                  "CASH",
-                  "Bonds",
-                  "BONDS",
-                  "Real Estate",
-                  "Commodities",
-                  "Other",
-                ]
-                const isNonStock = nonStockSectors.includes(item.name)
-
-                // Determine color for legend indicator
-                let legendColor =
-                  groupingMode === "none"
-                    ? colors[0]
-                    : colors[index % colors.length]
-                if (isCash) legendColor = CASH_COLOR
-                else if (isBonds) legendColor = BONDS_COLOR
-                else if (isNonStock) legendColor = OTHER_COLOR
-
-                return (
-                  <li key={`${item.name}-${index}`}>
+          {showLegend && (
+            <div className="mt-4">
+              <p className="mb-1 text-sm font-medium text-gray-700 dark:text-gray-300">
+                {holdingsFilter === "mag7"
+                  ? "Magnificent 7"
+                  : holdingsFilter === "top7"
+                    ? "Top 7 Holdings"
+                    : holdingsFilter === "top10"
+                      ? "Top 10 Holdings"
+                      : groupingMode === "none"
+                        ? "Top Holdings"
+                        : "Top Sectors"}
+              </p>
+              <ul className="flex flex-wrap gap-x-10 gap-y-4 text-sm">
+                {/* Total at START for filtered views */}
+                {filteredTotal !== null && (
+                  <li className="border-r border-gray-300 pr-6 dark:border-gray-700">
                     <span className="text-base font-semibold text-gray-900 dark:text-gray-50">
-                      {getLegendDisplayValue(item.value)}
+                      {getLegendDisplayValue(filteredTotal)}
                     </span>
                     <div className="flex items-center gap-2">
-                      {showLogo && isCash ? (
-                        // Show "$" for cash entries
-                        <div className="flex size-5 shrink-0 items-center justify-center rounded-full bg-emerald-100 dark:bg-emerald-900/30">
-                          <span className="text-xs font-bold text-emerald-600 dark:text-emerald-400">
-                            $
-                          </span>
-                        </div>
-                      ) : showLogo && isBonds ? (
-                        // Show bond icon for bonds entries
-                        <div className="flex size-5 shrink-0 items-center justify-center rounded-full bg-amber-100 dark:bg-amber-900/30">
-                          <span className="text-xs font-bold text-amber-600 dark:text-amber-400">
-                            B
-                          </span>
-                        </div>
-                      ) : logoUrl ? (
-                        <div className="flex size-5 shrink-0 items-center justify-center overflow-hidden rounded-full bg-gray-100 dark:bg-gray-800">
-                          {/* eslint-disable-next-line @next/next/no-img-element */}
-                          <img
-                            src={logoUrl}
-                            alt={item.name}
-                            className="h-full w-full object-contain"
-                          />
-                        </div>
-                      ) : (
-                        <span
-                          className="size-2.5 shrink-0 rounded-sm"
-                          style={{
-                            backgroundColor: legendColor,
-                          }}
-                          aria-hidden="true"
-                        />
-                      )}
-                      <span className="text-sm">{item.name}</span>
+                      <span className="text-sm font-medium">
+                        {holdingsFilter === "mag7"
+                          ? "Magnificent 7"
+                          : holdingsFilter === "top7"
+                            ? "Top 7"
+                            : "Top 10"}{" "}
+                        Total
+                      </span>
                     </div>
                   </li>
-                )
-              })}
-            </ul>
-          </div>
+                )}
+                {topGroups.map((item, index) => {
+                  const logoUrl = showLogo ? item.logoUrl : null
+                  const isCash = item.name === "CASH" || item.name === "Cash"
+                  const isBonds = item.name === "Bonds" || item.name === "BONDS"
+
+                  // Non-stock sectors for legend coloring
+                  const nonStockSectors = [
+                    "Cash",
+                    "CASH",
+                    "Bonds",
+                    "BONDS",
+                    "Real Estate",
+                    "Commodities",
+                    "Other",
+                  ]
+                  const isNonStock = nonStockSectors.includes(item.name)
+
+                  // Determine color for legend indicator
+                  let legendColor =
+                    groupingMode === "none"
+                      ? colors[0]
+                      : colors[index % colors.length]
+                  if (isCash) legendColor = CASH_COLOR
+                  else if (isBonds) legendColor = BONDS_COLOR
+                  else if (isNonStock) legendColor = OTHER_COLOR
+
+                  return (
+                    <li key={`${item.name}-${index}`}>
+                      <span className="text-base font-semibold text-gray-900 dark:text-gray-50">
+                        {getLegendDisplayValue(item.value)}
+                      </span>
+                      <div className="flex items-center gap-2">
+                        {showLogo && isCash ? (
+                          // Show "$" for cash entries
+                          <div className="flex size-5 shrink-0 items-center justify-center rounded-full bg-emerald-100 dark:bg-emerald-900/30">
+                            <span className="text-xs font-bold text-emerald-600 dark:text-emerald-400">
+                              $
+                            </span>
+                          </div>
+                        ) : showLogo && isBonds ? (
+                          // Show bond icon for bonds entries
+                          <div className="flex size-5 shrink-0 items-center justify-center rounded-full bg-amber-100 dark:bg-amber-900/30">
+                            <span className="text-xs font-bold text-amber-600 dark:text-amber-400">
+                              B
+                            </span>
+                          </div>
+                        ) : logoUrl ? (
+                          <div className="flex size-5 shrink-0 items-center justify-center overflow-hidden rounded-full bg-gray-100 dark:bg-gray-800">
+                            {/* eslint-disable-next-line @next/next/no-img-element */}
+                            <img
+                              src={logoUrl}
+                              alt={item.name}
+                              className="h-full w-full object-contain"
+                            />
+                          </div>
+                        ) : (
+                          <span
+                            className="size-2.5 shrink-0 rounded-sm"
+                            style={{
+                              backgroundColor: legendColor,
+                            }}
+                            aria-hidden="true"
+                          />
+                        )}
+                        <span className="text-sm">{item.name}</span>
+                      </div>
+                    </li>
+                  )
+                })}
+              </ul>
+            </div>
+          )}
         </>
       )}
-    </Card>
+    </Wrapper>
   )
 }
