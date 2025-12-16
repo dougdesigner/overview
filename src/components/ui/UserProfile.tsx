@@ -25,15 +25,34 @@ import {
   RiLockLine,
 } from "@remixicon/react"
 import { useTheme } from "next-themes"
-import { useRouter } from "next/navigation"
+import { usePathname, useRouter } from "next/navigation"
 import React from "react"
 
 function DropdownUserProfile() {
   const [mounted, setMounted] = React.useState(false)
   const { theme, setTheme } = useTheme()
   const router = useRouter()
+  const pathname = usePathname()
   const { exportPortfolioData, importPortfolioData, isDemoMode, setDemoMode } = usePortfolioStore()
   const fileInputRef = React.useRef<HTMLInputElement>(null)
+
+  // Check if user has real data stored (independent of demo mode)
+  // We check localStorage directly since the store returns demo data when in demo mode
+  const [hasRealData, setHasRealData] = React.useState(true) // Default to true to avoid flash
+  React.useEffect(() => {
+    try {
+      const stored = localStorage.getItem("portfolio-accounts")
+      if (stored) {
+        const parsed = JSON.parse(stored)
+        const accounts = parsed.data || parsed
+        setHasRealData(Array.isArray(accounts) && accounts.length > 0)
+      } else {
+        setHasRealData(false)
+      }
+    } catch {
+      setHasRealData(false)
+    }
+  }, [isDemoMode]) // Re-check when demo mode changes
 
   // Handle demo mode toggle
   const handleDemoModeToggle = () => {
@@ -174,7 +193,10 @@ function DropdownUserProfile() {
               />
               Import Portfolio
             </DropdownMenuItem>
-            <DropdownMenuItem onClick={handleDemoModeToggle}>
+            <DropdownMenuItem
+              onClick={handleDemoModeToggle}
+              disabled={isDemoMode && !hasRealData && pathname === "/showcase"}
+            >
               {isDemoMode ? (
                 <RiEyeOffLine
                   className="mr-2 size-4 shrink-0"
