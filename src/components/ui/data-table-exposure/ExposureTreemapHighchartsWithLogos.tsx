@@ -1181,6 +1181,7 @@ export function ExposureTreemapHighchartsWithLogos({
       {
         type: "treemap",
         name: "All",
+        animation: false, // Disable initial load animation (traversing animations still work)
         allowTraversingTree: groupingMode !== "none", // Disable tree traversing for flat structure
         layoutAlgorithm: "strip",
         alternateStartingDirection: true,
