@@ -146,6 +146,8 @@ export default function ExposurePage() {
     switch (filter) {
       case "mag7":
         return "Magnificent 7"
+      case "mag10":
+        return "Magnificent 10"
       case "top7":
         return "Top 7"
       case "top10":
