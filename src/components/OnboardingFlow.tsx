@@ -21,9 +21,9 @@ export function OnboardingFlow() {
   return (
     <div className="flex flex-col items-center justify-center px-4 py-8">
       {/* Marketing CTA Section */}
-      <div className="mb-8 text-center">
+      <div className="mb-8 text-left">
         <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-50 sm:text-4xl">
-          See what you actually own
+          See your clear financial picture
         </h1>
         <p className="mt-4 text-lg text-gray-600 dark:text-gray-400">
           Most portfolios have more overlap than you'd expect. See yours
