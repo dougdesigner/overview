@@ -1,21 +1,41 @@
 "use client"
 
-import { AccountTreemap } from "@/components/AccountTreemapWrapper"
 import { HighchartsDonutChart } from "@/components/HighchartsDonutChartWrapper"
-import { HoldingsSunburst } from "@/components/HoldingsSunburstWrapper"
 import { SankeyChartHighcharts } from "@/components/SankeyChartHighchartsWrapper"
-import { institutionLabels, usePortfolioStore } from "@/hooks/usePortfolioStore"
+import { ExposureTreemapHighchartsWithLogos } from "@/components/ui/data-table-exposure/ExposureTreemapHighchartsWrapper"
+import { useExposureCalculations } from "@/hooks/useExposureCalculations"
+import { usePortfolioStore } from "@/hooks/usePortfolioStore"
 import {
   getAssetClassBgColor,
   getAssetClassBorderColor,
 } from "@/lib/assetClassColors"
 import { getInstitutionDisplayLabel } from "@/lib/institutionUtils"
+import { getCachedLogoUrls } from "@/lib/logoUtils"
 import { cx } from "@/lib/utils"
-import { useMemo } from "react"
+import { useEffect, useMemo, useState } from "react"
 
 export default function ShowcasePage() {
   const { accounts, holdings, totalPortfolioValue, portfolioAllocation } =
     usePortfolioStore()
+
+  // Get exposure calculations for the stocks treemap
+  const { exposures, totalValue: exposureTotalValue } = useExposureCalculations()
+
+  // Logo URLs for stocks treemap
+  const [logoUrls, setLogoUrls] = useState<Record<string, string | null>>({})
+
+  // Fetch logo URLs when exposures change
+  useEffect(() => {
+    const fetchLogos = async () => {
+      if (exposures.length === 0) return
+
+      const tickers = exposures.map((exp) => exp.ticker.toUpperCase())
+      const logos = await getCachedLogoUrls(tickers)
+      setLogoUrls(logos)
+    }
+
+    fetchLogos()
+  }, [exposures])
 
   // Currency formatter
   const formatCurrency = (value: number) => {
@@ -67,19 +87,6 @@ export default function ShowcasePage() {
         },
       ].filter((d) => d.amount > 0),
     [assetValues, portfolioAllocation],
-  )
-
-  // Transform accounts for treemap
-  const treemapAccounts = useMemo(
-    () =>
-      accounts.map((acc) => ({
-        ...acc,
-        institutionLabel:
-          institutionLabels[
-            acc.institution as keyof typeof institutionLabels
-          ] || acc.institution,
-      })),
-    [accounts],
   )
 
   // Sankey chart data
@@ -196,21 +203,6 @@ export default function ShowcasePage() {
     }
   }, [accounts])
 
-  // Holdings for sunburst - need to include allocation data
-  const holdingsWithAllocations = useMemo(() => {
-    return holdings.map((holding) => {
-      const account = accounts.find((a) => a.id === holding.accountId)
-      return {
-        ...holding,
-        allocation:
-          totalPortfolioValue > 0
-            ? (holding.totalValue / totalPortfolioValue) * 100
-            : 0,
-        accountName: account?.name || "Unknown",
-      }
-    })
-  }, [holdings, accounts, totalPortfolioValue])
-
   // Benchmark comparison data
   const benchmarkAllocation = {
     usStocks: 46,
@@ -223,10 +215,10 @@ export default function ShowcasePage() {
     <div className="bg-white py-12 dark:bg-gray-950 sm:py-16">
       <div className="mx-auto max-w-2xl px-6 lg:max-w-7xl lg:px-8">
         <h2 className="text-base/7 font-semibold text-blue-600 dark:text-blue-400">
-          Overview Dashboard
+          Overview dashboard
         </h2>
         <p className="mt-2 max-w-lg text-pretty text-4xl font-semibold tracking-tight text-gray-950 dark:text-white sm:text-5xl">
-          Your complete and clear picture
+          See your clear financial picture
         </p>
         {/* <p className="mt-4 max-w-2xl text-lg text-gray-600 dark:text-gray-400">
           Track {accounts.length} accounts with {holdings.length} holdings worth{" "}
@@ -266,65 +258,110 @@ export default function ShowcasePage() {
             <div className="pointer-events-none absolute inset-0 rounded-lg shadow-sm ring-1 ring-black/5 dark:ring-white/15 max-lg:rounded-t-[2rem] lg:rounded-tl-[2rem]" />
           </div>
 
-          {/* Sunburst Chart - Holdings Breakdown */}
+          {/* Stocks Treemap - Stock Exposure */}
           <div className="relative lg:col-span-3">
             <div className="absolute inset-0 rounded-lg bg-white dark:bg-gray-800 lg:rounded-tr-[2rem]" />
             <div className="relative flex h-full flex-col overflow-hidden rounded-[calc(theme(borderRadius.lg)+1px)] lg:rounded-tr-[calc(2rem+1px)]">
-              <div className="h-80 p-4">
-                <HoldingsSunburst
-                  holdings={holdingsWithAllocations}
+              <div className="-mx-4 -mt-6 h-[340px]">
+                <ExposureTreemapHighchartsWithLogos
+                  exposures={exposures}
+                  totalValue={exposureTotalValue || totalPortfolioValue}
                   accounts={accounts}
-                  height={280}
-                  selectedAccountId="all"
-                  onAccountChange={() => {}}
+                  selectedAccounts={["all"]}
+                  logoUrls={logoUrls}
                 />
               </div>
-              <div className="p-6 pt-0">
+              <div className="p-6 pt-2">
                 <h3 className="text-sm/4 font-semibold text-blue-600 dark:text-blue-400">
-                  Holdings Breakdown
+                  Stock Exposure
                 </h3>
                 <p className="mt-2 text-lg font-medium tracking-tight text-gray-950 dark:text-white">
-                  Drill-down into your investments
+                  Individual stock holdings
                 </p>
                 <p className="mt-2 max-w-lg text-sm/6 text-gray-600 dark:text-gray-400">
-                  Interactive sunburst chart showing your portfolio hierarchy.
-                  Click to drill down into accounts and individual holdings.
+                  See your direct and indirect stock exposure from ETFs and
+                  funds, grouped by sector.
                 </p>
               </div>
             </div>
             <div className="pointer-events-none absolute inset-0 rounded-lg shadow-sm ring-1 ring-black/5 dark:ring-white/15 lg:rounded-tr-[2rem]" />
           </div>
 
-          {/* Treemap - Account Distribution */}
+          {/* Portfolio Value Summary */}
           <div className="relative lg:col-span-2">
             <div className="absolute inset-0 rounded-lg bg-white dark:bg-gray-800 lg:rounded-bl-[2rem]" />
             <div className="relative flex h-full flex-col overflow-hidden rounded-[calc(theme(borderRadius.lg)+1px)] lg:rounded-bl-[calc(2rem+1px)]">
-              <div className="h-64 p-4">
-                <AccountTreemap
-                  accounts={treemapAccounts}
-                  selectedAccounts={[]}
-                  groupBy="institution"
-                  displayValue="value"
-                  height={220}
-                />
+              <div className="flex-1 p-6">
+                <h3 className="text-sm/4 font-semibold text-blue-600 dark:text-blue-400">
+                  Portfolio Value
+                </h3>
+                <p className="mt-4 text-4xl font-semibold tracking-tight text-gray-950 dark:text-white">
+                  {formatCurrency(totalPortfolioValue)}
+                </p>
+
+                {/* Account & Holdings count */}
+                <div className="mt-6 grid grid-cols-2 gap-4">
+                  <div>
+                    <p className="text-2xl font-semibold text-gray-900 dark:text-gray-50">
+                      {accounts.length}
+                    </p>
+                    <p className="text-sm text-gray-500 dark:text-gray-400">
+                      Accounts
+                    </p>
+                  </div>
+                  <div>
+                    <p className="text-2xl font-semibold text-gray-900 dark:text-gray-50">
+                      {holdings.length}
+                    </p>
+                    <p className="text-sm text-gray-500 dark:text-gray-400">
+                      Holdings
+                    </p>
+                  </div>
+                </div>
+
+                {/* Asset allocation mini bars */}
+                <div className="mt-6 space-y-2">
+                  {[
+                    { name: "U.S. Stocks", value: portfolioAllocation.usStocks },
+                    {
+                      name: "Non-U.S. Stocks",
+                      value: portfolioAllocation.nonUsStocks,
+                    },
+                    {
+                      name: "Fixed Income",
+                      value: portfolioAllocation.fixedIncome,
+                    },
+                    { name: "Cash", value: portfolioAllocation.cash },
+                  ]
+                    .filter((item) => item.value > 0)
+                    .map((item) => (
+                      <div key={item.name} className="flex items-center gap-2">
+                        <div className="h-1.5 flex-1 overflow-hidden rounded-full bg-gray-100 dark:bg-gray-700">
+                          <div
+                            className={cx(
+                              "h-full rounded-full transition-all",
+                              getAssetClassBgColor(item.name),
+                            )}
+                            style={{ width: `${Math.min(item.value, 100)}%` }}
+                          />
+                        </div>
+                        <span className="w-16 text-right text-xs tabular-nums text-gray-600 dark:text-gray-400">
+                          {item.value.toFixed(0)}%
+                        </span>
+                      </div>
+                    ))}
+                </div>
               </div>
               <div className="p-6 pt-0">
-                <h3 className="text-sm/4 font-semibold text-blue-600 dark:text-blue-400">
-                  Accounts
-                </h3>
-                <p className="mt-2 text-lg font-medium tracking-tight text-gray-950 dark:text-white">
-                  Account distribution
-                </p>
-                <p className="mt-2 max-w-lg text-sm/6 text-gray-600 dark:text-gray-400">
-                  See how your portfolio is spread across different
-                  institutions.
+                <p className="max-w-lg text-sm/6 text-gray-600 dark:text-gray-400">
+                  Total value across all accounts and asset classes.
                 </p>
               </div>
             </div>
             <div className="pointer-events-none absolute inset-0 rounded-lg shadow-sm ring-1 ring-black/5 dark:ring-white/15 lg:rounded-bl-[2rem]" />
           </div>
 
-          {/* Sankey Chart - Portfolio Flow */}
+          {/* Sankey Chart - Accounts */}
           <div className="relative lg:col-span-2">
             <div className="absolute inset-0 rounded-lg bg-white dark:bg-gray-800" />
             <div className="relative flex h-full flex-col overflow-hidden rounded-[calc(theme(borderRadius.lg)+1px)]">
@@ -341,14 +378,14 @@ export default function ShowcasePage() {
               </div>
               <div className="p-6 pt-0">
                 <h3 className="text-sm/4 font-semibold text-blue-600 dark:text-blue-400">
-                  Portfolio Flow
+                  Accounts
                 </h3>
                 <p className="mt-2 text-lg font-medium tracking-tight text-gray-950 dark:text-white">
-                  Money flow visualization
+                  Account allocation flow
                 </p>
                 <p className="mt-2 max-w-lg text-sm/6 text-gray-600 dark:text-gray-400">
-                  Track how money flows from institutions to accounts to asset
-                  classes.
+                  Visualize how money flows from institutions to accounts and
+                  asset classes.
                 </p>
               </div>
             </div>
