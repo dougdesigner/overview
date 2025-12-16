@@ -2,7 +2,7 @@
 
 A modern portfolio management dashboard built with [Next.js 15](https://nextjs.org), [Tremor Raw](https://tremor.so), and [Highcharts](https://www.highcharts.com). Track accounts, holdings, and analyze portfolio exposure across asset classes, sectors, and institutions through rich interactive visualizations.
 
-**Capstone Project** - A comprehensive portfolio management application demonstrating modern React architecture, advanced data visualization with Highcharts (treemaps, sunburst charts, Sankey diagrams), and robust client-side state management.
+**Capstone Project** - A comprehensive portfolio management application demonstrating modern React architecture, advanced data visualization with Highcharts (treemaps, sunburst charts, Sankey diagrams), and robust client-side state management. The UX is optimized with responsive, mobile-first design principles and follows data visualization best practices for clarity, accessibility, and meaningful insights.
 
 ![Dashboard Preview](./public/preview.png)
 
