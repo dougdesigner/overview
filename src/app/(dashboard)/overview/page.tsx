@@ -5,7 +5,6 @@ export const dynamic = "force-dynamic"
 import AssetAllocationCard from "@/components/AssetAllocationCard"
 import BenchmarkCard from "@/components/BenchmarkCard"
 import KPICard from "@/components/KPICard"
-import { OnboardingFlow } from "@/components/OnboardingFlow"
 import PortfolioValueCard from "@/components/PortfolioValueCard"
 import { useExposureCalculations } from "@/hooks/useExposureCalculations"
 import { usePortfolioStore } from "@/hooks/usePortfolioStore"
@@ -14,9 +13,12 @@ import {
   getAssetClassBorderColor,
   getAssetClassColor,
 } from "@/lib/assetClassColors"
-import { useMemo } from "react"
+import { useRouter } from "next/navigation"
+import { useEffect, useMemo } from "react"
 
 export default function OverviewPage() {
+  const router = useRouter()
+
   // Get data from portfolio store
   const {
     accounts,
@@ -24,7 +26,16 @@ export default function OverviewPage() {
     totalPortfolioValue,
     portfolioAllocation,
     isLoading,
+    isDemoMode,
   } = usePortfolioStore()
+
+  // Redirect to landing page if user has no data and not in demo mode
+  useEffect(() => {
+    if (!isLoading && accounts.length === 0 && !isDemoMode) {
+      // Use window.location for more reliable navigation
+      window.location.href = "/"
+    }
+  }, [isLoading, accounts.length, isDemoMode, router])
 
   // Debug logging
   console.log("[Overview] isLoading:", isLoading)
@@ -88,9 +99,11 @@ export default function OverviewPage() {
             <div className="h-32 rounded-lg bg-gray-100 dark:bg-gray-800"></div>
           </div>
         </div>
-      ) : accounts.length === 0 ? (
-        // Empty state with onboarding flow
-        <OnboardingFlow />
+      ) : accounts.length === 0 && !isDemoMode ? (
+        // Redirecting to landing page - show loading state briefly
+        <div className="animate-pulse">
+          <div className="mb-6 h-48 rounded-lg bg-gray-100 dark:bg-gray-800"></div>
+        </div>
       ) : (
         <>
           <dl className="grid grid-cols-1 gap-6 sm:grid-cols-1 lg:grid-cols-1">

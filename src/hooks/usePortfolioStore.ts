@@ -323,6 +323,9 @@ const defaultHoldings: Holding[] = [
   },
 ]
 
+// Export default data for use in landing page
+export { defaultAccounts, defaultHoldings }
+
 // Hook for managing portfolio data
 export function usePortfolioStore() {
   const [accounts, setAccountsState] = useState<Account[]>([])

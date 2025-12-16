@@ -135,7 +135,7 @@ function DropdownUserProfile() {
             aria-label="open settings"
             className={cx(
               focusRing,
-              "group rounded-full p-1 hover:bg-gray-100 data-[state=open]:bg-gray-100 hover:dark:bg-gray-400/10 data-[state=open]:dark:bg-gray-400/10",
+              "group relative rounded-full p-1 hover:bg-gray-100 data-[state=open]:bg-gray-100 hover:dark:bg-gray-400/10 data-[state=open]:dark:bg-gray-400/10",
             )}
           >
             <span
@@ -144,6 +144,9 @@ function DropdownUserProfile() {
             >
               <Icon icon="carbon:settings" className="size-5" aria-hidden="true" />
             </span>
+            {isDemoMode && (
+              <span className="absolute right-0 top-0 size-2.5 rounded-full bg-blue-500 ring-2 ring-white dark:ring-gray-950" />
+            )}
           </button>
         </DropdownMenuTrigger>
         <DropdownMenuContent

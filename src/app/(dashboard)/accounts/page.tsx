@@ -41,6 +41,7 @@ import {
   institutionLabels,
   usePortfolioStore,
 } from "@/hooks/usePortfolioStore"
+import { getAssetClassHexColor } from "@/lib/assetClassColors"
 import { getInstitutionDisplayLabel } from "@/lib/institutionUtils"
 import { Icon } from "@iconify/react"
 import {
@@ -784,14 +785,6 @@ function AccountsContent() {
                       }))
                       .sort((a, b) => b.value - a.value)
 
-                    // Asset class colors (matches Sankey colors prop order)
-                    const assetClassColors = [
-                      "#3b82f6", // blue-500
-                      "#06b6d4", // cyan-500
-                      "#f59e0b", // amber-500
-                      "#10b981", // emerald-500
-                    ]
-
                     // Format currency for legend
                     const formatLegendValue = (value: number) => {
                       if (value >= 1000000)
@@ -918,7 +911,7 @@ function AccountsContent() {
                             Asset Allocation
                           </p>
                           <ul className="flex flex-wrap gap-x-10 gap-y-4 text-sm">
-                            {assetClassTotals.map((asset, index) => (
+                            {assetClassTotals.map((asset) => (
                               <li key={asset.id}>
                                 <span className="text-base font-semibold text-gray-900 dark:text-gray-50">
                                   {formatLegendValue(asset.value)}
@@ -927,7 +920,7 @@ function AccountsContent() {
                                   <span
                                     className="size-2.5 shrink-0 rounded-sm"
                                     style={{
-                                      backgroundColor: assetClassColors[index],
+                                      backgroundColor: getAssetClassHexColor(asset.id),
                                     }}
                                     aria-hidden="true"
                                   />
