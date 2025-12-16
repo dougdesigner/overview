@@ -22,7 +22,7 @@ export function OnboardingFlow() {
     <div className="flex flex-col items-center justify-center px-4 py-8">
       {/* Marketing CTA Section */}
       <div className="mb-8 text-left">
-        <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-50 sm:text-4xl">
+        <h1 className="max-w-lg text-pretty text-3xl font-semibold tracking-tight text-gray-950 dark:text-white sm:text-4xl">
           See your clear financial picture
         </h1>
         <p className="mt-4 text-lg text-gray-600 dark:text-gray-400">
