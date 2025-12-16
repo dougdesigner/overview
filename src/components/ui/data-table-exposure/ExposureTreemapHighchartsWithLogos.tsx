@@ -75,6 +75,8 @@ interface ExposureTreemapHighchartsProps {
   holdingsFilter?: "all" | "mag7" | "mag10" | "top7" | "top10" // View filter for legend display
   displayValue?: DisplayValue // Display value from page-level settings
   onChartSettingsChange?: (hasChanges: boolean) => void // Callback when chart settings change
+  showControls?: boolean // Show/hide toolbar buttons (default true)
+  height?: number // Override chart height (default: responsive 350/500)
 }
 
 type ChartType = "treemap" | "pie"
@@ -140,6 +142,8 @@ export function ExposureTreemapHighchartsWithLogos({
   holdingsFilter = "all",
   displayValue: displayValueProp = "pct-portfolio",
   onChartSettingsChange,
+  showControls = true,
+  height: heightProp,
 }: ExposureTreemapHighchartsProps) {
   const [chartType, setChartType] = useState<ChartType>("treemap")
   const [sizingMode] = useState<SizingMode>("proportional")
@@ -178,16 +182,23 @@ export function ExposureTreemapHighchartsWithLogos({
   const chartRef = useRef<HighchartsReact.RefObject>(null)
 
   // Responsive height: 350 on mobile (<640px), 500 on desktop
-  const [responsiveHeight, setResponsiveHeight] = useState(500)
+  // Can be overridden via height prop
+  const [responsiveHeight, setResponsiveHeight] = useState(heightProp ?? 500)
 
   useEffect(() => {
+    // If height prop is provided, use it directly
+    if (heightProp !== undefined) {
+      setResponsiveHeight(heightProp)
+      return
+    }
+    // Otherwise use responsive sizing
     const updateHeight = () => {
       setResponsiveHeight(window.innerWidth < 640 ? 350 : 500)
     }
     updateHeight()
     window.addEventListener("resize", updateHeight)
     return () => window.removeEventListener("resize", updateHeight)
-  }, [])
+  }, [heightProp])
 
   // Update chart when theme changes
   useEffect(() => {
@@ -1694,208 +1705,210 @@ export function ExposureTreemapHighchartsWithLogos({
   }
 
   return (
-    <Card className="pb-4 pt-6" data-chart="exposure-map">
-      <div className="flex items-center justify-between">
-        <h3
-          className="cursor-pointer text-base font-medium text-gray-900 transition-colors hover:text-blue-600 dark:text-gray-50 dark:hover:text-blue-400"
-          onClick={() => {
-            document
-              .getElementById("exposure-section")
-              ?.scrollIntoView({ behavior: "smooth" })
-          }}
-        >
-          Stocks
-        </h3>
-
-        <div className="flex items-center gap-2">
-          <Tooltip
-            triggerAsChild
-            content="Switch between treemap and pie chart views"
+    <Card className={showControls ? "pb-4 pt-6" : "p-0"} data-chart="exposure-map">
+      {showControls && (
+        <div className="flex items-center justify-between">
+          <h3
+            className="cursor-pointer text-base font-medium text-gray-900 transition-colors hover:text-blue-600 dark:text-gray-50 dark:hover:text-blue-400"
+            onClick={() => {
+              document
+                .getElementById("exposure-section")
+                ?.scrollIntoView({ behavior: "smooth" })
+            }}
           >
-            <Button
-              variant="secondary"
-              className="h-9"
-              onClick={() =>
-                setChartType(chartType === "treemap" ? "pie" : "treemap")
-              }
-            >
-              {chartType === "treemap" ? (
-                <RiDonutChartLine className="size-4" aria-hidden="true" />
-              ) : (
-                <RiLayout4Line className="size-4" aria-hidden="true" />
-              )}
-            </Button>
-          </Tooltip>
+            Stocks
+          </h3>
 
-          <DropdownMenu>
-            <Tooltip triggerAsChild content="Configure chart display options">
-              <DropdownMenuTrigger asChild>
-                <Button variant="secondary" className="relative h-9">
-                  <RiSettings3Line className="size-4" aria-hidden="true" />
-                  {hasSettingsChanges && (
-                    <span className="absolute -right-0.5 -top-0.5 size-2 rounded-full bg-blue-500" />
-                  )}
-                </Button>
-              </DropdownMenuTrigger>
-            </Tooltip>
-            <DropdownMenuContent align="end" className="w-56">
-              <DropdownMenuLabel>DISPLAY SETTINGS</DropdownMenuLabel>
-              <DropdownMenuSeparator />
-
-              <DropdownMenuCheckboxItem
-                checked={showLogo}
-                onCheckedChange={setShowLogo}
-              >
-                Logo
-              </DropdownMenuCheckboxItem>
-
-              <DropdownMenuSubMenu>
-                <DropdownMenuSubMenuTrigger>
-                  <span>Title</span>
-                  <span className="ml-auto text-xs text-gray-500">
-                    {titleMode === "symbol"
-                      ? "Symbol"
-                      : titleMode === "name"
-                        ? "Name"
-                        : "None"}
-                  </span>
-                </DropdownMenuSubMenuTrigger>
-                <DropdownMenuSubMenuContent>
-                  <DropdownMenuRadioGroup
-                    value={titleMode}
-                    onValueChange={(value) => setTitleMode(value as TitleMode)}
-                  >
-                    <DropdownMenuRadioItem value="symbol" iconType="check">
-                      Symbol
-                    </DropdownMenuRadioItem>
-                    <DropdownMenuRadioItem value="name" iconType="check">
-                      Name
-                    </DropdownMenuRadioItem>
-                    <DropdownMenuRadioItem value="none" iconType="check">
-                      None
-                    </DropdownMenuRadioItem>
-                  </DropdownMenuRadioGroup>
-                </DropdownMenuSubMenuContent>
-              </DropdownMenuSubMenu>
-
-              <DropdownMenuCheckboxItem
-                checked={showChartValue}
-                onCheckedChange={setShowChartValue}
-              >
-                Show value
-              </DropdownMenuCheckboxItem>
-
-              <DropdownMenuSeparator />
-
-              <DropdownMenuSubMenu>
-                <DropdownMenuSubMenuTrigger>
-                  <span>Group by</span>
-                  <span className="ml-auto text-xs text-gray-500">
-                    {groupingMode === "none"
-                      ? "None"
-                      : groupingMode === "sector"
-                        ? "Sector"
-                        : "Sector & Industry"}
-                  </span>
-                </DropdownMenuSubMenuTrigger>
-                <DropdownMenuSubMenuContent>
-                  <DropdownMenuRadioGroup
-                    value={groupingMode}
-                    onValueChange={(value) =>
-                      setGroupingMode(value as GroupingMode)
-                    }
-                  >
-                    <DropdownMenuRadioItem value="none" iconType="check">
-                      None
-                    </DropdownMenuRadioItem>
-                    <DropdownMenuRadioItem value="sector" iconType="check">
-                      Sector
-                    </DropdownMenuRadioItem>
-                    <DropdownMenuRadioItem
-                      value="sector-industry"
-                      iconType="check"
-                    >
-                      Sector & Industry
-                    </DropdownMenuRadioItem>
-                  </DropdownMenuRadioGroup>
-                </DropdownMenuSubMenuContent>
-              </DropdownMenuSubMenu>
-
-              {/* Reset Chart - shows when settings have changed */}
-              {hasSettingsChanges && (
-                <>
-                  <DropdownMenuSeparator />
-                  <DropdownMenuItem
-                    onClick={resetChartSettings}
-                    className="text-gray-500 dark:text-gray-400"
-                  >
-                    <Icon
-                      icon="carbon:filter-reset"
-                      className="mr-2 size-4"
-                      aria-hidden="true"
-                    />
-                    Reset Chart
-                  </DropdownMenuItem>
-                </>
-              )}
-            </DropdownMenuContent>
-          </DropdownMenu>
-
-          <DropdownMenu>
+          <div className="flex items-center gap-2">
             <Tooltip
               triggerAsChild
-              content="Export chart as image or data file"
+              content="Switch between treemap and pie chart views"
             >
-              <DropdownMenuTrigger asChild>
-                <Button variant="secondary" className="h-9">
-                  <Icon
-                    icon="carbon:download"
-                    className="size-4"
-                    aria-hidden="true"
-                  />
-                </Button>
-              </DropdownMenuTrigger>
+              <Button
+                variant="secondary"
+                className="h-9"
+                onClick={() =>
+                  setChartType(chartType === "treemap" ? "pie" : "treemap")
+                }
+              >
+                {chartType === "treemap" ? (
+                  <RiDonutChartLine className="size-4" aria-hidden="true" />
+                ) : (
+                  <RiLayout4Line className="size-4" aria-hidden="true" />
+                )}
+              </Button>
             </Tooltip>
-            <DropdownMenuContent align="end" className="w-56">
-              <DropdownMenuLabel>EXPORT OPTIONS</DropdownMenuLabel>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem onClick={() => handleExport("print")}>
-                Print chart
-              </DropdownMenuItem>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem onClick={() => handleExport("png")}>
-                Download PNG image
-              </DropdownMenuItem>
-              <DropdownMenuItem onClick={() => handleExport("jpeg")}>
-                Download JPEG image
-              </DropdownMenuItem>
-              <DropdownMenuItem onClick={() => handleExport("pdf")}>
-                Download PDF document
-              </DropdownMenuItem>
-              <DropdownMenuItem onClick={() => handleExport("svg")}>
-                Download SVG vector
-              </DropdownMenuItem>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem onClick={() => handleExport("csv")}>
-                Download CSV
-              </DropdownMenuItem>
-              <DropdownMenuItem onClick={() => handleExport("xls")}>
-                Download XLS
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
 
-          <Tooltip triggerAsChild content="View chart in fullscreen mode">
-            <Button
-              variant="secondary"
-              className="h-9"
-              onClick={() => handleExport("fullscreen")}
-            >
-              <RiFullscreenLine className="size-4" aria-hidden="true" />
-            </Button>
-          </Tooltip>
+            <DropdownMenu>
+              <Tooltip triggerAsChild content="Configure chart display options">
+                <DropdownMenuTrigger asChild>
+                  <Button variant="secondary" className="relative h-9">
+                    <RiSettings3Line className="size-4" aria-hidden="true" />
+                    {hasSettingsChanges && (
+                      <span className="absolute -right-0.5 -top-0.5 size-2 rounded-full bg-blue-500" />
+                    )}
+                  </Button>
+                </DropdownMenuTrigger>
+              </Tooltip>
+              <DropdownMenuContent align="end" className="w-56">
+                <DropdownMenuLabel>DISPLAY SETTINGS</DropdownMenuLabel>
+                <DropdownMenuSeparator />
+
+                <DropdownMenuCheckboxItem
+                  checked={showLogo}
+                  onCheckedChange={setShowLogo}
+                >
+                  Logo
+                </DropdownMenuCheckboxItem>
+
+                <DropdownMenuSubMenu>
+                  <DropdownMenuSubMenuTrigger>
+                    <span>Title</span>
+                    <span className="ml-auto text-xs text-gray-500">
+                      {titleMode === "symbol"
+                        ? "Symbol"
+                        : titleMode === "name"
+                          ? "Name"
+                          : "None"}
+                    </span>
+                  </DropdownMenuSubMenuTrigger>
+                  <DropdownMenuSubMenuContent>
+                    <DropdownMenuRadioGroup
+                      value={titleMode}
+                      onValueChange={(value) => setTitleMode(value as TitleMode)}
+                    >
+                      <DropdownMenuRadioItem value="symbol" iconType="check">
+                        Symbol
+                      </DropdownMenuRadioItem>
+                      <DropdownMenuRadioItem value="name" iconType="check">
+                        Name
+                      </DropdownMenuRadioItem>
+                      <DropdownMenuRadioItem value="none" iconType="check">
+                        None
+                      </DropdownMenuRadioItem>
+                    </DropdownMenuRadioGroup>
+                  </DropdownMenuSubMenuContent>
+                </DropdownMenuSubMenu>
+
+                <DropdownMenuCheckboxItem
+                  checked={showChartValue}
+                  onCheckedChange={setShowChartValue}
+                >
+                  Show value
+                </DropdownMenuCheckboxItem>
+
+                <DropdownMenuSeparator />
+
+                <DropdownMenuSubMenu>
+                  <DropdownMenuSubMenuTrigger>
+                    <span>Group by</span>
+                    <span className="ml-auto text-xs text-gray-500">
+                      {groupingMode === "none"
+                        ? "None"
+                        : groupingMode === "sector"
+                          ? "Sector"
+                          : "Sector & Industry"}
+                    </span>
+                  </DropdownMenuSubMenuTrigger>
+                  <DropdownMenuSubMenuContent>
+                    <DropdownMenuRadioGroup
+                      value={groupingMode}
+                      onValueChange={(value) =>
+                        setGroupingMode(value as GroupingMode)
+                      }
+                    >
+                      <DropdownMenuRadioItem value="none" iconType="check">
+                        None
+                      </DropdownMenuRadioItem>
+                      <DropdownMenuRadioItem value="sector" iconType="check">
+                        Sector
+                      </DropdownMenuRadioItem>
+                      <DropdownMenuRadioItem
+                        value="sector-industry"
+                        iconType="check"
+                      >
+                        Sector & Industry
+                      </DropdownMenuRadioItem>
+                    </DropdownMenuRadioGroup>
+                  </DropdownMenuSubMenuContent>
+                </DropdownMenuSubMenu>
+
+                {/* Reset Chart - shows when settings have changed */}
+                {hasSettingsChanges && (
+                  <>
+                    <DropdownMenuSeparator />
+                    <DropdownMenuItem
+                      onClick={resetChartSettings}
+                      className="text-gray-500 dark:text-gray-400"
+                    >
+                      <Icon
+                        icon="carbon:filter-reset"
+                        className="mr-2 size-4"
+                        aria-hidden="true"
+                      />
+                      Reset Chart
+                    </DropdownMenuItem>
+                  </>
+                )}
+              </DropdownMenuContent>
+            </DropdownMenu>
+
+            <DropdownMenu>
+              <Tooltip
+                triggerAsChild
+                content="Export chart as image or data file"
+              >
+                <DropdownMenuTrigger asChild>
+                  <Button variant="secondary" className="h-9">
+                    <Icon
+                      icon="carbon:download"
+                      className="size-4"
+                      aria-hidden="true"
+                    />
+                  </Button>
+                </DropdownMenuTrigger>
+              </Tooltip>
+              <DropdownMenuContent align="end" className="w-56">
+                <DropdownMenuLabel>EXPORT OPTIONS</DropdownMenuLabel>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem onClick={() => handleExport("print")}>
+                  Print chart
+                </DropdownMenuItem>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem onClick={() => handleExport("png")}>
+                  Download PNG image
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={() => handleExport("jpeg")}>
+                  Download JPEG image
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={() => handleExport("pdf")}>
+                  Download PDF document
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={() => handleExport("svg")}>
+                  Download SVG vector
+                </DropdownMenuItem>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem onClick={() => handleExport("csv")}>
+                  Download CSV
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={() => handleExport("xls")}>
+                  Download XLS
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+
+            <Tooltip triggerAsChild content="View chart in fullscreen mode">
+              <Button
+                variant="secondary"
+                className="h-9"
+                onClick={() => handleExport("fullscreen")}
+              >
+                <RiFullscreenLine className="size-4" aria-hidden="true" />
+              </Button>
+            </Tooltip>
+          </div>
         </div>
-      </div>
+      )}
 
       {validExposures.length === 0 ? (
         // Empty state when no stocks exist

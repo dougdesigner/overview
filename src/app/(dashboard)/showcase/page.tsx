@@ -19,7 +19,8 @@ export default function ShowcasePage() {
     usePortfolioStore()
 
   // Get exposure calculations for the stocks treemap
-  const { exposures, totalValue: exposureTotalValue } = useExposureCalculations()
+  const { exposures, totalValue: exposureTotalValue } =
+    useExposureCalculations()
 
   // Logo URLs for stocks treemap
   const [logoUrls, setLogoUrls] = useState<Record<string, string | null>>({})
@@ -215,7 +216,7 @@ export default function ShowcasePage() {
     <div className="bg-white py-12 dark:bg-gray-950 sm:py-16">
       <div className="mx-auto max-w-2xl px-6 lg:max-w-7xl lg:px-8">
         <h2 className="text-base/7 font-semibold text-blue-600 dark:text-blue-400">
-          Overview dashboard
+          Overview
         </h2>
         <p className="mt-2 max-w-lg text-pretty text-4xl font-semibold tracking-tight text-gray-950 dark:text-white sm:text-5xl">
           See your clear financial picture
@@ -262,13 +263,15 @@ export default function ShowcasePage() {
           <div className="relative lg:col-span-3">
             <div className="absolute inset-0 rounded-lg bg-white dark:bg-gray-800 lg:rounded-tr-[2rem]" />
             <div className="relative flex h-full flex-col overflow-hidden rounded-[calc(theme(borderRadius.lg)+1px)] lg:rounded-tr-[calc(2rem+1px)]">
-              <div className="-mx-4 -mt-6 h-[340px]">
+              <div className="h-80 p-4">
                 <ExposureTreemapHighchartsWithLogos
                   exposures={exposures}
                   totalValue={exposureTotalValue || totalPortfolioValue}
                   accounts={accounts}
                   selectedAccounts={["all"]}
                   logoUrls={logoUrls}
+                  showControls={false}
+                  height={280}
                 />
               </div>
               <div className="p-6 pt-2">
@@ -322,7 +325,10 @@ export default function ShowcasePage() {
                 {/* Asset allocation mini bars */}
                 <div className="mt-6 space-y-2">
                   {[
-                    { name: "U.S. Stocks", value: portfolioAllocation.usStocks },
+                    {
+                      name: "U.S. Stocks",
+                      value: portfolioAllocation.usStocks,
+                    },
                     {
                       name: "Non-U.S. Stocks",
                       value: portfolioAllocation.nonUsStocks,
