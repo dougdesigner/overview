@@ -82,7 +82,7 @@ function Navigation() {
           {/* Left: Logo + Title */}
           <div className="flex shrink-0 items-center gap-2">
             <GradientLogoIcon className="size-6" />
-            <span className="text-lg font-semibold">Overview</span>
+            <Link href="/showcase" className="text-lg font-semibold hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Overview</Link>
             {mounted && isDemoMode && (
               <span className="rounded bg-gradient-to-r from-blue-500 to-cyan-500 px-1.5 py-0.5 text-[10px] font-medium text-white">
                 Demo
