@@ -27,7 +27,7 @@ Sentry.init({
       isNameRequired: false,
       isEmailRequired: false,
       enableScreenshot: true,
-      autoInject: true,
+      autoInject: true, // Widget must be created for openDialog() API to work (hidden via CSS)
       triggerLabel: "Feedback",
     }),
     Sentry.replayIntegration({

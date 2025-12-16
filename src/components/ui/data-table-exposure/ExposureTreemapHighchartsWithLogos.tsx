@@ -18,8 +18,9 @@ import {
 } from "@/components/DropdownMenu"
 import { Tooltip } from "@/components/Tooltip"
 import { getAssetClassHexColor } from "@/lib/assetClassColors"
-import { toProperCase } from "@/lib/utils"
+import { cx, toProperCase } from "@/lib/utils"
 import { Icon } from "@iconify/react"
+import * as Dialog from "@radix-ui/react-dialog"
 import {
   RiDonutChartLine,
   RiFullscreenLine,
@@ -163,6 +164,17 @@ export function ExposureTreemapHighchartsWithLogos({
     titleMode !== "symbol" ||
     showChartValue !== true ||
     groupingMode !== "sector"
+
+  // Mobile detection for responsive UI (bottom sheet vs dropdown)
+  const [isMobile, setIsMobile] = useState(false)
+  const [isSettingsDrawerOpen, setIsSettingsDrawerOpen] = useState(false)
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 640)
+    checkMobile()
+    window.addEventListener("resize", checkMobile)
+    return () => window.removeEventListener("resize", checkMobile)
+  }, [])
 
   // Reset all chart settings to defaults
   const resetChartSettings = () => {
@@ -1748,119 +1760,292 @@ export function ExposureTreemapHighchartsWithLogos({
               </Button>
             </Tooltip>
 
-            <DropdownMenu>
-              <Tooltip triggerAsChild content="Configure chart display options">
-                <DropdownMenuTrigger asChild>
-                  <Button variant="secondary" className="relative h-9">
-                    <RiSettings3Line className="size-4" aria-hidden="true" />
-                    {hasSettingsChanges && (
-                      <span className="absolute -right-0.5 -top-0.5 size-2 rounded-full bg-blue-500" />
-                    )}
-                  </Button>
-                </DropdownMenuTrigger>
-              </Tooltip>
-              <DropdownMenuContent align="end" className="w-56">
-                <DropdownMenuLabel>DISPLAY SETTINGS</DropdownMenuLabel>
-                <DropdownMenuSeparator />
+            {/* Display Settings - Mobile: Bottom sheet, Desktop: Dropdown */}
+            {isMobile ? (
+              <Dialog.Root open={isSettingsDrawerOpen} onOpenChange={setIsSettingsDrawerOpen}>
+                <Tooltip triggerAsChild content="Configure chart display options">
+                  <Dialog.Trigger asChild>
+                    <Button variant="secondary" className="relative h-9">
+                      <RiSettings3Line className="size-4" aria-hidden="true" />
+                      {hasSettingsChanges && (
+                        <span className="absolute -right-0.5 -top-0.5 size-2 rounded-full bg-blue-500" />
+                      )}
+                    </Button>
+                  </Dialog.Trigger>
+                </Tooltip>
 
-                <DropdownMenuCheckboxItem
-                  checked={showLogo}
-                  onCheckedChange={setShowLogo}
-                >
-                  Logo
-                </DropdownMenuCheckboxItem>
+                <Dialog.Portal>
+                  {/* Overlay */}
+                  <Dialog.Overlay className="fixed inset-0 z-50 bg-white/50 data-[state=open]:animate-dialogOverlayShow dark:bg-black/50" />
 
-                <DropdownMenuSubMenu>
-                  <DropdownMenuSubMenuTrigger>
-                    <span>Title</span>
-                    <span className="ml-auto text-xs text-gray-500">
-                      {titleMode === "symbol"
-                        ? "Symbol"
-                        : titleMode === "name"
-                          ? "Name"
-                          : "None"}
-                    </span>
-                  </DropdownMenuSubMenuTrigger>
-                  <DropdownMenuSubMenuContent>
-                    <DropdownMenuRadioGroup
-                      value={titleMode}
-                      onValueChange={(value) => setTitleMode(value as TitleMode)}
-                    >
-                      <DropdownMenuRadioItem value="symbol" iconType="check">
-                        Symbol
-                      </DropdownMenuRadioItem>
-                      <DropdownMenuRadioItem value="name" iconType="check">
-                        Name
-                      </DropdownMenuRadioItem>
-                      <DropdownMenuRadioItem value="none" iconType="check">
-                        None
-                      </DropdownMenuRadioItem>
-                    </DropdownMenuRadioGroup>
-                  </DropdownMenuSubMenuContent>
-                </DropdownMenuSubMenu>
+                  {/* Bottom Sheet Content */}
+                  <Dialog.Content className="fixed inset-x-0 bottom-0 z-50 mx-2 mb-2 max-h-[85vh] overflow-hidden rounded-xl border border-gray-200 bg-white shadow-lg data-[state=closed]:animate-bottomSheetSlideDown data-[state=open]:animate-bottomSheetSlideUp dark:border-gray-800 dark:bg-gray-950">
+                    {/* Header */}
+                    <div className="flex items-center justify-between border-b border-gray-200 px-4 py-3 dark:border-gray-800">
+                      <Dialog.Title className="text-base font-semibold text-gray-900 dark:text-gray-50">
+                        Display Settings
+                      </Dialog.Title>
+                      <Dialog.Close asChild>
+                        <button className="rounded-full p-1.5 text-gray-500 hover:bg-gray-100 hover:text-gray-700 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-gray-200">
+                          <Icon icon="carbon:close" className="size-5" />
+                        </button>
+                      </Dialog.Close>
+                    </div>
 
-                <DropdownMenuCheckboxItem
-                  checked={showChartValue}
-                  onCheckedChange={setShowChartValue}
-                >
-                  Show value
-                </DropdownMenuCheckboxItem>
+                    {/* Scrollable Body */}
+                    <div className="max-h-[calc(85vh-60px)] overflow-y-auto">
+                      {/* Display Options Section */}
+                      <div className="border-b border-gray-200 px-4 py-3 dark:border-gray-800">
+                        <div className="mb-2 text-xs font-medium uppercase tracking-wide text-gray-500 dark:text-gray-400">
+                          Display Options
+                        </div>
+                        <div className="space-y-1">
+                          {/* Logo toggle */}
+                          <button
+                            onClick={() => setShowLogo(!showLogo)}
+                            className="flex w-full items-center justify-between rounded-lg px-3 py-2.5 text-left hover:bg-gray-100 dark:hover:bg-gray-800"
+                          >
+                            <span className="text-sm font-medium text-gray-900 dark:text-gray-50">
+                              Logo
+                            </span>
+                            <div
+                              className={cx(
+                                "flex size-5 items-center justify-center rounded border",
+                                showLogo
+                                  ? "border-blue-600 bg-blue-600 dark:border-blue-500 dark:bg-blue-500"
+                                  : "border-gray-300 dark:border-gray-600",
+                              )}
+                            >
+                              {showLogo && (
+                                <Icon
+                                  icon="carbon:checkmark"
+                                  className="size-3.5 text-white"
+                                />
+                              )}
+                            </div>
+                          </button>
 
-                <DropdownMenuSeparator />
+                          {/* Show value toggle */}
+                          <button
+                            onClick={() => setShowChartValue(!showChartValue)}
+                            className="flex w-full items-center justify-between rounded-lg px-3 py-2.5 text-left hover:bg-gray-100 dark:hover:bg-gray-800"
+                          >
+                            <span className="text-sm font-medium text-gray-900 dark:text-gray-50">
+                              Show value
+                            </span>
+                            <div
+                              className={cx(
+                                "flex size-5 items-center justify-center rounded border",
+                                showChartValue
+                                  ? "border-blue-600 bg-blue-600 dark:border-blue-500 dark:bg-blue-500"
+                                  : "border-gray-300 dark:border-gray-600",
+                              )}
+                            >
+                              {showChartValue && (
+                                <Icon
+                                  icon="carbon:checkmark"
+                                  className="size-3.5 text-white"
+                                />
+                              )}
+                            </div>
+                          </button>
+                        </div>
+                      </div>
 
-                <DropdownMenuSubMenu>
-                  <DropdownMenuSubMenuTrigger>
-                    <span>Group by</span>
-                    <span className="ml-auto text-xs text-gray-500">
-                      {groupingMode === "none"
-                        ? "None"
-                        : groupingMode === "sector"
-                          ? "Sector"
-                          : "Sector & Industry"}
-                    </span>
-                  </DropdownMenuSubMenuTrigger>
-                  <DropdownMenuSubMenuContent>
-                    <DropdownMenuRadioGroup
-                      value={groupingMode}
-                      onValueChange={(value) =>
-                        setGroupingMode(value as GroupingMode)
-                      }
-                    >
-                      <DropdownMenuRadioItem value="none" iconType="check">
-                        None
-                      </DropdownMenuRadioItem>
-                      <DropdownMenuRadioItem value="sector" iconType="check">
-                        Sector
-                      </DropdownMenuRadioItem>
-                      <DropdownMenuRadioItem
-                        value="sector-industry"
-                        iconType="check"
+                      {/* Title Section */}
+                      <div className="border-b border-gray-200 px-4 py-3 dark:border-gray-800">
+                        <div className="mb-2 text-xs font-medium uppercase tracking-wide text-gray-500 dark:text-gray-400">
+                          Title
+                        </div>
+                        <div className="space-y-1">
+                          {([
+                            { value: "symbol", label: "Symbol" },
+                            { value: "name", label: "Name" },
+                            { value: "none", label: "None" },
+                          ] as const).map((option) => (
+                            <button
+                              key={option.value}
+                              onClick={() => setTitleMode(option.value)}
+                              className="flex w-full items-center justify-between rounded-lg px-3 py-2.5 text-left hover:bg-gray-100 dark:hover:bg-gray-800"
+                            >
+                              <span className="text-sm font-medium text-gray-900 dark:text-gray-50">
+                                {option.label}
+                              </span>
+                              {titleMode === option.value && (
+                                <Icon
+                                  icon="carbon:checkmark"
+                                  className="size-5 text-blue-600 dark:text-blue-400"
+                                />
+                              )}
+                            </button>
+                          ))}
+                        </div>
+                      </div>
+
+                      {/* Group by Section */}
+                      <div className="border-b border-gray-200 px-4 py-3 dark:border-gray-800">
+                        <div className="mb-2 text-xs font-medium uppercase tracking-wide text-gray-500 dark:text-gray-400">
+                          Group by
+                        </div>
+                        <div className="space-y-1">
+                          {([
+                            { value: "none", label: "None" },
+                            { value: "sector", label: "Sector" },
+                            { value: "sector-industry", label: "Sector & Industry" },
+                          ] as const).map((option) => (
+                            <button
+                              key={option.value}
+                              onClick={() => setGroupingMode(option.value)}
+                              className="flex w-full items-center justify-between rounded-lg px-3 py-2.5 text-left hover:bg-gray-100 dark:hover:bg-gray-800"
+                            >
+                              <span className="text-sm font-medium text-gray-900 dark:text-gray-50">
+                                {option.label}
+                              </span>
+                              {groupingMode === option.value && (
+                                <Icon
+                                  icon="carbon:checkmark"
+                                  className="size-5 text-blue-600 dark:text-blue-400"
+                                />
+                              )}
+                            </button>
+                          ))}
+                        </div>
+                      </div>
+
+                      {/* Reset Button */}
+                      {hasSettingsChanges && (
+                        <div className="px-4 py-3">
+                          <button
+                            onClick={() => {
+                              resetChartSettings()
+                              setIsSettingsDrawerOpen(false)
+                            }}
+                            className="flex w-full items-center justify-center gap-2 rounded-lg bg-gray-100 px-4 py-2.5 text-sm font-medium text-gray-600 hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700"
+                          >
+                            <Icon icon="carbon:filter-reset" className="size-4" />
+                            Reset Chart
+                          </button>
+                        </div>
+                      )}
+                    </div>
+                  </Dialog.Content>
+                </Dialog.Portal>
+              </Dialog.Root>
+            ) : (
+              <DropdownMenu>
+                <Tooltip triggerAsChild content="Configure chart display options">
+                  <DropdownMenuTrigger asChild>
+                    <Button variant="secondary" className="relative h-9">
+                      <RiSettings3Line className="size-4" aria-hidden="true" />
+                      {hasSettingsChanges && (
+                        <span className="absolute -right-0.5 -top-0.5 size-2 rounded-full bg-blue-500" />
+                      )}
+                    </Button>
+                  </DropdownMenuTrigger>
+                </Tooltip>
+                <DropdownMenuContent align="end" className="w-56">
+                  <DropdownMenuLabel>DISPLAY SETTINGS</DropdownMenuLabel>
+                  <DropdownMenuSeparator />
+
+                  <DropdownMenuCheckboxItem
+                    checked={showLogo}
+                    onCheckedChange={setShowLogo}
+                  >
+                    Logo
+                  </DropdownMenuCheckboxItem>
+
+                  <DropdownMenuSubMenu>
+                    <DropdownMenuSubMenuTrigger>
+                      <span>Title</span>
+                      <span className="ml-auto text-xs text-gray-500">
+                        {titleMode === "symbol"
+                          ? "Symbol"
+                          : titleMode === "name"
+                            ? "Name"
+                            : "None"}
+                      </span>
+                    </DropdownMenuSubMenuTrigger>
+                    <DropdownMenuSubMenuContent>
+                      <DropdownMenuRadioGroup
+                        value={titleMode}
+                        onValueChange={(value) => setTitleMode(value as TitleMode)}
                       >
-                        Sector & Industry
-                      </DropdownMenuRadioItem>
-                    </DropdownMenuRadioGroup>
-                  </DropdownMenuSubMenuContent>
-                </DropdownMenuSubMenu>
+                        <DropdownMenuRadioItem value="symbol" iconType="check">
+                          Symbol
+                        </DropdownMenuRadioItem>
+                        <DropdownMenuRadioItem value="name" iconType="check">
+                          Name
+                        </DropdownMenuRadioItem>
+                        <DropdownMenuRadioItem value="none" iconType="check">
+                          None
+                        </DropdownMenuRadioItem>
+                      </DropdownMenuRadioGroup>
+                    </DropdownMenuSubMenuContent>
+                  </DropdownMenuSubMenu>
 
-                {/* Reset Chart - shows when settings have changed */}
-                {hasSettingsChanges && (
-                  <>
-                    <DropdownMenuSeparator />
-                    <DropdownMenuItem
-                      onClick={resetChartSettings}
-                      className="text-gray-500 dark:text-gray-400"
-                    >
-                      <Icon
-                        icon="carbon:filter-reset"
-                        className="mr-2 size-4"
-                        aria-hidden="true"
-                      />
-                      Reset Chart
-                    </DropdownMenuItem>
-                  </>
-                )}
-              </DropdownMenuContent>
-            </DropdownMenu>
+                  <DropdownMenuCheckboxItem
+                    checked={showChartValue}
+                    onCheckedChange={setShowChartValue}
+                  >
+                    Show value
+                  </DropdownMenuCheckboxItem>
+
+                  <DropdownMenuSeparator />
+
+                  <DropdownMenuSubMenu>
+                    <DropdownMenuSubMenuTrigger>
+                      <span>Group by</span>
+                      <span className="ml-auto text-xs text-gray-500">
+                        {groupingMode === "none"
+                          ? "None"
+                          : groupingMode === "sector"
+                            ? "Sector"
+                            : "Sector & Industry"}
+                      </span>
+                    </DropdownMenuSubMenuTrigger>
+                    <DropdownMenuSubMenuContent>
+                      <DropdownMenuRadioGroup
+                        value={groupingMode}
+                        onValueChange={(value) =>
+                          setGroupingMode(value as GroupingMode)
+                        }
+                      >
+                        <DropdownMenuRadioItem value="none" iconType="check">
+                          None
+                        </DropdownMenuRadioItem>
+                        <DropdownMenuRadioItem value="sector" iconType="check">
+                          Sector
+                        </DropdownMenuRadioItem>
+                        <DropdownMenuRadioItem
+                          value="sector-industry"
+                          iconType="check"
+                        >
+                          Sector & Industry
+                        </DropdownMenuRadioItem>
+                      </DropdownMenuRadioGroup>
+                    </DropdownMenuSubMenuContent>
+                  </DropdownMenuSubMenu>
+
+                  {/* Reset Chart - shows when settings have changed */}
+                  {hasSettingsChanges && (
+                    <>
+                      <DropdownMenuSeparator />
+                      <DropdownMenuItem
+                        onClick={resetChartSettings}
+                        className="text-gray-500 dark:text-gray-400"
+                      >
+                        <Icon
+                          icon="carbon:filter-reset"
+                          className="mr-2 size-4"
+                          aria-hidden="true"
+                        />
+                        Reset Chart
+                      </DropdownMenuItem>
+                    </>
+                  )}
+                </DropdownMenuContent>
+              </DropdownMenu>
+            )}
 
             <DropdownMenu>
               <Tooltip
