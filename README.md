@@ -1,4 +1,4 @@
-# Overview Dashboard
+# Portfolio Overview - Dashboard
 
 ## Abstract
 
@@ -10,9 +10,9 @@ A modern portfolio management dashboard built with [Next.js 15](https://nextjs.o
 
 **Capstone Project** - A comprehensive portfolio management application demonstrating modern React architecture, advanced data visualization with Highcharts (treemaps, sunburst charts, Sankey diagrams), and robust client-side state management. The UX is optimized with responsive, mobile-first design principles and follows data visualization best practices for clarity, accessibility, and meaningful insights.
 
-![Dashboard Preview](./public/preview.png)
+![Dashboard Preview - Desktop](./public/images/onboarding/overview-desktop-dark.png)
 
----
+![Dashboard Preview - Mobile](./public/images/onboarding/exposure-mobile-dark.png)
 
 ## Table of Contents
 
@@ -33,6 +33,7 @@ A modern portfolio management dashboard built with [Next.js 15](https://nextjs.o
 ## Features
 
 ### Portfolio Management
+
 - **Multi-Account Support**: Manage multiple brokerage accounts with institution branding
 - **Holdings Tracking**: Track stocks, ETFs, mutual funds, and cash positions
 - **Real-time Price Updates**: Auto-updating stock prices via Alpha Vantage API (5-minute polling)
@@ -40,12 +41,14 @@ A modern portfolio management dashboard built with [Next.js 15](https://nextjs.o
 - **Demo Mode**: Toggle demo data for showcasing without exposing personal portfolio
 
 ### Exposure Analysis
+
 - **Asset Class Allocation**: Visualize distribution across U.S. stocks, international stocks, fixed income, and cash
 - **Sector Exposure**: Break down holdings by market sector with ETF look-through
 - **Institution Exposure**: See allocation across brokerage accounts
 - **Concentration Risk**: Identify single-stock concentration risks
 
 ### Interactive Visualizations
+
 - **Treemaps**: Hierarchical portfolio views by sector and holding
 - **Sunburst Charts**: Multi-level drill-down into ETF compositions
 - **Sankey Diagrams**: Flow visualization from accounts to asset classes
@@ -53,30 +56,31 @@ A modern portfolio management dashboard built with [Next.js 15](https://nextjs.o
 - **Category Bars**: Proportional breakdowns with interactive legends
 
 ### Dashboard Pages
-| Page | Description |
-|------|-------------|
+
+| Page         | Description                                                             |
+| ------------ | ----------------------------------------------------------------------- |
 | **Overview** | Portfolio summary with key metrics, asset allocation, and quick actions |
-| **Accounts** | Manage brokerage accounts with institution logos and account types |
-| **Holdings** | Full holdings table with filtering, sorting, and CRUD operations |
-| **Exposure** | Deep-dive into portfolio allocation analysis with multiple chart types |
-| **Showcase** | Demo presentation mode for showcasing the application |
+| **Accounts** | Manage brokerage accounts with institution logos and account types      |
+| **Holdings** | Full holdings table with filtering, sorting, and CRUD operations        |
+| **Exposure** | Deep-dive into portfolio allocation analysis with multiple chart types  |
+| **Showcase** | Demo presentation mode for showcasing the application                   |
 
 ---
 
 ## Tech Stack
 
-| Category | Technology |
-|----------|------------|
-| **Framework** | [Next.js 15](https://nextjs.org) with App Router |
-| **Language** | TypeScript (strict mode) |
-| **UI Components** | [Tremor Raw](https://tremor.so) (built on [Radix UI](https://www.radix-ui.com)) |
-| **Styling** | [Tailwind CSS 3.4](https://tailwindcss.com) with [tailwind-variants](https://www.tailwind-variants.org/) |
-| **Charts** | [Recharts](https://recharts.org), [Highcharts](https://www.highcharts.com), [Nivo](https://nivo.rocks) |
-| **Tables** | [TanStack Table v8](https://tanstack.com/table) |
-| **Validation** | [Zod](https://zod.dev) |
-| **Icons** | [Remix Icons](https://remixicon.com) via `@remixicon/react` |
-| **Theme** | Dark mode support via [next-themes](https://github.com/pacocoursey/next-themes) |
-| **React** | React 19 |
+| Category          | Technology                                                                                               |
+| ----------------- | -------------------------------------------------------------------------------------------------------- |
+| **Framework**     | [Next.js 15](https://nextjs.org) with App Router                                                         |
+| **Language**      | TypeScript (strict mode)                                                                                 |
+| **UI Components** | [Tremor Raw](https://tremor.so) (built on [Radix UI](https://www.radix-ui.com))                          |
+| **Styling**       | [Tailwind CSS 3.4](https://tailwindcss.com) with [tailwind-variants](https://www.tailwind-variants.org/) |
+| **Charts**        | [Recharts](https://recharts.org), [Highcharts](https://www.highcharts.com), [Nivo](https://nivo.rocks)   |
+| **Tables**        | [TanStack Table v8](https://tanstack.com/table)                                                          |
+| **Validation**    | [Zod](https://zod.dev)                                                                                   |
+| **Icons**         | [Remix Icons](https://remixicon.com) via `@remixicon/react`                                              |
+| **Theme**         | Dark mode support via [next-themes](https://github.com/pacocoursey/next-themes)                          |
+| **React**         | React 19                                                                                                 |
 
 ### Key Dependencies
 
@@ -99,6 +103,7 @@ A modern portfolio management dashboard built with [Next.js 15](https://nextjs.o
 ## Getting Started
 
 ### Prerequisites
+
 - Node.js 18.17 or later
 - pnpm (recommended) or npm
 
@@ -131,16 +136,16 @@ Without an API key, the app uses mock price data for development.
 
 ### Available Scripts
 
-| Command | Description |
-|---------|-------------|
-| `pnpm dev` | Start development server |
-| `pnpm build` | Build for production |
-| `pnpm start` | Start production server |
-| `pnpm lint` | Run ESLint |
-| `pnpm generate:agents` | Generate agent mock data |
-| `pnpm generate:workflow` | Generate workflow mock data |
-| `pnpm generate:support` | Generate support ticket data |
-| `pnpm generate:retention` | Generate retention cohort data |
+| Command                     | Description                    |
+| --------------------------- | ------------------------------ |
+| `pnpm dev`                  | Start development server       |
+| `pnpm build`                | Build for production           |
+| `pnpm start`                | Start production server        |
+| `pnpm lint`                 | Run ESLint                     |
+| `pnpm generate:agents`      | Generate agent mock data       |
+| `pnpm generate:workflow`    | Generate workflow mock data    |
+| `pnpm generate:support`     | Generate support ticket data   |
+| `pnpm generate:retention`   | Generate retention cohort data |
 | `pnpm generate:screenshots` | Generate marketing screenshots |
 
 ---
@@ -251,15 +256,15 @@ The design system uses Tailwind CSS colors with semantic mapping for consistency
 
 Defined in `src/lib/chartUtils.ts`:
 
-| Color | Tailwind Class | Usage |
-|-------|---------------|-------|
-| Blue | `blue-500` | Primary, U.S. Stocks |
-| Cyan | `cyan-500` | Non-U.S. Stocks |
-| Emerald | `emerald-500` | Cash, Success states |
-| Amber | `amber-500` | Fixed Income |
-| Violet | `violet-500` | Alternative assets |
-| Rose | `rose-500` | Real Estate |
-| Gray | `gray-500` | Other, Neutral |
+| Color   | Tailwind Class | Usage                |
+| ------- | -------------- | -------------------- |
+| Blue    | `blue-500`     | Primary, U.S. Stocks |
+| Cyan    | `cyan-500`     | Non-U.S. Stocks      |
+| Emerald | `emerald-500`  | Cash, Success states |
+| Amber   | `amber-500`    | Fixed Income         |
+| Violet  | `violet-500`   | Alternative assets   |
+| Rose    | `rose-500`     | Real Estate          |
+| Gray    | `gray-500`     | Other, Neutral       |
 
 #### Asset Class Colors
 
@@ -270,15 +275,16 @@ const ASSET_CLASS_COLORS = {
   "U.S. Stocks": "blue",
   "Non-U.S. Stocks": "cyan",
   "Fixed Income": "amber",
-  "Cash": "emerald",
+  Cash: "emerald",
   "Real Estate": "rose",
-  "Commodities": "orange",
-  "Alternative": "violet",
-  "Other": "gray",
+  Commodities: "orange",
+  Alternative: "violet",
+  Other: "gray",
 }
 ```
 
 **Hex values for Highcharts:**
+
 - U.S. Stocks: `#3b82f6`
 - Non-U.S. Stocks: `#06b6d4`
 - Fixed Income: `#f59e0b`
@@ -300,7 +306,7 @@ Components use `tailwind-variants` for type-safe variant management.
 ```typescript
 // src/components/Button.tsx
 const buttonVariants = tv({
-  base: "inline-flex items-center justify-center rounded-md...",
+  base: "rounded-md... inline-flex items-center justify-center",
   variants: {
     variant: {
       primary: "bg-blue-600 text-white hover:bg-blue-700",
@@ -373,6 +379,7 @@ darkMode: "class"
 ```
 
 **Pattern for components:**
+
 ```typescript
 className={cx(
   "text-gray-900 dark:text-gray-50",
@@ -385,13 +392,13 @@ className={cx(
 
 Custom animations defined in `tailwind.config.ts`:
 
-| Animation | Usage |
-|-----------|-------|
-| `dialogOverlayShow` | Modal overlay fade-in |
-| `dialogContentShow` | Modal content scale-in |
-| `drawerSlideLeftAndFade` | Drawer slide from right |
-| `bottomSheetSlideUp` | Mobile bottom sheet |
-| `accordionOpen/Close` | Accordion expand/collapse |
+| Animation                | Usage                     |
+| ------------------------ | ------------------------- |
+| `dialogOverlayShow`      | Modal overlay fade-in     |
+| `dialogContentShow`      | Modal content scale-in    |
+| `drawerSlideLeftAndFade` | Drawer slide from right   |
+| `bottomSheetSlideUp`     | Mobile bottom sheet       |
+| `accordionOpen/Close`    | Accordion expand/collapse |
 
 ---
 
@@ -402,6 +409,7 @@ Custom animations defined in `tailwind.config.ts`:
 The central state management hook (`src/hooks/usePortfolioStore.ts`) provides:
 
 #### State
+
 - `accounts` - Array of brokerage accounts
 - `holdings` - Array of holdings across all accounts
 - `isLoading` - Loading state
@@ -410,6 +418,7 @@ The central state management hook (`src/hooks/usePortfolioStore.ts`) provides:
 - `dataVersion` - Cache invalidation counter
 
 #### Account Operations
+
 ```typescript
 addAccount(account: Omit<Account, "id" | "totalValue" | "holdingsCount" | "assetAllocation">)
 updateAccount(id: string, updates: Partial<Account>)
@@ -417,6 +426,7 @@ deleteAccount(id: string)
 ```
 
 #### Holdings Operations
+
 ```typescript
 addHolding(holding: Omit<Holding, "id" | "allocation">)
 updateHolding(id: string, updates: Partial<Holding>)
@@ -425,12 +435,16 @@ getHoldingsByAccount(accountId: string)
 ```
 
 #### Calculated Values
+
 ```typescript
 totalPortfolioValue: number
-portfolioAllocation: { usStocks, nonUsStocks, fixedIncome, cash }
+portfolioAllocation: {
+  usStocks, nonUsStocks, fixedIncome, cash
+}
 ```
 
 #### Utility Functions
+
 ```typescript
 clearAllData()
 resetToDefaults()
@@ -522,6 +536,7 @@ Fetches stock prices with multi-layer caching:
 ```
 
 **Caching Strategy:**
+
 1. Memory cache (15 minutes)
 2. File cache (24 hours)
 3. Alpha Vantage API (rate-limited)
@@ -547,7 +562,7 @@ Validates and caches logo URLs from logo.dev:
 
 ```typescript
 // Uses logo.dev API
-`https://img.logo.dev/${domain}?token=${token}&size=128`
+;`https://img.logo.dev/${domain}?token=${token}&size=128`
 ```
 
 ---
@@ -602,9 +617,11 @@ Storage events enable cross-tab state sync:
 window.addEventListener("storage", handleStorageChange)
 
 // Custom event for same-tab sync
-window.dispatchEvent(new CustomEvent("portfolio-state-update", {
-  detail: { accounts, holdings }
-}))
+window.dispatchEvent(
+  new CustomEvent("portfolio-state-update", {
+    detail: { accounts, holdings },
+  }),
+)
 ```
 
 ---
@@ -646,6 +663,7 @@ if (typeof Highcharts === "object") {
 ```
 
 **DO NOT:**
+
 ```typescript
 // Wrong - ES6 side-effect imports
 import "highcharts/modules/sunburst"
@@ -722,17 +740,21 @@ export { Component, type ComponentProps }
 
 ```typescript
 // types.ts - Define interfaces
-interface ColumnData { /* ... */ }
+interface ColumnData {
+  /* ... */
+}
 
 // columns.tsx - Column definitions
 export const createColumns = ({ onEdit, onDelete }) => [
-  columnHelper.accessor("name", { /* ... */ }),
+  columnHelper.accessor("name", {
+    /* ... */
+  }),
 ]
 
 // Table.tsx - Main component
 const columns = React.useMemo(
   () => createColumns({ onEdit, onDelete }),
-  [onEdit, onDelete]
+  [onEdit, onDelete],
 )
 ```
 
