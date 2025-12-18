@@ -10,9 +10,7 @@ A modern portfolio management dashboard built with [Next.js 15](https://nextjs.o
 
 **Capstone Project** - A comprehensive portfolio management application demonstrating modern React architecture, advanced data visualization with Highcharts (treemaps, sunburst charts, Sankey diagrams), and robust client-side state management. The UX is optimized with responsive, mobile-first design principles and follows data visualization best practices for clarity, accessibility, and meaningful insights.
 
-![Dashboard Preview - Desktop](./public/images/onboarding/overview-desktop-dark.png)
-
-![Dashboard Preview - Mobile](./public/images/onboarding/exposure-mobile-dark.png)
+![Dashboard Preview - Desktop](./public/images/doc/overview.png)
 
 ## Table of Contents
 
