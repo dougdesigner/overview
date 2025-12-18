@@ -136,8 +136,10 @@ export function HoldingsDrawer({
           isUSStock: initialData.isUSStock ?? true,
         })
       } else if (mode === "create") {
+        // Auto-select account if there's only one
+        const autoSelectedAccountId = accounts.length === 1 ? accounts[0].id : ""
         setFormData({
-          accountId: "",
+          accountId: autoSelectedAccountId,
           holdingType: "stocks-funds",
           ticker: "",
           shares: undefined,
@@ -152,7 +154,7 @@ export function HoldingsDrawer({
         })
       }
     }
-  }, [open, initialData, mode])
+  }, [open, initialData, mode, accounts])
 
   const handleUpdateForm = (updates: Partial<HoldingFormData>) => {
     setFormData((prev) => ({ ...prev, ...updates }))
