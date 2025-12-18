@@ -499,21 +499,25 @@ export default function ShowcasePage() {
                   {[
                     {
                       name: "U.S. Stocks",
+                      colorKey: "U.S. Stocks",
                       current: portfolioAllocation.usStocks,
                       benchmark: benchmarkAllocation.usStocks,
                     },
                     {
                       name: "Non-U.S.",
+                      colorKey: "Non-U.S. Stocks",
                       current: portfolioAllocation.nonUsStocks,
                       benchmark: benchmarkAllocation.nonUsStocks,
                     },
                     {
                       name: "Fixed Income",
+                      colorKey: "Fixed Income",
                       current: portfolioAllocation.fixedIncome,
                       benchmark: benchmarkAllocation.fixedIncome,
                     },
                     {
                       name: "Cash",
+                      colorKey: "Cash",
                       current: portfolioAllocation.cash,
                       benchmark: benchmarkAllocation.cash,
                     },
@@ -534,7 +538,7 @@ export default function ShowcasePage() {
                         <div
                           className={cx(
                             "absolute h-full rounded-full transition-all",
-                            getAssetClassBgColor(item.name),
+                            getAssetClassBgColor(item.colorKey),
                           )}
                           style={{ width: `${Math.min(item.current, 100)}%` }}
                         />
