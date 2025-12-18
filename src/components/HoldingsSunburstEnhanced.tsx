@@ -236,13 +236,14 @@ export function HoldingsSunburstEnhanced({
     return `$${value.toFixed(0)}`
   }
 
-  // Filter holdings by selected account
+  // Filter holdings by selected account and exclude ignored holdings
   const filteredHoldings =
-    selectedAccount === "all"
+    (selectedAccount === "all"
       ? holdings
       : holdings.filter((h) => h.accountId === selectedAccount)
+    ).filter((h) => !h.isIgnored)
 
-  // Calculate total portfolio value
+  // Calculate total portfolio value (excluding ignored)
   const totalValue = filteredHoldings.reduce((sum, h) => sum + h.marketValue, 0)
 
   // Get display text for a holding - always show ticker or name

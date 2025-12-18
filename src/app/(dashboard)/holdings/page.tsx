@@ -51,6 +51,7 @@ function HoldingsContent() {
     addHolding,
     updateHolding,
     deleteHolding,
+    toggleHoldingIgnored,
     refreshETFNames,
   } = usePortfolioStore()
 
@@ -83,12 +84,15 @@ function HoldingsContent() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []) // Only run once on mount
 
-  // Calculate allocations for all holdings
+  // Calculate allocations for all holdings (excluding ignored holdings from total)
   const holdingsWithAllocations = useMemo(() => {
-    const totalValue = holdings.reduce((sum, h) => sum + h.marketValue, 0)
+    // Only count non-ignored holdings in the total value for allocation calculation
+    const activeHoldings = holdings.filter((h) => !h.isIgnored)
+    const totalValue = activeHoldings.reduce((sum, h) => sum + h.marketValue, 0)
     return holdings.map((h) => ({
       ...h,
-      allocation: totalValue > 0 ? (h.marketValue / totalValue) * 100 : 0,
+      // Ignored holdings show 0% allocation since they're excluded from calculations
+      allocation: h.isIgnored ? 0 : (totalValue > 0 ? (h.marketValue / totalValue) * 100 : 0),
     }))
   }, [holdings])
 
@@ -101,9 +105,11 @@ function HoldingsContent() {
         )
   }, [holdingsWithAllocations, currentAccountFilter])
 
-  // Calculate total value of filtered holdings
+  // Calculate total value of filtered holdings (excluding ignored)
   const filteredTotalValue = useMemo(() => {
-    return filteredHoldings.reduce((sum, h) => sum + h.marketValue, 0)
+    return filteredHoldings
+      .filter((h) => !h.isIgnored)
+      .reduce((sum, h) => sum + h.marketValue, 0)
   }, [filteredHoldings])
 
   // Format currency
@@ -575,7 +581,7 @@ function HoldingsContent() {
             accounts={accounts}
             selectedAccountId={currentAccountFilter}
             onAccountChange={setCurrentAccountFilter}
-            height={500}
+            height={350}
           />
         </div>
       )}
@@ -637,6 +643,7 @@ function HoldingsContent() {
             accounts={accounts}
             onEdit={handleEdit}
             onDelete={handleDelete}
+            onToggleIgnored={toggleHoldingIgnored}
             selectedAccount={currentAccountFilter}
           />
         )}

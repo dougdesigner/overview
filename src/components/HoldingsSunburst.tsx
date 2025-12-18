@@ -71,8 +71,11 @@ export function HoldingsSunburst({
     "#3b82f6", // blue
   ]
 
-  // Calculate total portfolio value
-  const totalValue = holdings.reduce((sum, h) => sum + h.marketValue, 0)
+  // Filter out ignored holdings from visualization
+  const activeHoldings = holdings.filter((h) => !h.isIgnored)
+
+  // Calculate total portfolio value (excluding ignored)
+  const totalValue = activeHoldings.reduce((sum, h) => sum + h.marketValue, 0)
 
   // Transform holdings data to sunburst format
   const transformToSunburstData = (): Array<{
@@ -107,10 +110,10 @@ export function HoldingsSunburst({
       color: "transparent",
     })
 
-    // Group holdings by account and type
+    // Group holdings by account and type (using activeHoldings to exclude ignored)
     const accountMap = new Map<string, { holdings: Holding[]; total: number }>()
 
-    holdings.forEach((holding) => {
+    activeHoldings.forEach((holding) => {
       if (!accountMap.has(holding.accountId)) {
         accountMap.set(holding.accountId, { holdings: [], total: 0 })
       }

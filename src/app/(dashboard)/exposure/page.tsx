@@ -36,22 +36,24 @@ export default function ExposurePage() {
   // Get exposure calculations
   const { exposures, totalValue, error } = useExposureCalculations()
 
-  // Convert holdings to the format expected by ExposureTable
+  // Convert holdings to the format expected by ExposureTable (excluding ignored holdings)
   const portfolioHoldings = useMemo(() => {
-    return holdings.map((holding) => ({
-      id: holding.id,
-      accountId: holding.accountId,
-      accountName: holding.accountName,
-      ticker: holding.ticker,
-      name: holding.name,
-      quantity: holding.quantity,
-      lastPrice: holding.lastPrice,
-      marketValue: holding.marketValue,
-      type: holding.type,
-      isManualEntry: holding.isManualEntry,
-      sector: holding.sector,
-      industry: holding.industry,
-    }))
+    return holdings
+      .filter((holding) => !holding.isIgnored) // Exclude ignored holdings from calculations
+      .map((holding) => ({
+        id: holding.id,
+        accountId: holding.accountId,
+        accountName: holding.accountName,
+        ticker: holding.ticker,
+        name: holding.name,
+        quantity: holding.quantity,
+        lastPrice: holding.lastPrice,
+        marketValue: holding.marketValue,
+        type: holding.type,
+        isManualEntry: holding.isManualEntry,
+        sector: holding.sector,
+        industry: holding.industry,
+      }))
   }, [holdings])
 
   // Convert accounts to the format expected by ExposureTable

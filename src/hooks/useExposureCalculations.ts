@@ -22,22 +22,24 @@ export function useExposureCalculations() {
   const [error, setError] = useState<string | null>(null)
   const [exposureResult, setExposureResult] = useState<EnhancedExposureResult | null>(null)
 
-  // Convert holdings to the format expected by the exposure calculator
+  // Convert holdings to the format expected by the exposure calculator (excluding ignored holdings)
   const portfolioHoldings = useMemo((): PortfolioHolding[] => {
-    return holdings.map(holding => ({
-      id: holding.id,
-      accountId: holding.accountId,
-      accountName: holding.accountName,
-      ticker: holding.ticker,
-      name: holding.name,
-      quantity: holding.quantity,
-      lastPrice: holding.lastPrice,
-      marketValue: holding.marketValue,
-      type: holding.type as "stock" | "fund" | "cash",
-      isManualEntry: holding.isManualEntry,
-      sector: holding.sector,
-      industry: holding.industry,
-    }))
+    return holdings
+      .filter(holding => !holding.isIgnored) // Exclude ignored holdings from calculations
+      .map(holding => ({
+        id: holding.id,
+        accountId: holding.accountId,
+        accountName: holding.accountName,
+        ticker: holding.ticker,
+        name: holding.name,
+        quantity: holding.quantity,
+        lastPrice: holding.lastPrice,
+        marketValue: holding.marketValue,
+        type: holding.type as "stock" | "fund" | "cash",
+        isManualEntry: holding.isManualEntry,
+        sector: holding.sector,
+        industry: holding.industry,
+      }))
   }, [holdings])
 
   // Calculate exposures whenever holdings change

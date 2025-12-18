@@ -80,6 +80,7 @@ export function HoldingsTable({
   accounts,
   onEdit,
   onDelete,
+  onToggleIgnored,
   selectedAccount = "all",
 }: HoldingsTableProps) {
   const [expanded, setExpanded] = React.useState<ExpandedState>({})
@@ -128,8 +129,8 @@ export function HoldingsTable({
   }, [])
 
   const columns = React.useMemo(
-    () => createColumns({ onEdit, onDelete, toggleExpandAll, areAllExpanded, accounts }),
-    [onEdit, onDelete, toggleExpandAll, areAllExpanded, accounts],
+    () => createColumns({ onEdit, onDelete, onToggleIgnored, toggleExpandAll, areAllExpanded, accounts }),
+    [onEdit, onDelete, onToggleIgnored, toggleExpandAll, areAllExpanded, accounts],
   )
 
   const table = useReactTable({

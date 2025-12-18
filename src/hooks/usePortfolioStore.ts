@@ -61,6 +61,8 @@ export interface Holding {
   domain?: string // Company domain for logo lookup
   sector?: string // Company sector (e.g., "Technology", "Healthcare")
   industry?: string // Company industry (e.g., "Software", "Semiconductors")
+  // Calculation exclusion
+  isIgnored?: boolean // True to exclude from portfolio calculations (for what-if analysis)
 }
 
 // Map account types to labels for display
@@ -722,11 +724,13 @@ export function usePortfolioStore() {
     const updateAccounts = async () => {
       const updatedAccounts = await Promise.all(accounts.map(async (account) => {
         const accountHoldings = holdings.filter(h => h.accountId === account.id)
-        const totalValue = accountHoldings.reduce((sum, h) => sum + h.marketValue, 0)
-        const holdingsCount = accountHoldings.length
+        // Filter out ignored holdings from calculations
+        const activeAccountHoldings = accountHoldings.filter(h => !h.isIgnored)
+        const totalValue = activeAccountHoldings.reduce((sum, h) => sum + h.marketValue, 0)
+        const holdingsCount = accountHoldings.length // Keep total count including ignored
 
-        // Convert holdings to format expected by enhanced calculator
-        const portfolioHoldings = accountHoldings.map(h => ({
+        // Convert holdings to format expected by enhanced calculator (exclude ignored)
+        const portfolioHoldings = activeAccountHoldings.map(h => ({
           id: h.id,
           accountId: h.accountId,
           accountName: h.accountName,
@@ -775,8 +779,8 @@ export function usePortfolioStore() {
             })
           } catch (error) {
             console.error("Error calculating asset allocation:", error)
-            // Fallback to simple calculation on error
-            accountHoldings.forEach(holding => {
+            // Fallback to simple calculation on error (using active holdings only)
+            activeAccountHoldings.forEach(holding => {
               if (holding.type === "cash") {
                 assetAllocation.cash += (holding.marketValue / totalValue) * 100
               } else if (holding.type === "fund") {
@@ -884,6 +888,17 @@ export function usePortfolioStore() {
 
   const deleteHolding = useCallback((id: string) => {
     setHoldingsState(prev => prev.filter(holding => holding.id !== id))
+    // Clear exposure calculator cache to ensure fresh data on stocks page
+    enhancedExposureCalculator.clearCache()
+  }, [])
+
+  // Toggle holding ignored state
+  const toggleHoldingIgnored = useCallback((id: string) => {
+    setHoldingsState(prev =>
+      prev.map(holding =>
+        holding.id === id ? { ...holding, isIgnored: !holding.isIgnored } : holding
+      )
+    )
     // Clear exposure calculator cache to ensure fresh data on stocks page
     enhancedExposureCalculator.clearCache()
   }, [])
@@ -1102,6 +1117,7 @@ export function usePortfolioStore() {
     // Demo mode
     isDemoMode,
     setDemoMode,
+    hasUserData: accounts.length > 0, // True if user has real (non-demo) data
 
     // Account operations
     addAccount,
@@ -1112,6 +1128,7 @@ export function usePortfolioStore() {
     addHolding,
     updateHolding,
     deleteHolding,
+    toggleHoldingIgnored,
     getHoldingsByAccount,
 
     // Calculated values - use active data values

@@ -43,6 +43,7 @@ const formatPercentage = (value: number) => {
 interface ColumnsProps {
   onEdit: (holding: Holding) => void
   onDelete: (holdingId: string) => void
+  onToggleIgnored: (holdingId: string) => void
   toggleExpandAll: () => void
   areAllExpanded: () => boolean
   accounts: Account[]
@@ -51,6 +52,7 @@ interface ColumnsProps {
 export const createColumns = ({
   onEdit,
   onDelete,
+  onToggleIgnored,
   toggleExpandAll,
   areAllExpanded,
   accounts,
@@ -129,7 +131,7 @@ export const createColumns = ({
             type={type === "fund" ? "etf" : type === "stock" ? "stock" : undefined}
             className="size-6"
             domain={row.original.domain}
-            companyName={row.original.isManualEntry ? row.original.name : undefined}
+            companyName={row.original.name}
           />
           <Badge variant="flat" className="font-semibold">
             {ticker}
@@ -168,19 +170,28 @@ export const createColumns = ({
     accessorKey: "name",
     cell: ({ row }) => {
       const isNested = row.depth > 0
+      const isIgnored = row.original.isIgnored
       // Use canonical name from asset-classifications if available for consistency
       const ticker = row.original.ticker
       const canonicalName = ticker ? getKnownStockName(ticker) : null
       const displayName = canonicalName || row.original.name
       return (
-        <span
-          className={cx(
-            "font-semibold text-gray-900 dark:text-gray-50",
-            isNested && "pl-6 font-normal text-gray-600 dark:text-gray-400",
+        <div className="flex items-center gap-2">
+          <span
+            className={cx(
+              "font-semibold text-gray-900 dark:text-gray-50",
+              isNested && "pl-6 font-normal text-gray-600 dark:text-gray-400",
+              isIgnored && "text-gray-400 line-through dark:text-gray-500",
+            )}
+          >
+            {displayName}
+          </span>
+          {isIgnored && (
+            <Badge variant="warning" className="text-xs">
+              Excluded
+            </Badge>
           )}
-        >
-          {displayName}
-        </span>
+        </div>
       )
     },
     enableSorting: true,
@@ -528,6 +539,13 @@ export const createColumns = ({
             <DropdownMenuItem onClick={() => onEdit(holding)}>
               <Icon icon="carbon:edit" className="mr-2 h-4 w-4" />
               Edit
+            </DropdownMenuItem>
+            <DropdownMenuItem onClick={() => onToggleIgnored(holding.id)}>
+              <Icon
+                icon={holding.isIgnored ? "carbon:view" : "carbon:view-off"}
+                className="mr-2 h-4 w-4"
+              />
+              {holding.isIgnored ? "Include in Calculations" : "Exclude from Calculations"}
             </DropdownMenuItem>
             <DropdownMenuItem
               onClick={() => onDelete(holding.id)}

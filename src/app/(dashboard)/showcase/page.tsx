@@ -26,6 +26,7 @@ export default function ShowcasePage() {
     isDemoMode,
     setDemoMode,
     isLoading,
+    hasUserData,
   } = usePortfolioStore()
 
   const handleTryDemo = () => {
@@ -562,8 +563,8 @@ export default function ShowcasePage() {
           </div>
         </div>
 
-        {/* Footer CTA Cards - only shown when viewing demo data (no user data) */}
-        {isDemoMode && (
+        {/* Footer CTA Cards - only shown when viewing demo data AND user has no real data */}
+        {isDemoMode && !hasUserData && (
           <div className="mt-16 border-t border-gray-200 pt-12 dark:border-gray-800">
             <div className="grid w-full grid-cols-1 gap-4 sm:grid-cols-2 lg:mx-auto lg:max-w-2xl">
               {/* Try Demo Card */}
