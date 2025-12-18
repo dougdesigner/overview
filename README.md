@@ -802,7 +802,9 @@ import { cx } from "@/lib/utils"
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
+Copyright (c) 2025 Douglas O. Sanchez. All rights reserved.
+
+This source code is provided for viewing and educational purposes only. See [LICENSE.md](LICENSE.md) for details.
 
 ---
 
