@@ -1,11 +1,13 @@
 # Portfolio Overview
 
+A modern portfolio management dashboard built with Next.js 15, Tremor Raw, and Highcharts. Track accounts, holdings, and analyze portfolio exposure across asset classes, sectors, and individual stocks through rich interactive visualizations.
+
 ## Capstone Project Information
 
 |                               |                      |
 | ----------------------------- | -------------------- |
 | **Title of Capstone Project** | Portfolio Overview   |
-| **Full Name (Printed)**       | Douglas O. Sanchez   |
+| **Full Name**                 | Douglas O. Sanchez   |
 | **HES ID**                    | 31473772             |
 | **Graduate Degree Program**   | Digital Media Design |
 | **Email Address**             | dos707@g.harvard.edu |
@@ -800,7 +802,7 @@ import { cx } from "@/lib/utils"
 
 ## License
 
-This site template is a commercial product and is licensed under the [Tremor License](https://blocks.tremor.so/license).
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
 
 ---
 
