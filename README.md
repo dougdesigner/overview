@@ -831,5 +831,7 @@ This site template is a commercial product and is licensed under the [Tremor Lic
 
 - [Tremor](https://tremor.so) for the beautiful dashboard template foundation
 - [Vercel](https://vercel.com) for Next.js and deployment platform
-- [Alpha Vantage](https://www.alphavantage.co) for stock price API
+- [Alpha Vantage](https://www.alphavantage.co) for ETF holdings and stock price API
 - [logo.dev](https://logo.dev) for company logo API
+- [Claude Code](https://claude.ai/code) for AI-assisted development
+- [GitHub Copilot](https://github.com/features/copilot) for commit message summaries
