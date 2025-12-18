@@ -2,12 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Hide Sentry feedback floating button off-screen - only accessible via Portfolio settings menu */
-#sentry-feedback {
-  position: fixed !important;
-  transform: translateX(-9999px) !important;
-}
-
 /* Hide scrollbar on mobile to prevent jitter when dialogs open */
 @media (max-width: 639px) {
   html {
