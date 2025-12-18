@@ -42,7 +42,7 @@ export function OnboardingFlow() {
           className="group flex flex-col items-center rounded-xl border border-gray-200 bg-white p-6 text-center transition-all hover:border-blue-300 hover:shadow-md dark:border-gray-800 dark:bg-gray-900 dark:hover:border-blue-700"
         >
           <div className="mb-3 flex size-12 items-center justify-center rounded-full bg-blue-100 text-blue-600 dark:bg-blue-900/30 dark:text-blue-400">
-            <Icon icon="carbon:view" className="size-6" />
+            <Icon icon="carbon:chart-treemap" className="size-6" />
           </div>
           <h3 className="mb-1 text-base font-semibold text-gray-900 dark:text-gray-50">
             Explore Demo Data
@@ -62,7 +62,7 @@ export function OnboardingFlow() {
           className="group flex flex-col items-center rounded-xl border border-gray-200 bg-white p-6 text-center transition-all hover:border-emerald-300 hover:shadow-md dark:border-gray-800 dark:bg-gray-900 dark:hover:border-emerald-700"
         >
           <div className="mb-3 flex size-12 items-center justify-center rounded-full bg-emerald-100 text-emerald-600 dark:bg-emerald-900/30 dark:text-emerald-400">
-            <Icon icon="carbon:add" className="size-6" />
+            <Icon icon="carbon:add-large" className="size-6" />
           </div>
           <h3 className="mb-1 text-base font-semibold text-gray-900 dark:text-gray-50">
             Start Fresh

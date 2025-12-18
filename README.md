@@ -1,14 +1,23 @@
-# Portfolio Overview - Dashboard
+# Portfolio Overview
+
+## Capstone Project Information
+
+|                               |                      |
+| ----------------------------- | -------------------- |
+| **Title of Capstone Project** | Portfolio Overview   |
+| **Full Name (Printed)**       | Douglas O. Sanchez   |
+| **HES ID**                    | 31473772             |
+| **Graduate Degree Program**   | Digital Media Design |
+| **Email Address**             | dos707@g.harvard.edu |
+| **Date**                      | 12/17/2025           |
+
+---
 
 ## Abstract
 
 Individual investors increasingly hold diversified portfolios across multiple brokerage accounts, often including Exchange-Traded Funds (ETFs) that obscure true underlying stock exposure. This project addresses the challenge of understanding actual portfolio composition by developing a comprehensive portfolio analysis application. Built with Next.js 15, TypeScript, and advanced visualization libraries (Highcharts, Recharts, Nivo), the application implements ETF look-through analysis to reveal hidden stock concentrations within fund holdings. The architecture prioritizes user privacy through a client-side-only data model, storing all portfolio information locally without server-side persistence. Key features include multi-account management with institution branding, real-time price updates via Alpha Vantage API, and interactive visualizations including treemaps, sunburst charts, and Sankey diagrams for intuitive exposure analysis. The responsive, mobile-first design ensures accessibility across devices. This capstone project demonstrates proficiency in modern React patterns, complex state management, third-party API integration, and data visualization best practices while solving a practical problem for self-directed investors seeking deeper portfolio insights.
 
 ---
-
-A modern portfolio management dashboard built with [Next.js 15](https://nextjs.org), [Tremor Raw](https://tremor.so), and [Highcharts](https://www.highcharts.com). Track accounts, holdings, and analyze portfolio exposure across asset classes, sectors, and institutions through rich interactive visualizations.
-
-**Capstone Project** - A comprehensive portfolio management application demonstrating modern React architecture, advanced data visualization with Highcharts (treemaps, sunburst charts, Sankey diagrams), and robust client-side state management. The UX is optimized with responsive, mobile-first design principles and follows data visualization best practices for clarity, accessibility, and meaningful insights.
 
 ![Dashboard Preview - Desktop](./public/images/doc/overview.png)
 
