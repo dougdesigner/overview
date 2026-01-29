@@ -33,6 +33,7 @@ import { createColumns } from "./columns"
 // import { ExposureTreemapHighcharts } from "./ExposureTreemapHighcharts"  // Original version
 // import { ExposureTreemapHighcharts } from "./ExposureTreemapHighchartsSimplified"  // Simplified version
 import { ExposureTreemapHighchartsWithLogos as ExposureTreemapHighcharts } from "./ExposureTreemapHighchartsWrapper" // Version with logos
+import { ExposureCardList } from "./ExposureCardList"
 import { ExposureTableProps, PortfolioHolding, StockExposure } from "./types"
 // Data files for calculating non-stock portions of funds
 import mutualFundMappings from "@/data/mutual-fund-mappings.json"
@@ -269,7 +270,7 @@ const combineGoogleEntries = (exposures: StockExposure[]): StockExposure[] => {
     .map((e) => (e.ticker === "GOOGL" ? combined : e))
 }
 
-export function ExposureTable({ holdings, accounts, dataVersion, selectedAccounts = ["all"], holdingsFilter = "all", combineGoogleShares = false, showOtherAssets = false, displayValue = "pct-portfolio", onFilteredDataChange, onChartSettingsChange, onLoadingChange }: ExposureTableProps) {
+export function ExposureTable({ holdings, accounts, dataVersion, selectedAccounts = ["all"], holdingsFilter = "all", combineGoogleShares = false, showOtherAssets = false, displayValue = "pct-portfolio", viewMode = "table", onFilteredDataChange, onChartSettingsChange, onLoadingChange }: ExposureTableProps) {
   const [data, setData] = React.useState<StockExposure[]>([])
   const [sorting, setSorting] = React.useState<SortingState>([
     { id: "percentOfPortfolio", desc: true },
@@ -701,121 +702,102 @@ export function ExposureTable({ holdings, accounts, dataVersion, selectedAccount
         />
       )}
 
-      {/* Table Controls - only show when there are exposures to display */}
+      {/* Table/Card Controls - only show when there are exposures to display */}
       {exposuresForVisualization.length > 0 && (
         <>
-          <Card className="p-0">
-            {/* <div className="flex flex-col gap-4 p-4 sm:flex-row sm:items-center sm:justify-between">
-              <div className="relative">
-                <RiSearchLine className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" />
-                <Input
-                  placeholder="Search stocks..."
-                  value={globalFilter ?? ""}
-                  onChange={(e) => setGlobalFilter(e.target.value)}
-                  className="pl-9 sm:w-64"
-                />
-              </div>
-              <div className="flex items-center gap-2">
-                {lastUpdated && (
-                  <span className="text-xs text-gray-500 dark:text-gray-400">
-                    Updated: {lastUpdated.toLocaleTimeString()}
-                  </span>
-                )}
-                <Button
-                  variant="secondary"
-                  onClick={handleRefresh}
-                  disabled={isLoading}
-                  className="flex items-center gap-2"
-                >
-                  <RiRefreshLine
-                    className={cx("h-4 w-4", isLoading && "animate-spin")}
-                  />
-                  Refresh
-                </Button>
-              </div>
-            </div> */}
-
-            {/* Table */}
-            <div className="overflow-x-auto">
-              <Table>
-                <TableHead>
-                  {table.getHeaderGroups().map((headerGroup) => (
-                    <TableRow key={headerGroup.id}>
-                      {headerGroup.headers.map((header) => (
-                        <TableHeaderCell
-                          key={header.id}
-                          className={cx(header.column.columnDef.meta?.className)}
-                        >
-                          {header.isPlaceholder
-                            ? null
-                            : flexRender(
-                                header.column.columnDef.header,
-                                header.getContext(),
-                              )}
-                        </TableHeaderCell>
+          {viewMode === "table" ? (
+            <>
+              <Card className="p-0">
+                {/* Table */}
+                <div className="overflow-x-auto">
+                  <Table>
+                    <TableHead>
+                      {table.getHeaderGroups().map((headerGroup) => (
+                        <TableRow key={headerGroup.id}>
+                          {headerGroup.headers.map((header) => (
+                            <TableHeaderCell
+                              key={header.id}
+                              className={cx(header.column.columnDef.meta?.className)}
+                            >
+                              {header.isPlaceholder
+                                ? null
+                                : flexRender(
+                                    header.column.columnDef.header,
+                                    header.getContext(),
+                                  )}
+                            </TableHeaderCell>
+                          ))}
+                        </TableRow>
                       ))}
-                    </TableRow>
-                  ))}
-                </TableHead>
-                <TableBody>
-                  {isLoading ? (
-                    <TableRow>
-                      <TableCell
-                        colSpan={columns.length}
-                        className="h-24 text-center"
-                      >
-                        <div className="flex items-center justify-center">
-                          <RiRefreshLine className="h-6 w-6 animate-spin text-gray-400" />
-                          <span className="ml-2 text-gray-500">
-                            Calculating exposures...
-                          </span>
-                        </div>
-                      </TableCell>
-                    </TableRow>
-                  ) : table.getRowModel().rows?.length ? (
-                    table.getRowModel().rows.map((row) => (
-                      <TableRow
-                        key={row.id}
-                        data-state={row.getIsSelected() && "selected"}
-                        className={cx(
-                          row.depth > 0 && "bg-gray-50 dark:bg-gray-900/50",
-                        )}
-                      >
-                        {row.getVisibleCells().map((cell) => (
+                    </TableHead>
+                    <TableBody>
+                      {isLoading ? (
+                        <TableRow>
                           <TableCell
-                            key={cell.id}
-                            className={cx(cell.column.columnDef.meta?.className)}
+                            colSpan={columns.length}
+                            className="h-24 text-center"
                           >
-                            {flexRender(
-                              cell.column.columnDef.cell,
-                              cell.getContext(),
-                            )}
+                            <div className="flex items-center justify-center">
+                              <RiRefreshLine className="h-6 w-6 animate-spin text-gray-400" />
+                              <span className="ml-2 text-gray-500">
+                                Calculating exposures...
+                              </span>
+                            </div>
                           </TableCell>
-                        ))}
-                      </TableRow>
-                    ))
-                  ) : (
-                    <TableRow>
-                      <TableCell
-                        colSpan={columns.length}
-                        className="h-24 text-center"
-                      >
-                        No exposure data available
-                      </TableCell>
-                    </TableRow>
-                  )}
-                </TableBody>
-              </Table>
-            </div>
-          </Card>
+                        </TableRow>
+                      ) : table.getRowModel().rows?.length ? (
+                        table.getRowModel().rows.map((row) => (
+                          <TableRow
+                            key={row.id}
+                            data-state={row.getIsSelected() && "selected"}
+                            className={cx(
+                              row.depth > 0 && "bg-gray-50 dark:bg-gray-900/50",
+                            )}
+                          >
+                            {row.getVisibleCells().map((cell) => (
+                              <TableCell
+                                key={cell.id}
+                                className={cx(cell.column.columnDef.meta?.className)}
+                              >
+                                {flexRender(
+                                  cell.column.columnDef.cell,
+                                  cell.getContext(),
+                                )}
+                              </TableCell>
+                            ))}
+                          </TableRow>
+                        ))
+                      ) : (
+                        <TableRow>
+                          <TableCell
+                            colSpan={columns.length}
+                            className="h-24 text-center"
+                          >
+                            No exposure data available
+                          </TableCell>
+                        </TableRow>
+                      )}
+                    </TableBody>
+                  </Table>
+                </div>
+              </Card>
 
-          {/* Pagination */}
-          <ExposureTablePagination
-            totalRows={filteredByHoldingsFilter.length}
-            currentPage={currentPage}
-            pageSize={PAGE_SIZE}
-            onPageChange={setCurrentPage}
-          />
+              {/* Pagination */}
+              <ExposureTablePagination
+                totalRows={filteredByHoldingsFilter.length}
+                currentPage={currentPage}
+                pageSize={PAGE_SIZE}
+                onPageChange={setCurrentPage}
+              />
+            </>
+          ) : (
+            <ExposureCardList
+              exposures={filteredByHoldingsFilter}
+              accounts={accounts}
+              displayValue={displayValue}
+              totalStocksValue={totalStocksValue}
+            />
+          )}
         </>
       )}
     </div>

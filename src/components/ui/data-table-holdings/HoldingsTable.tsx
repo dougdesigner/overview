@@ -26,7 +26,7 @@ import { createColumns } from "./columns"
 import { Holding, HoldingsTableProps } from "./types"
 
 // Group holdings by ticker and account for nested display
-const groupHoldings = (holdings: Holding[]): Holding[] => {
+export const groupHoldings = (holdings: Holding[]): Holding[] => {
   const grouped: Record<string, Holding[]> = {}
 
   // Group holdings by ticker for stocks/funds, or by type for cash

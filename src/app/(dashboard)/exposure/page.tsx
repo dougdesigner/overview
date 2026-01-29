@@ -9,7 +9,9 @@ import { ExposureTable } from "@/components/ui/data-table-exposure/ExposureTable
 import {
   ExposureDisplayValue,
   HoldingsFilter,
+  ViewMode,
 } from "@/components/ui/data-table-exposure/types"
+import { ViewToggle } from "@/components/ui/ViewToggle"
 import { useExposureCalculations } from "@/hooks/useExposureCalculations"
 import { usePortfolioStore } from "@/hooks/usePortfolioStore"
 import { Icon } from "@iconify/react"
@@ -82,6 +84,19 @@ export default function ExposurePage() {
   // Display value state (moved from chart)
   const [displayValue, setDisplayValue] =
     useState<ExposureDisplayValue>("pct-stocks")
+
+  // View mode state with localStorage persistence
+  const [viewMode, setViewMode] = useState<ViewMode>(() => {
+    if (typeof window !== "undefined") {
+      return (localStorage.getItem("exposure_view_mode") as ViewMode) || "table"
+    }
+    return "table"
+  })
+
+  // Persist view mode preference
+  useEffect(() => {
+    localStorage.setItem("exposure_view_mode", viewMode)
+  }, [viewMode])
 
   // Reset key to force child components to remount and reset their local state
   const [resetKey, setResetKey] = useState(0)
@@ -371,6 +386,7 @@ export default function ExposurePage() {
                 hideTextOnMobile
                 compactWhenActive
               />
+              <ViewToggle viewMode={viewMode} onViewModeChange={setViewMode} />
             </div>
           </div>
         </div>
@@ -459,6 +475,7 @@ export default function ExposurePage() {
               onShowOtherAssetsChange={setShowOtherAssets}
               onReset={resetFilters}
             />
+            <ViewToggle viewMode={viewMode} onViewModeChange={setViewMode} />
           </div>
         </div>
       )}
@@ -547,6 +564,7 @@ export default function ExposurePage() {
             combineGoogleShares={combineGoogleShares}
             showOtherAssets={showOtherAssets}
             displayValue={displayValue}
+            viewMode={viewMode}
             onFilteredDataChange={handleFilteredDataChange}
             onLoadingChange={handleLoadingChange}
           />

@@ -83,6 +83,8 @@ export type HoldingsFilter = "all" | "mag7" | "mag10" | "top7" | "top10"
 // Grouping mode for exposure visualization
 export type GroupingMode = "none" | "sector" | "sector-industry"
 
+export type ViewMode = "table" | "card"
+
 export interface ExposureTableProps {
   holdings: PortfolioHolding[]
   accounts: Account[]
@@ -94,6 +96,7 @@ export interface ExposureTableProps {
   combineGoogleShares?: boolean
   showOtherAssets?: boolean
   displayValue?: ExposureDisplayValue
+  viewMode?: ViewMode
   onFilteredDataChange?: (count: number, totalValue: number) => void
   onChartSettingsChange?: (hasChanges: boolean) => void
   onLoadingChange?: (isLoading: boolean) => void

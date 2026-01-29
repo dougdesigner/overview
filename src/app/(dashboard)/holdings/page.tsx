@@ -10,8 +10,10 @@ import {
   type HoldingFormData,
 } from "@/components/ui/HoldingsDrawer"
 import { InstitutionLogo } from "@/components/ui/InstitutionLogo"
+import { HoldingsCardList } from "@/components/ui/data-table-holdings/HoldingsCardList"
 import { HoldingsTable } from "@/components/ui/data-table-holdings/HoldingsTable"
 import { Holding } from "@/components/ui/data-table-holdings/types"
+import { ViewToggle, ViewMode } from "@/components/ui/ViewToggle"
 import mutualFundMappings from "@/data/mutual-fund-mappings.json"
 import { usePortfolioStore } from "@/hooks/usePortfolioStore"
 import { getETFName } from "@/lib/etfMetadataService"
@@ -42,6 +44,17 @@ function HoldingsContent() {
   const [currentAccountFilter, setCurrentAccountFilter] =
     React.useState<string>(searchParams.get("account") || "all")
   const [isFilterSticky, setIsFilterSticky] = React.useState(false)
+  const [viewMode, setViewMode] = React.useState<ViewMode>(() => {
+    if (typeof window !== "undefined") {
+      return (localStorage.getItem("holdings_view_mode") as ViewMode) || "table"
+    }
+    return "table"
+  })
+
+  // Persist view mode preference
+  React.useEffect(() => {
+    localStorage.setItem("holdings_view_mode", viewMode)
+  }, [viewMode])
   const filterRef = React.useRef<HTMLDivElement>(null)
 
   // Use portfolio store for accounts and holdings data
@@ -522,6 +535,7 @@ function HoldingsContent() {
                   hideTextOnMobile
                   compactWhenActive
                 />
+                <ViewToggle viewMode={viewMode} onViewModeChange={setViewMode} />
               </div>
             </div>
           </div>
@@ -569,6 +583,7 @@ function HoldingsContent() {
               selectedAccount={currentAccountFilter}
               onAccountChange={setCurrentAccountFilter}
             />
+            <ViewToggle viewMode={viewMode} onViewModeChange={setViewMode} />
           </div>
         </div>
       )}
@@ -637,8 +652,17 @@ function HoldingsContent() {
               />
             </Button>
           </div>
-        ) : (
+        ) : viewMode === "table" ? (
           <HoldingsTable
+            holdings={holdingsWithAllocations}
+            accounts={accounts}
+            onEdit={handleEdit}
+            onDelete={handleDelete}
+            onToggleIgnored={toggleHoldingIgnored}
+            selectedAccount={currentAccountFilter}
+          />
+        ) : (
+          <HoldingsCardList
             holdings={holdingsWithAllocations}
             accounts={accounts}
             onEdit={handleEdit}
