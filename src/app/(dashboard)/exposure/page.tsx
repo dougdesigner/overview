@@ -3,6 +3,11 @@
 import { Badge } from "@/components/Badge"
 import { Button } from "@/components/Button"
 import { Divider } from "@/components/Divider"
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuTrigger,
+} from "@/components/DropdownMenu"
 import { DashboardSettingsDropdown } from "@/components/ui/DashboardSettingsDropdown"
 import { InstitutionLogo } from "@/components/ui/InstitutionLogo"
 import { ExposureTable } from "@/components/ui/data-table-exposure/ExposureTable"
@@ -15,6 +20,7 @@ import { ViewToggle } from "@/components/ui/ViewToggle"
 import { useExposureCalculations } from "@/hooks/useExposureCalculations"
 import { usePortfolioStore } from "@/hooks/usePortfolioStore"
 import { Icon } from "@iconify/react"
+import { useRouter } from "next/navigation"
 import React, { useCallback, useEffect, useMemo, useRef, useState, Suspense } from "react"
 
 export default function ExposurePage() {
@@ -27,6 +33,9 @@ export default function ExposurePage() {
     hasViewedStocksPage,
     markStocksPageViewed,
   } = usePortfolioStore()
+
+  const router = useRouter()
+  const hasAccounts = accounts.length > 0
 
   // Mark stocks page as viewed for onboarding
   useEffect(() => {
@@ -282,9 +291,62 @@ export default function ExposurePage() {
             Stock exposure across all ETFs and direct holdings
           </p>
         </div>
-        {/* <Button onClick={handleFullRefresh} variant="secondary" className="text-sm">
-          Refresh
-        </Button> */}
+        {hasAccounts && (
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button className="hidden items-center gap-2 sm:flex sm:text-sm">
+                Add
+                <Icon
+                  icon="carbon:add"
+                  className="-mr-0.5 size-5 shrink-0"
+                  aria-hidden="true"
+                />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end" className="min-w-[280px] p-2">
+              <button
+                onClick={() => router.push("/accounts?add=true")}
+                className="flex w-full items-center gap-4 rounded-xl p-3 text-left transition-colors hover:bg-gray-100 dark:hover:bg-gray-800"
+              >
+                <div className="flex size-10 items-center justify-center rounded-full bg-blue-100 dark:bg-blue-900/30">
+                  <Icon
+                    icon="mdi:bank"
+                    className="size-5 text-blue-600 dark:text-blue-400"
+                    aria-hidden="true"
+                  />
+                </div>
+                <div>
+                  <div className="font-medium text-gray-900 dark:text-gray-50">
+                    Account
+                  </div>
+                  <div className="text-sm text-gray-500 dark:text-gray-400">
+                    Add a new investment account
+                  </div>
+                </div>
+              </button>
+              <button
+                onClick={() => router.push("/holdings?add=true")}
+                className="flex w-full items-center gap-4 rounded-xl p-3 text-left transition-colors hover:bg-gray-100 dark:hover:bg-gray-800"
+              >
+                <div className="flex size-10 items-center justify-center rounded-full bg-emerald-100 dark:bg-emerald-900/30">
+                  <Icon
+                    icon="mdi:format-list-bulleted"
+                    className="size-5 text-emerald-600 dark:text-emerald-400"
+                    aria-hidden="true"
+                  />
+                </div>
+                <div>
+                  <div className="font-medium text-gray-900 dark:text-gray-50">
+                    Holding
+                  </div>
+                  <div className="text-sm text-gray-500 dark:text-gray-400">
+                    Add stocks, ETFs, or cash
+                  </div>
+                </div>
+              </button>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        )}
       </div>
       <Divider />
 
