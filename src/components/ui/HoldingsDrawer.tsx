@@ -57,6 +57,7 @@ export interface HoldingFormData {
   isUSStock?: boolean // Default: true
   sector?: string // Optional sector classification
   industry?: string // Optional industry classification
+  tickerType?: "stock" | "etf" | "mutual-fund" // Type from ticker search
 }
 
 interface HoldingsDrawerProps {
@@ -411,6 +412,7 @@ export function HoldingsDrawer({
                           handleUpdateForm({
                             ticker: ticker.symbol,
                             companyName: ticker.name,
+                            tickerType: ticker.type as "stock" | "etf" | "mutual-fund" | undefined,
                           })
                         }
                         onManualEntry={() =>

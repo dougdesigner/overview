@@ -1,0 +1,201 @@
+{
+  "symbol": "VEU",
+  "name": "VEU ETF",
+  "holdings": [
+    {
+      "symbol": "RY",
+      "weight": 0.006
+    },
+    {
+      "symbol": "CP",
+      "weight": 0.0026
+    },
+    {
+      "symbol": "BMO",
+      "weight": 0.0025
+    },
+    {
+      "symbol": "CRH",
+      "weight": 0.0023
+    },
+    {
+      "symbol": "CNQ",
+      "weight": 0.0022
+    },
+    {
+      "symbol": "BNS",
+      "weight": 0.0022
+    },
+    {
+      "symbol": "CM",
+      "weight": 0.002
+    },
+    {
+      "symbol": "MFC",
+      "weight": 0.0018
+    },
+    {
+      "symbol": "RACE",
+      "weight": 0.0017
+    },
+    {
+      "symbol": "SU",
+      "weight": 0.0017
+    },
+    {
+      "symbol": "TRP",
+      "weight": 0.0016
+    },
+    {
+      "symbol": "FLUT",
+      "weight": 0.0016
+    },
+    {
+      "symbol": "AEM",
+      "weight": 0.0016
+    },
+    {
+      "symbol": "WCN",
+      "weight": 0.0016
+    },
+    {
+      "symbol": "ALC",
+      "weight": 0.0016
+    },
+    {
+      "symbol": "WPM",
+      "weight": 0.001
+    },
+    {
+      "symbol": "FNV",
+      "weight": 0.0009
+    },
+    {
+      "symbol": "NTR",
+      "weight": 0.0009
+    },
+    {
+      "symbol": "SW",
+      "weight": 0.0009
+    },
+    {
+      "symbol": "BAM",
+      "weight": 0.0008
+    },
+    {
+      "symbol": "TRI",
+      "weight": 0.0008
+    },
+    {
+      "symbol": "QSR",
+      "weight": 0.0007
+    },
+    {
+      "symbol": "FTS",
+      "weight": 0.0007
+    },
+    {
+      "symbol": "CVE",
+      "weight": 0.0006
+    },
+    {
+      "symbol": "YUMC",
+      "weight": 0.0006
+    },
+    {
+      "symbol": "TEF",
+      "weight": 0.0006
+    },
+    {
+      "symbol": "ITUB",
+      "weight": 0.0005
+    },
+    {
+      "symbol": "AU",
+      "weight": 0.0005
+    },
+    {
+      "symbol": "PBR-A",
+      "weight": 0.0005
+    },
+    {
+      "symbol": "BEKE",
+      "weight": 0.0004
+    },
+    {
+      "symbol": "IMO",
+      "weight": 0.0004
+    },
+    {
+      "symbol": "TME",
+      "weight": 0.0003
+    },
+    {
+      "symbol": "YMM",
+      "weight": 0.0003
+    },
+    {
+      "symbol": "QGEN",
+      "weight": 0.0003
+    },
+    {
+      "symbol": "BCE",
+      "weight": 0.0003
+    },
+    {
+      "symbol": "KB",
+      "weight": 0.0003
+    },
+    {
+      "symbol": "CHT",
+      "weight": 0.0003
+    },
+    {
+      "symbol": "ATHM",
+      "weight": 0.0001
+    },
+    {
+      "symbol": "BSAC",
+      "weight": 0.0001
+    },
+    {
+      "symbol": "ABEV",
+      "weight": 0.0001
+    },
+    {
+      "symbol": "CAMT",
+      "weight": 0.0001
+    },
+    {
+      "symbol": "CX",
+      "weight": 0.0001
+    },
+    {
+      "symbol": "SQM",
+      "weight": 0.0001
+    },
+    {
+      "symbol": "BGKKF",
+      "weight": 0.0001
+    },
+    {
+      "symbol": "GGB",
+      "weight": 0.0001
+    },
+    {
+      "symbol": "RDY",
+      "weight": 0.0001
+    },
+    {
+      "symbol": "CIB",
+      "weight": 0.0001
+    },
+    {
+      "symbol": "RLX",
+      "weight": 0.0001
+    }
+  ],
+  "lastUpdated": "2026-01-31T02:33:45.059Z",
+  "cachedAt": "2026-01-31T02:33:45.059Z",
+  "source": "Alpha Vantage API"
+}

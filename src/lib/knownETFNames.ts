@@ -15,6 +15,7 @@ export const KNOWN_ETF_NAMES: Record<string, string> = {
   VO: "Vanguard Mid-Cap ETF",
   VB: "Vanguard Small-Cap ETF",
   VEA: "Vanguard FTSE Developed Markets ETF",
+  VEU: "Vanguard FTSE All-World ex-US ETF",
   VWO: "Vanguard FTSE Emerging Markets ETF",
   VTEB: "Vanguard Tax-Exempt Bond ETF",
   VGT: "Vanguard Information Technology ETF",

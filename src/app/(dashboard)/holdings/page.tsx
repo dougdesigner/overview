@@ -255,6 +255,11 @@ function HoldingsContent() {
         )
       } else if (holding.ticker) {
         // Predefined ticker - use existing logic
+        // If the ticker search already identified the type, use it
+        if (holding.tickerType === "etf" || holding.tickerType === "mutual-fund") {
+          type = "fund"
+        }
+
         // First, check if it's a mutual fund
         const mutualFund =
           mutualFundMappings[holding.ticker as keyof typeof mutualFundMappings]

@@ -1,6 +1,8 @@
 "use client"
 
+import { Button } from "@/components/Button"
 import { Card } from "@/components/Card"
+import { Input } from "@/components/Input"
 import {
   Table,
   TableBody,
@@ -27,6 +29,7 @@ import {
   useReactTable,
 } from "@tanstack/react-table"
 import React from "react"
+import { useDebouncedCallback } from "use-debounce"
 import { ExposureTablePagination } from "./ExposureTablePagination"
 import { createColumns } from "./columns"
 // import { ExposureTreemap } from "./ExposureTreemap"  // Nivo version - commented out
@@ -276,8 +279,26 @@ export function ExposureTable({ holdings, accounts, dataVersion, selectedAccount
     { id: "percentOfPortfolio", desc: true },
   ])
   const [globalFilter, setGlobalFilter] = React.useState("")
+  const [searchTerm, setSearchTerm] = React.useState("")
+  const searchInputRef = React.useRef<HTMLInputElement>(null)
   const [expanded, setExpanded] = React.useState<ExpandedState>({})
   const [isLoading, setIsLoading] = React.useState(true) // Start as true for initial load
+
+  const debouncedSetGlobalFilter = useDebouncedCallback((value: string) => {
+    setGlobalFilter(value)
+  }, 300)
+
+  const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const value = event.target.value
+    setSearchTerm(value)
+    debouncedSetGlobalFilter(value)
+  }
+
+  const handleClear = () => {
+    setSearchTerm("")
+    setGlobalFilter("")
+    searchInputRef.current?.focus()
+  }
 
   // Notify parent when loading state changes
   React.useEffect(() => {
@@ -553,11 +574,22 @@ export function ExposureTable({ holdings, accounts, dataVersion, selectedAccount
     }
   }, [exposuresForVisualization, onFilteredDataChange])
 
+  // Filter by search term (ticker or name, case-insensitive)
+  const filteredBySearch = React.useMemo(() => {
+    if (!globalFilter) return filteredByHoldingsFilter
+    const search = globalFilter.toLowerCase()
+    return filteredByHoldingsFilter.filter((row) => {
+      const ticker = (row.ticker || "").toLowerCase()
+      const name = (row.name || "").toLowerCase()
+      return ticker.includes(search) || name.includes(search)
+    })
+  }, [filteredByHoldingsFilter, globalFilter])
+
   // Paginate the sorted data (parent rows only)
   const paginatedData = React.useMemo(() => {
     const startIndex = currentPage * PAGE_SIZE
-    return filteredByHoldingsFilter.slice(startIndex, startIndex + PAGE_SIZE)
-  }, [filteredByHoldingsFilter, currentPage, PAGE_SIZE])
+    return filteredBySearch.slice(startIndex, startIndex + PAGE_SIZE)
+  }, [filteredBySearch, currentPage, PAGE_SIZE])
 
   // Reset to first page when data/filter/sort changes
   React.useEffect(() => {
@@ -707,6 +739,27 @@ export function ExposureTable({ holdings, accounts, dataVersion, selectedAccount
         <>
           {viewMode === "table" ? (
             <>
+              {/* Search */}
+              <div className="flex flex-wrap items-center gap-2 rounded-lg bg-gray-50/50 p-4 ring-1 ring-gray-200 dark:bg-[#090E1A] dark:ring-gray-800">
+                <Input
+                  ref={searchInputRef}
+                  className="w-full sm:w-96"
+                  type="search"
+                  placeholder="Search by ticker or name..."
+                  value={searchTerm}
+                  onChange={handleSearchChange}
+                />
+                {searchTerm && (
+                  <Button
+                    variant="ghost"
+                    onClick={handleClear}
+                    className="border border-gray-200 px-2.5 font-semibold text-blue-500 sm:border-none sm:py-1 dark:border-gray-800 dark:text-blue-500"
+                  >
+                    Clear
+                  </Button>
+                )}
+              </div>
+
               <Card className="p-0">
                 {/* Table */}
                 <div className="overflow-x-auto">
@@ -784,7 +837,7 @@ export function ExposureTable({ holdings, accounts, dataVersion, selectedAccount
 
               {/* Pagination */}
               <ExposureTablePagination
-                totalRows={filteredByHoldingsFilter.length}
+                totalRows={filteredBySearch.length}
                 currentPage={currentPage}
                 pageSize={PAGE_SIZE}
                 onPageChange={setCurrentPage}
