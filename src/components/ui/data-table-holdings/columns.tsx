@@ -15,6 +15,7 @@ import { ColumnDef } from "@tanstack/react-table"
 import { institutionLabels } from "@/lib/institutionUtils"
 import { getKnownStockName } from "@/lib/knownETFNames"
 import { InstitutionLogo } from "@/components/ui/InstitutionLogo"
+import Link from "next/link"
 import { Account, Holding } from "./types"
 
 // Format currency
@@ -171,21 +172,37 @@ export const createColumns = ({
     cell: ({ row }) => {
       const isNested = row.depth > 0
       const isIgnored = row.original.isIgnored
-      // Use canonical name from asset-classifications if available for consistency
+      const type = row.original.type
       const ticker = row.original.ticker
+      // Use canonical name from asset-classifications if available for consistency
       const canonicalName = ticker ? getKnownStockName(ticker) : null
       const displayName = canonicalName || row.original.name
+      const isETF = type === "fund" && ticker
+
       return (
         <div className="flex items-center gap-2">
-          <span
-            className={cx(
-              "font-semibold text-gray-900 dark:text-gray-50",
-              isNested && "pl-6 font-normal text-gray-600 dark:text-gray-400",
-              isIgnored && "text-gray-400 line-through dark:text-gray-500",
-            )}
-          >
-            {displayName}
-          </span>
+          {isETF ? (
+            <Link
+              href={`/etf/${ticker}`}
+              className={cx(
+                "font-semibold text-gray-900 underline decoration-gray-300 underline-offset-2 transition-colors hover:text-blue-600 hover:decoration-blue-400 dark:text-gray-50 dark:decoration-gray-600 dark:hover:text-blue-400 dark:hover:decoration-blue-400",
+                isNested && "pl-6 font-normal text-gray-600 dark:text-gray-400",
+                isIgnored && "text-gray-400 line-through dark:text-gray-500",
+              )}
+            >
+              {displayName}
+            </Link>
+          ) : (
+            <span
+              className={cx(
+                "font-semibold text-gray-900 dark:text-gray-50",
+                isNested && "pl-6 font-normal text-gray-600 dark:text-gray-400",
+                isIgnored && "text-gray-400 line-through dark:text-gray-500",
+              )}
+            >
+              {displayName}
+            </span>
+          )}
           {isIgnored && (
             <Badge variant="warning" className="text-xs">
               Excluded
